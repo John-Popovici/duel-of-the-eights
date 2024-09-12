@@ -24,32 +24,39 @@
 \midrule
 Date1 & Name(s) & Description of changes\\
 Date2 & Name(s) & Description of changes\\
-... & ... & ...\\
+\dots & \dots & \dots\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \section{Problem Statement}
 
-\wss{You should check your problem statement with the
-\href{https://github.com/smiths/capTemplate/blob/main/docs/Checklists/ProbState-Checklist.pdf}
-{problem statement checklist}.} 
-
-\wss{You can change the section headings, as long as you include the required
-information.}
+%\wss{You should check your problem statement with the
+%\href{https://github.com/smiths/capTemplate/blob/main/docs/Checklists/ProbState-Checklist.pdf}{problem statement checklist}.} 
+%\wss{You can change the section headings, as long as you include the required information.}
 
 \subsection{Problem}
 
+Games are a staple of entertainment and are used to bring people together for both competition and fun.
+There can often be a desire to share the experience of playing a game with someone but meeting can be hard or impossible in-person and so having an online version of popular games allows for such opportunities.
+One such game is the game of Yahtzee, which while it does have online versions, are limited to the classic rule-set and do not allow for variants to be designed and played.
+Yahtzee is a game many know yet is not often played, yet by leveraging the most interesting game mechanics and creating different variants, we could reinvigorate the genre while paying homage to the original.
+As developers, we are aiming to create an environment in which Yahtzee and Yahtzee variants can be designed and played with some preset rule-sets to be used as a starting-off point. This would allow for both the classic game as well as different variants of it, such as using 8-sided dice, to be played with a friend online.
+
 \subsection{Inputs and Outputs}
 
-\wss{Characterize the problem in terms of ``high level'' inputs and outputs.  
-Use abstraction so that you can avoid details.}
+%\wss{Characterize the problem in terms of ``high level'' inputs and outputs.  
+%Use abstraction so that you can avoid details.}
+
+In terms of interacting with the game, two players will exist and have the ability to interact with the current game state, allowing them to make decisions based on game events. The game state will be presented through a visual user interface displaying different elements of the game, including the dice and points system(s).
 
 \subsection{Stakeholders}
 
 \subsection{Environment}
 
-\wss{Hardware and software environment}
+%\wss{Hardware and software environment}
+
+The game will be run on Windows 10 devices and be run with an internet connection to enable online multiplayer. One of the players would act as the host with the other connecting such that they can play in real-time with an online connection.
 
 \section{Goals}
 
@@ -57,6 +64,7 @@ Use abstraction so that you can avoid details.}
 
 \section{Challenge Level and Extras}
 
+\iffalse
 \wss{State your expected challenge level (advanced, general or basic).  The
 challenge can come through the required domain knowledge, the implementation or
 something else.  Usually the greater the novelty of a project the greater its
@@ -72,6 +80,8 @@ personas, Design Thinking, etc.  Normally the maximum number of extras will be
 two.  Approval of the extras will be part of the discussion with the instructor
 for approving the project.  The extras, with the approval (or request) of the
 instructor, can be modified over the course of the term.}
+\fi
+
 
 \newpage{}
 
@@ -89,5 +99,6 @@ instructor, can be modified over the course of the term.}
     they are suitable for a Capstone project (not overly ambitious but also of
     appropriate complexity for a senior design project)?
 \end{enumerate}  
+
 
 \end{document}
