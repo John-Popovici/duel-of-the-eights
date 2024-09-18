@@ -1,3 +1,6 @@
+The Godot Engine uses the MIT License
+https://github.com/godotengine/godot/blob/master/LICENSE.txt
+
 <This is where you put your License.  A sample license is shown below.>
 
 MIT License
