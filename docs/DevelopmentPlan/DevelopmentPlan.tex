@@ -2,6 +2,7 @@
 
 \usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{url}
 
 \title{Development Plan\\\progname}
 
@@ -22,7 +23,7 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date1 & Name(s) & Description of changes\\
+2024/09/19 & Hemraj Bhatt & Added content to sections 7, 8 and the appendix. Created reference page\\
 Date2 & Name(s) & Description of changes\\
 ... & ... & ...\\
 \bottomrule
@@ -85,9 +86,54 @@ Topics to discuss include the following:
 
 \section{Coding Standard}
 
+
+The coding guidelines mentioned below will allow for an unfirm codebase and proper collaboration between developers. The guidelines set are universally accepted, which ensures these guidelines meet industry standards.
+
+\begin{itemize}
+
+  \item Use ``int'' rather than unsigned types. \texttt{int} is commonly used in C\# and interacts more easily with other libraries. Exceptions apply only for documentation specific to unsigned data types. [1]
+  \item Class and method names should always be in Pascal Case
+  \begin{itemize}
+    \item Ex: PascalCase
+  \end{itemize}
+  \item Method arguments and local variables should always be in Camel Case
+  \begin{itemize}
+    \item Ex: camelCase
+  \end{itemize}
+  \item Employ abstraction, encapsulation, inheritance and polymorphism
+
+  \begin{itemize}
+    \item Abstraction: Model the relevant attributes and interactions of entities as classes to define an abstract representation of a system. Use interfaces or abstract classes to provide a blueprint for other classes without revealing implementation details. [2]
+    \item Encapsulation: Hide the internal state and functionality of an object, allowing access only through a public set of functions. Use private fields to hide an object's internal state. Provide public properties or methods (get and set) to access or modify the private fields in a controlled way, ensuring safe interaction with the object. [2]
+    \item Inheritance: Create new abstractions based on existing abstractions. Reuse common functionality from the base class while allowing the derived class to add or override methods or properties. [2]
+    \item Polymorphism: Implement inherited properties or methods in different ways across multiple abstractions. Use interfaces or abstract classes to define common methods that can be implemented differently in each class. [2]
+
+  \end{itemize}
+
+\item Write code with clarity and simplicity in mind
+\item Avoid overly complex and convoluted code logic
+\item Comments should be consice and to the point
+\item Code should be formatted appropriately
+\item Hard coded constants should be avaided, employ symbolic names and use configuration files 
+\item Any code taken from external sources must be sufficiently cited through comments
+\begin{itemize}
+  \item Include links to webpages for any external resources
+  \item Include input and output for any AI-aided code
+\end{itemize}
+
+
+\end{itemize}
+
+
+\newpage
+
 \section{Project Scheduling}
 
-\wss{How will the project be scheduled?}
+The team has decided to employ a Gantt chart to schedule the project. A Gantt chart provides a way to depict the duration, completion percentage, and leads of tasks in a visual manner. Due to these benefits, deadlines are met due to the duration of a task being enforced by start and end dates. It also allows for effective communication as others know who to refer to if there is an issue pertaining to a certain task due to the leads being listed. All in all, a Gantt chart provides great facilities to effectively plan out a project. \\
+
+The team will also implement a backlog for our development which will be featured in our readme file on github to aid potential contributors. This will allow them to understand which features have been implemented and which are still in development. This will be in addition to utilizing GitHub project boards.\\
+
+Gantt Chart: \href{https://mcmasteru365-my.sharepoint.com/:x:/g/personal/bhatth14_mcmaster_ca/ESjvjVJfZflPvcV8xfFiPxEBNGdj_fdNWy0EyGGiqIbAEw?e=9wUfQj}{Link}
 
 \newpage{}
 
@@ -98,12 +144,33 @@ Topics to discuss include the following:
 \input{../Reflection.tex}
 
 \begin{enumerate}
-    \item Why is it important to create a development plan prior to starting the
-    project?
-    \item In your opinion, what are the advantages and disadvantages of using
-    CI/CD?
-    \item What disagreements did your group have in this deliverable, if any,
-    and how did you resolve them?
+    \item  \textbf {Why is it important to create a development plan prior to starting the
+    project?}
+
+    A development plan is essential when taking on any sort of project. It allows for the team to set a clear set of goals and milestones while also defining the project's scope. It creates a baseline of expectations for each team member and reduces any confusion about the team's plan as a high-level plan is detailed within the development plan. Without a development plan, a direction for the team is not set which in both the short and long term will cause issues that will eventually lead to missed deadlines and poor quality of work.
+    
+    \item  \textbf {In your opinion, what are the advantages and disadvantages of using
+    CI/CD?}
+
+    In our scenario, the team is creating a game using Godot, an open-source game engine. Therefore, there are some issues that present themselves. One is, performing automated testing, as it is more complex due to the need for graphical tests and user input simulations, which aren't easily automated in standard CI/CD pipelines. Another issue with CI/CD is that they are complex to set up and maintain as the system must remain updated, secure, and functional.
+
+    However, there are still benefits to employing CI/CI pipelines as it promotes collaboration. Everyone is always working on the most up-to-date version which reduces commit conflicts and new features not working due to code logic being altered in an unpulled commit. It also allows new features and fixes to be pushed to production more quickly and reliably which enhances software quality and user satisfaction.
+
+    Overall, implementing Continuous Integration (CI) and Continuous Deployment does provide a sizable benefit to most projects. However, as mentioned above, it cannot be used in certain circumstances. It may be ideal but it is not feasible. In the team's case, CI/CD may not be beneficial and impractical but we can still use aspects of CI/CD in our methodology.    
+    \item  \textbf {What disagreements did your group have in this deliverable, if any,
+    and how did you resolve them?}
+
+    When constructing the development plan, the team faced no disagreements. Due to the area of the project being outside of our expertise, the team was open to suggestions on how the project could be developed. Due to close to zero experience in game development, when researching important tools that would be used to develop the game such as what game engine to use we were able to go off separately on our own and research the pros and cons of certain game engines such as Unity and Godot. Doing this allowed each member to understand the pros and cons of different game engines and were then able to conclude which game engine to use without much issue.
 \end{enumerate}
+
+\newpage{}
+
+\section*{Appendix --- References}
+
+\begin{flushleft}
+  [1] B. Wagner, "C\# Coding Conventions," \textit{learn.microsoft.com}, Available: \url{https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions}.
+  \newline
+  [2] B. Wagner, "Object-Oriented Programming C\#," \textit{learn.microsoft.com}, Available: \url{https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/tutorials/oop}.
+\end{flushleft}
 
 \end{document}
