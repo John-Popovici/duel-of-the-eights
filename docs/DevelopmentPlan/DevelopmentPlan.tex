@@ -54,36 +54,6 @@ To address the key risks in developing an online multiplayer Yahtzee variant, th
 
 \section{Expected Technology}
 
-\wss{What programming language or languages do you expect to use?  What external
-libraries?  What frameworks?  What technologies.  Are there major components of
-the implementation that you expect you will implement, despite the existence of
-libraries that provide the required functionality.  For projects with machine
-learning, will you use pre-trained models, or be training your own model?  }
-
-\wss{The implementation decisions can, and likely will, change over the course
-of the project.  The initial documentation should be written in an abstract way;
-it should be agnostic of the implementation choices, unless the implementation
-choices are project constraints.  However, recording our initial thoughts on
-implementation helps understand the challenge level and feasibility of a
-project.  It may also help with early identification of areas where project
-members will need to augment their training.}
-
-Topics to discuss include the following:
-
-\begin{itemize}
-\item Specific programming language
-\item Specific libraries
-\item Pre-trained models
-\item Specific linter tool (if appropriate)
-\item Specific unit testing framework
-\item Investigation of code coverage measuring tools
-\item Specific plans for Continuous Integration (CI), or an explanation that CI
-  is not being done
-\item Specific performance measuring tools (like Valgrind), if
-  appropriate
-\item Tools you will likely be using?
-\end{itemize}
-
 For this project, the online multiplayer variant of Yahtzee will be developed using the Godot game engine with GDScript as the primary programming language. GDScript is specifically designed for Godot and offers an easy-to-read, Python-like syntax, making it ideal for rapid game development and ensuring seamless integration with the Godot engine's core features. The Godot engine will provide the necessary framework for game physics, rendering, input handling, and networking, allowing us to focus on game-specific functionality such as the multiplayer interaction, Yahtzee mechanics, and scoring system. \\
 
 External libraries may be utilized to support features such as real-time multiplayer synchronization and latency management. For example, Godot has built-in networking features, but depending on the complexity and performance requirements of the game, we may need to integrate additional libraries or APIs to enhance real-time communication between clients. As part of the development, we will implement certain major components ourselves, such as the Yahtzee scoring system and game logic, despite the existence of general-purpose libraries. This is because the game mechanics are fairly specific and require careful tuning to ensure proper scoring and gameplay flow, which can be more effectively managed through custom implementations. \\
