@@ -48,9 +48,9 @@ Date2 & Name(s) & Description of changes\\
 
 \section{Proof of Concept Demonstration Plan}
 
-What is the main risk, or risks, for the success of your project?  What will you
-demonstrate during your proof of concept demonstration to convince yourself that
-you will be able to overcome this risk?
+Developing an online multiplayer variant of Yahtzee presents several risks that could impact the success of the project. One significant risk is the inability to implement online multiplayer functionality with short response times, which is crucial for maintaining a smooth and enjoyable user experience, and to allow for simultaneous dice rolls. Delays or lags in response times could frustrate players and negatively affect gameplay, and hinder the player interaction that the game aims to provide. Another risk is not being able to correctly implement the complex Yahtzee scoring system, which could result in incorrect outcomes or unfair gameplay. Ensuring that the game accurately tracks scores according to the traditional rules is essential for user satisfaction. Finally, failing to implement the basic Yahtzee mechanics, such as rolling dice, re-rolling, and selecting scoring categories, could hinder the core gameplay. If these foundational elements are not properly developed, the entire game experience could become dysfunctional and unplayable. \\
+
+To address the key risks in developing an online multiplayer Yahtzee variant, the proof of concept demo will focus on demonstrating the core functionality required to overcome these challenges. First, it should showcase the implementation of online multiplayer with fast response times, ensuring real-time interaction between players without noticeable lag. This will prove that the game can handle smooth, synchronized gameplay across different devices. Next, the demo must include a fully functional Yahtzee scoring system, correctly calculating scores for all possible combinations, like full house, straights, and Yahtzees, to show accuracy and reliability in scoring. Lastly, the demo should feature the basic Yahtzee mechanics, such as rolling dice, re-rolling up to two times, and selecting score categories, all working seamlessly. By focusing on these critical features, the demo will provide confidence that the project can overcome the identified risks and deliver a functional and enjoyable multiplayer experience.\\
 
 \section{Expected Technology}
 
@@ -83,6 +83,12 @@ Topics to discuss include the following:
   appropriate
 \item Tools you will likely be using?
 \end{itemize}
+
+For this project, the online multiplayer variant of Yahtzee will be developed using the Godot game engine with GDScript as the primary programming language. GDScript is specifically designed for Godot and offers an easy-to-read, Python-like syntax, making it ideal for rapid game development and ensuring seamless integration with the Godot engine's core features. The Godot engine will provide the necessary framework for game physics, rendering, input handling, and networking, allowing us to focus on game-specific functionality such as the multiplayer interaction, Yahtzee mechanics, and scoring system. \\
+
+External libraries may be utilized to support features such as real-time multiplayer synchronization and latency management. For example, Godot has built-in networking features, but depending on the complexity and performance requirements of the game, we may need to integrate additional libraries or APIs to enhance real-time communication between clients. As part of the development, we will implement certain major components ourselves, such as the Yahtzee scoring system and game logic, despite the existence of general-purpose libraries. This is because the game mechanics are fairly specific and require careful tuning to ensure proper scoring and gameplay flow, which can be more effectively managed through custom implementations. \\
+
+Additionally, we will investigate tools for unit testing in GDScript and Godot, ensuring game logic is consistently validated, while code coverage tools will be explored to measure the extent of our test cases. Although Continuous Integration (CI) is typically less emphasized in game development, incorporating simple CI pipelines could benefit our project, ensuring that new builds are tested regularly for performance and functionality. Performance measuring tools like Godot's built-in profiler will be used to monitor frame rates and resource consumption, critical for ensuring smooth, responsive multiplayer gameplay. Lastly, we will be using version control through Git, integrated with platforms like GitHub for collaboration, which will facilitate efficient management of code changes and team contributions. \\
 
 \section{Coding Standard}
 
