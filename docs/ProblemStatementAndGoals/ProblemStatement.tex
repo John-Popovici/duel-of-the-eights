@@ -22,8 +22,11 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date1 & Name(s) & Description of changes\\
-Date2 & Name(s) & Description of changes\\
+2024-09-12 & John Popovici & Added content to section 1.1, 1.2, and 1.4\\
+2024-09-12 & John Popovici & Added content to section 4\\
+2024-09-17 & John Popovici & Added content to section 1.3; Updated section 4 to better reflect extras\\
+2024-09-17 & John Popovici & Added content to section 2 and 3\\
+2024-09-19 & John Popovici & Updated section 2 and 3 to have measurable goals\\
 \dots & \dots & \dots\\
 \bottomrule
 \end{tabularx}
@@ -74,7 +77,9 @@ The game will be run on Windows 10 devices and be run with an internet connectio
 For this project to be a success both as a capstone project and as a fun game, there are some goals we must meet.
 
 \begin{itemize}
-	\item Online multiplayer functionality. We need to be able to connect two players to play the game together.
+	\item Online multiplayer functionality. We need to be able to connect two players to play the game together.\\
+	\textit{Measurement:} Two players can connect such that both players can affect the game state and both players are notified of the updates.
+	
 	\item Customizable game settings. Core game elements must be modifiable to create custom Yahtzee variants. As a goal we would need these options to be implemented:
 	\begin{itemize}
         \item The number of dice each player have
@@ -82,8 +87,14 @@ For this project to be a success both as a capstone project and as a fun game, t
         \item Whether scoring will be done only after completing the score card, or by comparing each hand in a head-to-head fashion
         \item A round timer
     \end{itemize}
-	\item Preset game settings. By having some preset game configurations, it would allow players to more quickly learn the game or jump into an environment that has been tested.
-	\item 3D dice rolling. Rolling the dice will need to be or look to be three dimensional to recreate the tactical feel of the original game.
+	\textit{Measurement:} There are at least 3 options for number of dice, at least 3 options for type-types, at least 2 options for scoring methods, and an option to use a turn timer. These options would be all compatible with one another.
+	
+	\item Preset game settings. By having some preset game configurations, it would allow players to more quickly learn the game or jump into an environment that has been tested.\\
+	\textit{Measurement:} At least 3 preset game configurations would be available for players to load up and play.
+	
+	\item 3D dice rolling. Rolling the dice will need to be or look to be three dimensional to recreate the tactical feel of the original game.\\
+	\textit{Measurement:} Dice rolling will have the appearance of a die shape, depending on the die shape, and of being rolled, based on a minimum of 75\% of user feedback considering it so.
+	
 \end{itemize}
 
 \section{Stretch Goals}
@@ -91,9 +102,15 @@ For this project to be a success both as a capstone project and as a fun game, t
 Since we wish this game to go beyond just a capstone, and have the game be worth playing, there are stretch goals we will aim to implement as well.
 
 \begin{itemize}
-	\item Local multiplayer. This would allow for players to play together on a single computer, but would require a different user interface and allow for different user interactions.
-	\item Singleplayer variants. A singleplayer game could be achieved either through a computer-run opponent in a game, or through a custom designed experience that could leverage the different environment.
-	\item Saving custom game setting. Having this ability would allow for a user who created a custom game variant to save them for the ability to replay it without the need to recreate those specific settings.
+	\item Local multiplayer. This would allow for players to play together on a single computer, but would require a different user interface and allow for different user interactions.\\
+	\textit{Measurement:} The ability for 2 players to play together using a single interface and game instance without an internet connection.
+	
+	\item Singleplayer variants. A singleplayer game could be achieved either through a computer-run opponent in a game, or through a custom designed experience that could leverage the different environment.\\
+	\textit{Measurement:} A single person can play at least 1 variant made specifically to be singleplayer without requiring a second human player to update the game state.
+	
+	\item Saving custom game setting. Having this ability would allow for a user who created a custom game variant to save them for the ability to replay it without the need to recreate those specific settings.\\
+	\textit{Measurement:} A custom game variant, as per the "Customizable game settings" goal and "More game setting customization" stretch goals, can be saved locally and loaded up to be played.
+	
 	\item More game setting customization. Besides the options in the goals section, some additional game customization options would include:
 	\begin{itemize}
         \item The ability to customize what hands and options are on the scorecard
@@ -102,9 +119,17 @@ Since we wish this game to go beyond just a capstone, and have the game be worth
         \item A system to allow for gambling such as doubling down on a hand or folding for less of a punishment
         \item More options discovered through play-testing and theory crafting
     \end{itemize}
-	\item Dice customization. Dice could be made to appear differently, either as a means for personalization or for aiding with different impairments. An example could be a dice with pips versus a dice with a numbered faces.
-	\item Post game statistics. This could allow for players to analyze a game after completion in a more quantitative manner.
-	\item Dice highlighting. This would aid in determining what dice are used when scoring.
+	\textit{Measurement:} Additional game options outside the ones listed in the "Customizable game settings" goal would be available.
+	
+	\item Dice customization. Dice could be made to appear differently, either as a means for personalization or for aiding with different impairments. An example could be a dice with pips versus a dice with a numbered faces.\\
+	\textit{Measurement:} At least 5 different dice appearance variants players can choose from, that would appear in the game.
+	
+	\item Post game statistics. This could allow for players to analyze a game after completion in a more quantitative manner.\\
+	\textit{Measurement:} A post-game summary showing at least 3 key game stats, available after each game.
+	
+	\item Dice highlighting. This would aid in determining what dice are used when scoring.\\
+	\textit{Measurement:} Dice used in scoring will be highlighted when appropriate.
+	
 \end{itemize}
 
 \section{Challenge Level and Extras}
