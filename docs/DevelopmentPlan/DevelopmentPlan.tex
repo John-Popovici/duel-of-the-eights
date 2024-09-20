@@ -24,7 +24,8 @@
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
 2024/09/19 & Hemraj Bhatt & Added content to sections 7, 8 and the appendix. Created reference page\\
-Date2 & Name(s) & Description of changes\\
+2024/09/20 & Nigel Moses, Naishan Guo & Added content to sections 5 and 6.\\
+Date3 & Name(s) & Description of changes\\
 ... & ... & ...\\
 \bottomrule
 \end{tabularx}
@@ -58,7 +59,12 @@ For this project, the online multiplayer variant of Yahtzee will be developed us
 
 External libraries may be utilized to support features such as real-time multiplayer synchronization and latency management. For example, Godot has built-in networking features, but depending on the complexity and performance requirements of the game, we may need to integrate additional libraries or APIs to enhance real-time communication between clients. As part of the development, we will implement certain major components ourselves, such as the Yahtzee scoring system and game logic, despite the existence of general-purpose libraries. This is because the game mechanics are fairly specific and require careful tuning to ensure proper scoring and gameplay flow, which can be more effectively managed through custom implementations. \\
 
-Additionally, we will investigate tools for unit testing in GDScript and Godot, ensuring game logic is consistently validated, while code coverage tools will be explored to measure the extent of our test cases. Although Continuous Integration (CI) is typically less emphasized in game development, incorporating simple CI pipelines could benefit our project, ensuring that new builds are tested regularly for performance and functionality. Performance measuring tools like Godot's built-in profiler will be used to monitor frame rates and resource consumption, critical for ensuring smooth, responsive multiplayer gameplay. Lastly, we will be using version control through Git, integrated with platforms like GitHub for collaboration, which will facilitate efficient management of code changes and team contributions. \\
+For this project, Continuous Integration (CI) will primarily focus on documentation updates, ensuring that the project documentation is always up to date with the latest development changes. This will help streamline collaboration between team members and provide a clear and consistent understanding of the project’s current status. Documentation CI pipelines will automatically trigger when changes are made to files related to the design, development, or architecture, ensuring that our design documents, requirements, and user manuals are consistently aligned with the latest codebase. \\
+
+Additionally, although CI can be more challenging in game development due to the graphical and interactive nature of the project, we will explore ways to incorporate CI practices into our development workflow. For example, we plan to investigate the feasibility of automated unit testing for core game logic, such as the Yahtzee mechanics, scoring system, and multiplayer interactions. While automated tests for graphical interfaces and real-time multiplayer can be difficult, CI could still help us ensure that the game logic functions correctly after every code change. By keeping CI lightweight and focused on these areas, we can ensure some level of automation without over-complicating the process, especially given the unique constraints of game development projects. \\
+
+Performance measuring tools like Godot's built-in profiler will be used to monitor frame rates and resource consumption, critical for ensuring smooth, responsive multiplayer gameplay. Lastly, we will be using version control through Git, integrated with platforms like GitHub for collaboration, which will facilitate efficient management of code changes and team contributions. \\
+
 
 \section{Coding Standard}
 
