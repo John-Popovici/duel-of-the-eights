@@ -5,6 +5,7 @@
 \usepackage{url}
 \usepackage{enumitem}
 \usepackage{multirow}
+\usepackage{changepage}
 
 \title{Development Plan\\\progname}
 
@@ -80,13 +81,15 @@ The general workflow for the team follows from team meetings where we will asses
   \item Carry out task dev work and testing as needed.
   \item Commit code with descriptive title including necessary emoji to imply the general purpose of the commit, and also add a descriptive commit description.
   \end{enumerate}
-  \setlength{\leftskip}{1.5cm}
+  \begin{adjustwidth}{1.3cm}{0cm}
   - Automated unit tests will be run. If any tests fail user must recommit to fix the issue.
+  \end{adjustwidth}
 \begin{enumerate}[resume]
   \item Two other team members review and approve the PR if no issues are noted.
   \end{enumerate}
-  \setlength{\leftskip}{1.5cm}
+  \begin{adjustwidth}{1.3cm}{0cm}
   - If reviewers find an issue they can request code changes at which point the developer must go back to step 6 and make a new commit to meet code review expectations.
+  \end{adjustwidth}
 \begin{enumerate}[resume]
   \item Merge code from main into user branch if user branch is out of date.
   \item Merge code into main branch.
