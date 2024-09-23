@@ -3,6 +3,8 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{url}
+\usepackage{enumitem}
+\usepackage{multirow}
 
 \title{Development Plan\\\progname}
 
@@ -25,27 +27,70 @@
 \midrule
 2024/09/19 & Hemraj Bhatt & Added content to sections 7, 8 and the appendix. Created reference page\\
 2024/09/20 & Nigel Moses, Naishan Guo & Added content to sections 5 and 6.\\
-Date3 & Name(s) & Description of changes\\
+2024/09/23 & Isaac Giles & Added content to sections 1-4\\
 ... & ... & ...\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-\wss{Put your introductory blurb here.}
-
 \section{Team Meeting Plan}
+
+Team will meet every Friday morning at 9am via Microsoft Teams meeting for 30-60 minutes for general discussions. Further meetings will be suggested in Microsoft Teams chat when team members feel that an additional meeting is needed.
 
 \section{Team Communication Plan}
 
+Team will communicate via Microsoft Teams messaging for all baseline communication needs. We will also use Microsoft Teams to setup team calls for both recurring meetings and spontaneous meetings that come up when needed.
+
 \section{Team Member Roles}
+
+\begin{center}
+  \begin{tabular}{ |c|c|c| } 
+   \hline
+   \textbf{Person} & \textbf{Role} & \textbf{Responsibilities} \\ 
+   \hline
+   John Popovici & Developer \& Team Liaison & \multirow{5}*{\shortstack{Writing code, working on \\documentation, testing, reviewing \\code, creating detailed issues \\and bug reports}} \\ 
+   \cline{1-2}
+   Hemraj Bhatt & \multirow{4}*{Developer} & \\ 
+   \cline{1-1}
+   Isaac Giles & & \\ 
+   \cline{1-1}
+   Nai Shan Guo & & \\ 
+   \cline{1-1}
+   Nigel Moses & & \\ 
+   \hline
+  \end{tabular}
+  \end{center}
 
 \section{Workflow Plan}
 
-\begin{itemize}
-	\item How will you be using git, including branches, pull request, etc.?
-	\item How will you be managing issues, including template issues, issue
-	classificaiton, etc.?
-\end{itemize}
+The general workflow for the team follows from team meetings where we will assess where we are in our progress on the project, at which point we will determine what items need to be worked on next and work will be divided up accordingly. Each individual team member will work on changes in their own branch and create a pull request when ready to merge. Pull requests that are being merged into main must be created with a descriptive title and description and a specific emoji is used in the title to signify the type of commit(i.e. update documentation, update/improve code, bug fix, etc.). Additionally test cases will be run automatically with GitHub Actions and any failed test cases will block merging. If all test cases pass, pull requests will still require 2 approving reviewers(separate from the original developer) to be merged into main. It will be expected that all of these steps are followed by all team members throughout the course of the project. \newline
+
+\textbf{In Summary:}
+\begin{enumerate}
+    \end{enumerate}
+\textit{**group steps}
+\begin{enumerate}[resume]
+  \item Discuss current status of the project.
+  \item Divide workload evenly.
+  \end{enumerate}
+\textit{**individual steps}
+\begin{enumerate}[resume]
+  \item Pull changes from main branch.
+  \item Create new branch based on most up to date main branch.
+  \item Carry out task dev work and testing as needed.
+  \item Commit code with descriptive title including necessary emoji to imply the general purpose of the commit, and also add a descriptive commit description.
+  \end{enumerate}
+  \setlength{\leftskip}{1.5cm}
+  - Automated unit tests will be run. If any tests fail user must recommit to fix the issue.
+\begin{enumerate}[resume]
+  \item Two other team members review and approve the PR if no issues are noted.
+  \end{enumerate}
+  \setlength{\leftskip}{1.5cm}
+  - If reviewers find an issue they can request code changes at which point the developer must go back to step 6 and make a new commit to meet code review expectations.
+\begin{enumerate}[resume]
+  \item Merge code from main into user branch if user branch is out of date.
+  \item Merge code into main branch.
+\end{enumerate}
 
 \section{Proof of Concept Demonstration Plan}
 
