@@ -1,23 +1,18 @@
 \section{Specific System Description}
 
-This section first presents the problem description, which gives a high-level
+This section presents the problem description, which gives a high-level
 view of the problem to be solved.  This is followed by the solution characteristics
 specification, which presents the assumptions, theories, definitions and finally
-the instance models.  \plt{Add any project specific details that are relevant
-  for the section overview.}
+the instance models.
 
 \subsection{Problem Description} \label{Sec_pd}
 
-\progname{} is intended to solve ... \plt{What problem does your program solve?
-The description here should be in the problem space, not the solution space.}
+Games are a staple of entertainment and are used to bring people together for both competition and fun.
+There can often be a desire to share the experience of playing a game with someone but meeting can be hard or impossible in-person and so having an online version of popular games allows for such opportunities.
+One such game is the game of Yahtzee, which while it does have online versions, are limited to the classic rule-set and do not allow for variants to be designed and played.
+\textit{Dice Duels: Duel of the Eights} looks to solve the issue of not having online access to Yahtzee and the ability to create custom versions of the game and play them.
 
-\subsubsection{Terminology and  Definitions}
-
-\plt{This section is expressed in words, not with equations.  It provide the
-  meaning of the different words and phrases used in the domain of the problem.
-The terminology is used to introduce concepts from the world outside of the
-mathematical model  The terminology provides a real world connection to give the
-mathematical model meaning.}
+\subsubsection{Terminology and Definitions}
 
 This subsection provides a list of terms that are used in the subsequent
 sections and their meaning, with the purpose of reducing ambiguity and making it
@@ -25,7 +20,31 @@ easier to correctly understand the requirements:
 
 \begin{itemize}
 
-\item 
+\item Dice rolls can be given in the form AdX where A and X are variables representing the number of dice and number of sides, respectively. When A is 1, its inclusion is optional. For example 4d6 represents rolling 4 6-sided dice, and a d12 represent 1 die with 12 sides. These terms can also be used in contexts such as "we are playing with d8s".
+
+\item Since a fundamental mechanic of \textit{Dice Duels: Duel of the Eights} is that of re-rolling dice, an additional variable will be added to the notation to denote the number of rolls, AdXrB. For example, typical Yahtzee with 3 rolls would be denoted as 5d6r3.
+
+\item Dice typically take the forms of platonic solids, meaning where the dice faces are congruent regular polygons. The five such polyhedra are:
+\begin{itemize}
+	\item A tetrahedron has four faces (d4)
+	\item A cube has six faces (d6)
+	\item An octahedron has eight faces (d8)
+	\item A dodecahedron has twelve faces (d12)
+	\item An icosahedron has twenty faces (d20)
+\end{itemize}
+Other die shapes can be used such as a pentagonal trapezohedron with ten faces (d10) or even dice meant to be rolled lengthwise such as a triangular prism which despite having five total faces, is used as having three (d3), or has caps to prevent rolling an unintended face.
+
+\item Dice rolls indicate a value integer when rolled. These can be represented by the numeric value of the integer or by representing the integer value as dots, called pips.
+
+\item In typical Yahtzee some patterns for scoring have terms. These will have to be added to and abstracted for a game with a different number of dice, but for a 5d6r3 these would be the scoring opportunities:
+\begin{itemize}
+	\item Rolling for aces, twos, threes, fours, fives, or sixes is rolling for as many of the number.
+	\item Chance is any combination of dice as a sum of all dice values.
+	\item A yahtzee is rolling all five of five dice with matching faces.
+	\item A three of a kind is having at least three of five dice match. For four of a kind, it is having at least four dice the same.
+	\item A straight is a set of sequential dice values. This can come in the small straight variant with four sequential values, or a large straight where all five dice are part of a sequence.
+	\item A full house is having two dice of a kind and three of another.
+\end{itemize}
 
 \end{itemize}
 
