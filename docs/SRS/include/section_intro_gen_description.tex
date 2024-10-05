@@ -6,6 +6,12 @@ a paragraph or two that describes the problem, followed by a ``roadmap''
 paragraph.  A roadmap orients the reader by telling them what sub-sections to
 expect in the Introduction section.}
 
+Do you know the game Yahtzee? Played with dice, it's like Poker but more varied, requiring different skills, without betting. It uses 5 dice, with the usual dots representing the numbers 1 to 6. In rolling the dice, players try to create specific formations, thereby scoring points. At the end of a set number of rounds of dice rolls, the player with the higher score wins.
+But the cube isn't the only possibility for dice as the octahedron, with 8 sides could be used. Scoring could likewise be done each round. The number of dice could be changed. These suggest an expanded version of Yahtzee.
+This project creates an online multiplayer game platform that allows for the creation of custom Yahtzee-like games and variants. This family of games will come with some presets such as classic Yahtzee, Dr. Paul's octahedron version, and more, but will allow for the users to set their own variables such as number of dice, what kind of dice, and some elements of scoring, and then play that game. Kinds of dice would include cubes and octahedrons, among other multi-sided dice, and scoring could be calculated at the end of the game, as in classic Yahtzee, or on a per-round basis, where hands go in a head-to-head matchup.
+
+This section includes a general overview of the entire SRS document providing descriptions of all sections. It also outlines of the areas of knowledge needed to grasp the documentation accurately.
+
 \subsection{Purpose of Document}
 
 \plt{This section summarizes the purpose of the SRS document.  It does not focus
@@ -18,7 +24,9 @@ expect in the Introduction section.}
   purpose of the SRS, including communication, planning for the design stage,
   etc.}
 
-\subsection{Scope of Requirements} 
+  The Software Requirements Specification (SRS) document aims to clearly define the functional and non-functional needs of the project in order so that all parties involved have a common understanding of the objectives and requirements of the project. Throughout the whole software lifecycle, the SRS will serve as the development team's fundamental guide, aiding in the phases of design, implementation, and testing. ⁤⁤In addition, it facilitates effective communication between stakeholders and creates a framework that ensures the end result satisfies user requirements and is in line with the project's pre-determined goals.
+  
+  \subsection{Scope of Requirements} 
 
 \plt{Modelling the real world requires simplification.  The full complexity of
   the actual physics, chemistry, biology is too much for existing models, and
@@ -37,6 +45,8 @@ expect in the Introduction section.}
 
 \plt{The scope section is relevant for later determining typical values of inputs. The scope should make it clear what inputs are reasonable to expect. This is a distinction between scope and context (context is a later section).  Scope affects the inputs while context affects how the software will be used.}
 
+The scope of the project involves developing a modified Yahtzee game that features adjustable numbers of playable dice and various game attribute variations. This game will be available for both offline and online play, offering single-player and multiplayer. The scope does not include the implementation of advanced graphics, advanced computer opponents and other board games.
+
 \subsection{Characteristics of Intended Reader} \label{sec_IntendedReader}
 
 \plt{This section summarizes the skills and knowledge of the readers of the
@@ -54,12 +64,84 @@ expect in the Introduction section.}
   instance, is high school physics adequate, or should the reader have had a
   graduate course on advanced quantum mechanics?}
 
+  The intended readers of this SRS document are mainly software developers and game designers with expertise in 3D game development and design using game engines, in this case Godot. They should possess a solid understanding of game mechanics, particularly those related to dice games, and have experience with 3D modelling and physics simulations. Additionally, experience with C# and .NET is necessary for readers due to the development being done using C# on a.NET framework. A university-level undergraduate understanding of probability theory is also crucial for comprehending the game's underlying mechanics and probabilities due to the differing number of playable dice. It is assumed that readers are well-versed in these areas.
+
 \subsection{Organization of Document}
 
 \plt{This section provides a roadmap of the SRS document.  It will help the
   reader orient themselves.  It will provide direction that will help them
   select which sections they want to read, and in what order.  This section will
   be similar between project.}
+
+This SRS document is structured to provide a clear roadmap for readers. The sections are as follows:
+
+\begin{itemize}
+    \item \textbf{Introduction} 
+    \begin{itemize}
+        \item Outlines the purpose and scope of the SRS.
+    \end{itemize}
+    
+    \item \textbf{General System Description} 
+    \begin{itemize}
+        \item Outlines an overview of the project, along with user characterstics, system constraint and the interfaces between the system and its environment.
+    \end{itemize}
+    
+    \item \textbf{Specific System Description} 
+    \begin{itemize}
+        \item Indepth system description containg  high-level probelem and goal description, along with solutions characteristics, assumptions, definiations and instance models  detailed functionalities and features of the system.
+    \end{itemize}
+    
+    \item \textbf{Requirements} 
+    \begin{itemize}
+        \item Outlines both functional and non-functional requirements of the system.
+    \end{itemize}
+    
+    \item \textbf{Likely Changes} 
+    \begin{itemize}
+        \item Outlines anticipated modifications to the system.
+    \end{itemize}
+    
+    \item \textbf{Unlikely Changes} 
+    \begin{itemize}
+        \item Outlines ascpects of the system that will remain static.
+    \end{itemize}
+    
+    \item \textbf{Traceability Matrices and Graphs} 
+    \begin{itemize}
+        \item Tracking of requirements throughout the development process.
+    \end{itemize}
+    
+    \item \textbf{Development Plan} 
+    \begin{itemize}
+        \item Outlines the general timeline and milestones for the project.
+    \end{itemize}
+    
+    \item \textbf{Values of Auxiliary Constants} 
+    \begin{itemize}
+        \item Outlines constant parameters used in report.
+    \end{itemize}
+    
+    \item \textbf{Commonalities} 
+    \begin{itemize}
+        \item Outlines commonalities between differnt aspects of the system.
+    \end{itemize}
+    
+    \item \textbf{Variabilities} 
+    \begin{itemize}
+        \item Outlines variables between differnt aspects of the system.
+    \end{itemize}
+    
+    \item \textbf{Parameters of Variations} 
+    \begin{itemize}
+        \item Outlines the different variations of aspects of the system.
+    \end{itemize}
+    
+    \item \textbf{Appendix — Reflection} 
+    \begin{itemize}
+        \item Indepth insights into the development process and lessons learned.
+    \end{itemize}
+\end{itemize}
+
 
 \newpage
 \section{General System Description}
@@ -146,6 +228,17 @@ automotive hazard analyses.}
   user characteristics should be specific an unambiguous.  For instance, ``The
   end user of \progname{} should have an understanding of undergraduate Level 1
   Calculus and Physics.''}
+
+  This section summarizes the knowledge and skills expected of the user:
+  
+  \begin{itemize}
+      \item The end user of the Yahtzee 3D game should have an understanding of the Yahtzee game, including its rules and strategies.
+      
+      \item Users should have a undergraduate level of understanding of probability theory, as it is important for comprehending the game's mechanics and making informed decisions during gameplay.
+      
+      \item A foundational knowledge of 3D environments and interactions may enhance the user's experience but is not strictly required.
+  \end{itemize}
+  
 
 \subsection{System Constraints}
 
