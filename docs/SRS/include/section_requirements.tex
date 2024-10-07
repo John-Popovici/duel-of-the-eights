@@ -1,95 +1,142 @@
 \section{Requirements}
 
-\plt{The requirements refine the goal statement.  They will make heavy use of
-  references to the instance models.}
-
-This section provides the functional requirements, the business tasks that the
-software is expected to complete, and the nonfunctional requirements, the
-qualities that the software is expected to exhibit.
-
 \subsection{Functional Requirements}
 
-\noindent \begin{itemize}
+\begin{enumerate}[label=R\arabic*, start=1, left=0pt]
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:] \plt{Requirements
-    for the inputs that are supplied by the user.  This information has to be
-    explicit.}
+    \item The game shall support an online player vs player mode, where 2 players can play against each other.
+    \begin{description}
+        \item[Rationale:] Player vs player support is a central functionality for this game and one that enhances the overall enjoyment of the game by fostering a more social game dynamic.
+    \end{description}
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_OutputInputs}:] \plt{It isn't
-    always required, but often echoing the inputs as part of the output is a
-    good idea.}
+    \item The game shall handle score calculations using the same rules as standard Yahtzee.
+    \begin{description}
+        \item[Rationale:] Score calculations that follow from a well established, and well balanced game will help users jump into the game faster and foster a more fair game experience.
+    \end{description}
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Calculate}:] \plt{Calculation
-    related requirements.}
+    \item The game shall simulate realistic physics for 3D dice rolls with true randomness on every roll that replicates accurately to all users.
+    \begin{description}
+        \item[Rationale:] It is important that players get to visually see the dice roll and feel that the outcome of the roll is not clearly predetermined in order to enhance the user experience and maintain continuity between the game and real life.
+    \end{description}
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyOutput}:]
-  \plt{Verification related requirements.}
+    \item The game shall use the real outcome of a roll to get the values from the dice.
+    \begin{description}
+        \item[Rationale:] In order to get true randomness off a simulated dice roll, it makes the most sense to actually just simulate the roll and read the result rather than precalculating the results and forcing the roll to match the output.
+    \end{description}
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Output}:] \plt{Output related
-    requirements.}
+    \item The game shall support both regular six-sided dice and dice with more sides, such as octahedral dice.
+    \begin{description}
+        \item[Rationale:] By providing support for dice with more sides, we can increase the level of complexity of the game for users that are looking for a more interesting variation of the game.
+    \end{description}
 
-\end{itemize}
+    \item The game shall implement a turn based mechanism such that each player (or computer) takes a turn and then their opponent takes a turn, and this sequence repeats.
+    \begin{description}
+        \item[Rationale:] This game makes the most sense in a turn based setup so that both players finish all of their rolls at the same time, and so that the back and forth nature of the gameplay fosters better social engagement.
+    \end{description}
 
-\plt{Every IM should map to at least one requirement, but not every requirement
-  has to map to a corresponding IM.}
+    \item The game shall allow players to pick which dice they would like to use for each roll, and which dice they would like to omit.
+    \begin{description}
+        \item[Rationale:] This is an important part of standard game rules, and also increases the range of strategic decision making that players get to have.
+    \end{description}
 
-\subsection{Nonfunctional Requirements}
+    \item The game shall display some sort of user interface to display scores, number of rolls, time limits, state of dice, and player names.
+    \begin{description}
+        \item[Rationale:] Some form of user interface is necessary to convey important game information to the player.
+    \end{description}
 
-\plt{List your nonfunctional requirements.  You may consider using a fit
-  criterion to make them verifiable.}
-\plt{The goal is for the nonfunctional requirements to be unambiguous, abstract
-  and verifiable.  This isn't easy to show succinctly, so a good strategy may be
-to give a ``high level'' view of the requirement, but allow for the details to
-be covered in the Verification and Validation document.}
-\plt{An absolute requirement on a quality of the system is rarely needed.  For
-  instance, an accuracy of 0.0101 \% is likely fine, even if the requirement is
-  for 0.01 \% accuracy.  Therefore, the emphasis will often be more on
-  describing now well the quality is achieved, through experimentation, and
-  possibly theory, rather than meeting some bar that was defined a priori.}
-\plt{You do not need an entry for correctness in your NFRs.  The purpose of the
-  SRS is to record the requirements that need to be satisfied for correctness.
-  Any statement of correctness would just be redundant. Rather than discuss
-  correctness, you can characterize how far away from the correct (true)
-  solution you are allowed to be.  This is discussed under accuracy.}
+    \item The game shall provide controls for the player to modify the game settings to access unique variants of the game.
+    \begin{description}
+        \item[Rationale:] A core part of our team's vision for this game is that players should be able to customize their playing experience by altering things like; number of dice, type of dice used, time settings, and scoring methods.
+    \end{description}
 
-\noindent \begin{itemize}
+    \item The game shall provide presets for different game modes.
+    \begin{description}
+        \item[Rationale:] This should help new players get used to the game before exploring more unique setting configurations.
+    \end{description}
 
-\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Accuracy}:]
-  \textbf{Accuracy} \plt{Characterize the accuracy by giving the context/use for
-    the software.  Maybe something like, ``The accuracy of the computed
-    solutions should meet the level needed for $<$engineering or scientific
-    application$>$.  The level of accuracy achieved by \progname{} shall be
-    described following the procedure given in Section~X of the Verification and
-    Validation Plan.''  A link to the VnV plan would be a nice extra.}
+%   REQUIREMENTS RELATING TO STRETCH GOALS LISTED BELOW:::::::
+    \textit{**** The following requirements relate to our stretch goals ****}
+    \item The game shall support a local player vs player mode, where 2 players can play against each other on the same computer.
+    \begin{description}
+        \item[Rationale:] Given that this is a turn based game it is perfectly possible for this game to be setup with 2 player functionality on one device. This simply increases the number of ways in which the game can be played.
+    \end{description}
 
-\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Usability}:] \textbf{Usability}
-  \plt{Characterize the usability by giving the context/use for the software.
-    You should likely reference the user characteristics section.  The level of
-    usability achieved by the software shall be described following the
-    procedure given in Section~X of the Verification and Validation Plan.  A
-    link to the VnV plan would be a nice extra.}
+    \item The game shall support a player vs computer mode, where 1 player can play against another entity without needing to find a human match.
+    \begin{description}
+        \item[Rationale:] Player vs computer support is important for instances where a user may not be able to find a human match to play against.
+    \end{description}
 
-\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Maintainability}:]
-  \textbf{Maintainability} \plt{The effort required to make any of the likely
-    changes listed for \progname{} should be less than FRACTION of the original
-    development time.  FRACTION is then a symbolic constant that can be defined
-    at the end of the report.}
+    \item The game shall implement some sort of artificial intelligence for computer players in the player vs computer gameplay option.
+    \begin{description}
+        \item[Rationale:] For player vs computer to function, some sort of artificial intelligence will be necessary to implement the computer player or else there will be no challenge for the human player.
+    \end{description}
 
-\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Portability}:]
-  \textbf{Portability} \plt{This NFR is easier to write than the others.  The
-    systems that \progname{} should run on should be listed here.  When possible
-    the specific versions of the potential operating environments should be
-    given.  To make the NFR verifiable a statement could be made that the tests
-    from a given section of the VnV plan can be successfully run on all of the
-    possible operating environments.}
+    \item The game shall implement online matchmaking.
+    \begin{description}
+        \item[Rationale:] For players that want to play the game against a real opponent but don't know anyone who is available to play against them, this is a great way for that player to find someone to play against.
+    \end{description}
 
-\item Other NFRs that might be discussed include verifiability,
-  understandability and reusability.
+    \item The game shall provide the option to save specific game settings to be reused in future sessions.
+    \begin{description}
+        \item[Rationale:] For frequent players of the game, they may have a preferred custom variation of the game settings that they may wish to save rather than having to input the game settings on every new game.
+    \end{description}
 
-\end{itemize}
+    \item The game shall display round statistics to each player at the end of every round.
+    \begin{description}
+        \item[Rationale:] Players will likely want to see some statistics at the end of the round to quantify how well they played.
+    \end{description}
 
-\subsection{Rationale}
+\end{enumerate}
 
-\plt{Provide a rationale for the decisions made in the documentation.  Rationale
-should be provided for scope decisions, modelling decisions, assumptions and
-typical values.}
+\subsection{Non-Functional Requirements}
+
+\begin{enumerate}[label=NFR\arabic*, start=1, left=0pt]
+
+    \item \textbf{Performance} The game shall maintain a frame rate of at least 30 FPS at all times.
+    \begin{description}
+        \item[Rationale:] Players need the frame rate of the game to be high enough at all times to see what’s going on.
+    \end{description}
+
+    \item \textbf{Usability} The game shall implement a clear and easy to use/understand user interface.
+    \begin{description}
+        \item[Rationale:] Users should not struggle to figure out where controls are or how certain features work. This would create a barrier to entry for new players, and it would be best if players could pick up this game and its controls with little difficulty or time required.
+    \end{description}
+
+    \item \textbf{Portability} The game shall be supported on systems running Windows 10 or later.
+    \begin{description}
+        \item[Rationale:] Most PC users use Windows 10 or 11, so ensuring that the game ports well to these operating systems is an important requirement if we want to reach a large demographic of users.
+    \end{description}
+
+    \item \textbf{Reliability} Multiplayer games of Yahtzee should crash less than 1\% of the time.
+    \begin{description}
+        \item[Rationale:] Players need to feel that the game is reliable and should not need to be concerned about the game crashing in the middle of a round.
+    \end{description}
+
+    \item \textbf{Responsiveness} The game shall respond to inputs from the user within 500 milliseconds in the worst case.
+    \begin{description}
+        \item[Rationale:] This figure represents a minimum acceptable response. If a user needs to wait longer than this to see the result of their input, they may become frustrated and even try spamming the control.
+    \end{description}
+
+    \item \textbf{Modularity} The game’s codebase shall be modular, such that it is easily extendable and reusable, and allows for quick fixes to bugs that may occur.
+    \begin{description}
+        \item[Rationale:] Our team has minimum goals in mind for what this game must be upon release, but to be able to continue updating the game to meet stretch goals, our codebase should be designed with modularity in mind to streamline the development process.
+    \end{description}
+
+    \item \textbf{Efficiency} The game shall be optimized to run on lower end systems which might have minimal CPU and GPU resources.
+    \begin{description}
+        \item[Rationale:] The game that our team is developing is not such a graphically or computationally intensive game that it should require high-end PCs to run. Additionally, being able to run the game on lower-end systems will allow our game to reach a broader audience.
+    \end{description}
+
+    \item \textbf{Enjoyability} The game shall be found enjoyable by at least 75\% of users.
+    \begin{description}
+        \item[Rationale:] The game should appeal to the majority of its users, because if it doesn't then the game serves no particular purpose.
+    \end{description}
+
+%   REQUIREMENTS RELATING TO STRETCH GOALS LISTED BELOW:::::::
+    \textit{**** The following requirements relate to our stretch goals ****}
+    \item \textbf{Portability} The game shall be supported on ios devices.
+    \begin{description}
+        \item[Rationale:] There are many users who use ios devices and would be a good target audience for this game.
+    \end{description}
+
+\end{enumerate}
