@@ -92,6 +92,9 @@ includes the following elements:
 
 \subsubsection{Goal Statements}
 
+These primary goals should be achieved in the development of our system, providing criteria for completeness. We have additionally organized stretch goals for further development, but they are not to be a metric for system completeness
+
+\iffalse
 \plt{The goal statements refine the ``Problem Description''
   (Section~\ref{Sec_pd}).  A goal is a functional objective the system under
   consideration should achieve. Goals provide criteria for sufficient
@@ -101,16 +104,131 @@ includes the following elements:
   into smaller sub-goals.  The goals are written abstractly, with a minimal
   amount of technical language.  They should be understandable by non-domain
   experts.}
+\fi
 
 \noindent Given the \plt{inputs}, the goal statements are:
 
 \begin{itemize}
 
-\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_meaningfulLabel}:] \plt{One
-    sentence description of the goal.  There may be more than one.  Each Goal
-    should have a meaningful label.}
+	\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_enjoyable}:] Enjoyable game. The project is more than just a capstone, and we need the game to be an enjoyable experience.
+	\begin{itemize}
+        \item User feedback collection. Implement a simple feedback system such as rating or comments for use in interviews or surveys to gather player insight.
+        \item Testing iteration. Conduct at least two rounds of user testing to identify and iteratively improve the system based on user experience.
+        \item Quality assets. Ensure that graphics, animations, and sounds are of a quality to add positively to the overall enjoyment.
+    \end{itemize}
+	\textit{Measurement:} Based on user feedback, a minimum of 75\% consider the experience as enjoyable.
+
+	\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_multiplayer}:] Online multiplayer functionality. We need to be able to connect two concurrent players to play the game together.
+	\begin{itemize}
+        \item Connection setup. Develop a server-client connection system where two players can connect.
+        \item Game state synchronization. Each player's actions are to be reflected to both user outputs using real-time synchronization.
+        \item Disconnection handling. Design a method to handle disconnections.
+    \end{itemize}
+	\textit{Measurement:} Two players can connect such that both players can affect the game state and both players are notified of the updates.
+
+	\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_customization}:] Customizable game settings. Core game elements must be modifiable to create custom Yahtzee variants. As a goal we would need these options to be implemented:
+	\begin{itemize}
+        \item Dice quantity option. Create an interface element for users to select from at least three options for number of dice.
+        \item Dice type option. Create an interface element for users to select from at least three options for type of dice. These different types of dice will have different number of faces.
+        \item Scoring method option. Offer at least two scoring systems that can be used.
+        \item Timer feature. Implement a timer that can be turned on or off, providing a countdown for turn time.
+    \end{itemize}
+	\textit{Measurement:} The above options are implemented and are compatible with each another.
+	
+	\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_presets}:] Preset game settings. By having some preset game configurations, it would allow players to more quickly learn the game or jump into an environment that has been tested.
+	\begin{itemize}
+        \item Create presets. Develop at least three preset configurations and test them for gameplay balance.
+        \item Preset selection menu. Create a simple way to select a preset.
+        \item Preset names and description. Give each available preset a name and a brief description to help players understand them.
+    \end{itemize}
+	\textit{Measurement:} At least three preset game configurations would be available for players to load up and play.
+	
+	\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_3D}:] 3D dice rolling. Rolling the dice will need to be or look to be three dimensional to recreate the tactile feel of the original game.
+	\begin{itemize}
+        \item Dice 3D models. Develop 3D dice models, or the appearance of such.
+        \item Dice interaction. Allow for user interaction with rolling dice through clicks or drags.
+    \end{itemize}
+	\textit{Measurement:} Dice will have the appearance of the preset die shape, and of being rolled, based on a minimum of 75\% of user feedback considering it so.
 
 \end{itemize}
+
+\vspace{50px}
+Additional stretch goal statements are the following, and can additionally be considered for when looking to add to the system's complexity and to better fulfill the intended goal of being an enjoyable game.
+\noindent Given the \plt{inputs}, the stretch goals are:
+
+\begin{itemize}
+
+	\item[SG\refstepcounter{goalnum}\thegoalnum \label{G_local_multiplayer}:] Local multiplayer. This would allow for players to play together on a single computer, but would require a different user interface and allow for different user interactions.
+	\begin{itemize}
+        \item Player input methods. Develop a system to handle inputs from multiple players on the same device.
+        \item User interface adjustments. Design a UI layout suitable for two players sharing a single screen.
+    \end{itemize}
+	\textit{Measurement:} The ability for two players to play together using a single interface and game instance without an internet connection.
+
+	\item[SG\refstepcounter{goalnum}\thegoalnum \label{G_singleplayer}:] Singleplayer variants. A singleplayer game could be achieved either through a computer-run opponent in a game, or through a custom designed experience that could leverage the different environment.
+	\begin{itemize}
+        \item AI opponent development. Create an AI that can play against a human player.
+        \item Difficulties. Design and allow players to adjust the AI opponent difficulty.
+        \item Solo game modes. Design at least one unique solo challenge or mode that provides a self-contained experience.
+    \end{itemize}
+	\textit{Measurement:} A single person can play at least one variant made specifically to be singleplayer without requiring a second human player to update the game state.
+
+	\item[SG\refstepcounter{goalnum}\thegoalnum \label{G_matchmaking}:] Online matchmaking. The game would provide users with the option to connect to another concurrent user based on a matchmaking score.
+	\begin{itemize}
+        \item Player rating system. Develop a rating system to categorize players by experience and skill.
+        \item Matchmaking algorithm. Implement a system to match players.
+    \end{itemize}
+	\textit{Measurement:} A player can connect to another unknown concurrent player who was selected as a compatible opponent.
+
+	\item[SG\refstepcounter{goalnum}\thegoalnum \label{G_saving}:] Saving custom game setting. Having this ability would allow for a user who created a custom game variant to save them for the ability to replay it without the need to recreate those specific settings.
+	\begin{itemize}
+        \item Save and load system. Build a system for players to save custom setting to a file or local storage.
+        \item Edit and delete options. Allow players to edit or delete saved custom settings for better management.
+    \end{itemize}
+	\textit{Measurement:} A custom game variant, as per the "Customizable game settings" goal and "More game setting customization" stretch goals, can be saved locally and loaded up to be played.
+	
+	\item[SG\refstepcounter{goalnum}\thegoalnum \label{G_customization2}:] More game setting customization. Besides the options in the goals section, some additional game customization options would include:
+	\begin{itemize}
+        \item Scorecard customization. Provide methods for players to adjust what options and hands appear on the scorecards.
+        \item Scoring points options. Offer players the ability to modify the scores of scoring options.
+        \item Additional scoring mechanisms. Include options for different methods of round or game scoring.
+        \item Gambling mechanism. Add additional ways to act on probabilities such as wagering on specific rolls.
+        \item Feedback-based features. Gather ideas through user feedback and testing to further expand available customization options.
+    \end{itemize}
+	\textit{Measurement:} Additional game options outside the ones listed in the "Customizable game settings" goal would be available.
+
+	\item[SG\refstepcounter{goalnum}\thegoalnum \label{G_skins}:] Dice customization. Dice could be made to appear differently, either as a means for personalization or for aiding with different impairments. An example could be a dice with pips versus a dice with a numbered faces.
+	\begin{itemize}
+        \item Dice colour options. Create at least three different dice appearances.
+        \item Dice number representation. Create different ways to represent dice face values such as traditional pips, numbers, and symbols.
+        \item Personalization menu. Implement a menu to allow for easy selection of dice appearance.
+    \end{itemize}
+	\textit{Measurement:} At least five different dice appearance variants players can choose from, that would appear in the game.
+	
+	\item[SG\refstepcounter{goalnum}\thegoalnum \label{G_stats}:] Post game statistics. This could allow for players to analyze a game after completion in a more quantitative manner, aiding in better understanding statistical probabilities.
+	\begin{itemize}
+        \item Key statistic tracking. Track important game stats during play.
+        \item Post-game summary screen. Present collected stats on a summary screen after a game.
+    \end{itemize}
+	\textit{Measurement:} A post-game summary showing at least three key game stats, available after each game.
+	
+	\item[SG\refstepcounter{goalnum}\thegoalnum \label{G_platforms}:] Multi-platform support. While most gaming experiences are for windows, this would allow for the game to be run on more than just the Windows operating system, allowing for a wider audience.
+	\begin{itemize}
+        \item Compile for systems. Compile the created system for other operating systems.
+        \item Platform testing. Test the game on multiple operating systems.
+        \item Cross-platform functionality. Verify the features such as online multiplayer work across different operating systems.
+    \end{itemize}
+	\textit{Measurement:} The game can be run on operating systems other than Windows.
+	
+	\item[SG\refstepcounter{goalnum}\thegoalnum \label{G_highlights}:] Dice highlighting. This would aid in determining what dice are used when scoring.
+	\begin{itemize}
+        \item Automatic dice highlighting. Implement a system to automatically highlight the dice that contribute to a player's score.
+        \item Optional setting. Allow players to enable or disable the feature.
+    \end{itemize}
+	\textit{Measurement:} Dice used in scoring will be highlighted when appropriate.
+
+\end{itemize}
+
 
 \subsection{Solution Characteristics Specification}
 
