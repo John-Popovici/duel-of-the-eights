@@ -17,13 +17,22 @@ The scope of the project involves developing a modified Yahtzee game that featur
 
 \subsection{Characteristics of Intended Reader} \label{sec_IntendedReader}
 
-The intended readers of this SRS document are mainly software developers and game designers with expertise in game development and design using game engines, in this case, Godot. They should possess a solid understanding of game mechanics, particularly those related to dice games, in this case, Yahtzee, and have experience in understanding how multiplayer games work. Additionally, experience with C\# and .NET is necessary for readers due to the development being done using C\# on a .NET framework. A high school level of probability theory understanding is also recommended for comprehending the game's underlying mechanics and probabilities due to the differing number of playable dice. It is assumed that readers are well-versed in these areas as it will allow readers to understand certain decisions made by the team.
+The intended readers of this SRS document are mainly software developers and game designers with an understanding of game development and game design.
+
+\begin{itemize}
+    \item The reader should have a basic understanding of the classic Yahtzee game, and well as an understanding of different dice types and their uses.
+    \item Familiarity with casual gaming and turn-based gameplay will be beneficial for the reader's understanding of the decision making process.
+    \item Basic engineering requirements understanding is required to understand the breakdown of the SRS document and its purpose.
+\end{itemize}
+
+% They should possess a solid understanding of game mechanics, particularly those related to dice games, in this case, Yahtzee, and have experience in understanding how multiplayer games work. Additionally, experience with C\# and .NET is necessary for readers due to the development being done using C\# on a .NET framework. A high school level of probability theory understanding is also recommended for comprehending the game's underlying mechanics and probabilities due to the differing number of playable dice. It is assumed that readers are well-versed in these areas as it will allow readers to understand certain decisions made by the team.
 
 \subsection{Organization of Document}
 
 This SRS document is structured to provide a clear roadmap for readers. The sections are as follows:
 
 \begin{itemize}
+   
     \item \textbf{Introduction} 
     \begin{itemize}
         \item Outlines the purpose and scope of the SRS.
@@ -31,12 +40,18 @@ This SRS document is structured to provide a clear roadmap for readers. The sect
     
     \item \textbf{General System Description} 
     \begin{itemize}
-        \item Outlines an overview of the project, along with user characterstics, system constraint and the interfaces between the system and its environment.
+        \item Outlines an overview of the project, along with user characteristics, system constraint and the interfaces between the system and its environment.
     \end{itemize}
     
     \item \textbf{Specific System Description} 
     \begin{itemize}
-        \item Indepth system description containg  high-level probelem and goal description, along with solutions characteristics, assumptions, definiations and instance models  detailed functionalities and features of the system.
+        \item In-depth system description containing high-level problem and goal descriptions.
+        %, along with solutions characteristics, assumptions, definitions and instance models  detailed functionalities and features of the system.
+    \end{itemize}
+    
+    \item \textbf{Stakeholders} 
+    \begin{itemize}
+        \item Outlines stakeholder groups and relevant system user information.
     \end{itemize}
     
     \item \textbf{Requirements} 
@@ -51,7 +66,7 @@ This SRS document is structured to provide a clear roadmap for readers. The sect
     
     \item \textbf{Unlikely Changes} 
     \begin{itemize}
-        \item Outlines ascpects of the system that will remain static.
+        \item Outlines aspects of the system that will remain static.
     \end{itemize}
     
     \item \textbf{Traceability Matrices and Graphs} 
@@ -71,12 +86,12 @@ This SRS document is structured to provide a clear roadmap for readers. The sect
     
     \item \textbf{Commonalities} 
     \begin{itemize}
-        \item Outlines commonalities between differnt aspects of the system.
+        \item Outlines commonalities between different aspects of the system.
     \end{itemize}
     
     \item \textbf{Variabilities} 
     \begin{itemize}
-        \item Outlines variables between differnt aspects of the system.
+        \item Outlines variables between different aspects of the system.
     \end{itemize}
     
     \item \textbf{Parameters of Variations} 
@@ -86,7 +101,7 @@ This SRS document is structured to provide a clear roadmap for readers. The sect
     
     \item \textbf{Appendix — Reflection} 
     \begin{itemize}
-        \item Indepth insights into the development process and lessons learned.
+        \item In-depth insights into the development process and lessons learned.
     \end{itemize}
 \end{itemize}
 
@@ -147,11 +162,11 @@ System context includes an abstract view of the software following the design pa
 
 \subsection{User Characteristics} \label{SecUserCharacteristics}
 
-This section summarizes the knowledge and skills expected of the user:
+The user characteristics for the game can be considered to be the following and are further developed in the stakeholders section:
   
 \begin{itemize}
-    \item The end user of the Yahtzee 3D game should have an understanding of the Yahtzee game, including its rules and strategies.
-    \item Users should have a rudimentary (elementary school level) understanding of probability theory, as it is important for comprehending the game's mechanics and making informed decisions during gameplay.
+    \item The end user of \textit{Dice Duels: Duel of the Eights} should have an understanding of the Yahtzee game, including its rules and strategies.
+    \item Users should have a rudimentary understanding of probability theory, as it is important for comprehending the game's mechanics and making informed decisions during gameplay.
     \item Familiarity with casual gaming and turn-based gameplay will be beneficial for the user's overall enjoyment and understanding of the pacing of the game.
     \item Basic digital literacy is expected, particularly in understanding how to adjust game settings, access help menus, or troubleshoot simple connectivity issues.
 \end{itemize}
@@ -161,6 +176,6 @@ This section summarizes the knowledge and skills expected of the user:
 \noindent The following constraints must be adhered to during the development of the system:
   \begin{itemize}
     \item The game must use the Godot engine exclusively for its development.
-    \item The codebase must be written in C\# and  use .NET framework exclusively.
+    \item The codebase must be written in GDScript and C\# and  use .NET framework exclusively.
     \item The system must support peer-to-peer and multiplayer capabilities.
   \end{itemize}
