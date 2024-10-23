@@ -3,6 +3,7 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{float}
 
 \hypersetup{
     colorlinks=true,       % false: boxed links; true: colored links
@@ -36,7 +37,7 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date1 & Name(s) & Description of changes\\
+2024/10/23 & Hemraj & Added content to introduction, scope, purpose and hazard defination sections\\
 Date2 & Name(s) & Description of changes\\
 ... & ... & ...\\
 \bottomrule
@@ -55,12 +56,36 @@ Date2 & Name(s) & Description of changes\\
 
 \section{Introduction}
 
-\wss{You can include your definition of what a hazard is here.}
+Game system design is often perceived as straightforward because users interact primarily with the front end, unaware of the complexities that lie behind the scenes in the back end. In reality, it consists of multiple different components working together in order to create a seamless experience for the user.\\
+
+As digital gaming continues to evolve, understanding these various components and their interplay is essential. Thus it is crucial to examine the potential challenges and requirements that may emerge within these components to improve the overall system.
+
+\wss{You can include your definition of what a hazard is here. Hemraj note: added vague intro and moved defination to its own section}
 
 \section{Scope and Purpose of Hazard Analysis}
 
 \wss{You should say what \textbf{loss} could be incurred because of the
 hazards.}
+
+The purpose of this document is to assess the potential hazards associated with the system under development. The ultimate goal is to implement strategies that either eliminate these hazards or reduce them to an acceptable level. To achieve this, the Failure Modes and Effects Analysis (FMEA) method was employed, which aided in systematically identifying and prioritizing hazards. A thorough analysis was conducted on various aspects of the system, including requirements, design, and code implementation.\\
+
+The scope of this document is to identify possible hazards within the software components of the game system, including the game mechanics, user interface, and multiplayer functionalities. It aims to analyze the effects and causes of potential failures such as performance degradation and outright system failure. Through this, mitigation strategies, safety and security requirements for users were established. Importantly, the scope does not include any hardware components as the system is purely software based and any hardware hazards are not within the control of the developers.
+
+\section{Hazard Definition}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|p{10cm}|}
+    \hline
+    \textbf{Latex} & \textbf{Definition} \\ \hline
+    \textbf{System Hazard} & A condition that could foreseeably cause or contribute to the system going down or loss of performance. \\ \hline
+    \textbf{Risk} & A measure that indicates the likelihood of a system hazard. \\ \hline
+    \end{tabular}
+    \caption{Definitions of System Hazard and Risk}
+\end{table}
+
+A hazard, in the context of this system, is defined as any property, software, or component that leads to reduced performance or complete system failure.
+
 
 \section{System Boundaries and Components}
 
