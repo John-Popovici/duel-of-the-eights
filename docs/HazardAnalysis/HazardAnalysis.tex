@@ -4,6 +4,11 @@
 \usepackage{tabularx}
 \usepackage{hyperref}
 \usepackage{float}
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{pdflscape}
 
 \hypersetup{
     colorlinks=true,       % false: boxed links; true: colored links
@@ -38,7 +43,7 @@
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
 2024/10/23 & Hemraj & Added content to introduction, scope, purpose and hazard defination sections\\
-Date2 & Name(s) & Description of changes\\
+2024/10/23 & Isaac Giles & Added content to sections 4 & 5 \\
 ... & ... & ...\\
 \bottomrule
 \end{tabularx}
@@ -97,22 +102,85 @@ important library, these are also potential components.}
 
 \section{Critical Assumptions}
 
-\wss{These assumptions that are made about the software or system.  You should
-minimize the number of assumptions that remove potential hazards.  For instance,
-you could assume a part will never fail, but it is generally better to include
-this potential failure mode.}
+\begin{itemize}
+    \item \textbf{Godot Stability}: The Godot game engine is assumed to be stable and function correctly.
+\end{itemize}
 
 \section{Failure Mode and Effect Analysis}
+\subsection{Hazards Considered Out of Scope}
+\begin{enumerate}
+    \item \textbf{Hardware-Specific Failures}
+        \begin{itemize}
+            \item Issues related to hardware malfunctions such as GPU or CPU overheating, RAM failures, or hard drive corruption.
+            \item \textit{Rationale}: The FMEA table is focused on software development within the Godot game engine, and hardware reliability is typically managed by the user’s computer environment.
+        \end{itemize}
 
-\wss{Include your FMEA table here. This is the most important part of this document.}
-\wss{The safety requirements in the table do not have to have the prefix SR.
-The most important thing is to show traceability to your SRS. You might trace to
-requirements you have already written, or you might need to add new
-requirements.}
-\wss{If no safety requirement can be devised, other mitigation strategies can be
-entered in the table, including strategies involving providing additional
-documentation, and/or test cases.}
+    \item \textbf{Operating System Crashes or Instability}
+        \begin{itemize}
+            \item Operating system crashes, updates, or security vulnerabilities that interrupt game sessions.
+            \item \textit{Rationale}: These are dependent on the player's system and not directly related to the game's software development or behavior.
+        \end{itemize}
 
+    \item \textbf{Network Infrastructure Failures}
+        \begin{itemize}
+            \item Failures due to external network outages, router malfunctions, or ISP-level disruptions.
+            \item \textit{Rationale}: These are beyond the game's control and depend on the player's internet setup or service provider.
+        \end{itemize}
+
+    \item \textbf{Third-Party Library Bugs or Vulnerabilities}
+        \begin{itemize}
+            \item Bugs or security vulnerabilities in third-party libraries or plugins used within the Godot engine.
+            \item \textit{Rationale}: While the game relies on third-party tools, the FMEA focuses on bugs and issues within the game code itself, not third-party dependencies.
+        \end{itemize}
+
+    \item \textbf{Player Misuse or Exploits}
+        \begin{itemize}
+            \item Players intentionally trying to exploit the game, cheat, or use unauthorized modifications.
+            \item \textit{Rationale}: Handling intentional misuse or hacking is outside the game's core development, and managing these issues requires external anti-cheat measures or monitoring.
+        \end{itemize}
+
+    \item \textbf{Data Privacy and Security Breaches}
+        \begin{itemize}
+            \item Unauthorized data access, or privacy breaches.
+            \item \textit{Rationale}: The FMEA focuses on in-game functionalities like dice rolls, AI, and scoring. Data privacy concerns involve external security practices and infrastructure, which are beyond the game's core software behavior.
+        \end{itemize}
+
+    \item \textbf{Non-Game Software Interference}
+        \begin{itemize}
+            \item Interference from other software running on the user's machine, like antivirus programs or system background tasks.
+            \item \textit{Rationale}: These external software influences are outside the game's scope of control and would be handled by system administrators or users.
+        \end{itemize}
+
+\end{enumerate}
+
+\clearpage
+\begin{landscape}
+\subsection{FMEA Table}
+
+\begin{longtable}{|>{\raggedright}m{2.5cm}|>{\raggedright}m{2.5cm}|>{\raggedright}m{3cm}|>{\centering}m{1.5cm}|>{\raggedright}m{3cm}|>{\centering}m{1.5cm}|>{\raggedright}m{3cm}|>{\centering}m{2cm}|}
+\hline
+\textbf{Function} & \textbf{Failures} & \textbf{Unacceptable Event} & \textbf{Severity of Failure (0-10)} & \textbf{Cause of Failure} & \textbf{Likelihood of Occurrence (0-10)} & \textbf{Recommended Action} & \textbf{Likelihood of Failure Detection (0-10)} \\ \hline
+\endfirsthead
+
+\hline
+\textbf{Function} & \textbf{Failures} & \textbf{Unacceptable Event} & \textbf{Severity of Failure (0-10)} & \textbf{Cause of Failure} & \textbf{Likelihood of Occurrence (0-10)} & \textbf{Recommended Action} & \textbf{Likelihood of Failure Detection (0-10)} \\ \hline
+\endhead
+
+Dice Roll Simulation & Physics misbehaves & Unrealistic dice behavior & 8 & Physics engine glitch & 6 & Refine physics settings; improve collision detection & 4 \\ \hline
+Score Calculation & Incorrect scoring & Inaccurate score computation & 9 & Logic error in scoring algorithm & 4 & Unit test scoring algorithms thoroughly & 6 \\ \hline
+Player vs. Computer AI & Poor AI decisions & Computer opponent is too easy/unpredictable & 3 & Sub-optimal AI strategy & 6 & Refine AI strategy based on probability analysis & 9 \\ \hline
+Multiplayer Functionality & Connection loss & Player disconnects mid-game & 7 & Network instability & 5 & Implement reconnect feature; improve connection stability & 5 \\ \hline
+Dice Rendering & Dice not visible & Players cannot see the dice clearly & 3 & Rendering glitch & 3 & Reduce 3D model poly counts for best rendering reliability; ensure camera angles cover dice & 3 \\ \hline
+User Interface & Missing or confusing UI & Players are confused by the interface & 7 & Inadequate UI design & 5 & Conduct user testing; iterate on UI design & 8 \\ \hline
+Camera Control & Unclear view of the board & Players can't properly view game elements & 6 & Inadequate camera angle logic & 5 & Allow manual camera adjustment; improve auto camera control & 6 \\ \hline
+Audio Feedback & Missing or incorrect sounds & No sound feedback for player actions & 4 & Sound trigger event missed & 5 & Ensure audio events are linked to game actions with low latency & 6 \\ \hline
+General Game Stability & Unexpected crashes during gameplay & Game session terminates abruptly & 9 & Memory leaks, unhandled exceptions, or rendering overload & 4 & Conduct stress tests; improve error handling and resource management & 9 \\ \hline
+Scoreboard Display & Incorrect scores or missing player data on the scoreboard & Confusion over game results & 6 & Display update not synchronized with scoring logic & 3 & Ensure that scoreboard updates are triggered accurately, add validation & 4 \\ \hline
+
+\end{longtable}
+\end{landscape}
+
+\clearpage
 \section{Safety and Security Requirements}
 
 \wss{Newly discovered requirements.  These should also be added to the SRS.  (A
