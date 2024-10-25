@@ -4,11 +4,12 @@
 \usepackage{tabularx}
 \usepackage{hyperref}
 \usepackage{float}
-\documentclass{article}
 \usepackage{graphicx}
 \usepackage{longtable}
 \usepackage{array}
 \usepackage{pdflscape}
+\usepackage{geometry} %[showframe=true]
+\usepackage{changepage}
 
 \hypersetup{
     colorlinks=true,       % false: boxed links; true: colored links
@@ -32,7 +33,7 @@
 \maketitle
 \thispagestyle{empty}
 
-~\newpage
+%~\newpage
 
 \pagenumbering{roman}
 
@@ -42,9 +43,10 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-2024/10/23 & Hemraj & Added content to introduction, scope, purpose and hazard defination sections\\
-2024/10/23 & Isaac Giles & Added content to sections 4 & 5 \\
-2024/10/25 & Isaac Giles & Updated reflection section \\
+2024-10-23 & Hemraj & Added content to sections 1, 2, and 3\\
+2024-10-23 & Isaac Giles & Added content to sections 5 and 6 \\
+2024-10-25 & Isaac Giles & Updated reflection section \\
+2024-10-25 & John Popovici & Fixed LaTeX compiling error and table format \\
 ... & ... & ...\\
 \bottomrule
 \end{tabularx}
@@ -154,32 +156,78 @@ important library, these are also potential components.}
 
 \end{enumerate}
 
-\clearpage
-\begin{landscape}
 \subsection{FMEA Table}
 
-\begin{longtable}{|>{\raggedright}m{2.5cm}|>{\raggedright}m{2.5cm}|>{\raggedright}m{3cm}|>{\centering}m{1.5cm}|>{\raggedright}m{3cm}|>{\centering}m{1.5cm}|>{\raggedright}m{3cm}|>{\centering}m{2cm}|}
+Text FEMA table allows for us to quantify values related to possible failures and document each failure's severity, likelihood, and detectability. These values can help guide our countermeasures and priorities in risk mitigation.
+
+
+\begin{landscape}
+\thispagestyle{empty}
+%\newgeometry{left=2cm}
+
+\begin{table}[H]
+\caption{FEMA Table}
+%\begin{adjustwidth}{-5.5cm}{}
+\begin{adjustwidth}{-2cm}{}
+\begin{tabular}{|>{\raggedright}m{2.5cm}|>{\raggedright}m{2.5cm}|>{\raggedright}m{3cm}|>{\centering}m{1.5cm}|>{\raggedright}m{3cm}|>{\centering}m{1.8cm}|>{\raggedright}m{3cm}|>{\centering\arraybackslash}m{1.8cm}|}
 \hline
-\textbf{Function} & \textbf{Failures} & \textbf{Unacceptable Event} & \textbf{Severity of Failure (0-10)} & \textbf{Cause of Failure} & \textbf{Likelihood of Occurrence (0-10)} & \textbf{Recommended Action} & \textbf{Likelihood of Failure Detection (0-10)} \\ \hline
-\endfirsthead
 
+\textbf{Function} & \textbf{Failures} & \textbf{Unacceptable Event} & \textbf{Severity of Failure (0-10)} & \textbf{Cause of Failure} & \textbf{Likelihood of Occurrence (0-10)} & \textbf{Recommended Action} & \textbf{Likelihood of Failure Detection (0-10)} \\ 
 \hline
-\textbf{Function} & \textbf{Failures} & \textbf{Unacceptable Event} & \textbf{Severity of Failure (0-10)} & \textbf{Cause of Failure} & \textbf{Likelihood of Occurrence (0-10)} & \textbf{Recommended Action} & \textbf{Likelihood of Failure Detection (0-10)} \\ \hline
-\endhead
 
-Dice Roll Simulation & Physics misbehaves & Unrealistic dice behavior & 8 & Physics engine glitch & 6 & Refine physics settings; improve collision detection & 4 \\ \hline
-Score Calculation & Incorrect scoring & Inaccurate score computation & 9 & Logic error in scoring algorithm & 4 & Unit test scoring algorithms thoroughly & 6 \\ \hline
-Player vs. Computer AI & Poor AI decisions & Computer opponent is too easy/unpredictable & 3 & Sub-optimal AI strategy & 6 & Refine AI strategy based on probability analysis & 9 \\ \hline
-Multiplayer Functionality & Connection loss & Player disconnects mid-game & 7 & Network instability & 5 & Implement reconnect feature; improve connection stability & 5 \\ \hline
-Dice Rendering & Dice not visible & Players cannot see the dice clearly & 3 & Rendering glitch & 3 & Reduce 3D model poly counts for best rendering reliability; ensure camera angles cover dice & 3 \\ \hline
-User Interface & Missing or confusing UI & Players are confused by the interface & 7 & Inadequate UI design & 5 & Conduct user testing; iterate on UI design & 8 \\ \hline
-Camera Control & Unclear view of the board & Players can't properly view game elements & 6 & Inadequate camera angle logic & 5 & Allow manual camera adjustment; improve auto camera control & 6 \\ \hline
-Audio Feedback & Missing or incorrect sounds & No sound feedback for player actions & 4 & Sound trigger event missed & 5 & Ensure audio events are linked to game actions with low latency & 6 \\ \hline
-General Game Stability & Unexpected crashes during gameplay & Game session terminates abruptly & 9 & Memory leaks, unhandled exceptions, or rendering overload & 4 & Conduct stress tests; improve error handling and resource management & 9 \\ \hline
-Scoreboard Display & Incorrect scores or missing player data on the scoreboard & Confusion over game results & 6 & Display update not synchronized with scoring logic & 3 & Ensure that scoreboard updates are triggered accurately, add validation & 4 \\ \hline
+Dice Roll Simulation & Physics misbehaves & Unrealistic dice behavior & 8 & Physics engine glitch & 6 & Refine physics settings; improve collision detection & 4 \\
+\hline
+Score Calculation & Incorrect scoring & Inaccurate score computation & 9 & Logic error in scoring algorithm & 4 & Unit test scoring algorithms thoroughly & 6 \\
+\hline
+Player vs. Computer AI & Poor AI decisions & Computer opponent is too easy/unpredictable & 3 & Sub-optimal AI strategy & 6 & Refine AI strategy based on probability analysis & 9 \\
+\hline
+Multiplayer Functionality & Connection loss & Player disconnects mid-game & 7 & Network instability & 5 & Implement reconnect feature; improve connection stability & 5 \\
+\hline
+Dice Rendering & Dice not visible & Players cannot see the dice clearly & 3 & Rendering glitch & 3 & Reduce 3D model poly counts for best rendering reliability; ensure camera angles cover dice & 3 \\
+\hline
 
-\end{longtable}
+
+\end{tabular}
+\end{adjustwidth}
+\end{table}
+
+\vfill
+\raisebox{0cm}{\makebox[\linewidth]{\thepage}}
+
+%\restoregeometry
 \end{landscape}
+
+\begin{landscape}
+\thispagestyle{empty}
+
+\begin{table}[H]
+\begin{adjustwidth}{-2cm}{}
+\begin{tabular}{|>{\raggedright}m{2.5cm}|>{\raggedright}m{2.5cm}|>{\raggedright}m{3cm}|>{\centering}m{1.5cm}|>{\raggedright}m{3cm}|>{\centering}m{1.8cm}|>{\raggedright}m{3cm}|>{\centering\arraybackslash}m{1.8cm}|}
+\hline
+
+\textbf{Function} & \textbf{Failures} & \textbf{Unacceptable Event} & \textbf{Severity of Failure (0-10)} & \textbf{Cause of Failure} & \textbf{Likelihood of Occurrence (0-10)} & \textbf{Recommended Action} & \textbf{Likelihood of Failure Detection (0-10)} \\ 
+\hline
+
+User Interface & Missing or confusing UI & Players are confused by the interface & 7 & Inadequate UI design & 5 & Conduct user testing; iterate on UI design & 8 \\
+\hline
+Camera Control & Unclear view of the board & Players can't properly view game elements & 6 & Inadequate camera angle logic & 5 & Allow manual camera adjustment; improve auto camera control & 6 \\
+\hline
+Audio Feedback & Missing or incorrect sounds & No sound feedback for player actions & 4 & Sound trigger event missed & 5 & Ensure audio events are linked to game actions with low latency & 6 \\
+\hline
+General Game Stability & Unexpected crashes during gameplay & Game session terminates abruptly & 9 & Memory leaks, unhandled exceptions, or rendering overload & 4 & Conduct stress tests; improve error handling and resource management & 9 \\
+\hline
+Scoreboard Display & Incorrect scores or missing player data on the scoreboard & Confusion over game results & 6 & Display update not synchronized with scoring logic & 3 & Ensure that scoreboard updates are triggered accurately, add validation & 4 \\
+\hline
+
+\end{tabular}
+\end{adjustwidth}
+\end{table}
+
+\vfill
+\raisebox{0cm}{\makebox[\linewidth]{\thepage}}
+\end{landscape}
+
+
 
 \clearpage
 \section{Safety and Security Requirements}
