@@ -11,6 +11,10 @@
 \usepackage{geometry} %[showframe=true]
 \usepackage{changepage}
 
+\usepackage{enumitem}
+
+\usepackage[round]{natbib}
+
 \hypersetup{
     colorlinks=true,       % false: boxed links; true: colored links
     linkcolor=red,          % color of internal links (change box color with linkbordercolor)
@@ -267,15 +271,33 @@ Scoreboard Display & Incorrect scores or missing player data on the scoreboard &
 
 
 \clearpage
+
+\newpage{}
 \section{Safety and Security Requirements}
 
-\wss{Newly discovered requirements.  These should also be added to the SRS.  (A
-rationale design process how and why to fake it.)}
+\begin{enumerate}[label=R\arabic*, start=17, left=0pt]
+
+    \item The game shall always show the correct current state accurately.
+    \begin{description}
+        \item[Rationale:] The player needs to be able to understand the current state of the game to understand their current standings, and strategic the next move. Similarly, the current state indicates what is the next action to be done by the user. This is extended to states outside of an active game such as game settings selection, match-up, and system settings selection.
+    \end{description}
+
+\end{enumerate}
 
 \section{Roadmap}
 
-\wss{Which safety requirements will be implemented as part of the capstone timeline?
-Which requirements will be implemented in the future?}
+\subsection{POC Demonstration}
+	By POC Demonstrations, we will work towards R8 and R17, and it's base implications of current game standings, dice values, and win conditions to be accurately reflected to the user. We will also work towards NFR4, but will not expect to reach the less than 1\% crash condition until later in the project
+    
+    
+\subsection{Revision 0 Demonstration}
+	Expanding on R16 and R17, we will show a detailed description of the game's intermediary states at the end of a game. By this stage we will also have R1 functional on a stable peer to peer connection.By this stage, we will also have achieved NFR4's requirement of less than 1\% crash rate.
+    
+\subsection{Final (Revision 1) Demonstration}
+	By Final Demonstration, based on R13, we will have a sufficiently sophisticated AI opponent that the player can play against. It will not be expected to have the best strategy, but enough for the player to enjoy the game consistently, to match NFR8's 75\% user enjoyability metric. R3, R4, and NFR5 will also be completed by this stage.
+
+\subsection{Outside of Capstone Time line}
+	After Final Demonstrations, R13's requirement for a sophisticated AI opponent can be expanded, creating different levels of opponents and for the different game modes.
 
 \newpage{}
 
@@ -318,7 +340,7 @@ Which requirements will be implemented in the future?}
 
     \begin{itemize}
         \item Performance Risks: These involve the software failing to meet performance expectations due to degrading factors such as slow loading times or network lag in the case of online functionalities. Poor performance can lead to user frustration and the game could lose player base. - Hemraj B.
-        \item Usability Risks: These risks stem from a poorly designed user interface or experience, which makes it difficult for users to use or comprehend the software. Thus usability risks are crucial to examine since usability concerns can cause user irritation, decreased engagement, and lower adoption rates. In our case, if the game is hard to navigate due to poor design, users may opt to try other games instead not wanting to waste their time. - Hemraj B.
+        \item Usability Risks: These risks stem from a poorly designed user interface or experience, which makes it difficult for users to use or comprehend the software. Thus usability risks are crucial to examine since usability concerns can cause user irritation, decreased engagement, and lower adoption rates. In our case, if the game is hard to navigate due to poor design, users may opt to try other games instead not wanting to waste their time. - Hemraj B.
 	\end{itemize}
 
 
