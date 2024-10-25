@@ -43,10 +43,11 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-2024-10-23 & Hemraj & Added content to sections 1, 2, and 3\\
+2024-10-23 & Hemraj Bhatt & Added content to sections 1, 2, and 3\\
 2024-10-23 & Isaac Giles & Added content to sections 5 and 6 \\
 2024-10-25 & Isaac Giles & Updated reflection section \\
 2024-10-25 & John Popovici & Fixed LaTeX compiling error and table format \\
+2024-10-25 & Hemraj Bhatt & Added content to section 4\\
 ... & ... & ...\\
 \bottomrule
 \end{tabularx}
@@ -68,12 +69,7 @@ Game system design is often perceived as straightforward because users interact 
 
 As digital gaming continues to evolve, understanding these various components and their interplay is essential. Thus it is crucial to examine the potential challenges and requirements that may emerge within these components to improve the overall system.
 
-\wss{You can include your definition of what a hazard is here. Hemraj note: added vague intro and moved defination to its own section}
-
 \section{Scope and Purpose of Hazard Analysis}
-
-\wss{You should say what \textbf{loss} could be incurred because of the
-hazards.}
 
 The purpose of this document is to assess the potential hazards associated with the system under development. The ultimate goal is to implement strategies that either eliminate these hazards or reduce them to an acceptable level. To achieve this, the Failure Modes and Effects Analysis (FMEA) method was employed, which aided in systematically identifying and prioritizing hazards. A thorough analysis was conducted on various aspects of the system, including requirements, design, and code implementation.\\
 
@@ -94,14 +90,54 @@ The scope of this document is to identify possible hazards within the software c
 
 A hazard, in the context of this system, is defined as any property, software, or component that leads to reduced performance or complete system failure.
 
-
 \section{System Boundaries and Components}
 
-\wss{Dividing the system into components will help you brainstorm the hazards.
-You shouldn't do a full design of the components, just get a feel for the major
-ones.  For projects that involve hardware, the components will typically include
-each individual piece of hardware.  If your software will have a database, or an
-important library, these are also potential components.}
+\subsection*{4.1 System Overview}
+
+The system referred to in this document consists of the following major software components within the system:
+
+\begin{itemize}
+    \item Dice Roll Simulation
+    \item Score Calculation
+    \item Player vs. Computer AI
+    \item Multiplayer Functionality
+    \item Dice Rendering
+    \item User Interface
+    \item Camera Control
+    \item Audio Feedback
+    \item Scoreboard Display
+\end{itemize}
+
+These components collectively form the core functionality of the game, from simulating realistic 3D dice rolls to providing engaging interactions between players. Each component plays a unique role in delivering a comprehensive gameplay experience and is essential to the operation of the system.
+
+\subsection*{4.2 Component Descriptions}
+
+\subsubsection*{4.2.1 Dice Roll Simulation}
+This component simulates the physics-based rolling of 3D dice, providing a realistic and interactive experience for the players. It uses randomized initial velocities and rotations to ensure that each roll outcome is unpredictable, closely mimicking physical dice rolls.
+
+\subsubsection*{4.2.2 Score Calculation}
+This component handles the calculation of scores based on Yahtzee rules, modified for the game's unique mechanics. It evaluates the outcome of each roll, applies any special bonuses, and determines the impact on each player's health bar, reducing it accordingly when a player loses.
+
+\subsubsection*{4.2.3 Player vs. Computer AI}
+This component simulates a computer opponent, applying strategic choices based on current dice values and score potential. The AI adapts its moves based on the game state, using offensive or defensive strategies to reduce the player's health bar while attempting to maximize its own score. This AI is assumed to be basic in capabilities.
+
+\subsubsection*{4.2.4 Multiplayer Functionality}
+This component allows multiple players to compete either locally or online. It manages turn-taking, score calculations, and health updates for each player, ensuring a smooth and engaging multiplayer experience.
+
+\subsubsection*{4.2.5 Dice Rendering}
+This component is responsible for the 3D visual representation of the dice. It includes realistic textures, shadows, and animations to enhance the gaming experience. The rendering component ensures each dice roll feels tangible, giving feedback based on movement and resulting in a visually engaging display of outcomes.
+
+\subsubsection*{4.2.6 User Interface}
+This component provides an accessible and organized display for players, including game controls, player information, health bars, and scoring details. It guides the player through the gameplay with minimal effort, enhancing user engagement and intuitiveness.
+
+\subsubsection*{4.2.7 Camera Control}
+This component manages the in-game camera, providing a dynamic view of the dice, players, and game area. The camera adjusts automatically to showcase dice rolls and other key moments, ensuring players have a clear and immersive view of the action.
+
+\subsubsection*{4.2.8 Audio Feedback}
+This component provides audio cues for interactions such as dice rolls, score updates, and health deductions. Sounds are integrated to give players feedback on their actions, enhancing immersion and reinforcing gameplay events.
+
+\subsubsection*{4.2.9 Scoreboard Display}
+This component displays scores and health bar statuses for all players. It updates in real-time, showing each player's remaining health and overall score, allowing players to track their performance and make strategic decisions based on current standings.
 
 \section{Critical Assumptions}
 
