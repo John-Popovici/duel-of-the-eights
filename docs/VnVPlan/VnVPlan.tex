@@ -27,13 +27,17 @@
 
 \section*{Revision History}
 
-\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
-\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\begin{table}[hp]
+\caption{Revision History} \label{TblRevisionHistory}
+\begin{tabularx}{\textwidth}{llX}
+\toprule
+\textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+2024-10-27 & John Popovici & Preparing file and added to section 2\\
+... & ... & ...\\
 \bottomrule
 \end{tabularx}
+\end{table}
 
 ~\\
 \wss{The intention of the VnV plan is to increase confidence in the software.
@@ -82,18 +86,23 @@ in.}
 
 \pagenumbering{arabic}
 
-This document ... \wss{provide an introductory blurb and roadmap of the
-  Verification and Validation plan}
+%This document ... \wss{provide an introductory blurb and roadmap of the Verification and Validation plan}
 
 \section{General Information}
 
 \subsection{Summary}
 
-\wss{Say what software is being tested.  Give its name and a brief overview of
-  its general functions.}
+This project creates an online multiplayer game platform that allows for the creation of
+custom Yahtzee-like games and variants. This family of games will come with some presets
+such as classic Yahtzee, an octahedron version, and more, but will allow for the
+users to set their own variables such as number of dice, what kind of dice, and some elements
+of scoring, and then play that game. Kinds of dice would include cubes and octahedrons,
+among other multi-sided dice, and scoring could be calculated at the end of the game, as in
+classic Yahtzee, or on a per-round basis, where hands go in a head-to-head matchup.
 
 \subsection{Objectives}
 
+\iffalse
 \wss{State what is intended to be accomplished.  The objective will be around
   the qualities that are most important for your project.  You might have
   something like: ``build confidence in the software correctness,''
@@ -110,9 +119,28 @@ limitations in your resources for verification and validation.  You can't do eve
 so what are you going to prioritize?  As an example, if your system depends on an 
 external library, you can explicitly state that you will assume that external library 
 has already been verified by its implementation team.}
+\fi
+
+The main objective of this project is to ensure robust and flexible functionality that supports customizability in game creation, with confidence in their interactability. Specifically, the project will focus on:
+
+\begin{itemize}
+	\item Demonstrating Adequate Usability: User interactions should be intuitive, enabling smooth navigation and game setup without requiring extensive technical knowledge.
+	\item Supporting User-Driven Customizability: Emphasis will be placed on making the platform adaptable, allowing users to easily create and modify games with various dice types and scoring rules. These elements must be modular such that a custom game can make use of these components in a flexible fashion.
+	\item Ensuring Software Correctness: Testing will confirm accurate dice roll usage, score calculations, and game outcomes to build confidence in the correctness of the core mechanics.
+\end{itemize}
+
+Out of Scope Objectives: Due to time constraints, certain areas are out of scope for this project. These include:
+
+\begin{itemize}
+	\item Probability Testing: While a statistical analysis could be done on the randomness of dice rolls, it would be out of scope for our current plans and we will proceed with a general assumption that functions that rely on random values are as accurately pseudo-random as needed, without set seeding.
+	\item Performance Optimization: While performance will be monitored, extensive optimization for faulty connections or intricate rule configurations will be left out, with plans to address this in potential future releases.
+\end{itemize}
+
+This prioritization allows us to allocate resources efficiently, focusing on core functionality and foundational elements.
 
 \subsection{Challenge Level and Extras}
 
+\iffalse
 \wss{State the challenge level (advanced, general, basic) for your project.
 Your challenge level should exactly match what is included in your problem
 statement.  This should be the challenge level agreed on between you and the
@@ -126,6 +154,28 @@ proof, GenderMag personas, Design Thinking, etc.  Extras should have already
 been approved by the course instructor as included in your problem statement.
 You can use a pull request to update your extras (in TeamComposition.csv or
 Repos.csv) if your plan changes as a result of the VnV planning exercise.}
+\fi
+
+Through the implementation of not just a single Yahtzee game variant, but
+by implementing a system where the user can create a custom game variant
+and connect to another online player to play it, we are looking to achieve the
+advanced challenge level. We would also provide some pre-set game variants
+that have been tested and were found to be more fun than others.
+
+We will include extra elements to aid in better developing our game and
+allow us to design for a fun gaming experience, as we wish this game to not be
+just a capstone project, but a game we can be proud of and put out into the
+world. Following industry practices in game development, we wish to potentially
+do the following extras:
+\begin{itemize}
+	\item Focus groups, Surveys, and Interviews
+	\item Usability testing
+	\item User personas
+	\item User documentation
+\end{itemize}
+
+\wss{TODO update problem statement and gitlab once we know difficulty level and what extras}
+%TODO update problem statement and gitlab once we know difficulty level and what extras
 
 \subsection{Relevant Documentation}
 
