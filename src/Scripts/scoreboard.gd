@@ -9,6 +9,7 @@ extends VBoxContainer
 # Repeat for all category labels...
 
 @onready var total_score_label = $TotalScoreContainer/TotalScore
+@onready var dice_values_label = $CurrentDiceRollsContainer/CurrentDiceRolls
 @onready var turn_indicator_label = $TurnIndicatorLabel
 
 # Function to update a category score
@@ -30,6 +31,10 @@ func update_player_score(player: int, score: int) -> void:
 # Function to update total score
 func update_total_score(score: int) -> void:
 	total_score_label.text = str(score)
+
+# Function to update dice value display
+func update_dice_values(values: Array[int]) -> void:
+	dice_values_label.text = str(values)
 
 # Function to update the turn indicator
 func update_turn_indicator(player_name: String) -> void:

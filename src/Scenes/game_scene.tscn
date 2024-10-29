@@ -1,6 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dxwfosg6try75"]
+[gd_scene load_steps=10 format=3 uid="uid://dxwfosg6try75"]
 
+[ext_resource type="Script" path="res://Scenes/dice_container.gd" id="1_78uev"]
 [ext_resource type="Script" path="res://Scripts/scoreboard.gd" id="1_gapl4"]
+[ext_resource type="Script" path="res://Scenes/die.gd" id="2_muqym"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_c0fec"]
 
@@ -41,10 +43,16 @@ spot_range = 70.0
 spot_attenuation = -0.5
 spot_angle_attenuation = 2.37841
 
-[node name="DiceContainer" type="Node3D" parent="."]
+[node name="DiceContainer" type="Node3D" parent="." node_paths=PackedStringArray("dice_nodes", "scoreboard")]
+script = ExtResource("1_78uev")
+dice_nodes = [NodePath("Dice"), NodePath("Dice2"), NodePath("Dice3")]
+scoreboard = NodePath("../CanvasLayer/ScoreboardContatiner")
 
 [node name="Dice" type="RigidBody3D" parent="DiceContainer"]
 transform = Transform3D(0.651295, -0.443173, -0.615965, 0.178731, 0.878489, -0.443071, 0.737475, 0.178478, 0.651364, 0, 5.66481, 0)
+script = ExtResource("2_muqym")
+start_position = Vector3(0, 5.665, 0)
+start_rotation = Vector3(26.3, -43.4, 11.5)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DiceContainer/Dice"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -56,6 +64,9 @@ shape = SubResource("BoxShape3D_yb52v")
 
 [node name="Dice2" type="RigidBody3D" parent="DiceContainer"]
 transform = Transform3D(0.651295, -0.443173, -0.615965, 0.178731, 0.878489, -0.443071, 0.737475, 0.178478, 0.651364, 3, 9.66481, 0)
+script = ExtResource("2_muqym")
+start_position = Vector3(3, 9.665, 0)
+start_rotation = Vector3(26.3, -43.5, 11.5)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DiceContainer/Dice2"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -67,6 +78,9 @@ shape = SubResource("BoxShape3D_yb52v")
 
 [node name="Dice3" type="RigidBody3D" parent="DiceContainer"]
 transform = Transform3D(0.651295, -0.443173, -0.615965, 0.178731, 0.878489, -0.443071, 0.737475, 0.178478, 0.651364, 2, 13.6648, 3)
+script = ExtResource("2_muqym")
+start_position = Vector3(2, 13.665, 3)
+start_rotation = Vector3(26.3, -43.4, 11.5)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DiceContainer/Dice3"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -148,3 +162,13 @@ layout_mode = 2
 [node name="TurnStatusLabel" type="Label" parent="CanvasLayer/ScoreboardContatiner"]
 layout_mode = 2
 text = "Play your turn"
+
+[node name="CurrentDiceRollsContainer" type="HBoxContainer" parent="CanvasLayer/ScoreboardContatiner"]
+layout_mode = 2
+
+[node name="CurrentDiceRollsLabel" type="Label" parent="CanvasLayer/ScoreboardContatiner/CurrentDiceRollsContainer"]
+layout_mode = 2
+text = "Current Dice Rolls:"
+
+[node name="CurrentDiceRolls" type="Label" parent="CanvasLayer/ScoreboardContatiner/CurrentDiceRollsContainer"]
+layout_mode = 2
