@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxwfosg6try75"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_c0fec"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3mbto"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_47imm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m0ph7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_kwmu1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yb52v"]
+
+[node name="Game_Scene" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 25)
+
+[node name="GameBoard" type="MeshInstance3D" parent="."]
+transform = Transform3D(50, 0, 0, 0, 0.5, 0, 0, 0, 50, 0, 0, 0)
+mesh = SubResource("BoxMesh_c0fec")
+surface_material_override/0 = SubResource("StandardMaterial3D_3mbto")
+
+[node name="RaisedTable" type="MeshInstance3D" parent="GameBoard"]
+transform = Transform3D(0.9, 0, 0, 0, 2, 0, 0, 0, 0.9, 0, 0, 0)
+mesh = SubResource("BoxMesh_47imm")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GameBoard/RaisedTable"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameBoard/RaisedTable/StaticBody3D"]
+shape = SubResource("BoxShape3D_m0ph7")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 0)
+spot_range = 70.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 2.37841
+
+[node name="DiceContainer" type="Node3D" parent="."]
+
+[node name="Dice" type="RigidBody3D" parent="DiceContainer"]
+transform = Transform3D(0.651295, -0.443173, -0.615965, 0.178731, 0.878489, -0.443071, 0.737475, 0.178478, 0.651364, 0, 5.66481, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DiceContainer/Dice"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+mesh = SubResource("BoxMesh_kwmu1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceContainer/Dice"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("BoxShape3D_yb52v")
+
+[node name="Dice2" type="RigidBody3D" parent="DiceContainer"]
+transform = Transform3D(0.651295, -0.443173, -0.615965, 0.178731, 0.878489, -0.443071, 0.737475, 0.178478, 0.651364, 3, 9.66481, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DiceContainer/Dice2"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+mesh = SubResource("BoxMesh_kwmu1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceContainer/Dice2"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("BoxShape3D_yb52v")
+
+[node name="Dice3" type="RigidBody3D" parent="DiceContainer"]
+transform = Transform3D(0.651295, -0.443173, -0.615965, 0.178731, 0.878489, -0.443071, 0.737475, 0.178478, 0.651364, 2, 13.6648, 3)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DiceContainer/Dice3"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+mesh = SubResource("BoxMesh_kwmu1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceContainer/Dice3"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("BoxShape3D_yb52v")
