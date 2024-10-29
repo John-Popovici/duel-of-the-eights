@@ -33,7 +33,8 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-2024-10-27 & John Popovici & Preparing file and added to section 2\\
+2024-10-27 & John Popovici & Preparing file and added to section 1\\
+2024-10-28 & John Popovici & Removed table of symbols; Added to section 1\\
 ... & ... & ...\\
 \bottomrule
 \end{tabularx}
@@ -66,6 +67,7 @@ in.}
 
 \newpage
 
+\iffalse
 \section{Symbols, Abbreviations, and Acronyms}
 
 \renewcommand{\arraystretch}{1.2}
@@ -83,6 +85,7 @@ in.}
 \wss{Remove this section if it isn't needed}
 
 \newpage
+\fi
 
 \pagenumbering{arabic}
 
@@ -179,21 +182,29 @@ do the following extras:
 
 \subsection{Relevant Documentation}
 
+\iffalse
 \wss{Reference relevant documentation.  This will definitely include your SRS
   and your other project documents (design documents, like MG, MIS, etc).  You
   can include these even before they are written, since by the time the project
   is done, they will be written.  You can create BibTeX entries for your
   documents and within those entries include a hyperlink to the documents.}
-
 \citet{SRS}
-
 \wss{Don't just list the other documents.  You should explain why they are relevant and 
 how they relate to your VnV efforts.}
+\fi
+
+The following documents are crucial for the Verification and Validation process, ensuring the project meets its objectives and operates reliably:
+
+\begin{itemize}
+	\item Software Requirements Specification (SRS): This document outlines the core requirements for the platform, defining features and limitations, as well as expected behaviors. The SRS serves as a primary reference to validate that the developed software meets user and system requirements.
+	\item \wss{TODO add more}
+\end{itemize}
+
+\wss{TODO add BibTeX and hyperlinks}
 
 \section{Plan}
 
-\wss{Introduce this section.  You can provide a roadmap of the sections to
-  come.}
+\wss{Introduce this section.  You can provide a roadmap of the sections to come.}
 
 \subsection{Verification and Validation Team}
 
