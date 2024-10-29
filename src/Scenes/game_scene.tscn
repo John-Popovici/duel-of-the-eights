@@ -1,4 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dxwfosg6try75"]
+[gd_scene load_steps=8 format=3 uid="uid://dxwfosg6try75"]
+
+[ext_resource type="Script" path="res://Scripts/scoreboard.gd" id="1_gapl4"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_c0fec"]
 
@@ -16,7 +18,7 @@ albedo_color = Color(0, 0, 0, 1)
 [node name="Game_Scene" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 25)
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 21)
 
 [node name="GameBoard" type="MeshInstance3D" parent="."]
 transform = Transform3D(50, 0, 0, 0, 0.5, 0, 0, 0, 50, 0, 0, 0)
@@ -73,3 +75,76 @@ mesh = SubResource("BoxMesh_kwmu1")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DiceContainer/Dice3"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("BoxShape3D_yb52v")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreboardContatiner" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 197.0
+offset_bottom = 253.0
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("1_gapl4")
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/ScoreboardContatiner"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Scoreboard"
+
+[node name="Player1ScoreContainer" type="HBoxContainer" parent="CanvasLayer/ScoreboardContatiner"]
+layout_mode = 2
+
+[node name="Player1Name" type="Label" parent="CanvasLayer/ScoreboardContatiner/Player1ScoreContainer"]
+layout_mode = 2
+text = "Player 1:"
+
+[node name="Player1Score" type="Label" parent="CanvasLayer/ScoreboardContatiner/Player1ScoreContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="Player2ScoreContainer" type="HBoxContainer" parent="CanvasLayer/ScoreboardContatiner"]
+layout_mode = 2
+
+[node name="Player2Name" type="Label" parent="CanvasLayer/ScoreboardContatiner/Player2ScoreContainer"]
+layout_mode = 2
+text = "Player 2:"
+
+[node name="Player2Score" type="Label" parent="CanvasLayer/ScoreboardContatiner/Player2ScoreContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="CategoryContainers" type="VBoxContainer" parent="CanvasLayer/ScoreboardContatiner"]
+layout_mode = 2
+
+[node name="AcesContainer" type="HBoxContainer" parent="CanvasLayer/ScoreboardContatiner/CategoryContainers"]
+layout_mode = 2
+
+[node name="CategoryName" type="Label" parent="CanvasLayer/ScoreboardContatiner/CategoryContainers/AcesContainer"]
+layout_mode = 2
+text = "Aces:"
+
+[node name="CategoryScore" type="Label" parent="CanvasLayer/ScoreboardContatiner/CategoryContainers/AcesContainer"]
+layout_mode = 2
+
+[node name="TwosContainer" type="HBoxContainer" parent="CanvasLayer/ScoreboardContatiner/CategoryContainers"]
+layout_mode = 2
+
+[node name="CategoryName" type="Label" parent="CanvasLayer/ScoreboardContatiner/CategoryContainers/TwosContainer"]
+layout_mode = 2
+text = "Twos:"
+
+[node name="CategoryScore" type="Label" parent="CanvasLayer/ScoreboardContatiner/CategoryContainers/TwosContainer"]
+layout_mode = 2
+
+[node name="TotalScoreContainer" type="HBoxContainer" parent="CanvasLayer/ScoreboardContatiner"]
+layout_mode = 2
+
+[node name="TotalScoreLabel" type="Label" parent="CanvasLayer/ScoreboardContatiner/TotalScoreContainer"]
+layout_mode = 2
+text = "Total Score:"
+
+[node name="TotalScore" type="Label" parent="CanvasLayer/ScoreboardContatiner/TotalScoreContainer"]
+layout_mode = 2
+
+[node name="TurnStatusLabel" type="Label" parent="CanvasLayer/ScoreboardContatiner"]
+layout_mode = 2
+text = "Play your turn"
