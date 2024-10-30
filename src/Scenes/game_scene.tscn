@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://dxwfosg6try75"]
+[gd_scene load_steps=11 format=3 uid="uid://dxwfosg6try75"]
 
+[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_7ajte"]
 [ext_resource type="Script" path="res://Scenes/dice_container.gd" id="1_78uev"]
 [ext_resource type="Script" path="res://Scripts/scoreboard.gd" id="1_gapl4"]
 [ext_resource type="Script" path="res://Scenes/die.gd" id="2_muqym"]
@@ -18,6 +19,11 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_yb52v"]
 
 [node name="Game_Scene" type="Node3D"]
+
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("dice_container", "scoreboard")]
+script = ExtResource("1_7ajte")
+dice_container = NodePath("../DiceContainer")
+scoreboard = NodePath("../CanvasLayer/ScoreboardContatiner")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 21)
@@ -92,12 +98,13 @@ shape = SubResource("BoxShape3D_yb52v")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="ScoreboardContatiner" type="VBoxContainer" parent="CanvasLayer"]
+[node name="ScoreboardContatiner" type="VBoxContainer" parent="CanvasLayer" node_paths=PackedStringArray("turn_status_label")]
 offset_right = 197.0
 offset_bottom = 253.0
 theme_override_constants/separation = 0
 alignment = 1
 script = ExtResource("1_gapl4")
+turn_status_label = NodePath("TurnStatusLabel")
 
 [node name="TitleLabel" type="Label" parent="CanvasLayer/ScoreboardContatiner"]
 layout_mode = 2

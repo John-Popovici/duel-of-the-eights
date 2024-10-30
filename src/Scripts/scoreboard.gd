@@ -10,7 +10,7 @@ extends VBoxContainer
 
 @onready var total_score_label = $TotalScoreContainer/TotalScore
 @onready var dice_values_label = $CurrentDiceRollsContainer/CurrentDiceRolls
-@onready var turn_indicator_label = $TurnIndicatorLabel
+@export var turn_status_label: Label
 
 # Function to update a category score
 func update_category_score(player: int, category: String, score: int) -> void:
@@ -37,8 +37,8 @@ func update_dice_values(values: Array[int]) -> void:
 	dice_values_label.text = str(values)
 
 # Function to update the turn indicator
-func update_turn_indicator(player_name: String) -> void:
-	turn_indicator_label.text = "%s's Turn" % player_name
+func update_turn_status(player_name: String) -> void:
+	turn_status_label.text = str(player_name)
 
 
 # Called when the node enters the scene tree for the first time.
