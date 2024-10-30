@@ -11,16 +11,26 @@ extends Node
 var current_round: int = 1                     # Track current round
 var current_player: int = 1                    # Track current player
 var player_scores = {1: 0, 2: 0}               # Store scores for each player
+var player1name: String = ""
+var player2name: String  = ""
+var currentPlayerName: String = ""
+
 
 # Start the game
 func _ready() -> void:
-	start_round()
+	#start_round()
+	pass
 
 # Begins a round by rolling the dice
 func start_round() -> void:
 	if current_round > total_rounds:
 		end_game()
 		return
+	
+	if current_player == 1:
+		currentPlayerName = player1name
+	else:
+		currentPlayerName = player2name
 	print("Round %d, Player %d's turn" % [current_round, current_player])
 	
 	# Update the scoreboard to indicate current player
@@ -75,12 +85,16 @@ func next_turn() -> void:
 
 # Ends the game, displays final scores, and winner
 func end_game() -> void:
-	var winner = "Player 1" if player_scores[1] > player_scores[2] else "Player 2"
+	var winner = player1name if player_scores[1] > player_scores[2] else player2name
 	print("Game Over! Winner: %s" % winner)
 	print("Final Scores: Player 1 - %d, Player 2 - %d" % [player_scores[1], player_scores[2]])
 	
 	# Update scoreboard to show game over and winner
 	scoreboard.update_turn_status("Game Over! Winner: %s" % winner)
+
+func setPlayerNames(name1: String,name2: String) -> void:
+	player1name = name1
+	player2name = name2
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

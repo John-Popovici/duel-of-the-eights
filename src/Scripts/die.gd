@@ -5,6 +5,8 @@ extends RigidBody3D
 # Exported start position so it can be set in the editor
 @export var start_position: Vector3 = Vector3.ZERO
 @export var start_rotation: Vector3 = Vector3.ZERO
+@export var impulse_range: int = 5
+@export var torque_range: int = 5
 
 # Dictionary mapping each die face direction to its value
 var face_value_dict = {
@@ -28,16 +30,16 @@ func roll() -> void:
 	
 	# Apply random force for linear movement
 	apply_impulse(Vector3.ZERO, Vector3(
-		randf_range(-5, 5),
-		randf_range(5, 10),
-		randf_range(-5, 5)
+		randf_range(-impulse_range, impulse_range),
+		randf_range(impulse_range, impulse_range*2),
+		randf_range(-impulse_range, impulse_range)
 	))
 	
 	# Apply random torque for rotation
 	apply_torque_impulse(Vector3(
-		randf_range(-5, 5),
-		randf_range(-5, 5),
-		randf_range(-5, 5)
+		randf_range(-torque_range, torque_range),
+		randf_range(-torque_range, torque_range),
+		randf_range(-torque_range, torque_range)
 	))
 
 # Determines the top-facing die value after the roll

@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dxwfosg6try75"]
+[gd_scene load_steps=12 format=3 uid="uid://dxwfosg6try75"]
 
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_7ajte"]
-[ext_resource type="Script" path="res://Scenes/dice_container.gd" id="1_78uev"]
+[ext_resource type="Script" path="res://Scripts/dice_container.gd" id="1_78uev"]
 [ext_resource type="Script" path="res://Scripts/scoreboard.gd" id="1_gapl4"]
-[ext_resource type="Script" path="res://Scenes/die.gd" id="2_muqym"]
+[ext_resource type="Script" path="res://Scenes/game_scene.gd" id="1_ominb"]
+[ext_resource type="Script" path="res://Scripts/die.gd" id="2_muqym"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_c0fec"]
 
@@ -19,6 +20,7 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_yb52v"]
 
 [node name="Game_Scene" type="Node3D"]
+script = ExtResource("1_ominb")
 
 [node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("dice_container", "scoreboard")]
 script = ExtResource("1_7ajte")
@@ -51,14 +53,15 @@ spot_angle_attenuation = 2.37841
 
 [node name="DiceContainer" type="Node3D" parent="." node_paths=PackedStringArray("dice_nodes", "scoreboard")]
 script = ExtResource("1_78uev")
-dice_nodes = [NodePath("Dice"), NodePath("Dice2"), NodePath("Dice3")]
+dice_nodes = [NodePath("Dice"), NodePath("Dice2"), NodePath("Dice3"), NodePath("Dice4"), NodePath("Dice5")]
 scoreboard = NodePath("../CanvasLayer/ScoreboardContatiner")
 
 [node name="Dice" type="RigidBody3D" parent="DiceContainer"]
-transform = Transform3D(0.651295, -0.443173, -0.615965, 0.178731, 0.878489, -0.443071, 0.737475, 0.178478, 0.651364, 0, 5.66481, 0)
+transform = Transform3D(0.651295, -0.443173, -0.615965, 0.178731, 0.878489, -0.443071, 0.737475, 0.178478, 0.651364, -4.40723, 5.66481, 0)
 script = ExtResource("2_muqym")
-start_position = Vector3(0, 5.665, 0)
+start_position = Vector3(-4.407, 5.665, 0)
 start_rotation = Vector3(26.3, -43.4, 11.5)
+torque_range = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DiceContainer/Dice"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -69,10 +72,11 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("BoxShape3D_yb52v")
 
 [node name="Dice2" type="RigidBody3D" parent="DiceContainer"]
-transform = Transform3D(0.651295, -0.443173, -0.615965, 0.178731, 0.878489, -0.443071, 0.737475, 0.178478, 0.651364, 3, 9.66481, 0)
+transform = Transform3D(0.651295, -0.443173, -0.615965, 0.178731, 0.878489, -0.443071, 0.737475, 0.178478, 0.651364, 5.19931, 9.66481, -4.20788)
 script = ExtResource("2_muqym")
-start_position = Vector3(3, 9.665, 0)
+start_position = Vector3(5.199, 9.665, -4.208)
 start_rotation = Vector3(26.3, -43.5, 11.5)
+torque_range = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DiceContainer/Dice2"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -83,16 +87,47 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("BoxShape3D_yb52v")
 
 [node name="Dice3" type="RigidBody3D" parent="DiceContainer"]
-transform = Transform3D(0.651295, -0.443173, -0.615965, 0.178731, 0.878489, -0.443071, 0.737475, 0.178478, 0.651364, 2, 13.6648, 3)
+transform = Transform3D(0.651295, -0.443173, -0.615965, 0.178731, 0.878489, -0.443071, 0.737475, 0.178478, 0.651364, 3.71559, 9.77646, 3)
 script = ExtResource("2_muqym")
-start_position = Vector3(2, 13.665, 3)
+start_position = Vector3(3.716, 9.776, 3)
 start_rotation = Vector3(26.3, -43.4, 11.5)
+torque_range = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DiceContainer/Dice3"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 mesh = SubResource("BoxMesh_kwmu1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DiceContainer/Dice3"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("BoxShape3D_yb52v")
+
+[node name="Dice4" type="RigidBody3D" parent="DiceContainer"]
+transform = Transform3D(0.651295, -0.443173, -0.615965, 0.178731, 0.878489, -0.443071, 0.737475, 0.178478, 0.651364, -1.17253, 9.42751, -5.24562)
+script = ExtResource("2_muqym")
+start_position = Vector3(-1.173, 9.428, -5.246)
+start_rotation = Vector3(26.3, -43.4, 11.5)
+torque_range = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DiceContainer/Dice4"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+mesh = SubResource("BoxMesh_kwmu1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceContainer/Dice4"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("BoxShape3D_yb52v")
+
+[node name="Dice5" type="RigidBody3D" parent="DiceContainer"]
+transform = Transform3D(0.619643, 0.204831, -0.757686, -0.26865, 0.962387, 0.0404656, 0.737475, 0.178478, 0.651364, -0.529525, 12.8303, 1.47123)
+script = ExtResource("2_muqym")
+start_position = Vector3(-0.53, 12.83, 1.471)
+start_rotation = Vector3(-2.3, -49.3, -15.6)
+torque_range = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DiceContainer/Dice5"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+mesh = SubResource("BoxMesh_kwmu1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceContainer/Dice5"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("BoxShape3D_yb52v")
 
