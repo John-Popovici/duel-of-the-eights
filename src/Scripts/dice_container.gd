@@ -19,6 +19,12 @@ func roll_dice() -> void:
 	for die in dice_nodes:
 		die.roll()  # Call the roll function on each die
 
+# Rolls only selected dice
+func roll_selected_dice() -> void:
+	for die in dice_nodes:
+		if die.get_selected_status():  # Check if the die is selected
+			die.roll()
+
 # Retrieves the values of each die after rolling
 func get_dice_values() -> Array[int]:
 	var dice_values: Array[int] = []
@@ -26,6 +32,13 @@ func get_dice_values() -> Array[int]:
 		dice_values.append(die.get_face_value())  # Append the top-facing value
 	return dice_values
 
+# Returns a list of all selected dice
+func get_selected_dice() -> Array:
+	var selected_dice = []
+	for die in dice_nodes:
+		if die.get_selected_status():
+			selected_dice.append(die)
+	return selected_dice
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_7ajte"]
 [ext_resource type="Script" path="res://Scripts/dice_container.gd" id="1_78uev"]
 [ext_resource type="Script" path="res://Scripts/scoreboard.gd" id="1_gapl4"]
-[ext_resource type="Script" path="res://Scenes/game_scene.gd" id="1_ominb"]
+[ext_resource type="Script" path="res://Scripts/game_scene.gd" id="1_ominb"]
 [ext_resource type="Script" path="res://Scripts/die.gd" id="2_muqym"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_c0fec"]
@@ -22,118 +22,117 @@ albedo_color = Color(0, 0, 0, 1)
 [node name="Game_Scene" type="Node3D"]
 script = ExtResource("1_ominb")
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("dice_container", "scoreboard")]
+[node name="GameManager" type="Node" parent="."]
 script = ExtResource("1_7ajte")
-dice_container = NodePath("../DiceContainer")
-scoreboard = NodePath("../CanvasLayer/ScoreboardContatiner")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="GameManager"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 21)
 
-[node name="GameBoard" type="MeshInstance3D" parent="."]
+[node name="GameBoard" type="MeshInstance3D" parent="GameManager"]
 transform = Transform3D(50, 0, 0, 0, 0.5, 0, 0, 0, 50, 0, 0, 0)
 mesh = SubResource("BoxMesh_c0fec")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_3mbto")
 
-[node name="RaisedTable" type="MeshInstance3D" parent="GameBoard"]
+[node name="RaisedTable" type="MeshInstance3D" parent="GameManager/GameBoard"]
 transform = Transform3D(0.9, 0, 0, 0, 2, 0, 0, 0, 0.9, 0, 0, 0)
 mesh = SubResource("BoxMesh_47imm")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="GameBoard/RaisedTable"]
+[node name="StaticBody3D" type="StaticBody3D" parent="GameManager/GameBoard/RaisedTable"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GameBoard/RaisedTable/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/GameBoard/RaisedTable/StaticBody3D"]
 shape = SubResource("BoxShape3D_m0ph7")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
+[node name="SpotLight3D" type="SpotLight3D" parent="GameManager"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 0)
 spot_range = 70.0
 spot_attenuation = -0.5
 spot_angle_attenuation = 2.37841
 
-[node name="DiceContainer" type="Node3D" parent="." node_paths=PackedStringArray("dice_nodes", "scoreboard")]
+[node name="DiceContainer" type="Node3D" parent="GameManager" node_paths=PackedStringArray("dice_nodes", "scoreboard")]
 script = ExtResource("1_78uev")
 dice_nodes = [NodePath("Dice"), NodePath("Dice2"), NodePath("Dice3"), NodePath("Dice4"), NodePath("Dice5")]
 scoreboard = NodePath("../CanvasLayer/ScoreboardContatiner")
 
-[node name="Dice" type="RigidBody3D" parent="DiceContainer"]
+[node name="Dice" type="RigidBody3D" parent="GameManager/DiceContainer"]
 transform = Transform3D(0.651295, -0.443173, -0.615965, 0.178731, 0.878489, -0.443071, 0.737475, 0.178478, 0.651364, -4.40723, 5.66481, 0)
 script = ExtResource("2_muqym")
 start_position = Vector3(-4.407, 5.665, 0)
 start_rotation = Vector3(26.3, -43.4, 11.5)
 torque_range = 3
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="DiceContainer/Dice"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GameManager/DiceContainer/Dice"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 mesh = SubResource("BoxMesh_kwmu1")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceContainer/Dice"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/DiceContainer/Dice"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("BoxShape3D_yb52v")
 
-[node name="Dice2" type="RigidBody3D" parent="DiceContainer"]
+[node name="Dice2" type="RigidBody3D" parent="GameManager/DiceContainer"]
 transform = Transform3D(0.651295, -0.443173, -0.615965, 0.178731, 0.878489, -0.443071, 0.737475, 0.178478, 0.651364, 5.19931, 9.66481, -4.20788)
 script = ExtResource("2_muqym")
 start_position = Vector3(5.199, 9.665, -4.208)
 start_rotation = Vector3(26.3, -43.5, 11.5)
 torque_range = 3
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="DiceContainer/Dice2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GameManager/DiceContainer/Dice2"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 mesh = SubResource("BoxMesh_kwmu1")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceContainer/Dice2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/DiceContainer/Dice2"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("BoxShape3D_yb52v")
 
-[node name="Dice3" type="RigidBody3D" parent="DiceContainer"]
+[node name="Dice3" type="RigidBody3D" parent="GameManager/DiceContainer"]
 transform = Transform3D(0.651295, -0.443173, -0.615965, 0.178731, 0.878489, -0.443071, 0.737475, 0.178478, 0.651364, 3.71559, 9.77646, 3)
 script = ExtResource("2_muqym")
 start_position = Vector3(3.716, 9.776, 3)
 start_rotation = Vector3(26.3, -43.4, 11.5)
 torque_range = 3
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="DiceContainer/Dice3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GameManager/DiceContainer/Dice3"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 mesh = SubResource("BoxMesh_kwmu1")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceContainer/Dice3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/DiceContainer/Dice3"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("BoxShape3D_yb52v")
 
-[node name="Dice4" type="RigidBody3D" parent="DiceContainer"]
+[node name="Dice4" type="RigidBody3D" parent="GameManager/DiceContainer"]
 transform = Transform3D(0.651295, -0.443173, -0.615965, 0.178731, 0.878489, -0.443071, 0.737475, 0.178478, 0.651364, -1.17253, 9.42751, -5.24562)
 script = ExtResource("2_muqym")
 start_position = Vector3(-1.173, 9.428, -5.246)
 start_rotation = Vector3(26.3, -43.4, 11.5)
 torque_range = 3
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="DiceContainer/Dice4"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GameManager/DiceContainer/Dice4"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 mesh = SubResource("BoxMesh_kwmu1")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceContainer/Dice4"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/DiceContainer/Dice4"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("BoxShape3D_yb52v")
 
-[node name="Dice5" type="RigidBody3D" parent="DiceContainer"]
+[node name="Dice5" type="RigidBody3D" parent="GameManager/DiceContainer"]
 transform = Transform3D(0.619643, 0.204831, -0.757686, -0.26865, 0.962387, 0.0404656, 0.737475, 0.178478, 0.651364, -0.529525, 12.8303, 1.47123)
 script = ExtResource("2_muqym")
 start_position = Vector3(-0.53, 12.83, 1.471)
 start_rotation = Vector3(-2.3, -49.3, -15.6)
 torque_range = 3
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="DiceContainer/Dice5"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GameManager/DiceContainer/Dice5"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 mesh = SubResource("BoxMesh_kwmu1")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceContainer/Dice5"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/DiceContainer/Dice5"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("BoxShape3D_yb52v")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="GameManager"]
 
-[node name="ScoreboardContatiner" type="VBoxContainer" parent="CanvasLayer" node_paths=PackedStringArray("turn_status_label")]
+[node name="ScoreboardContatiner" type="VBoxContainer" parent="GameManager/CanvasLayer" node_paths=PackedStringArray("turn_status_label")]
 offset_right = 197.0
 offset_bottom = 253.0
 theme_override_constants/separation = 0
@@ -141,76 +140,95 @@ alignment = 1
 script = ExtResource("1_gapl4")
 turn_status_label = NodePath("TurnStatusLabel")
 
-[node name="TitleLabel" type="Label" parent="CanvasLayer/ScoreboardContatiner"]
+[node name="TitleLabel" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Scoreboard"
 
-[node name="Player1ScoreContainer" type="HBoxContainer" parent="CanvasLayer/ScoreboardContatiner"]
+[node name="Player1ScoreContainer" type="HBoxContainer" parent="GameManager/CanvasLayer/ScoreboardContatiner"]
 layout_mode = 2
 
-[node name="Player1Name" type="Label" parent="CanvasLayer/ScoreboardContatiner/Player1ScoreContainer"]
+[node name="Player1Name" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/Player1ScoreContainer"]
 layout_mode = 2
 text = "Player 1:"
 
-[node name="Player1Score" type="Label" parent="CanvasLayer/ScoreboardContatiner/Player1ScoreContainer"]
+[node name="Player1Score" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/Player1ScoreContainer"]
 layout_mode = 2
 text = "0"
 
-[node name="Player2ScoreContainer" type="HBoxContainer" parent="CanvasLayer/ScoreboardContatiner"]
+[node name="Player2ScoreContainer" type="HBoxContainer" parent="GameManager/CanvasLayer/ScoreboardContatiner"]
 layout_mode = 2
 
-[node name="Player2Name" type="Label" parent="CanvasLayer/ScoreboardContatiner/Player2ScoreContainer"]
+[node name="Player2Name" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/Player2ScoreContainer"]
 layout_mode = 2
 text = "Player 2:"
 
-[node name="Player2Score" type="Label" parent="CanvasLayer/ScoreboardContatiner/Player2ScoreContainer"]
+[node name="Player2Score" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/Player2ScoreContainer"]
 layout_mode = 2
 text = "0"
 
-[node name="CategoryContainers" type="VBoxContainer" parent="CanvasLayer/ScoreboardContatiner"]
+[node name="CategoryContainers" type="VBoxContainer" parent="GameManager/CanvasLayer/ScoreboardContatiner"]
 layout_mode = 2
 
-[node name="AcesContainer" type="HBoxContainer" parent="CanvasLayer/ScoreboardContatiner/CategoryContainers"]
+[node name="AcesContainer" type="HBoxContainer" parent="GameManager/CanvasLayer/ScoreboardContatiner/CategoryContainers"]
 layout_mode = 2
 
-[node name="CategoryName" type="Label" parent="CanvasLayer/ScoreboardContatiner/CategoryContainers/AcesContainer"]
+[node name="CategoryName" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/CategoryContainers/AcesContainer"]
 layout_mode = 2
 text = "Aces:"
 
-[node name="CategoryScore" type="Label" parent="CanvasLayer/ScoreboardContatiner/CategoryContainers/AcesContainer"]
+[node name="CategoryScore" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/CategoryContainers/AcesContainer"]
 layout_mode = 2
 
-[node name="TwosContainer" type="HBoxContainer" parent="CanvasLayer/ScoreboardContatiner/CategoryContainers"]
+[node name="TwosContainer" type="HBoxContainer" parent="GameManager/CanvasLayer/ScoreboardContatiner/CategoryContainers"]
 layout_mode = 2
 
-[node name="CategoryName" type="Label" parent="CanvasLayer/ScoreboardContatiner/CategoryContainers/TwosContainer"]
+[node name="CategoryName" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/CategoryContainers/TwosContainer"]
 layout_mode = 2
 text = "Twos:"
 
-[node name="CategoryScore" type="Label" parent="CanvasLayer/ScoreboardContatiner/CategoryContainers/TwosContainer"]
+[node name="CategoryScore" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/CategoryContainers/TwosContainer"]
 layout_mode = 2
 
-[node name="TotalScoreContainer" type="HBoxContainer" parent="CanvasLayer/ScoreboardContatiner"]
+[node name="TotalScoreContainer" type="HBoxContainer" parent="GameManager/CanvasLayer/ScoreboardContatiner"]
 layout_mode = 2
 
-[node name="TotalScoreLabel" type="Label" parent="CanvasLayer/ScoreboardContatiner/TotalScoreContainer"]
+[node name="TotalScoreLabel" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/TotalScoreContainer"]
 layout_mode = 2
 text = "Total Score:"
 
-[node name="TotalScore" type="Label" parent="CanvasLayer/ScoreboardContatiner/TotalScoreContainer"]
+[node name="TotalScore" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/TotalScoreContainer"]
 layout_mode = 2
 
-[node name="TurnStatusLabel" type="Label" parent="CanvasLayer/ScoreboardContatiner"]
+[node name="TurnStatusLabel" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner"]
 layout_mode = 2
 text = "Play your turn"
 
-[node name="CurrentDiceRollsContainer" type="HBoxContainer" parent="CanvasLayer/ScoreboardContatiner"]
+[node name="CurrentDiceRollsContainer" type="HBoxContainer" parent="GameManager/CanvasLayer/ScoreboardContatiner"]
 layout_mode = 2
 
-[node name="CurrentDiceRollsLabel" type="Label" parent="CanvasLayer/ScoreboardContatiner/CurrentDiceRollsContainer"]
+[node name="CurrentDiceRollsLabel" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/CurrentDiceRollsContainer"]
 layout_mode = 2
 text = "Current Dice Rolls:"
 
-[node name="CurrentDiceRolls" type="Label" parent="CanvasLayer/ScoreboardContatiner/CurrentDiceRollsContainer"]
+[node name="CurrentDiceRolls" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/CurrentDiceRollsContainer"]
 layout_mode = 2
+
+[node name="ControlButtons" type="VBoxContainer" parent="GameManager/CanvasLayer"]
+offset_left = 475.0
+offset_top = 520.0
+offset_right = 619.0
+offset_bottom = 621.0
+scale = Vector2(1.48, 1.22098)
+
+[node name="StartGameButton" type="Button" parent="GameManager/CanvasLayer/ControlButtons"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="RollSelectedDiceButton" type="Button" parent="GameManager/CanvasLayer/ControlButtons"]
+layout_mode = 2
+text = "Roll Selected Dice"
+
+[node name="PassTurnButton" type="Button" parent="GameManager/CanvasLayer/ControlButtons"]
+layout_mode = 2
+text = "Pass Turn"

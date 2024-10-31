@@ -18,7 +18,7 @@ func _ready() -> void:
 	if player1_name and player2_name:
 		print("Starting game with players: %s and %s" % [player1_name, player2_name])
 		GameManager.setPlayerNames(player1_name,player2_name)
-		GameManager.start_round()
+		#GameManager.start_round()
 	else:
 		print("Warning: Player names not set")
 

@@ -2,10 +2,11 @@
 
 extends Node
 
-@export var dice_container: Node3D   # Reference to DiceContainer node
-#@onready var scoreboard = $Scoreboard          # Reference to Scoreboard node
-@export var scoreboard: VBoxContainer
-
+@onready var dice_container = $DiceContainer   # Reference to DiceContainer node
+@onready var scoreboard = $CanvasLayer/ScoreboardContatiner          # Reference to Scoreboard node
+@onready var roll_selected_button = $CanvasLayer/ControlButtons/RollSelectedDiceButton # Reference to the Roll Selected Button
+@onready var pass_turn_button = $CanvasLayer/ControlButtons/PassTurnButton # Reference to the Pass Button
+@onready var start_game_button = $CanvasLayer/ControlButtons/StartGameButton # Reference to the Pass Button
 
 @export var total_rounds: int = 5             # Total rounds in the game
 var current_round: int = 1                     # Track current round
@@ -14,18 +15,48 @@ var player_scores = {1: 0, 2: 0}               # Store scores for each player
 var player1name: String = ""
 var player2name: String  = ""
 var currentPlayerName: String = ""
-
+var roll_phase: int = 0  # Tracks which roll phase we're in (0 = first roll, 1/2 = re-rolls)
+var max_rolls: int = 2
 
 # Start the game
 func _ready() -> void:
-	#start_round()
-	pass
+	roll_selected_button.pressed.connect(roll_selected_button_call)
+	pass_turn_button.pressed.connect(pass_turn_button_call)
+	start_game_button.pressed.connect(start_round)
+
+func roll_selected_button_call() -> void:
+	if roll_phase < max_rolls:
+		dice_container.roll_selected_dice()
+		roll_phase += 1
+	elif roll_phase == max_rolls:
+		# Disable buttons when no more rolls are allowed
+		roll_selected_button.disabled = true
+		pass_turn_button.disabled = true
+		dice_container.roll_selected_dice()
+		pass_turn()
+
+func pass_turn_button_call() -> void:
+	# Ends the current player's turn early, updating scores
+	roll_phase = max_rolls  # Skip to the end of the turn
+	roll_selected_button.disabled = true
+	pass_turn_button.disabled = true
+	pass_turn()
+
+func pass_turn() -> void:
+	await get_tree().create_timer(4.0).timeout
+	update_scores()
 
 # Begins a round by rolling the dice
 func start_round() -> void:
 	if current_round > total_rounds:
 		end_game()
 		return
+	
+	roll_phase = 0
+	roll_selected_button.disabled = true  # Disable initially, enabled after first roll
+	pass_turn_button.disabled = true
+	start_game_button.disabled = true
+	start_game_button.visible = false
 	
 	if current_player == 1:
 		currentPlayerName = player1name
@@ -36,14 +67,13 @@ func start_round() -> void:
 	# Update the scoreboard to indicate current player
 	scoreboard.update_turn_status("Player %d's turn" % current_player)
 	
-	await get_tree().create_timer(1.0).timeout
-	# Roll the dice
+	#First Roll (all)
 	dice_container.roll_dice()
-	
-	# Wait for dice to settle, then update scores (assume 2 seconds for simplicity)
-	#yield(get_tree().create_timer(2.0), "timeout")
-	await get_tree().create_timer(3.0).timeout
-	update_scores()
+	roll_phase += 1
+	roll_selected_button.disabled = false  # Disable initially, enabled after first roll
+	pass_turn_button.disabled = false
+
+
 
 # Updates scores based on dice results
 func update_scores() -> void:

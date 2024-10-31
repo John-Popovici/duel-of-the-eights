@@ -7,6 +7,9 @@ extends RigidBody3D
 @export var start_rotation: Vector3 = Vector3.ZERO
 @export var impulse_range: int = 5
 @export var torque_range: int = 5
+@export var hover_height: float = 0.5  # Hover height in meters
+var hover_toggle_position: Vector3
+var is_selected: bool = false          # Tracks if the die has been clicked/selected
 
 # Dictionary mapping each die face direction to its value
 var face_value_dict = {
@@ -23,6 +26,8 @@ func roll() -> void:
 	# Reset position and rotation to start values
 	global_transform.origin = start_position
 	global_transform.basis = Basis(start_rotation,0)
+	
+	is_selected = false
 	
 	# Reset linear and angular velocities
 	linear_velocity = Vector3.ZERO
@@ -57,10 +62,31 @@ func get_face_value() -> int:
 	
 	return face_value_dict[highest_face]  # Return the value of the top face
 
+func _mouse_enter() -> void:
+	hover_toggle_position = global_transform.origin  # Save the starting position
+	var new_position = hover_toggle_position + Vector3(0, hover_height, 0)
+	global_transform.origin = new_position
+
+func _mouse_exit() -> void:
+	hover_toggle_position = global_transform.origin  # Save the starting position
+	var new_position = hover_toggle_position + Vector3(0, -hover_height, 0)
+	global_transform.origin = new_position
+
+# Detects if the die was clicked and toggles its selected status
+func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		is_selected = !is_selected  # Toggle selection status
+		print("Die selected status:", is_selected)
+
+# Returns whether the die is selected
+func get_selected_status() -> bool:
+	return is_selected
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	self.mouse_entered.connect(_mouse_enter)
+	self.mouse_exited.connect(_mouse_exit)
+	self.input_event.connect(_on_input_event)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
