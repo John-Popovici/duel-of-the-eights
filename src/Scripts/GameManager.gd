@@ -4,8 +4,9 @@ extends Node
 
 @onready var dice_container = $DiceContainer   # Reference to DiceContainer node
 @onready var scoreboard = $CanvasLayer/ScoreboardContatiner          # Reference to Scoreboard node
+@onready var P1HandsContainer: VBoxContainer         # Reference to HandsContainer node
+@onready var P2HandsContainer: VBoxContainer         # Reference to HandsContainer node
 @onready var roll_selected_button = $CanvasLayer/ControlButtons/RollSelectedDiceButton # Reference to the Roll Selected Button
-@onready var pass_turn_button = $CanvasLayer/ControlButtons/PassTurnButton # Reference to the Pass Button
 @onready var start_game_button = $CanvasLayer/ControlButtons/StartGameButton # Reference to the Pass Button
 
 @export var total_rounds: int = 5             # Total rounds in the game
@@ -21,8 +22,11 @@ var max_rolls: int = 2
 # Start the game
 func _ready() -> void:
 	roll_selected_button.pressed.connect(roll_selected_button_call)
-	pass_turn_button.pressed.connect(pass_turn_button_call)
 	start_game_button.pressed.connect(start_round)
+	P1HandsContainer = get_node("CanvasLayer/P1HandsContainer")
+	P2HandsContainer = get_node("CanvasLayer/P2HandsContainer")
+	P1HandsContainer.OffVisibility()
+	P2HandsContainer.OffVisibility()
 
 func roll_selected_button_call() -> void:
 	if roll_phase < max_rolls:
@@ -31,20 +35,8 @@ func roll_selected_button_call() -> void:
 	elif roll_phase == max_rolls:
 		# Disable buttons when no more rolls are allowed
 		roll_selected_button.disabled = true
-		pass_turn_button.disabled = true
 		dice_container.roll_selected_dice()
-		pass_turn()
 
-func pass_turn_button_call() -> void:
-	# Ends the current player's turn early, updating scores
-	roll_phase = max_rolls  # Skip to the end of the turn
-	roll_selected_button.disabled = true
-	pass_turn_button.disabled = true
-	pass_turn()
-
-func pass_turn() -> void:
-	await get_tree().create_timer(4.0).timeout
-	update_scores()
 
 # Begins a round by rolling the dice
 func start_round() -> void:
@@ -54,14 +46,17 @@ func start_round() -> void:
 	
 	roll_phase = 0
 	roll_selected_button.disabled = true  # Disable initially, enabled after first roll
-	pass_turn_button.disabled = true
 	start_game_button.disabled = true
 	start_game_button.visible = false
 	
 	if current_player == 1:
 		currentPlayerName = player1name
+		P1HandsContainer.OnVisibility()
+		P2HandsContainer.OffVisibility()
 	else:
 		currentPlayerName = player2name
+		P1HandsContainer.OffVisibility()
+		P2HandsContainer.OnVisibility()
 	print("Round %d, Player %d's turn" % [current_round, current_player])
 	
 	# Update the scoreboard to indicate current player
@@ -71,19 +66,19 @@ func start_round() -> void:
 	dice_container.roll_dice()
 	roll_phase += 1
 	roll_selected_button.disabled = false  # Disable initially, enabled after first roll
-	pass_turn_button.disabled = false
 
 
 
 # Updates scores based on dice results
-func update_scores() -> void:
-	var dice_values = dice_container.get_dice_values()
-	var round_score = calculate_score(dice_values)
+func update_scores(round_score: int) -> void:
+	#var dice_values = dice_container.get_dice_values()
+	#var round_score = calculate_score(dice_values)
 	player_scores[current_player] += round_score
 	
 	# Update scoreboard
 	scoreboard.update_player_score(current_player, player_scores[current_player])
 	scoreboard.update_total_score(player_scores[current_player])
+	scoreboard.update_dice_values(dice_container.get_dice_values())
 	
 	# Move to next player's turn or next round
 	next_turn()
@@ -115,10 +110,17 @@ func next_turn() -> void:
 
 # Ends the game, displays final scores, and winner
 func end_game() -> void:
-	var winner = player1name if player_scores[1] > player_scores[2] else player2name
+	var winner
+	if player_scores[1] > player_scores[2]:
+		winner = player1name
+	elif player_scores[1] < player_scores[2]:
+		winner = player2name
+	else:
+		winner = "Both Players! (Or none, depending on how you look at it)"
 	print("Game Over! Winner: %s" % winner)
 	print("Final Scores: Player 1 - %d, Player 2 - %d" % [player_scores[1], player_scores[2]])
-	
+	P1HandsContainer.OffVisibility()
+	P2HandsContainer.OffVisibility()
 	# Update scoreboard to show game over and winner
 	scoreboard.update_turn_status("Game Over! Winner: %s" % winner)
 

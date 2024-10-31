@@ -1,3 +1,4 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://d3pmd3027bxsl"]
 
 [resource]
+diffuse_mode = 3

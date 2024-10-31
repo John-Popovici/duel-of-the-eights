@@ -1,15 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://dxwfosg6try75"]
+[gd_scene load_steps=14 format=3 uid="uid://dxwfosg6try75"]
 
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_7ajte"]
 [ext_resource type="Script" path="res://Scripts/dice_container.gd" id="1_78uev"]
 [ext_resource type="Script" path="res://Scripts/scoreboard.gd" id="1_gapl4"]
 [ext_resource type="Script" path="res://Scripts/game_scene.gd" id="1_ominb"]
 [ext_resource type="Script" path="res://Scripts/die.gd" id="2_muqym"]
+[ext_resource type="Material" uid="uid://cgpa3fsefx8ir" path="res://Materials/BoardLowMat.tres" id="3_i6nc6"]
+[ext_resource type="Material" uid="uid://dvsy8knluwv6e" path="res://Materials/BoardRaisedMat.tres" id="3_nilvk"]
+[ext_resource type="Script" path="res://Scripts/hands_container.gd" id="8_w1efo"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_c0fec"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3mbto"]
-albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_47imm"]
 
@@ -32,12 +32,13 @@ transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 21)
 transform = Transform3D(50, 0, 0, 0, 0.5, 0, 0, 0, 50, 0, 0, 0)
 mesh = SubResource("BoxMesh_c0fec")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_3mbto")
+surface_material_override/0 = ExtResource("3_i6nc6")
 
 [node name="RaisedTable" type="MeshInstance3D" parent="GameManager/GameBoard"]
 transform = Transform3D(0.9, 0, 0, 0, 2, 0, 0, 0, 0.9, 0, 0, 0)
 mesh = SubResource("BoxMesh_47imm")
 skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("3_nilvk")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="GameManager/GameBoard/RaisedTable"]
 
@@ -167,29 +168,6 @@ text = "Player 2:"
 layout_mode = 2
 text = "0"
 
-[node name="CategoryContainers" type="VBoxContainer" parent="GameManager/CanvasLayer/ScoreboardContatiner"]
-layout_mode = 2
-
-[node name="AcesContainer" type="HBoxContainer" parent="GameManager/CanvasLayer/ScoreboardContatiner/CategoryContainers"]
-layout_mode = 2
-
-[node name="CategoryName" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/CategoryContainers/AcesContainer"]
-layout_mode = 2
-text = "Aces:"
-
-[node name="CategoryScore" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/CategoryContainers/AcesContainer"]
-layout_mode = 2
-
-[node name="TwosContainer" type="HBoxContainer" parent="GameManager/CanvasLayer/ScoreboardContatiner/CategoryContainers"]
-layout_mode = 2
-
-[node name="CategoryName" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/CategoryContainers/TwosContainer"]
-layout_mode = 2
-text = "Twos:"
-
-[node name="CategoryScore" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/CategoryContainers/TwosContainer"]
-layout_mode = 2
-
 [node name="TotalScoreContainer" type="HBoxContainer" parent="GameManager/CanvasLayer/ScoreboardContatiner"]
 layout_mode = 2
 
@@ -209,7 +187,7 @@ layout_mode = 2
 
 [node name="CurrentDiceRollsLabel" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/CurrentDiceRollsContainer"]
 layout_mode = 2
-text = "Current Dice Rolls:"
+text = "Previous Dice Rolls: "
 
 [node name="CurrentDiceRolls" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/CurrentDiceRollsContainer"]
 layout_mode = 2
@@ -229,6 +207,122 @@ text = "Start Game"
 layout_mode = 2
 text = "Roll Selected Dice"
 
-[node name="PassTurnButton" type="Button" parent="GameManager/CanvasLayer/ControlButtons"]
+[node name="P1HandsContainer" type="VBoxContainer" parent="GameManager/CanvasLayer"]
+offset_left = 955.0
+offset_top = 9.0
+offset_right = 1079.0
+offset_bottom = 460.0
+scale = Vector2(1.24, 1.24)
+script = ExtResource("8_w1efo")
+
+[node name="OnesButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
 layout_mode = 2
-text = "Pass Turn"
+text = "Ones"
+
+[node name="TwosButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Twos"
+
+[node name="ThreesButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Threes"
+
+[node name="FoursButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Fours"
+
+[node name="FivesButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Fives"
+
+[node name="SixesButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Sixes"
+
+[node name="TripletButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Three of a kind"
+
+[node name="QuadrupletButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Four of a kind"
+
+[node name="FullHouseButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Full House"
+
+[node name="SmStraightButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Small Stright"
+
+[node name="LaStraightButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Large Straight"
+
+[node name="YahtzeeButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Yahtzee"
+
+[node name="ChanceButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Chance"
+
+[node name="P2HandsContainer" type="VBoxContainer" parent="GameManager/CanvasLayer"]
+offset_left = 955.0
+offset_top = 9.0
+offset_right = 1079.0
+offset_bottom = 460.0
+scale = Vector2(1.24, 1.24)
+script = ExtResource("8_w1efo")
+
+[node name="OnesButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Ones"
+
+[node name="TwosButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Twos"
+
+[node name="ThreesButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Threes"
+
+[node name="FoursButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Fours"
+
+[node name="FivesButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Fives"
+
+[node name="SixesButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Sixes"
+
+[node name="TripletButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Three of a kind"
+
+[node name="QuadrupletButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Four of a kind"
+
+[node name="FullHouseButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Full House"
+
+[node name="SmStraightButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Small Stright"
+
+[node name="LaStraightButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Large Straight"
+
+[node name="YahtzeeButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Yahtzee"
+
+[node name="ChanceButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Chance"

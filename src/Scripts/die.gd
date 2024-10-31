@@ -12,8 +12,8 @@ var hover_toggle_position: Vector3
 var is_selected: bool = false          # Tracks if the die has been clicked/selected
 @onready var dieMesh: MeshInstance3D = $MeshInstance3D
 
-var normalTex = preload('res://Materials/Tester.tres')
-var selectedTex = preload('res://Materials/Tester2.tres')
+var normalTex = preload('res://Materials/Dice_Base.tres')
+var selectedTex = preload('res://Materials/Dice_Selected.tres')
 
 # Dictionary mapping each die face direction to its value
 var face_value_dict = {

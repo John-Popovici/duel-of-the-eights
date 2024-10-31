@@ -5,21 +5,11 @@ extends VBoxContainer
 # Labels for individual categories and scores
 @onready var player1_score_label = $Player1ScoreContainer/Player1Score
 @onready var player2_score_label = $Player2ScoreContainer/Player2Score
-@onready var aces_score_label = $CategoryContainers/AcesContainer/AcesScore
-# Repeat for all category labels...
 
 @onready var total_score_label = $TotalScoreContainer/TotalScore
 @onready var dice_values_label = $CurrentDiceRollsContainer/CurrentDiceRolls
 @export var turn_status_label: Label
 
-# Function to update a category score
-func update_category_score(player: int, category: String, score: int) -> void:
-	match category:
-		"Aces":
-			aces_score_label.text = str(score)
-		"Twos":
-			$CategoryContainers/TwosContainer/TwosScore.text = str(score)
-		# Repeat for other categories
 
 # Function to update player score
 func update_player_score(player: int, score: int) -> void:
