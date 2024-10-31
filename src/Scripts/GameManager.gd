@@ -9,7 +9,7 @@ extends Node
 @onready var roll_selected_button = $CanvasLayer/ControlButtons/RollSelectedDiceButton # Reference to the Roll Selected Button
 @onready var start_game_button = $CanvasLayer/ControlButtons/StartGameButton # Reference to the Pass Button
 
-@export var total_rounds: int = 5             # Total rounds in the game
+@export var total_rounds: int = 13             # Total rounds in the game
 var current_round: int = 1                     # Track current round
 var current_player: int = 1                    # Track current player
 var player_scores = {1: 0, 2: 0}               # Store scores for each player
