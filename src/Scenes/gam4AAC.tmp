@@ -60,7 +60,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.40723, 5.66481, 0)
 script = ExtResource("2_muqym")
 start_position = Vector3(-4.407, 5.665, 0)
 start_rotation = Vector3(26.3, -43.4, 11.5)
+impulse_range = null
 torque_range = 3
+hover_height = null
+face_threshold = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GameManager/DiceContainer/Dice"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
@@ -70,36 +73,15 @@ mesh = ExtResource("7_too8u")
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("BoxShape3D_yb52v")
 
-[node name="RayCast3D_Face1" type="RayCast3D" parent="GameManager/DiceContainer/Dice"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.5, 0)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face2" type="RayCast3D" parent="GameManager/DiceContainer/Dice"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.5, 0, 0)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face3" type="RayCast3D" parent="GameManager/DiceContainer/Dice"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -1.5)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face4" type="RayCast3D" parent="GameManager/DiceContainer/Dice"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face5" type="RayCast3D" parent="GameManager/DiceContainer/Dice"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.5, 0, 0)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face6" type="RayCast3D" parent="GameManager/DiceContainer/Dice"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.5, 0)
-target_position = Vector3(0, 0, 1)
-
 [node name="Dice2" type="RigidBody3D" parent="GameManager/DiceContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.19931, 9.66481, -4.20788)
 script = ExtResource("2_muqym")
 start_position = Vector3(5.199, 9.665, -4.208)
 start_rotation = Vector3(26.3, -43.5, 11.5)
+impulse_range = null
 torque_range = 3
+hover_height = null
+face_threshold = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GameManager/DiceContainer/Dice2"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
@@ -109,36 +91,15 @@ mesh = ExtResource("7_too8u")
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("BoxShape3D_yb52v")
 
-[node name="RayCast3D_Face1" type="RayCast3D" parent="GameManager/DiceContainer/Dice2"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.5, 0)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face2" type="RayCast3D" parent="GameManager/DiceContainer/Dice2"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.5, 0, 0)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face3" type="RayCast3D" parent="GameManager/DiceContainer/Dice2"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -1.5)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face4" type="RayCast3D" parent="GameManager/DiceContainer/Dice2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face5" type="RayCast3D" parent="GameManager/DiceContainer/Dice2"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.5, 0, 0)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face6" type="RayCast3D" parent="GameManager/DiceContainer/Dice2"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.5, 0)
-target_position = Vector3(0, 0, 1)
-
 [node name="Dice3" type="RigidBody3D" parent="GameManager/DiceContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.71559, 9.77646, 3)
 script = ExtResource("2_muqym")
 start_position = Vector3(3.716, 9.776, 3)
 start_rotation = Vector3(26.3, -43.4, 11.5)
+impulse_range = null
 torque_range = 3
+hover_height = null
+face_threshold = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GameManager/DiceContainer/Dice3"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
@@ -148,36 +109,15 @@ mesh = ExtResource("7_too8u")
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("BoxShape3D_yb52v")
 
-[node name="RayCast3D_Face1" type="RayCast3D" parent="GameManager/DiceContainer/Dice3"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.5, 0)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face2" type="RayCast3D" parent="GameManager/DiceContainer/Dice3"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.5, 0, 0)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face3" type="RayCast3D" parent="GameManager/DiceContainer/Dice3"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -1.5)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face4" type="RayCast3D" parent="GameManager/DiceContainer/Dice3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face5" type="RayCast3D" parent="GameManager/DiceContainer/Dice3"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.5, 0, 0)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face6" type="RayCast3D" parent="GameManager/DiceContainer/Dice3"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.5, 0)
-target_position = Vector3(0, 0, 1)
-
 [node name="Dice4" type="RigidBody3D" parent="GameManager/DiceContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.17253, 9.42751, -5.24562)
 script = ExtResource("2_muqym")
 start_position = Vector3(-1.173, 9.428, -5.246)
 start_rotation = Vector3(26.3, -43.4, 11.5)
+impulse_range = null
 torque_range = 3
+hover_height = null
+face_threshold = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GameManager/DiceContainer/Dice4"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
@@ -187,36 +127,15 @@ mesh = ExtResource("7_too8u")
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("BoxShape3D_yb52v")
 
-[node name="RayCast3D_Face1" type="RayCast3D" parent="GameManager/DiceContainer/Dice4"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.5, 0)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face2" type="RayCast3D" parent="GameManager/DiceContainer/Dice4"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.5, 0, 0)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face3" type="RayCast3D" parent="GameManager/DiceContainer/Dice4"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -1.5)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face4" type="RayCast3D" parent="GameManager/DiceContainer/Dice4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face5" type="RayCast3D" parent="GameManager/DiceContainer/Dice4"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.5, 0, 0)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face6" type="RayCast3D" parent="GameManager/DiceContainer/Dice4"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.5, 0)
-target_position = Vector3(0, 0, 1)
-
 [node name="Dice5" type="RigidBody3D" parent="GameManager/DiceContainer"]
 transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 1, -0.529525, 12.8303, 1.47123)
 script = ExtResource("2_muqym")
 start_position = Vector3(-0.53, 12.83, 1.471)
 start_rotation = Vector3(-2.3, -49.3, -15.6)
+impulse_range = null
 torque_range = 3
+hover_height = null
+face_threshold = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GameManager/DiceContainer/Dice5"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
@@ -225,30 +144,6 @@ mesh = ExtResource("7_too8u")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/DiceContainer/Dice5"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("BoxShape3D_yb52v")
-
-[node name="RayCast3D_Face1" type="RayCast3D" parent="GameManager/DiceContainer/Dice5"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.5, 0)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face2" type="RayCast3D" parent="GameManager/DiceContainer/Dice5"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.5, 0, 0)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face3" type="RayCast3D" parent="GameManager/DiceContainer/Dice5"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -1.5)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face4" type="RayCast3D" parent="GameManager/DiceContainer/Dice5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face5" type="RayCast3D" parent="GameManager/DiceContainer/Dice5"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.5, 0, 0)
-target_position = Vector3(0, 0, 1)
-
-[node name="RayCast3D_Face6" type="RayCast3D" parent="GameManager/DiceContainer/Dice5"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.5, 0)
-target_position = Vector3(0, 0, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="GameManager"]
 

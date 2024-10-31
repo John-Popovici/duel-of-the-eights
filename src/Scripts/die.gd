@@ -15,6 +15,7 @@ var is_selected: bool = false          # Tracks if the die has been clicked/sele
 var normalTex = preload('res://Materials/Red.tres')
 var selectedTex = preload('res://Materials/Purple.tres')
 
+@export var face_threshold: float = 0.8  # Threshold for face orientation detection
 # Dictionary mapping each die face direction to its value
 var face_value_dict = {
 	Vector3.UP: 1,
@@ -23,6 +24,18 @@ var face_value_dict = {
 	Vector3.LEFT: 4,
 	Vector3.FORWARD: 2,
 	Vector3.BACK: 5
+}
+
+# Threshold for detecting the "upward" ray
+@export var up_threshold: float = 0.9
+# Dictionary to associate raycast nodes with face values
+@onready var face_rays = {
+	1: $"RayCast3D_Face1",
+	2: $"RayCast3D_Face2",
+	3: $"RayCast3D_Face3",
+	4: $"RayCast3D_Face4",
+	5: $"RayCast3D_Face5",
+	6: $"RayCast3D_Face6"
 }
 
 # Applies random torque and force to simulate a roll
@@ -53,7 +66,7 @@ func roll() -> void:
 	))
 
 # Determines the top-facing die value after the roll
-func get_face_value() -> int:
+func get_face_values() -> int:
 	# After the dice have settled, check which face is up
 	var highest_face: Vector3 = Vector3.UP
 	var highest_dot = -1.0
@@ -67,16 +80,31 @@ func get_face_value() -> int:
 	
 	return face_value_dict[highest_face]  # Return the value of the top face
 
+# Determine which face is facing upward
+func get_face_value() -> int:
+	var best_face = -1
+	var highest_dot = -1.0
+	
+	for face_value in face_rays.keys():
+		var raycast = face_rays[face_value]
+		var ray_direction = raycast.global_transform.basis.z.normalized()
+		var dot_product = ray_direction.dot(Vector3.UP)
+		
+		if dot_product > highest_dot and dot_product > up_threshold:
+			highest_dot = dot_product
+			best_face = face_value
+	return best_face
+
 func _mouse_enter() -> void:
-	hover_toggle_position = global_transform.origin  # Save the starting position
-	var new_position = hover_toggle_position + Vector3(0, hover_height, 0)
-	global_transform.origin = new_position
+	#hover_toggle_position = global_transform.origin  # Save the starting position
+	#var new_position = hover_toggle_position + Vector3(0, hover_height, 0)
+	#global_transform.origin = new_position
 	dieMesh.set_surface_override_material(1,selectedTex)
 
 func _mouse_exit() -> void:
-	hover_toggle_position = global_transform.origin  # Save the starting position
-	var new_position = hover_toggle_position + Vector3(0, -hover_height, 0)
-	global_transform.origin = new_position
+	#hover_toggle_position = global_transform.origin  # Save the starting position
+	#var new_position = hover_toggle_position + Vector3(0, -hover_height, 0)
+	#global_transform.origin = new_position
 	if !is_selected:
 		dieMesh.set_surface_override_material(1,normalTex)
 

@@ -47,10 +47,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	#time_since_last_roll += delta            # Increment the timer by delta
-
-	#if time_since_last_roll >= roll_interval:
-		#update_dice_values_board(get_dice_values())
-		#roll_dice()                          # Roll dice every 5 seconds
-		#time_since_last_roll = 0.0           # Reset timer
 	pass
