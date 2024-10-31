@@ -79,7 +79,7 @@ func update_scores(round_score: int) -> void:
 	scoreboard.update_player_score(current_player, player_scores[current_player])
 	scoreboard.update_total_score(player_scores[current_player])
 	scoreboard.update_dice_values(dice_container.get_dice_values())
-	
+	await get_tree().create_timer(2.0).timeout
 	# Move to next player's turn or next round
 	next_turn()
 
