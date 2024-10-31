@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b8ghgwonuxdax"]
+
+[resource]
+resource_name = "Red"
+cull_mode = 2
+diffuse_mode = 3
+albedo_color = Color(0.833783, 0, 0.298419, 1)
+roughness = 0.5

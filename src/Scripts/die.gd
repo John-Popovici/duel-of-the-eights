@@ -12,8 +12,8 @@ var hover_toggle_position: Vector3
 var is_selected: bool = false          # Tracks if the die has been clicked/selected
 @onready var dieMesh: MeshInstance3D = $MeshInstance3D
 
-var normalTex = preload('res://Materials/Dice_Base.tres')
-var selectedTex = preload('res://Materials/Dice_Selected.tres')
+var normalTex = preload('res://Materials/Red.tres')
+var selectedTex = preload('res://Materials/Purple.tres')
 
 # Dictionary mapping each die face direction to its value
 var face_value_dict = {
@@ -29,9 +29,10 @@ var face_value_dict = {
 func roll() -> void:
 	# Reset position and rotation to start values
 	global_transform.origin = start_position
-	global_transform.basis = Basis(start_rotation,0)
+	#global_transform.basis = Basis(start_rotation,0)
 	
 	is_selected = false
+	dieMesh.set_surface_override_material(1,normalTex)
 	
 	# Reset linear and angular velocities
 	linear_velocity = Vector3.ZERO
@@ -70,20 +71,22 @@ func _mouse_enter() -> void:
 	hover_toggle_position = global_transform.origin  # Save the starting position
 	var new_position = hover_toggle_position + Vector3(0, hover_height, 0)
 	global_transform.origin = new_position
-	dieMesh.set_surface_override_material(0,selectedTex)
+	dieMesh.set_surface_override_material(1,selectedTex)
 
 func _mouse_exit() -> void:
 	hover_toggle_position = global_transform.origin  # Save the starting position
 	var new_position = hover_toggle_position + Vector3(0, -hover_height, 0)
 	global_transform.origin = new_position
 	if !is_selected:
-		dieMesh.set_surface_override_material(0,normalTex)
+		dieMesh.set_surface_override_material(1,normalTex)
 
 # Detects if the die was clicked and toggles its selected status
 func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		is_selected = !is_selected  # Toggle selection status
 		print("Die selected status:", is_selected)
+		print(self.name)
+		print("Dice Face Value: ", get_face_value())
 
 # Returns whether the die is selected
 func get_selected_status() -> bool:
@@ -94,7 +97,7 @@ func _ready() -> void:
 	self.mouse_entered.connect(_mouse_enter)
 	self.mouse_exited.connect(_mouse_exit)
 	self.input_event.connect(_on_input_event)
-	dieMesh.set_surface_override_material(0,normalTex)
+	dieMesh.set_surface_override_material(1,normalTex)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
