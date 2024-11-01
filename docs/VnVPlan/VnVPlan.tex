@@ -35,9 +35,10 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-2024-10-27 & John Popovici & Preparing file and added to section 1\\
-2024-10-28 & John Popovici & Removed table of symbols; Added to section 1\\
+2024-10-27 & John Popovici & Preparing file and added 1.1, 1.2, 1.3\\
+2024-10-28 & John Popovici & Removed table of symbols; Added 1.4\\
 2024-10-30 & Hemraj Bhatt & Added content to section 2\\
+2024-10-31 & John Popovici & Finalized section 1 formatting and content\\
 ... & ... & ...\\
 \bottomrule
 \end{tabularx}
@@ -162,26 +163,18 @@ You can use a pull request to update your extras (in TeamComposition.csv or
 Repos.csv) if your plan changes as a result of the VnV planning exercise.}
 \fi
 
-Through the implementation of not just a single Yahtzee game variant, but
-by implementing a system where the user can create a custom game variant
-and connect to another online player to play it, we are looking to achieve the
-advanced challenge level. We would also provide some pre-set game variants
-that have been tested and were found to be more fun than others.
+Through the implementation of not just a single Yahtzee game variant, but by implementing a system where the user can create a custom game variant and connect to another online player to play it, we are looking to develop our project to be both a fun game and a capstone project. The challenge difficulty approved is that of general.
 
-We will include extra elements to aid in better developing our game and
-allow us to design for a fun gaming experience, as we wish this game to not be
-just a capstone project, but a game we can be proud of and put out into the
-world. Following industry practices in game development, we wish to potentially
-do the following extras:
+%TODO update problem statement and gitlab once we know difficulty level and what extras
+\iffalse
+, we are looking to achieve the advanced challenge level. We would also provide some pre-set game variants that have been tested and were found to be more fun than others.
+\fi
+
+We will include extra elements to aid in better developing our game and allow us to design for a fun gaming experience. Following industry practices in game development, we will do the following extras:
 \begin{itemize}
-	\item Focus groups, Surveys, and Interviews
-	\item Usability testing
-	\item User personas
+	\item Focus groups, Surveys, and Interviews, focused on Usability Testing
 	\item User documentation
 \end{itemize}
-
-\wss{TODO update problem statement and gitlab once we know difficulty level and what extras}
-%TODO update problem statement and gitlab once we know difficulty level and what extras
 
 \subsection{Relevant Documentation}
 
@@ -199,15 +192,15 @@ how they relate to your VnV efforts.}
 The following documents are crucial for the Verification and Validation process, ensuring the project meets its objectives and operates reliably:
 
 \begin{itemize}
-	\item Software Requirements Specification (SRS): This document outlines the core requirements for the platform, defining features and limitations, as well as expected behaviors. The SRS serves as a primary reference to validate that the developed software meets user and system requirements.
-	\item \wss{TODO add more}
+	\item \href{https://github.com/John-Popovici/duel-of-the-eights/blob/main/docs/SRS/SRS.pdf}{Software Requirements Specification (SRS)}: This document outlines the core requirements for the platform, defining features and limitations, as well as expected behaviors. The SRS serves as a primary reference to validate that the developed software meets user and system requirements.
+	\item \href{https://github.com/John-Popovici/duel-of-the-eights/blob/main/docs/HazardAnalysis/HazardAnalysis.pdf}{Hazard Analysis}: This document is key to identifying and managing risks associated with system failures, particularly in dice physics, scoring, and multiplayer stability.
 \end{itemize}
 
-\wss{TODO add BibTeX and hyperlinks}
+
 
 \section{Plan}
 
-\wss{Introduce this section.  You can provide a roadmap of the sections to come.}
+%\wss{Introduce this section.  You can provide a roadmap of the sections to come.}
 
 \noindent This section covers the project's verification and validation (V\&V) strategy, including the methodologies and strategies used to ensure software dependability, correctness, and usability. Each component of the plan will establish verification and validation procedures appropriate for each stage of the project lifecycle, from reviewing the Software Requirements Specification (SRS) to testing
 
@@ -220,7 +213,7 @@ The following documents are crucial for the Verification and Validation process,
 
 \begin{table}[H]
   \centering
-  \renewcommand{\arraystretch}{1.2} 
+  %\renewcommand{\arraystretch}{1.2} 
   \begin{adjustbox}{max width=0.9\textwidth} 
     \begin{tabularx}{\linewidth}{|p{2.5cm}|p{2.75cm}|X|} 
     \hline
