@@ -9,6 +9,10 @@ extends RigidBody3D
 @export var torque_range: int = 5
 @export var hover_height: float = 0.5  # Hover height in meters
 var hover_toggle_position: Vector3
+@onready var move_last_time = -1.0
+# Thresholds to consider if the die is still rolling
+@export var velocity_threshold: float = 0.1  # Adjust this value based on your needs
+@export var roll_time_limit: float = 3.0     # Time limit to trigger function
 var is_selected: bool = false          # Tracks if the die has been clicked/selected
 @onready var dieMesh: MeshInstance3D = $MeshInstance3D
 
@@ -94,12 +98,15 @@ func get_face_value() -> int:
 			highest_dot = dot_product
 			best_face = face_value
 	return best_face
-
+	
+var move_start_time = Time.get_ticks_msec() / 1000.0
 func _mouse_enter() -> void:
-	#hover_toggle_position = global_transform.origin  # Save the starting position
-	#var new_position = hover_toggle_position + Vector3(0, hover_height, 0)
-	#global_transform.origin = new_position
+	move_start_time = Time.get_ticks_msec() / 1000.0
+	if (move_last_time == -1.0 or move_start_time - move_last_time > 1.0) and !is_rolling:
+		move_last_time = move_start_time
+		hover()
 	dieMesh.set_surface_override_material(1,selectedTex)
+	
 
 func _mouse_exit() -> void:
 	#hover_toggle_position = global_transform.origin  # Save the starting position
@@ -127,7 +134,34 @@ func _ready() -> void:
 	self.input_event.connect(_on_input_event)
 	dieMesh.set_surface_override_material(1,normalTex)
 
-
+# Tracks if the die is currently rolling
+var is_rolling: bool = false
+var roll_start_time: float = -1.0  # Tracks when the die started rolling
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+# Update rolling status in _process
+
+func hover():
+	move_start_time = Time.get_ticks_msec() / 1000.0
+	move_last_time = move_start_time
+	hover_toggle_position = global_transform.origin  # Save the starting position
+	var new_position = hover_toggle_position + Vector3(0, hover_height, 0)
+	global_transform.origin = new_position
+	print("The die has been rolling for more than 3 seconds.")
+
 func _process(delta: float) -> void:
-	pass
+	# Calculate the speed by checking the length of the linear and angular velocities
+	var speed = linear_velocity.length()
+	var rotation_speed = angular_velocity.length()
+	
+	# Check if speed or rotation is above the threshold to determine if rolling
+	if speed > velocity_threshold or rotation_speed > velocity_threshold:
+		if !is_rolling:
+			is_rolling = true
+			roll_start_time = Time.get_ticks_msec() / 1000.0
+		else:
+			var current_time = Time.get_ticks_msec() / 1000.0
+			if current_time - roll_start_time > roll_time_limit:
+				hover()  # Call the function if the roll time limit is exceeded
+				roll_start_time = current_time  # Reset timer to prevent repeated calls
+	else:
+		is_rolling = false

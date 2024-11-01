@@ -4,14 +4,14 @@ extends Node3D
 
 @onready var player1_name_input = $VBoxContainer/Player1Entry  # Reference to Player 1's LineEdit
 @onready var player2_name_input = $VBoxContainer/Player2Entry  # Reference to Player 2's LineEdit
-@onready var start_button = $VBoxContainer/StartGame           # Reference to the Start Button
+@onready var start_local_button = $VBoxContainer/StartLocalGame           # Reference to the Start Button
 
 # Called when the node enters the scene tree
 func _ready() -> void:
-	start_button.pressed.connect(_on_start_game_pressed)
+	start_local_button.pressed.connect(_on_start_local_game_pressed)
 
 # Transition to GameScene with player names
-func _on_start_game_pressed() -> void:
+func _on_start_local_game_pressed() -> void:
 	var player1_name = player1_name_input.text
 	var player2_name = player2_name_input.text
 	
