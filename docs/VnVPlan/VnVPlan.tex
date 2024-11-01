@@ -5,6 +5,7 @@
 \usepackage{hyperref}
 \usepackage{float}
 \usepackage{adjustbox}
+\usepackage{float}
 \hypersetup{
     colorlinks,
     citecolor=blue,
@@ -39,6 +40,7 @@
 2024-10-28 & John Popovici & Removed table of symbols; Added 1.4\\
 2024-10-30 & Hemraj Bhatt & Added content to section 2\\
 2024-10-31 & John Popovici & Finalized section 1 formatting and content\\
+2024-11-01 & Isaac Giles & Filled in content for section 3\\
 ... & ... & ...\\
 \bottomrule
 \end{tabularx}
@@ -374,128 +376,149 @@ as a Rev 0 demo for the supervisor.}
 
 \section{System Tests}
 
-\wss{There should be text between all headings, even if it is just a roadmap of
-the contents of the subsections.}
+This section covers tests for functional and non-functional requirements to verify the game's adherence to its design specifications. The functional requirements focus on verifying the gameplay mechanics, score calculations, and user interface, while the non-functional requirements test aspects like performance, usability, and system compatibility.
 
 \subsection{Tests for Functional Requirements}
 
-\wss{Subsets of the tests may be in related, so this section is divided into
-  different areas.  If there are no identifiable subsets for the tests, this
-  level of document structure can be removed.}
+Functional tests are organized into different areas based on gameplay features, score handling, and user interface components, as defined in the software requirements specification (SRS).
 
-\wss{Include a blurb here to explain why the subsections below
-  cover the requirements.  References to the SRS would be good here.}
+\subsubsection{Gameplay and Rules}
 
-\subsubsection{Area of Testing1}
+Testing here covers the core game mechanics, such as player vs player mode, score calculations, and dice roll simulation.
 
-\wss{It would be nice to have a blurb here to explain why the subsections below
-  cover the requirements.  References to the SRS would be good here.  If a section
-  covers tests for input constraints, you should reference the data constraints
-  table in the SRS.}
-		
-\paragraph{Title for Test}
+\paragraph{Test: PvP Support}
+\begin{itemize}
+    \item \textbf{Test ID:} Test-1
+    \item \textbf{Control:} Automated
+    \item \textbf{Initial State:} Game loaded to main menu.
+    \item \textbf{Input:} Two players connect to a match.
+    \item \textbf{Output:} Game begins with both players connected, and each takes turns as expected.
+    \item \textbf{Test Case Derivation:} Confirms successful setup and turn-taking in online mode, satisfying R1.
+    \item \textbf{How test will be performed:} Automated script connects two players in PvP mode and checks player statuses.
+\end{itemize}
 
-\begin{enumerate}
+\paragraph{Test: Score Calculation}
+\begin{itemize}
+    \item \textbf{Test ID:} Test-2
+    \item \textbf{Control:} Automated
+    \item \textbf{Initial State:} Active game session with dice rolled.
+    \item \textbf{Input:} Player achieves a Yahtzee (five of a kind).
+    \item \textbf{Output:} Correct score added to the Yahtzee section.
+    \item \textbf{Test Case Derivation:} Ensures that score calculations adhere to specified Yahtzee-like rules, satisfying R2.
+    \item \textbf{How test will be performed:} Test evaluates various combinations to ensure scoring accuracy.
+\end{itemize}
 
-\item{test-id1\\}
+\paragraph{Test: Dice Roll Physics}
+\begin{itemize}
+    \item \textbf{Test ID:} Test-3
+    \item \textbf{Control:} Manual
+    \item \textbf{Initial State:} Game session loaded.
+    \item \textbf{Input:} Player rolls the dice.
+    \item \textbf{Output:} 3D dice roll with randomized, realistic outcome.
+    \item \textbf{Test Case Derivation:} Validates realistic physics for dice roll, ensuring that each outcome resembles real world physics, satisfying R3.
+    \item \textbf{How test will be performed:} Tester initiates rolls and observes animation and outcomes.
+\end{itemize}
 
-Control: Manual versus Automatic
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs.  Output is not how you
-are going to return the results of the test.  The output is the expected
-result.}
+\subsubsection{User Interface and Settings}
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
-					
-How test will be performed: 
-					
-\item{test-id2\\}
+This section validates the interface, display, and customization options to ensure they meet user needs and game standards.
 
-Control: Manual versus Automatic
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
+\paragraph{Test: Dice Selection}
+\begin{itemize}
+    \item \textbf{Test ID:} Test-4
+    \item \textbf{Control:} Manual
+    \item \textbf{Initial State:} Mid-game, with player allowed to roll again.
+    \item \textbf{Input:} Player selects specific dice to keep and re-rolls the remaining.
+    \item \textbf{Output:} Only unselected dice are re-rolled, while selected dice remain.
+    \item \textbf{Test Case Derivation:} Validates dice selection mechanics as per game rules, satisfying R7.
+    \item \textbf{How test will be performed:} Tester selects different dice combinations to confirm correct behavior.
+\end{itemize}
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
-
-How test will be performed: 
-
-\end{enumerate}
-
-\subsubsection{Area of Testing2}
-
-...
+\paragraph{Test: Game Settings Modification}
+\begin{itemize}
+    \item \textbf{Test ID:} Test-5
+    \item \textbf{Control:} Manual
+    \item \textbf{Initial State:} Game settings menu open.
+    \item \textbf{Input:} Player modifies settings (e.g., changes dice sides, scoring rules).
+    \item \textbf{Output:} Changes are successfully applied to new game sessions.
+    \item \textbf{Test Case Derivation:} Verifies that customizable game settings reflect unique variants, satisfying R9.
+    \item \textbf{How test will be performed:} Tester modifies various settings and initiates games to confirm functionality.
+\end{itemize}
 
 \subsection{Tests for Nonfunctional Requirements}
 
-\wss{The nonfunctional requirements for accuracy will likely just reference the
-  appropriate functional tests from above.  The test cases should mention
-  reporting the relative error for these tests.  Not all projects will
-  necessarily have nonfunctional requirements related to accuracy.}
+Nonfunctional tests focus on measuring performance, responsiveness, reliability, and usability. These tests ensure the game performs well under different conditions and on various systems.
 
-\wss{For some nonfunctional tests, you won't be setting a target threshold for
-passing the test, but rather describing the experiment you will do to measure
-the quality for different inputs.  For instance, you could measure speed versus
-the problem size.  The output of the test isn't pass/fail, but rather a summary
-table or graph.}
+\subsubsection{Performance and Usability}
 
-\wss{Tests related to usability could include conducting a usability test and
-  survey.  The survey will be in the Appendix.}
+\paragraph{Test: Frame Rate Consistency}
+\begin{itemize}
+    \item \textbf{Test ID:} Test-6
+    \item \textbf{Type:} Dynamic, Automated
+    \item \textbf{Initial State:} Game in progress.
+    \item \textbf{Input/Condition:} Standard gameplay, including dice rolls, UI interactions, and animations.
+    \item \textbf{Output/Result:} Game maintains a frame rate of at least 30 FPS.
+    \item \textbf{How test will be performed:} Frame rate monitored during gameplay on low and high-end systems to ensure stability.
+\end{itemize}
 
-\wss{Static tests, review, inspections, and walkthroughs, will not follow the
-format for the tests given below.}
+\paragraph{Test: Input Responsiveness}
+\begin{itemize}
+    \item \textbf{Test ID:} Test-7
+    \item \textbf{Type:} Dynamic, Automated
+    \item \textbf{Initial State:} Game loaded.
+    \item \textbf{Input:} Player performs multiple actions (e.g., roll dice, end turn).
+    \item \textbf{Output:} System responds within 500 ms of input.
+    \item \textbf{How test will be performed:} Response times recorded using automated tools, with any delays highlighted.
+\end{itemize}
 
-\wss{If you introduce static tests in your plan, you need to provide details.
-How will they be done?  In cases like code (or document) walkthroughs, who will
-be involved? Be specific.}
+\subsubsection{System Compatibility and Reliability}
 
-\subsubsection{Area of Testing1}
-		
-\paragraph{Title for Test}
+\paragraph{Test: System Compatibility}
+\begin{itemize}
+    \item \textbf{Test ID:} Test-8
+    \item \textbf{Type:} Manual
+    \item \textbf{Initial State:} Game installed on a Windows 10 system.
+    \item \textbf{Input/Condition:} Launch and operate the game as per standard.
+    \item \textbf{Output/Result:} Game loads and operates without compatibility issues.
+    \item \textbf{How test will be performed:} Run game on Windows 10 (and MacOS - stretch goal) to confirm compatibility, satisfying NFR3 (and NFR10).
+\end{itemize}
 
-\begin{enumerate}
+\paragraph{Test: Crash Resilience in Multiplayer}
+\begin{itemize}
+    \item \textbf{Test ID:} Test-9
+    \item \textbf{Type:} Dynamic, Manual
+    \item \textbf{Initial State:} Multiplayer game session in progress.
+    \item \textbf{Input/Condition:} Two players connected and actively playing.
+    \item \textbf{Output/Result:} Game remains stable, with crashes occurring less than 1\% of the time.
+    \item \textbf{How test will be performed:} Simulated load testing over numerous sessions, logging any crashes to validate NFR4.
+\end{itemize}
 
-\item{test-id1\\}
-
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input/Condition: 
-					
-Output/Result: 
-					
-How test will be performed: 
-					
-\item{test-id2\\}
-
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
-
-\end{enumerate}
-
-\subsubsection{Area of Testing2}
-
-...
 
 \subsection{Traceability Between Test Cases and Requirements}
 
-\wss{Provide a table that shows which test cases are supporting which
-  requirements.}
+The following table provides traceability between the test cases and the requirements. Each test case is mapped to one or more requirements that it validates, ensuring coverage of our functional and non-functional requirements.
+
+\begin{table}[H]
+    \centering
+    \caption{Traceability Matrix for Test Cases and Requirements}
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Test Case ID} & \textbf{Requirement(s) Verified} \\
+        \hline
+        Test-1 & R1: Online player vs player mode \\
+        Test-2 & R2: Score calculation using Yahtzee rules \\
+        Test-3 & R3: Realistic 3D dice roll physics \\
+        Test-4 & R7: Dice selection functionality \\
+        Test-5 & R9: Game settings modification \\
+        Test-6 & NFR1: Frame rate consistency \\
+        Test-7 & NFR5: Input responsiveness \\
+        Test-8 & NFR3: Windows 10 compatibility, NFR10: MacOS support \\
+        Test-9 & NFR4: Multiplayer stability \\
+        \hline
+    \end{tabular}
+    \label{tab:traceability}
+\end{table}
+
 
 \section{Unit Test Description}
 
