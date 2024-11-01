@@ -16,13 +16,13 @@ func _on_start_local_game_pressed() -> void:
 	var player2_name = player2_name_input.text
 	
 	# Load GameScene
-	var game_scene = load("res://Scenes/game_scene.tscn").instantiate()
+	var local_game_scene = load("res://Scenes/local_game_scene.tscn").instantiate()
 	
 	# Pass player names to GameScene
-	game_scene.set_player_names(player1_name, player2_name)
+	local_game_scene.set_player_names(player1_name, player2_name)
 	
 	# Change scene to GameScene
-	get_tree().root.add_child(game_scene)
+	get_tree().root.add_child(local_game_scene)
 	queue_free()  # Free IntroScene
 
 
