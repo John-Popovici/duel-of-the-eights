@@ -49,6 +49,15 @@ func start_round() -> void:
 	start_game_button.disabled = true
 	start_game_button.visible = false
 	
+	#Camera Movement
+	get_node("Camera3D").move_to_position()
+	#Terrain Movement
+	get_node("GameBoard/TerrainNode/Terrain1").move_to_position()
+	get_node("GameBoard/TerrainNode/Terrain3").move_to_position()
+	get_node("GameBoard/TerrainNode/Terrain5").move_to_position()
+	
+	await get_tree().create_timer(3.0).timeout
+	
 	if current_player == 1:
 		currentPlayerName = player1name
 		P1HandsContainer.OnVisibility()
