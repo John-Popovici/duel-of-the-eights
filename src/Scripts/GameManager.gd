@@ -19,6 +19,8 @@ var currentPlayerName: String = ""
 var roll_phase: int = 0  # Tracks which roll phase we're in (0 = first roll, 1/2 = re-rolls)
 var max_rolls: int = 2
 
+var sceneSetupDone: bool  = false
+
 # Start the game
 func _ready() -> void:
 	roll_selected_button.pressed.connect(roll_selected_button_call)
@@ -49,12 +51,14 @@ func start_round() -> void:
 	start_game_button.disabled = true
 	start_game_button.visible = false
 	
-	#Camera Movement
-	get_node("Camera3D").move_to_position()
-	#Terrain Movement
-	get_node("GameBoard/TerrainNode/Terrain1").move_to_position()
-	get_node("GameBoard/TerrainNode/Terrain3").move_to_position()
-	get_node("GameBoard/TerrainNode/Terrain5").move_to_position()
+	if !sceneSetupDone:
+		#Camera Movement
+		get_node("Camera3D").move_to_position()
+		#Terrain Movement
+		get_node("GameBoard/TerrainNode/Terrain1").move_to_position()
+		get_node("GameBoard/TerrainNode/Terrain3").move_to_position()
+		get_node("GameBoard/TerrainNode/Terrain5").move_to_position()
+		sceneSetupDone = true
 	
 	await get_tree().create_timer(3.0).timeout
 	
@@ -88,7 +92,7 @@ func update_scores(round_score: int) -> void:
 	scoreboard.update_player_score(current_player, player_scores[current_player])
 	scoreboard.update_total_score(player_scores[current_player])
 	scoreboard.update_dice_values(dice_container.get_dice_values())
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(1.0).timeout
 	# Move to next player's turn or next round
 	next_turn()
 

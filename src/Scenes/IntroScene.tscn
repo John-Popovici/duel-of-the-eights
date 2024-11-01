@@ -16,12 +16,17 @@ theme_override_constants/separation = 10
 [node name="Instructions" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Enter Player Names:"
+horizontal_alignment = 1
 
 [node name="Player1Entry" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
+placeholder_text = "Enter Name 1"
+alignment = 1
 
 [node name="Player2Entry" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
+placeholder_text = "Enter Name 2"
+alignment = 1
 
 [node name="StartGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
