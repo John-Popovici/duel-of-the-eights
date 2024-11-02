@@ -29,14 +29,8 @@ func _on_start_local_game_pressed() -> void:
 
 # Transition to GameScene with player names
 func _on_start_online_game_pressed() -> void:
-	var player1_name = player1_name_input.text
-	var player2_name = player2_name_input.text
-	
 	# Load GameScene
 	var online_game_scene = load("res://Scenes/online_game_scene.tscn").instantiate()
-	
-	# Pass player names to GameScene
-	#online_game_scene.set_player_names(player1_name, player2_name)
 	
 	# Change scene to GameScene
 	get_tree().root.add_child(online_game_scene)

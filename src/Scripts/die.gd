@@ -20,15 +20,6 @@ var normalTex = preload('res://Materials/Red.tres')
 var selectedTex = preload('res://Materials/Purple.tres')
 
 @export var face_threshold: float = 0.8  # Threshold for face orientation detection
-# Dictionary mapping each die face direction to its value
-var face_value_dict = {
-	Vector3.UP: 1,
-	Vector3.DOWN: 6,
-	Vector3.RIGHT: 3,
-	Vector3.LEFT: 4,
-	Vector3.FORWARD: 2,
-	Vector3.BACK: 5
-}
 
 # Threshold for detecting the "upward" ray
 @export var up_threshold: float = 0.9
@@ -68,21 +59,6 @@ func roll() -> void:
 		randf_range(-torque_range, torque_range),
 		randf_range(-torque_range, torque_range)
 	))
-
-# Determines the top-facing die value after the roll
-func get_face_values() -> int:
-	# After the dice have settled, check which face is up
-	var highest_face: Vector3 = Vector3.UP
-	var highest_dot = -1.0
-	
-	# Loop through each face direction in the dictionary
-	for face_dir in face_value_dict.keys():
-		var dot = global_transform.basis.y.dot(face_dir)
-		if dot > highest_dot:
-			highest_dot = dot
-			highest_face = face_dir
-	
-	return face_value_dict[highest_face]  # Return the value of the top face
 
 # Determine which face is facing upward
 func get_face_value() -> int:

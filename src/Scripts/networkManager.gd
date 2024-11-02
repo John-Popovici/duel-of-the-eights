@@ -2,11 +2,16 @@ extends Node
 
 @export var default_port: int = 12345
 var is_host: bool = false
-var Multiplayer = MultiplayerAPI
 var ConnectionUI: CanvasLayer
 var OnlineGameManager: Node3D
 
 signal connection_successful
+signal disconnected
+signal connection_failed
+
+var ping_timeout: float = 3.0
+var time_since_last_ping: float = 0.0
+var check_ping: bool = false
 
 # Start as a server
 func start_server(port: int):
@@ -17,21 +22,39 @@ func start_server(port: int):
 	print("Started as server on port: ", port)
 	print("IP: ", IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1))
 	multiplayer.multiplayer_peer.connect("peer_connected", self._on_peer_connected)
+	#setup tracking for peer disconnect
+	multiplayer.multiplayer_peer.connect("peer_disconnected", self._on_peer_disconnected)
 
 # Connect as a client
-func connect_to_server(ip: String, port: int):
+func connect_to_server(hash: String, port: int):
 	var peer = ENetMultiplayerPeer.new()
-	peer.create_client(ip, port)
+	peer.create_client(hash_to_ip(hash), port)
 	multiplayer.multiplayer_peer = peer
 	is_host = false
-	print("Attempting to connect to server at ", ip, " on port ", port)
+	print("Attempting to connect to server at ", hash_to_ip(hash), " on port ", port)
 	
 	# Check if connection is successful
 	multiplayer.multiplayer_peer.connect("peer_connected", self._on_peer_connected)
+	#Connection Failed case
+	multiplayer.multiplayer_peer.connect("connection_failed", self._on_connection_failed)
+	
 
 func _on_peer_connected(id: int):
 	print("Connected to peer with ID: ", id)
+	check_ping = true
 	emit_signal("connection_successful")
+
+func _on_peer_disconnected(id: int):
+	print("Disconnected from peer with ID: ", id)
+	emit_signal("disconnected")
+
+func _on_server_disconnected():
+	print("Disconnected from server")
+	emit_signal("disconnected")
+
+func _on_connection_failed():
+	print("Connection Failed")
+	emit_signal("connection_failed")
 
 # Converts a number to a two-character uppercase string, handling 0-255
 func number_to_letters(value: int) -> String:
@@ -100,6 +123,8 @@ func hash_to_ip(hash_code: String) -> String:
 
 	return ip.join(".")
 
+func getIsHost() -> bool:
+	return is_host
 
 func getHashIP() -> String:
 	return ip_to_hash(str(IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1)))
@@ -109,7 +134,22 @@ func _ready() -> void:
 	ConnectionUI = get_node("ConnectionUI")
 	ConnectionUI.setupNetworkManagerRef()
 
+# Reset the timer on each ping received
+@rpc
+func ping() -> void:
+	time_since_last_ping = 0.0
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if is_host:
+		# Broadcast a ping every second (adjust interval as necessary)
+		if Time.get_ticks_msec() % 1000 < delta * 1000:
+			rpc("ping")
+	elif !is_host and check_ping:
+		# Update the timer
+		time_since_last_ping += delta
+		
+		# Check if the timeout is exceeded
+		if time_since_last_ping >= ping_timeout:
+			_on_server_disconnected()
+			check_ping = false
 	pass

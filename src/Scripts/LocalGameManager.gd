@@ -96,17 +96,6 @@ func update_scores(round_score: int) -> void:
 	# Move to next player's turn or next round
 	next_turn()
 
-# Calculates score based on dice values (basic example)
-func calculate_score(dice_values: Array[int]) -> int:
-	# Sum of all dice values, can customize based on scoring rules
-	return sum(dice_values)
-
-func sum(arr:Array[int]):
-	var result = 0
-	for i in arr:
-		result+=i
-	return result
-
 # Switches to the next player's turn or next round
 func next_turn() -> void:
 	current_player = 2 if current_player == 1 else 1

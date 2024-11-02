@@ -12,6 +12,8 @@ var network_manager: Node
 @onready var connect_button = $UIBox/Connection_Setup/ConnectButton
 @onready var SetupUI = $UIBox/Connection_Setup
 @onready var WaitUI = $UIBox/Connection_Wait
+@onready var ErrorUI = $UIBox/Connection_Error
+@onready var ErrorSourceLabel = $"UIBox/Connection_Error/Error Source"
 @onready var IPDisplayLabel = $UIBox/Connection_Wait/IPDisplay
 @onready var CopyIPButton = $UIBox/Connection_Wait/CopyIPButton
 @onready var PortDisplayLabel = $UIBox/Connection_Wait/PortDisplay
@@ -22,6 +24,7 @@ func _ready():
 	host_checkbutton.set_toggle_mode(true)
 	host_checkbutton.connect("toggled", self._on_hostcheck_toggled)
 	WaitUI.visible = false
+	ErrorUI.visible = false
 	# Connect the copy buttons to functions to copy IP and port
 	CopyIPButton.connect("pressed", self._copy_ip_to_clipboard)
 	CopyPortButton.connect("pressed", self._copy_port_to_clipboard)
@@ -37,6 +40,8 @@ func _on_hostcheck_toggled(state):
 func setupNetworkManagerRef() -> void:
 	network_manager = get_parent()
 	network_manager.connect("connection_successful", self._on_connection_successful)
+	network_manager.connect("disconnected", self._on_disconnected)
+	network_manager.connect("connection_failed", self._on_connection_failed)
 	connect_button.connect("pressed", self._on_connect_pressed)
 
 func _on_connect_pressed():
@@ -46,14 +51,14 @@ func _on_connect_pressed():
 		network_manager.start_server(port)
 		SetupUI.visible = false
 		WaitUI.visible = true
-		IPDisplayLabel.text = "Connect Code: " + network_manager.ip_to_hash(str(IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1)))
+		IPDisplayLabel.text = "Connect Code: " + network_manager.getHashIP()
 		PortDisplayLabel.text = "Started as Host on port: " + str(port)
 	else:
-		var ip = network_manager.hash_to_ip(ip_field.text)
-		network_manager.connect_to_server(ip, port)
+		var hash = ip_field.text
+		network_manager.connect_to_server(hash, port)
 
 func _copy_ip_to_clipboard():
-	DisplayServer.clipboard_set(network_manager.ip_to_hash(str(IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1))))
+	DisplayServer.clipboard_set(network_manager.getHashIP())
 	print("Connect code copied to clipboard: ", DisplayServer.clipboard_get())
 
 func _copy_port_to_clipboard():
@@ -66,7 +71,31 @@ func _on_connection_successful():
 	self.visible = false
 	print("Multiplayer Successfully connected")
 	# Start the game via OnlineGameManager
-	#get_parent().get_parent().get_node("OnlineGameManager").start_game()
+	get_tree().get_root().get_node("OnlineGameScene").start_game()
+
+func _on_disconnected():
+	# Hide the ConnectionUI once connected
+	self.visible = true
+	SetupUI.visible = false
+	WaitUI.visible = false
+	ErrorUI.visible = true
+	ErrorSourceLabel.text = "Disconnected from game"
+	print("Disconnected")
+	await get_tree().create_timer(2.0).timeout
+	# Start the game via OnlineGameManager
+	get_tree().get_root().get_node("OnlineGameScene").returnToIntro()
+
+func _on_connection_failed():
+	# Hide the ConnectionUI once connected
+	self.visible = true
+	SetupUI.visible = false
+	WaitUI.visible = false
+	ErrorUI.visible = true
+	ErrorSourceLabel.text = "Connection Failed"
+	print("Connection Failed")
+	await get_tree().create_timer(2.0).timeout
+	# Start the game via OnlineGameManager
+	get_tree().get_root().get_node("OnlineGameScene").returnToIntro()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

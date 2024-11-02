@@ -13,14 +13,18 @@ func set_player_names(name1: String, name2: String) -> void:
 	print("Player 1: %s, Player 2: %s" % [player1_name, player2_name])
 	
 
+func start_game() -> void:
+	print("Game Started")
+
+func returnToIntro() -> void:
+	var intro_scene = load("res://Scenes/IntroScene.tscn").instantiate()
+	
+	# Change scene to GameScene
+	get_tree().root.add_child(intro_scene)
+	queue_free()  # Free IntroScene
+
 # Start game logic with player names
 func _ready() -> void:
-	#if player1_name and player2_name:
-	#	print("Starting game with players: %s and %s" % [player1_name, player2_name])
-	#	GameManager.setPlayerNames(player1_name,player2_name)
-	#	#GameManager.start_round()
-	#else:
-	#	print("Warning: Player names not set")
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
