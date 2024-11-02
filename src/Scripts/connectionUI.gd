@@ -1,0 +1,73 @@
+extends CanvasLayer
+
+@export var network_manager_path: NodePath = "../../NetworkManger"
+@export var default_port: int = 12345
+var host_option: bool = false
+
+# Cached references
+var network_manager: Node
+@onready var ip_field = $UIBox/Connection_Setup/IP_Input
+@onready var port_field = $UIBox/Connection_Setup/Port_Input
+@onready var host_checkbutton = $UIBox/Connection_Setup/HostCheckButton
+@onready var connect_button = $UIBox/Connection_Setup/ConnectButton
+@onready var SetupUI = $UIBox/Connection_Setup
+@onready var WaitUI = $UIBox/Connection_Wait
+@onready var IPDisplayLabel = $UIBox/Connection_Wait/IPDisplay
+@onready var CopyIPButton = $UIBox/Connection_Wait/CopyIPButton
+@onready var PortDisplayLabel = $UIBox/Connection_Wait/PortDisplay
+@onready var CopyPortButton = $UIBox/Connection_Wait/CopyPortButton
+
+
+func _ready():
+	host_checkbutton.set_toggle_mode(true)
+	host_checkbutton.connect("toggled", self._on_hostcheck_toggled)
+	WaitUI.visible = false
+	# Connect the copy buttons to functions to copy IP and port
+	CopyIPButton.connect("pressed", self._copy_ip_to_clipboard)
+	CopyPortButton.connect("pressed", self._copy_port_to_clipboard)
+
+func _on_hostcheck_toggled(state):
+	print("Host/Client Toggled: ",state)
+	host_option = state
+	if host_option:
+		ip_field.visible = false
+	else:
+		ip_field.visible = true
+
+func setupNetworkManagerRef() -> void:
+	network_manager = get_parent()
+	network_manager.connect("connection_successful", self._on_connection_successful)
+	connect_button.connect("pressed", self._on_connect_pressed)
+
+func _on_connect_pressed():
+	var port = port_field.text.to_int() if port_field.text else default_port
+	
+	if host_option:
+		network_manager.start_server(port)
+		SetupUI.visible = false
+		WaitUI.visible = true
+		IPDisplayLabel.text = "Connect Code: " + network_manager.ip_to_hash(str(IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1)))
+		PortDisplayLabel.text = "Started as Host on port: " + str(port)
+	else:
+		var ip = network_manager.hash_to_ip(ip_field.text)
+		network_manager.connect_to_server(ip, port)
+
+func _copy_ip_to_clipboard():
+	DisplayServer.clipboard_set(network_manager.ip_to_hash(str(IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1))))
+	print("Connect code copied to clipboard: ", DisplayServer.clipboard_get())
+
+func _copy_port_to_clipboard():
+	var port = port_field.text.to_int() if port_field.text else default_port
+	DisplayServer.clipboard_set(str(port))
+	print("Port copied to clipboard: ", DisplayServer.clipboard_get())
+
+func _on_connection_successful():
+	# Hide the ConnectionUI once connected
+	self.visible = false
+	print("Multiplayer Successfully connected")
+	# Start the game via OnlineGameManager
+	#get_parent().get_parent().get_node("OnlineGameManager").start_game()
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass

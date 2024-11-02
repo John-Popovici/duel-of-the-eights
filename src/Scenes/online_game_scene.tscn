@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://bv1diwskvph82"]
+
+[ext_resource type="Script" path="res://Scripts/online_game_scene.gd" id="1_qoyeu"]
+[ext_resource type="Script" path="res://Scripts/networkManager.gd" id="2_6sfck"]
+[ext_resource type="Script" path="res://Scripts/connectionUI.gd" id="3_f25r5"]
+
+[node name="OnlineGameScene" type="Node3D"]
+script = ExtResource("1_qoyeu")
+
+[node name="NetworkManager" type="Node" parent="."]
+script = ExtResource("2_6sfck")
+
+[node name="ConnectionUI" type="CanvasLayer" parent="NetworkManager"]
+script = ExtResource("3_f25r5")
+
+[node name="UIBox" type="PanelContainer" parent="NetworkManager/ConnectionUI"]
+offset_left = 176.0
+offset_top = 118.0
+offset_right = 728.0
+offset_bottom = 305.0
+scale = Vector2(1.44, 2.28)
+
+[node name="Connection_Setup" type="VBoxContainer" parent="NetworkManager/ConnectionUI/UIBox"]
+layout_mode = 2
+
+[node name="Instructions" type="Label" parent="NetworkManager/ConnectionUI/UIBox/Connection_Setup"]
+layout_mode = 2
+text = "Select Multiplayer Options:"
+horizontal_alignment = 1
+
+[node name="HostCheckButton" type="CheckButton" parent="NetworkManager/ConnectionUI/UIBox/Connection_Setup"]
+layout_mode = 2
+text = "Host?"
+alignment = 1
+
+[node name="IP_Input" type="LineEdit" parent="NetworkManager/ConnectionUI/UIBox/Connection_Setup"]
+layout_mode = 2
+placeholder_text = "Connect Code"
+alignment = 1
+
+[node name="Port_Input" type="LineEdit" parent="NetworkManager/ConnectionUI/UIBox/Connection_Setup"]
+layout_mode = 2
+placeholder_text = "Port (Optional - 5 Digits)"
+alignment = 1
+
+[node name="ConnectButton" type="Button" parent="NetworkManager/ConnectionUI/UIBox/Connection_Setup"]
+layout_mode = 2
+text = "Connect"
+
+[node name="Connection_Wait" type="VBoxContainer" parent="NetworkManager/ConnectionUI/UIBox"]
+layout_mode = 2
+
+[node name="IPDisplay" type="Label" parent="NetworkManager/ConnectionUI/UIBox/Connection_Wait"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="CopyIPButton" type="Button" parent="NetworkManager/ConnectionUI/UIBox/Connection_Wait"]
+layout_mode = 2
+text = "Copy Connect Code"
+
+[node name="PortDisplay" type="Label" parent="NetworkManager/ConnectionUI/UIBox/Connection_Wait"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="CopyPortButton" type="Button" parent="NetworkManager/ConnectionUI/UIBox/Connection_Wait"]
+layout_mode = 2
+text = "Copy Port"

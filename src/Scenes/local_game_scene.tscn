@@ -1,9 +1,9 @@
 [gd_scene load_steps=18 format=3 uid="uid://dxwfosg6try75"]
 
-[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_7ajte"]
+[ext_resource type="Script" path="res://Scripts/LocalGameManager.gd" id="1_7ajte"]
 [ext_resource type="Script" path="res://Scripts/dice_container.gd" id="1_78uev"]
 [ext_resource type="Script" path="res://Scripts/scoreboard.gd" id="1_gapl4"]
-[ext_resource type="Script" path="res://Scripts/game_scene.gd" id="1_ominb"]
+[ext_resource type="Script" path="res://Scripts/local_game_scene.gd" id="1_ominb"]
 [ext_resource type="Script" path="res://Scripts/die.gd" id="2_muqym"]
 [ext_resource type="Script" path="res://Scripts/Camera_Movement.gd" id="3_6gp0d"]
 [ext_resource type="Material" uid="uid://cgpa3fsefx8ir" path="res://Materials/BoardLowMat.tres" id="3_i6nc6"]
