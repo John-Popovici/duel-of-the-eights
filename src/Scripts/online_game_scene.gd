@@ -4,7 +4,7 @@ extends Node3D
 var player1_name: String
 var player2_name: String
 
-#@onready var GameManager: Node = $GameManager
+@onready var GameManager: Node = $GameManager
 
 # Method to set player names, called from IntroScene
 func set_player_names(name1: String, name2: String) -> void:
@@ -14,7 +14,9 @@ func set_player_names(name1: String, name2: String) -> void:
 	
 
 func start_game() -> void:
-	print("Game Started")
+	print("Start Game")
+	GameManager.startGame()
+	
 
 func returnToIntro() -> void:
 	var intro_scene = load("res://Scenes/IntroScene.tscn").instantiate()

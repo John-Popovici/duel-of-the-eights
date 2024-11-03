@@ -129,6 +129,10 @@ func getIsHost() -> bool:
 func getHashIP() -> String:
 	return ip_to_hash(str(IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1)))
 
+func disconnect_from_server() -> void:
+	#implement code
+	pass
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	ConnectionUI = get_node("ConnectionUI")
@@ -138,6 +142,16 @@ func _ready() -> void:
 @rpc
 func ping() -> void:
 	time_since_last_ping = 0.0
+
+@rpc
+func receive_game_settings(settings: Dictionary) -> void:
+	var game_settings = settings
+	OnlineGameManager = get_parent().get_node("GameManager")
+	OnlineGameManager.receive_game_settings(game_settings)
+
+func send_game_settings(settings: Dictionary) -> void:
+	var game_settings = settings
+	rpc("receive_game_settings",settings)
 
 func _process(delta: float) -> void:
 	if is_host:

@@ -1,10 +1,16 @@
-# DiceContainer.gd
 extends Node3D
 
 # Array to store references to all dice nodes
 @export var dice_nodes: Array[RigidBody3D]
 
 @export var scoreboard: VBoxContainer
+
+# Define starting positions for the dice (9 positions in total)
+var start_positions := [
+	Vector3(0, 10, 0), Vector3(4, 10, 0), Vector3(-4, 10, 0),
+	Vector3(0, 10, 4), Vector3(4, 10, 4), Vector3(-4, 10, 4),
+	Vector3(0, 10, -4), Vector3(4, 10, -4), Vector3(-4, 10, -4)
+]
 
 # Rolls all dice with random force and torque
 func update_dice_values_board(values: Array[int]) -> void:
@@ -35,6 +41,34 @@ func get_selected_dice() -> Array:
 		if die.get_selected_status():
 			selected_dice.append(die)
 	return selected_dice
+
+
+func clear_dice() -> void:
+	for child in get_children():
+		child.queue_free()
+
+func add_dice(dice_count: int, dice_type: int) -> void:
+	clear_dice()
+	for i in range(dice_count):
+		var dice
+		if dice_type == 6:
+			dice = preload("res://NodeScene/six_dice.tscn").instantiate()
+		elif dice_type == 8:
+			pass
+		
+		# Assign a starting position from the list, cycling if dice_count > 9
+		var start_pos = start_positions[i % start_positions.size()]
+		
+		# Generate a random rotation for added variation
+		var start_rot = Vector3(randf() * TAU, randf() * TAU, randf() * TAU)
+		
+		# Set initial position and rotation using the function in Dice.gd
+		dice.setStartConditions(start_pos, start_rot)
+		dice.global_transform.origin = start_pos
+		dice.rotation_degrees = Vector3.ZERO
+		add_child(dice)
+		dice_nodes.append(dice)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

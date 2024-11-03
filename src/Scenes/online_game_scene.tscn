@@ -1,8 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://bv1diwskvph82"]
+[gd_scene load_steps=12 format=3 uid="uid://bv1diwskvph82"]
 
 [ext_resource type="Script" path="res://Scripts/online_game_scene.gd" id="1_qoyeu"]
 [ext_resource type="Script" path="res://Scripts/networkManager.gd" id="2_6sfck"]
 [ext_resource type="Script" path="res://Scripts/connectionUI.gd" id="3_f25r5"]
+[ext_resource type="Script" path="res://Scripts/online_game_manager.gd" id="4_fvdct"]
+[ext_resource type="Script" path="res://Scripts/dynamic_dice_container.gd" id="5_aa5li"]
+[ext_resource type="Script" path="res://Scripts/game_settings.gd" id="5_js8aa"]
+[ext_resource type="Material" uid="uid://cgpa3fsefx8ir" path="res://Materials/BoardLowMat.tres" id="7_v2pfy"]
+[ext_resource type="Material" uid="uid://dvsy8knluwv6e" path="res://Materials/BoardRaisedMat.tres" id="8_ef00w"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_24wpm"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_e35qy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lfiu0"]
 
 [node name="OnlineGameScene" type="Node3D"]
 script = ExtResource("1_qoyeu")
@@ -82,3 +93,159 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Redirecting to Home Page"
 horizontal_alignment = 1
+
+[node name="GameManager" type="Node3D" parent="."]
+script = ExtResource("4_fvdct")
+
+[node name="GameSettings" type="CanvasLayer" parent="GameManager"]
+script = ExtResource("5_js8aa")
+
+[node name="UIBox" type="PanelContainer" parent="GameManager/GameSettings"]
+offset_left = 176.0
+offset_top = 13.0
+offset_right = 728.0
+offset_bottom = 281.0
+scale = Vector2(1.44, 2.28)
+
+[node name="Settings_Setup" type="VBoxContainer" parent="GameManager/GameSettings/UIBox"]
+layout_mode = 2
+
+[node name="Instructions" type="Label" parent="GameManager/GameSettings/UIBox/Settings_Setup"]
+layout_mode = 2
+text = "Select Game Settings:"
+horizontal_alignment = 1
+
+[node name="PlayerNames" type="HBoxContainer" parent="GameManager/GameSettings/UIBox/Settings_Setup"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Player1Name" type="LineEdit" parent="GameManager/GameSettings/UIBox/Settings_Setup/PlayerNames"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Host Player Name"
+alignment = 1
+
+[node name="Player2Name" type="LineEdit" parent="GameManager/GameSettings/UIBox/Settings_Setup/PlayerNames"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Client Player Name"
+alignment = 1
+
+[node name="HealthPoints" type="HBoxContainer" parent="GameManager/GameSettings/UIBox/Settings_Setup"]
+layout_mode = 2
+
+[node name="Instructions2" type="Label" parent="GameManager/GameSettings/UIBox/Settings_Setup/HealthPoints"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Health Points Per Player:"
+horizontal_alignment = 1
+
+[node name="HealthPoints" type="LineEdit" parent="GameManager/GameSettings/UIBox/Settings_Setup/HealthPoints"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "5"
+placeholder_text = "Health Points per player"
+alignment = 1
+
+[node name="Rounds" type="HBoxContainer" parent="GameManager/GameSettings/UIBox/Settings_Setup"]
+layout_mode = 2
+
+[node name="Instructions3" type="Label" parent="GameManager/GameSettings/UIBox/Settings_Setup/Rounds"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Total number of Rounds:"
+horizontal_alignment = 1
+
+[node name="Rounds" type="LineEdit" parent="GameManager/GameSettings/UIBox/Settings_Setup/Rounds"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "8"
+alignment = 1
+
+[node name="Dice" type="HBoxContainer" parent="GameManager/GameSettings/UIBox/Settings_Setup"]
+layout_mode = 2
+
+[node name="Instructions4" type="Label" parent="GameManager/GameSettings/UIBox/Settings_Setup/Dice"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Dice Specs:"
+horizontal_alignment = 1
+
+[node name="DiceCount" type="LineEdit" parent="GameManager/GameSettings/UIBox/Settings_Setup/Dice"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "# of Dice"
+alignment = 1
+
+[node name="DiceType" type="OptionButton" parent="GameManager/GameSettings/UIBox/Settings_Setup/Dice"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+allow_reselect = true
+item_count = 2
+popup/item_0/text = "6 Sided Dice"
+popup/item_0/id = 6
+popup/item_1/text = "8 Sided Dice"
+popup/item_1/id = 8
+
+[node name="HandLimit" type="HBoxContainer" parent="GameManager/GameSettings/UIBox/Settings_Setup"]
+layout_mode = 2
+
+[node name="Instructions5" type="Label" parent="GameManager/GameSettings/UIBox/Settings_Setup/HandLimit"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "# of plays per hand:"
+horizontal_alignment = 1
+
+[node name="HandLimit" type="LineEdit" parent="GameManager/GameSettings/UIBox/Settings_Setup/HandLimit"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+alignment = 1
+
+[node name="StartGame" type="Button" parent="GameManager/GameSettings/UIBox/Settings_Setup"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="BackToHomeButton" type="Button" parent="GameManager/GameSettings/UIBox/Settings_Setup"]
+layout_mode = 2
+text = "Back to Home"
+
+[node name="Settings_Wait" type="VBoxContainer" parent="GameManager/GameSettings/UIBox"]
+layout_mode = 2
+
+[node name="WaitInfo" type="Label" parent="GameManager/GameSettings/UIBox/Settings_Wait"]
+layout_mode = 2
+text = "Waiting for host to
+set up game rules"
+horizontal_alignment = 1
+
+[node name="DiceContainer" type="Node3D" parent="GameManager"]
+script = ExtResource("5_aa5li")
+
+[node name="Camera3D" type="Camera3D" parent="GameManager"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 21)
+
+[node name="GameBoard" type="MeshInstance3D" parent="GameManager"]
+transform = Transform3D(50, 0, 0, 0, 0.5, 0, 0, 0, 50, 0, 0, 0)
+mesh = SubResource("BoxMesh_24wpm")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("7_v2pfy")
+
+[node name="RaisedTable" type="MeshInstance3D" parent="GameManager/GameBoard"]
+transform = Transform3D(0.9, 0, 0, 0, 2, 0, 0, 0, 0.9, 0, 0, 0)
+mesh = SubResource("BoxMesh_e35qy")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("8_ef00w")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GameManager/GameBoard/RaisedTable"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/GameBoard/RaisedTable/StaticBody3D"]
+shape = SubResource("BoxShape3D_lfiu0")
+
+[node name="SpotLight3D_Board" type="SpotLight3D" parent="GameManager"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 0)
+spot_range = 70.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 2.37841

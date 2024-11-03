@@ -37,6 +37,7 @@ var selectedTex = preload('res://Materials/Purple.tres')
 func roll() -> void:
 	# Reset position and rotation to start values
 	global_transform.origin = start_position
+	rotation_degrees = start_rotation
 	#global_transform.basis = Basis(start_rotation,0)
 	
 	is_selected = false
@@ -122,7 +123,12 @@ func hover():
 	hover_toggle_position = global_transform.origin  # Save the starting position
 	var new_position = hover_toggle_position + Vector3(0, hover_height, 0)
 	global_transform.origin = new_position
-	print("The die has been rolling for more than 3 seconds.")
+
+func setStartConditions(_pos: Vector3, _rot: Vector3) -> void:
+	start_position = _pos
+	start_rotation = _rot
+	linear_velocity = Vector3.ZERO
+	angular_velocity = Vector3.ZERO
 
 func _process(delta: float) -> void:
 	# Calculate the speed by checking the length of the linear and angular velocities
@@ -137,6 +143,7 @@ func _process(delta: float) -> void:
 		else:
 			var current_time = Time.get_ticks_msec() / 1000.0
 			if current_time - roll_start_time > roll_time_limit:
+				print("The die has been rolling for more than 3 seconds.")
 				hover()  # Call the function if the roll time limit is exceeded
 				roll_start_time = current_time  # Reset timer to prevent repeated calls
 	else:

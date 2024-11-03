@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://cu4mb4w4jgh2e"]
+
+[ext_resource type="Script" path="res://Scripts/die.gd" id="1_l24xa"]
+[ext_resource type="ArrayMesh" uid="uid://853sy2cqxcot" path="res://Assets/Dice_Red_1_Cube.res" id="2_e8qqh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yb52v"]
+
+[node name="Six_Dice" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.40723, 5.66481, 0)
+script = ExtResource("1_l24xa")
+torque_range = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+mesh = ExtResource("2_e8qqh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("BoxShape3D_yb52v")
+
+[node name="RayCast3D_Face1" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.5, 0)
+target_position = Vector3(0, 0, 1)
+
+[node name="RayCast3D_Face2" type="RayCast3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.5, 0, 0)
+target_position = Vector3(0, 0, 1)
+
+[node name="RayCast3D_Face3" type="RayCast3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -1.5)
+target_position = Vector3(0, 0, 1)
+
+[node name="RayCast3D_Face4" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5)
+target_position = Vector3(0, 0, 1)
+
+[node name="RayCast3D_Face5" type="RayCast3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.5, 0, 0)
+target_position = Vector3(0, 0, 1)
+
+[node name="RayCast3D_Face6" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.5, 0)
+target_position = Vector3(0, 0, 1)

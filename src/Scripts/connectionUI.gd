@@ -34,8 +34,10 @@ func _on_hostcheck_toggled(state):
 	host_option = state
 	if host_option:
 		ip_field.visible = false
+		connect_button.text = "Start Hosting"
 	else:
 		ip_field.visible = true
+		connect_button.text = "Connect"
 
 func setupNetworkManagerRef() -> void:
 	network_manager = get_parent()
