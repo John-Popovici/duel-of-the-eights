@@ -41,6 +41,7 @@
 2024-10-30 & Hemraj Bhatt & Added content to section 2\\
 2024-10-31 & John Popovici & Finalized section 1 formatting and content\\
 2024-11-01 & Isaac Giles & Filled in content for section 3\\
+2024-11-02 & Naishan Guo & Added new content for section 3\\
 ... & ... & ...\\
 \bottomrule
 \end{tabularx}
@@ -405,7 +406,7 @@ Testing here covers the core game mechanics, such as player vs player mode, scor
     \item \textbf{Input:} Player achieves a Yahtzee (five of a kind).
     \item \textbf{Output:} Correct score added to the Yahtzee section.
     \item \textbf{Test Case Derivation:} Ensures that score calculations adhere to specified Yahtzee-like rules, satisfying R2.
-    \item \textbf{How test will be performed:} Test evaluates various combinations to ensure scoring accuracy.
+    \item \textbf{How test will be performed:} Tester evaluates various combinations to ensure scoring accuracy.
 \end{itemize}
 
 \paragraph{Test: Dice Roll Physics}
@@ -419,13 +420,36 @@ Testing here covers the core game mechanics, such as player vs player mode, scor
     \item \textbf{How test will be performed:} Tester initiates rolls and observes animation and outcomes.
 \end{itemize}
 
+\paragraph{Test: Simultaneous turn implementation}
+\begin{itemize}
+    \item \textbf{Test ID:} Test-4
+    \item \textbf{Control:} Manual
+    \item \textbf{Initial State:} Online game session loaded, Both players rolled once, one player confirmed choice of dice to reroll and is in waiting screen
+    \item \textbf{Input:} Second player confirms choice of dice to reroll 
+    \item \textbf{Output:} Game rerolls chosen dice for both players, updates both players with the results of both rerolls, and allows both players to select new dice to reroll at the same time
+    \item \textbf{Test Case Derivation:} Verifies that one player can’t move to their next turn until both players are ready, thus enforcing the rules of Simultaneous turn implementation and satisfying requirement R6
+    \item \textbf{How test will be performed:} Two testers in the same online session will end their turns in different orders to confirm the functionality of the implementation of Simultaneous turns.
+\end{itemize}
+
 \subsubsection{User Interface and Settings}
 
 This section validates the interface, display, and customization options to ensure they meet user needs and game standards.
 
+\paragraph{Test: User interface initiation}
+\begin{itemize}
+    \item \textbf{Test ID:} Test-5
+    \item \textbf{Control:} Automatic
+    \item \textbf{Initial State:} Game loaded to main menu
+    \item \textbf{Input:} Player connects to a match
+    \item \textbf{Output:} Game begins and a UI displaying important information, such as Player names, scores, number of rolls and time limits, is displayed.
+    \item \textbf{Test Case Derivation:} confirms the Display of UI elements conveying important information to the User, thus satisfying requirement R8
+    \item \textbf{How test will be performed:} Upon the beginning of a match, an automated script will Create a UI that displays important information to the user, and updates as the match goes on.
+\end{itemize}
+
+
 \paragraph{Test: Dice Selection}
 \begin{itemize}
-    \item \textbf{Test ID:} Test-4
+    \item \textbf{Test ID:} Test-6
     \item \textbf{Control:} Manual
     \item \textbf{Initial State:} Mid-game, with player allowed to roll again.
     \item \textbf{Input:} Player selects specific dice to keep and re-rolls the remaining.
@@ -434,11 +458,22 @@ This section validates the interface, display, and customization options to ensu
     \item \textbf{How test will be performed:} Tester selects different dice combinations to confirm correct behavior.
 \end{itemize}
 
-\paragraph{Test: Game Settings Modification}
+\paragraph{Test: Game Presets}
 \begin{itemize}
-    \item \textbf{Test ID:} Test-5
+    \item \textbf{Test ID:} Test-7
     \item \textbf{Control:} Manual
-    \item \textbf{Initial State:} Game settings menu open.
+    \item \textbf{Initial State:} Game loaded to game select menu
+    \item \textbf{Input:} Player selects a preset game option
+    \item \textbf{Output:} A new game session begins with the pre-made settings applied.
+    \item \textbf{Test Case Derivation:} Confirms that each preset produces a unique variant of the game, Satisfying R10
+    \item \textbf{How test will be performed:} Tester selects the pre-made options and runs the games to confirm functionality.
+\end{itemize}
+
+\paragraph{Test: Custom Game Settings Modification}
+\begin{itemize}
+    \item \textbf{Test ID:} Test-8
+    \item \textbf{Control:} Manual
+    \item \textbf{Initial State:} Custom Game settings menu open.
     \item \textbf{Input:} Player modifies settings (e.g., changes dice sides, scoring rules).
     \item \textbf{Output:} Changes are successfully applied to new game sessions.
     \item \textbf{Test Case Derivation:} Verifies that customizable game settings reflect unique variants, satisfying R9.
@@ -453,7 +488,7 @@ Nonfunctional tests focus on measuring performance, responsiveness, reliability,
 
 \paragraph{Test: Frame Rate Consistency}
 \begin{itemize}
-    \item \textbf{Test ID:} Test-6
+    \item \textbf{Test ID:} Test-9
     \item \textbf{Type:} Dynamic, Automated
     \item \textbf{Initial State:} Game in progress.
     \item \textbf{Input/Condition:} Standard gameplay, including dice rolls, UI interactions, and animations.
@@ -463,7 +498,7 @@ Nonfunctional tests focus on measuring performance, responsiveness, reliability,
 
 \paragraph{Test: Input Responsiveness}
 \begin{itemize}
-    \item \textbf{Test ID:} Test-7
+    \item \textbf{Test ID:} Test-10
     \item \textbf{Type:} Dynamic, Automated
     \item \textbf{Initial State:} Game loaded.
     \item \textbf{Input:} Player performs multiple actions (e.g., roll dice, end turn).
@@ -475,7 +510,7 @@ Nonfunctional tests focus on measuring performance, responsiveness, reliability,
 
 \paragraph{Test: System Compatibility}
 \begin{itemize}
-    \item \textbf{Test ID:} Test-8
+    \item \textbf{Test ID:} Test-11
     \item \textbf{Type:} Manual
     \item \textbf{Initial State:} Game installed on a Windows 10 system.
     \item \textbf{Input/Condition:} Launch and operate the game as per standard.
@@ -485,7 +520,7 @@ Nonfunctional tests focus on measuring performance, responsiveness, reliability,
 
 \paragraph{Test: Crash Resilience in Multiplayer}
 \begin{itemize}
-    \item \textbf{Test ID:} Test-9
+    \item \textbf{Test ID:} Test-12
     \item \textbf{Type:} Dynamic, Manual
     \item \textbf{Initial State:} Multiplayer game session in progress.
     \item \textbf{Input/Condition:} Two players connected and actively playing.
@@ -508,12 +543,15 @@ The following table provides traceability between the test cases and the require
         Test-1 & R1: Online player vs player mode \\
         Test-2 & R2: Score calculation using Yahtzee rules \\
         Test-3 & R3: Realistic 3D dice roll physics \\
-        Test-4 & R7: Dice selection functionality \\
-        Test-5 & R9: Game settings modification \\
-        Test-6 & NFR1: Frame rate consistency \\
-        Test-7 & NFR5: Input responsiveness \\
-        Test-8 & NFR3: Windows 10 compatibility, NFR10: MacOS support \\
-        Test-9 & NFR4: Multiplayer stability \\
+        Test-4 & R6: Simultaneous turn implementation \\
+        Test-5 & R8: User interface display \\
+        Test-6 & R7: Dice selection functionality \\
+        Test-7 & R10: Game Presets \\
+        Test-8 & R9: Game settings modification \\
+        Test-9 & NFR1: Frame rate consistency \\
+        Test-10 & NFR5: Input responsiveness \\
+        Test-11 & NFR3: Windows 10 compatibility, NFR10: MacOS support \\
+        Test-12 & NFR4: Multiplayer stability \\
         \hline
     \end{tabular}
     \label{tab:traceability}
