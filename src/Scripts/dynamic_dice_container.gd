@@ -69,8 +69,6 @@ func add_dice(dice_count: int, dice_type: int) -> void:
 		add_child(dice)
 		dice_nodes.append(dice)
 	roll_dice()
-	await get_tree().create_timer(10.0).timeout
-	roll_dice()
 
 
 # Called when the node enters the scene tree for the first time.
