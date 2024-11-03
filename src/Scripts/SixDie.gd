@@ -30,7 +30,7 @@ var selectedTex = preload('res://Materials/Purple.tres')
 	3: $"RayCast3D_Face3",
 	4: $"RayCast3D_Face4",
 	5: $"RayCast3D_Face5",
-	6: $"RayCast3D_Face6"
+	6: $"RayCast3D_Face6",
 }
 
 # Applies random torque and force to simulate a roll

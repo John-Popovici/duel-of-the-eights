@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cu4mb4w4jgh2e"]
 
-[ext_resource type="Script" path="res://Scripts/die.gd" id="1_l24xa"]
+[ext_resource type="Script" path="res://Scripts/SixDie.gd" id="1_l24xa"]
 [ext_resource type="ArrayMesh" uid="uid://853sy2cqxcot" path="res://Assets/Dice_Red_1_Cube.res" id="2_e8qqh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yb52v"]
