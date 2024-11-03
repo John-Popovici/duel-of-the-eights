@@ -83,7 +83,7 @@ func _mouse_enter() -> void:
 	move_start_time = Time.get_ticks_msec() / 1000.0
 	if (move_last_time == -1.0 or move_start_time - move_last_time > 1.0) and !is_rolling:
 		move_last_time = move_start_time
-		hover()
+		#hover()
 	dieMesh.set_surface_override_material(0,selectedTex)
 	
 

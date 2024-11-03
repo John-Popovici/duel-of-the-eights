@@ -22,6 +22,7 @@ script = ExtResource("1_qoyeu")
 script = ExtResource("2_6sfck")
 
 [node name="ConnectionUI" type="CanvasLayer" parent="NetworkManager"]
+visible = false
 script = ExtResource("3_f25r5")
 
 [node name="UIBox" type="PanelContainer" parent="NetworkManager/ConnectionUI"]
@@ -108,6 +109,7 @@ offset_bottom = 281.0
 scale = Vector2(1.44, 2.28)
 
 [node name="Settings_Setup" type="VBoxContainer" parent="GameManager/GameSettings/UIBox"]
+visible = false
 layout_mode = 2
 
 [node name="Instructions" type="Label" parent="GameManager/GameSettings/UIBox/Settings_Setup"]
@@ -169,19 +171,23 @@ layout_mode = 2
 [node name="Instructions4" type="Label" parent="GameManager/GameSettings/UIBox/Settings_Setup/Dice"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Dice Specs:"
+text = "Number of Dice:"
 horizontal_alignment = 1
 
-[node name="DiceCount" type="LineEdit" parent="GameManager/GameSettings/UIBox/Settings_Setup/Dice"]
+[node name="DiceCount" type="SpinBox" parent="GameManager/GameSettings/UIBox/Settings_Setup/Dice"]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "# of Dice"
+size_flags_vertical = 4
+min_value = 1.0
+max_value = 9.0
+value = 7.0
 alignment = 1
 
 [node name="DiceType" type="OptionButton" parent="GameManager/GameSettings/UIBox/Settings_Setup/Dice"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
+selected = 1
 allow_reselect = true
 item_count = 2
 popup/item_0/text = "6 Sided Dice"
@@ -195,14 +201,14 @@ layout_mode = 2
 [node name="Instructions5" type="Label" parent="GameManager/GameSettings/UIBox/Settings_Setup/HandLimit"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "# of plays per hand:"
+text = "Modify Hand Rules:"
 horizontal_alignment = 1
 
-[node name="HandLimit" type="LineEdit" parent="GameManager/GameSettings/UIBox/Settings_Setup/HandLimit"]
+[node name="AdvancedSettingsButton" type="Button" parent="GameManager/GameSettings/UIBox/Settings_Setup/HandLimit"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "1"
-alignment = 1
+tooltip_text = "Modify Hand restrictions"
+text = "Advanced"
 
 [node name="StartGame" type="Button" parent="GameManager/GameSettings/UIBox/Settings_Setup"]
 layout_mode = 2
@@ -212,7 +218,38 @@ text = "Start Game"
 layout_mode = 2
 text = "Back to Home"
 
+[node name="Settings_Advanced" type="VBoxContainer" parent="GameManager/GameSettings/UIBox"]
+layout_mode = 2
+
+[node name="AdvancedInfo" type="Label" parent="GameManager/GameSettings/UIBox/Settings_Advanced"]
+layout_mode = 2
+text = "Modify Rules for Individual hands"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GameManager/GameSettings/UIBox/Settings_Advanced"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+scroll_deadzone = 3
+
+[node name="advanced_settings_vbox" type="VBoxContainer" parent="GameManager/GameSettings/UIBox/Settings_Advanced/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 3
+
+[node name="SaveSettings" type="Button" parent="GameManager/GameSettings/UIBox/Settings_Advanced"]
+layout_mode = 2
+text = "Save Settings"
+
+[node name="ReturnToSettings" type="Button" parent="GameManager/GameSettings/UIBox/Settings_Advanced"]
+layout_mode = 2
+text = "Return"
+
 [node name="Settings_Wait" type="VBoxContainer" parent="GameManager/GameSettings/UIBox"]
+visible = false
 layout_mode = 2
 
 [node name="WaitInfo" type="Label" parent="GameManager/GameSettings/UIBox/Settings_Wait"]
@@ -227,24 +264,26 @@ script = ExtResource("5_aa5li")
 [node name="Camera3D" type="Camera3D" parent="GameManager"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 21)
 
-[node name="GameBoard" type="MeshInstance3D" parent="GameManager"]
+[node name="Environment" type="Node3D" parent="GameManager"]
+
+[node name="GameBoard" type="MeshInstance3D" parent="GameManager/Environment"]
 transform = Transform3D(50, 0, 0, 0, 0.5, 0, 0, 0, 50, 0, 0, 0)
 mesh = SubResource("BoxMesh_24wpm")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("7_v2pfy")
 
-[node name="RaisedTable" type="MeshInstance3D" parent="GameManager/GameBoard"]
+[node name="RaisedTable" type="MeshInstance3D" parent="GameManager/Environment/GameBoard"]
 transform = Transform3D(0.9, 0, 0, 0, 2, 0, 0, 0, 0.9, 0, 0, 0)
 mesh = SubResource("BoxMesh_e35qy")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../../../..")
 surface_material_override/0 = ExtResource("8_ef00w")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="GameManager/GameBoard/RaisedTable"]
+[node name="StaticBody3D" type="StaticBody3D" parent="GameManager/Environment/GameBoard/RaisedTable"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/GameBoard/RaisedTable/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/Environment/GameBoard/RaisedTable/StaticBody3D"]
 shape = SubResource("BoxShape3D_lfiu0")
 
-[node name="SpotLight3D_Board" type="SpotLight3D" parent="GameManager"]
+[node name="SpotLight3D_Board" type="SpotLight3D" parent="GameManager/Environment"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 0)
 spot_range = 70.0
 spot_attenuation = -0.5

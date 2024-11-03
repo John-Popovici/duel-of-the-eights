@@ -10,6 +10,7 @@ var network_manager: Node
 @onready var port_field = $UIBox/Connection_Setup/Port_Input
 @onready var host_checkbutton = $UIBox/Connection_Setup/HostCheckButton
 @onready var connect_button = $UIBox/Connection_Setup/ConnectButton
+@onready var back_to_home_button = $UIBox/Connection_Setup/BackToHomeButton
 @onready var SetupUI = $UIBox/Connection_Setup
 @onready var WaitUI = $UIBox/Connection_Wait
 @onready var ErrorUI = $UIBox/Connection_Error
@@ -21,6 +22,7 @@ var network_manager: Node
 
 
 func _ready():
+	self.visible = true
 	host_checkbutton.set_toggle_mode(true)
 	host_checkbutton.connect("toggled", self._on_hostcheck_toggled)
 	WaitUI.visible = false
@@ -47,6 +49,7 @@ func setupNetworkManagerRef() -> void:
 	network_manager.connect("disconnected", self._on_disconnected)
 	network_manager.connect("connection_failed", self._on_connection_failed)
 	connect_button.connect("pressed", self._on_connect_pressed)
+	back_to_home_button.connect("pressed",self._on_disconnected)
 
 func _on_connect_pressed():
 	var port = port_field.text.to_int() if port_field.text else default_port

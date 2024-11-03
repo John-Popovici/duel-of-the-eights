@@ -37,7 +37,6 @@ func connect_to_server(hash: String, port: int):
 	multiplayer.multiplayer_peer.connect("peer_connected", self._on_peer_connected)
 	#Connection Failed case
 	multiplayer.multiplayer_peer.connect("connection_failed", self._on_connection_failed)
-	
 
 func _on_peer_connected(id: int):
 	print("Connected to peer with ID: ", id)
@@ -144,14 +143,16 @@ func ping() -> void:
 	time_since_last_ping = 0.0
 
 @rpc
-func receive_game_settings(settings: Dictionary) -> void:
-	var game_settings = settings
+func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionary) -> void:
+	var game_settings = _game_settings
+	var hand_settings = _hand_settings
 	OnlineGameManager = get_parent().get_node("GameManager")
-	OnlineGameManager.receive_game_settings(game_settings)
+	OnlineGameManager.receive_game_settings(game_settings,hand_settings)
 
-func send_game_settings(settings: Dictionary) -> void:
-	var game_settings = settings
-	rpc("receive_game_settings",settings)
+func send_game_settings(_game_settings: Dictionary,_hand_settings: Dictionary) -> void:
+	var game_settings = _game_settings
+	var hand_settings = _hand_settings
+	rpc("receive_game_settings",_game_settings, _hand_settings)
 
 func _process(delta: float) -> void:
 	if is_host:

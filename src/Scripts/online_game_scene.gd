@@ -15,7 +15,7 @@ func set_player_names(name1: String, name2: String) -> void:
 
 func start_game() -> void:
 	print("Start Game")
-	GameManager.startGame()
+	GameManager.loadGameSetup()
 	
 
 func returnToIntro() -> void:
