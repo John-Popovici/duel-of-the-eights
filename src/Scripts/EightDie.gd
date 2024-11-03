@@ -5,14 +5,14 @@ extends RigidBody3D
 # Exported start position so it can be set in the editor
 @export var start_position: Vector3 = Vector3.ZERO
 @export var start_rotation: Vector3 = Vector3.ZERO
-@export var impulse_range: int = 5
-@export var torque_range: int = 5
+@export var impulse_range: int = 15
+@export var torque_range: int = 25
 @export var hover_height: float = 0.5  # Hover height in meters
 var hover_toggle_position: Vector3
 @onready var move_last_time = -1.0
 # Thresholds to consider if the die is still rolling
 @export var velocity_threshold: float = 0.1  # Adjust this value based on your needs
-@export var roll_time_limit: float = 3.0     # Time limit to trigger function
+@export var roll_time_limit: float = 5.0     # Time limit to trigger function
 var is_selected: bool = false          # Tracks if the die has been clicked/selected
 @onready var dieMesh: MeshInstance3D = $MeshInstance3D
 
@@ -43,7 +43,7 @@ func roll() -> void:
 	#global_transform.basis = Basis(start_rotation,0)
 	
 	is_selected = false
-	dieMesh.set_surface_override_material(1,normalTex)
+	dieMesh.set_surface_override_material(0,normalTex)
 	
 	# Reset linear and angular velocities
 	linear_velocity = Vector3.ZERO

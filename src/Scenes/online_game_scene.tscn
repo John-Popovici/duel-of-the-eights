@@ -51,7 +51,7 @@ alignment = 1
 
 [node name="Port_Input" type="LineEdit" parent="NetworkManager/ConnectionUI/UIBox/Connection_Setup"]
 layout_mode = 2
-placeholder_text = "Port (Optional - 5 digits to 65535)"
+placeholder_text = "Port - 5 digits"
 alignment = 1
 
 [node name="ConnectButton" type="Button" parent="NetworkManager/ConnectionUI/UIBox/Connection_Setup"]

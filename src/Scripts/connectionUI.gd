@@ -35,9 +35,11 @@ func _on_hostcheck_toggled(state):
 	if host_option:
 		ip_field.visible = false
 		connect_button.text = "Start Hosting"
+		port_field.placeholder_text = "Port (Optional - 5 digits to 65535)"
 	else:
 		ip_field.visible = true
 		connect_button.text = "Connect"
+		port_field.placeholder_text = "Port - 5 digits"
 
 func setupNetworkManagerRef() -> void:
 	network_manager = get_parent()
