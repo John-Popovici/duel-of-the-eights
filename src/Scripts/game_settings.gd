@@ -11,6 +11,7 @@ signal game_settings_ready(game_settings,hand_settings)
 @onready var player2Name = $UIBox/Settings_Setup/PlayerNames/Player2Name
 @onready var HealthPoints = $UIBox/Settings_Setup/HealthPoints/HealthPoints
 @onready var Rounds = $UIBox/Settings_Setup/Rounds/Rounds
+@onready var RoundRolls = $UIBox/Settings_Setup/Rounds/RoundRolls
 @onready var DiceCountRef = $UIBox/Settings_Setup/Dice/DiceCount.get_line_edit()
 @onready var DiceType = $UIBox/Settings_Setup/Dice/DiceType
 @onready var advanced_settings_vbox = $UIBox/Settings_Advanced/ScrollContainer/advanced_settings_vbox
@@ -28,6 +29,7 @@ func _on_start_game_pressed():
 		"player_names": [player1Name.text, player2Name.text],
 		"health_points": int(HealthPoints.text),
 		"rounds": int(Rounds.text),
+		"round_rolls": int(RoundRolls.text),
 		"dice_count": int(DiceCountRef.text),
 		"dice_type": DiceType.get_selected_id()  # e.g., 6-sided or 8-sided
 	}

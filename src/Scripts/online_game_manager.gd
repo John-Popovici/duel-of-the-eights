@@ -7,6 +7,8 @@ var hand_settings
 @onready var dice_container = get_node("DiceContainer")
 @onready var scoreboard = get_node("Scoreboard")
 @onready var scoreCalc = get_node("ScoreCalculator")
+@onready var hostPlayer = get_node("HostPlayer")
+@onready var clientPlayer = get_node("ClientPlayer")
 
 # Initialization: Connects to signals and retrieves NetworkManager
 func _ready() -> void:
@@ -35,11 +37,11 @@ func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionar
 func setup_game() -> void:
 	setup_game_environment(game_settings)
 	setup_scoreboard(hand_settings)
-	setup_PlayerManager()
+	setup_PlayerManager(game_settings)
 
-func setup_PlayerManager() -> void:
-	#clear anything generated and re build
-	pass
+func setup_PlayerManager(settings: Dictionary) -> void:
+	hostPlayer.setup_player(true, settings["health_points"], network_manager.getIsHost())
+	clientPlayer.setup_player(false, settings["health_points"], network_manager.getIsHost())
 
 func setup_scoreboard(_hand_settings: Dictionary) -> void:
 	#clear anything generated and re build
