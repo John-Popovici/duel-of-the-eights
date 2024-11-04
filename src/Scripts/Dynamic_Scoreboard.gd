@@ -6,6 +6,8 @@ extends CanvasLayer
 signal hand_selected(hand: Dictionary)
 var lastButton: Button
 var BonusButton: Button
+signal bonusExists(hand: Dictionary)
+var AllButtons: Array[Button]
 
 # Called to populate the scoreboard with hands from hand_settings
 func populate_scoreboard(hand_settings: Dictionary):
@@ -27,6 +29,9 @@ func populate_scoreboard(hand_settings: Dictionary):
 			select_button.text = "0"
 			select_button.disabled = true
 			BonusButton = select_button
+			bonusExists.emit(settings)
+		else:
+			AllButtons.append(select_button)
 		select_button.setMaxPlays(settings["max_plays"])
 		select_button.setSettings(settings)
 		#add code to set max number of presses per button
@@ -53,6 +58,11 @@ func updateButtonScore(_score: int):
 
 func updateBonusButtonScore(_score: int):
 	BonusButton.text = str(_score)
+
+func setAllButtonDisable(state: bool) -> void:
+	for _button in AllButtons:
+		if !_button.getDisable():
+			_button.disabled = state
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

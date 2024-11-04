@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bv1diwskvph82"]
+[gd_scene load_steps=14 format=3 uid="uid://bv1diwskvph82"]
 
 [ext_resource type="Script" path="res://Scripts/online_game_scene.gd" id="1_qoyeu"]
 [ext_resource type="Script" path="res://Scripts/networkManager.gd" id="2_6sfck"]
@@ -9,6 +9,7 @@
 [ext_resource type="Material" uid="uid://cgpa3fsefx8ir" path="res://Materials/BoardLowMat.tres" id="7_v2pfy"]
 [ext_resource type="Material" uid="uid://dvsy8knluwv6e" path="res://Materials/BoardRaisedMat.tres" id="8_ef00w"]
 [ext_resource type="Script" path="res://Scripts/Dynamic_Scoreboard.gd" id="9_i8ewx"]
+[ext_resource type="Script" path="res://Scripts/score_calculator.gd" id="10_0b2yf"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_24wpm"]
 
@@ -316,3 +317,6 @@ layout_mode = 2
 [node name="Total" type="Label" parent="GameManager/Scoreboard/SelfHandsSectionBox"]
 layout_mode = 2
 text = "Total:"
+
+[node name="ScoreCalculator" type="Node" parent="GameManager"]
+script = ExtResource("10_0b2yf")

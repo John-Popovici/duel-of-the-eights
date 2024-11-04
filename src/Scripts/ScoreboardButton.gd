@@ -3,6 +3,7 @@ extends Button
 var toCall: Callable
 var maxPlays: int
 var settings: Dictionary
+var disable: bool
 @onready var plays: int = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -14,7 +15,11 @@ func playHand() -> void:
 	plays += 1
 	if plays >= maxPlays:
 		self.disabled = true
+		disable = true
 	toCall.call(settings, self)
+
+func getDisable() ->bool:
+	return disable
 
 func setMaxPlays(_max: int) -> void:
 	maxPlays = _max

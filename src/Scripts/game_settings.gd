@@ -52,7 +52,7 @@ func _populate_advanced_settings():
 		child.queue_free()
 
 	# Generate and add each hand to the VBoxContainer
-	advanced_settings_vbox.add_child(_create_label("Specific Numbers"))
+	advanced_settings_vbox.add_child(_create_label("Single Numbers"))
 	_generate_singles()
 	
 	advanced_settings_vbox.add_child(_create_label("Bonus"))
@@ -67,7 +67,7 @@ func _populate_advanced_settings():
 	advanced_settings_vbox.add_child(_create_label("Full Houses"))
 	_generate_full_houses()
 	
-	advanced_settings_vbox.add_child(_create_label("Chance"))
+	advanced_settings_vbox.add_child(_create_label("All in"))
 	_generate_chance()
 
 func _create_label(_text: String) -> Label:
@@ -78,8 +78,8 @@ func _create_label(_text: String) -> Label:
 # Generate single-number hands (like Ones, Twos, ... up to dice_type)
 func _generate_singles():
 	for i in range(1, dice_type + 1):
-		var hand_name = "Hand: %d" % i
-		var hand_type = ["SpecNum",i]
+		var hand_name = "Hand: %d's" % i
+		var hand_type = ["Singles",i]
 		var hand_option = _create_hand_option(hand_name, hand_type)
 		advanced_settings_vbox.add_child(hand_option)
 

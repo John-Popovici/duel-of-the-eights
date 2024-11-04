@@ -42,6 +42,13 @@ func get_selected_dice() -> Array:
 			selected_dice.append(die)
 	return selected_dice
 
+# Returns a list of all selected dice
+func get_rolling_dice() -> Array:
+	var rolling_dice = []
+	for die in dice_nodes:
+		if die.getIsRolling():
+			rolling_dice.append(die)
+	return rolling_dice
 
 func clear_dice() -> void:
 	for child in get_children():

@@ -117,6 +117,9 @@ var roll_start_time: float = -1.0  # Tracks when the die started rolling
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 # Update rolling status in _process
 
+func getIsRolling() -> bool:
+	return is_rolling
+
 func hover():
 	move_start_time = Time.get_ticks_msec() / 1000.0
 	move_last_time = move_start_time
