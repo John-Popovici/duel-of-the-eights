@@ -43,6 +43,7 @@
 2024-11-01 & Isaac Giles & Filled in content for section 3\\
 2024-11-02 & Naishan Guo & Added new content for section 3\\
 2024-11-04 & Hemraj Bhatt & Added content to reflection \\
+2024-11-04 & Hemraj Bhatt & Updated section 2 content \\
 ... & ... & ...\\
 \bottomrule
 \end{tabularx}
@@ -208,15 +209,9 @@ The following documents are crucial for the Verification and Validation process,
 
 %\wss{Introduce this section.  You can provide a roadmap of the sections to come.}
 
-\noindent This section covers the project's verification and validation (V\&V) strategy, including the methodologies and strategies used to ensure software dependability, correctness, and usability. Each component of the plan will establish verification and validation procedures appropriate for each stage of the project lifecycle, from reviewing the Software Requirements Specification (SRS) to testing
+\noindent This section covers the project's verification and validation (V\&V) strategy, including the methodologies and strategies used to ensure software dependability, correctness, and usability. Each component of the plan will establish verification and validation procedures appropriate for each stage of the project lifecycle, from reviewing the Software Requirements Specification (SRS) to testing the developed system.
 
 \subsection{Verification and Validation Team}
-
-
-\wss{Your teammates.  Maybe your supervisor.
-  You should do more than list names.  You should say what each person's role is
-  for the project's verification.  A table is a good way to summarize this information.}
-
 \begin{table}[H]
   \centering
   %\renewcommand{\arraystretch}{1.2} 
@@ -224,49 +219,29 @@ The following documents are crucial for the Verification and Validation process,
     \begin{tabularx}{\linewidth}{|p{2.5cm}|p{2.75cm}|X|} 
     \hline
     \textbf{Team Member} & \textbf{Role} & \textbf{Responsibilities} \\ \hline
-    Member X & SRS Verification Lead & Oversees SRS review, organizes feedback, coordinates checklist compilation, and ensures any new or modified requirements are accurate. \\ \hline
-    Member X & Design\newline Verification Lead & Oversees design review, develops checklists, and organizes peer review meetings regarding design. They also ensure that any design modifications that either are outcomes of meetings or decisions made within the team are properly formulated and accurate.  \\ \hline
-    Member X & Implementation Tester & Performs unit tests, isolates tests for core capabilities, and ensures that individual code components are in line with the implementation plan outlined in this document. In charge of testing any new modifications and green-lighting them. \\ \hline
-    Member X & Software\newline Validation Lead & In charge of ensuring that the software matches user requirements through using feedback provided by supervisor and peer reviews. Additionally, in charge of performing validation strategies outlined in the document. \\ \hline
-    Member X & Tool and\newline Automation Lead & Oversees the installation and usage of automated testing tools, unit testing frameworks, and test coverage metric tracking tools. In charge of sourcing the correct tools needed for the specific system as well. \\ \hline
-    Supervisor & Project\newline Reviewer & Provides oversight, participates in structured review sessions, and provides feedback on requirements, design, and implementation reviews. Due to the supervisor's area of expertise, feedback will focus on requirements and design as opposed to programming implementation advice. \\ \hline
+    Isaac Giles & SRS\newline Verification Lead & Oversees SRS reviews, organizes feedback, coordinates checklist compilation, and ensures any new or modified requirements are accurate. \\ \hline
+    John Popovici & Design\newline Verification Lead & Oversees design reviews, develops checklists, and organizes peer review meetings regarding design. They also ensure that any design modifications that either are outcomes of meetings or decisions made within the team are properly formulated and accurate.  \\ \hline
+    Nai Shan Guo & Implementation Tester & Performs unit tests, isolates tests for core capabilities, and ensures that individual code components are in line with the implementation plan outlined in this document. In charge of testing any new modifications and green-lighting them. \\ \hline
+    Nigel Moses & Software\newline Validation Lead & In charge of ensuring that the software matches user requirements through using feedback provided by supervisor and peer reviews. Additionally, in charge of performing validation strategies outlined in the document. \\ \hline
+    Hemraj Bhatt & Tool and\newline Automation Lead & Oversees the installation and usage of automated testing tools, unit testing frameworks, and test coverage metric tracking tools. In charge of sourcing the correct tools needed for the specific system as well. \\ \hline
+    Dr.\newline Paul Rapoport & Project\newline Supervisor & Provides oversight, participates in structured review sessions, and provides feedback on requirements, design, and implementation reviews. Due to the supervisor's area of expertise, feedback will focus on requirements and design as opposed to programming implementation advice. \\ \hline
     \end{tabularx}
   \end{adjustbox}
   \caption{Verification and Validation Team Roles}
   \label{tab:team}
 \end{table}
 
-
 \subsection{SRS Verification Plan}
-
-\wss{List any approaches you intend to use for SRS verification.  This may
-  include ad hoc feedback from reviewers, like your classmates (like your
-  primary reviewer), or you may plan for something more rigorous/systematic.}
-
-\wss{If you have a supervisor for the project, you shouldn't just say they will
-read over the SRS.  You should explain your structured approach to the review.
-Will you have a meeting?  What will you present?  What questions will you ask?
-Will you give them instructions for a task-based inspection?  Will you use your
-issue tracker?}
-
-\wss{Maybe create an SRS checklist?}
-
 
 \noindent The SRS verification will take an organized approach, including supervisor and peer review sessions, to ensure that the stated requirements are clear, accurate, and thorough. 
 
 \begin{itemize}
     \item \textbf{Structured Review Meeting}: Conducted with the supervisor in person to present the essential SRS components. The team will highlight the essential functional and non-functional requirements and solicit feedback on the clarity and feasibility of each requirement. The feedback will then be tracked as issues and be used to make any modifications deemed necessary.
     \item \textbf{Checklist Creation}: A detailed checklist will be prepared to analyze each SRS item, ensuring the requirements are accurate and feasible for execution. The checklist will be utilized at each review session. If the checklist is filled out completely, the team will know that there are no necessary changes and if it is not then necessary modifications will be made to the SRS.
-    \item \textbf{Peer Review Sessions}: The team will have their peers such as classmates conduct task-based inspections of the SRS to identify any ambiguities or missing components. This will ensure that the SRS is complete and viable. 
+    \item \textbf{Peer Review Sessions}: The team will have our peers, such as classmates, complete task-based inspections of the SRS to identify any ambiguities or missing components. Tasks may include examining the document for completeness, by ensuring that all functional and non-functional requirements are properly stated, checking for terminology consistency, and ensuring that any assumptions or restrictions are well-defined and reasonably made. This will ensure that the SRS is complete and viable. 
 \end{itemize}
 
 \subsection{Design Verification Plan}
-
-\wss{Plans for design verification}
-
-\wss{The review will include reviews by your classmates}
-
-\wss{Create a checklists?}
 
 \noindent To ensure that the design complies with the SRS standards, the team will conduct a structured review process including the entire team, external peers and the teams supervisor:
 
@@ -276,15 +251,7 @@ issue tracker?}
     \item \textbf{Structured Review Meeting}: The team will schedule a review session with our supervisor where each design element will be presented. The goal being to receive feedback and make any necessary modifications. 
 \end{itemize}
 
-
 \subsection{Verification and Validation Plan Verification Plan}
-
-\wss{The verification and validation plan is an artifact that should also be
-verified.  Techniques for this include review and mutation testing.}
-
-\wss{The review will include reviews by your classmates}
-
-\wss{Create a checklists?}
 
 \noindent The V\&V plan itself will be verified to make sure it adequately addresses every facet of the project and sufficiently plans appropriate methods of verification and validation.
 
@@ -295,45 +262,16 @@ verified.  Techniques for this include review and mutation testing.}
 
 \subsection{Implementation Verification Plan}
 
-\wss{You should at least point to the tests listed in this document and the unit
-  testing plan.}
-
-\wss{In this section you would also give any details of any plans for static
-  verification of the implementation.  Potential techniques include code
-  walkthroughs, code inspection, static analyzers, etc.}
-
-\wss{The final class presentation in CAS 741 could be used as a code
-walkthrough.  There is also a possibility of using the final presentation (in
-CAS741) for a partial usability survey.}
-
 \noindent The implementation verification will primarily focus on unit testing and manual testing, emphasizing the isolation of modules and testing them with constant inputs mimicking user inputs. Given that project is a game, testing poses unique challenges and nuances that require careful consideration.
 
 \begin{itemize}
-  \item \textbf{Unit Testing}: The team will employ isolated unit tests, setting fixed inputs to verify core functionalities like game logic, scoring systems, and user input handling.  Simulations of dice rolls and the scores that go along with them are one example. Additionally,  to ensure that tests only concentrate on the module's functionality and are not influenced by outside factors, mocking will be used to mimic external dependencies.
+  \item \textbf{Unit Testing}: The team will employ isolated unit tests, setting fixed inputs to verify core functionalities like game logic, scoring systems, and user input handling.  Simulations of dice rolls and the scores that go along with them are one example. Additionally, to ensure that tests only concentrate on the module's functionality and are not influenced by outside factors, mocking will be used to mimic external dependencies.
   \item \textbf{Manual Testing}: Manual testing will be used to evaluate the game from a player's point of view and make sure that gameplay is fluid, intuitive, and stimulating, manual testing will be used. In order to find any possible errors or discrepancies in the game mechanics, test cases will cover a range of scenarios, including edge cases and user interactions.
   \item \textbf{Code Walkthroughs}: In order to collect feedback on code correctness, standard compliance adherence, and alignment with design specifications outlined in the SRS, team-based code walkthroughs will be carried out. These walkthroughs will be held with our peers and external individuals with expertise in the field.
   \item \textbf{Static Analysis}: FxCop, a free static code analysis tool from Microsoft, will be utilized to evaluate the code. It excels at analyzing .NET managed code assemblies for adherence to Microsoft's .NET Framework Design Guidelines. This tool will help ensure code quality and identify potential issues early in the development cycle. It is particularly well-suited for this project, as the game is being developed using C\# on the .NET version of Godot.
 \end{itemize}
 
-
-
-
 \subsection{Automated Testing and Verification Tools}
-
-\wss{What tools are you using for automated testing.  Likely a unit testing
-  framework and maybe a profiling tool, like ValGrind.  Other possible tools
-  include a static analyzer, make, continuous integration tools, test coverage
-  tools, etc.  Explain your plans for summarizing code coverage metrics.
-  Linters are another important class of tools.  For the programming language
-  you select, you should look at the available linters.  There may also be tools
-  that verify that coding standards have been respected, like flake9 for
-  Python.}
-
-\wss{If you have already done this in the development plan, you can point to
-that document.}
-
-\wss{The details of this section will likely evolve as you get closer to the
-  implementation.}
 
 \noindent To maintain code quality and reliability, teh team will implement a variety of automated testing tools. Any mentioned tools are not finalized and may be substituted based on team preferences and needs:
 
@@ -344,32 +282,13 @@ that document.}
     \item \textbf{Continuous Integration (CI)}: The team will try to use a continuous integration platform, such GitHub Actions. However, the unique demands of game development could make it difficult to achieve seamless integration. Due to problems including lengthy build times, complex asset management, and dependence on graphical resources. Notwithstanding these possible obstacles, our goal is to set up a continuous integration pipeline that provides reliable feedback on code quality by automatically running tests whenever work is posted to the repository. It is important to note that this may not be entirely feasible.
   \end{itemize}
 
-
 \subsection{Software Validation Plan}
-
-\wss{If there is any external data that can be used for validation, you should
-  point to it here.  If there are no plans for validation, you should state that
-  here.}
-
-\wss{You might want to use review sessions with the stakeholder to check that
-the requirements document captures the right requirements.  Maybe task based
-inspection?}
-
-\wss{For those capstone teams with an external supervisor, the Rev 0 demo should 
-be used as an opportunity to validate the requirements.  You should plan on 
-demonstrating your project to your supervisor shortly after the scheduled Rev 0 demo.  
-The feedback from your supervisor will be very useful for improving your project.}
-
-\wss{For teams without an external supervisor, user testing can serve the same purpose 
-as a Rev 0 demo for the supervisor.}
-
-\wss{This section might reference back to the SRS verification section.}
 
 \noindent Our software validation will involve confirming that the system meets user expectations and the requirements outlined in the SRS.
 
 \begin{itemize}
   \item \textbf{Stakeholder Review Sessions}: In order to make sure that requirements match user expectations and needs, we will arrange semi-regular review meetings with our supervisor and potential users, who are stakeholders. These meetings will be used to modify requirements as needed and will provide validation for newly developed components of the system.
-  \item \textbf{Task-Based Inspection}: In order to demonstrate that the system performs as intended, the team will develop use-case scenarios and conduct task-based inspections to validate whether or not the system operates correctly.
+  \item \textbf{Task-Based Inspection}: In order to demonstrate that the system performs as intended, the team will develop use-case scenarios and conduct task-based inspections to validate whether or not the system operates correctly. For example, one use-case scenario could be a player seeking to accomplish a "Full House" by rolling three dice of one number and two of another. A task-based inspection would include ensuring that the system correctly recognizes and scores this combination as a Full House, awarding the required points.
   \item \textbf{Rev 0 Demo Feedback}: For the purpose of further refining the system and optimizing it prior to the final release, the team will collect feedback from our supervisor both before and after the Rev 0 demo. 
 \end{itemize}
 
