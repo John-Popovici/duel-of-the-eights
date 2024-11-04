@@ -5,6 +5,7 @@ var hand_settings
 @onready var game_settings_ui = get_node("GameSettings")
 @onready var network_manager = get_node("../NetworkManager")
 @onready var dice_container = get_node("DiceContainer")
+@onready var scoreboard = get_node("Scoreboard")
 
 # Initialization: Connects to signals and retrieves NetworkManager
 func _ready() -> void:
@@ -32,16 +33,32 @@ func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionar
 
 func setup_game() -> void:
 	setup_game_environment(game_settings)
-	setup_hands_scoreboard(hand_settings)
+	setup_scoreboard(hand_settings)
 	setup_UI()
 
 func setup_UI() -> void:
 	#clear anything generated and re build
 	pass
 
-func setup_hands_scoreboard(_hands_settings: Dictionary) -> void:
+func setup_scoreboard(_hand_settings: Dictionary) -> void:
 	#clear anything generated and re build
-	pass
+	scoreboard.populate_scoreboard(_hand_settings)
+	scoreboard.hand_selected.connect(self._on_hand_selected)
+
+# Function called when a hand is selected
+func _on_hand_selected(hand: Dictionary):
+	var score = calculate_hand_score(hand)  # Call a function to calculate based on dice
+	#apply_score_to_player(score) #implement in Player Manager
+	scoreboard.updateButtonScore(score)
+	# Logic to proceed to next player's turn if necessary
+
+# Calculate score for selected hand based on current dice rolls
+func calculate_hand_score(hand: Dictionary) -> int:
+	# Implement scoring logic based on `hand_name` and the dice rolls
+	# Return the calculated score for that hand
+	#implement in other script for handling score calcs
+	var calculated_score = 5 # to remove
+	return calculated_score
 
 # Function to dynamically set up game environment based on settings
 func setup_game_environment(_game_settings: Dictionary) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bv1diwskvph82"]
+[gd_scene load_steps=13 format=3 uid="uid://bv1diwskvph82"]
 
 [ext_resource type="Script" path="res://Scripts/online_game_scene.gd" id="1_qoyeu"]
 [ext_resource type="Script" path="res://Scripts/networkManager.gd" id="2_6sfck"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/game_settings.gd" id="5_js8aa"]
 [ext_resource type="Material" uid="uid://cgpa3fsefx8ir" path="res://Materials/BoardLowMat.tres" id="7_v2pfy"]
 [ext_resource type="Material" uid="uid://dvsy8knluwv6e" path="res://Materials/BoardRaisedMat.tres" id="8_ef00w"]
+[ext_resource type="Script" path="res://Scripts/Dynamic_Scoreboard.gd" id="9_i8ewx"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_24wpm"]
 
@@ -99,6 +100,7 @@ horizontal_alignment = 1
 script = ExtResource("4_fvdct")
 
 [node name="GameSettings" type="CanvasLayer" parent="GameManager"]
+visible = false
 script = ExtResource("5_js8aa")
 
 [node name="UIBox" type="PanelContainer" parent="GameManager/GameSettings"]
@@ -109,7 +111,6 @@ offset_bottom = 281.0
 scale = Vector2(1.44, 2.28)
 
 [node name="Settings_Setup" type="VBoxContainer" parent="GameManager/GameSettings/UIBox"]
-visible = false
 layout_mode = 2
 
 [node name="Instructions" type="Label" parent="GameManager/GameSettings/UIBox/Settings_Setup"]
@@ -249,7 +250,6 @@ layout_mode = 2
 text = "Return"
 
 [node name="Settings_Wait" type="VBoxContainer" parent="GameManager/GameSettings/UIBox"]
-visible = false
 layout_mode = 2
 
 [node name="WaitInfo" type="Label" parent="GameManager/GameSettings/UIBox/Settings_Wait"]
@@ -288,3 +288,31 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35,
 spot_range = 70.0
 spot_attenuation = -0.5
 spot_angle_attenuation = 2.37841
+
+[node name="Scoreboard" type="CanvasLayer" parent="GameManager"]
+script = ExtResource("9_i8ewx")
+
+[node name="SelfHandsSectionBox" type="VBoxContainer" parent="GameManager/Scoreboard"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -205.0
+offset_bottom = 487.0
+grow_horizontal = 0
+theme_override_constants/separation = 0
+
+[node name="Header" type="Label" parent="GameManager/Scoreboard/SelfHandsSectionBox"]
+layout_mode = 2
+text = "Self Player's Scoreboard"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GameManager/Scoreboard/SelfHandsSectionBox"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="HandsContainer" type="VBoxContainer" parent="GameManager/Scoreboard/SelfHandsSectionBox/ScrollContainer"]
+layout_mode = 2
+
+[node name="Total" type="Label" parent="GameManager/Scoreboard/SelfHandsSectionBox"]
+layout_mode = 2
+text = "Total:"
