@@ -44,12 +44,14 @@
 2024-11-02 & Naishan Guo & Added new content for section 3\\
 2024-11-04 & Hemraj Bhatt & Added content to reflection \\
 2024-11-04 & Hemraj Bhatt & Updated section 2 content \\
+2024-11-04 & John Popovici & Added reflections \\
 ... & ... & ...\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 ~\\
+\iffalse
 \wss{The intention of the VnV plan is to increase confidence in the software.
 However, this does not mean listing every verification and validation technique
 that has ever been devised.  The VnV plan should also be a \textbf{feasible}
@@ -63,16 +65,17 @@ the design stage.  This means that the sections related to unit testing cannot
 initially be completed.  The sections will be filled in after the design stage
 is complete.  the final version of the VnV plan should have all sections filled
 in.}
+\fi
 
 \newpage
 
 \tableofcontents
 
 \listoftables
-\wss{Remove this section if it isn't needed}
+% \wss{Remove this section if it isn't needed}
 
-\listoffigures
-\wss{Remove this section if it isn't needed}
+% \listoffigures
+% \wss{Remove this section if it isn't needed}
 
 \newpage
 
@@ -204,7 +207,6 @@ The following documents are crucial for the Verification and Validation process,
 \end{itemize}
 
 
-
 \section{Plan}
 
 %\wss{Introduce this section.  You can provide a roadmap of the sections to come.}
@@ -215,7 +217,7 @@ The following documents are crucial for the Verification and Validation process,
 \begin{table}[H]
   \centering
   %\renewcommand{\arraystretch}{1.2} 
-  \begin{adjustbox}{max width=0.9\textwidth} 
+  \begin{adjustbox}{max width=0.85\textwidth} 
     \begin{tabularx}{\linewidth}{|p{2.5cm}|p{2.75cm}|X|} 
     \hline
     \textbf{Team Member} & \textbf{Role} & \textbf{Responsibilities} \\ \hline
@@ -231,6 +233,7 @@ The following documents are crucial for the Verification and Validation process,
   \label{tab:team}
 \end{table}
 
+\newpage
 \subsection{SRS Verification Plan}
 
 \noindent The SRS verification will take an organized approach, including supervisor and peer review sessions, to ensure that the stated requirements are clear, accurate, and thorough. 
@@ -478,6 +481,7 @@ The following table provides traceability between the test cases and the require
 \end{table}
 
 
+\newpage
 \section{Unit Test Description}
 
 \wss{This section should not be filled in until after the MIS (detailed design
@@ -625,22 +629,24 @@ Their values are defined in this section for easy maintenance.
 \newpage{}
 \section*{Appendix --- Reflection}
 
-\wss{This section is not required for CAS 741}
+% \wss{This section is not required for CAS 741}
 
-The information in this section will be used to evaluate the team members on the
-graduate attribute of Lifelong Learning.
+% The information in this section will be used to evaluate the team members on the graduate attribute of Lifelong Learning.
 
-\input{../Reflection.tex}
+% \input{../Reflection.tex}
 
 \begin{enumerate}
   \item What went well while writing this deliverable? 
   \begin{itemize}
     \item We were able to use past year examples to set up our document and understand what contents to add to each section - Hemraj B
+    \item Since we had already done the requirements and hazard analysis documentation, we had a better understanding of the project we are designing for. Additionally, we have a better idea of what the project will come to look like given we are developing our proof of concept. - John P.
   \end{itemize}
   \item What pain points did you experience during this deliverable, and how
     did you resolve them?
     \begin{itemize}
       \item Sections 3 and 4, were confusing in terms of us thinking that both essentially meant the same thing. We resolved this by looking at the previous year's examples and were able to figure out the differences between the two sections - Hemraj B
+      \item We wanted to focus more attention to the proof of concept, but this deadline could come useful for near the end of the project. - John P.
+      \item When it comes to choosing a challenge level, this is something that needs to be set with a meeting with the professor. We had initially had the project as advanced on the proposal, but the professor said everyone is expected to start with a general level. A meeting with the professor is something that would have helped this section. - John P.
     \end{itemize}
   \item What knowledge and skills will the team collectively need to acquire to
   successfully complete the verification and validation of your project?
@@ -649,6 +655,8 @@ graduate attribute of Lifelong Learning.
   identify at least one item for each team member.
   \begin{itemize}
     \item We will need to familiarize ourselves with testing methods that were mentioned in our document such as Coverlet and FxCop  - Hemraj B
+    \item We are working with GoDot, so we need to do some exploration with what tools best work with that software. Additionally, since this is a game we are developing where most elements are driven by user interaction. This also brings some difficulties and thus something that we need to explore. - John P.
+    \item As of right now there is no CI/CD element to our repository, especially given that 100\% of the commits to the main branch as of right now are for documentation. This is a skill we need to develop and brainstorm how we can best make use of this technology. - John P.
   \end{itemize}
   \item For each of the knowledge areas and skills identified in the previous
   question, what are at least two approaches to acquiring the knowledge or
@@ -656,6 +664,8 @@ graduate attribute of Lifelong Learning.
   member pursue, and why did they make this choice?
   \begin{itemize}
     \item We will acquire knowledge of Coverlet and FxCop through watching educational videos on YouTube and we will create trial projects to practice the software and familiarise ourselves with the tools available on each software - Hemraj B
+    \item We need to do research on GoDot and how verification tools can work with it. This would come through looking at online resources that have some experience with GoDot and we can use their expertise, but could also come through locally testing different software methods and bringing them to the team once integrated. Similarly with testing mostly user driven interactions, we would need to brainstorm as a team and test options, but perhaps also bring it up to the professor and TAs who might have useful ideas. - John P.
+    \item The problem of having CI/CD testing for games has been brought up in lecture, and as such is an issue the professor and TAs should be aware of. Asking for their advice and experience would be useul in this regard, as would searching online forums and videos for what others have done. This can take place at the same time as the above bullet point, since GoDot is primarily used for game development. - John P.
   \end{itemize}
 \end{enumerate}
 
