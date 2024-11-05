@@ -69,8 +69,11 @@ func setup_game() -> void:
 		await get_tree().create_timer(1.0).timeout
 		start_round()
 
+var round_start_done: bool = false
+
 func start_round() ->void:
 	waiting_on_other_player(false)
+	round_start_done = false
 	roll_count = 0
 	current_round += 1
 	myPlayer.clearRolls()
@@ -78,17 +81,34 @@ func start_round() ->void:
 	setDisableAllButtons(true)
 	if isHost:
 		print("Host Started Round")
-		await get_tree().create_timer(1.0).timeout
 		network_manager.broadcast_game_state("round_start", { "round": current_round })
+		await get_tree().create_timer(1.0).timeout
 	else:
 		print("Client Started Round")
 		await get_tree().create_timer(1.0).timeout
+	network_manager.broadcast_game_state("synchronize_start_round", { "round": current_round })
+	print("Host: ", isHost, " reached sync broadcast")
+	round_start_done = true
+	print("Host: ", isHost, ", round_start_done: ", round_start_done)
+	waiting_on_other_player(true)
+
+func synchronizeStartRound() -> void:
+	print("synchronize start round called by Host: ", !isHost, " on Host: ", isHost)
+	#wait for round to start locally
+	while !(round_start_done):
+		await get_tree().create_timer(1.0).timeout
+	round_start_done = false
+	waiting_on_other_player(false)
+	#start rolls phase
 	rollPhase(true)
+	
 
 func rollPhase(roll: bool) -> void:
 	setDisableAllButtons(true)
+	print("Host: ", isHost, " reached roll phase")
 	roll_selection_done = false
 	roll_count += 1
+	set_rolls_read(false)
 	if roll_count == 0:
 		myPlayer.roll_dice()
 	elif roll:
@@ -99,42 +119,49 @@ func rollPhase(roll: bool) -> void:
 func recieveRolls(fromHost: bool, _rolls: Array[int]) ->void:
 	enemyPlayer.setRolls(_rolls)
 	print("Received enemy rolls ", _rolls, " from Host: ", fromHost)
-	myPlayer.waitForDiceStop()
+	#wait of rolls read locally
+	while !(rolls_read):
+		await get_tree().create_timer(1.0).timeout
+	rolls_read = false
+	await get_tree().create_timer(1.0).timeout
 	waiting_on_other_player(false)
 	setup_selection()
 
+var rolls_read: bool = false
+
+func set_rolls_read(state: bool) ->void:
+	rolls_read = state
+
 func setup_selection() -> void:
 	if roll_count >= max_rolls_per_round:
-		print("Host: ", isHost, " reached hand selection on roll_count: ", roll_count, " of max: ", max_rolls_per_round)
 		hand_selection_done = false
+		print("Host: ", isHost, " reached hand selection on roll_count: ", roll_count, " of max: ", max_rolls_per_round)
 		setDisableScoreBoardButtons(false)
 	else:
+		roll_selection_done = false
 		print("Host: ", isHost, " reached roll selection on roll_count: ", roll_count, " of max: ", max_rolls_per_round)
 		setDisableRollButtons(false)
 
 func recieveRollSelection(type: String) -> void:
-	waiting_on_roll_selection()
-	doRollSelection()
-	waiting_on_other_player(false)
-
-func waiting_on_roll_selection() -> bool:
+	#wait on roll selection locally
 	while !(roll_selection_done):
 		await get_tree().create_timer(1.0).timeout
-	return true
+	roll_selection_done = false
+	waiting_on_other_player(false)
+	doRollSelection()
 
 func doRollSelection() -> void:
 	rollPhase(roll_selection)
 
 func recievehand(hand: Dictionary) -> void:
 	enemyPlayer.update_score(hand["score"])
-	waiting_on_hand_selection()
+	#wait on hand selection locally
+	while !(hand_selection_done):
+		await get_tree().create_timer(1.0).timeout
+	hand_selection_done = false
 	endOfRoundEffects()
 	waiting_on_other_player(false)
 
-func waiting_on_hand_selection() -> bool:
-	while !(hand_selection_done):
-		await get_tree().create_timer(1.0).timeout
-	return true
 
 func endOfRoundEffects() -> void:
 	#add logic for damage taken and other end of turn effects 
@@ -159,6 +186,8 @@ func _on_game_state_received(state: String, data: Dictionary):
 	match state:
 		"round_start":
 			start_round()
+		"synchronize_start_round":
+			synchronizeStartRound()
 		"roll_values":
 			recieveRolls(data["host"],data["rolls"])
 		"roll_selection":
@@ -209,7 +238,7 @@ func _on_pass_roll() -> void:
 
 func waiting_on_other_player(isWaiting: bool) -> void:
 	if isWaiting:
-		pass
+		setDisableAllButtons(true)
 	else:
 		pass
 

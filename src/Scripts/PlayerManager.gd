@@ -56,17 +56,16 @@ func pass_roll() -> void:
 	readRolls()
 
 func readRolls() -> void:
-	waitForDiceStop()
+	#Wait for dice to stop
+	while !(len(diceContainer.get_rolling_dice()) == 0):
+		await get_tree().create_timer(1.0).timeout
 	rolls = diceContainer.get_dice_values()
+	game_manager.set_rolls_read(true)
 	#Communicate to other player
 	print("Host: ", hostDevice, ", Rolls: ", rolls)
 	network_manager.broadcast_game_state("roll_values", { "host": hostDevice, "rolls": rolls })
 	game_manager.waiting_on_other_player(true)
 
-func waitForDiceStop() -> bool:
-	while !(len(diceContainer.get_rolling_dice()) == 0):
-		await get_tree().create_timer(1.0).timeout
-	return true
 
 func setRolls(_rolls: Array) -> void:
 	rolls = _rolls
