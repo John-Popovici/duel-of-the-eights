@@ -57,6 +57,7 @@
 2024-10-25 & John Popovici & Updated formatting; Added to reflection \\
 2024-10-25 & Naishan Guo &  Added to reflection \\
 2024-10-28 & John Popovici & Fixed FMEA labels and added de-sync, as per peer review \\
+2024-11-05 & John Popovici & Added FMEA table value/rating explanations section 6.2\\
 ... & ... & ...\\
 \bottomrule
 \end{tabularx}
@@ -204,6 +205,31 @@ This component displays scores and health bar statuses for all players. It updat
 \subsection{FMEA Table}
 
 Text FMEA table allows for us to quantify values related to possible failures and document each failure's severity, likelihood, and detectability. These values can help guide our countermeasures and priorities in risk mitigation.
+
+\begin{itemize}
+
+\item Severity of Failure (0-10): This column measures the impact of a failure on the system, users, or other critical elements. The scale is based on how severe the consequences are if this failure occurs, where:
+\begin{itemize}
+    \item 0-3: Minor impact, little to no disruption or harm.
+    \item 4-6: Moderate impact, leading to some disruption or user inconvenience.
+    \item 7-10: Major impact, potentially causing system failures, or major user dissatisfaction.
+\end{itemize}
+
+\item Likelihood of Occurrence (0-10): This column assesses how frequently the failure is likely to occur, based on past experiences and expert judgment. The scale can be interpreted as:
+\begin{itemize}
+    \item 0-3: Unlikely to occur, rarely observed in similar systems.
+	\item 4-6: Occasional, may occur under certain conditions.
+    \item 7-10: Frequent, likely to happen under normal operating conditions.
+\end{itemize}
+
+\item Likelihood of Failure Detection (0-10): This column measures the probability that a failure will be detected before it leads to an unacceptable event, with lower scores indicating high detectability and higher scores indicating low detectability:
+\begin{itemize}
+    \item 0-3: Very likely to be detected in early stages due to robust detection mechanisms.
+	\item 4-6: Moderately likely, may require specific testing or user reports to detect.
+    \item 7-10: Very unlikely to be detected, likely only observable after causing a significant issue.
+\end{itemize}
+
+\end{itemize}
 
 
 \begin{landscape}
