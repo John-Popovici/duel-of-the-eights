@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bv1diwskvph82"]
+[gd_scene load_steps=16 format=3 uid="uid://bv1diwskvph82"]
 
 [ext_resource type="Script" path="res://Scripts/online_game_scene.gd" id="1_qoyeu"]
 [ext_resource type="Script" path="res://Scripts/networkManager.gd" id="2_6sfck"]
@@ -17,6 +17,8 @@
 [sub_resource type="BoxMesh" id="BoxMesh_e35qy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lfiu0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ktrrr"]
 
 [node name="OnlineGameScene" type="Node3D"]
 script = ExtResource("1_qoyeu")
@@ -291,6 +293,38 @@ surface_material_override/0 = ExtResource("8_ef00w")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/Environment/GameBoard/RaisedTable/StaticBody3D"]
 shape = SubResource("BoxShape3D_lfiu0")
+
+[node name="CollisionWall1" type="MeshInstance3D" parent="GameManager/Environment/GameBoard"]
+transform = Transform3D(0.05, 0, 0, 0, 100, 0, 0, 0, 1, 0.475, 50, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GameManager/Environment/GameBoard/CollisionWall1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/Environment/GameBoard/CollisionWall1/StaticBody3D"]
+shape = SubResource("BoxShape3D_ktrrr")
+
+[node name="CollisionWall2" type="MeshInstance3D" parent="GameManager/Environment/GameBoard"]
+transform = Transform3D(0.05, 0, 0, 0, 100, 0, 0, 0, 1, -0.475, 50, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GameManager/Environment/GameBoard/CollisionWall2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/Environment/GameBoard/CollisionWall2/StaticBody3D"]
+shape = SubResource("BoxShape3D_ktrrr")
+
+[node name="CollisionWall3" type="MeshInstance3D" parent="GameManager/Environment/GameBoard"]
+transform = Transform3D(1, 0, 0, 0, 100, 0, 0, 0, 0.05, 0, 50, 0.475)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GameManager/Environment/GameBoard/CollisionWall3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/Environment/GameBoard/CollisionWall3/StaticBody3D"]
+shape = SubResource("BoxShape3D_ktrrr")
+
+[node name="CollisionWall4" type="MeshInstance3D" parent="GameManager/Environment/GameBoard"]
+transform = Transform3D(1, 0, 0, 0, 100, 0, 0, 0, 0.05, 0, 50, -0.475)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GameManager/Environment/GameBoard/CollisionWall4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/Environment/GameBoard/CollisionWall4/StaticBody3D"]
+shape = SubResource("BoxShape3D_ktrrr")
 
 [node name="SpotLight3D_Board" type="SpotLight3D" parent="GameManager/Environment"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 0)

@@ -119,7 +119,7 @@ func hash_to_ip(hash_code: String) -> String:
 		var octet_code = hash_code.substr(i, 2)
 		ip.append(str(letters_to_number(octet_code)))  # Convert each 2-character code back to octet
 
-	return ip.join(".")
+	return ".".join(ip)
 
 func getIsHost() -> bool:
 	return is_host
@@ -144,7 +144,7 @@ func broadcast_game_state(state: String, data: Dictionary):
 	rpc("receive_game_state", state, data)
 
 # Remote function to handle incoming game state updates
-@rpc
+@rpc("any_peer")
 func receive_game_state(state: String, data: Dictionary):
 	print("Received state: ", state, "with data: ", data, "on host: ", getIsHost())
 	emit_signal("game_state_received", state, data)

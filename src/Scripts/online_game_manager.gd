@@ -64,7 +64,7 @@ func setup_game() -> void:
 	current_round = 0
 	max_rolls_per_round = game_settings["round_rolls"]
 	max_rounds = game_settings["rounds"]
-	print("Setup Game Done")
+	print("Setup Game Done on Host: ", isHost)
 	if isHost:
 		await get_tree().create_timer(1.0).timeout
 		start_round()
@@ -87,6 +87,7 @@ func start_round() ->void:
 		print("Client Started Round")
 		await get_tree().create_timer(1.0).timeout
 	network_manager.broadcast_game_state("synchronize_start_round", { "round": current_round })
+	await get_tree().create_timer(0.1).timeout  # Short delay to ensure propagation
 	round_start_done = true
 	waiting_on_other_player(true)
 
@@ -103,9 +104,7 @@ func synchronizeStartRound() -> void:
 
 func rollPhase(roll: bool) -> void:
 	setDisableAllButtons(true)
-	print("Host: ", isHost, " reached roll phase")
 	roll_selection_done = false
-	roll_count += 1
 	set_rolls_read(false)
 	if roll_count == 0:
 		myPlayer.roll_dice()
@@ -113,6 +112,7 @@ func rollPhase(roll: bool) -> void:
 		myPlayer.roll_selected_dice()
 	elif !roll:
 		myPlayer.pass_roll()
+	roll_count += 1
 
 func recieveRolls(fromHost: bool, _rolls: Array[int]) ->void:
 	enemyPlayer.setRolls(_rolls)
@@ -146,13 +146,11 @@ func recieveRollSelection(type: String) -> void:
 		await get_tree().create_timer(1.0).timeout
 	roll_selection_done = false
 	waiting_on_other_player(false)
-	doRollSelection()
-
-func doRollSelection() -> void:
 	rollPhase(roll_selection)
 
 func recievehand(hand: Dictionary) -> void:
 	enemyPlayer.update_score(hand["score"])
+	#add code to enemy player to log all hands in order with score
 	#wait on hand selection locally
 	while !(hand_selection_done):
 		await get_tree().create_timer(1.0).timeout
@@ -167,8 +165,12 @@ func endOfRoundEffects() -> void:
 	var scoreDiff = myPlayer.getLastScore() - enemyPlayer.getLastScore()
 	if scoreDiff < 0:
 		myPlayer.adjust_health(-1)
+		print("Player Host: ", isHost, "scored less")
 	elif scoreDiff > 0:
 		enemyPlayer.adjust_health(-1)
+		print("Player Host: ", isHost, " scored more")
+	else:
+		print("Players scored the same")
 	
 	#check engGame Criteria
 	if current_round >= max_rounds or myPlayer.getHealth() <= 0 or enemyPlayer.getHealth() <= 0:
@@ -177,7 +179,15 @@ func endOfRoundEffects() -> void:
 		start_round()
 
 func endGame() -> void:
+	var myScore = myPlayer.getTotalScore()
+	var enemyScore = enemyPlayer.getTotalScore()
+	var result = "ties game"
+	if myScore>enemyScore:
+		result = "Wins"
+	if myScore<enemyScore:
+		result = "Loses"
 	print("Game ended")
+	print("This device Host: ", isHost, " ", result)
 
 # Handles incoming game states to synchronize players
 func _on_game_state_received(state: String, data: Dictionary):
@@ -192,6 +202,12 @@ func _on_game_state_received(state: String, data: Dictionary):
 			recieveRollSelection(data["type"])
 		"hand":
 			recievehand(data)
+		"test":
+			connectionTest(data)
+
+func connectionTest(data: Dictionary) -> void:
+	print(data)
+	pass
 
 func setup_PlayerManager(settings: Dictionary) -> void:
 	myPlayer.setup_player(true, settings["health_points"], network_manager.getIsHost())
@@ -252,7 +268,8 @@ func _on_hand_selected(hand: Dictionary):
 	scoreboard.updateButtonScore(score)
 	hand_selection_done = true
 	hand_selection = hand
-	network_manager.broadcast_game_state("hand", { "score": score, "hand": hand["hand"] })
+	print(hand)
+	network_manager.broadcast_game_state("hand", { "score": score, "hand": hand["hand_type"] })
 	# Logic to proceed to next player's turn if necessary
 
 func _on_bonus_exist(_hand: Dictionary) -> void:

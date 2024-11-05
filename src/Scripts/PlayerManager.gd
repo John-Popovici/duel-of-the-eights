@@ -62,7 +62,7 @@ func readRolls() -> void:
 	rolls = diceContainer.get_dice_values()
 	game_manager.set_rolls_read(true)
 	#Communicate to other player
-	print("Host: ", hostDevice, ", Rolls: ", rolls)
+	print("Player Manger: Host: ", hostDevice, ", Rolls: ", rolls)
 	network_manager.broadcast_game_state("roll_values", { "host": hostDevice, "rolls": rolls })
 	game_manager.waiting_on_other_player(true)
 
