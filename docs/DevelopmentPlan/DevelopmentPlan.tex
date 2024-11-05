@@ -35,6 +35,7 @@
 2024-10-24 & John Popovici & Updated team member roles\\
 2024-11-05 & John Popovici & Refined team meeting and communication plans\\
 2024-11-05 & John Popovici & Refined team charter and rules\\
+2024-11-05 & John Popovici & Added to workflow plan\\
 ... & ... & ...\\
 \bottomrule
 \end{tabularx}
@@ -114,20 +115,29 @@ The following are the rules all team members agree to follow. These rules cover 
 \newpage
 \section{Workflow Plan}
 
-The general workflow for the team follows from team meetings where we will assess where we are in our progress on the project, at which point we will determine what items need to be worked on next and work will be divided up accordingly. Each individual team member will work on changes in their own branch and create a pull request when ready to merge. Pull requests that are being merged into main must be created with a descriptive title and description and a specific emoji is used in the title to signify the type of commit(i.e. update documentation, update/improve code, bug fix, etc.). Additionally test cases will be run automatically with GitHub Actions and any failed test cases will block merging. If all test cases pass, pull requests will still require 2 approving reviewers(separate from the original developer) to be merged into main. It will be expected that all of these steps are followed by all team members throughout the course of the project.
+The general workflow for the team follows from team meetings where we will assess where we are in our progress on the project, at which point we will determine what items need to be worked on next and work will be divided up accordingly.
 
-The git repository used for the purposes of this project will be hosted on GitHub at  \href{https://github.com/John-Popovici/duel-of-the-eights.git}{this link here}.\newline
+Each individual team member will work on changes in their own branch for large multi-commit changes to the codebase and important documentation changes that need to be reviewd, and create a pull/merge request when ready to merge. Pull requests that are being merged into main must be created with a descriptive title and description. Smaller changes that are self-contained within a single commit and do not require testing, such as for documentation, can be pushed to main unless a specific commit pattern was decided upon ahead of time.
+
+Commits are to start with a specific emoji as per our \href{https://github.com/John-Popovici/duel-of-the-eights/blob/main/CONTRIBUTING.md}{contributing file} followed by a short description, such that they are readable and clear in their purpose.
+
+Additionally test cases will be run automatically with GitHub Actions and any failed test cases will block merging. If all test cases pass, pull requests will still require approval from another team member that has reviewed the branch, to be merged into main. It will be expected that all of these steps are followed by all team members throughout the course of the project.
+
+Project deliverables will discussed and tracked in weekly meetings and posted using GitHub issues. Peer review and TA feedback will also be tracked using issues with respective commits fixing those issues closing them. Once a stable project is put into place, feature requests as well as bugs will be tracked via issues as well. Templates for all of the above items are within the repository and will be used as appropriate.
+
+The git repository used for the purposes of this project will be hosted on GitHub at  \href{https://github.com/John-Popovici/duel-of-the-eights.git}{this link here}. The use of GoDot will not have a major effect on the use of GitHub outside of requiring the setup of additional directories and file extensions in the .gitignore file. All team members will have GoDot set up with the same configuration such that the project being maintained on GitHub can be opened, accessed, and modified by all. Code and assets will all be committed within the repository.\newline
+
 
 \textbf{In Summary:}\\ \\
-\textit{**group steps}
+\textit{Group Steps}
 \begin{enumerate}[resume]
   \item Discuss current status of the project.
   \item Divide workload evenly.
   \end{enumerate}
-\textit{**individual steps}
+\textit{Iindividual Steps}
 \begin{enumerate}[resume]
   \item Pull changes from main branch.
-  \item Create new branch based on most up to date main branch.
+  \item (Optional; Recommended) Create new branch based on most up to date main branch.
   \item Carry out task dev work and testing as needed.
   \item Commit code with descriptive title including necessary emoji to imply the general purpose of the commit, and also add a descriptive commit description.
   \end{enumerate}
@@ -135,7 +145,7 @@ The git repository used for the purposes of this project will be hosted on GitHu
   - Automated unit tests will be run. If any tests fail user must recommit to fix the issue.
   \end{adjustwidth}
 \begin{enumerate}[resume]
-  \item Two other team members review and approve the PR if no issues are noted.
+  \item Other team members review and approve the merge request if no issues are noted.
   \end{enumerate}
   \begin{adjustwidth}{1.3cm}{0cm}
   - If reviewers find an issue they can request code changes at which point the developer must go back to step 6 and make a new commit to meet code review expectations.
