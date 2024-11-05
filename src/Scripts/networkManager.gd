@@ -140,11 +140,13 @@ signal game_state_received(state: String, data: Dictionary)
 
 # Broadcasts the game state to keep both players in sync
 func broadcast_game_state(state: String, data: Dictionary):
+	print("Broadcasting state: ", state, "with data: ", data, "from host: ", getIsHost())
 	rpc("receive_game_state", state, data)
 
 # Remote function to handle incoming game state updates
 @rpc
 func receive_game_state(state: String, data: Dictionary):
+	print("Received state: ", state, "with data: ", data, "on host: ", getIsHost())
 	emit_signal("game_state_received", state, data)
 
 # Reset the timer on each ping received

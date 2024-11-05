@@ -87,9 +87,7 @@ func start_round() ->void:
 		print("Client Started Round")
 		await get_tree().create_timer(1.0).timeout
 	network_manager.broadcast_game_state("synchronize_start_round", { "round": current_round })
-	print("Host: ", isHost, " reached sync broadcast")
 	round_start_done = true
-	print("Host: ", isHost, ", round_start_done: ", round_start_done)
 	waiting_on_other_player(true)
 
 func synchronizeStartRound() -> void:
