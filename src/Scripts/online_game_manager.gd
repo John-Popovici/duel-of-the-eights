@@ -21,6 +21,7 @@ var game_over: bool = false
 @onready var RoundUI: CanvasLayer = get_node("RoundUI")
 @onready var rollSelected: Button = get_node("RoundUI/RollButtons/RollSelected")
 @onready var passRoll: Button = get_node("RoundUI/RollButtons/PassRoll")
+@onready var waitingScreen: VBoxContainer = get_node("RoundUI/WaitingScreen")
 
 
 # Initialization: Connects to signals and retrieves NetworkManager
@@ -61,6 +62,7 @@ func setup_game() -> void:
 	passRoll.connect("pressed", self._on_pass_roll)
 	setDisableAllButtons(true)
 	RoundUI.visible = true
+	waitingScreen.visible = true
 	current_round = 0
 	max_rolls_per_round = game_settings["round_rolls"]
 	max_rounds = game_settings["rounds"]
@@ -160,6 +162,8 @@ func recievehand(hand: Dictionary) -> void:
 
 
 func endOfRoundEffects() -> void:
+	#have a tree of end of round Effects instances to pass the score through and get updated result
+	
 	#add logic for damage taken and other end of turn effects 
 	#calculated locally based on score and totalscore
 	var scoreDiff = myPlayer.getLastScore() - enemyPlayer.getLastScore()
@@ -181,6 +185,7 @@ func endOfRoundEffects() -> void:
 func endGame() -> void:
 	var myScore = myPlayer.getTotalScore()
 	var enemyScore = enemyPlayer.getTotalScore()
+	#have a tree of end of game instances to check who wins/ apply effects
 	var result = "ties game"
 	if myScore>enemyScore:
 		result = "Wins"
@@ -253,8 +258,9 @@ func _on_pass_roll() -> void:
 func waiting_on_other_player(isWaiting: bool) -> void:
 	if isWaiting:
 		setDisableAllButtons(true)
+		waitingScreen.visible = true
 	else:
-		pass
+		waitingScreen.visible = false
 
 var hand_selection_done: bool = false
 var hand_selection: Dictionary
@@ -263,7 +269,7 @@ var hand_selection: Dictionary
 func _on_hand_selected(hand: Dictionary):
 	print(hand)
 	setDisableScoreBoardButtons(true)
-	var score = scoreCalc.calculate_hand_score(hand, dice_container.get_dice_values())
+	var score = scoreCalc.calculate_hand_score(hand, myPlayer.getRolls())
 	myPlayer.update_score(score)
 	scoreboard.updateButtonScore(score)
 	hand_selection_done = true

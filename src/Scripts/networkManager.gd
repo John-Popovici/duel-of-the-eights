@@ -40,19 +40,23 @@ func connect_to_server(hash: String, port: int):
 
 func _on_peer_connected(id: int):
 	print("Connected to peer with ID: ", id)
+	print("Connected peers: ", multiplayer.has_multiplayer_peer())
 	check_ping = true
 	emit_signal("connection_successful")
 
 func _on_peer_disconnected(id: int):
 	print("Disconnected from peer with ID: ", id)
+	multiplayer.multiplayer_peer = null
 	emit_signal("disconnected")
 
 func _on_server_disconnected():
 	print("Disconnected from server")
+	multiplayer.multiplayer_peer = null
 	emit_signal("disconnected")
 
 func _on_connection_failed():
 	print("Connection Failed")
+	multiplayer.multiplayer_peer = null
 	emit_signal("connection_failed")
 
 # Converts a number to a two-character uppercase string, handling 0-255
@@ -128,8 +132,7 @@ func getHashIP() -> String:
 	return ip_to_hash(str(IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1)))
 
 func disconnect_from_server() -> void:
-	#implement code
-	pass
+	multiplayer.multiplayer_peer = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -171,6 +174,9 @@ func _process(delta: float) -> void:
 		# Broadcast a ping every second (adjust interval as necessary)
 		if Time.get_ticks_msec() % 1000 < delta * 1000:
 			rpc("ping")
+			if !multiplayer.has_multiplayer_peer():
+				multiplayer.multiplayer_peer = null
+				emit_signal("disconnected")
 	elif !is_host and check_ping:
 		# Update the timer
 		time_since_last_ping += delta
