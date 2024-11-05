@@ -97,7 +97,6 @@ func letters_to_number(code: String) -> int:
 	
 	return -1  # Invalid code
 
-
 func ip_to_hash(ip: String) -> String:
 	# Converts an IP address (e.g., "192.168.0.1") to a 10-character uppercase string
 	var octets = ip.split(".")
@@ -136,6 +135,17 @@ func disconnect_from_server() -> void:
 func _ready() -> void:
 	ConnectionUI = get_node("ConnectionUI")
 	ConnectionUI.setupNetworkManagerRef()
+
+signal game_state_received(state: String, data: Dictionary)
+
+# Broadcasts the game state to keep both players in sync
+func broadcast_game_state(state: String, data: Dictionary):
+	rpc("receive_game_state", state, data)
+
+# Remote function to handle incoming game state updates
+@rpc
+func receive_game_state(state: String, data: Dictionary):
+	emit_signal("game_state_received", state, data)
 
 # Reset the timer on each ping received
 @rpc

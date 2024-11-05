@@ -299,6 +299,7 @@ spot_attenuation = -0.5
 spot_angle_attenuation = 2.37841
 
 [node name="Scoreboard" type="CanvasLayer" parent="GameManager"]
+visible = false
 script = ExtResource("9_i8ewx")
 
 [node name="SelfHandsSectionBox" type="VBoxContainer" parent="GameManager/Scoreboard"]
@@ -329,7 +330,33 @@ text = "Total:"
 [node name="ScoreCalculator" type="Node" parent="GameManager"]
 script = ExtResource("10_0b2yf")
 
-[node name="HostPlayer" type="Node" parent="GameManager"]
+[node name="myPlayer" type="Node" parent="GameManager"]
 script = ExtResource("11_ejug4")
 
-[node name="ClientPlayer" type="Node" parent="GameManager"]
+[node name="enemyPlayer" type="Node" parent="GameManager"]
+script = ExtResource("11_ejug4")
+
+[node name="RoundUI" type="CanvasLayer" parent="GameManager"]
+visible = false
+
+[node name="RollButtons" type="VBoxContainer" parent="GameManager/RoundUI"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -53.5
+offset_top = -66.0
+offset_right = 53.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="RollSelected" type="Button" parent="GameManager/RoundUI/RollButtons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Roll Selected"
+
+[node name="PassRoll" type="Button" parent="GameManager/RoundUI/RollButtons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Pass"

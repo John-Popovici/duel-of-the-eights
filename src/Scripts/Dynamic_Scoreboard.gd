@@ -59,7 +59,7 @@ func updateButtonScore(_score: int):
 func updateBonusButtonScore(_score: int):
 	BonusButton.text = str(_score)
 
-func setAllButtonDisable(state: bool) -> void:
+func setAllButtonsDisable(state: bool) -> void:
 	for _button in AllButtons:
 		if !_button.getDisable():
 			_button.disabled = state

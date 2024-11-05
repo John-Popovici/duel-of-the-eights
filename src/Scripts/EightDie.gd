@@ -148,7 +148,7 @@ func _process(delta: float) -> void:
 		else:
 			var current_time = Time.get_ticks_msec() / 1000.0
 			if current_time - roll_start_time > roll_time_limit:
-				print("The die has been rolling for more than 3 seconds.")
+				print("The die has been rolling for more than %d seconds.", roll_time_limit)
 				hover()  # Call the function if the roll time limit is exceeded
 				roll_start_time = current_time  # Reset timer to prevent repeated calls
 	else:
