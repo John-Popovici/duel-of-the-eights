@@ -54,13 +54,18 @@ func setup_game_ui(game_settings: Dictionary, isHost: bool):
 	update_round_info(1, total_rounds)
 	update_roll_info(1, total_round_rolls)
 
+	#opponent_dice_display.set_size(Vector2(0,container_height))
 	# Initialize opponent dice display with empty sprites
 	for child in opponent_dice_display.get_children():
 		child.queue_free()
 	for i in range(dice_count):
-		var dice_sprite = Sprite2D.new()
+		var dice_sprite = preload("res://NodeScene/dice_tex_temp.tscn").instantiate()
 		dice_sprite.name = "OpponentDie%d" % i
+		dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-0.png"))
 		opponent_dice_display.add_child(dice_sprite)
+		#opponent_dice_display.set_size(Vector2((i+1)*container_height,container_height))
+		#opponent_dice_display.set_offset(0,((i+1)*container_height)/2.0)
+		
 
 	# Initialize player stats labels
 	initialize_stat_labels(player_stat_box, "Player")
@@ -80,14 +85,17 @@ func initialize_stat_labels(stat_box: VBoxContainer, player_type: String):
 
 # Update the opponent's dice display based on rolls
 func update_opponent_dice_display(rolls: Array):
+	# Get the height of the container to scale dice appropriately
+	var container_height:float = 100 #opponent_dice_display.get_minimum_size().y
 	for i in range(rolls.size()):
 		match dice_type:
 			6:
-				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as Sprite2D
-				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % rolls[i])  # Adjust path to dice textures
+				print("loading tex ", i)
+				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
+				dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % rolls[i]))  # Adjust path to dice textures
 			8:
-				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as Sprite2D
-				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % rolls[i])  # Adjust path to dice textures
+				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
+				#dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % rolls[i])  # Adjust path to dice textures
 
 # Update game state info
 func update_round_info(current_round: int, total_rounds: int = total_rounds):

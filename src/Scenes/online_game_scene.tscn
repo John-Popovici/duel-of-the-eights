@@ -397,14 +397,16 @@ theme_override_font_sizes/font_size = 22
 text = "Pass"
 
 [node name="OpponentDiceDisplay" type="HBoxContainer" parent="GameManager/GameUI"]
-custom_minimum_size = Vector2(0, 100)
+layout_direction = 2
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 40.0
+offset_left = -245.5
+offset_right = 245.5
+offset_bottom = 100.0
 grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 alignment = 1
 
 [node name="GameStateInfo" type="HBoxContainer" parent="GameManager/GameUI"]
