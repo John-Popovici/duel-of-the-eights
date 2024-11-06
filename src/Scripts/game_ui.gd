@@ -20,6 +20,7 @@ var total_rounds:int
 var total_round_rolls:int
 var dice_count:int
 var dice_type:int
+var dice_display_height: float = 100
 
 # Set up the UI based on the initial game settings
 func setup_game_ui(game_settings: Dictionary, isHost: bool):
@@ -63,10 +64,7 @@ func setup_game_ui(game_settings: Dictionary, isHost: bool):
 		dice_sprite.name = "OpponentDie%d" % i
 		dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-0.png"))
 		opponent_dice_display.add_child(dice_sprite)
-		#opponent_dice_display.set_size(Vector2((i+1)*container_height,container_height))
-		#opponent_dice_display.set_offset(0,((i+1)*container_height)/2.0)
-		
-
+	#update_opponent_dice_display_width(dice_display_height)
 	# Initialize player stats labels
 	initialize_stat_labels(player_stat_box, "Player")
 	initialize_stat_labels(enemy_stat_box, "Opponent")
@@ -90,12 +88,32 @@ func update_opponent_dice_display(rolls: Array):
 	for i in range(rolls.size()):
 		match dice_type:
 			6:
-				print("loading tex ", i)
 				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
 				dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % rolls[i]))  # Adjust path to dice textures
 			8:
 				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
 				#dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % rolls[i])  # Adjust path to dice textures
+
+# Function to update the width of the HBoxContainer based on the number of dice
+func update_opponent_dice_display_width(dice_size: float):
+	# Calculate the required width based on dice count and desired size per dice
+	opponent_dice_display.size.x = dice_count * dice_size
+	opponent_dice_display.size.y = dice_size
+
+	# Center the HBoxContainer at the top middle of the screen
+	opponent_dice_display.anchor_left = 0.5
+	opponent_dice_display.anchor_right = 0.5
+	opponent_dice_display.offset_left = -opponent_dice_display.size.x / 2
+	opponent_dice_display.offset_right = opponent_dice_display.size.x / 2
+
+	# Set vertical alignment to the top center
+	opponent_dice_display.anchor_top = 0
+	opponent_dice_display.anchor_bottom = 0
+	opponent_dice_display.offset_top = 10  # Padding from the top of the screen
+	
+	opponent_dice_display.position = Vector2((DisplayServer.window_get_size().x/2.0) - opponent_dice_display.size.x,0)
+	print("Position: ",opponent_dice_display.position)
+
 
 # Update game state info
 func update_round_info(current_round: int, total_rounds: int = total_rounds):
