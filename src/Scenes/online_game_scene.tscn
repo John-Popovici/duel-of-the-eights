@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bv1diwskvph82"]
+[gd_scene load_steps=17 format=3 uid="uid://bv1diwskvph82"]
 
 [ext_resource type="Script" path="res://Scripts/online_game_scene.gd" id="1_qoyeu"]
 [ext_resource type="Script" path="res://Scripts/networkManager.gd" id="2_6sfck"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/Dynamic_Scoreboard.gd" id="9_i8ewx"]
 [ext_resource type="Script" path="res://Scripts/score_calculator.gd" id="10_0b2yf"]
 [ext_resource type="Script" path="res://Scripts/PlayerManager.gd" id="11_ejug4"]
+[ext_resource type="Script" path="res://Scripts/game_ui.gd" id="12_f4hi7"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_24wpm"]
 
@@ -370,9 +371,10 @@ script = ExtResource("11_ejug4")
 [node name="enemyPlayer" type="Node" parent="GameManager"]
 script = ExtResource("11_ejug4")
 
-[node name="RoundUI" type="CanvasLayer" parent="GameManager"]
+[node name="GameUI" type="CanvasLayer" parent="GameManager"]
+script = ExtResource("12_f4hi7")
 
-[node name="RollButtons" type="VBoxContainer" parent="GameManager/RoundUI"]
+[node name="RollButtons" type="VBoxContainer" parent="GameManager/GameUI"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -384,17 +386,49 @@ offset_right = 53.5
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="RollSelected" type="Button" parent="GameManager/RoundUI/RollButtons"]
+[node name="RollSelected" type="Button" parent="GameManager/GameUI/RollButtons"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "Roll Selected"
 
-[node name="PassRoll" type="Button" parent="GameManager/RoundUI/RollButtons"]
+[node name="PassRoll" type="Button" parent="GameManager/GameUI/RollButtons"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "Pass"
 
-[node name="WaitingScreen" type="VBoxContainer" parent="GameManager/RoundUI"]
+[node name="OpponentDiceDisplay" type="HBoxContainer" parent="GameManager/GameUI"]
+custom_minimum_size = Vector2(0, 100)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="GameStateInfo" type="HBoxContainer" parent="GameManager/GameUI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 100.0
+offset_right = 20.0
+offset_bottom = 140.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="PlayerStatsPanel" type="VBoxContainer" parent="GameManager/GameUI"]
+offset_right = 199.0
+offset_bottom = 385.0
+
+[node name="MyPlayerStatBox" type="VBoxContainer" parent="GameManager/GameUI/PlayerStatsPanel"]
+layout_mode = 2
+
+[node name="EnemyPlayerStatBox" type="VBoxContainer" parent="GameManager/GameUI/PlayerStatsPanel"]
+layout_mode = 2
+
+[node name="WaitingScreen" type="VBoxContainer" parent="GameManager/GameUI"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -408,7 +442,51 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="WaitMessage" type="Label" parent="GameManager/RoundUI/WaitingScreen"]
+[node name="WaitMessage" type="Label" parent="GameManager/GameUI/WaitingScreen"]
 layout_mode = 2
-text = "Waiting on other plaer"
+text = "Waiting for other player..."
 horizontal_alignment = 1
+
+[node name="EndOfGameScreen" type="VBoxContainer" parent="GameManager/GameUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -113.0
+offset_top = -73.5
+offset_right = 113.0
+offset_bottom = 73.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HeaderLabel" type="Label" parent="GameManager/GameUI/EndOfGameScreen"]
+layout_mode = 2
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="WinnerLabel" type="Label" parent="GameManager/GameUI/EndOfGameScreen"]
+layout_mode = 2
+text = "Winner is:"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameManager/GameUI/EndOfGameScreen"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlayerStatsLabel" type="Label" parent="GameManager/GameUI/EndOfGameScreen/HBoxContainer"]
+layout_mode = 2
+text = "My Player got:"
+
+[node name="OpponentStatsLabel" type="Label" parent="GameManager/GameUI/EndOfGameScreen/HBoxContainer"]
+layout_mode = 2
+text = "Opponent got:"
+horizontal_alignment = 2
+
+[node name="RestartButton" type="Button" parent="GameManager/GameUI/EndOfGameScreen"]
+layout_mode = 2
+text = "Rematch?"
+
+[node name="ExitButton" type="Button" parent="GameManager/GameUI/EndOfGameScreen"]
+layout_mode = 2
+text = "Exit Match"

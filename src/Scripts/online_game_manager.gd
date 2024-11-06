@@ -18,16 +18,15 @@ var current_round: int = 0
 var roll_count: int = 0
 var game_over: bool = false
 
-@onready var RoundUI: CanvasLayer = get_node("RoundUI")
-@onready var rollSelected: Button = get_node("RoundUI/RollButtons/RollSelected")
-@onready var passRoll: Button = get_node("RoundUI/RollButtons/PassRoll")
-@onready var waitingScreen: VBoxContainer = get_node("RoundUI/WaitingScreen")
+@onready var GameUI: CanvasLayer = get_node("GameUI")
+@onready var rollSelected: Button = get_node("GameUI/RollButtons/RollSelected")
+@onready var passRoll: Button = get_node("GameUI/RollButtons/PassRoll")
 
 
 # Initialization: Connects to signals and retrieves NetworkManager
 func _ready() -> void:
 	game_settings_ui.connect("game_settings_ready", self._on_settings_ready)
-	RoundUI.visible = false
+	GameUI.visible = false
 
 # Process game settings from GameSettings UI (Host side)
 func _on_settings_ready(_game_settings: Dictionary, _hand_settings: Dictionary) -> void:
@@ -56,13 +55,14 @@ func setup_game() -> void:
 	setup_game_environment(game_settings)
 	setup_scoreboard(hand_settings)
 	setup_PlayerManager(game_settings)
+	GameUI.setup_game_ui(game_settings,network_manager.getIsHost())
 	isHost = network_manager.getIsHost()
 	network_manager.connect("game_state_received", self._on_game_state_received)
 	rollSelected.connect("pressed", self._on_roll_selected)
 	passRoll.connect("pressed", self._on_pass_roll)
 	setDisableAllButtons(true)
-	RoundUI.visible = true
-	waitingScreen.visible = true
+	GameUI.visible = true
+	GameUI.hide_waiting_screen()
 	current_round = 0
 	max_rolls_per_round = game_settings["round_rolls"]
 	max_rounds = game_settings["rounds"]
@@ -78,6 +78,8 @@ func start_round() ->void:
 	round_start_done = false
 	roll_count = 0
 	current_round += 1
+	GameUI.update_round_info(current_round)
+	GameUI.update_roll_info(roll_count)
 	myPlayer.clearRolls()
 	enemyPlayer.clearRolls()
 	setDisableAllButtons(true)
@@ -91,7 +93,6 @@ func start_round() ->void:
 	network_manager.broadcast_game_state("synchronize_start_round", { "round": current_round })
 	await get_tree().create_timer(0.1).timeout  # Short delay to ensure propagation
 	round_start_done = true
-	waiting_on_other_player(true)
 
 func synchronizeStartRound() -> void:
 	print("synchronize start round called by Host: ", !isHost, " on Host: ", isHost)
@@ -99,7 +100,6 @@ func synchronizeStartRound() -> void:
 	while !(round_start_done):
 		await get_tree().create_timer(1.0).timeout
 	round_start_done = false
-	waiting_on_other_player(false)
 	#start rolls phase
 	rollPhase(true)
 	
@@ -115,9 +115,11 @@ func rollPhase(roll: bool) -> void:
 	elif !roll:
 		myPlayer.pass_roll()
 	roll_count += 1
+	GameUI.update_roll_info(roll_count)
 
 func recieveRolls(fromHost: bool, _rolls: Array[int]) ->void:
 	enemyPlayer.setRolls(_rolls)
+	GameUI.update_opponent_dice_display(_rolls)
 	print("Received enemy rolls ", _rolls, " from Host: ", fromHost)
 	#wait of rolls read locally
 	while !(rolls_read):
@@ -179,20 +181,43 @@ func endOfRoundEffects() -> void:
 	#check engGame Criteria
 	if current_round >= max_rounds or myPlayer.getHealth() <= 0 or enemyPlayer.getHealth() <= 0:
 		endGame()
-	elif isHost:
+	else:
+		network_manager.broadcast_game_state("synchronize_next_round", { "round": current_round })
+		start_next_round = true
+
+var start_next_round = false
+
+func synchronizeNextRound() -> void:
+	print("synchronize next round called by Host: ", !isHost, " on Host: ", isHost)
+	#wait for next round locally
+	while !(start_next_round):
+		await get_tree().create_timer(1.0).timeout
+	start_next_round = false
+	if(isHost):
 		start_round()
 
 func endGame() -> void:
 	var myScore = myPlayer.getTotalScore()
 	var enemyScore = enemyPlayer.getTotalScore()
 	#have a tree of end of game instances to check who wins/ apply effects
-	var result = "ties game"
+	
+	var myPlayerStats = myPlayer.getStats()
+	var OpponentStats = enemyPlayer.getStats()
+	var resultText = "Tied Game"
 	if myScore>enemyScore:
-		result = "Wins"
+		resultText = str(myPlayerStats["player_name"], " wins the game!")
 	if myScore<enemyScore:
-		result = "Loses"
+		resultText = str(OpponentStats["player_name"], " wins the game!")
 	print("Game ended")
-	print("This device Host: ", isHost, " ", result)
+	GameUI.show_end_of_game_screen(resultText, myPlayerStats, OpponentStats)
+
+func restartGame() ->void:
+	pass
+	
+
+func exitGame() -> void:
+	pass
+	
 
 # Handles incoming game states to synchronize players
 func _on_game_state_received(state: String, data: Dictionary):
@@ -201,6 +226,8 @@ func _on_game_state_received(state: String, data: Dictionary):
 			start_round()
 		"synchronize_start_round":
 			synchronizeStartRound()
+		"synchronize_next_round":
+			synchronizeNextRound()
 		"roll_values":
 			recieveRolls(data["host"],data["rolls"])
 		"roll_selection":
@@ -215,8 +242,8 @@ func connectionTest(data: Dictionary) -> void:
 	pass
 
 func setup_PlayerManager(settings: Dictionary) -> void:
-	myPlayer.setup_player(true, settings["health_points"], network_manager.getIsHost())
-	enemyPlayer.setup_player(false, settings["health_points"], network_manager.getIsHost())
+	myPlayer.setup_player(true, settings["health_points"],game_settings["player_names"][0] if network_manager.getIsHost() else game_settings["player_names"][1], network_manager.getIsHost())
+	enemyPlayer.setup_player(false, settings["health_points"],game_settings["player_names"][1] if network_manager.getIsHost() else game_settings["player_names"][0], network_manager.getIsHost())
 
 func setup_scoreboard(_hand_settings: Dictionary) -> void:
 	#clear anything generated and re build
@@ -258,9 +285,9 @@ func _on_pass_roll() -> void:
 func waiting_on_other_player(isWaiting: bool) -> void:
 	if isWaiting:
 		setDisableAllButtons(true)
-		waitingScreen.visible = true
+		GameUI.show_waiting_screen()
 	else:
-		waitingScreen.visible = false
+		GameUI.hide_waiting_screen()
 
 var hand_selection_done: bool = false
 var hand_selection: Dictionary
@@ -298,3 +325,6 @@ func setup_game_environment(_game_settings: Dictionary) -> void:
 		print("Host Game Environment initialized with settings:", _game_settings)
 	else:
 		print("Client Game Environment initialized with settings:", _game_settings)
+
+func returnToIntro()-> void:
+	get_parent().returnToIntro()
