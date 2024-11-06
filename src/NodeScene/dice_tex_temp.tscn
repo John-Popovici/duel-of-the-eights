@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwdg7u15ai0v7"]
+
+[ext_resource type="Texture2D" uid="uid://m5d18n1ugtpp" path="res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-0.png" id="1_xetdi"]
+
+[node name="DiceTexTemp" type="TextureRect"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_xetdi")
+expand_mode = 1
+stretch_mode = 4

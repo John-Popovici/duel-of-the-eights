@@ -50,6 +50,7 @@ func _on_advanced_settings_pressed() -> void:
 # Populates the advanced settings based on dice count and type
 func _populate_advanced_settings():
 	# Clear current advanced settings to rebuild them
+	hand_settings.clear()
 	for child in advanced_settings_vbox.get_children():
 		child.queue_free()
 

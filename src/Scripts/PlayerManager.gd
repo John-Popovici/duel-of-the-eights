@@ -8,15 +8,18 @@ var rolls: Array = []  # Stores current dice rolls
 var selected_hand: Dictionary = {}
 var selected_for_reroll: Array = []  # Dice selected to reroll
 var myPlayer: bool
+var playerName: String
 var hostDevice: bool
 var diceContainer: Node3D
 var network_manager: Node
 var game_manager: Node3D
+var GameUI: CanvasLayer
 
 # Initialize player with default values or game settings
-func setup_player(_myPlayer: bool, initial_health: int, _hostDevice: bool):
+func setup_player(_myPlayer: bool, initial_health: int, _playerName: String, _hostDevice: bool):
 	health_points = initial_health
 	score = 0
+	playerName = _playerName
 	rolls.clear()
 	selected_for_reroll.clear()
 	myPlayer = _myPlayer
@@ -24,11 +27,13 @@ func setup_player(_myPlayer: bool, initial_health: int, _hostDevice: bool):
 	diceContainer = get_parent().get_node("DiceContainer")
 	network_manager = get_parent().get_parent().get_node("NetworkManager")
 	game_manager = get_parent()
+	GameUI = get_parent().get_node("GameUI")
 
 # Update the player's score and health based on the round outcome
 func update_score(new_score: int):
 	score += new_score
 	last_score = new_score
+	GameUI.update_player_stats("Player" if myPlayer else "Opponent",playerName,health_points, score)
 
 func getTotalScore() -> int:
 	return score
@@ -38,6 +43,7 @@ func getLastScore() -> int:
 
 func adjust_health(points: int):
 	health_points += points  # Can be positive or negative
+	GameUI.update_player_stats("Player" if myPlayer else "Opponent",playerName,health_points, score)
 
 func getHealth() -> int:
 	return health_points
@@ -75,6 +81,14 @@ func getRolls() -> Array:
 
 func clearRolls() -> void:
 	rolls.clear()
+
+func getStats() -> Dictionary:
+	var player_stats = {
+		"player_name": playerName,
+		"health_points": health_points,
+		"score": score,
+	}
+	return player_stats
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
