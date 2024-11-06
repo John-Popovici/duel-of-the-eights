@@ -1,0 +1,327 @@
+[gd_scene load_steps=14 format=3 uid="uid://dxwfosg6try75"]
+
+[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_7ajte"]
+[ext_resource type="Script" path="res://Scripts/dice_container.gd" id="1_78uev"]
+[ext_resource type="Script" path="res://Scripts/scoreboard.gd" id="1_gapl4"]
+[ext_resource type="Script" path="res://Scripts/game_scene.gd" id="1_ominb"]
+[ext_resource type="Script" path="res://Scripts/die.gd" id="2_muqym"]
+[ext_resource type="Material" uid="uid://cgpa3fsefx8ir" path="res://Materials/BoardLowMat.tres" id="3_i6nc6"]
+[ext_resource type="Material" uid="uid://dvsy8knluwv6e" path="res://Materials/BoardRaisedMat.tres" id="3_nilvk"]
+[ext_resource type="ArrayMesh" uid="uid://853sy2cqxcot" path="res://Assets/Dice_Red_1_Cube.res" id="7_too8u"]
+[ext_resource type="Script" path="res://Scripts/hands_container.gd" id="8_w1efo"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_c0fec"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_47imm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m0ph7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yb52v"]
+
+[node name="Game_Scene" type="Node3D"]
+script = ExtResource("1_ominb")
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_7ajte")
+
+[node name="Camera3D" type="Camera3D" parent="GameManager"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 21)
+
+[node name="GameBoard" type="MeshInstance3D" parent="GameManager"]
+transform = Transform3D(50, 0, 0, 0, 0.5, 0, 0, 0, 50, 0, 0, 0)
+mesh = SubResource("BoxMesh_c0fec")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("3_i6nc6")
+
+[node name="RaisedTable" type="MeshInstance3D" parent="GameManager/GameBoard"]
+transform = Transform3D(0.9, 0, 0, 0, 2, 0, 0, 0, 0.9, 0, 0, 0)
+mesh = SubResource("BoxMesh_47imm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("3_nilvk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GameManager/GameBoard/RaisedTable"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/GameBoard/RaisedTable/StaticBody3D"]
+shape = SubResource("BoxShape3D_m0ph7")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="GameManager"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 0)
+spot_range = 70.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 2.37841
+
+[node name="DiceContainer" type="Node3D" parent="GameManager" node_paths=PackedStringArray("dice_nodes", "scoreboard")]
+script = ExtResource("1_78uev")
+dice_nodes = [NodePath("Dice"), NodePath("Dice2"), NodePath("Dice3"), NodePath("Dice4"), NodePath("Dice5")]
+scoreboard = NodePath("../CanvasLayer/ScoreboardContatiner")
+
+[node name="Dice" type="RigidBody3D" parent="GameManager/DiceContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.40723, 5.66481, 0)
+script = ExtResource("2_muqym")
+start_position = Vector3(-4.407, 5.665, 0)
+start_rotation = Vector3(26.3, -43.4, 11.5)
+torque_range = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GameManager/DiceContainer/Dice"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+mesh = ExtResource("7_too8u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/DiceContainer/Dice"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("BoxShape3D_yb52v")
+
+[node name="Dice2" type="RigidBody3D" parent="GameManager/DiceContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.19931, 9.66481, -4.20788)
+script = ExtResource("2_muqym")
+start_position = Vector3(5.199, 9.665, -4.208)
+start_rotation = Vector3(26.3, -43.5, 11.5)
+torque_range = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GameManager/DiceContainer/Dice2"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+mesh = ExtResource("7_too8u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/DiceContainer/Dice2"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("BoxShape3D_yb52v")
+
+[node name="Dice3" type="RigidBody3D" parent="GameManager/DiceContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.71559, 9.77646, 3)
+script = ExtResource("2_muqym")
+start_position = Vector3(3.716, 9.776, 3)
+start_rotation = Vector3(26.3, -43.4, 11.5)
+torque_range = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GameManager/DiceContainer/Dice3"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+mesh = ExtResource("7_too8u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/DiceContainer/Dice3"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("BoxShape3D_yb52v")
+
+[node name="Dice4" type="RigidBody3D" parent="GameManager/DiceContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.17253, 9.42751, -5.24562)
+script = ExtResource("2_muqym")
+start_position = Vector3(-1.173, 9.428, -5.246)
+start_rotation = Vector3(26.3, -43.4, 11.5)
+torque_range = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GameManager/DiceContainer/Dice4"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+mesh = ExtResource("7_too8u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/DiceContainer/Dice4"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("BoxShape3D_yb52v")
+
+[node name="Dice5" type="RigidBody3D" parent="GameManager/DiceContainer"]
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 1, -0.529525, 12.8303, 1.47123)
+script = ExtResource("2_muqym")
+start_position = Vector3(-0.53, 12.83, 1.471)
+start_rotation = Vector3(-2.3, -49.3, -15.6)
+torque_range = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GameManager/DiceContainer/Dice5"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+mesh = ExtResource("7_too8u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/DiceContainer/Dice5"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("BoxShape3D_yb52v")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="GameManager"]
+
+[node name="ScoreboardContatiner" type="VBoxContainer" parent="GameManager/CanvasLayer" node_paths=PackedStringArray("turn_status_label")]
+offset_right = 197.0
+offset_bottom = 253.0
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("1_gapl4")
+turn_status_label = NodePath("TurnStatusLabel")
+
+[node name="TitleLabel" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Scoreboard"
+
+[node name="Player1ScoreContainer" type="HBoxContainer" parent="GameManager/CanvasLayer/ScoreboardContatiner"]
+layout_mode = 2
+
+[node name="Player1Name" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/Player1ScoreContainer"]
+layout_mode = 2
+text = "Player 1:"
+
+[node name="Player1Score" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/Player1ScoreContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="Player2ScoreContainer" type="HBoxContainer" parent="GameManager/CanvasLayer/ScoreboardContatiner"]
+layout_mode = 2
+
+[node name="Player2Name" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/Player2ScoreContainer"]
+layout_mode = 2
+text = "Player 2:"
+
+[node name="Player2Score" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/Player2ScoreContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="TotalScoreContainer" type="HBoxContainer" parent="GameManager/CanvasLayer/ScoreboardContatiner"]
+layout_mode = 2
+
+[node name="TotalScoreLabel" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/TotalScoreContainer"]
+layout_mode = 2
+text = "Total Score:"
+
+[node name="TotalScore" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/TotalScoreContainer"]
+layout_mode = 2
+
+[node name="TurnStatusLabel" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner"]
+layout_mode = 2
+text = "Play your turn"
+
+[node name="CurrentDiceRollsContainer" type="HBoxContainer" parent="GameManager/CanvasLayer/ScoreboardContatiner"]
+layout_mode = 2
+
+[node name="CurrentDiceRollsLabel" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/CurrentDiceRollsContainer"]
+layout_mode = 2
+text = "Previous Dice Rolls: "
+
+[node name="CurrentDiceRolls" type="Label" parent="GameManager/CanvasLayer/ScoreboardContatiner/CurrentDiceRollsContainer"]
+layout_mode = 2
+
+[node name="ControlButtons" type="VBoxContainer" parent="GameManager/CanvasLayer"]
+offset_left = 475.0
+offset_top = 520.0
+offset_right = 619.0
+offset_bottom = 621.0
+scale = Vector2(1.48, 1.22098)
+
+[node name="StartGameButton" type="Button" parent="GameManager/CanvasLayer/ControlButtons"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="RollSelectedDiceButton" type="Button" parent="GameManager/CanvasLayer/ControlButtons"]
+layout_mode = 2
+text = "Roll Selected Dice"
+
+[node name="P1HandsContainer" type="VBoxContainer" parent="GameManager/CanvasLayer"]
+offset_left = 955.0
+offset_top = 9.0
+offset_right = 1079.0
+offset_bottom = 460.0
+scale = Vector2(1.24, 1.24)
+script = ExtResource("8_w1efo")
+
+[node name="OnesButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Ones"
+
+[node name="TwosButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Twos"
+
+[node name="ThreesButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Threes"
+
+[node name="FoursButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Fours"
+
+[node name="FivesButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Fives"
+
+[node name="SixesButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Sixes"
+
+[node name="TripletButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Three of a kind"
+
+[node name="QuadrupletButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Four of a kind"
+
+[node name="FullHouseButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Full House"
+
+[node name="SmStraightButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Small Stright"
+
+[node name="LaStraightButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Large Straight"
+
+[node name="YahtzeeButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Yahtzee"
+
+[node name="ChanceButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
+layout_mode = 2
+text = "Chance"
+
+[node name="P2HandsContainer" type="VBoxContainer" parent="GameManager/CanvasLayer"]
+offset_left = 955.0
+offset_top = 9.0
+offset_right = 1079.0
+offset_bottom = 460.0
+scale = Vector2(1.24, 1.24)
+script = ExtResource("8_w1efo")
+
+[node name="OnesButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Ones"
+
+[node name="TwosButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Twos"
+
+[node name="ThreesButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Threes"
+
+[node name="FoursButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Fours"
+
+[node name="FivesButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Fives"
+
+[node name="SixesButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Sixes"
+
+[node name="TripletButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Three of a kind"
+
+[node name="QuadrupletButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Four of a kind"
+
+[node name="FullHouseButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Full House"
+
+[node name="SmStraightButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Small Stright"
+
+[node name="LaStraightButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Large Straight"
+
+[node name="YahtzeeButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Yahtzee"
+
+[node name="ChanceButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
+layout_mode = 2
+text = "Chance"

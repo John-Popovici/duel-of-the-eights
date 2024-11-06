@@ -11,12 +11,17 @@ config_version=5
 [application]
 
 config/name="duel-of-the-eights"
+run/main_scene="res://Scenes/IntroScene.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [dotnet]
 
 project/assembly_name="duel-of-the-eights"
+
+[filesystem]
+
+import/blender/enabled=false
 
 [rendering]
 
