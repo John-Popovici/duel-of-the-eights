@@ -38,6 +38,7 @@ func setup_game_ui(game_settings: Dictionary, isHost: bool):
 	total_round_rolls = game_settings["round_rolls"]
 	dice_count = game_settings["dice_count"]
 	dice_type = game_settings["dice_type"]
+	print("Dice Type set to: ", dice_type)
 	# Initialize labels for game state
 	for child in game_state_info.get_children():
 		child.queue_free()
@@ -80,10 +81,10 @@ func initialize_stat_labels(stat_box: VBoxContainer, player_type: String):
 # Update the opponent's dice display based on rolls
 func update_opponent_dice_display(rolls: Array):
 	for i in range(rolls.size()):
-		match dice_count:
+		match dice_type:
 			6:
 				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as Sprite2D
-				dice_sprite.texture = load("res://path/to/dice_texture_%d.png" % rolls[i])  # Adjust path to dice textures
+				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % rolls[i])  # Adjust path to dice textures
 			8:
 				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as Sprite2D
 				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % rolls[i])  # Adjust path to dice textures
