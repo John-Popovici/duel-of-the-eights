@@ -4,6 +4,7 @@
 \restylefloat{table}
 
 \usepackage{booktabs}
+\usepackage{pgf}
 
 \title{Team Contributions: POC\\\progname}
 
@@ -22,100 +23,48 @@ This document summarizes the contributions of each team member up to the POC
 Demo.  The time period of interest is the time between the beginning of the term
 and the POC demo.
 
-Numbers for all sections as of 2024-11-03 23:00
+Numbers for all sections as of 2024-11-05 21:15
 
 \section{Demo Plans}
 
 \wss{What will you be demonstrating}
 
-\section{Team Meeting Attendance}
+\section{Meeting and Lecture Attendance}
 
 % \wss{For each team member how many team meetings have they attended over the time period of interest.  This number should be determined from the meeting issues in the team's repo.  The first entry in the table should be the total number of team meetings held by the team.}
 
-\begin{table}[H]
-\centering
-\begin{tabular}{ll}
-\toprule
-\textbf{Student} & \textbf{Meetings}\\
-\midrule
-Total & 8\\
-John P. & 7\\
-Nigel M. & 8\\
-Naishan G. & 8\\
-Isaac G. & 7\\
-Hemraj B. & 4\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-% \wss{If needed, an explanation for the counts can be provided here.}
-
-\section{Supervisor/Stakeholder Meeting Attendance}
-
 % \wss{For each team member how many supervisor/stakeholder team meetings have they attended over the time period of interest.  This number should be determined from the supervisor meeting issues in the team's repo.  The first entry in the table should be the total number of supervisor and team meetings held by the team.  If there is no supervisor, there will usually be meetings with stakeholders (potential users) that can serve a similar purpose.}
 
-\begin{table}[H]
-\centering
-\begin{tabular}{ll}
-\toprule
-\textbf{Student} & \textbf{Meetings}\\
-\midrule
-Total & 1\\
-John P. & 1\\
-Nigel M. & 1\\
-Naishan G. & 1\\
-Isaac G. & 0\\
-Hemraj B. & 0\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-% \wss{If needed, an explanation for the counts can be provided here.}
-There was only one supervisor meeting with most communication being done through the team liaison, John, through email.
-There is a meeting to be planned before the POC.
-
-\section{Lecture Attendance}
-
 % \wss{For each team member how many lectures have they attended over the time period of interest.  This number should be determined from the lecture issues in the team's repo.  The first entry in the table should be the total number of lectures since the beginning of the term.}
-
-\begin{table}[H]
-\centering
-\begin{tabular}{ll}
-\toprule
-\textbf{Student} & \textbf{Lectures}\\
-\midrule
-Total & 11\\
-John P. & 11\\
-Nigel M. & 8\\
-Naishan G. & 10\\
-Isaac G. & 7\\
-Hemraj B. & 6\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-% \wss{If needed, an explanation for the lecture attendance can be provided here.}
-We always had one team member at every lecture.
-
-\section{TA Document Discussion Attendance}
 
 % \wss{For each team member how many of the informal document discussion meetings with the TA were attended over the time period of interest.}
 
 \begin{table}[H]
 \centering
-\begin{tabular}{ll}
+\begin{tabular}{lllll}
 \toprule
-\textbf{Student} & \textbf{Lectures}\\
+\textbf{ } & \textbf{Team} & \textbf{Supervisor} & \textbf{ } & \textbf{TA}\\
+\textbf{Student} & \textbf{Meetings} & \textbf{Meetings} & \textbf{Lectures} & \textbf{Meetings}\\
 \midrule
-Total & 3\\
-John P. & 2\\
-Nigel M. & 3\\
-Naishan G. & 3\\
-Isaac G. & 3\\
-Hemraj B. & 3\\
+Total & 8 & 1 & 11 & 3\\
+\midrule
+John P. & 7 & 1 & 11 & 2\\
+Nigel M. & 8 & 1 & 8 & 3\\
+Naishan G. & 8 & 1 & 10 & 3\\
+Isaac G. & 7 & 0 & 7 & 3\\
+Hemraj B. & 4 & 0 & 6 & 3\\
 \bottomrule
 \end{tabular}
 \end{table}
+
+% \wss{If needed, an explanation for the counts can be provided here.}
+
+% \wss{If needed, an explanation for the counts can be provided here.}
+There was only one supervisor meeting at the beginning of the term before the whole team was together, and most of the communication was done through the team liaison, John, through email and thus there was no need for any additional meetings.
+There is a meeting to be planned before the POC to show the project demo.
+
+% \wss{If needed, an explanation for the lecture attendance can be provided here.}
+We always had one team member at every lecture and a majority at every TA discussion.
 
 % \wss{If needed, an explanation for the attendance can be provided here.}
 
@@ -123,67 +72,72 @@ Hemraj B. & 3\\
 
 % \wss{For each team member how many commits to the main branch have been made over the time period of interest.  The total is the total number of commits for the entire team since the beginning of the term.  The percentage is the percentage of the total commits made by each team member.}
 
+
+% The number of commits
+\pgfmathsetmacro{\CJ}{56}
+\pgfmathsetmacro{\CN}{51}
+\pgfmathsetmacro{\CNS}{7}
+\pgfmathsetmacro{\CI}{10}
+\pgfmathsetmacro{\CH}{12}
+
+% Calculate the total
+\pgfmathsetmacro{\CT}{\CJ + \CN + \CNS + \CH + \CI}
+
+% Calculate the percentages
+\pgfmathsetmacro{\PJ}{\CJ / \CT * 100}
+\pgfmathsetmacro{\PN}{\CN / \CT * 100}
+\pgfmathsetmacro{\PNS}{\CNS / \CT * 100}
+\pgfmathsetmacro{\PI}{\CI / \CT * 100}
+\pgfmathsetmacro{\PH}{\CH / \CT * 100}
+
 \begin{table}[H]
 \centering
 \begin{tabular}{lll}
 \toprule
 \textbf{Student} & \textbf{Commits} & \textbf{Percent}\\
 \midrule
-Total & 91 & 100\% \\
-John P. & 48 & 53\% \\
-Nigel M. & 16 & 18\% \\
-Naishan G. & 7 & 8\% \\
-Isaac G. & 10 & 11\% \\
-Hemraj B. & 10 & 11\% \\
+Total & \pgfmathprintnumber[fixed,precision=0]\CT & 100\% \\
+\midrule
+John P. & \CJ & \pgfmathprintnumber[fixed,precision=2]\PJ\% \\
+Nigel M. & \CN & \pgfmathprintnumber[fixed,precision=2]\PN\% \\
+Naishan G. & \CNS & \pgfmathprintnumber[fixed,precision=2]\PNS\% \\
+Isaac G. & \CI & \pgfmathprintnumber[fixed,precision=2]\PI\% \\
+Hemraj B. & \CH & \pgfmathprintnumber[fixed,precision=2]\PH\% \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 % \wss{If needed, an explanation for the counts can be provided here.  For instance, if a team member has more commits to unmerged branches, these numbers can be provided here.  If multiple people contribute to a commit, git allows for multi-author commits.}
 
-As of 2024-11-03 23:00, there are 91 commits, all related to the documentation. In the development branch, Nigel has an additional 29 unmerged commits, for a total of 45.
+As of 2024-11-05 21:15, there are 136 commits, 35 related to the project source code and all 101 other commits related primarily to documentation.
 
 \section{Issue Tracker}
 
 % \wss{For each team member how many issues have they authored (including open and closed issues (O+C)) and how many have they been assigned (only counting closed issues (C only)) over the time period of interest.}
 
+Total Authored refers to all issues authored including those of team meetings and lectures, which are tracked as issues. Assignable Authored refers to issues that have to be assigned and resolved by a team member.
+
 \begin{table}[H]
 \centering
-\begin{tabular}{lll}
+\begin{tabular}{llll}
 \toprule
-\textbf{Student} & \textbf{Authored (O+C)} & \textbf{Assigned (C only)}\\
+\textbf{ } & \textbf{Total} & \textbf{Assignable} & \textbf{Assigned}\\
+\textbf{Student} & \textbf{Authored} & \textbf{Authored} & \textbf{Closed}\\
 \midrule
-Total & 29 & 8 \\
-External & 9 & 0 \\
-John P. & 20 & 8 \\
-Nigel M. & 0 & 0 \\
-Naishan G. & 0 & 0 \\
-Isaac G. & 0 & 0 \\
-Hemraj B. & 0 & 0 \\
+Total & 52 & 29 & 11 \\
+\midrule
+External & 9 & 9 & 0 \\
+John P. & 42 & 20 & 11 \\
+Nigel M. & 1 & 0 & 0 \\
+Naishan G. & 0 & 0 & 0 \\
+Isaac G. & 0 & 0 & 0 \\
+Hemraj B. & 0 & 0 & 0 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 % \wss{If needed, an explanation for the counts can be provided here.}
 
-This counts the issues that are about features/fixes to code/documentation. Counting all issues that are also related to lectures and meetings, we have the following table:
-
-\begin{table}[H]
-\centering
-\begin{tabular}{lll}
-\toprule
-\textbf{Student} & \textbf{Authored (O+C)} & \textbf{Assigned (C only)}\\
-\midrule
-Total & 52 & 8 \\
-External & 9 & 0 \\
-John P. & 42 & 8 \\
-Nigel M. & 1 & 0 \\
-Naishan G. & 0 & 0 \\
-Isaac G. & 0 & 0 \\
-Hemraj B. & 0 & 0 \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 
 
