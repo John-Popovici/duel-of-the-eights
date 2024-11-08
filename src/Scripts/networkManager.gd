@@ -59,47 +59,34 @@ func _on_connection_failed():
 	multiplayer.multiplayer_peer = null
 	emit_signal("connection_failed")
 
-# Converts a number to a two-character uppercase string, handling 0-255
-func number_to_letters(value: int) -> String:
+# Converts a base-10 integer (0-600) to a base-26 string with letters A-Z representing 0-25
+func numberToLetters(number: int) -> String:
+	var result = ""
 	var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	
-	# Numbers 0-99
-	if value >= 0 and value <= 9:
-		return "A" + alphabet[value]  # Single digit: Pad with 'A'
-	elif value >= 10 and value <= 99:
-		var first_letter = alphabet[(value / 10)]
-		var second_letter = alphabet[value % 10]
-		return first_letter + second_letter
+	# Ensure number is within the valid range
+	if number < 0 or number > 600:
+		return ""
 	
-	# Numbers 100-255: Map starting from "AA" for 100, "AB" for 101, up to "IZ" for 255
-	elif value >= 100 and value <= 255:
-		var first_letter = alphabet[((value - 100) / 26)]
-		var second_letter = alphabet[(value - 100) % 26]
-		return "I" + first_letter + second_letter
+	while number >= 0:
+		var remainder = number % 26
+		result = alphabet[remainder] + result
+		number = number / 26 - 1  # Shift down by 1 to handle 26 as a "zero-indexed" system
+		if number < 0:
+			break
 	
-	return ""  # Return empty for out-of-range values
+	return result
 
-# Converts a 2-character uppercase code back to a number
-func letters_to_number(code: String) -> int:
+# Converts a base-26 string with letters A-Z back to a base-10 integer
+func lettersToNumber(letters: String) -> int:
+	var result = 0
 	var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	
-	# Decode single digit (0-9)
-	if code[0] == "A":
-		return alphabet.find(code[1])
+	for i in range(letters.length()):
+		var letter_value = alphabet.find(letters[i])
+		result = result * 26 + (letter_value + 1)
 	
-	# Decode two-digit numbers (10-99)
-	var tens = alphabet.find(code[0])
-	var units = alphabet.find(code[1])
-	if tens != -1 and units != -1:
-		return tens * 10 + units
-	
-	# Decode numbers 100-255
-	if code[0] == "I":
-		var hundreds = alphabet.find(code[1])
-		var remainder = alphabet.find(code[2])
-		return 100 + hundreds * 26 + remainder
-	
-	return -1  # Invalid code
+	return result - 1  # Adjust final result to account for the offset
 
 func ip_to_hash(ip: String) -> String:
 	# Converts an IP address (e.g., "192.168.0.1") to a 10-character uppercase string
@@ -109,7 +96,7 @@ func ip_to_hash(ip: String) -> String:
 	
 	var code = ""
 	for octet in octets:
-		code += number_to_letters(int(octet))  # Convert each octet to 2-character code
+		code += numberToLetters(int(octet))  # Convert each octet to 2-character code
 
 	return code
 
@@ -121,7 +108,7 @@ func hash_to_ip(hash_code: String) -> String:
 	var ip = []
 	for i in range(0, 10, 2):
 		var octet_code = hash_code.substr(i, 2)
-		ip.append(str(letters_to_number(octet_code)))  # Convert each 2-character code back to octet
+		ip.append(str(lettersToNumber(octet_code)))  # Convert each 2-character code back to octet
 
 	return ".".join(ip)
 

@@ -119,6 +119,7 @@ func rollPhase(roll: bool) -> void:
 		myPlayer.pass_roll()
 	roll_count += 1
 	GameUI.update_roll_info(roll_count)
+	GameUI.blank_opponent_dice_display()
 
 func recieveRolls(fromHost: bool, _rolls: Array[int]) ->void:
 	enemyPlayer.setRolls(_rolls)
@@ -177,7 +178,7 @@ func endOfRoundEffects() -> void:
 		0: #score
 			var scoreDiff = myPlayer.getLastScore() - enemyPlayer.getLastScore()
 			if scoreDiff < 0:
-				print("Player Host: ", isHost, "scored less")
+				print("Player Host: ", isHost, " scored less")
 			elif scoreDiff > 0:
 				print("Player Host: ", isHost, " scored more")
 			else:

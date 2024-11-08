@@ -83,8 +83,6 @@ func initialize_stat_labels(stat_box: VBoxContainer, player_type: String):
 
 # Update the opponent's dice display based on rolls
 func update_opponent_dice_display(rolls: Array):
-	# Get the height of the container to scale dice appropriately
-	var container_height:float = 100 #opponent_dice_display.get_minimum_size().y
 	for i in range(rolls.size()):
 		match dice_type:
 			6:
@@ -93,6 +91,18 @@ func update_opponent_dice_display(rolls: Array):
 			8:
 				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
 				#dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % rolls[i])  # Adjust path to dice textures
+
+# Update the opponent's dice display to blanks
+func blank_opponent_dice_display():
+	for i in range(dice_count):
+		match dice_type:
+			6:
+				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
+				dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-0.png"))  # Adjust path to dice textures
+			8:
+				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
+				#dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % rolls[i])  # Adjust path to dice textures
+
 
 # Function to update the width of the HBoxContainer based on the number of dice
 func update_opponent_dice_display_width(dice_size: float):
