@@ -30,6 +30,7 @@ alignment = 1
 
 [node name="StartLocalGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+disabled = true
 text = "Start Local Game!"
 
 [node name="StartOnlineGame" type="Button" parent="VBoxContainer"]
