@@ -150,12 +150,16 @@ func show_end_of_game_screen(resultText: String, player_stats: Dictionary, oppon
 	exit_button.pressed.connect(game_manager.exitGame)
 
 	# Display player and opponent stats
-	player_stats_label.text = "Player: %s\nScore: %d\nHealth: %d" % [
-		player_stats["player_name"], player_stats["score"], player_stats["health_points"]
-	]
-	opponent_stats_label.text = "Opponent: %s\nScore: %d\nHealth: %d" % [
-		opponent_stats["player_name"], opponent_stats["score"], opponent_stats["health_points"]
-	]
+	# Make this dynamic toread all passed keys in Dictionary
+	player_stats_label.text = format_dictionary_to_string(player_stats)
+	opponent_stats_label.text = format_dictionary_to_string(opponent_stats)
+
+func format_dictionary_to_string(data: Dictionary) -> String:
+	var result = ""
+	for key in data.keys():
+		var value = data[key]
+		result += "%s: %s\n" % [str(key), str(value)]
+	return result
 
 # Hide the end of game screen
 func hide_end_of_game_screen():

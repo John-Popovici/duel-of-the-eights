@@ -13,6 +13,7 @@ var isHost: bool
 
 var max_rounds: int
 var max_rolls_per_round: int
+var win_cond: int
 
 var current_round: int = 0
 var roll_count: int = 0
@@ -34,6 +35,7 @@ func _on_settings_ready(_game_settings: Dictionary, _hand_settings: Dictionary) 
 	hand_settings = _hand_settings
 	max_rounds = game_settings["rounds"]
 	max_rolls_per_round = game_settings["round_rolls"]
+	win_cond = game_settings["win_condition"]
 	
 	if network_manager.getIsHost():
 		network_manager.send_game_settings(game_settings,hand_settings)
@@ -49,6 +51,7 @@ func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionar
 	game_settings = _game_settings
 	hand_settings = _hand_settings
 	game_settings_ui.visible = false
+	win_cond = game_settings["win_condition"]
 	setup_game()
 
 func setup_game() -> void:
@@ -168,18 +171,35 @@ func endOfRoundEffects() -> void:
 	
 	#add logic for damage taken and other end of turn effects 
 	#calculated locally based on score and totalscore
-	var scoreDiff = myPlayer.getLastScore() - enemyPlayer.getLastScore()
-	if scoreDiff < 0:
-		myPlayer.adjust_health(-1)
-		print("Player Host: ", isHost, "scored less")
-	elif scoreDiff > 0:
-		enemyPlayer.adjust_health(-1)
-		print("Player Host: ", isHost, " scored more")
-	else:
-		print("Players scored the same")
+	var end_condition_reached = false
+	print("WinCondition: ",win_cond)
+	match win_cond:
+		0: #score
+			var scoreDiff = myPlayer.getLastScore() - enemyPlayer.getLastScore()
+			if scoreDiff < 0:
+				print("Player Host: ", isHost, "scored less")
+			elif scoreDiff > 0:
+				print("Player Host: ", isHost, " scored more")
+			else:
+				print("Players scored the same")
+			#check engGame Criteria
+			if current_round >= max_rounds:
+				end_condition_reached = true
+		1: #Health Points
+			var scoreDiff = myPlayer.getLastScore() - enemyPlayer.getLastScore()
+			if scoreDiff < 0:
+				myPlayer.adjust_health(-1) # make this dyanmic
+				print("Player Host: ", isHost, "scored less, took damage")
+			elif scoreDiff > 0:
+				enemyPlayer.adjust_health(-1) # make this dyanmic
+				print("Player Host: ", isHost, " scored more")
+			else:
+				print("Players scored the same")
+			if current_round >= max_rounds or myPlayer.getHealth() <= 0 or enemyPlayer.getHealth() <= 0:
+				end_condition_reached = true
 	
 	#check engGame Criteria
-	if current_round >= max_rounds or myPlayer.getHealth() <= 0 or enemyPlayer.getHealth() <= 0:
+	if end_condition_reached:
 		endGame()
 	else:
 		network_manager.broadcast_game_state("synchronize_next_round", { "round": current_round })
@@ -197,19 +217,47 @@ func synchronizeNextRound() -> void:
 		start_round()
 
 func endGame() -> void:
-	var myScore = myPlayer.getTotalScore()
-	var enemyScore = enemyPlayer.getTotalScore()
 	#have a tree of end of game instances to check who wins/ apply effects
 	
 	var myPlayerStats = myPlayer.getStats()
 	var OpponentStats = enemyPlayer.getStats()
+	var myPlayerFinalStats: Dictionary
+	var OpponentFinalStats: Dictionary
 	var resultText = "Tied Game"
-	if myScore>enemyScore:
-		resultText = str(myPlayerStats["player_name"], " wins the game!")
-	if myScore<enemyScore:
-		resultText = str(OpponentStats["player_name"], " wins the game!")
+	
+	match win_cond:
+		0: #score
+			var scoreDiff = myPlayer.getTotalScore() - enemyPlayer.getTotalScore()
+			if scoreDiff < 0:
+				resultText = str(OpponentStats["player_name"], " wins the game!")
+			elif scoreDiff > 0:
+				resultText = str(myPlayerStats["player_name"], " wins the game!")
+			myPlayerFinalStats = {
+				"Player: ": myPlayerStats["player_name"],
+				"Score: ": myPlayerStats["score"],
+			}
+			OpponentFinalStats = {
+				"Player: ": OpponentStats["player_name"],
+				"Score: ": OpponentStats["score"],
+			}
+		1: #Health Points
+			var healthDiff = myPlayer.getHealth() - enemyPlayer.getHealth()
+			if healthDiff < 0:
+				resultText = str(OpponentStats["player_name"], " wins the game!")
+			elif healthDiff > 0:
+				resultText = str(myPlayerStats["player_name"], " wins the game!")
+			myPlayerFinalStats = {
+				"Player: ": myPlayerStats["player_name"],
+				"Health Points: ": myPlayerStats["health_points"],
+				"Score: ": myPlayerStats["score"],
+			}
+			OpponentFinalStats = {
+				"Player: ": OpponentStats["player_name"],
+				"Health Points: ": OpponentStats["health_points"],
+				"Score: ": OpponentStats["score"],
+			}
 	print("Game ended")
-	GameUI.show_end_of_game_screen(resultText, myPlayerStats, OpponentStats)
+	GameUI.show_end_of_game_screen(resultText, myPlayerFinalStats, OpponentFinalStats)
 
 func restartGame() ->void:
 	pass

@@ -1,15 +1,17 @@
 extends CanvasLayer
 
 signal game_settings_ready(game_settings,hand_settings)
-@onready var start_game_button = $UIBox/Settings_Setup/StartGame
+@onready var start_game_button = $UIBox/Settings_Setup/Buttons/StartGame
 @onready var advanced_settings_button = $UIBox/Settings_Setup/HandLimit/AdvancedSettingsButton
 @onready var return_to_settings_button = $UIBox/Settings_Advanced/ReturnToSettings
 @onready var save_advanced_settings_button = $UIBox/Settings_Advanced/SaveSettings
-@onready var home_button = $UIBox/Settings_Setup/BackToHomeButton
+@onready var home_button = $UIBox/Settings_Setup/Buttons/BackToHomeButton
 
 @onready var player1Name = $UIBox/Settings_Setup/PlayerNames/Player1Name
 @onready var player2Name = $UIBox/Settings_Setup/PlayerNames/Player2Name
+@onready var WinCondition = $UIBox/Settings_Setup/WinCondition/ConditionSelect
 @onready var HealthPoints = $UIBox/Settings_Setup/HealthPoints/HealthPoints
+@onready var HealthPointsBox = $UIBox/Settings_Setup/HealthPoints
 @onready var Rounds = $UIBox/Settings_Setup/Rounds/Rounds
 @onready var RoundRolls = $UIBox/Settings_Setup/Rounds/RoundRolls
 @onready var DiceCountRef = $UIBox/Settings_Setup/Dice/DiceCount.get_line_edit()
@@ -23,10 +25,12 @@ var hand_settings_saved = false
 # Capture the dice type and count
 var dice_count: int
 var dice_type: int
+var win_cond: String
 
 func _on_start_game_pressed():
 	var game_settings = {
 		"player_names": [player1Name.text, player2Name.text],
+		"win_condition": WinCondition.get_selected_id(),
 		"health_points": int(HealthPoints.text),
 		"rounds": int(Rounds.text),
 		"round_rolls": int(RoundRolls.text),
@@ -39,6 +43,17 @@ func _on_start_game_pressed():
 	await get_tree().create_timer(1.0).timeout
 	emit_signal("game_settings_ready", game_settings, hand_settings)
 	self.visible = false
+
+func _win_condition_toggled(ID):
+	print("Win Condition Toggled: ",ID)
+	var win_cond = ID
+	match win_cond:
+		0: #score
+			HealthPointsBox.visible = false
+			win_cond = "Score"
+		1: #healthpoints
+			HealthPointsBox.visible = true
+			win_cond = "Health"
 
 func _on_advanced_settings_pressed() -> void:
 	dice_count = int(DiceCountRef.text)
@@ -204,6 +219,10 @@ func _ready() -> void:
 	save_advanced_settings_button.connect("pressed",self.save_advanced_settings)
 	return_to_settings_button.connect("pressed",self._on_return_to_settings_pressed)
 	home_button.connect("pressed",self.on_home_pressed)
+	WinCondition.set_toggle_mode(true)
+	WinCondition.connect("item_selected", self._win_condition_toggled)
+	HealthPointsBox.visible = false
+	win_cond = "Score"
 	pass # Replace with function body.
 
 func collectInfo() -> void:
