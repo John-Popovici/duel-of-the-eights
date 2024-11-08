@@ -258,6 +258,7 @@ func endGame() -> void:
 				"Score: ": OpponentStats["score"],
 			}
 	print("Game ended")
+	GameUI.hide_all_ui()
 	GameUI.show_end_of_game_screen(resultText, myPlayerFinalStats, OpponentFinalStats)
 
 func restartGame() ->void:

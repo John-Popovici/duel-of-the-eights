@@ -2,9 +2,11 @@ extends CanvasLayer
 
 @onready var opponent_dice_display = get_node("OpponentDiceDisplay")
 @onready var game_state_info = get_node("GameStateInfo")
+@onready var player_stats_panel = get_node("PlayerStatsPanel")
 @onready var player_stat_box = get_node("PlayerStatsPanel/MyPlayerStatBox")
 @onready var enemy_stat_box = get_node("PlayerStatsPanel/EnemyPlayerStatBox")
 @onready var waiting_screen = get_node("WaitingScreen")
+@onready var rollButtons = get_node("RollButtons")
 
 @onready var end_of_game_screen = get_node("EndOfGameScreen")
 @onready var winner_label = get_node("EndOfGameScreen/WinnerLabel")
@@ -27,6 +29,14 @@ func setup_game_ui(game_settings: Dictionary, isHost: bool):
 	#code to hide endGame and WaitingScreen
 	hide_waiting_screen()
 	hide_end_of_game_screen()
+	if game_settings["show_rolls"]:
+		show_opponent_rolls()
+	else: 
+		hide_opponent_rolls()
+		game_state_info.position = Vector2(game_state_info.position.x, 0)
+	show_roll_buttons()
+	show_game_state_info()
+	show_player_stats_panel()
 	
 	if isHost:
 		myPlayerName = game_settings["player_names"][0]
@@ -64,7 +74,6 @@ func setup_game_ui(game_settings: Dictionary, isHost: bool):
 		dice_sprite.name = "OpponentDie%d" % i
 		dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-0.png"))
 		opponent_dice_display.add_child(dice_sprite)
-	#update_opponent_dice_display_width(dice_display_height)
 	# Initialize player stats labels
 	initialize_stat_labels(player_stat_box, "Player")
 	initialize_stat_labels(enemy_stat_box, "Opponent")
@@ -174,6 +183,38 @@ func format_dictionary_to_string(data: Dictionary) -> String:
 # Hide the end of game screen
 func hide_end_of_game_screen():
 	end_of_game_screen.visible = false
+
+func hide_all_ui():
+	hide_roll_buttons()
+	hide_opponent_rolls()
+	hide_game_state_info()
+	hide_player_stats_panel()
+	hide_waiting_screen()
+	hide_end_of_game_screen()
+
+func hide_opponent_rolls():
+	opponent_dice_display.visible = false
+
+func show_opponent_rolls():
+	opponent_dice_display.visible = true
+
+func hide_roll_buttons():
+	rollButtons.visible = false
+
+func show_roll_buttons():
+	rollButtons.visible = true
+
+func hide_game_state_info():
+	game_state_info.visible = false
+
+func show_game_state_info():
+	game_state_info.visible = true
+
+func hide_player_stats_panel():
+	player_stats_panel.visible = false
+
+func show_player_stats_panel():
+	player_stats_panel.visible = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

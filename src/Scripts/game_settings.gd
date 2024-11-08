@@ -16,6 +16,7 @@ signal game_settings_ready(game_settings,hand_settings)
 @onready var RoundRolls = $UIBox/Settings_Setup/Rounds/RoundRolls
 @onready var DiceCountRef = $UIBox/Settings_Setup/Dice/DiceCount.get_line_edit()
 @onready var DiceType = $UIBox/Settings_Setup/Dice/DiceType
+@onready var opponent_roll_visible_button = $UIBox/Settings_Setup/HandLimit/OpponentRollVisible
 @onready var advanced_settings_vbox = $UIBox/Settings_Advanced/ScrollContainer/advanced_settings_vbox
 
 @onready var NetworkManager = get_node("../../NetworkManager")
@@ -26,8 +27,10 @@ var hand_settings_saved = false
 var dice_count: int
 var dice_type: int
 var win_cond: String
+var show_opponent_rolls: bool = false
 
 func _on_start_game_pressed():
+	print("Passing ", show_opponent_rolls)
 	var game_settings = {
 		"player_names": [player1Name.text, player2Name.text],
 		"win_condition": WinCondition.get_selected_id(),
@@ -35,7 +38,8 @@ func _on_start_game_pressed():
 		"rounds": int(Rounds.text),
 		"round_rolls": int(RoundRolls.text),
 		"dice_count": int(DiceCountRef.text),
-		"dice_type": DiceType.get_selected_id()  # e.g., 6-sided or 8-sided
+		"dice_type": DiceType.get_selected_id(),  # e.g., 6-sided or 8-sided
+		"show_rolls": show_opponent_rolls
 	}
 	if !hand_settings_saved:
 		_populate_advanced_settings()
@@ -223,7 +227,17 @@ func _ready() -> void:
 	WinCondition.connect("item_selected", self._win_condition_toggled)
 	HealthPointsBox.visible = false
 	win_cond = "Score"
-	pass # Replace with function body.
+	opponent_roll_visible_button.set_toggle_mode(true)
+	opponent_roll_visible_button.connect("toggled", self._on_roll_visible_toggled)
+	show_opponent_rolls = false
+
+func _on_roll_visible_toggled(state) -> void:
+	print("Was ", show_opponent_rolls)
+	if show_opponent_rolls:
+		show_opponent_rolls = false
+	else:
+		show_opponent_rolls = true
+	print("Is ", show_opponent_rolls)
 
 func collectInfo() -> void:
 	self.visible = true
