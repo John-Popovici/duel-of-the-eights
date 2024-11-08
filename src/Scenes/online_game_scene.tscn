@@ -213,7 +213,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 min_value = 1.0
-max_value = 9.0
+max_value = 99.0
 value = 7.0
 alignment = 1
 

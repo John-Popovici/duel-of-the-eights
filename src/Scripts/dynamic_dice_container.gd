@@ -65,12 +65,13 @@ func add_dice(dice_count: int, dice_type: int) -> void:
 		
 		# Assign a starting position from the list, cycling if dice_count > 9
 		var start_pos = start_positions[i % start_positions.size()]
+		var start_time = (i / start_positions.size()) * 0.3
 		
 		# Generate a random rotation for added variation
 		var start_rot = Vector3(randf() * TAU, randf() * TAU, randf() * TAU)
 		
 		# Set initial position and rotation using the function in Dice.gd
-		dice.setStartConditions(start_pos, start_rot)
+		dice.setStartConditions(start_pos, start_rot, start_time)
 		dice.global_transform.origin = start_pos
 		dice.rotation_degrees = Vector3.ZERO
 		add_child(dice)
