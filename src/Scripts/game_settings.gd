@@ -22,7 +22,8 @@ signal game_settings_ready(game_settings,hand_settings)
 @onready var NetworkManager = get_node("../../NetworkManager")
 
 var hand_settings_saved = false
-@export var hand_settings: Dictionary = {}
+@export var hand_settings_refs: Dictionary = {}
+@export var hand_settings_vals: Dictionary = {}
 # Capture the dice type and count
 var dice_count: int
 var dice_type: int
@@ -45,7 +46,7 @@ func _on_start_game_pressed():
 		_populate_advanced_settings()
 		save_advanced_settings()
 	await get_tree().create_timer(1.0).timeout
-	emit_signal("game_settings_ready", game_settings, hand_settings)
+	emit_signal("game_settings_ready", game_settings, hand_settings_vals)
 	self.visible = false
 
 func _win_condition_toggled(ID):
@@ -69,7 +70,8 @@ func _on_advanced_settings_pressed() -> void:
 # Populates the advanced settings based on dice count and type
 func _populate_advanced_settings():
 	# Clear current advanced settings to rebuild them
-	hand_settings.clear()
+	hand_settings_refs.clear()
+	hand_settings_vals.clear()
 	for child in advanced_settings_vbox.get_children():
 		child.queue_free()
 
@@ -183,7 +185,7 @@ func _create_hand_option(hand_name: String, hand_type: Array) -> HBoxContainer:
 	hand_hbox.add_child(scoring_input)
 
 	# Save settings for this hand in hand_settings dictionary
-	hand_settings[hand_name] = {
+	hand_settings_refs[hand_name] = {
 		"hand_type": hand_type,
 		"allowed": allowed_checkbox,
 		"repeatable": repeatable_checkbox,
@@ -195,10 +197,11 @@ func _create_hand_option(hand_name: String, hand_type: Array) -> HBoxContainer:
 
 # Saves the hand settings and hides the advanced settings UI
 func save_advanced_settings():
+	hand_settings_vals.clear()
 	# Loop through each hand in hand_settings and save current values
-	for hand_name in hand_settings.keys():
-		var settings = hand_settings[hand_name]
-		hand_settings[hand_name] = {
+	for hand_name in hand_settings_refs.keys():
+		var settings = hand_settings_refs[hand_name]
+		hand_settings_vals[hand_name] = {
 			"hand_type": settings["hand_type"],
 			"allowed": settings["allowed"].is_pressed(),#is_checked()
 			"repeatable": settings["repeatable"].is_pressed(),
