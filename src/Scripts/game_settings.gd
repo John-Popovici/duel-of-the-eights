@@ -202,7 +202,7 @@ func save_advanced_settings():
 			"scoring_rule": settings["scoring_rule"].text
 		}
 	hand_settings_saved = true
-	print("Hand settings saved:", hand_settings)
+	#print("Hand settings saved:", hand_settings)
 
 func _on_return_to_settings_pressed() -> void:
 	# Clear current advanced settings nodes
