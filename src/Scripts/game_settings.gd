@@ -15,6 +15,7 @@ signal game_settings_ready(game_settings,hand_settings)
 @onready var Rounds = $UIBox/Settings_Setup/Rounds/Rounds
 @onready var RoundRolls = $UIBox/Settings_Setup/Rounds/RoundRolls
 @onready var DiceCountRef = $UIBox/Settings_Setup/Dice/DiceCount.get_line_edit()
+@onready var DiceCountRange = $UIBox/Settings_Setup/Dice/DiceCount
 @onready var DiceType = $UIBox/Settings_Setup/Dice/DiceType
 @onready var opponent_roll_visible_button = $UIBox/Settings_Setup/HandLimit/OpponentRollVisible
 @onready var advanced_settings_vbox = $UIBox/Settings_Advanced/ScrollContainer/advanced_settings_vbox
@@ -31,6 +32,9 @@ var win_cond: String
 var show_opponent_rolls: bool = false
 
 func _on_start_game_pressed():
+	start_game_button.disabled = true
+	home_button.disabled = true
+	advanced_settings_button.disabled = true
 	print("Passing ", show_opponent_rolls)
 	var game_settings = {
 		"player_names": [player1Name.text, player2Name.text],
@@ -44,6 +48,7 @@ func _on_start_game_pressed():
 	}
 	if !hand_settings_saved:
 		_populate_advanced_settings()
+		await get_tree().create_timer(1.0).timeout
 		save_advanced_settings()
 	await get_tree().create_timer(1.0).timeout
 	emit_signal("game_settings_ready", game_settings, hand_settings_vals)
@@ -233,6 +238,9 @@ func _ready() -> void:
 	opponent_roll_visible_button.set_toggle_mode(true)
 	opponent_roll_visible_button.connect("toggled", self._on_roll_visible_toggled)
 	show_opponent_rolls = false
+	DiceType.set_toggle_mode(true)
+	DiceType.connect("item_selected", self._dice_values_changed)
+	DiceCountRange.connect("value_changed", self._dice_values_changed)
 
 func _on_roll_visible_toggled(state) -> void:
 	print("Was ", show_opponent_rolls)
@@ -241,6 +249,12 @@ func _on_roll_visible_toggled(state) -> void:
 	else:
 		show_opponent_rolls = true
 	print("Is ", show_opponent_rolls)
+
+func _dice_values_changed(state) -> void:
+	if hand_settings_saved:
+		print("Hand Settings lost")
+		hand_settings_saved = false
+	#code to indicate
 
 func collectInfo() -> void:
 	self.visible = true
