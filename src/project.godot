@@ -23,6 +23,10 @@ project/assembly_name="duel-of-the-eights"
 
 import/blender/enabled=false
 
+[gui]
+
+theme/custom_font="res://Themes/SystemFont_Pixel1.tres"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

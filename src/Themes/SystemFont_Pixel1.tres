@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://cvgef1a2mvfea"]
+
+[ext_resource type="FontFile" uid="uid://csnjpr0m5eryd" path="res://Themes/Pixelme.ttf" id="1_akrvs"]
+
+[resource]
+base_font = ExtResource("1_akrvs")
