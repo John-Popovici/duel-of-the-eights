@@ -27,6 +27,11 @@ func roll_selected_dice() -> void:
 		if die.get_selected_status():  # Check if the die is selected
 			die.roll()
 
+func roll_rolling_or_invalid_dice() -> void:
+	for die in dice_nodes:
+		if die.getIsRolling() or (die.get_face_value() == -1):
+			die.roll()
+
 # Retrieves the values of each die after rolling
 func get_dice_values() -> Array[int]:
 	var dice_values: Array[int] = []
@@ -49,6 +54,13 @@ func get_rolling_dice() -> Array:
 		if die.getIsRolling():
 			rolling_dice.append(die)
 	return rolling_dice
+
+func get_invalid_dice() -> Array:
+	var invalid_dice = []
+	for die in dice_nodes:
+		if die.get_face_value() == -1:
+			invalid_dice.append(die)
+	return invalid_dice
 
 func clear_dice() -> void:
 	for child in get_children():
