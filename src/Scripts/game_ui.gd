@@ -72,11 +72,12 @@ func setup_game_ui(game_settings: Dictionary, isHost: bool):
 	for i in range(dice_count):
 		var dice_sprite = preload("res://NodeScene/dice_tex_temp.tscn").instantiate()
 		dice_sprite.name = "OpponentDie%d" % i
-		dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-0.png"))
+		#dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-0.png"))
 		opponent_dice_display.add_child(dice_sprite)
 	# Initialize player stats labels
 	initialize_stat_labels(player_stat_box, "Player")
 	initialize_stat_labels(enemy_stat_box, "Opponent")
+	blank_opponent_dice_display()
 	update_player_stats("Player", myPlayerName, health_points, 0)
 	update_player_stats("Opponent", enemyPlayerName, health_points, 0)
 
@@ -99,7 +100,7 @@ func update_opponent_dice_display(rolls: Array):
 				dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % rolls[i]))  # Adjust path to dice textures
 			8:
 				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
-				#dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % rolls[i])  # Adjust path to dice textures
+				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-%d.png" % rolls[i])  # Adjust path to dice textures
 
 # Update the opponent's dice display to blanks
 func blank_opponent_dice_display():
@@ -110,7 +111,7 @@ func blank_opponent_dice_display():
 				dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-0.png"))  # Adjust path to dice textures
 			8:
 				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
-				#dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % rolls[i])  # Adjust path to dice textures
+				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-0.png")  # Adjust path to dice textures
 
 
 # Function to update the width of the HBoxContainer based on the number of dice

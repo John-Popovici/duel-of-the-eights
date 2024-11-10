@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bniar5vumf6xk"
-path="res://.godot/imported/dice-eight-faces-blank.png-08c888a933afe527804179e335e2709e.ctex"
+uid="uid://d1wcxu3ofbjq4"
+path="res://.godot/imported/dice-eight-faces-1.png-35f3b2a246f0318113e51268e1bd431b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-blank.png"
-dest_files=["res://.godot/imported/dice-eight-faces-blank.png-08c888a933afe527804179e335e2709e.ctex"]
+source_file="res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-1.png"
+dest_files=["res://.godot/imported/dice-eight-faces-1.png-35f3b2a246f0318113e51268e1bd431b.ctex"]
 
 [params]
 
