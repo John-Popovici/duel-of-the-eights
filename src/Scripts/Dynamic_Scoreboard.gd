@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var vbox_container = $SelfHandsSectionBox/ScrollContainer/HandsContainer
+@onready var vbox_container = $UIBox/SelfHandsSectionBox/ScrollContainer/HandsContainer
 
 # Signal for when a hand is selected
 signal hand_selected(hand: Dictionary)
