@@ -47,6 +47,8 @@ func _on_start_game_pressed():
 		"show_rolls": show_opponent_rolls
 	}
 	if !hand_settings_saved:
+		dice_count = int(DiceCountRef.text)
+		dice_type = DiceType.get_selected_id()
 		_populate_advanced_settings()
 		await get_tree().create_timer(1.0).timeout
 		save_advanced_settings()
