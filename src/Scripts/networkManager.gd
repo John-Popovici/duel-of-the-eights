@@ -16,8 +16,12 @@ var check_ping: bool = false
 # Start as a server
 func start_server(port: int):
 	var peer = ENetMultiplayerPeer.new()
-	peer.create_server(port, 2)  # Set maximum peers to 2 (host + 1 client)
-	multiplayer.multiplayer_peer = peer
+	var error = peer.create_server(port, 2)  # Set maximum peers to 2 (host + 1 client)
+	if error != OK:
+		print("Cannot Host: ", error)
+		return
+	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
+	multiplayer.set_multiplayer_peer(peer)
 	is_host = true
 	print("Started as server on port: ", port)
 	print("IP: ", IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1))
@@ -29,7 +33,8 @@ func start_server(port: int):
 func connect_to_server(hash: String, port: int):
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_client(hash_to_ip(hash), port)
-	multiplayer.multiplayer_peer = peer
+	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
+	multiplayer.set_multiplayer_peer(peer)
 	is_host = false
 	print("Attempting to connect to server at ", hash_to_ip(hash), " on port ", port)
 	
