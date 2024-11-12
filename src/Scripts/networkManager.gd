@@ -32,10 +32,16 @@ func start_server(port: int):
 # Connect as a client
 func connect_to_server(_hash: String, port: int):
 	var peer = ENetMultiplayerPeer.new()
-	peer.create_client(hash_to_ip(_hash), port)
+	var error = peer.create_client(hash_to_ip(_hash), port)
+	if error != OK:
+		print("Cannot Join as Client: ", error)
+		print("Cannot Join as Client to: ", hash_to_ip(_hash), " on port ", port)
+		return
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
 	is_host = false
+	print("Hash code recieved: ", _hash)
+	print("Hash to IP: ",hash_to_ip(_hash))
 	print("Attempting to connect to server at ", hash_to_ip(_hash), " on port ", port)
 	
 	# Check if connection is successful
@@ -68,7 +74,7 @@ func _on_connection_failed():
 func numberToLetters(number: int) -> String:
 	var result = ""
 	var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	
+
 	# Ensure number is within the valid range
 	if number < 0 or number > 600:
 		return ""
@@ -79,13 +85,21 @@ func numberToLetters(number: int) -> String:
 		number = number / 26 - 1  # Shift down by 1 to handle 26 as a "zero-indexed" system
 		if number < 0:
 			break
-	
+
+	# Ensure result is always 2 characters long
+	if result.length() < 2:
+		return "A" + result
 	return result
+
 
 # Converts a base-26 string with letters A-Z back to a base-10 integer
 func lettersToNumber(letters: String) -> int:
 	var result = 0
 	var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	
+	letters = letters.lstrip("A")
+	if letters == "":
+		return result
 	
 	for i in range(letters.length()):
 		var letter_value = alphabet.find(letters[i])
@@ -107,15 +121,16 @@ func ip_to_hash(ip: String) -> String:
 
 func hash_to_ip(hash_code: String) -> String:
 	# Converts a 10-character code back to an IP address (e.g., "C0A80001")
-	if hash_code.length() != 10:
+	if hash_code.length() != 8:
 		return ""  # Invalid code length
 
 	var ip = []
-	for i in range(0, 10, 2):
+	for i in range(0, hash_code.length(), 2):
 		var octet_code = hash_code.substr(i, 2)
 		ip.append(str(lettersToNumber(octet_code)))  # Convert each 2-character code back to octet
 
 	return ".".join(ip)
+
 
 func getIsHost() -> bool:
 	return is_host
