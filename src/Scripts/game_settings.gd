@@ -1,24 +1,28 @@
 extends CanvasLayer
 
 signal game_settings_ready(game_settings,hand_settings)
-@onready var start_game_button = $UIBox/Settings_Setup/Buttons/StartGame
-@onready var advanced_settings_button = $UIBox/Settings_Setup/HandLimit/AdvancedSettingsButton
-@onready var return_to_settings_button = $UIBox/Settings_Advanced/ReturnToSettings
-@onready var save_advanced_settings_button = $UIBox/Settings_Advanced/SaveSettings
-@onready var home_button = $UIBox/Settings_Setup/Buttons/BackToHomeButton
+@onready var settingsSetup = get_node("UIBox/SettingsSplitBox/Settings_Setup")
+@onready var settingsAdvanced = get_node("UIBox/Settings_Advanced")
+@onready var settingsWait = get_node("UIBox/Settings_Wait")
+@onready var presetsPanel = get_node("UIBox/SettingsSplitBox/PresetsPanelBox")
+@onready var start_game_button = settingsSetup.get_node("Buttons/StartGame")
+@onready var advanced_settings_button = settingsSetup.get_node("HandLimit/AdvancedSettingsButton")
+@onready var return_to_settings_button = settingsAdvanced.get_node("ReturnToSettings")
+@onready var save_advanced_settings_button = settingsAdvanced.get_node("SaveSettings")
+@onready var home_button = settingsSetup.get_node("Buttons/BackToHomeButton")
 
-@onready var player1Name = $UIBox/Settings_Setup/PlayerNames/Player1Name
-@onready var player2Name = $UIBox/Settings_Setup/PlayerNames/Player2Name
-@onready var WinCondition = $UIBox/Settings_Setup/WinCondition/ConditionSelect
-@onready var HealthPoints = $UIBox/Settings_Setup/HealthPoints/HealthPoints
-@onready var HealthPointsBox = $UIBox/Settings_Setup/HealthPoints
-@onready var Rounds = $UIBox/Settings_Setup/Rounds/Rounds
-@onready var RoundRolls = $UIBox/Settings_Setup/Rounds/RoundRolls
-@onready var DiceCountRef = $UIBox/Settings_Setup/Dice/DiceCount.get_line_edit()
-@onready var DiceCountRange = $UIBox/Settings_Setup/Dice/DiceCount
-@onready var DiceType = $UIBox/Settings_Setup/Dice/DiceType
-@onready var opponent_roll_visible_button = $UIBox/Settings_Setup/HandLimit/OpponentRollVisible
-@onready var advanced_settings_vbox = $UIBox/Settings_Advanced/ScrollContainer/advanced_settings_vbox
+@onready var player1Name = settingsSetup.get_node("PlayerNames/Player1Name")
+@onready var player2Name = settingsSetup.get_node("PlayerNames/Player2Name")
+@onready var WinCondition = settingsSetup.get_node("WinCondition/ConditionSelect")
+@onready var HealthPoints = settingsSetup.get_node("HealthPoints/HealthPoints")
+@onready var HealthPointsBox = settingsSetup.get_node("HealthPoints")
+@onready var Rounds = settingsSetup.get_node("Rounds/Rounds")
+@onready var RoundRolls = settingsSetup.get_node("Rounds/RoundRolls")
+@onready var DiceCountRef = settingsSetup.get_node("Dice/DiceCount").get_line_edit()
+@onready var DiceCountRange = settingsSetup.get_node("Dice/DiceCount")
+@onready var DiceType = settingsSetup.get_node("Dice/DiceType")
+@onready var opponent_roll_visible_button = settingsSetup.get_node("HandLimit/OpponentRollVisible")
+@onready var advanced_settings_vbox = settingsAdvanced.get_node("ScrollContainer/advanced_settings_vbox")
 
 @onready var NetworkManager = get_node("../../NetworkManager")
 
@@ -222,8 +226,8 @@ func _on_return_to_settings_pressed() -> void:
 	# Clear current advanced settings nodes
 	for child in advanced_settings_vbox.get_children():
 		child.queue_free()
-	get_node("UIBox/Settings_Setup").visible = true
-	get_node("UIBox/Settings_Advanced").visible = false
+	settingsSetup.visible = true
+	settingsAdvanced.visible = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -261,13 +265,15 @@ func _dice_values_changed(_state) -> void:
 func collectInfo() -> void:
 	self.visible = true
 	if NetworkManager.getIsHost():
-		get_node("UIBox/Settings_Setup").visible = true
-		get_node("UIBox/Settings_Advanced").visible = false
-		get_node("UIBox/Settings_Wait").visible = false
+		settingsSetup.visible = true
+		settingsAdvanced.visible = false
+		settingsWait.visible = false
+		presetsPanel.visible = true
 	else:
-		get_node("UIBox/Settings_Setup").visible = false
-		get_node("UIBox/Settings_Advanced").visible = false
-		get_node("UIBox/Settings_Wait").visible = true
+		settingsSetup.visible = false
+		settingsAdvanced.visible = false
+		settingsWait.visible = true
+		presetsPanel.visible = false
 
 func on_home_pressed() -> void:
 	#Add disconnect code here and network manager

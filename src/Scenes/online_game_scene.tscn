@@ -112,57 +112,71 @@ horizontal_alignment = 1
 script = ExtResource("4_fvdct")
 
 [node name="GameSettings" type="CanvasLayer" parent="GameManager"]
-visible = false
 script = ExtResource("5_js8aa")
 
 [node name="UIBox" type="PanelContainer" parent="GameManager/GameSettings"]
-offset_left = 176.0
-offset_top = 13.0
-offset_right = 728.0
-offset_bottom = 281.0
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -468.912
+offset_top = -280.408
+offset_right = 182.088
+offset_bottom = -34.408
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(1.44, 2.28)
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("5_oidav")
 
-[node name="Settings_Setup" type="VBoxContainer" parent="GameManager/GameSettings/UIBox"]
+[node name="SettingsSplitBox" type="HSplitContainer" parent="GameManager/GameSettings/UIBox"]
 layout_mode = 2
+split_offset = 2
+dragger_visibility = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="GameManager/GameSettings/UIBox/Settings_Setup"]
+[node name="Settings_Setup" type="VBoxContainer" parent="GameManager/GameSettings/UIBox/SettingsSplitBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup"]
 layout_mode = 2
 theme_override_constants/margin_top = 3
 theme_override_constants/margin_bottom = 3
 
-[node name="Instructions" type="Label" parent="GameManager/GameSettings/UIBox/Settings_Setup/MarginContainer"]
+[node name="Instructions" type="Label" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/MarginContainer"]
 layout_mode = 2
 text = "Select Game Settings:"
 horizontal_alignment = 1
 
-[node name="PlayerNames" type="HBoxContainer" parent="GameManager/GameSettings/UIBox/Settings_Setup"]
+[node name="PlayerNames" type="HBoxContainer" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup"]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Player1Name" type="LineEdit" parent="GameManager/GameSettings/UIBox/Settings_Setup/PlayerNames"]
+[node name="Player1Name" type="LineEdit" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/PlayerNames"]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Host Player Name"
 alignment = 1
 
-[node name="Player2Name" type="LineEdit" parent="GameManager/GameSettings/UIBox/Settings_Setup/PlayerNames"]
+[node name="Player2Name" type="LineEdit" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/PlayerNames"]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Client Player Name"
 alignment = 1
 
-[node name="WinCondition" type="HBoxContainer" parent="GameManager/GameSettings/UIBox/Settings_Setup"]
+[node name="WinCondition" type="HBoxContainer" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup"]
 layout_mode = 2
 
-[node name="Instructions4" type="Label" parent="GameManager/GameSettings/UIBox/Settings_Setup/WinCondition"]
+[node name="Instructions4" type="Label" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/WinCondition"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Choose Win Condition:"
 horizontal_alignment = 1
 
-[node name="ConditionSelect" type="OptionButton" parent="GameManager/GameSettings/UIBox/Settings_Setup/WinCondition"]
+[node name="ConditionSelect" type="OptionButton" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/WinCondition"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
@@ -173,54 +187,54 @@ popup/item_0/text = "Score"
 popup/item_1/text = "Health Points"
 popup/item_1/id = 1
 
-[node name="HealthPoints" type="HBoxContainer" parent="GameManager/GameSettings/UIBox/Settings_Setup"]
+[node name="HealthPoints" type="HBoxContainer" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup"]
 layout_mode = 2
 
-[node name="Instructions2" type="Label" parent="GameManager/GameSettings/UIBox/Settings_Setup/HealthPoints"]
+[node name="Instructions2" type="Label" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/HealthPoints"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Health Points Per Player:"
 horizontal_alignment = 1
 
-[node name="HealthPoints" type="LineEdit" parent="GameManager/GameSettings/UIBox/Settings_Setup/HealthPoints"]
+[node name="HealthPoints" type="LineEdit" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/HealthPoints"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "5"
 placeholder_text = "Health Points per player"
 alignment = 1
 
-[node name="Rounds" type="HBoxContainer" parent="GameManager/GameSettings/UIBox/Settings_Setup"]
+[node name="Rounds" type="HBoxContainer" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup"]
 layout_mode = 2
 
-[node name="Instructions3" type="Label" parent="GameManager/GameSettings/UIBox/Settings_Setup/Rounds"]
+[node name="Instructions3" type="Label" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/Rounds"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Total number of Rounds:"
 horizontal_alignment = 1
 
-[node name="Rounds" type="LineEdit" parent="GameManager/GameSettings/UIBox/Settings_Setup/Rounds"]
+[node name="Rounds" type="LineEdit" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/Rounds"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "8"
 alignment = 1
 
-[node name="RoundRolls" type="LineEdit" parent="GameManager/GameSettings/UIBox/Settings_Setup/Rounds"]
+[node name="RoundRolls" type="LineEdit" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/Rounds"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "3"
 placeholder_text = "Rolls per round"
 alignment = 1
 
-[node name="Dice" type="HBoxContainer" parent="GameManager/GameSettings/UIBox/Settings_Setup"]
+[node name="Dice" type="HBoxContainer" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup"]
 layout_mode = 2
 
-[node name="Instructions4" type="Label" parent="GameManager/GameSettings/UIBox/Settings_Setup/Dice"]
+[node name="Instructions4" type="Label" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/Dice"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Number of Dice:"
 horizontal_alignment = 1
 
-[node name="DiceCount" type="SpinBox" parent="GameManager/GameSettings/UIBox/Settings_Setup/Dice"]
+[node name="DiceCount" type="SpinBox" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/Dice"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -229,7 +243,7 @@ max_value = 9.0
 value = 7.0
 alignment = 1
 
-[node name="DiceType" type="OptionButton" parent="GameManager/GameSettings/UIBox/Settings_Setup/Dice"]
+[node name="DiceType" type="OptionButton" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/Dice"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
@@ -241,33 +255,57 @@ popup/item_0/id = 6
 popup/item_1/text = "8 Sided Dice"
 popup/item_1/id = 8
 
-[node name="HandLimit" type="HBoxContainer" parent="GameManager/GameSettings/UIBox/Settings_Setup"]
+[node name="HandLimit" type="HBoxContainer" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup"]
 layout_mode = 2
 
-[node name="OpponentRollVisible" type="CheckButton" parent="GameManager/GameSettings/UIBox/Settings_Setup/HandLimit"]
+[node name="OpponentRollVisible" type="CheckButton" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/HandLimit"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Show Opponent Roll:"
 
-[node name="AdvancedSettingsButton" type="Button" parent="GameManager/GameSettings/UIBox/Settings_Setup/HandLimit"]
+[node name="AdvancedSettingsButton" type="Button" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/HandLimit"]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Modify Hand restrictions"
 text = "Modify Hand Rules"
 
-[node name="Buttons" type="HBoxContainer" parent="GameManager/GameSettings/UIBox/Settings_Setup"]
+[node name="Buttons" type="HBoxContainer" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup"]
 layout_mode = 2
 alignment = 1
 
-[node name="StartGame" type="Button" parent="GameManager/GameSettings/UIBox/Settings_Setup/Buttons"]
+[node name="StartGame" type="Button" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Start Game"
 
-[node name="BackToHomeButton" type="Button" parent="GameManager/GameSettings/UIBox/Settings_Setup/Buttons"]
+[node name="BackToHomeButton" type="Button" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Back to Home"
+
+[node name="PresetsPanelBox" type="VBoxContainer" parent="GameManager/GameSettings/UIBox/SettingsSplitBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PresetLabel" type="Label" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/PresetsPanelBox"]
+layout_mode = 2
+text = "Presets:"
+
+[node name="PresetsButtons" type="VBoxContainer" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/PresetsPanelBox"]
+layout_mode = 2
+
+[node name="SamplePreset" type="Button" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/PresetsPanelBox/PresetsButtons"]
+layout_mode = 2
+text = "Yahtzee!"
+
+[node name="NewPresetName" type="LineEdit" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/PresetsPanelBox"]
+layout_mode = 2
+placeholder_text = "New Preset Name"
+alignment = 1
+
+[node name="AddPreset" type="Button" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/PresetsPanelBox"]
+layout_mode = 2
+text = "Add Current Settings as Preset"
 
 [node name="Settings_Advanced" type="VBoxContainer" parent="GameManager/GameSettings/UIBox"]
 visible = false
