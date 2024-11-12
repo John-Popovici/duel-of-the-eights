@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bv1diwskvph82"]
+[gd_scene load_steps=20 format=3 uid="uid://bv1diwskvph82"]
 
 [ext_resource type="Script" path="res://Scripts/online_game_scene.gd" id="1_qoyeu"]
 [ext_resource type="Script" path="res://Scripts/networkManager.gd" id="2_6sfck"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/dynamic_dice_container.gd" id="5_aa5li"]
 [ext_resource type="Script" path="res://Scripts/game_settings.gd" id="5_js8aa"]
 [ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/BlueBoxBackgroundStyle.tres" id="5_oidav"]
+[ext_resource type="PackedScene" uid="uid://c2y0m27eadb6i" path="res://NodeScene/sample_preset_button.tscn" id="7_q6wg6"]
 [ext_resource type="Material" uid="uid://cgpa3fsefx8ir" path="res://Materials/BoardLowMat.tres" id="7_v2pfy"]
 [ext_resource type="Material" uid="uid://dvsy8knluwv6e" path="res://Materials/BoardRaisedMat.tres" id="8_ef00w"]
 [ext_resource type="Script" path="res://Scripts/Dynamic_Scoreboard.gd" id="9_i8ewx"]
@@ -294,9 +295,8 @@ text = "Presets:"
 [node name="PresetsButtons" type="VBoxContainer" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/PresetsPanelBox"]
 layout_mode = 2
 
-[node name="SamplePreset" type="Button" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/PresetsPanelBox/PresetsButtons"]
+[node name="SamplePreset" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/PresetsPanelBox/PresetsButtons" instance=ExtResource("7_q6wg6")]
 layout_mode = 2
-text = "Yahtzee!"
 
 [node name="NewPresetName" type="LineEdit" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/PresetsPanelBox"]
 layout_mode = 2
