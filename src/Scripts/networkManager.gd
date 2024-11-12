@@ -30,13 +30,13 @@ func start_server(port: int):
 	multiplayer.multiplayer_peer.connect("peer_disconnected", self._on_peer_disconnected)
 
 # Connect as a client
-func connect_to_server(hash: String, port: int):
+func connect_to_server(_hash: String, port: int):
 	var peer = ENetMultiplayerPeer.new()
-	peer.create_client(hash_to_ip(hash), port)
+	peer.create_client(hash_to_ip(_hash), port)
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
 	is_host = false
-	print("Attempting to connect to server at ", hash_to_ip(hash), " on port ", port)
+	print("Attempting to connect to server at ", hash_to_ip(_hash), " on port ", port)
 	
 	# Check if connection is successful
 	multiplayer.multiplayer_peer.connect("peer_connected", self._on_peer_connected)

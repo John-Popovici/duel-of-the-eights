@@ -37,5 +37,5 @@ func _on_start_online_game_pressed() -> void:
 	queue_free()  # Free IntroScene
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass

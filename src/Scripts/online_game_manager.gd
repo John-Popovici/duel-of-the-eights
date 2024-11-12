@@ -148,7 +148,7 @@ func setup_selection() -> void:
 		print("Host: ", isHost, " reached roll selection on roll_count: ", roll_count, " of max: ", max_rolls_per_round)
 		setDisableRollButtons(false)
 
-func recieveRollSelection(type: String) -> void:
+func recieveRollSelection(_type: String) -> void:
 	#wait on roll selection locally
 	while !(roll_selection_done):
 		await get_tree().create_timer(1.0).timeout

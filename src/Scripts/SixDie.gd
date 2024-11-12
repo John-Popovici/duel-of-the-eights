@@ -95,7 +95,7 @@ func _mouse_exit() -> void:
 		dieMesh.set_surface_override_material(1,normalTex)
 
 # Detects if the die was clicked and toggles its selected status
-func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+func _on_input_event(_camera: Node, event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		is_selected = !is_selected  # Toggle selection status
 		print("Die selected status:", is_selected)
@@ -136,7 +136,7 @@ func setStartConditions(_pos: Vector3, _rot: Vector3, _time: float) -> void:
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Calculate the speed by checking the length of the linear and angular velocities
 	var speed = linear_velocity.length()
 	var rotation_speed = angular_velocity.length()

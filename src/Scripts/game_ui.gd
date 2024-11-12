@@ -136,19 +136,19 @@ func update_opponent_dice_display_width(dice_size: float):
 
 
 # Update game state info
-func update_round_info(current_round: int, total_rounds: int = total_rounds):
+func update_round_info(current_round: int, _total_rounds: int = total_rounds):
 	var round_label = game_state_info.get_node("RoundLabel") as Label
-	round_label.text = "Round: %d / %d" % [current_round, total_rounds]
+	round_label.text = "Round: %d / %d" % [current_round, _total_rounds]
 
 func update_roll_info(current_roll: int, total_rolls: int = total_round_rolls):
 	var roll_label = game_state_info.get_node("RollLabel") as Label
 	roll_label.text = "Roll: %d / %d" % [current_roll, total_rolls]
 
 # Update player stats (name, health, score)
-func update_player_stats(player_type: String, name: String, health: int, score: int):
+func update_player_stats(player_type: String, _name: String, health: int, score: int):
 	var stat_box = player_stat_box if (player_type == "Player") else enemy_stat_box
 	
-	stat_box.get_node("%sNameLabel" % player_type).text = "%s Name: %s" % [player_type, name]
+	stat_box.get_node("%sNameLabel" % player_type).text = "%s Name: %s" % [player_type, _name]
 	stat_box.get_node("%sHealthLabel" % player_type).text = "%s Health: %d" % [player_type, health]
 	stat_box.get_node("%sScoreLabel" % player_type).text = "%s Score: %d" % [player_type, score]
 
@@ -222,5 +222,5 @@ func _ready() -> void:
 	self.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass

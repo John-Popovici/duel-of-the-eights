@@ -30,7 +30,7 @@ func calculate_hand_score(hand_dict: Dictionary, dice_rolls: Array) -> int:
 			print("Unknown hand type:", hand_type)
 			return 0
 
-func setupBonus(bonusHand: Dictionary) -> void:
+func setupBonus(_bonusHand: Dictionary) -> void:
 	#Add logic to read host input
 	BonusExists = true
 	BonusScore = 35
@@ -129,5 +129,5 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass

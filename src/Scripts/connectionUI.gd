@@ -61,8 +61,8 @@ func _on_connect_pressed():
 		IPDisplayLabel.text = "Connect Code: " + network_manager.getHashIP()
 		PortDisplayLabel.text = "Started as Host on port: " + str(port)
 	else:
-		var hash = ip_field.text
-		network_manager.connect_to_server(hash, port)
+		var _hash = ip_field.text
+		network_manager.connect_to_server(_hash, port)
 
 func _copy_ip_to_clipboard():
 	DisplayServer.clipboard_set(network_manager.getHashIP())
@@ -105,5 +105,5 @@ func _on_connection_failed():
 	get_tree().get_root().get_node("OnlineGameScene").returnToIntro()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass

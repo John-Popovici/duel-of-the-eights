@@ -58,8 +58,8 @@ func _on_start_game_pressed():
 
 func _win_condition_toggled(ID):
 	print("Win Condition Toggled: ",ID)
-	var win_cond = ID
-	match win_cond:
+	var win_cond_num = ID
+	match win_cond_num:
 		0: #score
 			HealthPointsBox.visible = false
 			win_cond = "Score"
@@ -244,7 +244,7 @@ func _ready() -> void:
 	DiceType.connect("item_selected", self._dice_values_changed)
 	DiceCountRange.connect("value_changed", self._dice_values_changed)
 
-func _on_roll_visible_toggled(state) -> void:
+func _on_roll_visible_toggled(_state) -> void:
 	print("Was ", show_opponent_rolls)
 	if show_opponent_rolls:
 		show_opponent_rolls = false
@@ -252,7 +252,7 @@ func _on_roll_visible_toggled(state) -> void:
 		show_opponent_rolls = true
 	print("Is ", show_opponent_rolls)
 
-func _dice_values_changed(state) -> void:
+func _dice_values_changed(_state) -> void:
 	if hand_settings_saved:
 		print("Hand Settings lost")
 		hand_settings_saved = false
@@ -274,5 +274,5 @@ func on_home_pressed() -> void:
 	get_tree().get_root().get_node("OnlineGameScene").returnToIntro()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
