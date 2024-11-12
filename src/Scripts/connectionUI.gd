@@ -19,6 +19,7 @@ var network_manager: Node
 @onready var CopyIPButton = $UIBox/Connection_Wait/CopyIPButton
 @onready var PortDisplayLabel = $UIBox/Connection_Wait/PortDisplay
 @onready var CopyPortButton = $UIBox/Connection_Wait/CopyPortButton
+@onready var CancelHostButton = $UIBox/Connection_Wait/CancelHosting
 
 
 func _ready():
@@ -30,6 +31,7 @@ func _ready():
 	# Connect the copy buttons to functions to copy IP and port
 	CopyIPButton.connect("pressed", self._copy_ip_to_clipboard)
 	CopyPortButton.connect("pressed", self._copy_port_to_clipboard)
+	CancelHostButton.connect("pressed", self._cancel_hosting)
 
 func _on_hostcheck_toggled(state):
 	print("Host/Client Toggled: ",state)
@@ -50,6 +52,18 @@ func setupNetworkManagerRef() -> void:
 	network_manager.connect("connection_failed", self._on_connection_failed)
 	connect_button.connect("pressed", self._on_connect_pressed)
 	back_to_home_button.connect("pressed",self._on_disconnected)
+
+func _cancel_hosting() -> void:
+	self.visible = false
+	SetupUI.visible = false
+	WaitUI.visible = false
+	ErrorUI.visible = true
+	ErrorSourceLabel.text = "Disconnected from game"
+	print("Disconnected")
+	network_manager.disconnect_from_server()
+	await get_tree().create_timer(2.0).timeout
+	# Start the game via OnlineGameManager
+	get_tree().get_root().get_node("OnlineGameScene").returnToIntro()
 
 func _on_connect_pressed():
 	var port = port_field.text.to_int() if port_field.text else default_port
@@ -81,7 +95,6 @@ func _on_connection_successful():
 	get_tree().get_root().get_node("OnlineGameScene").start_game()
 
 func _on_disconnected():
-	# Hide the ConnectionUI once connected
 	self.visible = true
 	SetupUI.visible = false
 	WaitUI.visible = false

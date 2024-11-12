@@ -73,7 +73,6 @@ layout_mode = 2
 text = "Back to Home"
 
 [node name="Connection_Wait" type="VBoxContainer" parent="NetworkManager/ConnectionUI/UIBox"]
-visible = false
 layout_mode = 2
 
 [node name="IPDisplay" type="Label" parent="NetworkManager/ConnectionUI/UIBox/Connection_Wait"]
@@ -92,8 +91,11 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Copy Port"
 
+[node name="CancelHosting" type="Button" parent="NetworkManager/ConnectionUI/UIBox/Connection_Wait"]
+layout_mode = 2
+text = "Stop Hosting"
+
 [node name="Connection_Error" type="VBoxContainer" parent="NetworkManager/ConnectionUI/UIBox"]
-visible = false
 layout_mode = 2
 
 [node name="Error Source" type="Label" parent="NetworkManager/ConnectionUI/UIBox/Connection_Error"]
@@ -414,6 +416,7 @@ script = ExtResource("11_ejug4")
 script = ExtResource("11_ejug4")
 
 [node name="GameUI" type="CanvasLayer" parent="GameManager"]
+visible = false
 script = ExtResource("12_f4hi7")
 
 [node name="RollButtons" type="VBoxContainer" parent="GameManager/GameUI"]
