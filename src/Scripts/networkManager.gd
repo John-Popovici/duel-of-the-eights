@@ -183,6 +183,7 @@ func _process(delta: float) -> void:
 			rpc("ping")
 			if !multiplayer.has_multiplayer_peer():
 				multiplayer.multiplayer_peer = null
+				print("Client Disconnected")
 				emit_signal("disconnected")
 	elif !is_host and check_ping:
 		# Update the timer
@@ -190,6 +191,7 @@ func _process(delta: float) -> void:
 		
 		# Check if the timeout is exceeded
 		if time_since_last_ping >= ping_timeout:
+			print("Host Ping Timedout")
 			_on_server_disconnected()
 			check_ping = false
 	pass
