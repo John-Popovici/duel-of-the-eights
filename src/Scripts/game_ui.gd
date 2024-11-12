@@ -7,6 +7,9 @@ extends CanvasLayer
 @onready var enemy_stat_box = get_node("PlayerStatsPanel/EnemyPlayerStatBox")
 @onready var waiting_screen = get_node("WaitingScreen")
 @onready var rollButtons = get_node("RollButtons")
+@onready var PausePanel = get_node("EscPanel")
+@onready var EscBackground = get_node("EscBackOverlay")
+@onready var ReturnToGameButton = get_node("EscPanel/EscBox/ReturnToGameButton")
 
 @onready var end_of_game_screen = get_node("EndOfGameScreen")
 @onready var winner_label = get_node("EndOfGameScreen/WinnerLabel")
@@ -23,12 +26,14 @@ var total_round_rolls:int
 var dice_count:int
 var dice_type:int
 var dice_display_height: float = 100
+signal escPressed
 
 # Set up the UI based on the initial game settings
 func setup_game_ui(game_settings: Dictionary, isHost: bool):
 	#code to hide endGame and WaitingScreen
 	hide_waiting_screen()
 	hide_end_of_game_screen()
+	hide_pause_menu()
 	if game_settings["show_rolls"]:
 		show_opponent_rolls()
 	else: 
@@ -80,6 +85,7 @@ func setup_game_ui(game_settings: Dictionary, isHost: bool):
 	blank_opponent_dice_display()
 	update_player_stats("Player", myPlayerName, health_points, 0)
 	update_player_stats("Opponent", enemyPlayerName, health_points, 0)
+	connect("escPressed",self.toggle_pause_menu)
 
 # Helper to initialize player stat labels
 func initialize_stat_labels(stat_box: VBoxContainer, player_type: String):
@@ -192,6 +198,26 @@ func hide_all_ui():
 	hide_player_stats_panel()
 	hide_waiting_screen()
 	hide_end_of_game_screen()
+	hide_pause_menu()
+
+func hide_pause_menu():
+	PausePanel.visible = false
+	EscBackground.visible = false
+
+func show_pause_menu():
+	PausePanel.visible = true
+	EscBackground.visible = true
+
+func toggle_pause_menu():
+	if PausePanel.visible:
+		hide_pause_menu()
+	else:
+		show_pause_menu()
+
+func _input(event):
+	if event is InputEventKey:
+		if event.is_pressed() and event.keycode == KEY_ESCAPE :
+			escPressed.emit()
 
 func hide_opponent_rolls():
 	opponent_dice_display.visible = false
@@ -220,6 +246,7 @@ func show_player_stats_panel():
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.visible = false
+	ReturnToGameButton.connect("pressed",self.hide_pause_menu)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

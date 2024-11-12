@@ -537,3 +537,69 @@ text = "Rematch?"
 [node name="ExitButton" type="Button" parent="GameManager/GameUI/EndOfGameScreen"]
 layout_mode = 2
 text = "Exit Match"
+
+[node name="EscBackOverlay" type="ColorRect" parent="GameManager/GameUI"]
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 0, 0, 0.266667)
+
+[node name="EscPanel" type="PanelContainer" parent="GameManager/GameUI"]
+z_index = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -405.0
+offset_top = -271.0
+offset_right = 405.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("5_oidav")
+
+[node name="EscBox" type="VBoxContainer" parent="GameManager/GameUI/EscPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GameManager/GameUI/EscPanel/EscBox"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Pause Menu"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="GameManager/GameUI/EscPanel/EscBox"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Game Volume:"
+horizontal_alignment = 1
+
+[node name="GameVolumeSlider" type="HSlider" parent="GameManager/GameUI/EscPanel/EscBox"]
+layout_mode = 2
+size_flags_vertical = 2
+step = 5.0
+value = 50.0
+scrollable = false
+
+[node name="Label3" type="Label" parent="GameManager/GameUI/EscPanel/EscBox"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Music Volume:"
+horizontal_alignment = 1
+
+[node name="MusicVolumeSlider2" type="HSlider" parent="GameManager/GameUI/EscPanel/EscBox"]
+layout_mode = 2
+size_flags_vertical = 2
+step = 5.0
+value = 30.0
+scrollable = false
+
+[node name="ReturnToGameButton" type="Button" parent="GameManager/GameUI/EscPanel/EscBox"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Return to Game"
