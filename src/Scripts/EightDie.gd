@@ -90,9 +90,6 @@ func _mouse_enter() -> void:
 	
 
 func _mouse_exit() -> void:
-	#hover_toggle_position = global_transform.origin  # Save the starting position
-	#var new_position = hover_toggle_position + Vector3(0, -hover_height, 0)
-	#global_transform.origin = new_position
 	if !is_selected:
 		dieMesh.set_surface_override_material(0,normalTex)
 
