@@ -647,3 +647,7 @@ scrollable = false
 layout_mode = 2
 size_flags_vertical = 3
 text = "Return to Game"
+
+[node name="ExitGameButton" type="Button" parent="GameManager/GameUI/EscPanel/EscBox"]
+layout_mode = 2
+text = "Exit Game"

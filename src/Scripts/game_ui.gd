@@ -10,6 +10,7 @@ extends CanvasLayer
 @onready var PausePanel = get_node("EscPanel")
 @onready var EscBackground = get_node("EscBackOverlay")
 @onready var ReturnToGameButton = get_node("EscPanel/EscBox/ReturnToGameButton")
+@onready var ExitGameButton = get_node("EscPanel/EscBox/ExitGameButton")
 
 @onready var end_of_game_screen = get_node("EndOfGameScreen")
 @onready var winner_label = get_node("EndOfGameScreen/WinnerLabel")
@@ -252,6 +253,8 @@ func show_player_stats_panel():
 func _ready() -> void:
 	self.visible = false
 	ReturnToGameButton.connect("pressed",self.hide_pause_menu)
+	var game_manager = get_parent()
+	ExitGameButton.pressed.connect(game_manager.exitGame)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
