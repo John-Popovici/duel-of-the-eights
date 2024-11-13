@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bv1diwskvph82"]
+[gd_scene load_steps=18 format=3 uid="uid://bv1diwskvph82"]
 
 [ext_resource type="Script" path="res://Scripts/online_game_scene.gd" id="1_qoyeu"]
 [ext_resource type="Script" path="res://Scripts/networkManager.gd" id="2_6sfck"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://Scripts/score_calculator.gd" id="10_0b2yf"]
 [ext_resource type="Script" path="res://Scripts/PlayerManager.gd" id="11_ejug4"]
 [ext_resource type="Script" path="res://Scripts/game_ui.gd" id="12_f4hi7"]
+[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Default_pixel_theme.tres" id="13_g1ii3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_24wpm"]
 
@@ -385,6 +386,7 @@ offset_top = -66.0
 offset_right = 53.5
 grow_horizontal = 2
 grow_vertical = 0
+theme = ExtResource("13_g1ii3")
 
 [node name="RollSelected" type="Button" parent="GameManager/GameUI/RollButtons"]
 layout_mode = 2
@@ -461,6 +463,7 @@ offset_right = 113.0
 offset_bottom = 73.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("13_g1ii3")
 
 [node name="HeaderLabel" type="Label" parent="GameManager/GameUI/EndOfGameScreen"]
 layout_mode = 2
