@@ -27,7 +27,7 @@ signal game_settings_ready(game_settings,hand_settings)
 @onready var presets_folder = "res://Presets"
 @onready var preset_name_input = presetsPanel.get_node("NewPresetName")
 @onready var save_preset_button = presetsPanel.get_node("AddPreset")
-@onready var presetsButtonsBox = presetsPanel.get_node("PresetsButtons")
+@onready var presetsButtonsBox = presetsPanel.get_node("PresetsScrollBar/PresetsButtons")
 
 @onready var NetworkManager = get_node("../../NetworkManager")
 
@@ -115,6 +115,7 @@ func _populate_advanced_settings():
 # Save a new preset with game and hand settings
 func save_preset():
 	var preset_name = preset_name_input.text.strip_edges()
+	preset_name_input.text = ""
 	print("Preset Name from input: ", preset_name)
 	if preset_name == "":
 		print("Please enter a name for the preset.")
@@ -193,8 +194,8 @@ func _on_preset_selected(preset_name: String):
 # Update the input fields with loaded game and hand settings
 func update_ui_fields(game_settings: Dictionary, hand_settings: Dictionary):
 	# Example updates; adjust to fit actual input nodes in your UI
-	player1Name.text = game_settings.get("player_names", 0)[0]
-	player2Name.text = game_settings.get("player_names", 0)[1]
+	#player1Name.text = game_settings.get("player_names", 0)[0]
+	#player2Name.text = game_settings.get("player_names", 0)[1]
 	WinCondition.select(game_settings.get("win_condition", 0))
 	HealthPoints.text = str(game_settings.get("health_points", 0))
 	Rounds.text = str(game_settings.get("rounds", 0))

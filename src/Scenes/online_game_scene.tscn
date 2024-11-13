@@ -292,10 +292,16 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "Presets:"
 
-[node name="PresetsButtons" type="VBoxContainer" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/PresetsPanelBox"]
+[node name="PresetsScrollBar" type="ScrollContainer" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/PresetsPanelBox"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="SamplePreset" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/PresetsPanelBox/PresetsButtons" instance=ExtResource("7_q6wg6")]
+[node name="PresetsButtons" type="VBoxContainer" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/PresetsPanelBox/PresetsScrollBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SamplePreset" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/PresetsPanelBox/PresetsScrollBar/PresetsButtons" instance=ExtResource("7_q6wg6")]
 layout_mode = 2
 
 [node name="NewPresetName" type="LineEdit" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/PresetsPanelBox"]
