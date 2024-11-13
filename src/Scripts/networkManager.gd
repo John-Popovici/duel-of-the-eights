@@ -156,7 +156,7 @@ func broadcast_game_state(state: String, data: Dictionary):
 # Remote function to handle incoming game state updates
 @rpc("any_peer")
 func receive_game_state(state: String, data: Dictionary):
-	print("Received state: ", state, "with data: ", data, "on host: ", getIsHost())
+	print("Received state: ", state, " with data: ", data, " on host: ", getIsHost())
 	emit_signal("game_state_received", state, data)
 
 # Reset the timer on each ping received

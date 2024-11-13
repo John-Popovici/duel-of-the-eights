@@ -354,6 +354,10 @@ text = "Waiting for host to
 set up game rules"
 horizontal_alignment = 1
 
+[node name="ExitGameButton" type="Button" parent="GameManager/GameSettings/UIBox/Settings_Wait"]
+layout_mode = 2
+text = "Exit Game"
+
 [node name="DiceContainer" type="Node3D" parent="GameManager"]
 script = ExtResource("5_aa5li")
 

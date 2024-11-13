@@ -281,7 +281,8 @@ func synchronizeRematch() -> void:
 
 func exitGame() -> void:
 	network_manager.broadcast_game_state("end_game", {})
-	get_tree().get_root().get_node("OnlineGameScene").returnToIntro()
+	network_manager.disconnect_from_server()
+	get_parent().returnToIntro()
 	pass
 	
 

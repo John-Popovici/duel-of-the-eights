@@ -9,6 +9,7 @@ signal game_settings_ready(game_settings,hand_settings)
 @onready var return_to_settings_button = settingsAdvanced.get_node("ReturnToSettings")
 @onready var save_advanced_settings_button = settingsAdvanced.get_node("SaveSettings")
 @onready var home_button = settingsSetup.get_node("Buttons/BackToHomeButton")
+@onready var wait_home_button = settingsWait.get_node("ExitGameButton")
 
 @onready var player1Name = settingsSetup.get_node("PlayerNames/Player1Name")
 @onready var player2Name = settingsSetup.get_node("PlayerNames/Player2Name")
@@ -342,6 +343,7 @@ func _ready() -> void:
 	save_advanced_settings_button.connect("pressed",self.save_advanced_settings)
 	return_to_settings_button.connect("pressed",self._on_return_to_settings_pressed)
 	home_button.connect("pressed",self.on_home_pressed)
+	wait_home_button.connect("pressed",self.on_home_pressed)
 	WinCondition.set_toggle_mode(true)
 	WinCondition.connect("item_selected", self._win_condition_toggled)
 	HealthPointsBox.visible = false
@@ -353,6 +355,7 @@ func _ready() -> void:
 	DiceType.connect("item_selected", self._dice_values_changed)
 	DiceCountRange.connect("value_changed", self._dice_values_changed)
 	save_preset_button.connect("pressed",self.save_preset)
+	
 
 func _on_roll_visible_toggled(_state) -> void:
 	print("Was ", show_opponent_rolls)
@@ -384,7 +387,7 @@ func collectInfo() -> void:
 
 func on_home_pressed() -> void:
 	#Add disconnect code here and network manager
-	get_tree().get_root().get_node("OnlineGameScene").returnToIntro()
+	get_parent().exitGame()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
