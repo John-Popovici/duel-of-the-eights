@@ -1,14 +1,13 @@
 extends Node
 # score_calculator.gd
 @onready var SinglesTotal = 0
-signal BonusTriggered(_score:int)
 var BonusThreshold: int
 var BonusScore: int
 var BonusUsed: bool
 @onready var BonusExists: bool = false
 
 # Main scoring function
-func calculate_hand_score(hand_dict: Dictionary, dice_rolls: Array) -> int:
+func calculate_hand_score(hand_dict: Dictionary, dice_rolls: Array) -> Array[int]:
 	var hand_type = hand_dict.get("hand_type")[0]  # e.g., "Singles", "Kind", "Straight"
 	var hand_value1 = hand_dict.get("hand_type")[1]  # e.g., target value like 1, 2 for Singles; 3 for 3 of a Kind
 	
@@ -18,17 +17,17 @@ func calculate_hand_score(hand_dict: Dictionary, dice_rolls: Array) -> int:
 		"Singles":
 			return _calculate_singles_score(hand_value1, dice_rolls)
 		"Kind":
-			return _calculate_kind_score(hand_value1, dice_rolls)
+			return [_calculate_kind_score(hand_value1, dice_rolls),0]
 		"Straight":
-			return _calculate_straight_score(hand_value1, dice_rolls)
+			return [_calculate_straight_score(hand_value1, dice_rolls),0]
 		"FullHouse":
 			var hand_value2 = hand_dict.get("hand_type")[2]  # used for full houses
-			return _calculate_full_house_score(hand_value1, hand_value2, dice_rolls)
+			return [_calculate_full_house_score(hand_value1, hand_value2, dice_rolls),0]
 		"Chance":
-			return _calculate_chance_score(dice_rolls)
+			return [_calculate_chance_score(dice_rolls),0]
 		_:
 			print("Unknown hand type:", hand_type)
-			return 0
+			return [0,0]
 
 func setupBonus(_bonusHand: Dictionary) -> void:
 	#Add logic to read host input
@@ -42,16 +41,17 @@ func initializeValues() -> void:
 	SinglesTotal = 0
 
 # Calculates score for Singles (like Ones, Twos, etc.)
-func _calculate_singles_score(target_value: int, dice_rolls: Array) -> int:
+func _calculate_singles_score(target_value: int, dice_rolls: Array) -> Array[int]:
 	var score = 0
+	var bonus_send = 0
 	for roll in dice_rolls:
 		if roll == target_value:
 			score += roll
 	SinglesTotal += score
 	if BonusExists and SinglesTotal >= BonusThreshold and !BonusUsed:
-		BonusTriggered.emit(BonusScore)
+		bonus_send = BonusScore
 		BonusUsed = true
-	return score
+	return [score, bonus_send]
 
 # Calculates score for Chance (Sum)
 func _calculate_chance_score(dice_rolls: Array) -> int:

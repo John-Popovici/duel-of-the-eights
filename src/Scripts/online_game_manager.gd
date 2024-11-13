@@ -166,6 +166,9 @@ func recievehand(hand: Dictionary) -> void:
 	endOfRoundEffects()
 	waiting_on_other_player(false)
 
+func recievebonus(hand: Dictionary) -> void:
+	enemyPlayer.update_score(hand["score"])
+	#add code to enemy player to log all hands in order with score
 
 func endOfRoundEffects() -> void:
 	#have a tree of end of round Effects instances to pass the score through and get updated result
@@ -284,6 +287,8 @@ func _on_game_state_received(state: String, data: Dictionary):
 			recieveRollSelection(data["type"])
 		"hand":
 			recievehand(data)
+		"bonus":
+			recievebonus(data)
 		"test":
 			connectionTest(data)
 
@@ -298,7 +303,6 @@ func setup_PlayerManager(settings: Dictionary) -> void:
 func setup_scoreboard(_hand_settings: Dictionary) -> void:
 	#clear anything generated and re build
 	scoreCalc.initializeValues()
-	scoreCalc.BonusTriggered.connect(self._on_bonus_triggered)
 	scoreboard.bonusExists.connect(self._on_bonus_exist)
 	scoreboard.populate_scoreboard(_hand_settings)
 	scoreboard.hand_selected.connect(self._on_hand_selected)
@@ -347,20 +351,20 @@ func _on_hand_selected(hand: Dictionary):
 	print(hand)
 	setDisableScoreBoardButtons(true)
 	var score = scoreCalc.calculate_hand_score(hand, myPlayer.getRolls())
-	myPlayer.update_score(score)
-	scoreboard.updateButtonScore(score)
+	myPlayer.update_score(score[0])
+	scoreboard.updateButtonScore(score[0])
+	if score[1] >= 0:
+		myPlayer.update_score(score[1])
+		scoreboard.updateBonusButtonScore(score[1])
+		network_manager.broadcast_game_state("bonus", { "score": score[1], "hand": hand["hand_type"] })
 	hand_selection_done = true
 	hand_selection = hand
 	print(hand)
-	network_manager.broadcast_game_state("hand", { "score": score, "hand": hand["hand_type"] })
+	network_manager.broadcast_game_state("hand", { "score": score[0], "hand": hand["hand_type"] })
 	# Logic to proceed to next player's turn if necessary
 
 func _on_bonus_exist(_hand: Dictionary) -> void:
 	scoreCalc.setupBonus(_hand)
-
-func _on_bonus_triggered(_score):
-	#apply_score_to_player(score) #implement in Player Manager !!!!!!!!!!!
-	scoreboard.updateBonusButtonScore(_score)
 
 # Function to dynamically set up game environment based on settings
 func setup_game_environment(_game_settings: Dictionary) -> void:

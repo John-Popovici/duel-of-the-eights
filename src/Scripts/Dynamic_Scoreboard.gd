@@ -57,7 +57,8 @@ func updateButtonScore(_score: int):
 		lastButton.text = str(oldScore + _score)
 
 func updateBonusButtonScore(_score: int):
-	BonusButton.text = str(_score)
+	var oldScore = int(BonusButton.text)
+	BonusButton.text = str(oldScore + _score)
 
 func setAllButtonsDisable(state: bool) -> void:
 	for _button in AllButtons:
