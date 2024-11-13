@@ -17,7 +17,7 @@ func calculate_hand_score(hand_dict: Dictionary, dice_rolls: Array) -> Array[int
 		"Singles":
 			return _calculate_singles_score(hand_value1, dice_rolls)
 		"Kind":
-			return [_calculate_kind_score(hand_value1, dice_rolls),0]
+			return [_calculate_kind_score(hand_value1, dice_rolls),0] #Modify to include Yahtzee repetition rules
 		"Straight":
 			return [_calculate_straight_score(hand_value1, dice_rolls),0]
 		"FullHouse":
