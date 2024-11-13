@@ -58,7 +58,9 @@ func setup_game() -> void:
 	setup_game_environment(game_settings)
 	setup_scoreboard(hand_settings)
 	setup_PlayerManager(game_settings)
+	print("Setup UI Called on Host: ", network_manager.getIsHost())
 	GameUI.setup_game_ui(game_settings,network_manager.getIsHost())
+	print("Setup UI Finished Calling Called on Host: ", network_manager.getIsHost())
 	isHost = network_manager.getIsHost()
 	network_manager.connect("game_state_received", self._on_game_state_received)
 	rollSelected.connect("pressed", self._on_roll_selected)
@@ -264,11 +266,22 @@ func endGame() -> void:
 	GameUI.hide_all_ui()
 	GameUI.show_end_of_game_screen(resultText, myPlayerFinalStats, OpponentFinalStats)
 
+var rematch = false
 func restartGame() ->void:
-	pass
-	
+	network_manager.broadcast_game_state("rematch", {})
+	rematch = true
+
+func synchronizeRematch() -> void:
+	print("synchronize rematch round called by Host: ", !isHost, " on Host: ", isHost)
+	#wait for round to start locally
+	while !(rematch):
+		await get_tree().create_timer(1.0).timeout
+	rematch = false
+	setup_game()
 
 func exitGame() -> void:
+	network_manager.broadcast_game_state("end_game", {})
+	get_tree().get_root().get_node("OnlineGameScene").returnToIntro()
 	pass
 	
 
@@ -289,6 +302,10 @@ func _on_game_state_received(state: String, data: Dictionary):
 			recievehand(data)
 		"bonus":
 			recievebonus(data)
+		"end_game":
+			exitGame()
+		"rematch":
+			synchronizeRematch()
 		"test":
 			connectionTest(data)
 

@@ -13,8 +13,10 @@ var AllButtons: Array[Button]
 func populate_scoreboard(hand_settings: Dictionary):
 	self.visible = true
 	for child in vbox_container.get_children():# Clear existing entries
-		child.queue_free()
+		child.free()
 
+	AllButtons.clear()
+	
 	for hand_name in hand_settings.keys():
 		var settings = hand_settings[hand_name]
 		# Load the HandScoreEntry scene as a template

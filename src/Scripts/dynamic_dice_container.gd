@@ -65,6 +65,7 @@ func get_invalid_dice() -> Array:
 func clear_dice() -> void:
 	for child in get_children():
 		child.queue_free()
+	dice_nodes.clear()
 
 func add_dice(dice_count: int, dice_type: int) -> void:
 	clear_dice()

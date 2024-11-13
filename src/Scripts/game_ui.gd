@@ -27,10 +27,12 @@ var dice_count:int
 var dice_type:int
 var dice_display_height: float = 100
 signal escPressed
+var isHost
 
 # Set up the UI based on the initial game settings
-func setup_game_ui(game_settings: Dictionary, isHost: bool):
+func setup_game_ui(game_settings: Dictionary, _isHost: bool):
 	#code to hide endGame and WaitingScreen
+	isHost = _isHost
 	hide_waiting_screen()
 	hide_end_of_game_screen()
 	hide_pause_menu()
@@ -57,11 +59,12 @@ func setup_game_ui(game_settings: Dictionary, isHost: bool):
 	print("Dice Type set to: ", dice_type)
 	# Initialize labels for game state
 	for child in game_state_info.get_children():
-		child.queue_free()
+		child.free()
+		
 	var round_label = Label.new()
 	round_label.name = "RoundLabel"
 	game_state_info.add_child(round_label)
-	
+	print("Label made on Host: ", isHost)
 	var roll_label = Label.new()
 	roll_label.name = "RollLabel"
 	game_state_info.add_child(roll_label)
@@ -73,7 +76,7 @@ func setup_game_ui(game_settings: Dictionary, isHost: bool):
 	#opponent_dice_display.set_size(Vector2(0,container_height))
 	# Initialize opponent dice display with empty sprites
 	for child in opponent_dice_display.get_children():
-		child.queue_free()
+		child.free()
 	for i in range(dice_count):
 		var dice_sprite = preload("res://NodeScene/dice_tex_temp.tscn").instantiate()
 		dice_sprite.name = "OpponentDie%d" % i
@@ -90,7 +93,7 @@ func setup_game_ui(game_settings: Dictionary, isHost: bool):
 # Helper to initialize player stat labels
 func initialize_stat_labels(stat_box: VBoxContainer, player_type: String):
 	for child in stat_box.get_children():
-		child.queue_free()
+		child.free()
 	for stat_name in ["Name", "Health", "Score"]:
 		var label = Label.new()
 		label.name = "%s%sLabel" % [player_type, stat_name]
@@ -144,6 +147,8 @@ func update_opponent_dice_display_width(dice_size: float):
 # Update game state info
 func update_round_info(current_round: int, _total_rounds: int = total_rounds):
 	var round_label = game_state_info.get_node("RoundLabel") as Label
+	print(game_state_info.get_children())
+	print("Round Label ID: ",round_label, " on Host: ", isHost)
 	round_label.text = "Round: %d / %d" % [current_round, _total_rounds]
 
 func update_roll_info(current_roll: int, total_rolls: int = total_round_rolls):
