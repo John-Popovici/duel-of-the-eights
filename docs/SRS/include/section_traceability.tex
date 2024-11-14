@@ -2,58 +2,63 @@
 
 This section has been adapted from the original "Traceability Matrices and Graphs" portion of this document, which was initially geared toward scientific computation and the dependencies between physical components. In this revised section, we focus on aligning the specific goals of the game with the corresponding requirements, design changes, and other relevant elements outlined in this document. By doing so, we aim to create a clear and structured mapping between our Goals and the necessary steps for implementation.
 
-The traceability matrices in this section provide an overview of these connections. Where an 'X' appears in the table, it signifies that a requirement or other item was developed in response to a particular goal or is linked to that goal. Two separate tables are presented: the first traces the core Goals of the project, while the second maps the Stretch Goals, allowing for a more comprehensive understanding of how different project objectives are supported through specific requirements.
+The traceability matrices in this section provide an overview of these connections. Where an 'X' appears in the table, it signifies that a requirement or other item was developed in response to a particular goal or is linked to that goal. Two separate tables are presented: the first traces the core Goals of the project, while the second maps the Stretch Goals, allowing for a more comprehensive understanding of how different project objectives are supported through specific requirements.\newline
 
-Summary definitions: (refer to Requirements section for details)
+Summary of goals and stretch goals:
 \begin{itemize}
-	\item GS1: Enjoyable game
-	\item GS2: Online multiplayer functionality
-	\item GS3: Customizable game settings
-	\item GS4: Preset game settings
-	\item GS5: 3D dice rolling
+	\item \hyperref[G_enjoyable]{GS1: Enjoyable game}
+	\item \hyperref[G_multiplayer]{GS2: Online multiplayer functionality}
+	\item \hyperref[G_customization]{GS3: Customizable game settings}
+	\item \hyperref[G_presets]{GS4: Preset game settings}
+	\item \hyperref[G_3D]{GS5: 3D dice rolling}
 
-	\item SG6: Local multiplayer
-	\item SG7: Singleplayer variants
-	\item SG8: Online matchmaking
-	\item SG9: Saving custom game setting
-	\item SG10: More game setting customization
-	\item SG11: Visual Dice customization
-	\item SG12: Post game statistics
-	\item SG13: Multi-platform support
-	\item SG14: Dice highlighting
+	\item \hyperref[G_local_multiplayer]{SG6: Local multiplayer}
+	\item \hyperref[G_singleplayer]{SG7: Singleplayer variants}
+	\item \hyperref[G_matchmaking]{SG8: Online matchmaking}
+	\item \hyperref[G_saving]{SG9: Saving custom game setting}
+	\item \hyperref[G_customization2]{SG10: More game setting customization}
+	\item \hyperref[G_skins]{SG11: Visual Dice customization}
+	\item \hyperref[G_stats]{SG12: Post game statistics}
+	\item \hyperref[G_platforms]{SG13: Multi-platform support}
+	\item \hyperref[G_highlights]{SG14: Dice highlighting}
 \end{itemize}
 
 \begin{table}[ht]
 \centering
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline
-\textbf{Reference Item} & \textbf{GS1} & \textbf{GS2} & \textbf{GS3} & \textbf{GS4} & \textbf{GS5} \\ \hline
-\textbf{R1} & &X & & & \\ \hline
-\textbf{R2} & & & &X & \\ \hline
-\textbf{R3} & & & & &X \\ \hline
-\textbf{R4} & & & & &X \\ \hline
-\textbf{R5} & & &X & & \\ \hline
-\textbf{R6} & &X & & & \\ \hline
-\textbf{R7} &X & & & & \\ \hline
-\textbf{R8} &X & & & &X \\ \hline
-\textbf{R9} & & &X & & \\ \hline
-\textbf{R10} & & & &X & \\ \hline
-\textbf{R17} &X & & & &X \\ \hline
-\textbf{NFR1} &X & & & & \\ \hline
-\textbf{NFR2} &X & & & & \\ \hline
-\textbf{NFR3} & & & & & \\ \hline
-\textbf{NFR4} &X & & & & \\ \hline
-\textbf{NFR5} &X & & & & \\ \hline
-\textbf{NFR6} & & & & & \\ \hline
-\textbf{NFR7} &X & & & & \\ \hline
-\textbf{NFR8} &X & & & & \\ \hline
-\textbf{NFR9} &X & & & &X \\ \hline
-\textbf{LC2} & & &X & & \\ \hline
-\textbf{LC4} & & &X & & \\ \hline
-\textbf{UC1} & &X & & & \\ \hline
-\textbf{UC2} & & & & &X \\ \hline
-\textbf{UC4} & & &X & & \\ \hline
-\textbf{UC5} & & & & &X \\ \hline
+\textbf{Reference Item} &
+\hyperref[G_enjoyable]{\textbf{GS1}} &
+\hyperref[G_multiplayer]{\textbf{GS2}} &
+\hyperref[G_customization]{\textbf{GS3}} &
+\hyperref[G_presets]{\textbf{GS4}} &
+\hyperref[G_3D]{\textbf{GS5}} \\ \hline
+\hyperref[R1]{\textbf{R1}} & &X & & & \\ \hline
+\hyperref[R2]{\textbf{R2}} & & & &X & \\ \hline
+\hyperref[R3]{\textbf{R3}} & & & & &X \\ \hline
+\hyperref[R4]{\textbf{R4}} & & & & &X \\ \hline
+\hyperref[R5]{\textbf{R5}} & & &X & & \\ \hline
+\hyperref[R6]{\textbf{R6}} & &X & & & \\ \hline
+\hyperref[R7]{\textbf{R7}} &X & & & & \\ \hline
+\hyperref[R8]{\textbf{R8}} &X & & & &X \\ \hline
+\hyperref[R9]{\textbf{R9}} & & &X & & \\ \hline
+\hyperref[R10]{\textbf{R10}} & & & &X & \\ \hline
+\hyperref[R17]{\textbf{R17}} &X & & & &X \\ \hline
+\hyperref[NFR1]{\textbf{NFR1}} &X & & & & \\ \hline
+\hyperref[NFR2]{\textbf{NFR2}} &X & & & & \\ \hline
+\hyperref[NFR3]{\textbf{NFR3}} & & & & & \\ \hline
+\hyperref[NFR4]{\textbf{NFR4}} &X & & & & \\ \hline
+\hyperref[NFR5]{\textbf{NFR5}} &X & & & & \\ \hline
+\hyperref[NFR6]{\textbf{NFR6}} & & & & & \\ \hline
+\hyperref[NFR7]{\textbf{NFR7}} &X & & & & \\ \hline
+\hyperref[NFR8]{\textbf{NFR8}} &X & & & & \\ \hline
+\hyperref[NFR9]{\textbf{NFR9}} &X & & & &X \\ \hline
+\hyperref[LC_dice]{\textbf{LC2}} & & &X & & \\ \hline
+\hyperref[LC_score_calc]{\textbf{LC4}} & & &X & & \\ \hline
+\hyperref[ULC_multiplayer]{\textbf{UC1}} & &X & & & \\ \hline
+\hyperref[ULC_dice]{\textbf{UC2}} & & & & &X \\ \hline
+\hyperref[ULC_customization]{\textbf{UC4}} & & &X & & \\ \hline
+\hyperref[ULC_3D]{\textbf{UC5}} & & & & &X \\ \hline
 \end{tabular}
 \caption{Traceability Matrix for Goals}
 \label{table:goals_traceability}
@@ -64,20 +69,29 @@ Summary definitions: (refer to Requirements section for details)
 \centering
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
 \hline
-\textbf{Reference Item} & \textbf{SG6} & \textbf{SG7} & \textbf{SG8} & \textbf{SG9} & \textbf{SG10} & \textbf{SG11} & \textbf{SG12} & \textbf{SG13} & \textbf{SG14} \\ \hline
-\textbf{R11} &X & & & & & & & & \\ \hline
-\textbf{R12} & &X & & & & & & & \\ \hline
-\textbf{R13} & &X & & & & & & & \\ \hline
-\textbf{R14} & & &X & & & & & & \\ \hline
-\textbf{R15} & & & &X & & & & & \\ \hline
-\textbf{R16} & & & & & & &X & & \\ \hline
-\textbf{R17} & & & & & &X &X & &X \\ \hline
-\textbf{NFR10} & & & & & & & &X & \\ \hline
-\textbf{LC1} &X &X &X & & & & & & \\ \hline
-\textbf{LC3} & & & & & & & &X & \\ \hline
-\textbf{LC5} & & & & &X & & & & \\ \hline
-\textbf{UC1} &X & & & & & & & & \\ \hline
-\textbf{UC3} & & & & & & & &X & \\ \hline
+\textbf{Reference Item} &
+\hyperref[G_local_multiplayer]{\textbf{SG6}} &
+\hyperref[G_singleplayer]{\textbf{SG7}} &
+\hyperref[G_matchmaking]{\textbf{SG8}} &
+\hyperref[G_saving]{\textbf{SG9}} &
+\hyperref[G_customization2]{\textbf{SG10}} &
+\hyperref[G_skins]{\textbf{SG11}} &
+\hyperref[G_stats]{\textbf{SG12}} &
+\hyperref[G_platforms]{\textbf{SG13}} &
+\hyperref[G_highlights]{\textbf{SG14}} \\ \hline
+\hyperref[R11]{\textbf{R11}} &X & & & & & & & & \\ \hline
+\hyperref[R12]{\textbf{R12}} & &X & & & & & & & \\ \hline
+\hyperref[R13]{\textbf{R13}} & &X & & & & & & & \\ \hline
+\hyperref[R14]{\textbf{R14}} & & &X & & & & & & \\ \hline
+\hyperref[R15]{\textbf{R15}} & & & &X & & & & & \\ \hline
+\hyperref[R16]{\textbf{R16}} & & & & & & &X & & \\ \hline
+\hyperref[R17]{\textbf{R17}} & & & & & &X &X & &X \\ \hline
+\hyperref[NFR10]{\textbf{NFR10}} & & & & & & & &X & \\ \hline
+\hyperref[LC_find_opp]{\textbf{LC1}} &X &X &X & & & & & & \\ \hline
+\hyperref[LC_platforms]{\textbf{LC3}} & & & & & & & &X & \\ \hline
+\hyperref[LC_num_players]{\textbf{LC5}} & & & & &X & & & & \\ \hline
+\hyperref[ULC_multiplayer]{\textbf{UC1}} &X & & & & & & & & \\ \hline
+\hyperref[ULC_godot]{\textbf{UC3}} & & & & & & & &X & \\ \hline
 \end{tabular}
 \caption{Traceability Matrix for Stretch Goals}
 \label{table:stretch_goals_traceability}
