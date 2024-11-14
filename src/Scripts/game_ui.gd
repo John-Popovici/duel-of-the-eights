@@ -1,7 +1,11 @@
 extends CanvasLayer
 
-@onready var opponent_dice_display = get_node("OpponentDicePanel/OpponentDiceDisplay")
-@onready var game_state_info = get_node("GameStateInfo")
+@onready var opponent_dice_base = get_node("OpponentDiceBase")
+@onready var opponent_dice_display = get_node("OpponentDiceBase/OpponentDicePanel/OpponentDiceDisplay")
+@onready var my_player_dice_base = get_node("MyPlayerDiceBase")
+@onready var my_player_dice_display = get_node("MyPlayerDiceBase/MyPlayerDicePanel/MyPlayerDiceDisplay")
+@onready var game_state_panel = get_node("GameStatePanel")
+@onready var game_state_info = get_node("GameStatePanel/GameStateInfo")
 @onready var player_stats_panel = get_node("PlayerStatsPanel")
 @onready var player_stat_box = get_node("PlayerStatsPanel/MyPlayerPanel/MyPlayerStatBox")
 @onready var enemy_stat_box = get_node("PlayerStatsPanel/EnemyPlayerPanel/EnemyPlayerStatBox")
@@ -28,12 +32,14 @@ var dice_count:int
 var dice_type:int
 var dice_display_height: float = 100
 signal escPressed
+var escScreenAllowed = false
 var isHost
 
 # Set up the UI based on the initial game settings
 func setup_game_ui(game_settings: Dictionary, _isHost: bool):
 	#code to hide endGame and WaitingScreen
 	isHost = _isHost
+	escScreenAllowed = true
 	hide_waiting_screen()
 	hide_end_of_game_screen()
 	hide_pause_menu()
@@ -41,10 +47,10 @@ func setup_game_ui(game_settings: Dictionary, _isHost: bool):
 		show_opponent_rolls()
 	else: 
 		hide_opponent_rolls()
-		game_state_info.position = Vector2(game_state_info.position.x, 0)
 	show_roll_buttons()
 	show_game_state_info()
 	show_player_stats_panel()
+	show_my_player_rolls()
 	
 	if isHost:
 		myPlayerName = game_settings["player_names"][0]
@@ -74,21 +80,14 @@ func setup_game_ui(game_settings: Dictionary, _isHost: bool):
 	update_round_info(1, total_rounds)
 	update_roll_info(1, total_round_rolls)
 
-	#opponent_dice_display.set_size(Vector2(0,container_height))
-	# Initialize opponent dice display with empty sprites
-	for child in opponent_dice_display.get_children():
-		child.free()
-	for i in range(dice_count):
-		var dice_sprite = preload("res://NodeScene/dice_tex_temp.tscn").instantiate()
-		dice_sprite.name = "OpponentDie%d" % i
-		#dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-0.png"))
-		opponent_dice_display.add_child(dice_sprite)
+	# Initialize dice displays with empty sprites
+	initialize_opponent_dice_display()
+	initialize_my_player_dice_display()
 	# Initialize player stats labels
-	initialize_stat_labels(player_stat_box, "Player")
-	initialize_stat_labels(enemy_stat_box, "Opponent")
-	blank_opponent_dice_display()
-	update_player_stats("Player", myPlayerName, health_points, 0)
-	update_player_stats("Opponent", enemyPlayerName, health_points, 0)
+	initialize_stat_labels(player_stat_box, "Player") #make more dynamic
+	initialize_stat_labels(enemy_stat_box, "Opponent") #make more dynamic
+	update_player_stats("Player", myPlayerName, health_points, 0) #make more dynamic
+	update_player_stats("Opponent", enemyPlayerName, health_points, 0) #make more dynamic
 	connect("escPressed",self.toggle_pause_menu)
 
 # Helper to initialize player stat labels
@@ -101,8 +100,31 @@ func initialize_stat_labels(stat_box: VBoxContainer, player_type: String):
 		label.text = "%s %s: " % [player_type, stat_name]
 		stat_box.add_child(label)
 
+func initialize_opponent_dice_display() -> void:
+	# Initialize opponent dice display with empty sprites
+	for child in opponent_dice_display.get_children():
+		child.free()
+	for i in range(dice_count):
+		var dice_sprite = preload("res://NodeScene/dice_tex_temp.tscn").instantiate()
+		dice_sprite.name = "OpponentDie%d" % i
+		#dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-0.png"))
+		opponent_dice_display.add_child(dice_sprite)
+	blank_opponent_dice_display()
+
+func initialize_my_player_dice_display() -> void:
+	# Initialize my dice display with empty sprites
+	for child in my_player_dice_display.get_children():
+		child.free()
+	for i in range(dice_count):
+		var dice_sprite = preload("res://NodeScene/dice_tex_temp.tscn").instantiate()
+		dice_sprite.name = "OpponentDie%d" % i
+		#dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-0.png"))
+		my_player_dice_display.add_child(dice_sprite)
+	blank_my_player_dice_display()
+
 # Update the opponent's dice display based on rolls
 func update_opponent_dice_display(rolls: Array):
+	rolls.sort()
 	for i in range(rolls.size()):
 		match dice_type:
 			6:
@@ -110,6 +132,17 @@ func update_opponent_dice_display(rolls: Array):
 				dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % rolls[i]))  # Adjust path to dice textures
 			8:
 				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
+				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-%d.png" % rolls[i])  # Adjust path to dice textures
+
+func update_my_player_dice_display(rolls: Array):
+	rolls.sort()
+	for i in range(rolls.size()):
+		match dice_type:
+			6:
+				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
+				dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % rolls[i]))  # Adjust path to dice textures
+			8:
+				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
 				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-%d.png" % rolls[i])  # Adjust path to dice textures
 
 # Update the opponent's dice display to blanks
@@ -122,6 +155,17 @@ func blank_opponent_dice_display():
 			8:
 				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
 				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-0.png")  # Adjust path to dice textures
+
+func blank_my_player_dice_display():
+	for i in range(dice_count):
+		match dice_type:
+			6:
+				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
+				dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-0.png"))  # Adjust path to dice textures
+			8:
+				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
+				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-0.png")  # Adjust path to dice textures
+
 
 # Update game state info
 func update_round_info(current_round: int, _total_rounds: int = total_rounds):
@@ -153,6 +197,8 @@ func hide_waiting_screen():
 # Initialize the end of game screen with winner and player stats
 func show_end_of_game_screen(resultText: String, player_stats: Dictionary, opponent_stats: Dictionary):
 	end_of_game_screen.visible = true
+	EscBackground.visible = true
+	escScreenAllowed = false
 	winner_label.text = resultText
 	
 	var game_manager = get_parent()
@@ -174,10 +220,13 @@ func format_dictionary_to_string(data: Dictionary) -> String:
 # Hide the end of game screen
 func hide_end_of_game_screen():
 	end_of_game_screen.visible = false
+	EscBackground.visible = false
+	escScreenAllowed = true
 
 func hide_all_ui():
 	hide_roll_buttons()
 	hide_opponent_rolls()
+	hide_my_player_rolls()
 	hide_game_state_info()
 	hide_player_stats_panel()
 	hide_waiting_screen()
@@ -189,8 +238,9 @@ func hide_pause_menu():
 	EscBackground.visible = false
 
 func show_pause_menu():
-	PausePanel.visible = true
-	EscBackground.visible = true
+	if escScreenAllowed:
+		PausePanel.visible = true
+		EscBackground.visible = true
 
 func toggle_pause_menu():
 	if PausePanel.visible:
@@ -204,10 +254,16 @@ func _input(event):
 			escPressed.emit()
 
 func hide_opponent_rolls():
-	opponent_dice_display.visible = false
+	opponent_dice_base.visible = false
 
 func show_opponent_rolls():
-	opponent_dice_display.visible = true
+	opponent_dice_base.visible = true
+
+func hide_my_player_rolls():
+	my_player_dice_base.visible = false
+
+func show_my_player_rolls():
+	my_player_dice_base.visible = true
 
 func hide_roll_buttons():
 	rollButtons.visible = false
@@ -216,10 +272,10 @@ func show_roll_buttons():
 	rollButtons.visible = true
 
 func hide_game_state_info():
-	game_state_info.visible = false
+	game_state_panel.visible = false
 
 func show_game_state_info():
-	game_state_info.visible = true
+	game_state_panel.visible = true
 
 func hide_player_stats_panel():
 	player_stats_panel.visible = false

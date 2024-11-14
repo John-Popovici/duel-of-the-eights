@@ -459,7 +459,6 @@ spot_attenuation = -0.5
 spot_angle_attenuation = 2.37841
 
 [node name="Scoreboard" type="CanvasLayer" parent="GameManager"]
-visible = false
 script = ExtResource("9_i8ewx")
 
 [node name="UIBox" type="PanelContainer" parent="GameManager/Scoreboard"]
@@ -511,49 +510,113 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -53.5
-offset_top = -66.0
-offset_right = 53.5
+offset_left = 400.0
+offset_top = -279.0
+offset_right = 548.0
+offset_bottom = -213.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("13_g1ii3")
 
 [node name="RollSelected" type="Button" parent="GameManager/GameUI/RollButtons"]
 layout_mode = 2
+theme = ExtResource("14_jpiw0")
 theme_override_font_sizes/font_size = 22
 text = "Roll Selected"
 
 [node name="PassRoll" type="Button" parent="GameManager/GameUI/RollButtons"]
 layout_mode = 2
+theme = ExtResource("14_jpiw0")
 theme_override_font_sizes/font_size = 22
 text = "Pass"
 
-[node name="OpponentDicePanel" type="PanelContainer" parent="GameManager/GameUI"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -284.0
-offset_right = 284.0
-offset_bottom = 76.0
-grow_horizontal = 2
+[node name="MyPlayerDiceLabel" type="Label" parent="GameManager/GameUI"]
+offset_left = 3.0
+offset_top = 544.0
+offset_right = 170.0
+offset_bottom = 568.0
+theme = ExtResource("14_jpiw0")
+text = "Opponent Dice Rolls:"
+
+[node name="OpponentDiceBase" type="Control" parent="GameManager/GameUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 theme = ExtResource("14_jpiw0")
 
-[node name="OpponentDiceDisplay" type="HBoxContainer" parent="GameManager/GameUI/OpponentDicePanel"]
+[node name="OpponentDiceLabel" type="Label" parent="GameManager/GameUI/OpponentDiceBase"]
+offset_left = 3.0
+offset_top = 544.0
+offset_right = 169.0
+offset_bottom = 568.0
+theme = ExtResource("14_jpiw0")
+text = "Opponent Dice Rolls:"
+
+[node name="OpponentDicePanel" type="PanelContainer" parent="GameManager/GameUI/OpponentDiceBase"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 532.0
+offset_right = 568.0
+offset_bottom = 608.0
+grow_vertical = 0
+theme = ExtResource("14_jpiw0")
+
+[node name="OpponentDiceDisplay" type="HBoxContainer" parent="GameManager/GameUI/OpponentDiceBase/OpponentDicePanel"]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="GameStateInfo" type="HBoxContainer" parent="GameManager/GameUI"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_top = 100.0
-offset_right = 20.0
-offset_bottom = 140.0
-grow_horizontal = 2
+[node name="MyPlayerDiceBase" type="Control" parent="GameManager/GameUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("14_jpiw0")
+
+[node name="MyPlayerDiceLabel" type="Label" parent="GameManager/GameUI/MyPlayerDiceBase"]
+offset_left = 1034.0
+offset_top = 543.0
+offset_right = 1146.0
+offset_bottom = 567.0
+theme = ExtResource("14_jpiw0")
+text = "My Dice Rolls:"
+horizontal_alignment = 2
+
+[node name="MyPlayerDicePanel" type="PanelContainer" parent="GameManager/GameUI/MyPlayerDiceBase"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 544.0
+offset_top = 532.0
+offset_right = 1112.0
+offset_bottom = 608.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("14_jpiw0")
+
+[node name="MyPlayerDiceDisplay" type="HBoxContainer" parent="GameManager/GameUI/MyPlayerDiceBase/MyPlayerDicePanel"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="GameStatePanel" type="PanelContainer" parent="GameManager/GameUI"]
+offset_top = 390.0
+offset_right = 199.0
+offset_bottom = 430.0
+theme = ExtResource("14_jpiw0")
+
+[node name="GameStateInfo" type="HBoxContainer" parent="GameManager/GameUI/GameStatePanel"]
+layout_mode = 2
 alignment = 1
 
 [node name="PlayerStatsPanel" type="VBoxContainer" parent="GameManager/GameUI"]
@@ -597,16 +660,29 @@ theme = ExtResource("13_g1ii3")
 text = "Waiting for other player..."
 horizontal_alignment = 1
 
+[node name="EscBackOverlay" type="ColorRect" parent="GameManager/GameUI"]
+visible = false
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 0, 0, 0.266667)
+
 [node name="EndOfGameScreen" type="VBoxContainer" parent="GameManager/GameUI"]
 visible = false
+z_index = 2
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -113.0
+offset_left = -121.0
 offset_top = -73.5
-offset_right = 113.0
+offset_right = 121.0
 offset_bottom = 73.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -642,18 +718,6 @@ text = "Rematch?"
 [node name="ExitButton" type="Button" parent="GameManager/GameUI/EndOfGameScreen"]
 layout_mode = 2
 text = "Exit Match"
-
-[node name="EscBackOverlay" type="ColorRect" parent="GameManager/GameUI"]
-visible = false
-z_index = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-color = Color(0, 0, 0, 0.266667)
 
 [node name="EscPanel" type="PanelContainer" parent="GameManager/GameUI"]
 visible = false

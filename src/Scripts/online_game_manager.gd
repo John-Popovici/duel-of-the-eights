@@ -130,6 +130,7 @@ func recieveRolls(fromHost: bool, _rolls: Array[int]) ->void:
 	#wait of rolls read locally
 	while !(rolls_read):
 		await get_tree().create_timer(1.0).timeout
+	GameUI.update_my_player_dice_display(myPlayer.getRolls())
 	rolls_read = false
 	await get_tree().create_timer(1.0).timeout
 	waiting_on_other_player(false)
