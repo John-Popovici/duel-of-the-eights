@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bv1diwskvph82"]
+[gd_scene load_steps=22 format=3 uid="uid://bv1diwskvph82"]
 
 [ext_resource type="Script" path="res://Scripts/online_game_scene.gd" id="1_qoyeu"]
 [ext_resource type="Script" path="res://Scripts/networkManager.gd" id="2_6sfck"]
@@ -6,16 +6,17 @@
 [ext_resource type="Script" path="res://Scripts/online_game_manager.gd" id="4_fvdct"]
 [ext_resource type="Script" path="res://Scripts/dynamic_dice_container.gd" id="5_aa5li"]
 [ext_resource type="Script" path="res://Scripts/game_settings.gd" id="5_js8aa"]
-[ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/BlueBoxBackgroundStyle.tres" id="5_oidav"]
+[ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/Default_Pixel_Blue/BlueBoxBackgroundStyle.tres" id="5_oidav"]
 [ext_resource type="PackedScene" uid="uid://c2y0m27eadb6i" path="res://NodeScene/sample_preset_button.tscn" id="7_q6wg6"]
 [ext_resource type="Material" uid="uid://cgpa3fsefx8ir" path="res://Materials/BoardLowMat.tres" id="7_v2pfy"]
 [ext_resource type="Material" uid="uid://dvsy8knluwv6e" path="res://Materials/BoardRaisedMat.tres" id="8_ef00w"]
 [ext_resource type="Script" path="res://Scripts/Dynamic_Scoreboard.gd" id="9_i8ewx"]
 [ext_resource type="Script" path="res://Scripts/score_calculator.gd" id="10_0b2yf"]
-[ext_resource type="StyleBox" uid="uid://bdd2m4n2as1ot" path="res://Themes/WoodBoxBackgroundStyle.tres" id="11_522jn"]
+[ext_resource type="StyleBox" uid="uid://bdd2m4n2as1ot" path="res://Themes/Default_Pixel_Wood/WoodBoxBackgroundStyle.tres" id="11_522jn"]
 [ext_resource type="Script" path="res://Scripts/PlayerManager.gd" id="11_ejug4"]
 [ext_resource type="Script" path="res://Scripts/game_ui.gd" id="12_f4hi7"]
-[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Default_pixel_theme.tres" id="13_g1ii3"]
+[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="13_g1ii3"]
+[ext_resource type="Theme" uid="uid://dokd457t4xs7n" path="res://Themes/Default_Pixel_Wood/Default_pixel_.Wood.tres" id="14_jpiw0"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_24wpm"]
 
@@ -48,65 +49,80 @@ layout_mode = 2
 
 [node name="Instructions" type="Label" parent="NetworkManager/ConnectionUI/UIBox/Connection_Setup"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 text = "Select Multiplayer Options:"
 horizontal_alignment = 1
 
 [node name="HostCheckButton" type="CheckButton" parent="NetworkManager/ConnectionUI/UIBox/Connection_Setup"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 text = "Host?"
 alignment = 1
 
 [node name="IP_Input" type="LineEdit" parent="NetworkManager/ConnectionUI/UIBox/Connection_Setup"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 placeholder_text = "Connect Code"
 alignment = 1
 
 [node name="Port_Input" type="LineEdit" parent="NetworkManager/ConnectionUI/UIBox/Connection_Setup"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 placeholder_text = "Port - 5 digits"
 alignment = 1
 
 [node name="ConnectButton" type="Button" parent="NetworkManager/ConnectionUI/UIBox/Connection_Setup"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 text = "Connect"
 
 [node name="BackToHomeButton" type="Button" parent="NetworkManager/ConnectionUI/UIBox/Connection_Setup"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 text = "Back to Home"
 
 [node name="Connection_Wait" type="VBoxContainer" parent="NetworkManager/ConnectionUI/UIBox"]
+visible = false
 layout_mode = 2
 
 [node name="IPDisplay" type="Label" parent="NetworkManager/ConnectionUI/UIBox/Connection_Wait"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 horizontal_alignment = 1
 
 [node name="CopyIPButton" type="Button" parent="NetworkManager/ConnectionUI/UIBox/Connection_Wait"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 text = "Copy Connect Code"
 
 [node name="PortDisplay" type="Label" parent="NetworkManager/ConnectionUI/UIBox/Connection_Wait"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 horizontal_alignment = 1
 
 [node name="CopyPortButton" type="Button" parent="NetworkManager/ConnectionUI/UIBox/Connection_Wait"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 text = "Copy Port"
 
 [node name="CancelHosting" type="Button" parent="NetworkManager/ConnectionUI/UIBox/Connection_Wait"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 text = "Stop Hosting"
 
 [node name="Connection_Error" type="VBoxContainer" parent="NetworkManager/ConnectionUI/UIBox"]
+visible = false
 layout_mode = 2
 
 [node name="Error Source" type="Label" parent="NetworkManager/ConnectionUI/UIBox/Connection_Error"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 text = "Error Source"
 horizontal_alignment = 1
 
 [node name="RedirectingToHome" type="Label" parent="NetworkManager/ConnectionUI/UIBox/Connection_Error"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 text = "Redirecting to Home Page"
 horizontal_alignment = 1
 
@@ -114,6 +130,7 @@ horizontal_alignment = 1
 script = ExtResource("4_fvdct")
 
 [node name="GameSettings" type="CanvasLayer" parent="GameManager"]
+visible = false
 script = ExtResource("5_js8aa")
 
 [node name="UIBox" type="PanelContainer" parent="GameManager/GameSettings"]
@@ -139,6 +156,7 @@ split_offset = 2
 dragger_visibility = 1
 
 [node name="Settings_Setup" type="VBoxContainer" parent="GameManager/GameSettings/UIBox/SettingsSplitBox"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -160,12 +178,14 @@ alignment = 1
 [node name="Player1Name" type="LineEdit" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/PlayerNames"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("13_g1ii3")
 placeholder_text = "Host Player Name"
 alignment = 1
 
 [node name="Player2Name" type="LineEdit" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/PlayerNames"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("13_g1ii3")
 placeholder_text = "Client Player Name"
 alignment = 1
 
@@ -181,6 +201,7 @@ horizontal_alignment = 1
 [node name="ConditionSelect" type="OptionButton" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/WinCondition"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("13_g1ii3")
 alignment = 1
 selected = 0
 allow_reselect = true
@@ -201,6 +222,7 @@ horizontal_alignment = 1
 [node name="HealthPoints" type="LineEdit" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/HealthPoints"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("13_g1ii3")
 text = "5"
 placeholder_text = "Health Points per player"
 alignment = 1
@@ -217,12 +239,14 @@ horizontal_alignment = 1
 [node name="Rounds" type="LineEdit" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/Rounds"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("13_g1ii3")
 text = "8"
 alignment = 1
 
 [node name="RoundRolls" type="LineEdit" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/Rounds"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("13_g1ii3")
 text = "3"
 placeholder_text = "Rolls per round"
 alignment = 1
@@ -240,6 +264,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme = ExtResource("13_g1ii3")
 min_value = 1.0
 max_value = 9.0
 value = 7.0
@@ -248,6 +273,7 @@ alignment = 1
 [node name="DiceType" type="OptionButton" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/Dice"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("13_g1ii3")
 alignment = 1
 selected = 1
 allow_reselect = true
@@ -263,12 +289,14 @@ layout_mode = 2
 [node name="OpponentRollVisible" type="CheckButton" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/HandLimit"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("13_g1ii3")
 text = "Show Opponent Roll:"
 
 [node name="AdvancedSettingsButton" type="Button" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/HandLimit"]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Modify Hand restrictions"
+theme = ExtResource("13_g1ii3")
 text = "Modify Hand Rules"
 
 [node name="Buttons" type="HBoxContainer" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup"]
@@ -278,14 +306,17 @@ alignment = 1
 [node name="StartGame" type="Button" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("13_g1ii3")
 text = "Start Game"
 
 [node name="BackToHomeButton" type="Button" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("13_g1ii3")
 text = "Back to Home"
 
 [node name="PresetsPanelBox" type="VBoxContainer" parent="GameManager/GameSettings/UIBox/SettingsSplitBox"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -307,19 +338,21 @@ layout_mode = 2
 
 [node name="NewPresetName" type="LineEdit" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/PresetsPanelBox"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 placeholder_text = "New Preset Name"
 alignment = 1
 
 [node name="AddPreset" type="Button" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/PresetsPanelBox"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 text = "Add Current Settings as Preset"
 
 [node name="Settings_Advanced" type="VBoxContainer" parent="GameManager/GameSettings/UIBox"]
-visible = false
 layout_mode = 2
 
 [node name="AdvancedInfo" type="Label" parent="GameManager/GameSettings/UIBox/Settings_Advanced"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 text = "Modify Rules for Individual hands"
 horizontal_alignment = 1
 
@@ -339,24 +372,27 @@ theme_override_constants/separation = 3
 
 [node name="SaveSettings" type="Button" parent="GameManager/GameSettings/UIBox/Settings_Advanced"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 text = "Save Settings"
 
 [node name="ReturnToSettings" type="Button" parent="GameManager/GameSettings/UIBox/Settings_Advanced"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 text = "Return"
 
 [node name="Settings_Wait" type="VBoxContainer" parent="GameManager/GameSettings/UIBox"]
-visible = false
 layout_mode = 2
 
 [node name="WaitInfo" type="Label" parent="GameManager/GameSettings/UIBox/Settings_Wait"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 text = "Waiting for host to
 set up game rules"
 horizontal_alignment = 1
 
 [node name="ExitGameButton" type="Button" parent="GameManager/GameSettings/UIBox/Settings_Wait"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 text = "Exit Game"
 
 [node name="DiceContainer" type="Node3D" parent="GameManager"]
@@ -441,6 +477,7 @@ theme_override_constants/separation = 0
 
 [node name="Header" type="Label" parent="GameManager/Scoreboard/UIBox/SelfHandsSectionBox"]
 layout_mode = 2
+theme = ExtResource("14_jpiw0")
 text = "Self Player's Scoreboard"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="GameManager/Scoreboard/UIBox/SelfHandsSectionBox"]
@@ -453,6 +490,7 @@ layout_mode = 2
 
 [node name="Total" type="Label" parent="GameManager/Scoreboard/UIBox/SelfHandsSectionBox"]
 layout_mode = 2
+theme = ExtResource("14_jpiw0")
 text = "Total:"
 
 [node name="ScoreCalculator" type="Node" parent="GameManager"]
@@ -465,10 +503,10 @@ script = ExtResource("11_ejug4")
 script = ExtResource("11_ejug4")
 
 [node name="GameUI" type="CanvasLayer" parent="GameManager"]
-visible = false
 script = ExtResource("12_f4hi7")
 
 [node name="RollButtons" type="VBoxContainer" parent="GameManager/GameUI"]
+visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -492,6 +530,7 @@ theme_override_font_sizes/font_size = 22
 text = "Pass"
 
 [node name="OpponentDiceDisplay" type="HBoxContainer" parent="GameManager/GameUI"]
+visible = false
 layout_direction = 2
 anchors_preset = 5
 anchor_left = 0.5
@@ -505,6 +544,7 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="GameStateInfo" type="HBoxContainer" parent="GameManager/GameUI"]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -519,13 +559,24 @@ alignment = 1
 offset_right = 199.0
 offset_bottom = 385.0
 
-[node name="MyPlayerStatBox" type="VBoxContainer" parent="GameManager/GameUI/PlayerStatsPanel"]
+[node name="MyPlayerPanel" type="PanelContainer" parent="GameManager/GameUI/PlayerStatsPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("14_jpiw0")
+
+[node name="MyPlayerStatBox" type="VBoxContainer" parent="GameManager/GameUI/PlayerStatsPanel/MyPlayerPanel"]
 layout_mode = 2
 
-[node name="EnemyPlayerStatBox" type="VBoxContainer" parent="GameManager/GameUI/PlayerStatsPanel"]
+[node name="EnemyPlayerPanel" type="PanelContainer" parent="GameManager/GameUI/PlayerStatsPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("14_jpiw0")
+
+[node name="EnemyPlayerStatBox" type="VBoxContainer" parent="GameManager/GameUI/PlayerStatsPanel/EnemyPlayerPanel"]
 layout_mode = 2
 
 [node name="WaitingScreen" type="VBoxContainer" parent="GameManager/GameUI"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -541,10 +592,12 @@ alignment = 1
 
 [node name="WaitMessage" type="Label" parent="GameManager/GameUI/WaitingScreen"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 text = "Waiting for other player..."
 horizontal_alignment = 1
 
 [node name="EndOfGameScreen" type="VBoxContainer" parent="GameManager/GameUI"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -590,6 +643,7 @@ layout_mode = 2
 text = "Exit Match"
 
 [node name="EscBackOverlay" type="ColorRect" parent="GameManager/GameUI"]
+visible = false
 z_index = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -601,6 +655,7 @@ size_flags_vertical = 3
 color = Color(0, 0, 0, 0.266667)
 
 [node name="EscPanel" type="PanelContainer" parent="GameManager/GameUI"]
+visible = false
 z_index = 2
 anchors_preset = 8
 anchor_left = 0.5
@@ -621,18 +676,21 @@ layout_mode = 2
 [node name="Label" type="Label" parent="GameManager/GameUI/EscPanel/EscBox"]
 layout_mode = 2
 size_flags_vertical = 6
+theme = ExtResource("13_g1ii3")
 text = "Pause Menu"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="GameManager/GameUI/EscPanel/EscBox"]
 layout_mode = 2
 size_flags_vertical = 6
+theme = ExtResource("13_g1ii3")
 text = "Game Volume:"
 horizontal_alignment = 1
 
 [node name="GameVolumeSlider" type="HSlider" parent="GameManager/GameUI/EscPanel/EscBox"]
 layout_mode = 2
 size_flags_vertical = 2
+theme = ExtResource("13_g1ii3")
 step = 5.0
 value = 50.0
 scrollable = false
@@ -640,12 +698,14 @@ scrollable = false
 [node name="Label3" type="Label" parent="GameManager/GameUI/EscPanel/EscBox"]
 layout_mode = 2
 size_flags_vertical = 6
+theme = ExtResource("13_g1ii3")
 text = "Music Volume:"
 horizontal_alignment = 1
 
 [node name="MusicVolumeSlider2" type="HSlider" parent="GameManager/GameUI/EscPanel/EscBox"]
 layout_mode = 2
 size_flags_vertical = 2
+theme = ExtResource("13_g1ii3")
 step = 5.0
 value = 30.0
 scrollable = false
@@ -653,8 +713,10 @@ scrollable = false
 [node name="ReturnToGameButton" type="Button" parent="GameManager/GameUI/EscPanel/EscBox"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("13_g1ii3")
 text = "Return to Game"
 
 [node name="ExitGameButton" type="Button" parent="GameManager/GameUI/EscPanel/EscBox"]
 layout_mode = 2
+theme = ExtResource("13_g1ii3")
 text = "Exit Game"

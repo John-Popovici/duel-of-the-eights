@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d05a7cco5s8tg"]
 
 [ext_resource type="Script" path="res://Scripts/IntroScene.gd" id="1_datn8"]
-[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Default_pixel_theme.tres" id="2_j2iul"]
+[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="2_j2iul"]
 
 [node name="IntroScene" type="Node3D"]
 script = ExtResource("1_datn8")
@@ -16,21 +16,25 @@ theme_override_constants/separation = 10
 
 [node name="Instructions" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_j2iul")
 text = "Enter Player Names:"
 horizontal_alignment = 1
 
 [node name="Player1Entry" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_j2iul")
 placeholder_text = "Enter Name 1"
 alignment = 1
 
 [node name="Player2Entry" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_j2iul")
 placeholder_text = "Enter Name 2"
 alignment = 1
 
 [node name="StartLocalGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_j2iul")
 disabled = true
 text = "Start Local Game!"
 
