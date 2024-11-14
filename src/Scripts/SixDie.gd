@@ -5,6 +5,7 @@ extends RigidBody3D
 # Exported start position so it can be set in the editor
 @export var start_position: Vector3 = Vector3.ZERO
 @export var start_rotation: Vector3 = Vector3.ZERO
+@export var start_time: float = 0
 @export var impulse_range: int = 5
 @export var torque_range: int = 5
 @export var hover_height: float = 0.5  # Hover height in meters
@@ -35,6 +36,7 @@ var selectedTex = preload('res://Materials/Purple.tres')
 
 # Applies random torque and force to simulate a roll
 func roll() -> void:
+	await get_tree().create_timer(start_time).timeout
 	# Reset position and rotation to start values
 	global_transform.origin = start_position
 	rotation_degrees = start_rotation
@@ -93,7 +95,7 @@ func _mouse_exit() -> void:
 		dieMesh.set_surface_override_material(1,normalTex)
 
 # Detects if the die was clicked and toggles its selected status
-func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+func _on_input_event(_camera: Node, event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		is_selected = !is_selected  # Toggle selection status
 		print("Die selected status:", is_selected)
@@ -127,13 +129,14 @@ func hover():
 	var new_position = hover_toggle_position + Vector3(0, hover_height, 0)
 	global_transform.origin = new_position
 
-func setStartConditions(_pos: Vector3, _rot: Vector3) -> void:
+func setStartConditions(_pos: Vector3, _rot: Vector3, _time: float) -> void:
 	start_position = _pos
 	start_rotation = _rot
+	start_time = _time
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Calculate the speed by checking the length of the linear and angular velocities
 	var speed = linear_velocity.length()
 	var rotation_speed = angular_velocity.length()
@@ -146,7 +149,7 @@ func _process(delta: float) -> void:
 		else:
 			var current_time = Time.get_ticks_msec() / 1000.0
 			if current_time - roll_start_time > roll_time_limit:
-				print("The die has been rolling for more than 3 seconds.")
+				print("The die has been rolling for more than 3 seconds.", roll_time_limit, " seconds.")
 				hover()  # Call the function if the roll time limit is exceeded
 				roll_start_time = current_time  # Reset timer to prevent repeated calls
 	else:

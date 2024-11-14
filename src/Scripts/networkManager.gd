@@ -16,8 +16,12 @@ var check_ping: bool = false
 # Start as a server
 func start_server(port: int):
 	var peer = ENetMultiplayerPeer.new()
-	peer.create_server(port, 2)  # Set maximum peers to 2 (host + 1 client)
-	multiplayer.multiplayer_peer = peer
+	var error = peer.create_server(port, 2)  # Set maximum peers to 2 (host + 1 client)
+	if error != OK:
+		print("Cannot Host: ", error)
+		return
+	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
+	multiplayer.set_multiplayer_peer(peer)
 	is_host = true
 	print("Started as server on port: ", port)
 	print("IP: ", IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1))
@@ -26,12 +30,19 @@ func start_server(port: int):
 	multiplayer.multiplayer_peer.connect("peer_disconnected", self._on_peer_disconnected)
 
 # Connect as a client
-func connect_to_server(hash: String, port: int):
+func connect_to_server(_hash: String, port: int):
 	var peer = ENetMultiplayerPeer.new()
-	peer.create_client(hash_to_ip(hash), port)
-	multiplayer.multiplayer_peer = peer
+	var error = peer.create_client(hash_to_ip(_hash), port)
+	if error != OK:
+		print("Cannot Join as Client: ", error)
+		print("Cannot Join as Client to: ", hash_to_ip(_hash), " on port ", port)
+		return
+	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
+	multiplayer.set_multiplayer_peer(peer)
 	is_host = false
-	print("Attempting to connect to server at ", hash_to_ip(hash), " on port ", port)
+	print("Hash code recieved: ", _hash)
+	print("Hash to IP: ",hash_to_ip(_hash))
+	print("Attempting to connect to server at ", hash_to_ip(_hash), " on port ", port)
 	
 	# Check if connection is successful
 	multiplayer.multiplayer_peer.connect("peer_connected", self._on_peer_connected)
@@ -59,47 +70,42 @@ func _on_connection_failed():
 	multiplayer.multiplayer_peer = null
 	emit_signal("connection_failed")
 
-# Converts a number to a two-character uppercase string, handling 0-255
-func number_to_letters(value: int) -> String:
+# Converts a base-10 integer (0-600) to a base-26 string with letters A-Z representing 0-25
+func numberToLetters(number: int) -> String:
+	var result = ""
 	var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	
-	# Numbers 0-99
-	if value >= 0 and value <= 9:
-		return "A" + alphabet[value]  # Single digit: Pad with 'A'
-	elif value >= 10 and value <= 99:
-		var first_letter = alphabet[(value / 10)]
-		var second_letter = alphabet[value % 10]
-		return first_letter + second_letter
-	
-	# Numbers 100-255: Map starting from "AA" for 100, "AB" for 101, up to "IZ" for 255
-	elif value >= 100 and value <= 255:
-		var first_letter = alphabet[((value - 100) / 26)]
-		var second_letter = alphabet[(value - 100) % 26]
-		return "I" + first_letter + second_letter
-	
-	return ""  # Return empty for out-of-range values
 
-# Converts a 2-character uppercase code back to a number
-func letters_to_number(code: String) -> int:
+	# Ensure number is within the valid range
+	if number < 0 or number > 600:
+		return ""
+	
+	while number >= 0:
+		var remainder = number % 26
+		result = alphabet[remainder] + result
+		number = number / 26 - 1  # Shift down by 1 to handle 26 as a "zero-indexed" system
+		if number < 0:
+			break
+
+	# Ensure result is always 2 characters long
+	if result.length() < 2:
+		return "A" + result
+	return result
+
+
+# Converts a base-26 string with letters A-Z back to a base-10 integer
+func lettersToNumber(letters: String) -> int:
+	var result = 0
 	var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	
-	# Decode single digit (0-9)
-	if code[0] == "A":
-		return alphabet.find(code[1])
+	letters = letters.lstrip("A")
+	if letters == "":
+		return result
 	
-	# Decode two-digit numbers (10-99)
-	var tens = alphabet.find(code[0])
-	var units = alphabet.find(code[1])
-	if tens != -1 and units != -1:
-		return tens * 10 + units
+	for i in range(letters.length()):
+		var letter_value = alphabet.find(letters[i])
+		result = result * 26 + (letter_value + 1)
 	
-	# Decode numbers 100-255
-	if code[0] == "I":
-		var hundreds = alphabet.find(code[1])
-		var remainder = alphabet.find(code[2])
-		return 100 + hundreds * 26 + remainder
-	
-	return -1  # Invalid code
+	return result - 1  # Adjust final result to account for the offset
 
 func ip_to_hash(ip: String) -> String:
 	# Converts an IP address (e.g., "192.168.0.1") to a 10-character uppercase string
@@ -109,21 +115,22 @@ func ip_to_hash(ip: String) -> String:
 	
 	var code = ""
 	for octet in octets:
-		code += number_to_letters(int(octet))  # Convert each octet to 2-character code
+		code += numberToLetters(int(octet))  # Convert each octet to 2-character code
 
 	return code
 
 func hash_to_ip(hash_code: String) -> String:
 	# Converts a 10-character code back to an IP address (e.g., "C0A80001")
-	if hash_code.length() != 10:
+	if hash_code.length() != 8:
 		return ""  # Invalid code length
 
 	var ip = []
-	for i in range(0, 10, 2):
+	for i in range(0, hash_code.length(), 2):
 		var octet_code = hash_code.substr(i, 2)
-		ip.append(str(letters_to_number(octet_code)))  # Convert each 2-character code back to octet
+		ip.append(str(lettersToNumber(octet_code)))  # Convert each 2-character code back to octet
 
 	return ".".join(ip)
+
 
 func getIsHost() -> bool:
 	return is_host
@@ -149,7 +156,7 @@ func broadcast_game_state(state: String, data: Dictionary):
 # Remote function to handle incoming game state updates
 @rpc("any_peer")
 func receive_game_state(state: String, data: Dictionary):
-	print("Received state: ", state, "with data: ", data, "on host: ", getIsHost())
+	print("Received state: ", state, " with data: ", data, " on host: ", getIsHost())
 	emit_signal("game_state_received", state, data)
 
 # Reset the timer on each ping received
@@ -176,6 +183,7 @@ func _process(delta: float) -> void:
 			rpc("ping")
 			if !multiplayer.has_multiplayer_peer():
 				multiplayer.multiplayer_peer = null
+				print("Client Disconnected")
 				emit_signal("disconnected")
 	elif !is_host and check_ping:
 		# Update the timer
@@ -183,6 +191,7 @@ func _process(delta: float) -> void:
 		
 		# Check if the timeout is exceeded
 		if time_since_last_ping >= ping_timeout:
+			print("Host Ping Timedout")
 			_on_server_disconnected()
 			check_ping = false
 	pass

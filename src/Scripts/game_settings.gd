@@ -1,56 +1,96 @@
 extends CanvasLayer
 
 signal game_settings_ready(game_settings,hand_settings)
-@onready var start_game_button = $UIBox/Settings_Setup/StartGame
-@onready var advanced_settings_button = $UIBox/Settings_Setup/HandLimit/AdvancedSettingsButton
-@onready var return_to_settings_button = $UIBox/Settings_Advanced/ReturnToSettings
-@onready var save_advanced_settings_button = $UIBox/Settings_Advanced/SaveSettings
-@onready var home_button = $UIBox/Settings_Setup/BackToHomeButton
+@onready var settingsSetup = get_node("UIBox/SettingsSplitBox/Settings_Setup")
+@onready var settingsAdvanced = get_node("UIBox/Settings_Advanced")
+@onready var settingsWait = get_node("UIBox/Settings_Wait")
+@onready var start_game_button = settingsSetup.get_node("Buttons/StartGame")
+@onready var advanced_settings_button = settingsSetup.get_node("HandLimit/AdvancedSettingsButton")
+@onready var return_to_settings_button = settingsAdvanced.get_node("ReturnToSettings")
+@onready var save_advanced_settings_button = settingsAdvanced.get_node("SaveSettings")
+@onready var home_button = settingsSetup.get_node("Buttons/BackToHomeButton")
+@onready var wait_home_button = settingsWait.get_node("ExitGameButton")
 
-@onready var player1Name = $UIBox/Settings_Setup/PlayerNames/Player1Name
-@onready var player2Name = $UIBox/Settings_Setup/PlayerNames/Player2Name
-@onready var HealthPoints = $UIBox/Settings_Setup/HealthPoints/HealthPoints
-@onready var Rounds = $UIBox/Settings_Setup/Rounds/Rounds
-@onready var RoundRolls = $UIBox/Settings_Setup/Rounds/RoundRolls
-@onready var DiceCountRef = $UIBox/Settings_Setup/Dice/DiceCount.get_line_edit()
-@onready var DiceType = $UIBox/Settings_Setup/Dice/DiceType
-@onready var advanced_settings_vbox = $UIBox/Settings_Advanced/ScrollContainer/advanced_settings_vbox
+@onready var player1Name = settingsSetup.get_node("PlayerNames/Player1Name")
+@onready var player2Name = settingsSetup.get_node("PlayerNames/Player2Name")
+@onready var WinCondition = settingsSetup.get_node("WinCondition/ConditionSelect")
+@onready var HealthPoints = settingsSetup.get_node("HealthPoints/HealthPoints")
+@onready var HealthPointsBox = settingsSetup.get_node("HealthPoints")
+@onready var Rounds = settingsSetup.get_node("Rounds/Rounds")
+@onready var RoundRolls = settingsSetup.get_node("Rounds/RoundRolls")
+@onready var DiceCountRef = settingsSetup.get_node("Dice/DiceCount").get_line_edit()
+@onready var DiceCountRange = settingsSetup.get_node("Dice/DiceCount")
+@onready var DiceType = settingsSetup.get_node("Dice/DiceType")
+@onready var opponent_roll_visible_button = settingsSetup.get_node("HandLimit/OpponentRollVisible")
+@onready var advanced_settings_vbox = settingsAdvanced.get_node("ScrollContainer/advanced_settings_vbox")
+
+@onready var presetsPanel = get_node("UIBox/SettingsSplitBox/PresetsPanelBox")
+@onready var presets_folder = "res://Presets"
+@onready var preset_name_input = presetsPanel.get_node("NewPresetName")
+@onready var save_preset_button = presetsPanel.get_node("AddPreset")
+@onready var presetsButtonsBox = presetsPanel.get_node("PresetsScrollBar/PresetsButtons")
 
 @onready var NetworkManager = get_node("../../NetworkManager")
 
 var hand_settings_saved = false
-@export var hand_settings: Dictionary = {}
+@export var hand_settings_refs: Dictionary = {}
+@export var hand_settings_vals: Dictionary = {}
+@export var game_settings: Dictionary = {}
 # Capture the dice type and count
 var dice_count: int
 var dice_type: int
+var win_cond: String
+var show_opponent_rolls: bool = false
 
 func _on_start_game_pressed():
-	var game_settings = {
+	start_game_button.disabled = true
+	home_button.disabled = true
+	advanced_settings_button.disabled = true
+	print("Passing ", show_opponent_rolls)
+	game_settings = {
 		"player_names": [player1Name.text, player2Name.text],
+		"win_condition": WinCondition.get_selected_id(),
 		"health_points": int(HealthPoints.text),
 		"rounds": int(Rounds.text),
 		"round_rolls": int(RoundRolls.text),
 		"dice_count": int(DiceCountRef.text),
-		"dice_type": DiceType.get_selected_id()  # e.g., 6-sided or 8-sided
+		"dice_type": DiceType.get_selected_id(),  # e.g., 6-sided or 8-sided
+		"show_rolls": show_opponent_rolls
 	}
 	if !hand_settings_saved:
+		dice_count = int(DiceCountRef.text)
+		dice_type = DiceType.get_selected_id()
 		_populate_advanced_settings()
+		await get_tree().create_timer(1.0).timeout
 		save_advanced_settings()
 	await get_tree().create_timer(1.0).timeout
-	emit_signal("game_settings_ready", game_settings, hand_settings)
+	emit_signal("game_settings_ready", game_settings, hand_settings_vals)
 	self.visible = false
+
+func _win_condition_toggled(ID):
+	print("Win Condition Toggled: ",ID)
+	var win_cond_num = ID
+	match win_cond_num:
+		0: #score
+			HealthPointsBox.visible = false
+			win_cond = "Score"
+		1: #healthpoints
+			HealthPointsBox.visible = true
+			win_cond = "Health"
 
 func _on_advanced_settings_pressed() -> void:
 	dice_count = int(DiceCountRef.text)
 	dice_type = DiceType.get_selected_id()
-	get_node("UIBox/Settings_Setup").visible = false
+	settingsSetup.visible = false
+	presetsPanel.visible = false
 	_populate_advanced_settings()
-	get_node("UIBox/Settings_Advanced").visible = true
+	settingsAdvanced.visible = true
 
 # Populates the advanced settings based on dice count and type
 func _populate_advanced_settings():
 	# Clear current advanced settings to rebuild them
-	hand_settings.clear()
+	hand_settings_refs.clear()
+	hand_settings_vals.clear()
 	for child in advanced_settings_vbox.get_children():
 		child.queue_free()
 
@@ -72,6 +112,103 @@ func _populate_advanced_settings():
 	
 	advanced_settings_vbox.add_child(_create_label("All in"))
 	_generate_chance()
+
+# Save a new preset with game and hand settings
+func save_preset():
+	var preset_name = preset_name_input.text.strip_edges()
+	preset_name_input.text = ""
+	print("Preset Name from input: ", preset_name)
+	if preset_name == "":
+		print("Please enter a name for the preset.")
+		return
+	print("Storing Settings into Variables")
+	game_settings = {
+		"player_names": [player1Name.text, player2Name.text],
+		"win_condition": WinCondition.get_selected_id(),
+		"health_points": int(HealthPoints.text),
+		"rounds": int(Rounds.text),
+		"round_rolls": int(RoundRolls.text),
+		"dice_count": int(DiceCountRef.text),
+		"dice_type": DiceType.get_selected_id(),  # e.g., 6-sided or 8-sided
+		"show_rolls": show_opponent_rolls
+	}
+	
+	if !hand_settings_saved:
+		dice_count = int(DiceCountRef.text)
+		dice_type = DiceType.get_selected_id()
+		_populate_advanced_settings()
+		await get_tree().create_timer(1.0).timeout
+		save_advanced_settings()
+		await get_tree().create_timer(1.0).timeout
+
+	var preset_data = {
+		"preset_name": preset_name,
+		"game_settings": game_settings,
+		"hand_settings": hand_settings_vals
+	}
+
+	var file_path = presets_folder + "/" + preset_name + ".json"
+	print("Writing to: ", file_path)
+	var file = FileAccess.open(file_path, FileAccess.WRITE)
+	var json = JSON.new()
+	var json_string = json.stringify(preset_data)
+	file.store_string(json_string)
+	file.close()
+	print("Preset saved:", preset_name)
+	load_preset_buttons()  # Refresh preset buttons
+
+# Load existing presets and populate buttons
+func load_preset_buttons():
+	for child in presetsButtonsBox.get_children():# Clear existing entries
+		child.queue_free()
+	var dir = DirAccess.open(presets_folder)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if file_name.ends_with(".json"):
+				var preset_name = file_name.replace(".json", "")
+				var button = load("res://NodeScene/sample_preset_button.tscn").instantiate()
+				button.text = preset_name
+				button.setSettings(preset_name)
+				var select_callable = Callable(self, "_on_preset_selected")
+				button.setCallable(select_callable)
+				presetsButtonsBox.add_child(button)
+			file_name = dir.get_next()
+		dir.list_dir_end()
+
+# Load a preset's data and apply it to the UI
+func _on_preset_selected(preset_name: String):
+	var file_path = presets_folder + "/" + preset_name + ".json"
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	var preset_data = file.get_as_text()
+	file.close()
+	var json = JSON.new()
+	json.parse(preset_data)
+	game_settings = json.data.get("game_settings", {})
+	hand_settings_vals = json.data.get("hand_settings", {})
+	hand_settings_saved = true
+	print(preset_data)
+	# Update UI fields based on the loaded settings
+	update_ui_fields(game_settings, hand_settings_vals)
+
+# Update the input fields with loaded game and hand settings
+func update_ui_fields(game_settings: Dictionary, hand_settings: Dictionary):
+	# Example updates; adjust to fit actual input nodes in your UI
+	#player1Name.text = game_settings.get("player_names", 0)[0]
+	#player2Name.text = game_settings.get("player_names", 0)[1]
+	WinCondition.select(game_settings.get("win_condition", 0))
+	HealthPoints.text = str(game_settings.get("health_points", 0))
+	Rounds.text = str(game_settings.get("rounds", 0))
+	RoundRolls.text = str(game_settings.get("round_rolls", 0))
+	DiceCountRef.text = str(game_settings.get("dice_count", 0))
+	DiceType.select(DiceType.get_item_index(int(game_settings.get("dice_type", 0))))
+	opponent_roll_visible_button.set_pressed(bool(game_settings.get("show_rolls", false)))
+	show_opponent_rolls = bool(game_settings.get("show_rolls", false))
+
+	# Update any hand settings-related fields if necessary
+	# (for example, list of hand rules or settings if part of the UI)
+	print("UI fields updated with preset:", game_settings, hand_settings)
 
 func _create_label(_text: String) -> Label:
 	var label = Label.new()
@@ -164,7 +301,7 @@ func _create_hand_option(hand_name: String, hand_type: Array) -> HBoxContainer:
 	hand_hbox.add_child(scoring_input)
 
 	# Save settings for this hand in hand_settings dictionary
-	hand_settings[hand_name] = {
+	hand_settings_refs[hand_name] = {
 		"hand_type": hand_type,
 		"allowed": allowed_checkbox,
 		"repeatable": repeatable_checkbox,
@@ -176,10 +313,11 @@ func _create_hand_option(hand_name: String, hand_type: Array) -> HBoxContainer:
 
 # Saves the hand settings and hides the advanced settings UI
 func save_advanced_settings():
+	hand_settings_vals.clear()
 	# Loop through each hand in hand_settings and save current values
-	for hand_name in hand_settings.keys():
-		var settings = hand_settings[hand_name]
-		hand_settings[hand_name] = {
+	for hand_name in hand_settings_refs.keys():
+		var settings = hand_settings_refs[hand_name]
+		hand_settings_vals[hand_name] = {
 			"hand_type": settings["hand_type"],
 			"allowed": settings["allowed"].is_pressed(),#is_checked()
 			"repeatable": settings["repeatable"].is_pressed(),
@@ -187,14 +325,15 @@ func save_advanced_settings():
 			"scoring_rule": settings["scoring_rule"].text
 		}
 	hand_settings_saved = true
-	print("Hand settings saved:", hand_settings)
+	#print("Hand settings saved:", hand_settings)
 
 func _on_return_to_settings_pressed() -> void:
 	# Clear current advanced settings nodes
 	for child in advanced_settings_vbox.get_children():
 		child.queue_free()
-	get_node("UIBox/Settings_Setup").visible = true
-	get_node("UIBox/Settings_Advanced").visible = false
+	settingsSetup.visible = true
+	presetsPanel.visible = true
+	settingsAdvanced.visible = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -204,23 +343,52 @@ func _ready() -> void:
 	save_advanced_settings_button.connect("pressed",self.save_advanced_settings)
 	return_to_settings_button.connect("pressed",self._on_return_to_settings_pressed)
 	home_button.connect("pressed",self.on_home_pressed)
-	pass # Replace with function body.
+	wait_home_button.connect("pressed",self.on_home_pressed)
+	WinCondition.set_toggle_mode(true)
+	WinCondition.connect("item_selected", self._win_condition_toggled)
+	HealthPointsBox.visible = false
+	win_cond = "Score"
+	opponent_roll_visible_button.set_toggle_mode(true)
+	opponent_roll_visible_button.connect("toggled", self._on_roll_visible_toggled)
+	show_opponent_rolls = false
+	DiceType.set_toggle_mode(true)
+	DiceType.connect("item_selected", self._dice_values_changed)
+	DiceCountRange.connect("value_changed", self._dice_values_changed)
+	save_preset_button.connect("pressed",self.save_preset)
+	
+
+func _on_roll_visible_toggled(_state) -> void:
+	print("Was ", show_opponent_rolls)
+	if show_opponent_rolls:
+		show_opponent_rolls = false
+	else:
+		show_opponent_rolls = true
+	print("Is ", show_opponent_rolls)
+
+func _dice_values_changed(_state) -> void:
+	if hand_settings_saved:
+		print("Hand Settings lost")
+		hand_settings_saved = false
+	#code to indicate
 
 func collectInfo() -> void:
 	self.visible = true
 	if NetworkManager.getIsHost():
-		get_node("UIBox/Settings_Setup").visible = true
-		get_node("UIBox/Settings_Advanced").visible = false
-		get_node("UIBox/Settings_Wait").visible = false
+		settingsSetup.visible = true
+		settingsAdvanced.visible = false
+		settingsWait.visible = false
+		presetsPanel.visible = true
+		load_preset_buttons()
 	else:
-		get_node("UIBox/Settings_Setup").visible = false
-		get_node("UIBox/Settings_Advanced").visible = false
-		get_node("UIBox/Settings_Wait").visible = true
+		settingsSetup.visible = false
+		settingsAdvanced.visible = false
+		settingsWait.visible = true
+		presetsPanel.visible = false
 
 func on_home_pressed() -> void:
 	#Add disconnect code here and network manager
-	get_tree().get_root().get_node("OnlineGameScene").returnToIntro()
+	get_parent().exitGame()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass

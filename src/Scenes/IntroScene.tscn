@@ -31,8 +31,7 @@ alignment = 1
 
 [node name="StartLocalGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("2_j2iul")
+disabled = true
 text = "Start Local Game!"
 
 [node name="StartOnlineGame" type="Button" parent="VBoxContainer"]

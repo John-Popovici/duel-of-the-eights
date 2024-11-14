@@ -25,7 +25,7 @@ import/blender/enabled=false
 
 [gui]
 
-theme/custom_font="res://Pixelme.ttf"
+theme/custom_font="res://Themes/SystemFont_Pixel1.tres"
 
 [rendering]
 

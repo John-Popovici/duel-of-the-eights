@@ -2,9 +2,15 @@ extends CanvasLayer
 
 @onready var opponent_dice_display = get_node("OpponentDiceDisplay")
 @onready var game_state_info = get_node("GameStateInfo")
+@onready var player_stats_panel = get_node("PlayerStatsPanel")
 @onready var player_stat_box = get_node("PlayerStatsPanel/MyPlayerStatBox")
 @onready var enemy_stat_box = get_node("PlayerStatsPanel/EnemyPlayerStatBox")
 @onready var waiting_screen = get_node("WaitingScreen")
+@onready var rollButtons = get_node("RollButtons")
+@onready var PausePanel = get_node("EscPanel")
+@onready var EscBackground = get_node("EscBackOverlay")
+@onready var ReturnToGameButton = get_node("EscPanel/EscBox/ReturnToGameButton")
+@onready var ExitGameButton = get_node("EscPanel/EscBox/ExitGameButton")
 
 @onready var end_of_game_screen = get_node("EndOfGameScreen")
 @onready var winner_label = get_node("EndOfGameScreen/WinnerLabel")
@@ -20,12 +26,25 @@ var total_rounds:int
 var total_round_rolls:int
 var dice_count:int
 var dice_type:int
+var dice_display_height: float = 100
+signal escPressed
+var isHost
 
 # Set up the UI based on the initial game settings
-func setup_game_ui(game_settings: Dictionary, isHost: bool):
+func setup_game_ui(game_settings: Dictionary, _isHost: bool):
 	#code to hide endGame and WaitingScreen
+	isHost = _isHost
 	hide_waiting_screen()
 	hide_end_of_game_screen()
+	hide_pause_menu()
+	if game_settings["show_rolls"]:
+		show_opponent_rolls()
+	else: 
+		hide_opponent_rolls()
+		game_state_info.position = Vector2(game_state_info.position.x, 0)
+	show_roll_buttons()
+	show_game_state_info()
+	show_player_stats_panel()
 	
 	if isHost:
 		myPlayerName = game_settings["player_names"][0]
@@ -41,11 +60,12 @@ func setup_game_ui(game_settings: Dictionary, isHost: bool):
 	print("Dice Type set to: ", dice_type)
 	# Initialize labels for game state
 	for child in game_state_info.get_children():
-		child.queue_free()
+		child.free()
+		
 	var round_label = Label.new()
 	round_label.name = "RoundLabel"
 	game_state_info.add_child(round_label)
-	
+	print("Label made on Host: ", isHost)
 	var roll_label = Label.new()
 	roll_label.name = "RollLabel"
 	game_state_info.add_child(roll_label)
@@ -57,26 +77,24 @@ func setup_game_ui(game_settings: Dictionary, isHost: bool):
 	#opponent_dice_display.set_size(Vector2(0,container_height))
 	# Initialize opponent dice display with empty sprites
 	for child in opponent_dice_display.get_children():
-		child.queue_free()
+		child.free()
 	for i in range(dice_count):
 		var dice_sprite = preload("res://NodeScene/dice_tex_temp.tscn").instantiate()
 		dice_sprite.name = "OpponentDie%d" % i
-		dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-0.png"))
+		#dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-0.png"))
 		opponent_dice_display.add_child(dice_sprite)
-		#opponent_dice_display.set_size(Vector2((i+1)*container_height,container_height))
-		#opponent_dice_display.set_offset(0,((i+1)*container_height)/2.0)
-		
-
 	# Initialize player stats labels
 	initialize_stat_labels(player_stat_box, "Player")
 	initialize_stat_labels(enemy_stat_box, "Opponent")
+	blank_opponent_dice_display()
 	update_player_stats("Player", myPlayerName, health_points, 0)
 	update_player_stats("Opponent", enemyPlayerName, health_points, 0)
+	connect("escPressed",self.toggle_pause_menu)
 
 # Helper to initialize player stat labels
 func initialize_stat_labels(stat_box: VBoxContainer, player_type: String):
 	for child in stat_box.get_children():
-		child.queue_free()
+		child.free()
 	for stat_name in ["Name", "Health", "Score"]:
 		var label = Label.new()
 		label.name = "%s%sLabel" % [player_type, stat_name]
@@ -85,32 +103,64 @@ func initialize_stat_labels(stat_box: VBoxContainer, player_type: String):
 
 # Update the opponent's dice display based on rolls
 func update_opponent_dice_display(rolls: Array):
-	# Get the height of the container to scale dice appropriately
-	var container_height:float = 100 #opponent_dice_display.get_minimum_size().y
 	for i in range(rolls.size()):
 		match dice_type:
 			6:
-				print("loading tex ", i)
 				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
 				dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % rolls[i]))  # Adjust path to dice textures
 			8:
 				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
-				#dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % rolls[i])  # Adjust path to dice textures
+				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-%d.png" % rolls[i])  # Adjust path to dice textures
+
+# Update the opponent's dice display to blanks
+func blank_opponent_dice_display():
+	for i in range(dice_count):
+		match dice_type:
+			6:
+				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
+				dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-0.png"))  # Adjust path to dice textures
+			8:
+				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
+				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-0.png")  # Adjust path to dice textures
+
+
+# Function to update the width of the HBoxContainer based on the number of dice
+func update_opponent_dice_display_width(dice_size: float):
+	# Calculate the required width based on dice count and desired size per dice
+	opponent_dice_display.size.x = dice_count * dice_size
+	opponent_dice_display.size.y = dice_size
+
+	# Center the HBoxContainer at the top middle of the screen
+	opponent_dice_display.anchor_left = 0.5
+	opponent_dice_display.anchor_right = 0.5
+	opponent_dice_display.offset_left = -opponent_dice_display.size.x / 2
+	opponent_dice_display.offset_right = opponent_dice_display.size.x / 2
+
+	# Set vertical alignment to the top center
+	opponent_dice_display.anchor_top = 0
+	opponent_dice_display.anchor_bottom = 0
+	opponent_dice_display.offset_top = 10  # Padding from the top of the screen
+	
+	opponent_dice_display.position = Vector2((DisplayServer.window_get_size().x/2.0) - opponent_dice_display.size.x,0)
+	print("Position: ",opponent_dice_display.position)
+
 
 # Update game state info
-func update_round_info(current_round: int, total_rounds: int = total_rounds):
+func update_round_info(current_round: int, _total_rounds: int = total_rounds):
 	var round_label = game_state_info.get_node("RoundLabel") as Label
-	round_label.text = "Round: %d / %d" % [current_round, total_rounds]
+	print(game_state_info.get_children())
+	print("Round Label ID: ",round_label, " on Host: ", isHost)
+	round_label.text = "Round: %d / %d" % [current_round, _total_rounds]
 
 func update_roll_info(current_roll: int, total_rolls: int = total_round_rolls):
 	var roll_label = game_state_info.get_node("RollLabel") as Label
 	roll_label.text = "Roll: %d / %d" % [current_roll, total_rolls]
 
 # Update player stats (name, health, score)
-func update_player_stats(player_type: String, name: String, health: int, score: int):
+func update_player_stats(player_type: String, _name: String, health: int, score: int):
 	var stat_box = player_stat_box if (player_type == "Player") else enemy_stat_box
 	
-	stat_box.get_node("%sNameLabel" % player_type).text = "%s Name: %s" % [player_type, name]
+	stat_box.get_node("%sNameLabel" % player_type).text = "%s Name: %s" % [player_type, _name]
 	stat_box.get_node("%sHealthLabel" % player_type).text = "%s Health: %d" % [player_type, health]
 	stat_box.get_node("%sScoreLabel" % player_type).text = "%s Score: %d" % [player_type, score]
 
@@ -132,21 +182,80 @@ func show_end_of_game_screen(resultText: String, player_stats: Dictionary, oppon
 	exit_button.pressed.connect(game_manager.exitGame)
 
 	# Display player and opponent stats
-	player_stats_label.text = "Player: %s\nScore: %d\nHealth: %d" % [
-		player_stats["player_name"], player_stats["score"], player_stats["health_points"]
-	]
-	opponent_stats_label.text = "Opponent: %s\nScore: %d\nHealth: %d" % [
-		opponent_stats["player_name"], opponent_stats["score"], opponent_stats["health_points"]
-	]
+	# Make this dynamic toread all passed keys in Dictionary
+	player_stats_label.text = format_dictionary_to_string(player_stats)
+	opponent_stats_label.text = format_dictionary_to_string(opponent_stats)
+
+func format_dictionary_to_string(data: Dictionary) -> String:
+	var result = ""
+	for key in data.keys():
+		var value = data[key]
+		result += "%s: %s\n" % [str(key), str(value)]
+	return result
 
 # Hide the end of game screen
 func hide_end_of_game_screen():
 	end_of_game_screen.visible = false
 
+func hide_all_ui():
+	hide_roll_buttons()
+	hide_opponent_rolls()
+	hide_game_state_info()
+	hide_player_stats_panel()
+	hide_waiting_screen()
+	hide_end_of_game_screen()
+	hide_pause_menu()
+
+func hide_pause_menu():
+	PausePanel.visible = false
+	EscBackground.visible = false
+
+func show_pause_menu():
+	PausePanel.visible = true
+	EscBackground.visible = true
+
+func toggle_pause_menu():
+	if PausePanel.visible:
+		hide_pause_menu()
+	else:
+		show_pause_menu()
+
+func _input(event):
+	if event is InputEventKey:
+		if event.is_pressed() and event.keycode == KEY_ESCAPE :
+			escPressed.emit()
+
+func hide_opponent_rolls():
+	opponent_dice_display.visible = false
+
+func show_opponent_rolls():
+	opponent_dice_display.visible = true
+
+func hide_roll_buttons():
+	rollButtons.visible = false
+
+func show_roll_buttons():
+	rollButtons.visible = true
+
+func hide_game_state_info():
+	game_state_info.visible = false
+
+func show_game_state_info():
+	game_state_info.visible = true
+
+func hide_player_stats_panel():
+	player_stats_panel.visible = false
+
+func show_player_stats_panel():
+	player_stats_panel.visible = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.visible = false
+	ReturnToGameButton.connect("pressed",self.hide_pause_menu)
+	var game_manager = get_parent()
+	ExitGameButton.pressed.connect(game_manager.exitGame)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass

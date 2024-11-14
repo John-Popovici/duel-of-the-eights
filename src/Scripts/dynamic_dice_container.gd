@@ -27,6 +27,11 @@ func roll_selected_dice() -> void:
 		if die.get_selected_status():  # Check if the die is selected
 			die.roll()
 
+func roll_rolling_or_invalid_dice() -> void:
+	for die in dice_nodes:
+		if die.getIsRolling() or (die.get_face_value() == -1):
+			die.roll()
+
 # Retrieves the values of each die after rolling
 func get_dice_values() -> Array[int]:
 	var dice_values: Array[int] = []
@@ -50,9 +55,17 @@ func get_rolling_dice() -> Array:
 			rolling_dice.append(die)
 	return rolling_dice
 
+func get_invalid_dice() -> Array:
+	var invalid_dice = []
+	for die in dice_nodes:
+		if die.get_face_value() == -1:
+			invalid_dice.append(die)
+	return invalid_dice
+
 func clear_dice() -> void:
 	for child in get_children():
 		child.queue_free()
+	dice_nodes.clear()
 
 func add_dice(dice_count: int, dice_type: int) -> void:
 	clear_dice()
@@ -65,12 +78,13 @@ func add_dice(dice_count: int, dice_type: int) -> void:
 		
 		# Assign a starting position from the list, cycling if dice_count > 9
 		var start_pos = start_positions[i % start_positions.size()]
+		var start_time = (i / start_positions.size()) * 0.3
 		
 		# Generate a random rotation for added variation
 		var start_rot = Vector3(randf() * TAU, randf() * TAU, randf() * TAU)
 		
 		# Set initial position and rotation using the function in Dice.gd
-		dice.setStartConditions(start_pos, start_rot)
+		dice.setStartConditions(start_pos, start_rot, start_time)
 		dice.global_transform.origin = start_pos
 		dice.rotation_degrees = Vector3.ZERO
 		add_child(dice)
@@ -84,5 +98,5 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass

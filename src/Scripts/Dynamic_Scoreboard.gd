@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var vbox_container = $SelfHandsSectionBox/ScrollContainer/HandsContainer
+@onready var vbox_container = $UIBox/SelfHandsSectionBox/ScrollContainer/HandsContainer
 
 # Signal for when a hand is selected
 signal hand_selected(hand: Dictionary)
@@ -13,8 +13,10 @@ var AllButtons: Array[Button]
 func populate_scoreboard(hand_settings: Dictionary):
 	self.visible = true
 	for child in vbox_container.get_children():# Clear existing entries
-		child.queue_free()
+		child.free()
 
+	AllButtons.clear()
+	
 	for hand_name in hand_settings.keys():
 		var settings = hand_settings[hand_name]
 		# Load the HandScoreEntry scene as a template
@@ -57,7 +59,8 @@ func updateButtonScore(_score: int):
 		lastButton.text = str(oldScore + _score)
 
 func updateBonusButtonScore(_score: int):
-	BonusButton.text = str(_score)
+	var oldScore = int(BonusButton.text)
+	BonusButton.text = str(oldScore + _score)
 
 func setAllButtonsDisable(state: bool) -> void:
 	for _button in AllButtons:
@@ -71,5 +74,5 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass

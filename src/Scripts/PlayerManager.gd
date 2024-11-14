@@ -51,14 +51,29 @@ func getHealth() -> int:
 func roll_dice() -> void:
 	diceContainer.roll_dice()
 	await get_tree().create_timer(1.0).timeout
-	readRolls()
+	checkIfDiceValidThenRead()
 
 func roll_selected_dice() -> void:
 	diceContainer.roll_selected_dice()
 	await get_tree().create_timer(1.0).timeout
-	readRolls()
+	checkIfDiceValidThenRead()
+
+func roll_rolling_or_invalid_dice() -> void:
+	diceContainer.roll_rolling_or_invalid_dice()
+
 
 func pass_roll() -> void:
+	checkIfDiceValidThenRead()
+
+func checkIfDiceValidThenRead() -> void:
+	var timeTillReroll = 5
+	while len(diceContainer.get_rolling_dice()) > 0 or len(diceContainer.get_invalid_dice()) > 0:
+		timeTillReroll -=1
+		await get_tree().create_timer(1.0).timeout
+		if timeTillReroll <= 0:
+			timeTillReroll = 5
+			roll_rolling_or_invalid_dice()
+			await get_tree().create_timer(1.0).timeout
 	readRolls()
 
 func readRolls() -> void:
@@ -96,5 +111,5 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass

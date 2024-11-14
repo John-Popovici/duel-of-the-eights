@@ -13,6 +13,7 @@ var isHost: bool
 
 var max_rounds: int
 var max_rolls_per_round: int
+var win_cond: int
 
 var current_round: int = 0
 var roll_count: int = 0
@@ -34,6 +35,7 @@ func _on_settings_ready(_game_settings: Dictionary, _hand_settings: Dictionary) 
 	hand_settings = _hand_settings
 	max_rounds = game_settings["rounds"]
 	max_rolls_per_round = game_settings["round_rolls"]
+	win_cond = game_settings["win_condition"]
 	
 	if network_manager.getIsHost():
 		network_manager.send_game_settings(game_settings,hand_settings)
@@ -49,13 +51,16 @@ func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionar
 	game_settings = _game_settings
 	hand_settings = _hand_settings
 	game_settings_ui.visible = false
+	win_cond = game_settings["win_condition"]
 	setup_game()
 
 func setup_game() -> void:
 	setup_game_environment(game_settings)
 	setup_scoreboard(hand_settings)
 	setup_PlayerManager(game_settings)
+	print("Setup UI Called on Host: ", network_manager.getIsHost())
 	GameUI.setup_game_ui(game_settings,network_manager.getIsHost())
+	print("Setup UI Finished Calling Called on Host: ", network_manager.getIsHost())
 	isHost = network_manager.getIsHost()
 	network_manager.connect("game_state_received", self._on_game_state_received)
 	rollSelected.connect("pressed", self._on_roll_selected)
@@ -116,6 +121,7 @@ func rollPhase(roll: bool) -> void:
 		myPlayer.pass_roll()
 	roll_count += 1
 	GameUI.update_roll_info(roll_count)
+	GameUI.blank_opponent_dice_display()
 
 func recieveRolls(fromHost: bool, _rolls: Array[int]) ->void:
 	enemyPlayer.setRolls(_rolls)
@@ -144,7 +150,7 @@ func setup_selection() -> void:
 		print("Host: ", isHost, " reached roll selection on roll_count: ", roll_count, " of max: ", max_rolls_per_round)
 		setDisableRollButtons(false)
 
-func recieveRollSelection(type: String) -> void:
+func recieveRollSelection(_type: String) -> void:
 	#wait on roll selection locally
 	while !(roll_selection_done):
 		await get_tree().create_timer(1.0).timeout
@@ -162,24 +168,44 @@ func recievehand(hand: Dictionary) -> void:
 	endOfRoundEffects()
 	waiting_on_other_player(false)
 
+func recievebonus(hand: Dictionary) -> void:
+	enemyPlayer.update_score(hand["score"])
+	#add code to enemy player to log all hands in order with score
 
 func endOfRoundEffects() -> void:
 	#have a tree of end of round Effects instances to pass the score through and get updated result
 	
 	#add logic for damage taken and other end of turn effects 
 	#calculated locally based on score and totalscore
-	var scoreDiff = myPlayer.getLastScore() - enemyPlayer.getLastScore()
-	if scoreDiff < 0:
-		myPlayer.adjust_health(-1)
-		print("Player Host: ", isHost, "scored less")
-	elif scoreDiff > 0:
-		enemyPlayer.adjust_health(-1)
-		print("Player Host: ", isHost, " scored more")
-	else:
-		print("Players scored the same")
+	var end_condition_reached = false
+	print("WinCondition: ",win_cond)
+	match win_cond:
+		0: #score
+			var scoreDiff = myPlayer.getLastScore() - enemyPlayer.getLastScore()
+			if scoreDiff < 0:
+				print("Player Host: ", isHost, " scored less")
+			elif scoreDiff > 0:
+				print("Player Host: ", isHost, " scored more")
+			else:
+				print("Players scored the same")
+			#check engGame Criteria
+			if current_round >= max_rounds:
+				end_condition_reached = true
+		1: #Health Points
+			var scoreDiff = myPlayer.getLastScore() - enemyPlayer.getLastScore()
+			if scoreDiff < 0:
+				myPlayer.adjust_health(-1) # make this dyanmic
+				print("Player Host: ", isHost, "scored less, took damage")
+			elif scoreDiff > 0:
+				enemyPlayer.adjust_health(-1) # make this dyanmic
+				print("Player Host: ", isHost, " scored more")
+			else:
+				print("Players scored the same")
+			if current_round >= max_rounds or myPlayer.getHealth() <= 0 or enemyPlayer.getHealth() <= 0:
+				end_condition_reached = true
 	
 	#check engGame Criteria
-	if current_round >= max_rounds or myPlayer.getHealth() <= 0 or enemyPlayer.getHealth() <= 0:
+	if end_condition_reached:
 		endGame()
 	else:
 		network_manager.broadcast_game_state("synchronize_next_round", { "round": current_round })
@@ -197,25 +223,66 @@ func synchronizeNextRound() -> void:
 		start_round()
 
 func endGame() -> void:
-	var myScore = myPlayer.getTotalScore()
-	var enemyScore = enemyPlayer.getTotalScore()
 	#have a tree of end of game instances to check who wins/ apply effects
 	
 	var myPlayerStats = myPlayer.getStats()
 	var OpponentStats = enemyPlayer.getStats()
+	var myPlayerFinalStats: Dictionary
+	var OpponentFinalStats: Dictionary
 	var resultText = "Tied Game"
-	if myScore>enemyScore:
-		resultText = str(myPlayerStats["player_name"], " wins the game!")
-	if myScore<enemyScore:
-		resultText = str(OpponentStats["player_name"], " wins the game!")
-	print("Game ended")
-	GameUI.show_end_of_game_screen(resultText, myPlayerStats, OpponentStats)
-
-func restartGame() ->void:
-	pass
 	
+	match win_cond:
+		0: #score
+			var scoreDiff = myPlayer.getTotalScore() - enemyPlayer.getTotalScore()
+			if scoreDiff < 0:
+				resultText = str(OpponentStats["player_name"], " wins the game!")
+			elif scoreDiff > 0:
+				resultText = str(myPlayerStats["player_name"], " wins the game!")
+			myPlayerFinalStats = {
+				"Player: ": myPlayerStats["player_name"],
+				"Score: ": myPlayerStats["score"],
+			}
+			OpponentFinalStats = {
+				"Player: ": OpponentStats["player_name"],
+				"Score: ": OpponentStats["score"],
+			}
+		1: #Health Points
+			var healthDiff = myPlayer.getHealth() - enemyPlayer.getHealth()
+			if healthDiff < 0:
+				resultText = str(OpponentStats["player_name"], " wins the game!")
+			elif healthDiff > 0:
+				resultText = str(myPlayerStats["player_name"], " wins the game!")
+			myPlayerFinalStats = {
+				"Player: ": myPlayerStats["player_name"],
+				"Health Points: ": myPlayerStats["health_points"],
+				"Score: ": myPlayerStats["score"],
+			}
+			OpponentFinalStats = {
+				"Player: ": OpponentStats["player_name"],
+				"Health Points: ": OpponentStats["health_points"],
+				"Score: ": OpponentStats["score"],
+			}
+	print("Game ended")
+	GameUI.hide_all_ui()
+	GameUI.show_end_of_game_screen(resultText, myPlayerFinalStats, OpponentFinalStats)
+
+var rematch = false
+func restartGame() ->void:
+	network_manager.broadcast_game_state("rematch", {})
+	rematch = true
+
+func synchronizeRematch() -> void:
+	print("synchronize rematch round called by Host: ", !isHost, " on Host: ", isHost)
+	#wait for round to start locally
+	while !(rematch):
+		await get_tree().create_timer(1.0).timeout
+	rematch = false
+	setup_game()
 
 func exitGame() -> void:
+	network_manager.broadcast_game_state("end_game", {})
+	network_manager.disconnect_from_server()
+	get_parent().returnToIntro()
 	pass
 	
 
@@ -234,6 +301,12 @@ func _on_game_state_received(state: String, data: Dictionary):
 			recieveRollSelection(data["type"])
 		"hand":
 			recievehand(data)
+		"bonus":
+			recievebonus(data)
+		"end_game":
+			exitGame()
+		"rematch":
+			synchronizeRematch()
 		"test":
 			connectionTest(data)
 
@@ -248,7 +321,6 @@ func setup_PlayerManager(settings: Dictionary) -> void:
 func setup_scoreboard(_hand_settings: Dictionary) -> void:
 	#clear anything generated and re build
 	scoreCalc.initializeValues()
-	scoreCalc.BonusTriggered.connect(self._on_bonus_triggered)
 	scoreboard.bonusExists.connect(self._on_bonus_exist)
 	scoreboard.populate_scoreboard(_hand_settings)
 	scoreboard.hand_selected.connect(self._on_hand_selected)
@@ -297,20 +369,20 @@ func _on_hand_selected(hand: Dictionary):
 	print(hand)
 	setDisableScoreBoardButtons(true)
 	var score = scoreCalc.calculate_hand_score(hand, myPlayer.getRolls())
-	myPlayer.update_score(score)
-	scoreboard.updateButtonScore(score)
+	myPlayer.update_score(score[0])
+	scoreboard.updateButtonScore(score[0])
+	if score[1] >= 0:
+		myPlayer.update_score(score[1])
+		scoreboard.updateBonusButtonScore(score[1])
+		network_manager.broadcast_game_state("bonus", { "score": score[1], "hand": hand["hand_type"] })
 	hand_selection_done = true
 	hand_selection = hand
 	print(hand)
-	network_manager.broadcast_game_state("hand", { "score": score, "hand": hand["hand_type"] })
+	network_manager.broadcast_game_state("hand", { "score": score[0], "hand": hand["hand_type"] })
 	# Logic to proceed to next player's turn if necessary
 
 func _on_bonus_exist(_hand: Dictionary) -> void:
 	scoreCalc.setupBonus(_hand)
-
-func _on_bonus_triggered(_score):
-	#apply_score_to_player(score) #implement in Player Manager !!!!!!!!!!!
-	scoreboard.updateBonusButtonScore(_score)
 
 # Function to dynamically set up game environment based on settings
 func setup_game_environment(_game_settings: Dictionary) -> void:
