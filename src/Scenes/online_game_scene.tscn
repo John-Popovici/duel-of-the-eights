@@ -506,7 +506,6 @@ script = ExtResource("11_ejug4")
 script = ExtResource("12_f4hi7")
 
 [node name="RollButtons" type="VBoxContainer" parent="GameManager/GameUI"]
-visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -529,22 +528,24 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "Pass"
 
-[node name="OpponentDiceDisplay" type="HBoxContainer" parent="GameManager/GameUI"]
-visible = false
-layout_direction = 2
+[node name="OpponentDicePanel" type="PanelContainer" parent="GameManager/GameUI"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -245.5
-offset_right = 245.5
-offset_bottom = 100.0
+offset_left = -284.0
+offset_right = 284.0
+offset_bottom = 76.0
 grow_horizontal = 2
+theme = ExtResource("14_jpiw0")
+
+[node name="OpponentDiceDisplay" type="HBoxContainer" parent="GameManager/GameUI/OpponentDicePanel"]
+layout_direction = 2
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
 [node name="GameStateInfo" type="HBoxContainer" parent="GameManager/GameUI"]
-visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
