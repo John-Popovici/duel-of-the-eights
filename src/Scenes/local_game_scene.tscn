@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dxwfosg6try75"]
+[gd_scene load_steps=19 format=3 uid="uid://dxwfosg6try75"]
 
 [ext_resource type="Script" path="res://Scripts/LocalGameManager.gd" id="1_7ajte"]
 [ext_resource type="Script" path="res://Scripts/dice_container.gd" id="1_78uev"]
@@ -13,6 +13,7 @@
 [ext_resource type="ArrayMesh" uid="uid://benljw575qaid" path="res://Assets/Terrain_1_Plane_001.res" id="6_jqa5p"]
 [ext_resource type="ArrayMesh" uid="uid://853sy2cqxcot" path="res://Assets/Dice_Red_1_Cube.res" id="7_too8u"]
 [ext_resource type="Script" path="res://Scripts/hands_container.gd" id="8_w1efo"]
+[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Default_pixel_theme.tres" id="13_lgjp5"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_c0fec"]
 
@@ -385,10 +386,12 @@ scale = Vector2(1.48, 1.22098)
 
 [node name="StartGameButton" type="Button" parent="GameManager/CanvasLayer/ControlButtons"]
 layout_mode = 2
+theme = ExtResource("13_lgjp5")
 text = "Start Game"
 
 [node name="RollSelectedDiceButton" type="Button" parent="GameManager/CanvasLayer/ControlButtons"]
 layout_mode = 2
+theme = ExtResource("13_lgjp5")
 text = "Roll Selected Dice"
 
 [node name="P1HandsContainer" type="VBoxContainer" parent="GameManager/CanvasLayer"]
@@ -397,10 +400,12 @@ offset_top = 9.0
 offset_right = 1079.0
 offset_bottom = 460.0
 scale = Vector2(1.24, 1.24)
+theme = ExtResource("13_lgjp5")
 script = ExtResource("8_w1efo")
 
 [node name="OnesButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
 layout_mode = 2
+theme = ExtResource("13_lgjp5")
 text = "Ones"
 
 [node name="TwosButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
@@ -437,7 +442,7 @@ text = "Full House"
 
 [node name="SmStraightButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
 layout_mode = 2
-text = "Small Stright"
+text = "Small Straight"
 
 [node name="LaStraightButton" type="Button" parent="GameManager/CanvasLayer/P1HandsContainer"]
 layout_mode = 2
@@ -457,6 +462,7 @@ offset_top = 9.0
 offset_right = 1079.0
 offset_bottom = 460.0
 scale = Vector2(1.24, 1.24)
+theme = ExtResource("13_lgjp5")
 script = ExtResource("8_w1efo")
 
 [node name="OnesButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
@@ -497,7 +503,7 @@ text = "Full House"
 
 [node name="SmStraightButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
 layout_mode = 2
-text = "Small Stright"
+text = "Small Straight"
 
 [node name="LaStraightButton" type="Button" parent="GameManager/CanvasLayer/P2HandsContainer"]
 layout_mode = 2
