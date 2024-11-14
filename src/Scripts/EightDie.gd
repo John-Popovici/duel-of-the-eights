@@ -26,14 +26,14 @@ var selectedTex = preload('res://Materials/Purple.tres')
 @export var up_threshold: float = 0.8
 # Dictionary to associate raycast nodes with face values
 @onready var face_rays = {
-	1: $"RayCast3D_Face1",
-	2: $"RayCast3D_Face2",
-	3: $"RayCast3D_Face3",
-	4: $"RayCast3D_Face4",
-	5: $"RayCast3D_Face5",
-	6: $"RayCast3D_Face6",
-	7: $"RayCast3D_Face7",
-	8: $"RayCast3D_Face8"
+	1: $"RayCastHolder/RayCast3D_Face1",
+	2: $"RayCastHolder/RayCast3D_Face2",
+	3: $"RayCastHolder/RayCast3D_Face3",
+	4: $"RayCastHolder/RayCast3D_Face4",
+	5: $"RayCastHolder/RayCast3D_Face5",
+	6: $"RayCastHolder/RayCast3D_Face6",
+	7: $"RayCastHolder/RayCast3D_Face7",
+	8: $"RayCastHolder/RayCast3D_Face8"
 }
 
 # Applies random torque and force to simulate a roll
