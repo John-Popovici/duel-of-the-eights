@@ -1,0 +1,17 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://cdngopo7bbi1h"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jsiow"]
+load_path = "res://.godot/imported/GUI.png-f478c1ec4df8950d3094d6c76be3aa7c.ctex"
+
+[resource]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+texture = SubResource("CompressedTexture2D_jsiow")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 3.0
+region_rect = Rect2(113, 98, 30, 13)
+modulate_color = Color(0.184314, 0.709804, 1, 1)

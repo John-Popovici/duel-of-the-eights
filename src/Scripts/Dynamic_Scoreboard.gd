@@ -8,6 +8,7 @@ var lastButton: Button
 var BonusButton: Button
 signal bonusExists(hand: Dictionary)
 var AllButtons: Array[Button]
+@onready var TotalLabel = get_node("UIBox/SelfHandsSectionBox/Total")
 
 # Called to populate the scoreboard with hands from hand_settings
 func populate_scoreboard(hand_settings: Dictionary):
@@ -52,6 +53,9 @@ func _on_hand_selected(hand: Dictionary, button: Button):
 	emit_signal("hand_selected", hand)
 
 func updateButtonScore(_score: int):
+	var _oldScore = TotalLabel.text.replace("Total: ", "")
+	var newScore = int(_oldScore) + _score
+	TotalLabel.text = "Total: " + str(newScore)
 	if lastButton.text == "Select":
 		lastButton.text = str(_score)
 	else:
@@ -59,6 +63,9 @@ func updateButtonScore(_score: int):
 		lastButton.text = str(oldScore + _score)
 
 func updateBonusButtonScore(_score: int):
+	var _oldScore = TotalLabel.text.replace("Total: ", "")
+	var newScore = int(_oldScore) + _score
+	TotalLabel.text = "Total: " + str(newScore)
 	var oldScore = int(BonusButton.text)
 	BonusButton.text = str(oldScore + _score)
 
