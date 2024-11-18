@@ -1,12 +1,21 @@
 # Software Requirements Specification (SRS)
 
-<The SRS is for a single product, not a family of products. A Commonality Analysis is
-more appropriate for a family of products.>
+- **Description**:
 
-<The template in this folder is suited to Scientific Computing (also known as 
-Research Software) projects>
+The software requirements specification plan looks to define the functional and non-functional needs of the project. Also included are descriptions of likely and unlikely changes as well as an overview of commonalities, variabilities, and parameters of variations for the family of product elements within.
 
-The folders and files for this folder are as follows:
+- **Folders and Files**:
 
-Describe ...
+figures - Figures for the compilation of the document
+
+include - File partitioned into subsections included here
+
+other_files - Template information files
+
+SRS.pdf - The compiled pdf version of the documentation
+
+SRS.tex - The LaTeX code for the documentation
+
+README.md - Overview of deliverable
+
 
