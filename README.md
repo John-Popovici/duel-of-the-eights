@@ -11,12 +11,17 @@ This project creates an online multiplayer game platform that allows for the cre
 
 - **Folders and Files**:
 
+.github - GitHub related files
+builds - Game versions exported
 docs - Documentation for the project
-
-refs - Reference material used for the project, including papers
-
+refs - Reference material used for the project
 src - Source code
-
 test - Test cases
 
-
+.gitignore - For informing git
+AUTHORS.md - Authors and credits
+CodeOfConduct.md - Participation rules
+ExceptionsGranted.md - Capstone project exceptions
+INSTALL.md - Instructions for installing software
+LICENSE.txt - License used for the project
+README.md - Project overview
