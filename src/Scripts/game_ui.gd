@@ -22,6 +22,9 @@ extends CanvasLayer
 @onready var opponent_stats_label = get_node("EndOfGameScreen/HBoxContainer/OpponentStatsLabel")
 @onready var restart_button = get_node("EndOfGameScreen/RestartButton")
 @onready var exit_button = get_node("EndOfGameScreen/ExitButton")
+@onready var sort_asc_button = get_node("MyPlayerDiceBase/RollSorter/ButtonHolder/Asc")
+@onready var sort_desc_button = get_node("MyPlayerDiceBase/RollSorter/ButtonHolder/Desc")
+@onready var sort_freq_button = get_node("MyPlayerDiceBase/RollSorter/ButtonHolder/Freq")
 
 var myPlayerName: String
 var enemyPlayerName: String
@@ -138,8 +141,6 @@ func update_opponent_dice_display(rolls: Array):
 
 func update_my_player_dice_display(dice: Array[RigidBody3D]):
 	dice = sortDice(dice,sortMethod)
-	
-	
 	for i in range(dice.size()):
 		var face_value = dice[i].get_face_value()
 		match dice_type:
@@ -152,31 +153,55 @@ func update_my_player_dice_display(dice: Array[RigidBody3D]):
 				dice_sprite.setDie(dice[i])
 				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-%d.png" % face_value)  # Adjust path to dice textures
 
-func sortDice(_dice: Array[RigidBody3D], _sortMethod: int)-> Array[RigidBody3D]:
-	_dice = sort_dice_ascending(_dice)
-	
+func sortDice(_dice: Array[RigidBody3D], _sortMethod: int = 1)-> Array[RigidBody3D]:
+	match _sortMethod:
+		1:
+			_dice.sort_custom(custom_sort_ascending)
+		2:
+			_dice.sort_custom(custom_sort_descending)
+		3:
+			_dice = sort_by_frequency(_dice)
 	return _dice
 
-func sort_dice_ascending(_dice: Array[RigidBody3D]) -> Array[RigidBody3D]:
-	var n = _dice.size()
+func custom_sort_ascending(a, b):
+	if a.get_face_value() < b.get_face_value():
+		return true
+	return false
+
+func custom_sort_descending(a, b):
+	if a.get_face_value() > b.get_face_value():
+		return true
+	return false
+
+var frequency_dict = {}
+
+func sort_by_frequency(_dice: Array[RigidBody3D]) -> Array[RigidBody3D]:
+	frequency_dict.clear()
 	
-	for i in range(n):
-		# Assume the minimum is the first element in the unsorted portion
-		var min_index = i
-		
-		# Find the index of the minimum element in the remaining unsorted portion
-		for j in range(i + 1, n):
-			if _dice[j].get_face_value() < _dice[min_index].get_face_value():
-				min_index = j
-		
-		# Swap the found minimum element with the first element in the unsorted portion
-		if min_index != i:
-			var temp = _dice[i]
-			_dice[i] = _dice[min_index]
-			_dice[min_index] = temp
-	
+	# Calculate the frequency of each element in the array
+	for die in _dice:
+		var faceValue = die.get_face_value()
+		if faceValue in frequency_dict:
+			frequency_dict[faceValue] += 1
+		else:
+			frequency_dict[faceValue] = 1
+	print(frequency_dict)
+	# Sort the array by frequency (descending), and by value (ascending) if frequencies are equal
+	_dice.sort_custom(_compare_by_frequency)
+
 	return _dice
+
+# Custom comparator function for sorting based on frequency and value
+func _compare_by_frequency(a, b) -> int:
+	var freq_a = frequency_dict[a.get_face_value()]
+	var freq_b = frequency_dict[b.get_face_value()]
 	
+	# Compare by frequency in descending order
+	if freq_a != freq_b:
+		return freq_b < freq_a
+	# If frequencies are equal, compare by value in ascending order
+	return a.get_face_value() < b.get_face_value()
+
 
 # Update the opponent's dice display to blanks
 func blank_opponent_dice_display():
@@ -318,12 +343,27 @@ func hide_player_stats_panel():
 func show_player_stats_panel():
 	player_stats_panel.visible = true
 
+func _on_asc_sort_pressed():
+	sortMethod = 1
+	update_my_player_dice_display(get_parent().get_node("myPlayer").get_dice())
+
+func _on_desc_sort_pressed():
+	sortMethod = 2
+	update_my_player_dice_display(get_parent().get_node("myPlayer").get_dice())
+
+func _on_freq_sort_pressed():
+	sortMethod = 3
+	update_my_player_dice_display(get_parent().get_node("myPlayer").get_dice())
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.visible = false
 	ReturnToGameButton.connect("pressed",self.hide_pause_menu)
 	var game_manager = get_parent()
 	ExitGameButton.pressed.connect(game_manager.exitGame)
+	sort_asc_button.pressed.connect(_on_asc_sort_pressed)
+	sort_desc_button.pressed.connect(_on_desc_sort_pressed)
+	sort_freq_button.pressed.connect(_on_freq_sort_pressed)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

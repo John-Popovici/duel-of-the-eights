@@ -604,6 +604,31 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
+[node name="RollSorter" type="PanelContainer" parent="GameManager/GameUI/MyPlayerDiceBase"]
+layout_mode = 0
+offset_left = 584.0
+offset_top = 533.0
+offset_right = 889.0
+offset_bottom = 568.0
+
+[node name="ButtonHolder" type="HBoxContainer" parent="GameManager/GameUI/MyPlayerDiceBase/RollSorter"]
+layout_mode = 2
+
+[node name="Asc" type="Button" parent="GameManager/GameUI/MyPlayerDiceBase/RollSorter/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Asc"
+
+[node name="Desc" type="Button" parent="GameManager/GameUI/MyPlayerDiceBase/RollSorter/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Desc"
+
+[node name="Freq" type="Button" parent="GameManager/GameUI/MyPlayerDiceBase/RollSorter/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Freq"
+
 [node name="GameStatePanel" type="PanelContainer" parent="GameManager/GameUI"]
 offset_top = 390.0
 offset_right = 199.0
