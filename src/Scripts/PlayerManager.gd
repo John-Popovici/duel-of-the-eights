@@ -63,6 +63,7 @@ func roll_rolling_or_invalid_dice() -> void:
 
 
 func pass_roll() -> void:
+	await get_tree().create_timer(1.0).timeout
 	checkIfDiceValidThenRead()
 
 func checkIfDiceValidThenRead() -> void:

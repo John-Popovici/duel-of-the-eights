@@ -112,6 +112,8 @@ func synchronizeStartRound() -> void:
 func rollPhase(roll: bool) -> void:
 	setDisableAllButtons(true)
 	roll_selection_done = false
+	GameUI.blank_opponent_dice_display()
+	GameUI.blank_my_player_dice_display()
 	set_rolls_read(false)
 	if roll_count == 0:
 		myPlayer.roll_dice()
@@ -121,7 +123,6 @@ func rollPhase(roll: bool) -> void:
 		myPlayer.pass_roll()
 	roll_count += 1
 	GameUI.update_roll_info(roll_count)
-	GameUI.blank_opponent_dice_display()
 
 func recieveRolls(fromHost: bool, _rolls: Array[int]) ->void:
 	enemyPlayer.setRolls(_rolls)
