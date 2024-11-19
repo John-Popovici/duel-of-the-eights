@@ -531,14 +531,6 @@ theme = ExtResource("14_jpiw0")
 theme_override_font_sizes/font_size = 22
 text = "Pass"
 
-[node name="MyPlayerDiceLabel" type="Label" parent="GameManager/GameUI"]
-offset_left = 3.0
-offset_top = 544.0
-offset_right = 170.0
-offset_bottom = 568.0
-theme = ExtResource("14_jpiw0")
-text = "Opponent Dice Rolls:"
-
 [node name="OpponentDiceBase" type="Control" parent="GameManager/GameUI"]
 layout_mode = 3
 anchors_preset = 0

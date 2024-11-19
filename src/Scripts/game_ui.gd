@@ -290,7 +290,6 @@ func _input(event):
 
 func hide_opponent_rolls():
 	opponent_dice_base.visible = false
-	opponent_dice_base.get_node("OpponentDiceLabel").visible = false
 
 func show_opponent_rolls():
 	opponent_dice_base.visible = true
