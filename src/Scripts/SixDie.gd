@@ -98,10 +98,13 @@ func _mouse_exit() -> void:
 # Detects if the die was clicked and toggles its selected status
 func _on_input_event(_camera: Node, event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		is_selected = !is_selected  # Toggle selection status
-		print("Die selected status:", is_selected)
-		print(self.name)
-		print("Dice Face Value: ", get_face_value())
+		_toggle_selection_status()
+
+func _toggle_selection_status() -> void:
+	is_selected = !is_selected  # Toggle selection status
+	print("Die selected status:", is_selected)
+	print(self.name)
+	print("Dice Face Value: ", get_face_value())
 
 # Returns whether the die is selected
 func get_selected_status() -> bool:

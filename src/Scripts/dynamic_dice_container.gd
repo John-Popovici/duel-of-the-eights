@@ -39,6 +39,9 @@ func get_dice_values() -> Array[int]:
 		dice_values.append(die.get_face_value())  # Append the top-facing value
 	return dice_values
 
+func get_dice() -> Array[RigidBody3D]:
+	return dice_nodes
+
 # Returns a list of all selected dice
 func get_selected_dice() -> Array:
 	var selected_dice = []

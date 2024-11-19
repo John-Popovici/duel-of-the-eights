@@ -5,6 +5,7 @@ var score: int = 0
 var last_score: int = 0
 var health_points: int = 10  # Example starting health
 var rolls: Array = []  # Stores current dice rolls
+var dice : Array[RigidBody3D]
 var selected_hand: Dictionary = {}
 var selected_for_reroll: Array = []  # Dice selected to reroll
 var myPlayer: bool
@@ -82,6 +83,7 @@ func readRolls() -> void:
 	while !(len(diceContainer.get_rolling_dice()) == 0):
 		await get_tree().create_timer(1.0).timeout
 	rolls = diceContainer.get_dice_values()
+	dice = diceContainer.get_dice()
 	game_manager.set_rolls_read(true)
 	#Communicate to other player
 	print("Player Manger: Host: ", hostDevice, ", Rolls: ", rolls)
@@ -94,6 +96,9 @@ func setRolls(_rolls: Array) -> void:
 
 func getRolls() -> Array:
 	return rolls
+
+func get_dice() -> Array[RigidBody3D]:
+	return dice
 
 func clearRolls() -> void:
 	rolls.clear()

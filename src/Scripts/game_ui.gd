@@ -30,6 +30,7 @@ var total_rounds:int
 var total_round_rolls:int
 var dice_count:int
 var dice_type:int
+var sortMethod: int
 var dice_display_height: float = 100
 signal escPressed
 var escScreenAllowed = false
@@ -63,6 +64,7 @@ func setup_game_ui(game_settings: Dictionary, _isHost: bool):
 	total_round_rolls = game_settings["round_rolls"]
 	dice_count = game_settings["dice_count"]
 	dice_type = game_settings["dice_type"]
+	sortMethod = 1
 	print("Dice Type set to: ", dice_type)
 	# Initialize labels for game state
 	for child in game_state_info.get_children():
@@ -134,16 +136,47 @@ func update_opponent_dice_display(rolls: Array):
 				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
 				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-%d.png" % rolls[i])  # Adjust path to dice textures
 
-func update_my_player_dice_display(rolls: Array):
-	rolls.sort()
-	for i in range(rolls.size()):
+func update_my_player_dice_display(dice: Array[RigidBody3D]):
+	dice = sortDice(dice,sortMethod)
+	
+	
+	for i in range(dice.size()):
+		var face_value = dice[i].get_face_value()
 		match dice_type:
 			6:
 				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
-				dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % rolls[i]))  # Adjust path to dice textures
+				dice_sprite.setDie(dice[i])
+				dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % face_value))  # Adjust path to dice textures
 			8:
 				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
-				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-%d.png" % rolls[i])  # Adjust path to dice textures
+				dice_sprite.setDie(dice[i])
+				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-%d.png" % face_value)  # Adjust path to dice textures
+
+func sortDice(_dice: Array[RigidBody3D], _sortMethod: int)-> Array[RigidBody3D]:
+	_dice = sort_dice_ascending(_dice)
+	
+	return _dice
+
+func sort_dice_ascending(_dice: Array[RigidBody3D]) -> Array[RigidBody3D]:
+	var n = _dice.size()
+	
+	for i in range(n):
+		# Assume the minimum is the first element in the unsorted portion
+		var min_index = i
+		
+		# Find the index of the minimum element in the remaining unsorted portion
+		for j in range(i + 1, n):
+			if _dice[j].get_face_value() < _dice[min_index].get_face_value():
+				min_index = j
+		
+		# Swap the found minimum element with the first element in the unsorted portion
+		if min_index != i:
+			var temp = _dice[i]
+			_dice[i] = _dice[min_index]
+			_dice[min_index] = temp
+	
+	return _dice
+	
 
 # Update the opponent's dice display to blanks
 func blank_opponent_dice_display():
@@ -161,9 +194,11 @@ func blank_my_player_dice_display():
 		match dice_type:
 			6:
 				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
+				dice_sprite.clearDie()
 				dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-0.png"))  # Adjust path to dice textures
 			8:
 				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
+				dice_sprite.clearDie()
 				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-0.png")  # Adjust path to dice textures
 
 
@@ -255,6 +290,7 @@ func _input(event):
 
 func hide_opponent_rolls():
 	opponent_dice_base.visible = false
+	opponent_dice_base.get_node("OpponentDiceLabel").visible = false
 
 func show_opponent_rolls():
 	opponent_dice_base.visible = true
