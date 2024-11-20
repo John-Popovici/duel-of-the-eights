@@ -139,6 +139,9 @@ func update_opponent_dice_display(rolls: Array):
 			8:
 				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
 				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-%d.png" % rolls[i])  # Adjust path to dice textures
+			4:
+				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
+				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-%d.png" % rolls[i])  # Adjust path to dice textures
 
 func update_my_player_dice_display(dice: Array[RigidBody3D]):
 	dice = sortDice(dice,sortMethod)
@@ -150,6 +153,10 @@ func update_my_player_dice_display(dice: Array[RigidBody3D]):
 				dice_sprite.setDie(dice[i])
 				dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % face_value))  # Adjust path to dice textures
 			8:
+				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
+				dice_sprite.setDie(dice[i])
+				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-%d.png" % face_value)  # Adjust path to dice textures
+			4:
 				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
 				dice_sprite.setDie(dice[i])
 				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-%d.png" % face_value)  # Adjust path to dice textures
@@ -214,6 +221,9 @@ func blank_opponent_dice_display():
 			8:
 				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
 				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-0.png")  # Adjust path to dice textures
+			4:
+				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
+				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-0.png")  # Adjust path to dice textures
 
 func blank_my_player_dice_display():
 	for i in range(dice_count):
@@ -223,6 +233,10 @@ func blank_my_player_dice_display():
 				dice_sprite.clearDie()
 				dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-0.png"))  # Adjust path to dice textures
 			8:
+				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
+				dice_sprite.clearDie()
+				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-0.png")  # Adjust path to dice textures
+			4:
 				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
 				dice_sprite.clearDie()
 				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-0.png")  # Adjust path to dice textures

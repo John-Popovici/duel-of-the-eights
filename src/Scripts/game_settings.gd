@@ -239,8 +239,8 @@ func _generate_chance():
 
 # Generate straights based on dice count
 func _generate_straights():
-	var min_straight = min(4, dice_count)
-	for length in range(min_straight, dice_count + 1):
+	var maxStraight = dice_count if dice_count<dice_type else dice_type
+	for length in range(4, maxStraight + 1): #change 4 to allow for smaller straights
 		var hand_name = "Straight of %d" % length
 		var hand_type = ["Straight",length]
 		var hand_option = _create_hand_option(hand_name, hand_type)

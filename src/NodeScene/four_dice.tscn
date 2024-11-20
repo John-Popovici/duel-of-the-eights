@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://dhfe5d2eygmel"]
+
+[ext_resource type="Script" path="res://Scripts/FourDie.gd" id="1_i6gdu"]
+[ext_resource type="ArrayMesh" uid="uid://dy5tewlmwlr8w" path="res://Assets/dice/d4/DiceMakerD4_d4_3d_numbered_stl.res" id="2_y3uq0"]
+[ext_resource type="Material" uid="uid://du2ej862se3yl" path="res://Materials/Faces.tres" id="3_t3v2a"]
+[ext_resource type="ArrayMesh" uid="uid://bt5upkkp3cde" path="res://Assets/dice/d4/DiceMakerD4_d4_3d_blank_stl.res" id="4_w2agu"]
+[ext_resource type="Material" uid="uid://d3pmd3027bxsl" path="res://Materials/Dice_Base.tres" id="5_ynw1g"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jqowa"]
+points = PackedVector3Array(2, -0.7, 0, -1, -0.7, 1.7, -1, -0.7, -1.7, 0, 2, 0)
+
+[node name="FourDice" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+script = ExtResource("1_i6gdu")
+
+[node name="OuterMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.23, 0, 0, 0, 0.23, 0, 0, 0, 0.23, 0, 0, 0)
+mesh = ExtResource("2_y3uq0")
+surface_material_override/0 = ExtResource("3_t3v2a")
+
+[node name="InnerMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.225, 0, 0, 0, 0.225, 0, 0, 0, 0.225, 0, 0, 0)
+mesh = ExtResource("4_w2agu")
+surface_material_override/0 = ExtResource("5_ynw1g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_jqowa")
+
+[node name="RayCastHolder" type="Node3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+
+[node name="RayCast3D_Face1" type="RayCast3D" parent="RayCastHolder"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+target_position = Vector3(0, 0, 1)
+
+[node name="RayCast3D_Face2" type="RayCast3D" parent="RayCastHolder"]
+transform = Transform3D(-4.37114e-08, 0.5, 0.866026, 0, 0.866026, -0.5, -1, -2.18557e-08, -3.78552e-08, 0, 0, 0)
+target_position = Vector3(0, 0, 1)
+
+[node name="RayCast3D_Face3" type="RayCast3D" parent="RayCastHolder"]
+transform = Transform3D(0.866025, -0.25, -0.433013, 0, 0.866026, -0.5, 0.5, 0.433013, 0.75, 0, 0, 0)
+target_position = Vector3(0, 0, 1)
+
+[node name="RayCast3D_Face4" type="RayCast3D" parent="RayCastHolder"]
+transform = Transform3D(-0.866025, -0.25, -0.433013, 0, 0.866025, -0.5, 0.5, -0.433013, -0.75, 0, 0, 0)
+target_position = Vector3(0, 0, 1)

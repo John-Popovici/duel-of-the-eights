@@ -78,6 +78,8 @@ func add_dice(dice_count: int, dice_type: int) -> void:
 			dice = preload("res://NodeScene/six_dice.tscn").instantiate()
 		elif dice_type == 8:
 			dice = preload("res://NodeScene/eight_dice.tscn").instantiate()
+		elif dice_type == 4:
+			dice = preload("res://NodeScene/four_dice.tscn").instantiate()
 		
 		# Assign a starting position from the list, cycling if dice_count > 9
 		var start_pos = start_positions[i % start_positions.size()]
