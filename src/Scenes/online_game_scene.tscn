@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bv1diwskvph82"]
+[gd_scene load_steps=23 format=3 uid="uid://bv1diwskvph82"]
 
 [ext_resource type="Script" path="res://Scripts/online_game_scene.gd" id="1_qoyeu"]
 [ext_resource type="Script" path="res://Scripts/networkManager.gd" id="2_6sfck"]
@@ -12,6 +12,7 @@
 [ext_resource type="Material" uid="uid://dvsy8knluwv6e" path="res://Materials/BoardRaisedMat.tres" id="8_ef00w"]
 [ext_resource type="Script" path="res://Scripts/Dynamic_Scoreboard.gd" id="9_i8ewx"]
 [ext_resource type="Script" path="res://Scripts/score_calculator.gd" id="10_0b2yf"]
+[ext_resource type="Script" path="res://Scripts/camera_controller.gd" id="10_m1igd"]
 [ext_resource type="StyleBox" uid="uid://bdd2m4n2as1ot" path="res://Themes/Default_Pixel_Wood/WoodBoxBackgroundStyle.tres" id="11_522jn"]
 [ext_resource type="Script" path="res://Scripts/PlayerManager.gd" id="11_ejug4"]
 [ext_resource type="Script" path="res://Scripts/game_ui.gd" id="12_f4hi7"]
@@ -399,8 +400,46 @@ text = "Exit Game"
 [node name="DiceContainer" type="Node3D" parent="GameManager"]
 script = ExtResource("5_aa5li")
 
-[node name="Camera3D" type="Camera3D" parent="GameManager"]
+[node name="CameraController" type="Node3D" parent="GameManager"]
+script = ExtResource("10_m1igd")
+
+[node name="Positions" type="Node3D" parent="GameManager/CameraController"]
+
+[node name="Angled" type="Node3D" parent="GameManager/CameraController/Positions"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 21)
+
+[node name="Top Down" type="Node3D" parent="GameManager/CameraController/Positions"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 3)
+
+[node name="Cinematic" type="Node3D" parent="GameManager/CameraController/Positions"]
+transform = Transform3D(0.707107, -0.454519, 0.541675, 0, 0.766044, 0.642788, -0.707107, -0.454519, 0.541675, 25, 15, 25)
+
+[node name="Camera3D" type="Camera3D" parent="GameManager/CameraController"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 21)
+
+[node name="CameraPosPanel" type="PanelContainer" parent="GameManager/CameraController"]
+offset_top = 435.0
+offset_right = 200.0
+offset_bottom = 515.0
+theme = ExtResource("14_jpiw0")
+
+[node name="ButtonHolder" type="VBoxContainer" parent="GameManager/CameraController/CameraPosPanel"]
+layout_mode = 2
+
+[node name="Angled" type="Button" parent="GameManager/CameraController/CameraPosPanel/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Angled"
+
+[node name="Top Down" type="Button" parent="GameManager/CameraController/CameraPosPanel/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Top Down"
+
+[node name="Cinematic" type="Button" parent="GameManager/CameraController/CameraPosPanel/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cinematic"
 
 [node name="Environment" type="Node3D" parent="GameManager"]
 

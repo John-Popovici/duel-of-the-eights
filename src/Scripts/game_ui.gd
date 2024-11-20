@@ -55,6 +55,7 @@ func setup_game_ui(game_settings: Dictionary, _isHost: bool):
 	show_game_state_info()
 	show_player_stats_panel()
 	show_my_player_rolls()
+	show_camera_options()
 	
 	if isHost:
 		myPlayerName = game_settings["player_names"][0]
@@ -292,6 +293,13 @@ func hide_all_ui():
 	hide_waiting_screen()
 	hide_end_of_game_screen()
 	hide_pause_menu()
+	hide_camera_options()
+
+func hide_camera_options() -> void:
+	get_parent().get_node("CameraController").set_options_visible(false)
+
+func show_camera_options() -> void:
+	get_parent().get_node("CameraController").set_options_visible(true)
 
 func hide_pause_menu():
 	PausePanel.visible = false
