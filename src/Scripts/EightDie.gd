@@ -15,9 +15,9 @@ var hover_toggle_position: Vector3
 @export var velocity_threshold: float = 0.1  # Adjust this value based on your needs
 @export var roll_time_limit: float = 5.0     # Time limit to trigger function
 var is_selected: bool = false          # Tracks if the die has been clicked/selected
-@onready var dieMesh: MeshInstance3D = $MeshInstance3D
+@onready var dieMesh: MeshInstance3D = get_node("OuterMesh")
 
-var normalTex = preload('res://Materials/Red.tres')
+var normalTex = preload('res://Materials/Faces.tres')
 var selectedTex = preload('res://Materials/Purple.tres')
 
 @export var face_threshold: float = 0.8  # Threshold for face orientation detection
