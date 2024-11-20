@@ -28,9 +28,9 @@ func _ready():
 	host_checkbutton.connect("toggled", self._on_hostcheck_toggled)
 	WaitUI.visible = false
 	ErrorUI.visible = false
+	port_field.visible = false
 	# Connect the copy buttons to functions to copy IP and port
 	CopyIPButton.connect("pressed", self._copy_ip_to_clipboard)
-	CopyPortButton.connect("pressed", self._copy_port_to_clipboard)
 	CancelHostButton.connect("pressed", self._cancel_hosting)
 
 func _on_hostcheck_toggled(state):
@@ -39,10 +39,12 @@ func _on_hostcheck_toggled(state):
 	if host_option:
 		ip_field.visible = false
 		connect_button.text = "Start Hosting"
+		port_field.visible = true
 		port_field.placeholder_text = "Port (Optional - 5 digits to 65535)"
 	else:
 		ip_field.visible = true
 		connect_button.text = "Connect"
+		port_field.visible = false
 		port_field.placeholder_text = "Port - 5 digits"
 
 func setupNetworkManagerRef() -> void:
@@ -67,25 +69,24 @@ func _cancel_hosting() -> void:
 
 func _on_connect_pressed():
 	var port = port_field.text.to_int() if port_field.text else default_port
+	# with server hosting, most likely, the port will be chosen internally and dynamically
 	
 	if host_option:
 		network_manager.start_server(port)
 		SetupUI.visible = false
 		WaitUI.visible = true
-		IPDisplayLabel.text = "Connect Code: " + network_manager.getHashIP()
+		print(network_manager.getHashIP())
+		print(network_manager.getHashPort())
+		IPDisplayLabel.text = "Connect Code: " + network_manager.getHashIP() + network_manager.getHashPort()
 		PortDisplayLabel.text = "Started as Host on port: " + str(port)
 	else:
 		var _hash = ip_field.text
-		network_manager.connect_to_server(_hash, port)
+		network_manager.connect_to_server(_hash)
 
 func _copy_ip_to_clipboard():
-	DisplayServer.clipboard_set(network_manager.getHashIP())
+	DisplayServer.clipboard_set(network_manager.getHashIP()+network_manager.getHashPort())
 	print("Connect code copied to clipboard: ", DisplayServer.clipboard_get())
 
-func _copy_port_to_clipboard():
-	var port = port_field.text.to_int() if port_field.text else default_port
-	DisplayServer.clipboard_set(str(port))
-	print("Port copied to clipboard: ", DisplayServer.clipboard_get())
 
 func _on_connection_successful():
 	# Hide the ConnectionUI once connected

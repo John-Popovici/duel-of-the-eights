@@ -1,6 +1,7 @@
 extends Node
 
 @export var default_port: int = 12345
+var port
 var is_host: bool = false
 var ConnectionUI: CanvasLayer
 var OnlineGameManager: Node3D
@@ -14,8 +15,9 @@ var time_since_last_ping: float = 0.0
 var check_ping: bool = false
 
 # Start as a server
-func start_server(port: int):
+func start_server(_port: int = default_port):
 	var peer = ENetMultiplayerPeer.new()
+	port = _port
 	var error = peer.create_server(port, 2)  # Set maximum peers to 2 (host + 1 client)
 	if error != OK:
 		print("Cannot Host: ", error)
@@ -30,9 +32,11 @@ func start_server(port: int):
 	multiplayer.multiplayer_peer.connect("peer_disconnected", self._on_peer_disconnected)
 
 # Connect as a client
-func connect_to_server(_hash: String, port: int):
+func connect_to_server(_hash: String):
 	var peer = ENetMultiplayerPeer.new()
-	var error = peer.create_client(hash_to_ip(_hash), port)
+	var ip = hash_to_ip(_hash.substr(0,8))
+	port = lettersToNumber(_hash.substr(8,-1))
+	var error = peer.create_client(ip, port)
 	if error != OK:
 		print("Cannot Join as Client: ", error)
 		print("Cannot Join as Client to: ", hash_to_ip(_hash), " on port ", port)
@@ -76,8 +80,8 @@ func numberToLetters(number: int) -> String:
 	var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 	# Ensure number is within the valid range
-	if number < 0 or number > 600:
-		return ""
+	#if number < 0 or number > 600:
+	#	return ""
 	
 	while number >= 0:
 		var remainder = number % 26
@@ -137,6 +141,9 @@ func getIsHost() -> bool:
 
 func getHashIP() -> String:
 	return ip_to_hash(str(IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1)))
+
+func getHashPort() -> String:
+	return numberToLetters(port)
 
 func disconnect_from_server() -> void:
 	multiplayer.multiplayer_peer = null

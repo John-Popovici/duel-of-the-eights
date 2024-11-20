@@ -34,7 +34,6 @@ script = ExtResource("1_qoyeu")
 script = ExtResource("2_6sfck")
 
 [node name="ConnectionUI" type="CanvasLayer" parent="NetworkManager"]
-visible = false
 script = ExtResource("3_f25r5")
 
 [node name="UIBox" type="PanelContainer" parent="NetworkManager/ConnectionUI"]
@@ -97,14 +96,10 @@ theme = ExtResource("13_g1ii3")
 text = "Copy Connect Code"
 
 [node name="PortDisplay" type="Label" parent="NetworkManager/ConnectionUI/UIBox/Connection_Wait"]
+visible = false
 layout_mode = 2
 theme = ExtResource("13_g1ii3")
 horizontal_alignment = 1
-
-[node name="CopyPortButton" type="Button" parent="NetworkManager/ConnectionUI/UIBox/Connection_Wait"]
-layout_mode = 2
-theme = ExtResource("13_g1ii3")
-text = "Copy Port"
 
 [node name="CancelHosting" type="Button" parent="NetworkManager/ConnectionUI/UIBox/Connection_Wait"]
 layout_mode = 2
@@ -418,6 +413,7 @@ transform = Transform3D(0.707107, -0.454519, 0.541675, 0, 0.766044, 0.642788, -0
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 21)
 
 [node name="CameraPosPanel" type="PanelContainer" parent="GameManager/CameraController"]
+visible = false
 offset_top = 435.0
 offset_right = 200.0
 offset_bottom = 515.0
@@ -499,6 +495,7 @@ spot_attenuation = -0.5
 spot_angle_attenuation = 2.37841
 
 [node name="Scoreboard" type="CanvasLayer" parent="GameManager"]
+visible = false
 script = ExtResource("9_i8ewx")
 
 [node name="UIBox" type="PanelContainer" parent="GameManager/Scoreboard"]
@@ -542,6 +539,7 @@ script = ExtResource("11_ejug4")
 script = ExtResource("11_ejug4")
 
 [node name="GameUI" type="CanvasLayer" parent="GameManager"]
+visible = false
 script = ExtResource("12_f4hi7")
 
 [node name="RollButtons" type="VBoxContainer" parent="GameManager/GameUI"]
