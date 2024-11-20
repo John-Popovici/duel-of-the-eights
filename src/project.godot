@@ -27,7 +27,14 @@ import/blender/enabled=false
 
 theme/custom_font="res://Themes/SystemFont_Pixel1.tres"
 
+[importer_defaults]
+
+texture={
+"detect_3d/compress_to": 0
+}
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true

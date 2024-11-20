@@ -13,7 +13,7 @@
 [ext_resource type="ArrayMesh" uid="uid://benljw575qaid" path="res://Assets/Terrain_1_Plane_001.res" id="6_jqa5p"]
 [ext_resource type="ArrayMesh" uid="uid://853sy2cqxcot" path="res://Assets/Dice_Red_1_Cube.res" id="7_too8u"]
 [ext_resource type="Script" path="res://Scripts/hands_container.gd" id="8_w1efo"]
-[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Default_pixel_theme.tres" id="13_lgjp5"]
+[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="13_lgjp5"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_c0fec"]
 

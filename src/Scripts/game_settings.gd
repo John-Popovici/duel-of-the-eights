@@ -268,37 +268,25 @@ func _generate_full_houses():
 
 # Helper function to create a UI option for each hand
 func _create_hand_option(hand_name: String, hand_type: Array) -> HBoxContainer:
-	var hand_hbox = HBoxContainer.new()
+	var hand_hbox = load("res://NodeScene/advanced_settings_hand_template.tscn").instantiate()
 
 	# Label for the hand name
-	var name_label = Label.new()
+	var name_label = hand_hbox.get_node("HandName")
 	name_label.text = hand_name
-	hand_hbox.add_child(name_label)
 
 	# Toggle for allowing the hand
-	var allowed_checkbox = CheckBox.new()
-	allowed_checkbox.text = "Allowed"
+	var allowed_checkbox = hand_hbox.get_node("Allowed")
 	allowed_checkbox.set_toggle_mode(true)
 	allowed_checkbox.set_pressed(true)
-	hand_hbox.add_child(allowed_checkbox)
 
 	# Toggle for repeatable
-	var repeatable_checkbox = CheckBox.new()
-	repeatable_checkbox.text = "Repeatable"
-	hand_hbox.add_child(repeatable_checkbox)
+	var repeatable_checkbox = hand_hbox.get_node("Repeatable")
 
 	# SpinBox for maximum plays allowed
-	var max_plays = SpinBox.new()
-	max_plays.min_value = 0
-	max_plays.max_value = 99
-	max_plays.value = 1
-	max_plays.suffix = "Play"
-	hand_hbox.add_child(max_plays)
+	var max_plays = hand_hbox.get_node("MaxPlays")
 
 	# TextField for custom scoring rule
-	var scoring_input = LineEdit.new()
-	scoring_input.placeholder_text = "Scoring rule"
-	hand_hbox.add_child(scoring_input)
+	var scoring_input = hand_hbox.get_node("ScoringRule")
 
 	# Save settings for this hand in hand_settings dictionary
 	hand_settings_refs[hand_name] = {

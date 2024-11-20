@@ -36,6 +36,7 @@ var selectedTex = preload('res://Materials/Purple.tres')
 
 # Applies random torque and force to simulate a roll
 func roll() -> void:
+	self.set_freeze_enabled(false)
 	await get_tree().create_timer(start_time).timeout
 	# Reset position and rotation to start values
 	global_transform.origin = start_position
@@ -67,7 +68,7 @@ func roll() -> void:
 func get_face_value() -> int:
 	var best_face = -1
 	var highest_dot = -1.0
-	
+	self.set_freeze_enabled(true)
 	for face_value in face_rays.keys():
 		var raycast = face_rays[face_value]
 		var ray_direction = raycast.global_transform.basis.z.normalized()
@@ -97,10 +98,13 @@ func _mouse_exit() -> void:
 # Detects if the die was clicked and toggles its selected status
 func _on_input_event(_camera: Node, event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		is_selected = !is_selected  # Toggle selection status
-		print("Die selected status:", is_selected)
-		print(self.name)
-		print("Dice Face Value: ", get_face_value())
+		_toggle_selection_status()
+
+func _toggle_selection_status() -> void:
+	is_selected = !is_selected  # Toggle selection status
+	print("Die selected status:", is_selected)
+	print(self.name)
+	print("Dice Face Value: ", get_face_value())
 
 # Returns whether the die is selected
 func get_selected_status() -> bool:

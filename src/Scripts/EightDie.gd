@@ -26,18 +26,19 @@ var selectedTex = preload('res://Materials/Purple.tres')
 @export var up_threshold: float = 0.8
 # Dictionary to associate raycast nodes with face values
 @onready var face_rays = {
-	1: $"RayCast3D_Face1",
-	2: $"RayCast3D_Face2",
-	3: $"RayCast3D_Face3",
-	4: $"RayCast3D_Face4",
-	5: $"RayCast3D_Face5",
-	6: $"RayCast3D_Face6",
-	7: $"RayCast3D_Face7",
-	8: $"RayCast3D_Face8"
+	1: $"RayCastHolder/RayCast3D_Face1",
+	2: $"RayCastHolder/RayCast3D_Face2",
+	3: $"RayCastHolder/RayCast3D_Face3",
+	4: $"RayCastHolder/RayCast3D_Face4",
+	5: $"RayCastHolder/RayCast3D_Face5",
+	6: $"RayCastHolder/RayCast3D_Face6",
+	7: $"RayCastHolder/RayCast3D_Face7",
+	8: $"RayCastHolder/RayCast3D_Face8"
 }
 
 # Applies random torque and force to simulate a roll
 func roll() -> void:
+	self.set_freeze_enabled(false)
 	await get_tree().create_timer(start_time).timeout
 	# Reset position and rotation to start values
 	global_transform.origin = start_position
@@ -69,7 +70,7 @@ func roll() -> void:
 func get_face_value() -> int:
 	var best_face = -1
 	var highest_dot = -1.0
-	
+	self.set_freeze_enabled(true)
 	for face_value in face_rays.keys():
 		var raycast = face_rays[face_value]
 		var ray_direction = raycast.global_transform.basis.z.normalized()
@@ -96,10 +97,17 @@ func _mouse_exit() -> void:
 # Detects if the die was clicked and toggles its selected status
 func _on_input_event(_camera: Node, event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		is_selected = !is_selected  # Toggle selection status
-		print("Die selected status:", is_selected)
-		print(self.name)
-		print("Dice Face Value: ", get_face_value())
+		_toggle_selection_status()
+
+func _toggle_selection_status() -> void:
+	is_selected = !is_selected  # Toggle selection status
+	print("Die selected status:", is_selected)
+	print(self.name)
+	print("Dice Face Value: ", get_face_value())
+	if !is_selected:
+		dieMesh.set_surface_override_material(0,normalTex)
+	else:
+		dieMesh.set_surface_override_material(0,selectedTex)
 
 # Returns whether the die is selected
 func get_selected_status() -> bool:
