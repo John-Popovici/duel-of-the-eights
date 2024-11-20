@@ -1,6 +1,5 @@
 extends CanvasLayer
 
-@export var network_manager_path: NodePath = "../../NetworkManger"
 @export var default_port: int = 12345
 var host_option: bool = false
 
