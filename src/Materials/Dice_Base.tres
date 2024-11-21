@@ -1,4 +1,5 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://d3pmd3027bxsl"]
 
 [resource]
+render_priority = 3
 diffuse_mode = 3

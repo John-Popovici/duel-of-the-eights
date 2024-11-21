@@ -1,6 +1,5 @@
 extends CanvasLayer
 
-@export var network_manager_path: NodePath = "../../NetworkManger"
 @export var default_port: int = 12345
 var host_option: bool = false
 
@@ -12,26 +11,18 @@ var network_manager: Node
 @onready var connect_button = $UIBox/Connection_Setup/ConnectButton
 @onready var back_to_home_button = $UIBox/Connection_Setup/BackToHomeButton
 @onready var SetupUI = $UIBox/Connection_Setup
-@onready var WaitUI = $UIBox/Connection_Wait
 @onready var ErrorUI = $UIBox/Connection_Error
+@onready var ErrorBack = $EscBackOverlay
 @onready var ErrorSourceLabel = $"UIBox/Connection_Error/Error Source"
-@onready var IPDisplayLabel = $UIBox/Connection_Wait/IPDisplay
-@onready var CopyIPButton = $UIBox/Connection_Wait/CopyIPButton
-@onready var PortDisplayLabel = $UIBox/Connection_Wait/PortDisplay
-@onready var CopyPortButton = $UIBox/Connection_Wait/CopyPortButton
-@onready var CancelHostButton = $UIBox/Connection_Wait/CancelHosting
 
 
 func _ready():
 	self.visible = true
 	host_checkbutton.set_toggle_mode(true)
 	host_checkbutton.connect("toggled", self._on_hostcheck_toggled)
-	WaitUI.visible = false
 	ErrorUI.visible = false
-	# Connect the copy buttons to functions to copy IP and port
-	CopyIPButton.connect("pressed", self._copy_ip_to_clipboard)
-	CopyPortButton.connect("pressed", self._copy_port_to_clipboard)
-	CancelHostButton.connect("pressed", self._cancel_hosting)
+	ErrorBack.visible = false
+	port_field.visible = false
 
 func _on_hostcheck_toggled(state):
 	print("Host/Client Toggled: ",state)
@@ -39,10 +30,12 @@ func _on_hostcheck_toggled(state):
 	if host_option:
 		ip_field.visible = false
 		connect_button.text = "Start Hosting"
+		port_field.visible = true
 		port_field.placeholder_text = "Port (Optional - 5 digits to 65535)"
 	else:
 		ip_field.visible = true
 		connect_button.text = "Connect"
+		port_field.visible = false
 		port_field.placeholder_text = "Port - 5 digits"
 
 func setupNetworkManagerRef() -> void:
@@ -56,8 +49,8 @@ func setupNetworkManagerRef() -> void:
 func _cancel_hosting() -> void:
 	self.visible = false
 	SetupUI.visible = false
-	WaitUI.visible = false
 	ErrorUI.visible = true
+	ErrorBack.visible = true
 	ErrorSourceLabel.text = "Disconnected from game"
 	print("Disconnected")
 	network_manager.disconnect_from_server()
@@ -67,38 +60,33 @@ func _cancel_hosting() -> void:
 
 func _on_connect_pressed():
 	var port = port_field.text.to_int() if port_field.text else default_port
+	# with server hosting, most likely, the port will be chosen internally and dynamically
 	
 	if host_option:
 		network_manager.start_server(port)
 		SetupUI.visible = false
-		WaitUI.visible = true
-		IPDisplayLabel.text = "Connect Code: " + network_manager.getHashIP()
-		PortDisplayLabel.text = "Started as Host on port: " + str(port)
+		print(network_manager.getHashIP())
+		print(network_manager.getHashPort())
+		_on_connection_successful()
 	else:
 		var _hash = ip_field.text
-		network_manager.connect_to_server(_hash, port)
+		network_manager.connect_to_server(_hash)
 
-func _copy_ip_to_clipboard():
-	DisplayServer.clipboard_set(network_manager.getHashIP())
-	print("Connect code copied to clipboard: ", DisplayServer.clipboard_get())
-
-func _copy_port_to_clipboard():
-	var port = port_field.text.to_int() if port_field.text else default_port
-	DisplayServer.clipboard_set(str(port))
-	print("Port copied to clipboard: ", DisplayServer.clipboard_get())
 
 func _on_connection_successful():
 	# Hide the ConnectionUI once connected
 	self.visible = false
 	print("Multiplayer Successfully connected")
+	network_manager.disconnect("connection_successful", self._on_connection_successful)
+	network_manager.connect("connection_successful", get_parent().get_parent().get_node("GameManager/GameSettings")._allow_game_start)
 	# Start the game via OnlineGameManager
 	get_tree().get_root().get_node("OnlineGameScene").start_game()
 
 func _on_disconnected():
 	self.visible = true
 	SetupUI.visible = false
-	WaitUI.visible = false
 	ErrorUI.visible = true
+	ErrorBack.visible = true
 	ErrorSourceLabel.text = "Disconnected from game"
 	print("Disconnected")
 	await get_tree().create_timer(2.0).timeout
@@ -109,8 +97,8 @@ func _on_connection_failed():
 	# Hide the ConnectionUI once connected
 	self.visible = true
 	SetupUI.visible = false
-	WaitUI.visible = false
 	ErrorUI.visible = true
+	ErrorBack.visible = true
 	ErrorSourceLabel.text = "Connection Failed"
 	print("Connection Failed")
 	await get_tree().create_timer(2.0).timeout

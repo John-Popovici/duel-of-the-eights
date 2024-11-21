@@ -10,6 +10,8 @@ var hand_settings
 @onready var myPlayer = get_node("myPlayer")
 @onready var enemyPlayer = get_node("enemyPlayer")
 var isHost: bool
+var baseTimer: int
+var timedRounds: bool
 
 var max_rounds: int
 var max_rolls_per_round: int
@@ -36,6 +38,9 @@ func _on_settings_ready(_game_settings: Dictionary, _hand_settings: Dictionary) 
 	max_rounds = game_settings["rounds"]
 	max_rolls_per_round = game_settings["round_rolls"]
 	win_cond = game_settings["win_condition"]
+	baseTimer = game_settings["round_time"]
+	timedRounds = game_settings["timed_rounds"]
+	
 	
 	if network_manager.getIsHost():
 		network_manager.send_game_settings(game_settings,hand_settings)
@@ -52,6 +57,8 @@ func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionar
 	hand_settings = _hand_settings
 	game_settings_ui.visible = false
 	win_cond = game_settings["win_condition"]
+	baseTimer = game_settings["round_time"]
+	timedRounds = game_settings["timed_rounds"]
 	setup_game()
 
 func setup_game() -> void:
@@ -147,10 +154,14 @@ func setup_selection() -> void:
 		hand_selection_done = false
 		print("Host: ", isHost, " reached hand selection on roll_count: ", roll_count, " of max: ", max_rolls_per_round)
 		setDisableScoreBoardButtons(false)
+		if timedRounds:
+			GameUI.startTimer(baseTimer*2)
 	else:
 		roll_selection_done = false
 		print("Host: ", isHost, " reached roll selection on roll_count: ", roll_count, " of max: ", max_rolls_per_round)
 		setDisableRollButtons(false)
+		if timedRounds:
+			GameUI.startTimer(baseTimer)
 
 func recieveRollSelection(_type: String) -> void:
 	#wait on roll selection locally
@@ -195,6 +206,7 @@ func endOfRoundEffects() -> void:
 				end_condition_reached = true
 		1: #Health Points
 			var scoreDiff = myPlayer.getLastScore() - enemyPlayer.getLastScore()
+			print("MyPlayer Host: ", isHost, " scored: ", myPlayer.getLastScore(), " and EnemyPlayer Host: ", !isHost, " scored: ", enemyPlayer.getLastScore())
 			if scoreDiff < 0:
 				myPlayer.adjust_health(-1) # make this dyanmic
 				print("Player Host: ", isHost, "scored less, took damage")
@@ -286,7 +298,9 @@ func exitGame() -> void:
 	network_manager.disconnect_from_server()
 	get_parent().returnToIntro()
 	pass
-	
+
+func timer_complete() -> void:
+	exitGame()
 
 # Handles incoming game states to synchronize players
 func _on_game_state_received(state: String, data: Dictionary):
@@ -347,6 +361,8 @@ func _on_roll_selected() -> void:
 	network_manager.broadcast_game_state("roll_selection", { "type": "Roll" })
 	roll_selection = true
 	roll_selection_done = true
+	if timedRounds:
+			GameUI.stopTimer()
 	waiting_on_other_player(true)
 
 func _on_pass_roll() -> void:
@@ -354,6 +370,8 @@ func _on_pass_roll() -> void:
 	network_manager.broadcast_game_state("roll_selection", { "type": "Pass" })
 	roll_selection = false
 	roll_selection_done = true
+	if timedRounds:
+			GameUI.stopTimer()
 	waiting_on_other_player(true)
 
 func waiting_on_other_player(isWaiting: bool) -> void:
@@ -371,13 +389,16 @@ func _on_hand_selected(hand: Dictionary):
 	print(hand)
 	setDisableScoreBoardButtons(true)
 	var score = scoreCalc.calculate_hand_score(hand, myPlayer.getRolls())
-	myPlayer.update_score(score[0])
-	scoreboard.updateButtonScore(score[0])
 	if score[1] >= 0:
+		print("Bonus Triggered")
 		myPlayer.update_score(score[1])
 		scoreboard.updateBonusButtonScore(score[1])
 		network_manager.broadcast_game_state("bonus", { "score": score[1], "hand": hand["hand_type"] })
+	myPlayer.update_score(score[0])
+	scoreboard.updateButtonScore(score[0])
 	hand_selection_done = true
+	if timedRounds:
+			GameUI.stopTimer()
 	hand_selection = hand
 	print(hand)
 	network_manager.broadcast_game_state("hand", { "score": score[0], "hand": hand["hand_type"] })

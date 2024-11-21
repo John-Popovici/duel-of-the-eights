@@ -15,6 +15,9 @@ extends CanvasLayer
 @onready var EscBackground = get_node("EscBackOverlay")
 @onready var ReturnToGameButton = get_node("EscPanel/EscBox/ReturnToGameButton")
 @onready var ExitGameButton = get_node("EscPanel/EscBox/ExitGameButton")
+@onready var timer = get_node("CountdownTimer")
+@onready var countdownBar = get_node("CountdownPanel/ProgressBar")
+@onready var countdownPanel = get_node("CountdownPanel")
 
 @onready var end_of_game_screen = get_node("EndOfGameScreen")
 @onready var winner_label = get_node("EndOfGameScreen/WinnerLabel")
@@ -51,10 +54,16 @@ func setup_game_ui(game_settings: Dictionary, _isHost: bool):
 		show_opponent_rolls()
 	else: 
 		hide_opponent_rolls()
+	if game_settings["timed_rounds"]: #change to setting info
+		show_countdown_panel()
+	else:
+		hide_countdown_panel()
+	
 	show_roll_buttons()
 	show_game_state_info()
 	show_player_stats_panel()
 	show_my_player_rolls()
+	show_camera_options()
 	
 	if isHost:
 		myPlayerName = game_settings["player_names"][0]
@@ -138,6 +147,9 @@ func update_opponent_dice_display(rolls: Array):
 			8:
 				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
 				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-%d.png" % rolls[i])  # Adjust path to dice textures
+			4:
+				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
+				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-%d.png" % rolls[i])  # Adjust path to dice textures
 
 func update_my_player_dice_display(dice: Array[RigidBody3D]):
 	dice = sortDice(dice,sortMethod)
@@ -149,6 +161,10 @@ func update_my_player_dice_display(dice: Array[RigidBody3D]):
 				dice_sprite.setDie(dice[i])
 				dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % face_value))  # Adjust path to dice textures
 			8:
+				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
+				dice_sprite.setDie(dice[i])
+				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-%d.png" % face_value)  # Adjust path to dice textures
+			4:
 				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
 				dice_sprite.setDie(dice[i])
 				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-%d.png" % face_value)  # Adjust path to dice textures
@@ -213,6 +229,9 @@ func blank_opponent_dice_display():
 			8:
 				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
 				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-0.png")  # Adjust path to dice textures
+			4:
+				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
+				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-0.png")  # Adjust path to dice textures
 
 func blank_my_player_dice_display():
 	for i in range(dice_count):
@@ -222,6 +241,10 @@ func blank_my_player_dice_display():
 				dice_sprite.clearDie()
 				dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-0.png"))  # Adjust path to dice textures
 			8:
+				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
+				dice_sprite.clearDie()
+				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-0.png")  # Adjust path to dice textures
+			4:
 				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
 				dice_sprite.clearDie()
 				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-0.png")  # Adjust path to dice textures
@@ -292,6 +315,14 @@ func hide_all_ui():
 	hide_waiting_screen()
 	hide_end_of_game_screen()
 	hide_pause_menu()
+	hide_camera_options()
+	hide_countdown_panel()
+
+func hide_camera_options() -> void:
+	get_parent().get_node("CameraController").set_options_visible(false)
+
+func show_camera_options() -> void:
+	get_parent().get_node("CameraController").set_options_visible(true)
 
 func hide_pause_menu():
 	PausePanel.visible = false
@@ -340,6 +371,12 @@ func show_game_state_info():
 func hide_player_stats_panel():
 	player_stats_panel.visible = false
 
+func hide_countdown_panel():
+	countdownPanel.visible = false
+
+func show_countdown_panel():
+	countdownPanel.visible = true
+
 func show_player_stats_panel():
 	player_stats_panel.visible = true
 
@@ -355,6 +392,23 @@ func _on_freq_sort_pressed():
 	sortMethod = 3
 	update_my_player_dice_display(get_parent().get_node("myPlayer").get_dice())
 
+var currentDuration: float
+var continueCountdown: bool = false
+func startTimer(_duration: int) -> void:
+	currentDuration = float(_duration)
+	timer.set_wait_time(currentDuration)
+	timer.connect("timeout",get_parent().timer_complete)
+	timer.start()
+	continueCountdown = true
+	
+
+func stopTimer() -> void:
+	timer.disconnect("timeout",get_parent().timer_complete)
+	continueCountdown = false
+	timer.stop()
+	countdownBar.set_value(100)
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.visible = false
@@ -368,3 +422,5 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
+	if continueCountdown: #loop break/start var
+		countdownBar.set_value(ceil(timer.get_time_left()/currentDuration*100))
