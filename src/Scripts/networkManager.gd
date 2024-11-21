@@ -10,7 +10,7 @@ signal connection_successful
 signal disconnected
 signal connection_failed
 
-var ping_timeout: float = 20.0
+var ping_timeout: float = 10.0
 var time_since_last_ping: float = 0.0
 var check_ping: bool = false
 

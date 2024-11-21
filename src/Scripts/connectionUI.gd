@@ -81,6 +81,7 @@ func _on_connect_pressed():
 		print(network_manager.getHashPort())
 		IPDisplayLabel.text = "Connect Code: " + network_manager.getHashIP() + network_manager.getHashPort()
 		PortDisplayLabel.text = "Started as Host on port: " + str(port)
+		_on_connection_successful()
 	else:
 		var _hash = ip_field.text
 		network_manager.connect_to_server(_hash)
@@ -94,6 +95,8 @@ func _on_connection_successful():
 	# Hide the ConnectionUI once connected
 	self.visible = false
 	print("Multiplayer Successfully connected")
+	network_manager.disconnect("connection_successful", self._on_connection_successful)
+	network_manager.connect("connection_successful", get_parent().get_parent().get_node("GameManager/GameSettings")._allow_game_start)
 	# Start the game via OnlineGameManager
 	get_tree().get_root().get_node("OnlineGameScene").start_game()
 

@@ -140,7 +140,6 @@ color = Color(0, 0, 0, 0.266667)
 script = ExtResource("4_fvdct")
 
 [node name="GameSettings" type="CanvasLayer" parent="GameManager"]
-visible = false
 script = ExtResource("5_js8aa")
 
 [node name="UIBox" type="PanelContainer" parent="GameManager/GameSettings"]
@@ -166,7 +165,6 @@ split_offset = 2
 dragger_visibility = 1
 
 [node name="Settings_Setup" type="VBoxContainer" parent="GameManager/GameSettings/UIBox/SettingsSplitBox"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -315,7 +313,14 @@ text = "Modify Hand Rules"
 layout_mode = 2
 alignment = 1
 
+[node name="CopyConnectButton" type="Button" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("13_g1ii3")
+text = "Copy Connect Code"
+
 [node name="StartGame" type="Button" parent="GameManager/GameSettings/UIBox/SettingsSplitBox/Settings_Setup/Buttons"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("13_g1ii3")
@@ -328,7 +333,6 @@ theme = ExtResource("13_g1ii3")
 text = "Back to Home"
 
 [node name="PresetsPanelBox" type="VBoxContainer" parent="GameManager/GameSettings/UIBox/SettingsSplitBox"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -360,6 +364,7 @@ theme = ExtResource("13_g1ii3")
 text = "Add Current Settings as Preset"
 
 [node name="Settings_Advanced" type="VBoxContainer" parent="GameManager/GameSettings/UIBox"]
+visible = false
 layout_mode = 2
 
 [node name="AdvancedInfo" type="Label" parent="GameManager/GameSettings/UIBox/Settings_Advanced"]
@@ -435,6 +440,7 @@ spot_attenuation = -0.5
 spot_angle_attenuation = 2.37841
 
 [node name="CameraPosPanel" type="PanelContainer" parent="GameManager/CameraController"]
+visible = false
 offset_top = 435.0
 offset_right = 200.0
 offset_bottom = 515.0
@@ -516,6 +522,7 @@ spot_attenuation = -0.5
 spot_angle_attenuation = 2.37841
 
 [node name="Scoreboard" type="CanvasLayer" parent="GameManager"]
+visible = false
 script = ExtResource("9_i8ewx")
 
 [node name="UIBox" type="PanelContainer" parent="GameManager/Scoreboard"]
@@ -559,6 +566,7 @@ script = ExtResource("11_ejug4")
 script = ExtResource("11_ejug4")
 
 [node name="GameUI" type="CanvasLayer" parent="GameManager"]
+visible = false
 script = ExtResource("12_f4hi7")
 
 [node name="RollButtons" type="VBoxContainer" parent="GameManager/GameUI"]

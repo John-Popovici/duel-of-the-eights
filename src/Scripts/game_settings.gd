@@ -5,6 +5,7 @@ signal game_settings_ready(game_settings,hand_settings)
 @onready var settingsAdvanced = get_node("UIBox/Settings_Advanced")
 @onready var settingsWait = get_node("UIBox/Settings_Wait")
 @onready var start_game_button = settingsSetup.get_node("Buttons/StartGame")
+@onready var copy_connect_code_button = settingsSetup.get_node("Buttons/CopyConnectButton")
 @onready var advanced_settings_button = settingsSetup.get_node("HandLimit/AdvancedSettingsButton")
 @onready var return_to_settings_button = settingsAdvanced.get_node("ReturnToSettings")
 @onready var save_advanced_settings_button = settingsAdvanced.get_node("SaveSettings")
@@ -327,6 +328,9 @@ func _on_return_to_settings_pressed() -> void:
 func _ready() -> void:
 	self.visible = false
 	start_game_button.connect("pressed",self._on_start_game_pressed)
+	start_game_button.visible = false
+	copy_connect_code_button.connect("pressed",self._copy_hash_to_clipboard)
+	copy_connect_code_button.visible = true
 	advanced_settings_button.connect("pressed",self._on_advanced_settings_pressed)
 	save_advanced_settings_button.connect("pressed",self.save_advanced_settings)
 	return_to_settings_button.connect("pressed",self._on_return_to_settings_pressed)
@@ -366,12 +370,21 @@ func collectInfo() -> void:
 		settingsAdvanced.visible = false
 		settingsWait.visible = false
 		presetsPanel.visible = true
+		copy_connect_code_button.text = "Code: " + get_parent().get_parent().get_node("NetworkManager").getHashIP()+get_parent().get_parent().get_node("NetworkManager").getHashPort()
 		load_preset_buttons()
 	else:
 		settingsSetup.visible = false
 		settingsAdvanced.visible = false
 		settingsWait.visible = true
 		presetsPanel.visible = false
+
+func _copy_hash_to_clipboard():
+	DisplayServer.clipboard_set(get_parent().get_parent().get_node("NetworkManager").getHashIP()+get_parent().get_parent().get_node("NetworkManager").getHashPort())
+	print("Connect code copied to clipboard: ", DisplayServer.clipboard_get())
+
+func _allow_game_start() -> void:
+	copy_connect_code_button.visible = false
+	start_game_button.visible = true
 
 func on_home_pressed() -> void:
 	#Add disconnect code here and network manager
