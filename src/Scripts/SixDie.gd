@@ -15,7 +15,7 @@ var hover_toggle_position: Vector3
 @export var velocity_threshold: float = 0.1  # Adjust this value based on your needs
 @export var roll_time_limit: float = 3.0     # Time limit to trigger function
 var is_selected: bool = false          # Tracks if the die has been clicked/selected
-@onready var dieMesh: MeshInstance3D = $MeshInstance3D
+@onready var dieMesh: MeshInstance3D = get_node("OuterMesh")
 
 var normalTex = preload('res://Materials/Red.tres')
 var selectedTex = preload('res://Materials/Purple.tres')
@@ -44,7 +44,7 @@ func roll() -> void:
 	#global_transform.basis = Basis(start_rotation,0)
 	
 	is_selected = false
-	dieMesh.set_surface_override_material(1,normalTex)
+	dieMesh.set_surface_override_material(0,normalTex)
 	
 	# Reset linear and angular velocities
 	linear_velocity = Vector3.ZERO
@@ -85,7 +85,7 @@ func _mouse_enter() -> void:
 	if (move_last_time == -1.0 or move_start_time - move_last_time > 1.0) and !is_rolling:
 		move_last_time = move_start_time
 		hover()
-	dieMesh.set_surface_override_material(1,selectedTex)
+	dieMesh.set_surface_override_material(0,selectedTex)
 	
 
 func _mouse_exit() -> void:
@@ -93,7 +93,7 @@ func _mouse_exit() -> void:
 	#var new_position = hover_toggle_position + Vector3(0, -hover_height, 0)
 	#global_transform.origin = new_position
 	if !is_selected:
-		dieMesh.set_surface_override_material(1,normalTex)
+		dieMesh.set_surface_override_material(0,normalTex)
 
 # Detects if the die was clicked and toggles its selected status
 func _on_input_event(_camera: Node, event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
@@ -106,9 +106,9 @@ func _toggle_selection_status() -> void:
 	print(self.name)
 	print("Dice Face Value: ", get_face_value())
 	if !is_selected:
-		dieMesh.set_surface_override_material(1,normalTex)
+		dieMesh.set_surface_override_material(0,normalTex)
 	else:
-		dieMesh.set_surface_override_material(1,selectedTex)
+		dieMesh.set_surface_override_material(0,selectedTex)
 
 # Returns whether the die is selected
 func get_selected_status() -> bool:

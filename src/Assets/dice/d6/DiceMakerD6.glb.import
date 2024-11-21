@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cfpjss5bkgohf"
-path="res://.godot/imported/Dice_Red_1.glb-c3484cfab314205c9a5b5b6cfe887c33.scn"
+uid="uid://dtohuamct7vwq"
+path="res://.godot/imported/DiceMakerD6.glb-1eaa3e532445da1aa47ae62bd9083c34.scn"
 
 [deps]
 
-source_file="res://Assets/Dice_Red_1.glb"
-dest_files=["res://.godot/imported/Dice_Red_1.glb-c3484cfab314205c9a5b5b6cfe887c33.scn"]
+source_file="res://Assets/dice/d6/DiceMakerD6.glb"
+dest_files=["res://.godot/imported/DiceMakerD6.glb-1eaa3e532445da1aa47ae62bd9083c34.scn"]
 
 [params]
 
@@ -32,25 +32,24 @@ animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
-"materials": {
-"Red": {
-"use_external/enabled": true,
-"use_external/path": "res://Materials/Red.tres"
-},
-"White": {
-"use_external/enabled": true,
-"use_external/path": "res://Materials/White.tres"
-}
-},
 "meshes": {
-"Dice_Red_1_Cube": {
+"DiceMakerD6_d6_3d_blank_stl": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
 "lods/normal_split_angle": 25.0,
 "save_to_file/enabled": true,
-"save_to_file/path": "res://Assets/Dice_Red_1_Cube.res"
+"save_to_file/path": "res://Assets/dice/d6/DiceMakerD6_d6_3d_blank_stl.res"
+},
+"DiceMakerD6_d6_3d_numbered_stl": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Assets/dice/d6/DiceMakerD6_d6_3d_numbered_stl.res"
 }
 }
 }
