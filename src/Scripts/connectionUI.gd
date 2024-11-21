@@ -11,28 +11,18 @@ var network_manager: Node
 @onready var connect_button = $UIBox/Connection_Setup/ConnectButton
 @onready var back_to_home_button = $UIBox/Connection_Setup/BackToHomeButton
 @onready var SetupUI = $UIBox/Connection_Setup
-@onready var WaitUI = $UIBox/Connection_Wait
 @onready var ErrorUI = $UIBox/Connection_Error
 @onready var ErrorBack = $EscBackOverlay
 @onready var ErrorSourceLabel = $"UIBox/Connection_Error/Error Source"
-@onready var IPDisplayLabel = $UIBox/Connection_Wait/IPDisplay
-@onready var CopyIPButton = $UIBox/Connection_Wait/CopyIPButton
-@onready var PortDisplayLabel = $UIBox/Connection_Wait/PortDisplay
-@onready var CopyPortButton = $UIBox/Connection_Wait/CopyPortButton
-@onready var CancelHostButton = $UIBox/Connection_Wait/CancelHosting
 
 
 func _ready():
 	self.visible = true
 	host_checkbutton.set_toggle_mode(true)
 	host_checkbutton.connect("toggled", self._on_hostcheck_toggled)
-	WaitUI.visible = false
 	ErrorUI.visible = false
 	ErrorBack.visible = false
 	port_field.visible = false
-	# Connect the copy buttons to functions to copy IP and port
-	CopyIPButton.connect("pressed", self._copy_ip_to_clipboard)
-	CancelHostButton.connect("pressed", self._cancel_hosting)
 
 func _on_hostcheck_toggled(state):
 	print("Host/Client Toggled: ",state)
@@ -59,7 +49,6 @@ func setupNetworkManagerRef() -> void:
 func _cancel_hosting() -> void:
 	self.visible = false
 	SetupUI.visible = false
-	WaitUI.visible = false
 	ErrorUI.visible = true
 	ErrorBack.visible = true
 	ErrorSourceLabel.text = "Disconnected from game"
@@ -76,19 +65,12 @@ func _on_connect_pressed():
 	if host_option:
 		network_manager.start_server(port)
 		SetupUI.visible = false
-		WaitUI.visible = true
 		print(network_manager.getHashIP())
 		print(network_manager.getHashPort())
-		IPDisplayLabel.text = "Connect Code: " + network_manager.getHashIP() + network_manager.getHashPort()
-		PortDisplayLabel.text = "Started as Host on port: " + str(port)
 		_on_connection_successful()
 	else:
 		var _hash = ip_field.text
 		network_manager.connect_to_server(_hash)
-
-func _copy_ip_to_clipboard():
-	DisplayServer.clipboard_set(network_manager.getHashIP()+network_manager.getHashPort())
-	print("Connect code copied to clipboard: ", DisplayServer.clipboard_get())
 
 
 func _on_connection_successful():
@@ -103,7 +85,6 @@ func _on_connection_successful():
 func _on_disconnected():
 	self.visible = true
 	SetupUI.visible = false
-	WaitUI.visible = false
 	ErrorUI.visible = true
 	ErrorBack.visible = true
 	ErrorSourceLabel.text = "Disconnected from game"
@@ -116,7 +97,6 @@ func _on_connection_failed():
 	# Hide the ConnectionUI once connected
 	self.visible = true
 	SetupUI.visible = false
-	WaitUI.visible = false
 	ErrorUI.visible = true
 	ErrorBack.visible = true
 	ErrorSourceLabel.text = "Connection Failed"
