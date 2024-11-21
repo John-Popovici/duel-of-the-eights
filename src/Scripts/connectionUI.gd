@@ -13,6 +13,7 @@ var network_manager: Node
 @onready var SetupUI = $UIBox/Connection_Setup
 @onready var WaitUI = $UIBox/Connection_Wait
 @onready var ErrorUI = $UIBox/Connection_Error
+@onready var ErrorBack = $EscBackOverlay
 @onready var ErrorSourceLabel = $"UIBox/Connection_Error/Error Source"
 @onready var IPDisplayLabel = $UIBox/Connection_Wait/IPDisplay
 @onready var CopyIPButton = $UIBox/Connection_Wait/CopyIPButton
@@ -27,6 +28,7 @@ func _ready():
 	host_checkbutton.connect("toggled", self._on_hostcheck_toggled)
 	WaitUI.visible = false
 	ErrorUI.visible = false
+	ErrorBack.visible = false
 	port_field.visible = false
 	# Connect the copy buttons to functions to copy IP and port
 	CopyIPButton.connect("pressed", self._copy_ip_to_clipboard)
@@ -59,6 +61,7 @@ func _cancel_hosting() -> void:
 	SetupUI.visible = false
 	WaitUI.visible = false
 	ErrorUI.visible = true
+	ErrorBack.visible = true
 	ErrorSourceLabel.text = "Disconnected from game"
 	print("Disconnected")
 	network_manager.disconnect_from_server()
@@ -99,6 +102,7 @@ func _on_disconnected():
 	SetupUI.visible = false
 	WaitUI.visible = false
 	ErrorUI.visible = true
+	ErrorBack.visible = true
 	ErrorSourceLabel.text = "Disconnected from game"
 	print("Disconnected")
 	await get_tree().create_timer(2.0).timeout
@@ -111,6 +115,7 @@ func _on_connection_failed():
 	SetupUI.visible = false
 	WaitUI.visible = false
 	ErrorUI.visible = true
+	ErrorBack.visible = true
 	ErrorSourceLabel.text = "Connection Failed"
 	print("Connection Failed")
 	await get_tree().create_timer(2.0).timeout

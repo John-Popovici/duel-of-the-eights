@@ -34,6 +34,7 @@ script = ExtResource("1_qoyeu")
 script = ExtResource("2_6sfck")
 
 [node name="ConnectionUI" type="CanvasLayer" parent="NetworkManager"]
+layer = 3
 visible = false
 script = ExtResource("3_f25r5")
 
@@ -122,6 +123,18 @@ layout_mode = 2
 theme = ExtResource("13_g1ii3")
 text = "Redirecting to Home Page"
 horizontal_alignment = 1
+
+[node name="EscBackOverlay" type="ColorRect" parent="NetworkManager/ConnectionUI"]
+visible = false
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 0, 0, 0.266667)
 
 [node name="GameManager" type="Node3D" parent="."]
 script = ExtResource("4_fvdct")
