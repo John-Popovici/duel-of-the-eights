@@ -6,23 +6,25 @@ signal game_settings_ready(game_settings,hand_settings)
 @onready var settingsWait = get_node("UIBox/Settings_Wait")
 @onready var start_game_button = settingsSetup.get_node("Buttons/StartGame")
 @onready var copy_connect_code_button = settingsSetup.get_node("Buttons/CopyConnectButton")
-@onready var advanced_settings_button = settingsSetup.get_node("HandLimit/AdvancedSettingsButton")
+@onready var advanced_settings_button = settingsSetup.get_node("OptionsVBox/HandLimit/AdvancedSettingsButton")
 @onready var return_to_settings_button = settingsAdvanced.get_node("ReturnToSettings")
 @onready var save_advanced_settings_button = settingsAdvanced.get_node("SaveSettings")
 @onready var home_button = settingsSetup.get_node("Buttons/BackToHomeButton")
 @onready var wait_home_button = settingsWait.get_node("ExitGameButton")
 
-@onready var player1Name = settingsSetup.get_node("PlayerNames/Player1Name")
-@onready var player2Name = settingsSetup.get_node("PlayerNames/Player2Name")
-@onready var WinCondition = settingsSetup.get_node("WinCondition/ConditionSelect")
-@onready var HealthPoints = settingsSetup.get_node("HealthPoints/HealthPoints")
-@onready var HealthPointsBox = settingsSetup.get_node("HealthPoints")
-@onready var Rounds = settingsSetup.get_node("Rounds/Rounds")
-@onready var RoundRolls = settingsSetup.get_node("Rounds/RoundRolls")
-@onready var DiceCountRef = settingsSetup.get_node("Dice/DiceCount").get_line_edit()
-@onready var DiceCountRange = settingsSetup.get_node("Dice/DiceCount")
-@onready var DiceType = settingsSetup.get_node("Dice/DiceType")
-@onready var opponent_roll_visible_button = settingsSetup.get_node("HandLimit/OpponentRollVisible")
+@onready var player1Name = settingsSetup.get_node("OptionsVBox/PlayerNames/Player1Name")
+@onready var player2Name = settingsSetup.get_node("OptionsVBox/PlayerNames/Player2Name")
+@onready var WinCondition = settingsSetup.get_node("OptionsVBox/WinCondition/ConditionSelect")
+@onready var HealthPoints = settingsSetup.get_node("OptionsVBox/HealthPoints/HealthPoints")
+@onready var HealthPointsBox = settingsSetup.get_node("OptionsVBox/HealthPoints")
+@onready var Rounds = settingsSetup.get_node("OptionsVBox/Rounds/Rounds")
+@onready var RoundRolls = settingsSetup.get_node("OptionsVBox/Rounds/RoundRolls")
+@onready var DiceCountRef = settingsSetup.get_node("OptionsVBox/Dice/DiceCount").get_line_edit()
+@onready var timed_rounds_button = settingsSetup.get_node("OptionsVBox/TimedRounds/TimedRoundsToggle")
+@onready var round_time = settingsSetup.get_node("OptionsVBox/TimedRounds/RoundTime")
+@onready var DiceCountRange = settingsSetup.get_node("OptionsVBox/Dice/DiceCount")
+@onready var DiceType = settingsSetup.get_node("OptionsVBox/Dice/DiceType")
+@onready var opponent_roll_visible_button = settingsSetup.get_node("OptionsVBox/HandLimit/OpponentRollVisible")
 @onready var advanced_settings_vbox = settingsAdvanced.get_node("ScrollContainer/advanced_settings_vbox")
 
 @onready var presetsPanel = get_node("UIBox/SettingsSplitBox/PresetsPanelBox")
@@ -42,12 +44,12 @@ var dice_count: int
 var dice_type: int
 var win_cond: String
 var show_opponent_rolls: bool = false
+var timed_rounds: bool = true
 
 func _on_start_game_pressed():
 	start_game_button.disabled = true
 	home_button.disabled = true
 	advanced_settings_button.disabled = true
-	print("Passing ", show_opponent_rolls)
 	game_settings = {
 		"player_names": [player1Name.text, player2Name.text],
 		"win_condition": WinCondition.get_selected_id(),
@@ -56,7 +58,9 @@ func _on_start_game_pressed():
 		"round_rolls": int(RoundRolls.text),
 		"dice_count": int(DiceCountRef.text),
 		"dice_type": DiceType.get_selected_id(),  # e.g., 6-sided or 8-sided
-		"show_rolls": show_opponent_rolls
+		"show_rolls": show_opponent_rolls,
+		"timed_rounds": timed_rounds,
+		"round_time": int(round_time.text) if int(round_time.text) > 0 else 25,
 	}
 	if !hand_settings_saved:
 		dice_count = int(DiceCountRef.text)
@@ -131,7 +135,9 @@ func save_preset():
 		"round_rolls": int(RoundRolls.text),
 		"dice_count": int(DiceCountRef.text),
 		"dice_type": DiceType.get_selected_id(),  # e.g., 6-sided or 8-sided
-		"show_rolls": show_opponent_rolls
+		"show_rolls": show_opponent_rolls,
+		"timed_rounds": timed_rounds,
+		"round_time": int(round_time.text) if int(round_time.text) > 0 else 25,
 	}
 	
 	if !hand_settings_saved:
@@ -206,6 +212,8 @@ func update_ui_fields(game_settings: Dictionary, hand_settings: Dictionary):
 	DiceType.select(DiceType.get_item_index(int(game_settings.get("dice_type", 0))))
 	opponent_roll_visible_button.set_pressed(bool(game_settings.get("show_rolls", false)))
 	show_opponent_rolls = bool(game_settings.get("show_rolls", false))
+	timed_rounds_button.set_pressed(bool(game_settings.get("timed_rounds", true)))
+	timed_rounds = bool(game_settings.get("timed_rounds",true))
 
 	# Update any hand settings-related fields if necessary
 	# (for example, list of hand rules or settings if part of the UI)
@@ -344,6 +352,9 @@ func _ready() -> void:
 	opponent_roll_visible_button.connect("toggled", self._on_roll_visible_toggled)
 	show_opponent_rolls = false
 	DiceType.set_toggle_mode(true)
+	timed_rounds_button.set_toggle_mode(true)
+	timed_rounds_button.connect("toggled", self._on_timed_round_toggled)
+	timed_rounds = true
 	DiceType.connect("item_selected", self._dice_values_changed)
 	DiceCountRange.connect("value_changed", self._dice_values_changed)
 	save_preset_button.connect("pressed",self.save_preset)
@@ -356,6 +367,16 @@ func _on_roll_visible_toggled(_state) -> void:
 	else:
 		show_opponent_rolls = true
 	print("Is ", show_opponent_rolls)
+
+func _on_timed_round_toggled(_state) -> void:
+	print("Was ", timed_rounds)
+	if timed_rounds:
+		timed_rounds = false
+		round_time.visible = false
+	else:
+		timed_rounds = true
+		round_time.visible = true
+	print("Is ", timed_rounds)
 
 func _dice_values_changed(_state) -> void:
 	if hand_settings_saved:

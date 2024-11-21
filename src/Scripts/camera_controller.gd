@@ -11,6 +11,7 @@ extends Node3D
 func _ready() -> void:
 	populate_buttons()
 	set_options_visible(false)
+	self.visible = true
 
 # Populates the VBoxContainer with buttons for each position node
 func populate_buttons() -> void:
