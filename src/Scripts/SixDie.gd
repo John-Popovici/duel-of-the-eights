@@ -105,6 +105,10 @@ func _toggle_selection_status() -> void:
 	print("Die selected status:", is_selected)
 	print(self.name)
 	print("Dice Face Value: ", get_face_value())
+	if !is_selected:
+		dieMesh.set_surface_override_material(1,normalTex)
+	else:
+		dieMesh.set_surface_override_material(1,selectedTex)
 
 # Returns whether the die is selected
 func get_selected_status() -> bool:
