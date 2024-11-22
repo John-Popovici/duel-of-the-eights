@@ -58,6 +58,9 @@
 2024-10-25 & Naishan Guo &  Added to reflection \\
 2024-10-28 & John Popovici & Fixed FMEA labels and added de-sync, as per peer review \\
 2024-11-05 & John Popovici & Added FMEA table value/rating explanations section 6.2\\
+2024-11-22 & John Popovici & Added List of Tables and fixed table 2\\
+2024-11-22 & John Popovici & Expanded upon section 5 and 6 based on feedback\\
+2024-11-22 & John Popovici & Improved FMEA Table traceability\\
 ... & ... & ...\\
 \bottomrule
 \end{tabularx}
@@ -66,6 +69,8 @@
 ~\newpage
 
 \tableofcontents
+
+\listoftables
 
 ~\newpage
 
@@ -91,7 +96,7 @@ The scope of this document is to identify possible hazards within the software c
     \centering
     \begin{tabular}{|l|p{10cm}|}
     \hline
-    \textbf{Latex} & \textbf{Definition} \\ \hline
+    \textbf{Term} & \textbf{Definition} \\ \hline
     \textbf{System Hazard} & A condition that could foreseeably cause or contribute to the system going down or loss of performance. \\ \hline
     \textbf{Risk} & A measure that indicates the likelihood of a system hazard. \\ \hline
     \end{tabular}
@@ -122,39 +127,41 @@ These components collectively form the core functionality of the game, from simu
 
 \subsection{Component Descriptions}
 
-\subsubsection*{4.2.1 Dice Roll Simulation}
+\subsubsection*{4.2.1 Dice Roll Simulation} \label{DRS}
 This component simulates the physics-based rolling of 3D dice, providing a realistic and interactive experience for the players. It uses randomized initial velocities and rotations to ensure that each roll outcome is unpredictable, closely mimicking physical dice rolls.
 
-\subsubsection*{4.2.2 Score Calculation}
+\subsubsection*{4.2.2 Score Calculation} \label{SC}
 This component handles the calculation of scores based on Yahtzee rules, modified for the game's unique mechanics. It evaluates the outcome of each roll, applies any special bonuses, and determines the impact on each player's health bar, reducing it accordingly when a player loses.
 
-\subsubsection*{4.2.3 Player vs. Computer AI}
+\subsubsection*{4.2.3 Player vs. Computer AI} \label{PVC}
 This component simulates a computer opponent, applying strategic choices based on current dice values and score potential. The AI adapts its moves based on the game state, using offensive or defensive strategies to reduce the player's health bar while attempting to maximize its own score. This AI is assumed to be basic in capabilities.
 
-\subsubsection*{4.2.4 Multiplayer Functionality}
+\subsubsection*{4.2.4 Multiplayer Functionality} \label{MF}
 This component allows multiple players to compete either locally or online. It manages turn-taking, score calculations, and health updates for each player, ensuring a smooth and engaging multiplayer experience.
 
-\subsubsection*{4.2.5 Dice Rendering}
+\subsubsection*{4.2.5 Dice Rendering} \label{DR}
 This component is responsible for the 3D visual representation of the dice. It includes realistic textures, shadows, and animations to enhance the gaming experience. The rendering component ensures each dice roll feels tangible, giving feedback based on movement and resulting in a visually engaging display of outcomes.
 
-\subsubsection*{4.2.6 User Interface}
+\subsubsection*{4.2.6 User Interface} \label{UI}
 This component provides an accessible and organized display for players, including game controls, player information, health bars, and scoring details. It guides the player through the gameplay with minimal effort, enhancing user engagement and intuitiveness.
 
-\subsubsection*{4.2.7 Camera Control}
+\subsubsection*{4.2.7 Camera Control} \label{CC}
 This component manages the in-game camera, providing a dynamic view of the dice, players, and game area. The camera adjusts automatically to showcase dice rolls and other key moments, ensuring players have a clear and immersive view of the action.
 
-\subsubsection*{4.2.8 Audio Feedback}
+\subsubsection*{4.2.8 Audio Feedback} \label{AF}
 This component provides audio cues for interactions such as dice rolls, score updates, and health deductions. Sounds are integrated to give players feedback on their actions, enhancing immersion and reinforcing gameplay events.
 
-\subsubsection*{4.2.9 Scoreboard Display}
+\subsubsection*{4.2.9 Scoreboard Display} \label{SD}
 This component displays scores and health bar statuses for all players. It updates in real-time, showing each player's remaining health and overall score, allowing players to track their performance and make strategic decisions based on current standings.
 
 \section{Critical Assumptions}
 
 \begin{itemize}
     \item \textbf{Godot Stability}: The Godot game engine is assumed to be stable and function correctly.
+    \item \textbf{External Libraries Correctness}: We assume all third party libraries and plugins to function correctly given they have been used and tested by others.
 \end{itemize}
 
+\newpage
 \section{Failure Mode and Effect Analysis}
 \subsection{Hazards Considered Out of Scope}
 \begin{enumerate}
@@ -172,20 +179,20 @@ This component displays scores and health bar statuses for all players. It updat
 
     \item \textbf{Network Infrastructure Failures}
         \begin{itemize}
-            \item Failures due to external network outages, router malfunctions, or ISP-level disruptions.
+            \item Failures due to external network outages, router malfunctions, or ISP-level disruptions. These would be long-term outages that make play impossible and thus would be out-of-scope, while latency and data de-sync issues would be considered.
             \item \textit{Rationale}: These are beyond the game's control and depend on the player's internet setup or service provider.
         \end{itemize}
 
     \item \textbf{Third-Party Library Bugs or Vulnerabilities}
         \begin{itemize}
             \item Bugs or security vulnerabilities in third-party libraries or plugins used within the Godot engine.
-            \item \textit{Rationale}: While the game relies on third-party tools, the FMEA focuses on bugs and issues within the game code itself, not third-party dependencies.
+            \item \textit{Rationale}: While the game relies on third-party tools, they are assumed to be correct, as we focus on bugs and issues within the game code itself.
         \end{itemize}
 
     \item \textbf{Player Misuse or Exploits}
         \begin{itemize}
             \item Players intentionally trying to exploit the game, cheat, or use unauthorized modifications.
-            \item \textit{Rationale}: Handling intentional misuse or hacking is outside the game's core development, and managing these issues requires external anti-cheat measures or monitoring.
+            \item \textit{Rationale}: Handling intentional misuse or hacking is outside the game's core development, and managing these issues requires external anti-cheat measures or monitoring. The game is intended to be played by invite link, meaning the two players would be communicating beforehand and have a level of trust.
         \end{itemize}
 
     \item \textbf{Data Privacy and Security Breaches}
@@ -243,20 +250,20 @@ Text FMEA table allows for us to quantify values related to possible failures an
 \begin{tabular}{|>{\raggedright}m{2.5cm}|>{\raggedright}m{2.5cm}|>{\raggedright}m{3cm}|>{\centering}m{1.5cm}|>{\raggedright}m{3cm}|>{\centering}m{1.8cm}|>{\raggedright}m{3cm}|>{\centering\arraybackslash}m{1.8cm}|}
 \hline
 
-\textbf{Function} & \textbf{Failures} & \textbf{Unacceptable Event} & \textbf{Severity of Failure (0-10)} & \textbf{Cause of Failure} & \textbf{Likelihood of Occurrence (0-10)} & \textbf{Recommended Action} & \textbf{Likelihood of Failure Detection (0-10)} \\ 
+\textbf{Component} & \textbf{Failures} & \textbf{Unacceptable Event} & \textbf{Severity of Failure (0-10)} & \textbf{Cause of Failure} & \textbf{Likelihood of Occurrence (0-10)} & \textbf{Recommended Action} & \textbf{Likelihood of Failure Detection (0-10)} \\ 
 \hline
 
-Dice Roll Simulation & Physics misbehaves & Unrealistic dice behavior & 8 & Physics engine glitch & 6 & Refine physics settings; improve collision detection & 4 \\
+\hyperref[DRS]{Dice Roll Simulation} & Physics misbehaves & Unrealistic dice behavior & 8 & Physics engine glitch & 6 & Refine physics settings; improve collision detection & 4 \\
 \hline
-Score Calculation & Incorrect scoring & Inaccurate score computation & 9 & Logic error in scoring algorithm & 4 & Unit test scoring algorithms thoroughly & 6 \\
+\hyperref[SC]{Score Calculation} & Incorrect scoring & Inaccurate score computation & 9 & Logic error in scoring algorithm & 4 & Unit test scoring algorithms thoroughly & 6 \\
 \hline
-Player vs. Computer AI & Poor AI decisions & Computer opponent is too easy/unpredictable & 3 & Sub-optimal AI strategy & 6 & Refine AI strategy based on probability analysis & 9 \\
+\hyperref[PVC]{Player vs. Computer AI} & Poor AI decisions & Computer opponent is too easy/unpredictable & 3 & Sub-optimal AI strategy & 6 & Refine AI strategy based on probability analysis & 9 \\
 \hline
-Multiplayer Functionality & Connection loss & Player disconnects mid-game & 7 & Network instability & 5 & Implement reconnect feature; improve connection stability & 5 \\
+\hyperref[MF]{Multiplayer Functionality} & Connection loss & Player disconnects mid-game & 7 & Network instability & 5 & Implement reconnect feature; improve connection stability & 5 \\
 \hline
-Multiplayer Functionality & Data de-sync & Player have different outputs displayed & 7 & Network instability & 4 & Perform checks between clients; improve connection stability & 7 \\
+\hyperref[MF]{Multiplayer Functionality} & Data de-sync & Player have different outputs displayed & 7 & Network instability & 4 & Perform checks between clients; improve connection stability & 7 \\
 \hline
-Dice Rendering & Dice not visible & Players cannot see the dice clearly & 3 & Rendering glitch & 3 & Reduce 3D model poly counts for best rendering reliability; ensure camera angles cover dice & 3 \\
+\hyperref[DR]{Dice Rendering} & Dice not visible & Players cannot see the dice clearly & 3 & Rendering glitch & 3 & Reduce 3D model poly counts for best rendering reliability; ensure camera angles cover dice & 3 \\
 \hline
 
 
@@ -278,18 +285,20 @@ Dice Rendering & Dice not visible & Players cannot see the dice clearly & 3 & Re
 \begin{tabular}{|>{\raggedright}m{2.5cm}|>{\raggedright}m{2.5cm}|>{\raggedright}m{3cm}|>{\centering}m{1.5cm}|>{\raggedright}m{3cm}|>{\centering}m{1.8cm}|>{\raggedright}m{3cm}|>{\centering\arraybackslash}m{1.8cm}|}
 \hline
 
-\textbf{Function} & \textbf{Failures} & \textbf{Unacceptable Event} & \textbf{Severity of Failure (0-10)} & \textbf{Cause of Failure} & \textbf{Likelihood of Occurrence (0-10)} & \textbf{Recommended Action} & \textbf{Likelihood of Failure Detection (0-10)} \\ 
+\textbf{Component} & \textbf{Failures} & \textbf{Unacceptable Event} & \textbf{Severity of Failure (0-10)} & \textbf{Cause of Failure} & \textbf{Likelihood of Occurrence (0-10)} & \textbf{Recommended Action} & \textbf{Likelihood of Failure Detection (0-10)} \\ 
 \hline
 
-User Interface & Missing or confusing UI & Players are confused by the interface & 7 & Inadequate UI design & 5 & Conduct user testing; iterate on UI design & 8 \\
+\hyperref[UI]{User Interface} & Missing or confusing UI & Players are confused by the interface & 7 & Inadequate UI design & 5 & Conduct user testing; iterate on UI design & 8 \\
 \hline
-Camera Control & Unclear view of the board & Players can't properly view game elements & 6 & Inadequate camera angle logic & 5 & Allow manual camera adjustment; improve auto camera control & 6 \\
+\hyperref[UI]{User Interface} & Invalid input & Player inputs are not valid & 4 & Unclear or unsanitized inputs & 3 & Conduct user testing; iterate on UI design & 3 \\
 \hline
-Audio Feedback & Missing or incorrect sounds & No sound feedback for player actions & 4 & Sound trigger event missed & 5 & Ensure audio events are linked to game actions with low latency & 6 \\
+\hyperref[CC]{Camera Control} & Unclear view of the board & Players can't properly view game elements & 6 & Inadequate camera angle logic & 5 & Allow manual camera adjustment; improve auto camera control & 6 \\
+\hline
+\hyperref[AF]{Audio Feedback} & Missing or incorrect sounds & No sound feedback for player actions & 4 & Sound trigger event missed & 5 & Ensure audio events are linked to game actions with low latency & 6 \\
 \hline
 General Game Stability & Unexpected crashes during gameplay & Game session terminates abruptly & 9 & Memory leaks, unhandled exceptions, or rendering overload & 4 & Conduct stress tests; improve error handling and resource management & 9 \\
 \hline
-Scoreboard Display & Incorrect scores or missing player data on the scoreboard & Confusion over game results & 6 & Display update not synchronized with scoring logic & 3 & Ensure that scoreboard updates are triggered accurately, add validation & 4 \\
+\hyperref[SD]{Scoreboard Display} & Incorrect scores or missing player data on the scoreboard & Confusion over game results & 6 & Display update not synchronized with scoring logic & 3 & Ensure that scoreboard updates are triggered accurately, add validation & 4 \\
 \hline
 
 \end{tabular}
@@ -323,13 +332,13 @@ Scoreboard Display & Incorrect scores or missing player data on the scoreboard &
     
     
 \subsection{Revision 0 Demonstration}
-	Expanding on R16 and R17, we will show a detailed description of the game's intermediary states at the end of a game. By this stage we will also have R1 functional on a stable peer to peer connection.By this stage, we will also have achieved NFR4's requirement of less than 1\% crash rate.
+	Expanding on R16 and R17, we will show a detailed description of the game's intermediary states at the end of a game. By this stage we will also have R1 functional on a stable peer to peer connection. By this stage, we will also have achieved NFR4's requirement of less than 1\% crash rate.
     
 \subsection{Final (Revision 1) Demonstration}
-	By Final Demonstration, based on R13, we will have a sufficiently sophisticated AI opponent that the player can play against. It will not be expected to have the best strategy, but enough for the player to enjoy the game consistently, to match NFR8's 75\% user enjoyability metric. R3, R4, and NFR5 will also be completed by this stage.
+	By Final Demonstration, based on R13, we will have a sufficiently sophisticated algorithmic opponent that the player can play against. It will not be expected to have the best strategy, but enough for the player to enjoy the game consistently, to match NFR8's 75\% user enjoyability metric. R3, R4, and NFR5 will also be completed by this stage.
 
 \subsection{Outside of Capstone Time line}
-	After Final Demonstrations, R13's requirement for a sophisticated AI opponent can be expanded, creating different levels of opponents and for the different game modes.
+	After Final Demonstrations, R13's requirement for a sophisticated algorithmic opponent can be expanded, creating different levels of opponents and for the different game modes.
 
 \newpage{}
 
