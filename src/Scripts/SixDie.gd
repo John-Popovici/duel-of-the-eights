@@ -16,9 +16,11 @@ var hover_toggle_position: Vector3
 @export var roll_time_limit: float = 3.0     # Time limit to trigger function
 var is_selected: bool = false          # Tracks if the die has been clicked/selected
 @onready var dieMesh: MeshInstance3D = get_node("OuterMesh")
+@onready var dieBase: MeshInstance3D = get_node("InnerMesh")
 
-var normalTex = preload('res://Materials/Red.tres')
-var selectedTex = preload('res://Materials/Purple.tres')
+var normalTex = GlobalSettings.normalDiceTex
+var selectedTex = GlobalSettings.selectedDiceTex
+var diceBaseTex = GlobalSettings.dicebaseTex
 
 @export var face_threshold: float = 0.8  # Threshold for face orientation detection
 
@@ -86,7 +88,13 @@ func _mouse_enter() -> void:
 		move_last_time = move_start_time
 		hover()
 	dieMesh.set_surface_override_material(0,selectedTex)
-	
+
+func reset_dice_tex()->void:
+	normalTex = GlobalSettings.normalDiceTex
+	selectedTex = GlobalSettings.selectedDiceTex
+	diceBaseTex = GlobalSettings.dicebaseTex
+	dieMesh.set_surface_override_material(0,normalTex)
+	dieBase.set_surface_override_material(0,diceBaseTex)
 
 func _mouse_exit() -> void:
 	#hover_toggle_position = global_transform.origin  # Save the starting position
@@ -119,7 +127,8 @@ func _ready() -> void:
 	self.mouse_entered.connect(_mouse_enter)
 	self.mouse_exited.connect(_mouse_exit)
 	self.input_event.connect(_on_input_event)
-	dieMesh.set_surface_override_material(1,normalTex)
+	dieMesh.set_surface_override_material(0,normalTex)
+	dieBase.set_surface_override_material(0,diceBaseTex)
 
 # Tracks if the die is currently rolling
 var is_rolling: bool = false
