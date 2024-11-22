@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dtplkitgu8t25"]
+
+[resource]
+resource_name = "Red"
+cull_mode = 2
+diffuse_mode = 3
+albedo_color = Color(0.870588, 0.439216, 0.270588, 1)
+metallic = 0.6
+metallic_specular = 0.0
+roughness = 0.5

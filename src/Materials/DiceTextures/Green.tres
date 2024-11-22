@@ -3,5 +3,6 @@
 [resource]
 resource_name = "Material.001"
 cull_mode = 2
+diffuse_mode = 3
 albedo_color = Color(0.224522, 0.906426, 0.381247, 1)
 roughness = 0.5

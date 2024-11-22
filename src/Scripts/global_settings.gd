@@ -6,10 +6,15 @@ extends Node
 
 @export var allDiceTextures : Dictionary = {
 	"Blue": load("res://Materials/DiceTextures/Blue.tres"),
+	"Forest Green": load("res://Materials/DiceTextures/ForestGreen.tres"),
+	"Gold": load("res://Materials/DiceTextures/Gold.tres"),
 	"Green": load("res://Materials/DiceTextures/Green.tres"),
+	"Orange": load("res://Materials/DiceTextures/Orange.tres"),
+	"Pink": load("res://Materials/DiceTextures/Pink.tres"),
 	"Purple": load("res://Materials/DiceTextures/Purple.tres"),
 	"Red": load("res://Materials/DiceTextures/Red.tres"),
 	"White": load("res://Materials/DiceTextures/White.tres"),
+	"Yellow": load("res://Materials/DiceTextures/Yellow.tres")
 	}
 
 # Called when the node enters the scene tree for the first time.

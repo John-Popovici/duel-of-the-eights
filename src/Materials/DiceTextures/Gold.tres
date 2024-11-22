@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://rktenayoy708"]
+
+[resource]
+resource_name = "Faces"
+cull_mode = 2
+albedo_color = Color(1, 0.843137, 0, 1)
+metallic = 0.78
+roughness = 0.5

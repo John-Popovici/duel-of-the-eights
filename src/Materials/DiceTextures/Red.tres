@@ -3,5 +3,6 @@
 [resource]
 resource_name = "Faces"
 cull_mode = 2
+diffuse_mode = 3
 albedo_color = Color(0.696621, 0.171193, 0.0937205, 1)
 roughness = 0.5
