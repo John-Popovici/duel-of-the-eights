@@ -59,6 +59,7 @@
 2024-10-28 & John Popovici & Fixed FMEA labels and added de-sync, as per peer review \\
 2024-11-05 & John Popovici & Added FMEA table value/rating explanations section 6.2\\
 2024-11-22 & John Popovici & Added List of Tables and fixed table 2\\
+2024-11-22 & John Popovici & Expanded upon section 5 and 6 based on feedback\\
 ... & ... & ...\\
 \bottomrule
 \end{tabularx}
@@ -156,8 +157,10 @@ This component displays scores and health bar statuses for all players. It updat
 
 \begin{itemize}
     \item \textbf{Godot Stability}: The Godot game engine is assumed to be stable and function correctly.
+    \item \textbf{External Libraries Correctness}: We assume all third party libraries and plugins to function correctly given they have been used and tested by others.
 \end{itemize}
 
+\newpage
 \section{Failure Mode and Effect Analysis}
 \subsection{Hazards Considered Out of Scope}
 \begin{enumerate}
@@ -175,20 +178,20 @@ This component displays scores and health bar statuses for all players. It updat
 
     \item \textbf{Network Infrastructure Failures}
         \begin{itemize}
-            \item Failures due to external network outages, router malfunctions, or ISP-level disruptions.
+            \item Failures due to external network outages, router malfunctions, or ISP-level disruptions. These would be long-term outages that make play impossible and thus would be out-of-scope, while latency and data de-sync issues would be considered.
             \item \textit{Rationale}: These are beyond the game's control and depend on the player's internet setup or service provider.
         \end{itemize}
 
     \item \textbf{Third-Party Library Bugs or Vulnerabilities}
         \begin{itemize}
             \item Bugs or security vulnerabilities in third-party libraries or plugins used within the Godot engine.
-            \item \textit{Rationale}: While the game relies on third-party tools, the FMEA focuses on bugs and issues within the game code itself, not third-party dependencies.
+            \item \textit{Rationale}: While the game relies on third-party tools, they are assumed to be correct, as we focus on bugs and issues within the game code itself.
         \end{itemize}
 
     \item \textbf{Player Misuse or Exploits}
         \begin{itemize}
             \item Players intentionally trying to exploit the game, cheat, or use unauthorized modifications.
-            \item \textit{Rationale}: Handling intentional misuse or hacking is outside the game's core development, and managing these issues requires external anti-cheat measures or monitoring.
+            \item \textit{Rationale}: Handling intentional misuse or hacking is outside the game's core development, and managing these issues requires external anti-cheat measures or monitoring. The game is intended to be played by invite link, meaning the two players would be communicating beforehand and have a level of trust.
         \end{itemize}
 
     \item \textbf{Data Privacy and Security Breaches}
