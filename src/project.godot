@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/IntroScene.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalSettings="*res://Scripts/global_settings.gd"
+
 [dotnet]
 
 project/assembly_name="duel-of-the-eights"

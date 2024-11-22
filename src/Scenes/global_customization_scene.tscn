@@ -1,0 +1,251 @@
+[gd_scene load_steps=13 format=3 uid="uid://dbuevipki6jra"]
+
+[ext_resource type="Script" path="res://Scripts/global_customization_scene.gd" id="1_2co8p"]
+[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="1_odr4a"]
+[ext_resource type="PackedScene" uid="uid://cu4mb4w4jgh2e" path="res://NodeScene/six_dice.tscn" id="2_18byj"]
+[ext_resource type="Script" path="res://Scripts/customization_ui.gd" id="2_61s26"]
+[ext_resource type="PackedScene" uid="uid://dvqod4aw6sxvo" path="res://NodeScene/button.tscn" id="4_aknih"]
+[ext_resource type="Material" uid="uid://dvsy8knluwv6e" path="res://Materials/BoardRaisedMat.tres" id="6_tmny7"]
+[ext_resource type="Material" uid="uid://cgpa3fsefx8ir" path="res://Materials/BoardLowMat.tres" id="7_kk2ga"]
+[ext_resource type="PackedScene" uid="uid://ko2fgefssdcp" path="res://NodeScene/eight_dice.tscn" id="8_smb06"]
+[ext_resource type="PackedScene" uid="uid://dhfe5d2eygmel" path="res://NodeScene/four_dice.tscn" id="9_jmq6d"]
+[ext_resource type="Script" path="res://Scripts/camera_controller.gd" id="10_cj1yu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kermc"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_36lpi"]
+
+[node name="GlobalCustomizationScene" type="Node3D"]
+script = ExtResource("1_2co8p")
+
+[node name="CustomizationUI" type="CanvasLayer" parent="."]
+script = ExtResource("2_61s26")
+
+[node name="BackPanel" type="PanelContainer" parent="CustomizationUI"]
+offset_left = 51.0
+offset_top = 52.0
+offset_right = 834.0
+offset_bottom = 591.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_odr4a")
+
+[node name="Sections" type="VBoxContainer" parent="CustomizationUI/BackPanel"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CustomizationUI/BackPanel/Sections"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CustomizationUI/BackPanel/Sections/HBoxContainer"]
+layout_mode = 2
+text = "Customization Panel"
+
+[node name="Button" type="Button" parent="CustomizationUI/BackPanel/Sections/HBoxContainer"]
+layout_mode = 2
+text = "Dice Customization"
+
+[node name="Button2" type="Button" parent="CustomizationUI/BackPanel/Sections/HBoxContainer"]
+layout_mode = 2
+text = "Music Customization"
+
+[node name="Button3" type="Button" parent="CustomizationUI/BackPanel/Sections/HBoxContainer"]
+layout_mode = 2
+text = "Theme Customization"
+
+[node name="DiceCustomization" type="VBoxContainer" parent="CustomizationUI/BackPanel/Sections"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CustomizationUI/BackPanel/Sections/DiceCustomization"]
+layout_mode = 2
+text = "Dice Main Texture"
+
+[node name="MainDiceTextures" type="HBoxContainer" parent="CustomizationUI/BackPanel/Sections/DiceCustomization"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" parent="CustomizationUI/BackPanel/Sections/DiceCustomization/MainDiceTextures" instance=ExtResource("4_aknih")]
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="CustomizationUI/BackPanel/Sections/DiceCustomization/MainDiceTextures"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Blank"
+
+[node name="Button3" type="Button" parent="CustomizationUI/BackPanel/Sections/DiceCustomization/MainDiceTextures"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Blank"
+
+[node name="Label2" type="Label" parent="CustomizationUI/BackPanel/Sections/DiceCustomization"]
+layout_mode = 2
+text = "Dice Selected Texture"
+
+[node name="SelectedDiceTextures" type="HBoxContainer" parent="CustomizationUI/BackPanel/Sections/DiceCustomization"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="CustomizationUI/BackPanel/Sections/DiceCustomization/SelectedDiceTextures"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Blank"
+
+[node name="Button2" type="Button" parent="CustomizationUI/BackPanel/Sections/DiceCustomization/SelectedDiceTextures"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Blank"
+
+[node name="Button3" type="Button" parent="CustomizationUI/BackPanel/Sections/DiceCustomization/SelectedDiceTextures"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Blank"
+
+[node name="Label3" type="Label" parent="CustomizationUI/BackPanel/Sections/DiceCustomization"]
+layout_mode = 2
+text = "Dice Engraving Texture"
+
+[node name="DiceBaseTextures" type="HBoxContainer" parent="CustomizationUI/BackPanel/Sections/DiceCustomization"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="CustomizationUI/BackPanel/Sections/DiceCustomization/DiceBaseTextures"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Blank"
+
+[node name="Button2" type="Button" parent="CustomizationUI/BackPanel/Sections/DiceCustomization/DiceBaseTextures"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Blank"
+
+[node name="Button3" type="Button" parent="CustomizationUI/BackPanel/Sections/DiceCustomization/DiceBaseTextures"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Blank"
+
+[node name="BackToHomeButton" type="Button" parent="CustomizationUI/BackPanel/Sections"]
+layout_mode = 2
+text = "Back To Home"
+
+[node name="DiceDisplay" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="DiceDisplay"]
+transform = Transform3D(0.853553, 0.146447, 0.5, -0.5, 0.5, 0.707107, -0.146447, -0.853553, 0.5, 0, 0, 0)
+sky_mode = 1
+
+[node name="D6Display" type="RigidBody3D" parent="DiceDisplay"]
+gravity_scale = 0.0
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceDisplay/D6Display"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+shape = SubResource("BoxShape3D_kermc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DiceDisplay/D6Display"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -2, 0)
+mesh = SubResource("BoxMesh_36lpi")
+surface_material_override/0 = ExtResource("6_tmny7")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="DiceDisplay/D6Display"]
+transform = Transform3D(12, 0, 0, 0, 1, 0, 0, 0, 12, 0, -2.5, 0)
+mesh = SubResource("BoxMesh_36lpi")
+surface_material_override/0 = ExtResource("7_kk2ga")
+
+[node name="Six_Dice" parent="DiceDisplay/D6Display" instance=ExtResource("2_18byj")]
+
+[node name="D8Display" type="RigidBody3D" parent="DiceDisplay"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
+gravity_scale = 0.0
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceDisplay/D8Display"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+shape = SubResource("BoxShape3D_kermc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DiceDisplay/D8Display"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -2, 0)
+mesh = SubResource("BoxMesh_36lpi")
+surface_material_override/0 = ExtResource("6_tmny7")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="DiceDisplay/D8Display"]
+transform = Transform3D(12, 0, 0, 0, 1, 0, 0, 0, 12, 0, -2.5, 0)
+mesh = SubResource("BoxMesh_36lpi")
+surface_material_override/0 = ExtResource("7_kk2ga")
+
+[node name="EightDice" parent="DiceDisplay/D8Display" instance=ExtResource("8_smb06")]
+
+[node name="D4Display" type="RigidBody3D" parent="DiceDisplay"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50)
+gravity_scale = 0.0
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DiceDisplay/D4Display"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+shape = SubResource("BoxShape3D_kermc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DiceDisplay/D4Display"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -2, 0)
+mesh = SubResource("BoxMesh_36lpi")
+surface_material_override/0 = ExtResource("6_tmny7")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="DiceDisplay/D4Display"]
+transform = Transform3D(12, 0, 0, 0, 1, 0, 0, 0, 12, 0, -2.5, 0)
+mesh = SubResource("BoxMesh_36lpi")
+surface_material_override/0 = ExtResource("7_kk2ga")
+
+[node name="FourDice" parent="DiceDisplay/D4Display" instance=ExtResource("9_jmq6d")]
+
+[node name="CameraController" type="Node3D" parent="DiceDisplay"]
+script = ExtResource("10_cj1yu")
+
+[node name="Positions" type="Node3D" parent="DiceDisplay/CameraController"]
+
+[node name="D6" type="Node3D" parent="DiceDisplay/CameraController/Positions"]
+transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 10, 7, 12)
+
+[node name="D8" type="Node3D" parent="DiceDisplay/CameraController/Positions"]
+transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 10, 7, 62)
+
+[node name="D4" type="Node3D" parent="DiceDisplay/CameraController/Positions"]
+transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 10, 7, -38)
+
+[node name="Camera3D" type="Camera3D" parent="DiceDisplay/CameraController"]
+transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 10, 7, 12)
+
+[node name="SpotLight3D_Camera" type="SpotLight3D" parent="DiceDisplay/CameraController/Camera3D"]
+transform = Transform3D(0.95658, 0.145735, -0.252421, -0.145735, 0.989145, 0.0188015, 0.252421, 0.0188015, 0.967435, 0, 0, 0)
+light_energy = 0.25
+spot_range = 70.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 2.37841
+
+[node name="CameraPosPanel" type="PanelContainer" parent="DiceDisplay/CameraController"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -108.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("1_odr4a")
+
+[node name="ButtonHolder" type="VBoxContainer" parent="DiceDisplay/CameraController/CameraPosPanel"]
+layout_mode = 2
+
+[node name="Angled" type="Button" parent="DiceDisplay/CameraController/CameraPosPanel/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Angled"
+
+[node name="Top Down" type="Button" parent="DiceDisplay/CameraController/CameraPosPanel/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Top Down"
+
+[node name="Cinematic" type="Button" parent="DiceDisplay/CameraController/CameraPosPanel/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cinematic"
