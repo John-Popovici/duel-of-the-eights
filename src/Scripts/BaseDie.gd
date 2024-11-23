@@ -47,18 +47,17 @@ func setup_dice_specific_variables(_faces: int) -> void:
 # Applies random torque and force to simulate a roll
 func roll() -> void:
 	self.set_freeze_enabled(false)
-	await get_tree().create_timer(start_time).timeout
-	# Reset position and rotation to start values
-	global_transform.origin = start_position
-	rotation_degrees = start_rotation
-	#global_transform.basis = Basis(start_rotation,0)
+	await get_tree().create_timer(start_time+0.5).timeout
 	
 	is_selected = false
 	dieMesh.set_surface_override_material(0,normalTex)
-	
+
 	# Reset linear and angular velocities
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
+	# Reset position and rotation to start values
+	global_transform.origin = start_position
+	rotation_degrees = start_rotation
 	
 	# Apply random force for linear movement
 	apply_impulse(Vector3.ZERO, Vector3(
