@@ -78,7 +78,8 @@ func roll() -> void:
 func get_face_value() -> int:
 	var best_face = -1
 	var highest_dot = -1.0
-	self.set_freeze_enabled(true)
+	if !is_rolling:
+		self.set_freeze_enabled(true)
 	for face_value in face_rays.keys():
 		var raycast = face_rays[face_value]
 		var ray_direction = raycast.global_transform.basis.z.normalized()
