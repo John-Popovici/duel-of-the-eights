@@ -5,31 +5,55 @@
 \item[LC\refstepcounter{lcnum}\thelcnum \label{LC_find_opp}:] Adding more ways to find opponents to play with (single player, local multiplayer on same device, etc)
 
 \begin{itemize}
-	\item After setting up our initial on-line multiplayer and making sure that the online multiplayer is stable, we can expand our projects scope by adding other ways that users can find opponents to play against, such as a singleplayer gamemode against Ai, or a local multiplayer mode that can be played on the same device.
+	\item After setting up our initial on-line multiplayer and making sure that the online multiplayer is stable, we can expand our projects scope by adding other ways that users can find opponents to play against, such as a singleplayer gamemode against an algorithmic opponent, or a local multiplayer mode that can be played on the same device.
+	\item This relates to the following requirements: 
+	\begin{itemize}
+		\item \hyperref[G_multiplayer]{GS2: Online multiplayer functionality}
+		\item \hyperref[G_local_multiplayer]{SG6: Local multiplayer}
+		\item \hyperref[G_singleplayer]{SG7: Singleplayer variants}
+		\item \hyperref[G_matchmaking]{SG8: Online matchmaking}
+	\end{itemize}
 \end{itemize}
 
 \item[LC\refstepcounter{lcnum}\thelcnum \label{LC_dice}:] the amount and variability of dice options may increase and decrease based on the scope of the project
 
 \begin{itemize}
-	\item As the Scope of our project increase and decreases, we will consider experimenting with different amounts and types of dice. and should circumstances allow, we may choose to add or remove these different options for our game.
+	\item As the Scope of our project increase and decreases, we will consider experimenting with different amounts and types of dice.
+	\item This relates to the following requirements: 
+	\begin{itemize}
+		\item \hyperref[G_customization]{GS3: Customizable game settings}
+	\end{itemize}
 \end{itemize}
 
 \item[LC\refstepcounter{lcnum}\thelcnum \label{LC_platforms}:] We may expand comparability to other operating systems depending of the scope of the project (Mac OS, etc).
 
 \begin{itemize}
 	\item While we will initially design our system to work on Windows 10/11 devices, should the scope of our project expand, we are likely to adapt our system to work on other OS systems too such as Mac OS, or Linux, allowing our product to reach more players.
+	\item This relates to the following requirements: 
+	\begin{itemize}
+		\item \hyperref[G_platforms]{SG13: Multi-platform support}
+	\end{itemize}
 \end{itemize}
 
 \item[LC\refstepcounter{lcnum}\thelcnum \label{LC_score_calc}:] We may change how the scores are calculated.
 
 \begin{itemize}
 	\item As we change and add various options for the players, such as changing the number and types of the dice, we may need to account for the different probabilities that these new options may create, which in turn would require us to modify our scoring system to account for these radically different probabilities.
+	\item This relates to the following requirements: 
+	\begin{itemize}
+		\item \hyperref[G_customization]{GS3: Customizable game settings}
+		\item \hyperref[G_customization2]{SG10: More game setting customization}
+	\end{itemize}
 \end{itemize}
 
 \item[LC\refstepcounter{lcnum}\thelcnum \label{LC_num_players}:] We may expand the amount of players that can play the same game from just the initial 2 depending on scope.
 
 \begin{itemize}
 	\item While initialized for two players, it is known that Yatzee can easily support more players, given that the fundamental mechanics of the game don't change when you add them. Thus, when we stabilize our two-player multiplayer, we could expand upon it to allow more then the initial two players to play the same game, allowing more users to enjoy our product.
+	\item This relates to the following requirements: 
+	\begin{itemize}
+		\item \hyperref[G_customization2]{SG10: More game setting customization}
+	\end{itemize}
 \end{itemize}
 
     
@@ -46,36 +70,59 @@
 \item[UC\refstepcounter{ucnum}\theucnum \label{ULC_multiplayer}:] We will not remove the multi-player component of the game.
 
 \begin{itemize}
-	\item The game is inherently a social game that involves chance and strategy in an attempt to get the highest score compared to other players, As such Multi-player is a core component of the game and it must be included to ensure that an important aspect of the game isn't lost. Relates to R1 of requirements
+	\item The game is inherently a social game that involves chance and strategy in an attempt to get the highest score compared to other players, As such multiplayer is a core component of the game and it must be included to ensure that an important aspect of the game isn't lost.
+	\item This relates to the following requirements: 
+	\begin{itemize}
+		\item \hyperref[G_enjoyable]{GS1: Enjoyable game}
+		\item \hyperref[G_multiplayer]{GS2: Online multiplayer functionality}
+		\item \hyperref[G_local_multiplayer]{SG6: Local multiplayer}
+	\end{itemize}
 \end{itemize}
 
 	
 \item[UC\refstepcounter{ucnum}\theucnum \label{ULC_dice}:] We will not remove the dice and it's probabilities 
 
 \begin{itemize}
-	\item Dice are a critical component of Yahtzee and it's variations, and the probabilities that the dices rolls provide are a core component in the way that score is calculated in game. Thus, our game will always involve the usage of dice and the calculation of the probabilities involving them. Relates to R3 and R5 of requirements
+	\item Dice are a critical component of Yahtzee and it's variations, and the probabilities that the dices rolls provide are a core component in the way that score is calculated in game. Thus, our game will always involve the usage of dice and the calculation of the probabilities involving them.
+	\item This relates to the following requirements: 
+	\begin{itemize}
+		\item \hyperref[G_customization]{GS3: Customizable game settings}
+		\item \hyperref[G_3D]{GS5: 3D dice rolling}
+	\end{itemize}
 \end{itemize}
 
 
 \item[UC\refstepcounter{ucnum}\theucnum \label{ULC_godot}:] We will not switch from our engine Godot for the duration of the project.
 
 \begin{itemize}
-	\item After conducting research on other game engines, and comparing our options, we have concluded that the Godot engine is the game engine best suited for our project.
+	\item After conducting research on other game engines, and comparing our options, we have concluded that the Godot engine is the game engine best suited for our project and that would help us best achieve all our requirements but especially related to the following requirements: 
+	\begin{itemize}
+		\item \hyperref[G_platforms]{SG13: Multi-platform support}
+	\end{itemize}
 \end{itemize}
 
 \item[UC\refstepcounter{ucnum}\theucnum \label{ULC_customization}:] We will always have customization between game variants, and not just presets.
 
 
 \begin{itemize}
-	\item One of the selling points for this project is to have customised settings for our game, allowing the user to tailor their experience to the way they want it. Thus, it is unlikely we will alter our plans to include this feature. Relates to R9 of requirements
+	\item One of the selling points for this project is to have customised settings for our game, allowing the user to tailor their experience to the way they want it. Thus, it is unlikely we will alter our plans to include this feature.
+	\item This relates to the following requirements: 
+	\begin{itemize}
+		\item \hyperref[G_presets]{GS4: Preset game settings}
+		\item \hyperref[G_customization]{GS3: Customizable game settings}
+		\item \hyperref[G_customization2]{SG10: More game setting customization}
+		\item \hyperref[G_saving]{SG9: Saving custom game setting}
+	\end{itemize}
 \end{itemize}
 
 \item[UC\refstepcounter{ucnum}\theucnum \label{ULC_3D}:] We will not change the 3D format of our game to 2D
 
 \begin{itemize}
-	\item When playing a physical game like Yahtzee, one of the most engaging aspects is the action of rolling the dice. We wish to recreate the feel of playing the physical game as closely as possible by allowing our player to be able to visually see the dice roll in a way that mirrors the physical experience. Relates to R3 of requirements
-	
-	 
+	\item When playing a physical game like Yahtzee, one of the most engaging aspects is the action of rolling the dice. We wish to recreate the feel of playing the physical game as closely as possible by allowing our player to be able to visually see the dice roll in a way that mirrors the physical experience.
+	\item This relates to the following requirements: 
+	\begin{itemize}
+		\item \hyperref[G_3D]{GS5: 3D dice rolling}
+	\end{itemize}
 \end{itemize}
 
 
