@@ -17,7 +17,7 @@ var game_manager: Node3D
 var GameUI: CanvasLayer
 
 # Initialize player with default values or game settings
-func setup_player(_myPlayer: bool, initial_health: int, _playerName: String, _hostDevice: bool):
+func setup_player(_myPlayer: bool, initial_health: int, _playerName: String, _hostDevice: bool, _dice_container, _network_manager,_game_manager,_game_ui):
 	health_points = initial_health
 	score = 0
 	playerName = _playerName
@@ -25,10 +25,10 @@ func setup_player(_myPlayer: bool, initial_health: int, _playerName: String, _ho
 	selected_for_reroll.clear()
 	myPlayer = _myPlayer
 	hostDevice = _hostDevice
-	diceContainer = get_parent().get_node("DiceContainer")
-	network_manager = get_parent().get_parent().get_node("NetworkManager")
-	game_manager = get_parent()
-	GameUI = get_parent().get_node("GameUI")
+	diceContainer = _dice_container
+	network_manager = _network_manager
+	game_manager = _game_manager
+	GameUI = _game_ui
 
 # Update the player's score and health based on the round outcome
 func update_score(new_score: int):

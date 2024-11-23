@@ -331,8 +331,8 @@ func connectionTest(data: Dictionary) -> void:
 	pass
 
 func setup_PlayerManager(settings: Dictionary) -> void:
-	myPlayer.setup_player(true, settings["health_points"],game_settings["player_names"][0] if network_manager.getIsHost() else game_settings["player_names"][1], network_manager.getIsHost())
-	enemyPlayer.setup_player(false, settings["health_points"],game_settings["player_names"][1] if network_manager.getIsHost() else game_settings["player_names"][0], network_manager.getIsHost())
+	myPlayer.setup_player(true, settings["health_points"],game_settings["player_names"][0] if network_manager.getIsHost() else game_settings["player_names"][1], network_manager.getIsHost(),dice_container,network_manager,self,GameUI)
+	enemyPlayer.setup_player(false, settings["health_points"],game_settings["player_names"][1] if network_manager.getIsHost() else game_settings["player_names"][0], network_manager.getIsHost(),dice_container,network_manager,self,GameUI)
 
 func setup_scoreboard(_hand_settings: Dictionary) -> void:
 	#clear anything generated and re build
