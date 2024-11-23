@@ -94,7 +94,6 @@ func add_dice(dice_count: int, dice_type: int) -> void:
 		dice.rotation_degrees = Vector3.ZERO
 		add_child(dice)
 		dice_nodes.append(dice)
-	roll_dice()
 
 
 # Called when the node enters the scene tree for the first time.
