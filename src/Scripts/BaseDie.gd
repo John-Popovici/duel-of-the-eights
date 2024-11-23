@@ -3,17 +3,15 @@
 extends RigidBody3D
 
 # Exported start position so it can be set in the editor
+@export var num_faces: int
 @export var start_position: Vector3 = Vector3.ZERO
 @export var start_rotation: Vector3 = Vector3.ZERO
-@export var start_time: float = 0
-@export var impulse_range: int = 5
-@export var torque_range: int = 5
-@export var hover_height: float = 0.5  # Hover height in meters
-var hover_toggle_position: Vector3
-@onready var move_last_time = -1.0
+@export var start_time: float
+@export var impulse_range: int
+@export var torque_range: int
 # Thresholds to consider if the die is still rolling
-@export var velocity_threshold: float = 0.1  # Adjust this value based on your needs
-@export var roll_time_limit: float = 3.0     # Time limit to trigger function
+@export var velocity_threshold: float  # Adjust this value based on your needs
+@export var roll_time_limit: float     # Time limit to trigger function
 var is_selected: bool = false          # Tracks if the die has been clicked/selected
 @onready var dieMesh: MeshInstance3D = get_node("OuterMesh")
 @onready var dieBase: MeshInstance3D = get_node("InnerMesh")
@@ -22,19 +20,29 @@ var normalTex = GlobalSettings.normalDiceTex
 var selectedTex = GlobalSettings.selectedDiceTex
 var diceBaseTex = GlobalSettings.dicebaseTex
 
-@export var face_threshold: float = 0.8  # Threshold for face orientation detection
-
 # Threshold for detecting the "upward" ray
-@export var up_threshold: float = 0.9
+@export var up_threshold: float
 # Dictionary to associate raycast nodes with face values
-@onready var face_rays = {
-	1: $"RayCast3D_Face1",
-	2: $"RayCast3D_Face2",
-	3: $"RayCast3D_Face3",
-	4: $"RayCast3D_Face4",
-	5: $"RayCast3D_Face5",
-	6: $"RayCast3D_Face6",
-}
+@onready var face_rays = {}
+
+func setup_face_rays() -> void:
+	# Sets up raycast nodes for each face of the die
+	var raycastHolder = get_node("RayCastHolder")
+	var rayCount = 0
+	for rayCast in raycastHolder.get_children():
+		rayCount += 1
+		face_rays[rayCount] = rayCast
+	num_faces = rayCount
+	setup_dice_specific_variables(num_faces)
+
+func setup_dice_specific_variables(_faces: int) -> void:
+	var diceDefaultSettings = GlobalSettings.diceDefaultSettingsRefs[_faces]
+	start_time = diceDefaultSettings["start_time"]
+	impulse_range = diceDefaultSettings["impulse_range"]
+	torque_range = diceDefaultSettings["torque_range"]
+	velocity_threshold = diceDefaultSettings["velocity_threshold"]
+	roll_time_limit = diceDefaultSettings["roll_time_limit"]
+	up_threshold = diceDefaultSettings["up_threshold"]
 
 # Applies random torque and force to simulate a roll
 func roll() -> void:
@@ -80,26 +88,12 @@ func get_face_value() -> int:
 			highest_dot = dot_product
 			best_face = face_value
 	return best_face
-	
-var move_start_time = Time.get_ticks_msec() / 1000.0
-func _mouse_enter() -> void:
-	move_start_time = Time.get_ticks_msec() / 1000.0
-	if (move_last_time == -1.0 or move_start_time - move_last_time > 1.0) and !is_rolling:
-		move_last_time = move_start_time
-		hover()
-	dieMesh.set_surface_override_material(0,selectedTex)
 
-func reset_dice_tex()->void:
-	normalTex = GlobalSettings.normalDiceTex
-	selectedTex = GlobalSettings.selectedDiceTex
-	diceBaseTex = GlobalSettings.dicebaseTex
-	dieMesh.set_surface_override_material(0,normalTex)
-	dieBase.set_surface_override_material(0,diceBaseTex)
+func _mouse_enter() -> void:
+	dieMesh.set_surface_override_material(0,selectedTex)
+	
 
 func _mouse_exit() -> void:
-	#hover_toggle_position = global_transform.origin  # Save the starting position
-	#var new_position = hover_toggle_position + Vector3(0, -hover_height, 0)
-	#global_transform.origin = new_position
 	if !is_selected:
 		dieMesh.set_surface_override_material(0,normalTex)
 
@@ -129,6 +123,17 @@ func _ready() -> void:
 	self.input_event.connect(_on_input_event)
 	dieMesh.set_surface_override_material(0,normalTex)
 	dieBase.set_surface_override_material(0,diceBaseTex)
+	setup_face_rays()
+
+func reset_dice_tex()->void:
+	normalTex = GlobalSettings.normalDiceTex
+	selectedTex = GlobalSettings.selectedDiceTex
+	diceBaseTex = GlobalSettings.dicebaseTex
+	if !is_selected:
+		dieMesh.set_surface_override_material(0,normalTex)
+	else:
+		dieMesh.set_surface_override_material(0,selectedTex)
+	dieBase.set_surface_override_material(0,diceBaseTex)
 
 # Tracks if the die is currently rolling
 var is_rolling: bool = false
@@ -139,12 +144,6 @@ var roll_start_time: float = -1.0  # Tracks when the die started rolling
 func getIsRolling() -> bool:
 	return is_rolling
 
-func hover():
-	move_start_time = Time.get_ticks_msec() / 1000.0
-	move_last_time = move_start_time
-	hover_toggle_position = global_transform.origin  # Save the starting position
-	var new_position = hover_toggle_position + Vector3(0, hover_height, 0)
-	global_transform.origin = new_position
 
 func setStartConditions(_pos: Vector3, _rot: Vector3, _time: float) -> void:
 	start_position = _pos
@@ -166,8 +165,7 @@ func _process(_delta: float) -> void:
 		else:
 			var current_time = Time.get_ticks_msec() / 1000.0
 			if current_time - roll_start_time > roll_time_limit:
-				print("The die has been rolling for more than 3 seconds.", roll_time_limit, " seconds.")
-				hover()  # Call the function if the roll time limit is exceeded
+				print("The die has been rolling for more than, ", roll_time_limit, " seconds.")
 				roll_start_time = current_time  # Reset timer to prevent repeated calls
 	else:
 		is_rolling = false

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dhfe5d2eygmel"]
 
-[ext_resource type="Script" path="res://Scripts/FourDie.gd" id="1_i6gdu"]
+[ext_resource type="Script" path="res://Scripts/BaseDie.gd" id="1_hv7fx"]
 [ext_resource type="ArrayMesh" uid="uid://dy5tewlmwlr8w" path="res://Assets/dice/d4/DiceMakerD4_d4_3d_numbered_stl.res" id="2_y3uq0"]
 [ext_resource type="Material" uid="uid://du2ej862se3yl" path="res://Materials/Faces.tres" id="3_t3v2a"]
 [ext_resource type="ArrayMesh" uid="uid://bt5upkkp3cde" path="res://Assets/dice/d4/DiceMakerD4_d4_3d_blank_stl.res" id="4_w2agu"]
@@ -11,7 +11,12 @@ points = PackedVector3Array(2, -0.7, 0, -1, -0.7, 1.7, -1, -0.7, -1.7, 0, 2, 0)
 
 [node name="FourDice" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-script = ExtResource("1_i6gdu")
+script = ExtResource("1_hv7fx")
+impulse_range = 15
+torque_range = 25
+velocity_threshold = 0.1
+roll_time_limit = 5.0
+up_threshold = 0.8
 
 [node name="OuterMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.23, 0, 0, 0, 0.23, 0, 0, 0, 0.23, 0, 0, 0)
