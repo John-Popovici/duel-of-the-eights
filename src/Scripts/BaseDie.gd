@@ -111,6 +111,15 @@ func _toggle_selection_status() -> void:
 		dieMesh.set_surface_override_material(0,normalTex)
 	else:
 		dieMesh.set_surface_override_material(0,selectedTex)
+	if dice_ui_element != null:
+		dice_ui_element._toggle_texture()
+
+var dice_ui_element
+func _set_dice_ui(_ui_element) -> void:
+	dice_ui_element = _ui_element
+
+func _clear_dice_ui() ->void:
+	dice_ui_element = null
 
 # Returns whether the die is selected
 func get_selected_status() -> bool:

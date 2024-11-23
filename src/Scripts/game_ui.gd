@@ -158,16 +158,19 @@ func update_my_player_dice_display(dice: Array[RigidBody3D]):
 		match dice_type:
 			6:
 				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
-				dice_sprite.setDie(dice[i])
-				dice_sprite.set_texture(load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % face_value))  # Adjust path to dice textures
+				var _norm_tex = load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % face_value)
+				var _selected_tex = load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-selected-six-faces-%d.png" % face_value)
+				dice_sprite.setDie(dice[i],_norm_tex,_selected_tex)
 			8:
 				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
-				dice_sprite.setDie(dice[i])
-				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-%d.png" % face_value)  # Adjust path to dice textures
+				var _norm_tex = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-%d.png" % face_value)
+				var _selected_tex = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-selected-eight-faces-%d.png" % face_value)
+				dice_sprite.setDie(dice[i],_norm_tex,_selected_tex)
 			4:
 				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
-				dice_sprite.setDie(dice[i])
-				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-%d.png" % face_value)  # Adjust path to dice textures
+				var _norm_tex = load("res://Assets/2D Assets/DiceSprites/4 Sided/dice-four-faces-%d.png" % face_value)
+				var _selected_tex = load("res://Assets/2D Assets/DiceSprites/4 Sided/dice-selected-four-faces-%d.png" % face_value)
+				dice_sprite.setDie(dice[i],_norm_tex,_selected_tex)
 
 func sortDice(_dice: Array[RigidBody3D], _sortMethod: int = 1)-> Array[RigidBody3D]:
 	match _sortMethod:
