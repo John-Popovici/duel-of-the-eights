@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 GlobalSettings="*res://Scripts/global_settings.gd"
 
+[debug]
+
+shapes/collision/shape_color=Color(0.167061, 0.393987, 0.975937, 1)
+
 [dotnet]
 
 project/assembly_name="duel-of-the-eights"
