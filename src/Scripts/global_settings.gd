@@ -4,24 +4,50 @@ extends Node
 @onready var selectedDiceTex = load("res://Materials/DiceTextures/Purple.tres")
 @onready var dicebaseTex = load("res://Materials/DiceTextures/White.tres")
 
-@export var allDiceTextures : Dictionary = {
-	"Blue": load("res://Materials/DiceTextures/Blue.tres"),
-	"Forest Green": load("res://Materials/DiceTextures/ForestGreen.tres"),
-	"Gold": load("res://Materials/DiceTextures/Gold.tres"),
-	"Green": load("res://Materials/DiceTextures/Green.tres"),
-	"Orange": load("res://Materials/DiceTextures/Orange.tres"),
-	"Pink": load("res://Materials/DiceTextures/Pink.tres"),
-	"Purple": load("res://Materials/DiceTextures/Purple.tres"),
-	"Red": load("res://Materials/DiceTextures/Red.tres"),
-	"White": load("res://Materials/DiceTextures/White.tres"),
-	"Yellow": load("res://Materials/DiceTextures/Yellow.tres")
-	}
+@onready var dice_tex_folder = "res://Materials/DiceTextures"
+@onready var allDiceTextures : Dictionary = {}
+
+@onready var d4Settings : Dictionary = {
+	"start_time" : 0,
+	"impulse_range" : 15,
+	"torque_range" : 25,
+	"velocity_threshold" : 0.1,
+	"roll_time_limit" : 5.0,
+	"up_threshold" : 0.8
+}
+@onready var d6Settings : Dictionary = {
+	"start_time" : 0,
+	"impulse_range" : 5,
+	"torque_range" : 5,
+	"velocity_threshold" : 0.1,
+	"roll_time_limit" : 3.0,
+	"up_threshold" : 0.9
+}
+@onready var d8Settings : Dictionary = {
+	"start_time" : 0,
+	"impulse_range" : 15,
+	"torque_range" : 25,
+	"velocity_threshold" : 0.1,
+	"roll_time_limit" : 5.0,
+	"up_threshold" : 0.8
+}
+
+@onready var diceDefaultSettingsRefs : Dictionary = {
+	4 : d4Settings,
+	6 : d6Settings,
+	8 : d8Settings
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	var dir = DirAccess.open(dice_tex_folder)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if file_name.ends_with(".tres"):
+				var texture_name = file_name.replace(".tres", "").capitalize()
+				var texture_path = "res://Materials/DiceTextures/" + file_name
+				allDiceTextures[texture_name] = load(texture_path)
+			file_name = dir.get_next()
+		dir.list_dir_end()

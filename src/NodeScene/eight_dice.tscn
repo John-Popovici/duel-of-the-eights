@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://ko2fgefssdcp"]
 
-[ext_resource type="Script" path="res://Scripts/EightDie.gd" id="1_w5n1s"]
+[ext_resource type="Script" path="res://Scripts/BaseDie.gd" id="1_ypqbm"]
 [ext_resource type="ArrayMesh" uid="uid://cewlljwddbpb" path="res://Assets/dice/d8/DiceMakerD8_blank_d8_3d_numbered_stl.res" id="3_refpq"]
 [ext_resource type="ArrayMesh" uid="uid://de1uw53qdwgih" path="res://Assets/dice/d8/DiceMakerD8_blank_d8_3d_blank_stl_001.res" id="4_n7077"]
 [ext_resource type="Material" uid="uid://du2ej862se3yl" path="res://Materials/Faces.tres" id="4_oxfae"]
@@ -11,7 +11,12 @@ points = PackedVector3Array(0, 2, 0, 1.5, 0, 1.5, 1.5, 0, -1.5, -1.5, 0, -1.5, -
 
 [node name="EightDice" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-script = ExtResource("1_w5n1s")
+script = ExtResource("1_ypqbm")
+impulse_range = 15
+torque_range = 25
+velocity_threshold = 0.1
+roll_time_limit = 5.0
+up_threshold = 0.8
 
 [node name="OuterMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.23, 0, 0, 0, 0.23, 0, 0, 0, 0.23, 0, 0, 0)

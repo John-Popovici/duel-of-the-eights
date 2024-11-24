@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cu4mb4w4jgh2e"]
 
-[ext_resource type="Script" path="res://Scripts/SixDie.gd" id="1_l24xa"]
+[ext_resource type="Script" path="res://Scripts/BaseDie.gd" id="1_eqa3l"]
 [ext_resource type="ArrayMesh" uid="uid://ba2f8u3v23wm7" path="res://Assets/dice/d6/DiceMakerD6_d6_3d_numbered_stl.res" id="2_odioc"]
 [ext_resource type="Material" uid="uid://du2ej862se3yl" path="res://Materials/Faces.tres" id="3_0blmm"]
 [ext_resource type="ArrayMesh" uid="uid://cuau61gveesdi" path="res://Assets/dice/d6/DiceMakerD6_d6_3d_blank_stl.res" id="4_uluw5"]
@@ -9,8 +9,12 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_yb52v"]
 
 [node name="Six_Dice" type="RigidBody3D"]
-script = ExtResource("1_l24xa")
+script = ExtResource("1_eqa3l")
+impulse_range = 5
 torque_range = 3
+velocity_threshold = 0.1
+roll_time_limit = 3.0
+up_threshold = 0.9
 
 [node name="OuterMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.19, 0, 0, 0, 0.19, 0, 0, 0, 0.19, 0, 0, 0)
@@ -26,26 +30,28 @@ surface_material_override/0 = ExtResource("5_pfs0a")
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("BoxShape3D_yb52v")
 
-[node name="RayCast3D_Face1" type="RayCast3D" parent="."]
+[node name="RayCastHolder" type="Node3D" parent="."]
+
+[node name="RayCast3D_Face1" type="RayCast3D" parent="RayCastHolder"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.5, 0)
 target_position = Vector3(0, 0, 1)
 
-[node name="RayCast3D_Face2" type="RayCast3D" parent="."]
+[node name="RayCast3D_Face2" type="RayCast3D" parent="RayCastHolder"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.5, 0, 0)
 target_position = Vector3(0, 0, 1)
 
-[node name="RayCast3D_Face3" type="RayCast3D" parent="."]
+[node name="RayCast3D_Face3" type="RayCast3D" parent="RayCastHolder"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -1.5)
 target_position = Vector3(0, 0, 1)
 
-[node name="RayCast3D_Face4" type="RayCast3D" parent="."]
+[node name="RayCast3D_Face4" type="RayCast3D" parent="RayCastHolder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5)
 target_position = Vector3(0, 0, 1)
 
-[node name="RayCast3D_Face5" type="RayCast3D" parent="."]
+[node name="RayCast3D_Face5" type="RayCast3D" parent="RayCastHolder"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.5, 0, 0)
 target_position = Vector3(0, 0, 1)
 
-[node name="RayCast3D_Face6" type="RayCast3D" parent="."]
+[node name="RayCast3D_Face6" type="RayCast3D" parent="RayCastHolder"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.5, 0)
 target_position = Vector3(0, 0, 1)
