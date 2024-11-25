@@ -46,6 +46,7 @@ func _reset_dice()->void:
 	get_parent().get_node("DiceDisplay/D6Display/Six_Dice").reset_dice_tex()
 	get_parent().get_node("DiceDisplay/D8Display/EightDice").reset_dice_tex()
 	get_parent().get_node("DiceDisplay/D4Display/FourDice").reset_dice_tex()
+	get_parent().get_node("DiceDisplay/D12Display/TwelveDice").reset_dice_tex()
 
 func returnToIntro() -> void:
 	get_parent().returnToIntro()
