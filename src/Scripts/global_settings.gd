@@ -31,11 +31,20 @@ extends Node
 	"roll_time_limit" : 5.0,
 	"up_threshold" : 0.8
 }
+@onready var d12Settings : Dictionary = {
+	"start_time" : 0,
+	"impulse_range" : 15,
+	"torque_range" : 25,
+	"velocity_threshold" : 0.1,
+	"roll_time_limit" : 10.0,
+	"up_threshold" : 0.9
+}
 
 @onready var diceDefaultSettingsRefs : Dictionary = {
 	4 : d4Settings,
 	6 : d6Settings,
-	8 : d8Settings
+	8 : d8Settings,
+	12 : d12Settings
 }
 
 # Called when the node enters the scene tree for the first time.
