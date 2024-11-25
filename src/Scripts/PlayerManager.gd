@@ -68,12 +68,12 @@ func pass_roll() -> void:
 	checkIfDiceValidThenRead()
 
 func checkIfDiceValidThenRead() -> void:
-	var timeTillReroll = 5
+	var timeTillReroll = diceContainer.get_dice()[0].roll_time_limit
 	while len(diceContainer.get_rolling_dice()) > 0 or len(diceContainer.get_invalid_dice()) > 0:
 		timeTillReroll -=1
 		await get_tree().create_timer(1.0).timeout
 		if timeTillReroll <= 0:
-			timeTillReroll = 5
+			timeTillReroll = diceContainer.get_dice()[0].roll_time_limit
 			roll_rolling_or_invalid_dice()
 			await get_tree().create_timer(1.0).timeout
 	readRolls()
