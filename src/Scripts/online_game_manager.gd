@@ -30,6 +30,7 @@ var game_over: bool = false
 func _ready() -> void:
 	game_settings_ui.connect("game_settings_ready", self._on_settings_ready)
 	GameUI.visible = false
+	network_manager.connect("received_game_settings", self.receive_game_settings)
 
 # Process game settings from GameSettings UI (Host side)
 func _on_settings_ready(_game_settings: Dictionary, _hand_settings: Dictionary) -> void:

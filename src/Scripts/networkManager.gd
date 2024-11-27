@@ -171,12 +171,15 @@ func receive_game_state(state: String, data: Dictionary):
 func ping() -> void:
 	time_since_last_ping = 0.0
 
+signal received_game_settings(_game_settings: Dictionary, _hand_settings: Dictionary)
+
 @rpc
 func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionary) -> void:
 	var game_settings = _game_settings
 	var hand_settings = _hand_settings
-	OnlineGameManager = get_parent().get_node("GameManager")
-	OnlineGameManager.receive_game_settings(game_settings,hand_settings)
+	emit_signal("received_game_settings",game_settings,hand_settings)
+	#OnlineGameManager = get_parent().get_node("GameManager")
+	#OnlineGameManager.receive_game_settings(game_settings,hand_settings)
 
 func send_game_settings(_game_settings: Dictionary,_hand_settings: Dictionary) -> void:
 	var game_settings = _game_settings
