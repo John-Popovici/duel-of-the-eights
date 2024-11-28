@@ -18,6 +18,7 @@ func roll_dice() -> void:
 
 # Rolls only selected dice
 func roll_selected_dice() -> void:
+	moveDiceAside()
 	for die in dice_nodes:
 		if die.get_selected_status():  # Check if the die is selected
 			die.roll()
@@ -93,6 +94,12 @@ func add_dice(dice_count: int, dice_type: int) -> void:
 		dice_nodes.append(dice)
 
 func moveDiceAside() -> void:
+	#move dice that are not being rerolled (i.e. not selected at time of reroll, when this is called)
+	#to the side of the board (or other location, to not interfere with the rerolling dice)
+	pass
+
+func moveDiceInLine() -> void:
+	#move dice once read to an organized display on the board
 	pass
 
 # Called when the node enters the scene tree for the first time.

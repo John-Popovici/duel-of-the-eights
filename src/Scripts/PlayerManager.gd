@@ -82,7 +82,7 @@ func readRolls() -> void:
 		await get_tree().create_timer(1.0).timeout
 	rolls = diceContainer.get_dice_values()
 	dice = diceContainer.get_dice()
-	diceContainer.moveDiceAside()
+	diceContainer.moveDiceInLine()
 	emit_signal("rollsReadandWaiting",true)
 	#Communicate to other player
 	print("Player Manger: Host: ", hostDevice, ", Rolls: ", rolls)
