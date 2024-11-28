@@ -3,8 +3,6 @@ extends Node3D
 # Array to store references to all dice nodes
 @export var dice_nodes: Array[RigidBody3D]
 
-@export var scoreboard: VBoxContainer
-
 # Define starting positions for the dice (9 positions in total)
 var start_positions := [
 	Vector3(0, 10, 0), Vector3(4, 10, 0), Vector3(-4, 10, 0),
@@ -12,9 +10,6 @@ var start_positions := [
 	Vector3(0, 10, -4), Vector3(4, 10, -4), Vector3(-4, 10, -4)
 ]
 
-# Rolls all dice with random force and torque
-func update_dice_values_board(values: Array[int]) -> void:
-	scoreboard.update_dice_values(values)
 
 # Rolls all dice with random force and torque
 func roll_dice() -> void:
