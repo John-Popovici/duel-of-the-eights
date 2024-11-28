@@ -92,6 +92,8 @@ func add_dice(dice_count: int, dice_type: int) -> void:
 		add_child(dice)
 		dice_nodes.append(dice)
 
+func moveDiceAside() -> void:
+	pass
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
