@@ -15,6 +15,7 @@ var network_manager: Node
 @onready var ErrorBack = $EscBackOverlay
 @onready var ErrorSourceLabel = $"UIBox/Connection_Error/Error Source"
 
+signal returnToIntro
 
 func _ready():
 	self.visible = true
@@ -55,8 +56,6 @@ func _cancel_hosting() -> void:
 	print("Disconnected")
 	network_manager.disconnect_from_server()
 	await get_tree().create_timer(2.0).timeout
-	# Start the game via OnlineGameManager
-	get_tree().get_root().get_node("OnlineGameScene").returnToIntro()
 
 func _on_connect_pressed():
 	var port = port_field.text.to_int() if port_field.text else default_port
@@ -78,9 +77,9 @@ func _on_connection_successful():
 	self.visible = false
 	print("Multiplayer Successfully connected")
 	network_manager.disconnect("connection_successful", self._on_connection_successful)
-	network_manager.connect("connection_successful", get_parent().get_parent().get_node("GameManager/GameSettings")._allow_game_start)
+	network_manager.connect("connection_successful", network_manager._second_player_connected)
 	# Start the game via OnlineGameManager
-	get_tree().get_root().get_node("OnlineGameScene").start_game()
+	network_manager.emit_signal("startGame")
 
 func _on_disconnected():
 	self.visible = true
@@ -89,9 +88,8 @@ func _on_disconnected():
 	ErrorBack.visible = true
 	ErrorSourceLabel.text = "Disconnected from game"
 	print("Disconnected")
+	#network_manager.disconnect_from_server()
 	await get_tree().create_timer(2.0).timeout
-	# Start the game via OnlineGameManager
-	get_tree().get_root().get_node("OnlineGameScene").returnToIntro()
 
 func _on_connection_failed():
 	# Hide the ConnectionUI once connected
@@ -102,8 +100,6 @@ func _on_connection_failed():
 	ErrorSourceLabel.text = "Connection Failed"
 	print("Connection Failed")
 	await get_tree().create_timer(2.0).timeout
-	# Start the game via OnlineGameManager
-	get_tree().get_root().get_node("OnlineGameScene").returnToIntro()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

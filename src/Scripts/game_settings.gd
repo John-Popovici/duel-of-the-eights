@@ -33,7 +33,8 @@ signal game_settings_ready(game_settings,hand_settings)
 @onready var save_preset_button = presetsPanel.get_node("AddPreset")
 @onready var presetsButtonsBox = presetsPanel.get_node("PresetsScrollBar/PresetsButtons")
 
-@onready var NetworkManager = get_node("../../NetworkManager")
+@onready var networkManagers = get_tree().get_nodes_in_group("NetworkHandlingNodes")
+@onready var NetworkManager = networkManagers[0]
 
 var hand_settings_saved = false
 @export var hand_settings_refs: Dictionary = {}
@@ -202,8 +203,6 @@ func _on_preset_selected(preset_name: String):
 # Update the input fields with loaded game and hand settings
 func update_ui_fields(game_settings: Dictionary, hand_settings: Dictionary):
 	# Example updates; adjust to fit actual input nodes in your UI
-	#player1Name.text = game_settings.get("player_names", 0)[0]
-	#player2Name.text = game_settings.get("player_names", 0)[1]
 	WinCondition.select(game_settings.get("win_condition", 0))
 	HealthPoints.text = str(game_settings.get("health_points", 0))
 	Rounds.text = str(game_settings.get("rounds", 0))
@@ -358,6 +357,7 @@ func _ready() -> void:
 	DiceType.connect("item_selected", self._dice_values_changed)
 	DiceCountRange.connect("value_changed", self._dice_values_changed)
 	save_preset_button.connect("pressed",self.save_preset)
+	NetworkManager.connect("second_player_connected", self._allow_game_start)
 	
 
 func _on_roll_visible_toggled(_state) -> void:

@@ -59,20 +59,27 @@ func _on_peer_connected(id: int):
 	check_ping = true
 	emit_signal("connection_successful")
 
+signal second_player_connected
+func _second_player_connected():
+	emit_signal("second_player_connected")
+
 func _on_peer_disconnected(id: int):
 	print("Disconnected from peer with ID: ", id)
-	multiplayer.multiplayer_peer = null
 	emit_signal("disconnected")
+	multiplayer.multiplayer_peer = null
+	remove_from_group("NetworkHandlingNodes")
 
 func _on_server_disconnected():
 	print("Disconnected from server")
-	multiplayer.multiplayer_peer = null
 	emit_signal("disconnected")
+	multiplayer.multiplayer_peer = null
+	remove_from_group("NetworkHandlingNodes")
 
 func _on_connection_failed():
 	print("Connection Failed")
 	multiplayer.multiplayer_peer = null
 	emit_signal("connection_failed")
+	remove_from_group("NetworkHandlingNodes")
 
 # Converts a base-10 integer (0-600) to a base-26 string with letters A-Z representing 0-25
 func numberToLetters(number: int) -> String:
@@ -146,12 +153,30 @@ func getHashPort() -> String:
 	return numberToLetters(port)
 
 func disconnect_from_server() -> void:
+	emit_signal("disconnected")
 	multiplayer.multiplayer_peer = null
+	remove_from_group("NetworkHandlingNodes")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	ConnectionUI = get_node("ConnectionUI")
 	ConnectionUI.setupNetworkManagerRef()
+	connect("disconnected", self.broadcast_disconnect)
+	add_to_group("NetworkHandlingNodes")
+	
+
+signal startGame
+
+# Broadcasts disconnect
+func broadcast_disconnect(state: String, data: Dictionary):
+	rpc("receive_disconnect")
+	remove_from_group("NetworkHandlingNodes")
+
+# Remote function to handle incoming game state updates
+@rpc("any_peer")
+func receive_disconnect():
+	emit_signal("disconnected")
+	remove_from_group("NetworkHandlingNodes")
 
 signal game_state_received(state: String, data: Dictionary)
 
@@ -178,8 +203,6 @@ func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionar
 	var game_settings = _game_settings
 	var hand_settings = _hand_settings
 	emit_signal("received_game_settings",game_settings,hand_settings)
-	#OnlineGameManager = get_parent().get_node("GameManager")
-	#OnlineGameManager.receive_game_settings(game_settings,hand_settings)
 
 func send_game_settings(_game_settings: Dictionary,_hand_settings: Dictionary) -> void:
 	var game_settings = _game_settings
@@ -192,9 +215,10 @@ func _process(delta: float) -> void:
 		if Time.get_ticks_msec() % 1000 < delta * 1000:
 			rpc("ping")
 			if !multiplayer.has_multiplayer_peer():
+				emit_signal("disconnected")
 				multiplayer.multiplayer_peer = null
 				print("Client Disconnected")
-				emit_signal("disconnected")
+				remove_from_group("NetworkHandlingNodes")
 	elif !is_host and check_ping:
 		# Update the timer
 		time_since_last_ping += delta

@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=3 uid="uid://bb1hsjv35krnk"]
+
+[ext_resource type="Script" path="res://Scripts/networkManager.gd" id="1_n7215"]
+[ext_resource type="Script" path="res://Scripts/connectionUI.gd" id="2_b1k17"]
+[ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/Default_Pixel_Blue/PanelBlueBoxBackgroundStyle.tres" id="3_bplf4"]
+[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="4_77rg4"]
+
+[node name="NetworkManager" type="Node" groups=["NetworkHandlingNodes"]]
+script = ExtResource("1_n7215")
+
+[node name="ConnectionUI" type="CanvasLayer" parent="."]
+layer = 3
+visible = false
+script = ExtResource("2_b1k17")
+
+[node name="UIBox" type="PanelContainer" parent="ConnectionUI"]
+offset_left = 176.0
+offset_top = 118.0
+offset_right = 728.0
+offset_bottom = 305.0
+scale = Vector2(1.44, 2.28)
+theme_override_styles/panel = ExtResource("3_bplf4")
+
+[node name="Connection_Setup" type="VBoxContainer" parent="ConnectionUI/UIBox"]
+layout_mode = 2
+
+[node name="Instructions" type="Label" parent="ConnectionUI/UIBox/Connection_Setup"]
+layout_mode = 2
+theme = ExtResource("4_77rg4")
+text = "Select Multiplayer Options:"
+horizontal_alignment = 1
+
+[node name="HostCheckButton" type="CheckButton" parent="ConnectionUI/UIBox/Connection_Setup"]
+layout_mode = 2
+theme = ExtResource("4_77rg4")
+text = "Host?"
+alignment = 1
+
+[node name="IP_Input" type="LineEdit" parent="ConnectionUI/UIBox/Connection_Setup"]
+layout_mode = 2
+theme = ExtResource("4_77rg4")
+placeholder_text = "Connect Code"
+alignment = 1
+
+[node name="Port_Input" type="LineEdit" parent="ConnectionUI/UIBox/Connection_Setup"]
+layout_mode = 2
+theme = ExtResource("4_77rg4")
+placeholder_text = "Port - 5 digits"
+alignment = 1
+
+[node name="ConnectButton" type="Button" parent="ConnectionUI/UIBox/Connection_Setup"]
+layout_mode = 2
+theme = ExtResource("4_77rg4")
+text = "Connect"
+
+[node name="BackToHomeButton" type="Button" parent="ConnectionUI/UIBox/Connection_Setup"]
+layout_mode = 2
+theme = ExtResource("4_77rg4")
+text = "Back to Home"
+
+[node name="Connection_Error" type="VBoxContainer" parent="ConnectionUI/UIBox"]
+visible = false
+layout_mode = 2
+
+[node name="Error Source" type="Label" parent="ConnectionUI/UIBox/Connection_Error"]
+layout_mode = 2
+theme = ExtResource("4_77rg4")
+text = "Error Source"
+horizontal_alignment = 1
+
+[node name="RedirectingToHome" type="Label" parent="ConnectionUI/UIBox/Connection_Error"]
+layout_mode = 2
+theme = ExtResource("4_77rg4")
+text = "Redirecting to Home Page"
+horizontal_alignment = 1
+
+[node name="EscBackOverlay" type="ColorRect" parent="ConnectionUI"]
+visible = false
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 0, 0, 0.266667)

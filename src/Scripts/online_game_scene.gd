@@ -5,6 +5,7 @@ var player1_name: String
 var player2_name: String
 
 @onready var GameManager: Node = $GameManager
+@onready var network_manager: Node = $NetworkManager
 
 # Method to set player names, called from IntroScene
 func set_player_names(name1: String, name2: String) -> void:
@@ -27,7 +28,9 @@ func returnToIntro() -> void:
 
 # Start game logic with player names
 func _ready() -> void:
-	pass
+	network_manager.connect("startGame", self.start_game)
+	network_manager.connect("disconnected", self.returnToIntro)
+	network_manager.connect("connection_failed", self.returnToIntro)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
