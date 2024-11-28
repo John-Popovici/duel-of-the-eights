@@ -12,7 +12,7 @@ var playerName: String
 var hostDevice: bool
 var diceContainer: Node3D
 @onready var networkManagers = get_tree().get_nodes_in_group("NetworkHandlingNodes")
-@onready var network_manager = networkManagers[0]
+var network_manager
 var GameUI: CanvasLayer
 
 # Initialize player with default values or game settings
@@ -85,7 +85,8 @@ func readRolls() -> void:
 	emit_signal("rollsReadandWaiting",true)
 	#Communicate to other player
 	print("Player Manger: Host: ", hostDevice, ", Rolls: ", rolls)
-	network_manager.broadcast_game_state("roll_values", { "host": hostDevice, "rolls": rolls })
+	if len(networkManagers) ==1:
+		network_manager.broadcast_game_state("roll_values", { "host": hostDevice, "rolls": rolls })
 
 
 func setRolls(_rolls: Array) -> void:
@@ -125,7 +126,8 @@ func getState() -> Dictionary:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	if len(networkManagers) == 1:
+		network_manager = networkManagers[0]
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
