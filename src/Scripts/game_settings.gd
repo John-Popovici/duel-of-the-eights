@@ -391,7 +391,7 @@ func collectInfo() -> void:
 		settingsAdvanced.visible = false
 		settingsWait.visible = false
 		presetsPanel.visible = true
-		copy_connect_code_button.text = "Code: " + get_parent().get_parent().get_node("NetworkManager").getHashIP()+get_parent().get_parent().get_node("NetworkManager").getHashPort()
+		copy_connect_code_button.text = "Code: " + NetworkManager.getHashIP()+NetworkManager.getHashPort()
 		load_preset_buttons()
 	else:
 		settingsSetup.visible = false
@@ -400,7 +400,7 @@ func collectInfo() -> void:
 		presetsPanel.visible = false
 
 func _copy_hash_to_clipboard():
-	DisplayServer.clipboard_set(get_parent().get_parent().get_node("NetworkManager").getHashIP()+get_parent().get_parent().get_node("NetworkManager").getHashPort())
+	DisplayServer.clipboard_set(NetworkManager.getHashIP()+NetworkManager.getHashPort())
 	print("Connect code copied to clipboard: ", DisplayServer.clipboard_get())
 
 func _allow_game_start() -> void:
@@ -409,7 +409,7 @@ func _allow_game_start() -> void:
 
 func on_home_pressed() -> void:
 	#Add disconnect code here and network manager
-	get_parent().exitGame()
+	NetworkManager._on_server_disconnected()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
