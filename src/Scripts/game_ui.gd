@@ -75,7 +75,6 @@ func setup_game_ui(game_settings: Dictionary, _isHost: bool):
 	dice_count = game_settings["dice_count"]
 	dice_type = game_settings["dice_type"]
 	sortMethod = 1
-	print("Dice Type set to: ", dice_type)
 	# Initialize labels for game state
 	for child in game_state_info.get_children():
 		child.free()

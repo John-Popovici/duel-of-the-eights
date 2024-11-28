@@ -65,20 +65,21 @@ func _second_player_connected():
 
 func _on_peer_disconnected(id: int):
 	print("Disconnected from peer with ID: ", id)
-	emit_signal("disconnected")
-	multiplayer.multiplayer_peer = null
-	remove_from_group("NetworkHandlingNodes")
+	_try_reconnect()
 
 func _on_server_disconnected():
 	print("Disconnected from server")
-	emit_signal("disconnected")
-	multiplayer.multiplayer_peer = null
-	remove_from_group("NetworkHandlingNodes")
+	_try_reconnect()
 
 func _on_connection_failed():
 	print("Connection Failed")
 	multiplayer.multiplayer_peer = null
 	emit_signal("connection_failed")
+	remove_from_group("NetworkHandlingNodes")
+
+func _try_reconnect():
+	emit_signal("disconnected")
+	multiplayer.multiplayer_peer = null
 	remove_from_group("NetworkHandlingNodes")
 
 # Converts a base-10 integer (0-600) to a base-26 string with letters A-Z representing 0-25

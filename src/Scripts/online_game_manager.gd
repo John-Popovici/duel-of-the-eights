@@ -9,6 +9,11 @@ var hand_settings
 @onready var scoreCalc = get_node("ScoreCalculator")
 @onready var myPlayer = get_node("myPlayer")
 @onready var enemyPlayer = get_node("enemyPlayer")
+
+@onready var GameUI: CanvasLayer = get_node("GameUI")
+@onready var rollButtons = get_node("RollButtons")
+@onready var rollSelected: Button = get_node("RollButtons/RollSelected")
+@onready var passRoll: Button = get_node("RollButtons/PassRoll")
 var isHost: bool
 var baseTimer: int
 var timedRounds: bool
@@ -20,11 +25,6 @@ var win_cond: int
 var current_round: int = 0
 var roll_count: int = 0
 var game_over: bool = false
-
-@onready var GameUI: CanvasLayer = get_node("GameUI")
-@onready var rollButtons = get_node("RollButtons")
-@onready var rollSelected: Button = get_node("RollButtons/RollSelected")
-@onready var passRoll: Button = get_node("RollButtons/PassRoll")
 
 
 # Initialization: Connects to signals and retrieves NetworkManager
