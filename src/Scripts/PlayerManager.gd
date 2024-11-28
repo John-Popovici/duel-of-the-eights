@@ -13,10 +13,9 @@ var hostDevice: bool
 var diceContainer: Node3D
 @onready var networkManagers = get_tree().get_nodes_in_group("NetworkHandlingNodes")
 var network_manager
-var GameUI: CanvasLayer
 
 # Initialize player with default values or game settings
-func setup_player(_myPlayer: bool, initial_health: int, _playerName: String, _hostDevice: bool, _dice_container,_game_ui):
+func setup_player(_myPlayer: bool, initial_health: int, _playerName: String, _hostDevice: bool, _dice_container):
 	health_points = initial_health
 	score = 0
 	playerName = _playerName
@@ -24,13 +23,12 @@ func setup_player(_myPlayer: bool, initial_health: int, _playerName: String, _ho
 	myPlayer = _myPlayer
 	hostDevice = _hostDevice
 	diceContainer = _dice_container
-	GameUI = _game_ui
 
 # Update the player's score and health based on the round outcome
 func update_score(new_score: int):
 	score += new_score
 	last_score = new_score
-	GameUI.update_player_stats("Player" if myPlayer else "Opponent",playerName,health_points, score)
+	emit_signal("player_stats_updated","Player" if myPlayer else "Opponent",getStats())
 
 func getTotalScore() -> int:
 	return score
@@ -40,7 +38,9 @@ func getLastScore() -> int:
 
 func adjust_health(points: int):
 	health_points += points  # Can be positive or negative
-	GameUI.update_player_stats("Player" if myPlayer else "Opponent",playerName,health_points, score)
+	emit_signal("player_stats_updated","Player" if myPlayer else "Opponent",getStats())
+
+signal player_stats_updated(_player: String, Stats: Dictionary)
 
 func getHealth() -> int:
 	return health_points
@@ -104,9 +104,9 @@ func clearRolls() -> void:
 
 func getStats() -> Dictionary:
 	var player_stats = {
-		"player_name": playerName,
-		"health_points": health_points,
-		"score": score,
+		"Name": playerName,
+		"Health points": health_points,
+		"Score": score,
 	}
 	return player_stats
 

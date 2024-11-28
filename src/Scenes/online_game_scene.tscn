@@ -478,17 +478,8 @@ text = "Total: "
 [node name="ScoreCalculator" type="Node" parent="GameManager"]
 script = ExtResource("10_0b2yf")
 
-[node name="myPlayer" type="Node" parent="GameManager"]
-script = ExtResource("11_ejug4")
-
-[node name="enemyPlayer" type="Node" parent="GameManager"]
-script = ExtResource("11_ejug4")
-
-[node name="GameUI" type="CanvasLayer" parent="GameManager"]
+[node name="RollButtons" type="VBoxContainer" parent="GameManager"]
 visible = false
-script = ExtResource("12_f4hi7")
-
-[node name="RollButtons" type="VBoxContainer" parent="GameManager/GameUI"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -502,17 +493,27 @@ grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("13_g1ii3")
 
-[node name="RollSelected" type="Button" parent="GameManager/GameUI/RollButtons"]
+[node name="RollSelected" type="Button" parent="GameManager/RollButtons"]
 layout_mode = 2
 theme = ExtResource("14_jpiw0")
 theme_override_font_sizes/font_size = 22
 text = "Roll Selected"
 
-[node name="PassRoll" type="Button" parent="GameManager/GameUI/RollButtons"]
+[node name="PassRoll" type="Button" parent="GameManager/RollButtons"]
 layout_mode = 2
 theme = ExtResource("14_jpiw0")
 theme_override_font_sizes/font_size = 22
 text = "Pass"
+
+[node name="myPlayer" type="Node" parent="GameManager"]
+script = ExtResource("11_ejug4")
+
+[node name="enemyPlayer" type="Node" parent="GameManager"]
+script = ExtResource("11_ejug4")
+
+[node name="GameUI" type="CanvasLayer" parent="GameManager"]
+visible = false
+script = ExtResource("12_f4hi7")
 
 [node name="OpponentDiceBase" type="Control" parent="GameManager/GameUI"]
 layout_mode = 3

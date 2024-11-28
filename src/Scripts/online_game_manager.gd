@@ -22,8 +22,9 @@ var roll_count: int = 0
 var game_over: bool = false
 
 @onready var GameUI: CanvasLayer = get_node("GameUI")
-@onready var rollSelected: Button = get_node("GameUI/RollButtons/RollSelected")
-@onready var passRoll: Button = get_node("GameUI/RollButtons/PassRoll")
+@onready var rollButtons = get_node("RollButtons")
+@onready var rollSelected: Button = get_node("RollButtons/RollSelected")
+@onready var passRoll: Button = get_node("RollButtons/PassRoll")
 
 
 # Initialization: Connects to signals and retrieves NetworkManager
@@ -33,6 +34,12 @@ func _ready() -> void:
 	network_manager.connect("received_game_settings", self.receive_game_settings)
 	myPlayer.connect("rollsReadandWaiting", self.set_rolls_read)
 	myPlayer.connect("rollsReadandWaiting", self.waiting_on_other_player)
+	myPlayer.connect("player_stats_updated", self.update_player_stats_signal)
+	enemyPlayer.connect("player_stats_updated", self.update_player_stats_signal)
+
+signal update_player_stats(_player: String, Stats: Dictionary)
+func update_player_stats_signal(_player: String, Stats: Dictionary) -> void:
+	emit_signal("update_player_stats",_player,Stats)
 
 # Process game settings from GameSettings UI (Host side)
 func _on_settings_ready(_game_settings: Dictionary, _hand_settings: Dictionary) -> void:
@@ -70,6 +77,7 @@ func setup_game() -> void:
 	setup_PlayerManager(game_settings)
 	print("Setup UI Called on Host: ", network_manager.getIsHost())
 	GameUI.setup_game_ui(game_settings,network_manager.getIsHost())
+	rollButtons.visible = true
 	print("Setup UI Finished Calling Called on Host: ", network_manager.getIsHost())
 	isHost = network_manager.getIsHost()
 	network_manager.connect("game_state_received", self._on_game_state_received)
@@ -281,6 +289,7 @@ func endGame() -> void:
 			}
 	print("Game ended")
 	GameUI.hide_all_ui()
+	rollButtons.visible = false
 	GameUI.show_end_of_game_screen(resultText, myPlayerFinalStats, OpponentFinalStats)
 
 var rematch = false
@@ -334,8 +343,8 @@ func connectionTest(data: Dictionary) -> void:
 	pass
 
 func setup_PlayerManager(settings: Dictionary) -> void:
-	myPlayer.setup_player(true, settings["health_points"],game_settings["player_names"][0] if network_manager.getIsHost() else game_settings["player_names"][1], network_manager.getIsHost(),dice_container,GameUI)
-	enemyPlayer.setup_player(false, settings["health_points"],game_settings["player_names"][1] if network_manager.getIsHost() else game_settings["player_names"][0], network_manager.getIsHost(),dice_container,GameUI)
+	myPlayer.setup_player(true, settings["health_points"],game_settings["player_names"][0] if network_manager.getIsHost() else game_settings["player_names"][1], network_manager.getIsHost(),dice_container)
+	enemyPlayer.setup_player(false, settings["health_points"],game_settings["player_names"][1] if network_manager.getIsHost() else game_settings["player_names"][0], network_manager.getIsHost(),dice_container)
 
 func setup_scoreboard(_hand_settings: Dictionary) -> void:
 	#clear anything generated and re build
@@ -368,7 +377,7 @@ func _on_roll_selected() -> void:
 			GameUI.stopTimer()
 	waiting_on_other_player(true)
 
-func _on_pass_roll() -> void:
+func _on_pass_roll() -> void:	  
 	setDisableRollButtons(true)
 	network_manager.broadcast_game_state("roll_selection", { "type": "Pass" })
 	roll_selection = false

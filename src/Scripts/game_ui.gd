@@ -10,7 +10,6 @@ extends CanvasLayer
 @onready var player_stat_box = get_node("PlayerStatsPanel/MyPlayerPanel/MyPlayerStatBox")
 @onready var enemy_stat_box = get_node("PlayerStatsPanel/EnemyPlayerPanel/EnemyPlayerStatBox")
 @onready var waiting_screen = get_node("WaitingScreen")
-@onready var rollButtons = get_node("RollButtons")
 @onready var PausePanel = get_node("EscPanel")
 @onready var EscBackground = get_node("EscBackOverlay")
 @onready var ReturnToGameButton = get_node("EscPanel/EscBox/ReturnToGameButton")
@@ -59,7 +58,6 @@ func setup_game_ui(game_settings: Dictionary, _isHost: bool):
 	else:
 		hide_countdown_panel()
 	
-	show_roll_buttons()
 	show_game_state_info()
 	show_player_stats_panel()
 	show_my_player_rolls()
@@ -100,8 +98,18 @@ func setup_game_ui(game_settings: Dictionary, _isHost: bool):
 	# Initialize player stats labels
 	initialize_stat_labels(player_stat_box, "Player") #make more dynamic
 	initialize_stat_labels(enemy_stat_box, "Opponent") #make more dynamic
-	update_player_stats("Player", myPlayerName, health_points, 0) #make more dynamic
-	update_player_stats("Opponent", enemyPlayerName, health_points, 0) #make more dynamic
+	var playerDict = {
+		"Name": myPlayerName,
+		"Health": health_points,
+		"Score": 0
+	}
+	update_player_stats("Player", playerDict) #make more dynamic
+	var opponentDict = {
+		"Name": enemyPlayerName,
+		"Health": health_points,
+		"Score": 0
+	}
+	update_player_stats("Opponent", opponentDict) #make more dynamic
 	connect("escPressed",self.toggle_pause_menu)
 
 # Helper to initialize player stat labels
@@ -280,12 +288,18 @@ func update_roll_info(current_roll: int, total_rolls: int = total_round_rolls):
 	roll_label.text = "Roll: %d / %d" % [current_roll, total_rolls]
 
 # Update player stats (name, health, score)
-func update_player_stats(player_type: String, _name: String, health: int, score: int):
+func update_player_stats(player_type: String, _player_info: Dictionary):
 	var stat_box = player_stat_box if (player_type == "Player") else enemy_stat_box
 	
-	stat_box.get_node("%sNameLabel" % player_type).text = "%s Name: %s" % [player_type, _name]
-	stat_box.get_node("%sHealthLabel" % player_type).text = "%s Health: %d" % [player_type, health]
-	stat_box.get_node("%sScoreLabel" % player_type).text = "%s Score: %d" % [player_type, score]
+	# Clear existing children in stat_box
+	for child in stat_box.get_children():
+		child.queue_free()
+	# Create labels dynamically for each key-value pair in the dictionary
+	for key in _player_info.keys():
+		var value = _player_info[key]
+		var label = Label.new()
+		label.text = "%s: %s" % [key.capitalize(), str(value)]
+		stat_box.add_child(label)
 
 # Show the waiting screen
 func show_waiting_screen():
@@ -325,7 +339,6 @@ func hide_end_of_game_screen():
 	escScreenAllowed = true
 
 func hide_all_ui():
-	hide_roll_buttons()
 	hide_opponent_rolls()
 	hide_my_player_rolls()
 	hide_game_state_info()
@@ -374,11 +387,6 @@ func hide_my_player_rolls():
 func show_my_player_rolls():
 	my_player_dice_base.visible = true
 
-func hide_roll_buttons():
-	rollButtons.visible = false
-
-func show_roll_buttons():
-	rollButtons.visible = true
 
 func hide_game_state_info():
 	game_state_panel.visible = false
@@ -436,6 +444,7 @@ func _ready() -> void:
 	sort_asc_button.pressed.connect(_on_asc_sort_pressed)
 	sort_desc_button.pressed.connect(_on_desc_sort_pressed)
 	sort_freq_button.pressed.connect(_on_freq_sort_pressed)
+	game_manager.connect("update_player_stats", self.update_player_stats)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
