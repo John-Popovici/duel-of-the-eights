@@ -11,11 +11,12 @@ var myPlayer: bool
 var playerName: String
 var hostDevice: bool
 var diceContainer: Node3D
-var network_manager: Node
+@onready var networkManagers = get_tree().get_nodes_in_group("NetworkHandlingNodes")
+@onready var network_manager = networkManagers[0]
 var GameUI: CanvasLayer
 
 # Initialize player with default values or game settings
-func setup_player(_myPlayer: bool, initial_health: int, _playerName: String, _hostDevice: bool, _dice_container, _network_manager,_game_ui):
+func setup_player(_myPlayer: bool, initial_health: int, _playerName: String, _hostDevice: bool, _dice_container,_game_ui):
 	health_points = initial_health
 	score = 0
 	playerName = _playerName
@@ -23,7 +24,6 @@ func setup_player(_myPlayer: bool, initial_health: int, _playerName: String, _ho
 	myPlayer = _myPlayer
 	hostDevice = _hostDevice
 	diceContainer = _dice_container
-	network_manager = _network_manager
 	GameUI = _game_ui
 
 # Update the player's score and health based on the round outcome
