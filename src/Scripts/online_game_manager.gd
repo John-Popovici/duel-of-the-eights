@@ -31,6 +31,8 @@ func _ready() -> void:
 	game_settings_ui.connect("game_settings_ready", self._on_settings_ready)
 	GameUI.visible = false
 	network_manager.connect("received_game_settings", self.receive_game_settings)
+	myPlayer.connect("rollsReadandWaiting", self.set_rolls_read)
+	myPlayer.connect("rollsReadandWaiting", self.waiting_on_other_player)
 
 # Process game settings from GameSettings UI (Host side)
 func _on_settings_ready(_game_settings: Dictionary, _hand_settings: Dictionary) -> void:
@@ -332,8 +334,8 @@ func connectionTest(data: Dictionary) -> void:
 	pass
 
 func setup_PlayerManager(settings: Dictionary) -> void:
-	myPlayer.setup_player(true, settings["health_points"],game_settings["player_names"][0] if network_manager.getIsHost() else game_settings["player_names"][1], network_manager.getIsHost(),dice_container,network_manager,self,GameUI)
-	enemyPlayer.setup_player(false, settings["health_points"],game_settings["player_names"][1] if network_manager.getIsHost() else game_settings["player_names"][0], network_manager.getIsHost(),dice_container,network_manager,self,GameUI)
+	myPlayer.setup_player(true, settings["health_points"],game_settings["player_names"][0] if network_manager.getIsHost() else game_settings["player_names"][1], network_manager.getIsHost(),dice_container,network_manager,GameUI)
+	enemyPlayer.setup_player(false, settings["health_points"],game_settings["player_names"][1] if network_manager.getIsHost() else game_settings["player_names"][0], network_manager.getIsHost(),dice_container,network_manager,GameUI)
 
 func setup_scoreboard(_hand_settings: Dictionary) -> void:
 	#clear anything generated and re build

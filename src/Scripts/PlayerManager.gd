@@ -7,27 +7,23 @@ var health_points: int = 10  # Example starting health
 var rolls: Array = []  # Stores current dice rolls
 var dice : Array[RigidBody3D]
 var selected_hand: Dictionary = {}
-var selected_for_reroll: Array = []  # Dice selected to reroll
 var myPlayer: bool
 var playerName: String
 var hostDevice: bool
 var diceContainer: Node3D
 var network_manager: Node
-var game_manager: Node3D
 var GameUI: CanvasLayer
 
 # Initialize player with default values or game settings
-func setup_player(_myPlayer: bool, initial_health: int, _playerName: String, _hostDevice: bool, _dice_container, _network_manager,_game_manager,_game_ui):
+func setup_player(_myPlayer: bool, initial_health: int, _playerName: String, _hostDevice: bool, _dice_container, _network_manager,_game_ui):
 	health_points = initial_health
 	score = 0
 	playerName = _playerName
 	rolls.clear()
-	selected_for_reroll.clear()
 	myPlayer = _myPlayer
 	hostDevice = _hostDevice
 	diceContainer = _dice_container
 	network_manager = _network_manager
-	game_manager = _game_manager
 	GameUI = _game_ui
 
 # Update the player's score and health based on the round outcome
@@ -78,17 +74,18 @@ func checkIfDiceValidThenRead() -> void:
 			await get_tree().create_timer(1.0).timeout
 	readRolls()
 
+signal rollsReadandWaiting(state: bool)
+
 func readRolls() -> void:
 	#Wait for dice to stop
 	while !(len(diceContainer.get_rolling_dice()) == 0):
 		await get_tree().create_timer(1.0).timeout
 	rolls = diceContainer.get_dice_values()
 	dice = diceContainer.get_dice()
-	game_manager.set_rolls_read(true)
+	emit_signal("rollsReadandWaiting",true)
 	#Communicate to other player
 	print("Player Manger: Host: ", hostDevice, ", Rolls: ", rolls)
 	network_manager.broadcast_game_state("roll_values", { "host": hostDevice, "rolls": rolls })
-	game_manager.waiting_on_other_player(true)
 
 
 func setRolls(_rolls: Array) -> void:
@@ -110,6 +107,21 @@ func getStats() -> Dictionary:
 		"score": score,
 	}
 	return player_stats
+
+func getState() -> Dictionary:
+	var playerState ={
+		"player_name": playerName,
+		"health_points": health_points,
+		"score": score,
+		"rolls": rolls,
+		"dice": dice,
+		"selected_hand": selected_hand,
+		"myPlayer":myPlayer,
+		"hostDevice":hostDevice,
+		"diceContainer":diceContainer
+	}
+	return playerState
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
