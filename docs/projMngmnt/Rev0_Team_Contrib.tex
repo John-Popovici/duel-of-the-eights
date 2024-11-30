@@ -4,6 +4,9 @@
 \restylefloat{table}
 
 \usepackage{booktabs}
+\usepackage{pgf}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
 
 \title{Team Contributions: Rev 0\\\progname}
 
@@ -22,10 +25,13 @@ This document summarizes the contributions of each team member for the Rev 0
 Demo.  The time period of interest is the time between the POC demo and the Rev
 0 demo.
 
+\newpage
 \section{Demo Plans}
 
+%TODO EXPLAIN
 \wss{What will you be demonstrating}
 
+\newpage
 \section{Team Meeting Attendance}
 
 \wss{For each team member how many team meetings have they attended over the
@@ -33,6 +39,8 @@ time period of interest.  This number should be determined from the meeting
 issues in the team's repo.  The first entry in the table should be the total
 number of team meetings held by the team.}
 
+%TODO track starting week of 2024-11-24
+% is:issue label:meeting
 \begin{table}[H]
 \centering
 \begin{tabular}{ll}
@@ -40,17 +48,18 @@ number of team meetings held by the team.}
 \textbf{Student} & \textbf{Meetings}\\
 \midrule
 Total & Num\\
-Name 1 & Num\\
-Name 2 & Num\\
-Name 3 & Num\\
-Name 4 & Num\\
-Name 5 & Num\\
+John P. & Num\\
+Nigel M. & Num\\
+Naishan G. & Num\\
+Isaac G. & Num\\
+Hemraj B. & Num\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \wss{If needed, an explanation for the counts can be provided here.}
 
+\newpage
 \section{Supervisor/Stakeholder Meeting Attendance}
 
 \wss{For each team member how many supervisor/stakeholder team meetings have
@@ -60,6 +69,7 @@ table should be the total number of supervisor and team meetings held by the
 team.  If there is no supervisor, there will usually be meetings with
 stakeholders (potential users) that can serve a similar purpose.}
 
+%TODO
 \begin{table}[H]
 \centering
 \begin{tabular}{ll}
@@ -67,17 +77,18 @@ stakeholders (potential users) that can serve a similar purpose.}
 \textbf{Student} & \textbf{Meetings}\\
 \midrule
 Total & Num\\
-Name 1 & Num\\
-Name 2 & Num\\
-Name 3 & Num\\
-Name 4 & Num\\
-Name 5 & Num\\
+John P. & Num\\
+Nigel M. & Num\\
+Naishan G. & Num\\
+Isaac G. & Num\\
+Hemraj B. & Num\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \wss{If needed, an explanation for the counts can be provided here.}
 
+\newpage
 \section{Lecture Attendance}
 
 \wss{For each team member how many lectures have they attended over the time
@@ -85,6 +96,7 @@ period of interest.  This number should be determined from the lecture issues in
 the team's repo.  The first entry in the table should be the total number of
 lectures since the beginning of the term.}
 
+%TODO
 \begin{table}[H]
 \centering
 \begin{tabular}{ll}
@@ -92,22 +104,24 @@ lectures since the beginning of the term.}
 \textbf{Student} & \textbf{Lectures}\\
 \midrule
 Total & Num\\
-Name 1 & Num\\
-Name 2 & Num\\
-Name 3 & Num\\
-Name 4 & Num\\
-Name 5 & Num\\
+John P. & Num\\
+Nigel M. & Num\\
+Naishan G. & Num\\
+Isaac G. & Num\\
+Hemraj B. & Num\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \wss{If needed, an explanation for the lecture attendance can be provided here.}
 
+\newpage
 \section{TA Document Discussion Attendance}
 
 \wss{For each team member how many of the informal document discussion meetings
 with the TA were attended over the time period of interest.}
 
+%TODO
 \begin{table}[H]
 \centering
 \begin{tabular}{ll}
@@ -115,17 +129,18 @@ with the TA were attended over the time period of interest.}
 \textbf{Student} & \textbf{Lectures}\\
 \midrule
 Total & Num\\
-Name 1 & Num\\
-Name 2 & Num\\
-Name 3 & Num\\
-Name 4 & Num\\
-Name 5 & Num\\
+John P. & Num\\
+Nigel M. & Num\\
+Naishan G. & Num\\
+Isaac G. & Num\\
+Hemraj B. & Num\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \wss{If needed, an explanation for the attendance can be provided here.}
 
+\newpage
 \section{Commits}
 
 \wss{For each team member how many commits to the main branch have been made
@@ -133,18 +148,37 @@ over the time period of interest.  The total is the total number of commits for
 the entire team since the beginning of the term.  The percentage is the
 percentage of the total commits made by each team member.}
 
+%TODO UPDATE NUMBERS
+% The number of commits
+\pgfmathsetmacro{\CJ}{78}
+\pgfmathsetmacro{\CN}{137}
+\pgfmathsetmacro{\CNS}{7}
+\pgfmathsetmacro{\CI}{12}
+\pgfmathsetmacro{\CH}{16}
+
+% Calculate the total
+\pgfmathsetmacro{\CT}{\CJ + \CN + \CNS + \CH + \CI}
+
+% Calculate the percentages
+\pgfmathsetmacro{\PJ}{\CJ / \CT * 100}
+\pgfmathsetmacro{\PN}{\CN / \CT * 100}
+\pgfmathsetmacro{\PNS}{\CNS / \CT * 100}
+\pgfmathsetmacro{\PI}{\CI / \CT * 100}
+\pgfmathsetmacro{\PH}{\CH / \CT * 100}
+
 \begin{table}[H]
 \centering
 \begin{tabular}{lll}
 \toprule
 \textbf{Student} & \textbf{Commits} & \textbf{Percent}\\
 \midrule
-Total & Num & 100\% \\
-Name 1 & Num & \% \\
-Name 2 & Num & \% \\
-Name 3 & Num & \% \\
-Name 4 & Num & \% \\
-Name 5 & Num & \% \\
+Total & \pgfmathprintnumber[fixed,precision=0]\CT & 100\% \\
+\midrule
+John P. & \CJ & \pgfmathprintnumber[fixed,precision=2]\PJ\% \\
+Nigel M. & \CN & \pgfmathprintnumber[fixed,precision=2]\PN\% \\
+Naishan G. & \CNS & \pgfmathprintnumber[fixed,precision=2]\PNS\% \\
+Isaac G. & \CI & \pgfmathprintnumber[fixed,precision=2]\PI\% \\
+Hemraj B. & \CH & \pgfmathprintnumber[fixed,precision=2]\PH\% \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -154,31 +188,47 @@ instance, if a team member has more commits to unmerged branches, these numbers
 can be provided here.  If multiple people contribute to a commit, git allows for
 multi-author commits.}
 
+\newpage
 \section{Issue Tracker}
 
 \wss{For each team member how many issues have they authored (including open and
 closed issues (O+C)) and how many have they been assigned (only counting closed
 issues (C only)) over the time period of interest.}
 
+% is:issue author:John-Popovici
+% is:issue author:nigelmoses32
+% is:issue author:STARS952
+% is:issue author:Isaac020717
+% is:issue author:HemrajB87
+
+% is:issue is:closed assignee:John-Popovici 
+% is:issue is:closed assignee:nigelmoses32
+% is:issue is:closed assignee:STARS952
+% is:issue is:closed assignee:Isaac020717
+% is:issue is:closed assignee:HemrajB87
+
+%TODO UPDATE NUMBERS
 \begin{table}[H]
 \centering
 \begin{tabular}{lll}
 \toprule
 \textbf{Student} & \textbf{Authored (O+C)} & \textbf{Assigned (C only)}\\
 \midrule
-Name 1 & Num & Num \\
-Name 2 & Num & Num \\
-Name 3 & Num & Num \\
-Name 4 & Num & Num \\
-Name 5 & Num & Num \\
+John P. & Num & Num \\
+Nigel M. & Num & Num \\
+Naishan G. & Num & Num \\
+Isaac G. & Num & Num \\
+Hemraj B. & Num & Num \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \wss{If needed, an explanation for the counts can be provided here.}
 
+\newpage
 \section{CICD}
 
+%TODO EXPLAIN
 \wss{Say how CICD is used in your project}
 
 \wss{If your team has additional metrics of productivity, please feel free to
