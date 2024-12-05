@@ -250,8 +250,8 @@ func synchronizeNextRound() -> void:
 func endGame() -> void:
 	#have a tree of end of game instances to check who wins/ apply effects
 	
-	var myPlayerStats = myPlayer.getStats()
-	var OpponentStats = enemyPlayer.getStats()
+	var myPlayerStats = myPlayer.getState()
+	var OpponentStats = enemyPlayer.getState()
 	var myPlayerFinalStats: Dictionary
 	var OpponentFinalStats: Dictionary
 	var resultText = "Tied Game"
