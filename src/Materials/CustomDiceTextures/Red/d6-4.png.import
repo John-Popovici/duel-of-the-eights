@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxmvhnb5ka6i6"
-path.s3tc="res://.godot/imported/dice-six-faces-2.png-e810f1dd48894cdc5051c95c68d1420d.s3tc.ctex"
-path.etc2="res://.godot/imported/dice-six-faces-2.png-e810f1dd48894cdc5051c95c68d1420d.etc2.ctex"
+uid="uid://cln7rdklf6rkf"
+path.s3tc="res://.godot/imported/d6-4.png-e9f12fd6d2d26f3742b42f91ec412644.s3tc.ctex"
+path.etc2="res://.godot/imported/d6-4.png-e9f12fd6d2d26f3742b42f91ec412644.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-2.png"
-dest_files=["res://.godot/imported/dice-six-faces-2.png-e810f1dd48894cdc5051c95c68d1420d.s3tc.ctex", "res://.godot/imported/dice-six-faces-2.png-e810f1dd48894cdc5051c95c68d1420d.etc2.ctex"]
+source_file="res://Materials/CustomDiceTextures/Red/d6-4.png"
+dest_files=["res://.godot/imported/d6-4.png-e9f12fd6d2d26f3742b42f91ec412644.s3tc.ctex", "res://.godot/imported/d6-4.png-e9f12fd6d2d26f3742b42f91ec412644.etc2.ctex"]
 
 [params]
 

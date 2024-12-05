@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://crn03r73y7qfl"]
+
+[ext_resource type="PackedScene" uid="uid://c82amylpr3h42" path="res://NodeScene/custom_six_dice.tscn" id="1_ydejp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_u1r2l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tpilf"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0)
+mesh = SubResource("BoxMesh_u1r2l")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="MeshInstance3D"]
+gravity_scale = 0.0
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/RigidBody3D"]
+shape = SubResource("BoxShape3D_tpilf")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 7, 7, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Camera3D"]
+
+[node name="Six_Dice" parent="." instance=ExtResource("1_ydejp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.19042, 0)

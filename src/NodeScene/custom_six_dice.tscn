@@ -1,0 +1,103 @@
+[gd_scene load_steps=19 format=3 uid="uid://c82amylpr3h42"]
+
+[ext_resource type="Script" path="res://Scripts/CustomBaseDie.gd" id="1_bbuhp"]
+[ext_resource type="ArrayMesh" uid="uid://ba2f8u3v23wm7" path="res://Assets/dice/d6/DiceMakerD6_d6_3d_numbered_stl.res" id="2_vfnn4"]
+[ext_resource type="Material" uid="uid://du2ej862se3yl" path="res://Materials/Faces.tres" id="3_ua6px"]
+[ext_resource type="ArrayMesh" uid="uid://cuau61gveesdi" path="res://Assets/dice/d6/DiceMakerD6_d6_3d_blank_stl.res" id="4_wpy65"]
+[ext_resource type="Material" uid="uid://d3pmd3027bxsl" path="res://Materials/Dice_Base.tres" id="5_5fkom"]
+[ext_resource type="ArrayMesh" uid="uid://dq46p5g0ryu5b" path="res://Assets/dice/customizableDice/d6/DiceMakerD6Custom_Cube_005.res" id="6_7yt6p"]
+[ext_resource type="ArrayMesh" uid="uid://bgjvv6kognbst" path="res://Assets/dice/customizableDice/d6/DiceMakerD6Custom_Cube_006.res" id="7_p1lg0"]
+[ext_resource type="Material" uid="uid://crbtj7v7au8r6" path="res://Materials/CustomDiceTextures/Purple/d6-1.tres" id="7_uwsve"]
+[ext_resource type="ArrayMesh" uid="uid://dlma323yhkumd" path="res://Assets/dice/customizableDice/d6/DiceMakerD6Custom_Cube_007.res" id="8_llikw"]
+[ext_resource type="ArrayMesh" uid="uid://d36npslr35t00" path="res://Assets/dice/customizableDice/d6/DiceMakerD6Custom_Cube_008.res" id="9_7b2ck"]
+[ext_resource type="Material" uid="uid://dxhogqtbgxqjg" path="res://Materials/CustomDiceTextures/Purple/d6-2.tres" id="9_qpbaw"]
+[ext_resource type="ArrayMesh" uid="uid://cr3hhwbhnab5l" path="res://Assets/dice/customizableDice/d6/DiceMakerD6Custom_Cube_009.res" id="10_11qg2"]
+[ext_resource type="ArrayMesh" uid="uid://dl07xbstatxoy" path="res://Assets/dice/customizableDice/d6/DiceMakerD6Custom_Cube_010.res" id="11_ccgaf"]
+[ext_resource type="Material" uid="uid://djyij58opey5s" path="res://Materials/CustomDiceTextures/Purple/d6-3.tres" id="11_cjy8v"]
+[ext_resource type="Material" uid="uid://bio478e0if8ea" path="res://Materials/CustomDiceTextures/Purple/d6-4.tres" id="13_hjm46"]
+[ext_resource type="Material" uid="uid://rdywhxwr6ddh" path="res://Materials/CustomDiceTextures/Purple/d6-5.tres" id="15_g7wqu"]
+[ext_resource type="Material" uid="uid://c768wwm8irl7w" path="res://Materials/CustomDiceTextures/Purple/d6-6.tres" id="17_043dr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yb52v"]
+
+[node name="Six_Dice" type="RigidBody3D"]
+script = ExtResource("1_bbuhp")
+impulse_range = 5
+torque_range = 3
+velocity_threshold = 0.1
+roll_time_limit = 3.0
+up_threshold = 0.9
+
+[node name="OuterMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.19, 0, 0, 0, 0.19, 0, 0, 0, 0.19, 0, 0, 0)
+visible = false
+mesh = ExtResource("2_vfnn4")
+surface_material_override/0 = ExtResource("3_ua6px")
+
+[node name="InnerMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.17, 0, 0, 0, 0.17, 0, 0, 0, 0.17, 0, 0, 0)
+visible = false
+mesh = ExtResource("4_wpy65")
+surface_material_override/0 = ExtResource("5_5fkom")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("BoxShape3D_yb52v")
+
+[node name="RayCastHolder" type="Node3D" parent="."]
+
+[node name="RayCast3D_Face1" type="RayCast3D" parent="RayCastHolder"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.5, 0)
+target_position = Vector3(0, 0, 1)
+
+[node name="RayCast3D_Face2" type="RayCast3D" parent="RayCastHolder"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.5, 0, 0)
+target_position = Vector3(0, 0, 1)
+
+[node name="RayCast3D_Face3" type="RayCast3D" parent="RayCastHolder"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -1.5)
+target_position = Vector3(0, 0, 1)
+
+[node name="RayCast3D_Face4" type="RayCast3D" parent="RayCastHolder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5)
+target_position = Vector3(0, 0, 1)
+
+[node name="RayCast3D_Face5" type="RayCast3D" parent="RayCastHolder"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.5, 0, 0)
+target_position = Vector3(0, 0, 1)
+
+[node name="RayCast3D_Face6" type="RayCast3D" parent="RayCastHolder"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.5, 0)
+target_position = Vector3(0, 0, 1)
+
+[node name="DiceFaceHolder" type="Node3D" parent="."]
+
+[node name="MeshInstance3D1" type="MeshInstance3D" parent="DiceFaceHolder"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+mesh = ExtResource("6_7yt6p")
+surface_material_override/0 = ExtResource("7_uwsve")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="DiceFaceHolder"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+mesh = ExtResource("7_p1lg0")
+surface_material_override/0 = ExtResource("9_qpbaw")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="DiceFaceHolder"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+mesh = ExtResource("10_11qg2")
+surface_material_override/0 = ExtResource("11_cjy8v")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="DiceFaceHolder"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+mesh = ExtResource("8_llikw")
+surface_material_override/0 = ExtResource("13_hjm46")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="DiceFaceHolder"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+mesh = ExtResource("9_7b2ck")
+surface_material_override/0 = ExtResource("15_g7wqu")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="DiceFaceHolder"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+mesh = ExtResource("11_ccgaf")
+surface_material_override/0 = ExtResource("17_043dr")
