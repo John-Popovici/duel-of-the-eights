@@ -7,12 +7,6 @@ var player2_name: String
 @onready var GameManager: Node = $GameManager
 @onready var network_manager: Node = $NetworkManager
 
-# Method to set player names, called from IntroScene
-func set_player_names(name1: String, name2: String) -> void:
-	player1_name = name1
-	player2_name = name2
-	print("Player 1: %s, Player 2: %s" % [player1_name, player2_name])
-	
 
 func start_game() -> void:
 	print("Start Game")

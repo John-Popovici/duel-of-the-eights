@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyxdhttcsohqw"]
+
+[ext_resource type="PackedScene" uid="uid://bb1hsjv35krnk" path="res://NodeScene/network_manager_2Player.tscn" id="1_62gfc"]
+
+[node name="OnlineLongFormPVPScene" type="Node3D"]
+
+[node name="NetworkManager" parent="." instance=ExtResource("1_62gfc")]
