@@ -150,7 +150,7 @@ func _flipfaces() -> void:
 			for i in range(1,7):
 				change_face_value(i,i)
 		changenumber = !changenumber
-		break
+		#break
 
 func reset_dice_tex()->void:
 	normalCustomTex = GlobalSettings.normalCustomDiceTex
