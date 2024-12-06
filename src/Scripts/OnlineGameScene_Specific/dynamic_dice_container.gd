@@ -98,10 +98,6 @@ func moveDiceAside() -> void:
 	#to the side of the board (or other location, to not interfere with the rerolling dice)
 	pass
 
-func moveDiceInLine() -> void:
-	#move dice once read to an organized display on the board
-	pass
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
