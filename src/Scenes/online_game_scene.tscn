@@ -1,21 +1,20 @@
-[gd_scene load_steps=23 format=3 uid="uid://bv1diwskvph82"]
+[gd_scene load_steps=22 format=3 uid="uid://bv1diwskvph82"]
 
-[ext_resource type="Script" path="res://Scripts/online_game_scene.gd" id="1_qoyeu"]
-[ext_resource type="Script" path="res://Scripts/networkManager.gd" id="2_6sfck"]
-[ext_resource type="Script" path="res://Scripts/connectionUI.gd" id="3_f25r5"]
-[ext_resource type="Script" path="res://Scripts/online_game_manager.gd" id="4_fvdct"]
-[ext_resource type="Script" path="res://Scripts/dynamic_dice_container.gd" id="5_aa5li"]
-[ext_resource type="Script" path="res://Scripts/game_settings.gd" id="5_js8aa"]
+[ext_resource type="Script" path="res://Scripts/OnlineGameScene_Specific/online_game_scene.gd" id="1_qoyeu"]
+[ext_resource type="PackedScene" uid="uid://bb1hsjv35krnk" path="res://NodeScene/network_manager_2Player.tscn" id="2_a1b70"]
+[ext_resource type="Script" path="res://Scripts/OnlineGameScene_Specific/online_game_manager.gd" id="4_fvdct"]
+[ext_resource type="Script" path="res://Scripts/OnlineGameScene_Specific/dynamic_dice_container.gd" id="5_aa5li"]
+[ext_resource type="Script" path="res://Scripts/OnlineGameScene_Specific/game_settings.gd" id="5_js8aa"]
 [ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/Default_Pixel_Blue/PanelBlueBoxBackgroundStyle.tres" id="5_oidav"]
 [ext_resource type="PackedScene" uid="uid://c2y0m27eadb6i" path="res://NodeScene/sample_preset_button.tscn" id="7_q6wg6"]
 [ext_resource type="Material" uid="uid://cgpa3fsefx8ir" path="res://Materials/BoardLowMat.tres" id="7_v2pfy"]
 [ext_resource type="Material" uid="uid://dvsy8knluwv6e" path="res://Materials/BoardRaisedMat.tres" id="8_ef00w"]
-[ext_resource type="Script" path="res://Scripts/Dynamic_Scoreboard.gd" id="9_i8ewx"]
-[ext_resource type="Script" path="res://Scripts/score_calculator.gd" id="10_0b2yf"]
-[ext_resource type="Script" path="res://Scripts/camera_controller.gd" id="10_m1igd"]
+[ext_resource type="Script" path="res://Scripts/OnlineGameScene_Specific/Dynamic_Scoreboard.gd" id="9_i8ewx"]
+[ext_resource type="Script" path="res://Scripts/OnlineGameScene_Specific/score_calculator.gd" id="10_0b2yf"]
+[ext_resource type="Script" path="res://Scripts/camera_toggle_controller.gd" id="10_m1igd"]
 [ext_resource type="StyleBox" uid="uid://bdd2m4n2as1ot" path="res://Themes/Default_Pixel_Wood/WoodBoxBackgroundStyle.tres" id="11_522jn"]
-[ext_resource type="Script" path="res://Scripts/PlayerManager.gd" id="11_ejug4"]
-[ext_resource type="Script" path="res://Scripts/game_ui.gd" id="12_f4hi7"]
+[ext_resource type="Script" path="res://Scripts/OnlineGameScene_Specific/PlayerManager.gd" id="11_ejug4"]
+[ext_resource type="Script" path="res://Scripts/OnlineGameScene_Specific/game_ui.gd" id="12_f4hi7"]
 [ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="13_g1ii3"]
 [ext_resource type="Theme" uid="uid://dokd457t4xs7n" path="res://Themes/Default_Pixel_Wood/Default_pixel_.Wood.tres" id="14_jpiw0"]
 
@@ -30,86 +29,7 @@
 [node name="OnlineGameScene" type="Node3D"]
 script = ExtResource("1_qoyeu")
 
-[node name="NetworkManager" type="Node" parent="."]
-script = ExtResource("2_6sfck")
-
-[node name="ConnectionUI" type="CanvasLayer" parent="NetworkManager"]
-layer = 3
-visible = false
-script = ExtResource("3_f25r5")
-
-[node name="UIBox" type="PanelContainer" parent="NetworkManager/ConnectionUI"]
-offset_left = 176.0
-offset_top = 118.0
-offset_right = 728.0
-offset_bottom = 305.0
-scale = Vector2(1.44, 2.28)
-theme_override_styles/panel = ExtResource("5_oidav")
-
-[node name="Connection_Setup" type="VBoxContainer" parent="NetworkManager/ConnectionUI/UIBox"]
-layout_mode = 2
-
-[node name="Instructions" type="Label" parent="NetworkManager/ConnectionUI/UIBox/Connection_Setup"]
-layout_mode = 2
-theme = ExtResource("13_g1ii3")
-text = "Select Multiplayer Options:"
-horizontal_alignment = 1
-
-[node name="HostCheckButton" type="CheckButton" parent="NetworkManager/ConnectionUI/UIBox/Connection_Setup"]
-layout_mode = 2
-theme = ExtResource("13_g1ii3")
-text = "Host?"
-alignment = 1
-
-[node name="IP_Input" type="LineEdit" parent="NetworkManager/ConnectionUI/UIBox/Connection_Setup"]
-layout_mode = 2
-theme = ExtResource("13_g1ii3")
-placeholder_text = "Connect Code"
-alignment = 1
-
-[node name="Port_Input" type="LineEdit" parent="NetworkManager/ConnectionUI/UIBox/Connection_Setup"]
-layout_mode = 2
-theme = ExtResource("13_g1ii3")
-placeholder_text = "Port - 5 digits"
-alignment = 1
-
-[node name="ConnectButton" type="Button" parent="NetworkManager/ConnectionUI/UIBox/Connection_Setup"]
-layout_mode = 2
-theme = ExtResource("13_g1ii3")
-text = "Connect"
-
-[node name="BackToHomeButton" type="Button" parent="NetworkManager/ConnectionUI/UIBox/Connection_Setup"]
-layout_mode = 2
-theme = ExtResource("13_g1ii3")
-text = "Back to Home"
-
-[node name="Connection_Error" type="VBoxContainer" parent="NetworkManager/ConnectionUI/UIBox"]
-visible = false
-layout_mode = 2
-
-[node name="Error Source" type="Label" parent="NetworkManager/ConnectionUI/UIBox/Connection_Error"]
-layout_mode = 2
-theme = ExtResource("13_g1ii3")
-text = "Error Source"
-horizontal_alignment = 1
-
-[node name="RedirectingToHome" type="Label" parent="NetworkManager/ConnectionUI/UIBox/Connection_Error"]
-layout_mode = 2
-theme = ExtResource("13_g1ii3")
-text = "Redirecting to Home Page"
-horizontal_alignment = 1
-
-[node name="EscBackOverlay" type="ColorRect" parent="NetworkManager/ConnectionUI"]
-visible = false
-z_index = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-color = Color(0, 0, 0, 0.266667)
+[node name="NetworkManager" parent="." instance=ExtResource("2_a1b70")]
 
 [node name="GameManager" type="Node3D" parent="."]
 script = ExtResource("4_fvdct")
@@ -427,7 +347,7 @@ transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 21)
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 3)
 
 [node name="Cinematic" type="Node3D" parent="GameManager/CameraController/Positions"]
-transform = Transform3D(0.707107, -0.454519, 0.541675, 0, 0.766044, 0.642788, -0.707107, -0.454519, 0.541675, 25, 15, 25)
+transform = Transform3D(0.707107, -0.454519, 0.541675, 0, 0.766044, 0.642788, -0.707107, -0.454519, 0.541675, 21, 15, 21)
 
 [node name="Camera3D" type="Camera3D" parent="GameManager/CameraController"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 21)
@@ -558,17 +478,8 @@ text = "Total: "
 [node name="ScoreCalculator" type="Node" parent="GameManager"]
 script = ExtResource("10_0b2yf")
 
-[node name="myPlayer" type="Node" parent="GameManager"]
-script = ExtResource("11_ejug4")
-
-[node name="enemyPlayer" type="Node" parent="GameManager"]
-script = ExtResource("11_ejug4")
-
-[node name="GameUI" type="CanvasLayer" parent="GameManager"]
+[node name="RollButtons" type="VBoxContainer" parent="GameManager"]
 visible = false
-script = ExtResource("12_f4hi7")
-
-[node name="RollButtons" type="VBoxContainer" parent="GameManager/GameUI"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -582,17 +493,27 @@ grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("13_g1ii3")
 
-[node name="RollSelected" type="Button" parent="GameManager/GameUI/RollButtons"]
+[node name="RollSelected" type="Button" parent="GameManager/RollButtons"]
 layout_mode = 2
 theme = ExtResource("14_jpiw0")
 theme_override_font_sizes/font_size = 22
 text = "Roll Selected"
 
-[node name="PassRoll" type="Button" parent="GameManager/GameUI/RollButtons"]
+[node name="PassRoll" type="Button" parent="GameManager/RollButtons"]
 layout_mode = 2
 theme = ExtResource("14_jpiw0")
 theme_override_font_sizes/font_size = 22
 text = "Pass"
+
+[node name="myPlayer" type="Node" parent="GameManager"]
+script = ExtResource("11_ejug4")
+
+[node name="enemyPlayer" type="Node" parent="GameManager"]
+script = ExtResource("11_ejug4")
+
+[node name="GameUI" type="CanvasLayer" parent="GameManager"]
+visible = false
+script = ExtResource("12_f4hi7")
 
 [node name="OpponentDiceBase" type="Control" parent="GameManager/GameUI"]
 layout_mode = 3
