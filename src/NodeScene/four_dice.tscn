@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dhfe5d2eygmel"]
 
-[ext_resource type="Script" path="res://Scripts/OnlineGameScene_Specific/BaseDie.gd" id="1_hv7fx"]
+[ext_resource type="Script" path="res://Scripts/CustomDiceScripts/BaseDie.gd" id="1_hv7fx"]
 [ext_resource type="ArrayMesh" uid="uid://dy5tewlmwlr8w" path="res://Assets/dice/d4/DiceMakerD4_d4_3d_numbered_stl.res" id="2_y3uq0"]
 [ext_resource type="Material" uid="uid://du2ej862se3yl" path="res://Materials/Faces.tres" id="3_t3v2a"]
 [ext_resource type="ArrayMesh" uid="uid://bt5upkkp3cde" path="res://Assets/dice/d4/DiceMakerD4_d4_3d_blank_stl.res" id="4_w2agu"]

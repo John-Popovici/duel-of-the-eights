@@ -1,9 +1,9 @@
 [gd_scene load_steps=14 format=3 uid="uid://dbuevipki6jra"]
 
-[ext_resource type="Script" path="res://Scripts/GlobalCustomization/global_customization_scene.gd" id="1_2co8p"]
+[ext_resource type="Script" path="res://Scripts/GlobalCustomization/GC_scene.gd" id="1_2co8p"]
 [ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="1_odr4a"]
 [ext_resource type="PackedScene" uid="uid://cu4mb4w4jgh2e" path="res://NodeScene/six_dice.tscn" id="2_18byj"]
-[ext_resource type="Script" path="res://Scripts/GlobalCustomization/customization_ui.gd" id="2_61s26"]
+[ext_resource type="Script" path="res://Scripts/GlobalCustomization/GC_customization_ui.gd" id="2_61s26"]
 [ext_resource type="PackedScene" uid="uid://dvqod4aw6sxvo" path="res://NodeScene/button.tscn" id="4_aknih"]
 [ext_resource type="Material" uid="uid://dvsy8knluwv6e" path="res://Materials/BoardRaisedMat.tres" id="6_tmny7"]
 [ext_resource type="Material" uid="uid://cgpa3fsefx8ir" path="res://Materials/BoardLowMat.tres" id="7_kk2ga"]

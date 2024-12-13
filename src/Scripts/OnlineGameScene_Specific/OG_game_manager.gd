@@ -198,8 +198,7 @@ func recievebonus(hand: Dictionary) -> void:
 
 func endOfRoundEffects() -> void:
 	#have a tree of end of round Effects instances to pass the score through and get updated result
-	for die in dice_container.get_dice():
-		die._flipfaces()
+	
 	#add logic for damage taken and other end of turn effects 
 	#calculated locally based on score and totalscore
 	var end_condition_reached = false
