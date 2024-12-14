@@ -4,13 +4,13 @@ extends Node3D
 var player1_name: String
 var player2_name: String
 
-@onready var GameManager: Node = $GameManager
+@onready var MultiGameManager: Node = $MultiGameManager
 @onready var network_manager: Node = $NetworkManager
 
 
 func start_game() -> void:
 	print("Start Game")
-	GameManager.loadGameSetup()
+	MultiGameManager.loadGameSetup()
 	
 
 func returnToIntro() -> void:
@@ -22,6 +22,7 @@ func returnToIntro() -> void:
 
 # Start game logic with player names
 func _ready() -> void:
+	network_manager.visible = true
 	network_manager.connect("startGame", self.start_game)
 	network_manager.connect("disconnected", self.returnToIntro)
 	network_manager.connect("connection_failed", self.returnToIntro)
