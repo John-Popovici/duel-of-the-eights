@@ -7,8 +7,8 @@ var hand_settings
 @onready var dice_container = get_node("DiceContainer")
 @onready var scoreboard = get_node("Scoreboard")
 @onready var scoreCalc = get_node("ScoreCalculator")
-@onready var myPlayer = get_node("myPlayer")
-@onready var enemyPlayer = get_node("enemyPlayer")
+@onready var myPlayer = get_parent().get_node("myPlayer")
+@onready var enemyPlayer = get_parent().get_node("enemyPlayer")
 
 @onready var GameUI: CanvasLayer = get_node("GameUI")
 @onready var rollButtons = get_node("RollButtons")
@@ -236,14 +236,17 @@ func endGame() -> void:
 	var myPlayerFinalStats: Dictionary
 	var OpponentFinalStats: Dictionary
 	var resultText = "Tied Game"
+	var winner = "none"
 	
 	match win_cond:
 		0: #score
 			var scoreDiff = myPlayer.getTotalScore() - enemyPlayer.getTotalScore()
 			if scoreDiff < 0:
 				resultText = str(OpponentStats["player_name"], " wins the game!")
+				winner = "opponent"
 			elif scoreDiff > 0:
 				resultText = str(myPlayerStats["player_name"], " wins the game!")
+				winner = "self"
 			myPlayerFinalStats = {
 				"Player: ": myPlayerStats["player_name"],
 				"Score: ": myPlayerStats["score"],
@@ -256,8 +259,10 @@ func endGame() -> void:
 			var healthDiff = myPlayer.getHealth() - enemyPlayer.getHealth()
 			if healthDiff < 0:
 				resultText = str(OpponentStats["player_name"], " wins the game!")
+				winner = "opponent"
 			elif healthDiff > 0:
 				resultText = str(myPlayerStats["player_name"], " wins the game!")
+				winner = "self"
 			myPlayerFinalStats = {
 				"Player: ": myPlayerStats["player_name"],
 				"Health Points: ": myPlayerStats["health_points"],
@@ -271,9 +276,10 @@ func endGame() -> void:
 	print("Game ended")
 	GameUI.hide_all_ui()
 	rollButtons.visible = false
-	#self.visible = false
-	get_parent().finish_game(resultText, myPlayerFinalStats, OpponentFinalStats)
-	#GameUI.show_end_of_game_screen(resultText, myPlayerFinalStats, OpponentFinalStats)
+	GameUI.show_end_of_game_screen(resultText, myPlayerFinalStats, OpponentFinalStats)
+	await get_tree().create_timer(5).timeout
+	#Add button instead of timer
+	get_parent().finish_game(winner, myPlayerFinalStats, OpponentFinalStats)
 
 var rematch = false
 func restartGame() ->void:

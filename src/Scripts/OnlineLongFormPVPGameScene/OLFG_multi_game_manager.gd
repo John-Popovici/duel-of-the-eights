@@ -1,7 +1,7 @@
 extends Node
 
 @onready var game_settings_ui = get_node("GameSettings")
-@onready var single_game_manager = get_node("GameManager")
+@onready var single_game_manager# = get_node("GameManager")
 @onready var networkManagers = get_tree().get_nodes_in_group("NetworkHandlingNodes")
 @onready var NetworkManager = networkManagers[0]
 
@@ -9,9 +9,9 @@ var game_settings: Dictionary
 var hand_settings: Dictionary
 
 var current_game_count = 0
-var total_games = 8
-var player1_wins = 0
-var player2_wins = 0
+var total_games = 3
+var self_wins = 0
+var opponent_wins = 0
 
 func start_next_game():
 	if current_game_count < total_games:
@@ -23,22 +23,36 @@ func start_next_game():
 
 func start_game():
 	current_game_count += 1
+	print("Starting Game ", current_game_count)
+	var gameManager = load("res://NodeScene/OLFG_game_manager.tscn").instantiate()
+	single_game_manager = gameManager
+	self.add_child(gameManager)
+	
 	single_game_manager._on_settings_ready(game_settings,hand_settings)
 	game_settings_ui.visible = false
 
-func finish_game(resultText, myPlayerFinalStats, OpponentFinalStats):
-	pass
+func finish_game(winner, myPlayerFinalStats, OpponentFinalStats):
+	single_game_manager.queue_free()
+	single_game_manager = null
 	# Determine winner of the current game, track results
-	#if winner == "Player 1":
-	#	player1_wins += 1
-	#else:
-	#	player2_wins += 1
+	if winner == "self":
+		self_wins += 1
+	elif winner == "opponent":
+		opponent_wins += 1
+	if NetworkManager.getIsHost():
+			print("Host Wins = ", self_wins)
+			print("Client Wins = ", opponent_wins)
+	await get_tree().create_timer(5).timeout
 	
 	# Go to customization menu
 	#customization_menu.show_customization(winner)
+	start_next_game()
+
 
 func end_game():
-	pass
+	if NetworkManager.getIsHost():
+		print("Host Wins = ", self_wins)
+		print("Client Wins = ", opponent_wins)
 	# Determine the final winner based on win condition
 	#var overall_winner = calculate_final_winner()
 	#display_end_screen(overall_winner)
