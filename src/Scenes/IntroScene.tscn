@@ -14,10 +14,10 @@
 script = ExtResource("1_datn8")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_left = 415.0
-offset_top = 57.0
-offset_right = 572.0
-offset_bottom = 244.0
+offset_left = 333.0
+offset_top = 36.0
+offset_right = 567.0
+offset_bottom = 251.0
 scale = Vector2(2.01922, 2.61369)
 theme_override_constants/separation = 5
 
@@ -68,6 +68,16 @@ theme_override_styles/hover = ExtResource("8_mpfnf")
 theme_override_styles/pressed = ExtResource("9_lucfa")
 theme_override_styles/normal = ExtResource("10_3uy0t")
 text = "Start Online Game!"
+
+[node name="StartOnlineLongFormGame" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_j2iul")
+theme_override_styles/disabled = ExtResource("7_sypxc")
+theme_override_styles/hover = ExtResource("8_mpfnf")
+theme_override_styles/pressed = ExtResource("9_lucfa")
+theme_override_styles/normal = ExtResource("10_3uy0t")
+text = "Start Online Long Form Game!"
 
 [node name="OptionsPanel" type="PanelContainer" parent="."]
 anchors_preset = 1

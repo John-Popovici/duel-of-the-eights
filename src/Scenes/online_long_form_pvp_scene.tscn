@@ -2,22 +2,22 @@
 
 [ext_resource type="PackedScene" uid="uid://bb1hsjv35krnk" path="res://NodeScene/network_manager_2Player.tscn" id="1_62gfc"]
 [ext_resource type="Script" path="res://Scripts/OnlineLongFormPVPGameScene/OLFG_game_scene.gd" id="1_cwa8m"]
-[ext_resource type="Script" path="res://Scripts/OnlineGameScene_Specific/OG_game_settings.gd" id="3_2prpv"]
 [ext_resource type="Script" path="res://Scripts/OnlineLongFormPVPGameScene/OLFG_multi_game_manager.gd" id="3_c1urj"]
 [ext_resource type="Script" path="res://Scripts/OnlineLongFormPVPGameScene/OLFG_game_manager.gd" id="3_qct0n"]
+[ext_resource type="Script" path="res://Scripts/OnlineLongFormPVPGameScene/OLFG_game_settings.gd" id="4_s8ucl"]
 [ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/Default_Pixel_Blue/PanelBlueBoxBackgroundStyle.tres" id="4_x2ts0"]
 [ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="5_atrsu"]
 [ext_resource type="PackedScene" uid="uid://c2y0m27eadb6i" path="res://NodeScene/sample_preset_button.tscn" id="6_2tlyn"]
-[ext_resource type="Script" path="res://Scripts/OnlineGameScene_Specific/OG_dynamic_dice_container.gd" id="7_oejle"]
 [ext_resource type="Script" path="res://Scripts/camera_toggle_controller.gd" id="8_3ndyj"]
+[ext_resource type="Script" path="res://Scripts/OnlineLongFormPVPGameScene/OLFG_dynamic_dice_container.gd" id="9_kyqqu"]
 [ext_resource type="Theme" uid="uid://dokd457t4xs7n" path="res://Themes/Default_Pixel_Wood/Default_pixel_.Wood.tres" id="9_xh50h"]
 [ext_resource type="Material" uid="uid://cgpa3fsefx8ir" path="res://Materials/BoardLowMat.tres" id="10_op1b4"]
 [ext_resource type="Material" uid="uid://dvsy8knluwv6e" path="res://Materials/BoardRaisedMat.tres" id="11_gm6ew"]
-[ext_resource type="Script" path="res://Scripts/OnlineGameScene_Specific/OG_Dynamic_Scoreboard.gd" id="12_l1r6x"]
 [ext_resource type="StyleBox" uid="uid://bdd2m4n2as1ot" path="res://Themes/Default_Pixel_Wood/WoodBoxBackgroundStyle.tres" id="13_cr4ww"]
-[ext_resource type="Script" path="res://Scripts/OnlineGameScene_Specific/OG_score_calculator.gd" id="14_xxw7a"]
-[ext_resource type="Script" path="res://Scripts/OnlineGameScene_Specific/OG_PlayerManager.gd" id="15_jdtwo"]
-[ext_resource type="Script" path="res://Scripts/OnlineGameScene_Specific/OG_game_ui.gd" id="16_aa47f"]
+[ext_resource type="Script" path="res://Scripts/OnlineLongFormPVPGameScene/OLFG_Dynamic_Scoreboard.gd" id="14_0lcrb"]
+[ext_resource type="Script" path="res://Scripts/OnlineLongFormPVPGameScene/OLFG_score_calculator.gd" id="16_8ek0j"]
+[ext_resource type="Script" path="res://Scripts/OnlineLongFormPVPGameScene/OLFG_PlayerManager.gd" id="17_38ctl"]
+[ext_resource type="Script" path="res://Scripts/OnlineLongFormPVPGameScene/OLFG_game_ui.gd" id="18_3e0pw"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_watpb"]
 
@@ -36,7 +36,7 @@ script = ExtResource("1_cwa8m")
 script = ExtResource("3_c1urj")
 
 [node name="GameSettings" type="CanvasLayer" parent="MultiGameManager"]
-script = ExtResource("3_2prpv")
+script = ExtResource("4_s8ucl")
 
 [node name="UIBox" type="PanelContainer" parent="MultiGameManager/GameSettings"]
 anchors_preset = 8
@@ -336,7 +336,7 @@ text = "Exit Game"
 script = ExtResource("3_qct0n")
 
 [node name="DiceContainer" type="Node3D" parent="MultiGameManager/GameManager"]
-script = ExtResource("7_oejle")
+script = ExtResource("9_kyqqu")
 
 [node name="CameraController" type="Node3D" parent="MultiGameManager/GameManager"]
 script = ExtResource("8_3ndyj")
@@ -445,7 +445,7 @@ spot_angle_attenuation = 2.37841
 
 [node name="Scoreboard" type="CanvasLayer" parent="MultiGameManager/GameManager"]
 visible = false
-script = ExtResource("12_l1r6x")
+script = ExtResource("14_0lcrb")
 
 [node name="UIBox" type="PanelContainer" parent="MultiGameManager/GameManager/Scoreboard"]
 anchors_preset = 1
@@ -479,7 +479,7 @@ theme = ExtResource("9_xh50h")
 text = "Total: "
 
 [node name="ScoreCalculator" type="Node" parent="MultiGameManager/GameManager"]
-script = ExtResource("14_xxw7a")
+script = ExtResource("16_8ek0j")
 
 [node name="RollButtons" type="VBoxContainer" parent="MultiGameManager/GameManager"]
 visible = false
@@ -509,14 +509,14 @@ theme_override_font_sizes/font_size = 22
 text = "Pass"
 
 [node name="myPlayer" type="Node" parent="MultiGameManager/GameManager"]
-script = ExtResource("15_jdtwo")
+script = ExtResource("17_38ctl")
 
 [node name="enemyPlayer" type="Node" parent="MultiGameManager/GameManager"]
-script = ExtResource("15_jdtwo")
+script = ExtResource("17_38ctl")
 
 [node name="GameUI" type="CanvasLayer" parent="MultiGameManager/GameManager"]
 visible = false
-script = ExtResource("16_aa47f")
+script = ExtResource("18_3e0pw")
 
 [node name="OpponentDiceBase" type="Control" parent="MultiGameManager/GameManager/GameUI"]
 layout_mode = 3

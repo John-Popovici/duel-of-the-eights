@@ -203,11 +203,13 @@ signal received_game_settings(_game_settings: Dictionary, _hand_settings: Dictio
 func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionary) -> void:
 	var game_settings = _game_settings
 	var hand_settings = _hand_settings
+	print("Network Manager recieved settings")
 	emit_signal("received_game_settings",game_settings,hand_settings)
 
 func send_game_settings(_game_settings: Dictionary,_hand_settings: Dictionary) -> void:
 	var game_settings = _game_settings
 	var hand_settings = _hand_settings
+	print("Network Manager sent settings")
 	rpc("receive_game_settings",_game_settings, _hand_settings)
 
 func _process(delta: float) -> void:

@@ -22,7 +22,7 @@ func returnToIntro() -> void:
 
 # Start game logic with player names
 func _ready() -> void:
-	network_manager.visible = true
+	network_manager.get_node("ConnectionUI").visible = true
 	network_manager.connect("startGame", self.start_game)
 	network_manager.connect("disconnected", self.returnToIntro)
 	network_manager.connect("connection_failed", self.returnToIntro)

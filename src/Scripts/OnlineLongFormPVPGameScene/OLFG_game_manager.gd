@@ -2,8 +2,8 @@ extends Node3D
 
 var game_settings
 var hand_settings
-@onready var game_settings_ui = get_node("GameSettings")
-@onready var network_manager = get_node("../NetworkManager")
+@onready var networkManagers = get_tree().get_nodes_in_group("NetworkHandlingNodes")
+@onready var network_manager = networkManagers[0]
 @onready var dice_container = get_node("DiceContainer")
 @onready var scoreboard = get_node("Scoreboard")
 @onready var scoreCalc = get_node("ScoreCalculator")
@@ -29,9 +29,7 @@ var game_over: bool = false
 
 # Initialization: Connects to signals and retrieves NetworkManager
 func _ready() -> void:
-	game_settings_ui.connect("game_settings_ready", self._on_settings_ready)
 	GameUI.visible = false
-	network_manager.connect("received_game_settings", self.receive_game_settings)
 	myPlayer.connect("rollsReadandWaiting", self.set_rolls_read)
 	myPlayer.connect("rollsReadandWaiting", self.waiting_on_other_player)
 	myPlayer.connect("player_stats_updated", self.update_player_stats_signal)
@@ -41,7 +39,7 @@ signal update_player_stats(_player: String, Stats: Dictionary)
 func update_player_stats_signal(_player: String, Stats: Dictionary) -> void:
 	emit_signal("update_player_stats",_player,Stats)
 
-# Process game settings from GameSettings UI (Host side)
+# Process game settings and start game
 func _on_settings_ready(_game_settings: Dictionary, _hand_settings: Dictionary) -> void:
 	game_settings = _game_settings
 	hand_settings = _hand_settings
@@ -50,26 +48,9 @@ func _on_settings_ready(_game_settings: Dictionary, _hand_settings: Dictionary) 
 	win_cond = game_settings["win_condition"]
 	baseTimer = game_settings["round_time"]
 	timedRounds = game_settings["timed_rounds"]
-	
-	
-	if network_manager.getIsHost():
-		network_manager.send_game_settings(game_settings,hand_settings)
-
 	# Set up the game environment with these settings
 	setup_game()
 
-func loadGameSetup() -> void:
-	game_settings_ui.collectInfo()
-
-# Client receives the game settings from host
-func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionary) -> void:
-	game_settings = _game_settings
-	hand_settings = _hand_settings
-	game_settings_ui.visible = false
-	win_cond = game_settings["win_condition"]
-	baseTimer = game_settings["round_time"]
-	timedRounds = game_settings["timed_rounds"]
-	setup_game()
 
 func setup_game() -> void:
 	setup_game_environment(game_settings)
@@ -290,7 +271,9 @@ func endGame() -> void:
 	print("Game ended")
 	GameUI.hide_all_ui()
 	rollButtons.visible = false
-	GameUI.show_end_of_game_screen(resultText, myPlayerFinalStats, OpponentFinalStats)
+	#self.visible = false
+	get_parent().finish_game(resultText, myPlayerFinalStats, OpponentFinalStats)
+	#GameUI.show_end_of_game_screen(resultText, myPlayerFinalStats, OpponentFinalStats)
 
 var rematch = false
 func restartGame() ->void:
@@ -308,7 +291,7 @@ func synchronizeRematch() -> void:
 func exitGame() -> void:
 	network_manager.broadcast_game_state("end_game", {})
 	network_manager.disconnect_from_server()
-	get_parent().returnToIntro()
+	get_parent().get_parent().returnToIntro()
 	pass
 
 func timer_complete() -> void:
