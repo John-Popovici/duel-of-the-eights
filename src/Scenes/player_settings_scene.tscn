@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfmdn3uyuevf1"]
+
+[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="1_gbwnh"]
+
+[node name="PlayerSettingsScene" type="Node3D"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = -1
+anchor_right = 0.315
+anchor_bottom = 0.554
+offset_right = 0.119965
+offset_bottom = 0.00799561
+
+[node name="Settings" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="Label1" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Select Game Preset"
+horizontal_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_gbwnh")
+item_count = 3
+popup/item_0/text = "A"
+popup/item_1/text = "B"
+popup/item_1/id = 1
+popup/item_2/text = "C"
+popup/item_2/id = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Custom"
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter # of Dice"
+alignment = 1
+
+[node name="LineEdit2" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter Time"
+alignment = 1
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_gbwnh")
+text = "Back"
+vertical_icon_alignment = 2
