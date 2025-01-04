@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cyxdhttcsohqw"]
+[gd_scene load_steps=10 format=3 uid="uid://cyxdhttcsohqw"]
 
 [ext_resource type="PackedScene" uid="uid://bb1hsjv35krnk" path="res://NodeScene/network_manager_2Player.tscn" id="1_62gfc"]
 [ext_resource type="Script" path="res://Scripts/OnlineLongFormPVPGameScene/OLFG_game_scene.gd" id="1_cwa8m"]
@@ -7,6 +7,7 @@
 [ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/Default_Pixel_Blue/PanelBlueBoxBackgroundStyle.tres" id="4_x2ts0"]
 [ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="5_atrsu"]
 [ext_resource type="PackedScene" uid="uid://c2y0m27eadb6i" path="res://NodeScene/sample_preset_button.tscn" id="6_2tlyn"]
+[ext_resource type="Script" path="res://Scripts/OnlineLongFormPVPGameScene/OLFG_customization_menu.gd" id="9_4edwa"]
 [ext_resource type="Script" path="res://Scripts/OnlineLongFormPVPGameScene/OLFG_PlayerManager.gd" id="17_38ctl"]
 
 [node name="OnlineGameScene" type="Node3D"]
@@ -18,6 +19,7 @@ script = ExtResource("1_cwa8m")
 script = ExtResource("3_c1urj")
 
 [node name="GameSettings" type="CanvasLayer" parent="MultiGameManager"]
+visible = false
 script = ExtResource("4_s8ucl")
 
 [node name="UIBox" type="PanelContainer" parent="MultiGameManager/GameSettings"]
@@ -319,3 +321,6 @@ script = ExtResource("17_38ctl")
 
 [node name="enemyPlayer" type="Node" parent="MultiGameManager"]
 script = ExtResource("17_38ctl")
+
+[node name="CustomizationMenu" type="CanvasLayer" parent="MultiGameManager"]
+script = ExtResource("9_4edwa")

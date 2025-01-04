@@ -4,6 +4,7 @@ extends Node
 @onready var single_game_manager# = get_node("GameManager")
 @onready var networkManagers = get_tree().get_nodes_in_group("NetworkHandlingNodes")
 @onready var NetworkManager = networkManagers[0]
+@onready var customization_menu = get_node("CustomizationMenu")
 
 var game_settings: Dictionary
 var hand_settings: Dictionary
@@ -42,15 +43,28 @@ func finish_game(winner, myPlayerFinalStats, OpponentFinalStats):
 	if NetworkManager.getIsHost():
 			print("Host Wins = ", self_wins)
 			print("Client Wins = ", opponent_wins)
+	
+	#Show winner screen for both players, with stats on how they did
+	
 	await get_tree().create_timer(5).timeout
 	
+	if current_game_count > total_games:
+		end_game()
+		pass
+	
 	# Go to customization menu
-	#customization_menu.show_customization(winner)
+	customization_menu.visible = true
+	if winner == "self":
+		customization_menu.show_customization()
+	else:
+		customization_menu.wait_customization()
+	
 	start_next_game()
 
 
 func end_game():
 	if NetworkManager.getIsHost():
+		print("End of Game, Final Tally:")
 		print("Host Wins = ", self_wins)
 		print("Client Wins = ", opponent_wins)
 	# Determine the final winner based on win condition
