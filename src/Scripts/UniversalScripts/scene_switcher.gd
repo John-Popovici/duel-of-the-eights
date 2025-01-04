@@ -1,32 +1,25 @@
-extends Node
-
-# derived from https://gist.github.com/brettchalupa/1c68e37d2788a3d36f74222c354baac2
-# Use SceneSwitcher.switch_scene("path to scene")
-
-var current_scene = null
-
+extends Node3D
+# Use SceneSwitcher.returnToIntro("path to scene")
+# Not in use currently
 func _ready() -> void:
-	var root = get_tree().root
-	if root.get_child_count() > 0:
-		current_scene = root.get_child(root.get_child_count() - 1)
-	else:
-		print("No scenes found in the root node")
+	pass
 
-func switch_scene(res_path: String) -> void:
-	call_deferred("_deferred_switch_scene", res_path)
+func returnToIntro() -> void:
+	var current_scene = get_tree().current_scene
 
-func _deferred_switch_scene(res_path: String) -> void:
-	var scene = load(res_path)
-	if scene == null:
-		print_debug("Failed to load scene: ", res_path)
-		return
-	
-	# Forcefull clear the root nodes
-	var root = get_tree().root
-	for child in root.get_children():
-		child.queue_free()  
-	
-	current_scene = scene.instantiate()
-	root.add_child(current_scene)
-	get_tree().current_scene = current_scene
-	print("Switched to new scene: ", current_scene.name)
+	# Only free the current scene if it's still valid
+	if current_scene != null:
+		current_scene.queue_free()
+	else: # brute force clear of all nodes (in progress)
+		var root = get_tree().root
+		for child in root.get_children():
+			child.queue_free()
+
+	var intro_scene = load("res://Scenes/IntroScene.tscn").instantiate()
+
+	get_tree().root.add_child(intro_scene)
+
+	get_tree().current_scene = intro_scene
+
+func _process(delta: float) -> void:
+	pass
