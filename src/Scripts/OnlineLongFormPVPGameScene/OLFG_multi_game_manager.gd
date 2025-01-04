@@ -61,7 +61,7 @@ func finish_game(winner, myPlayerFinalStats, OpponentFinalStats):
 	
 	start_next_game()
 
-
+# end of all multi games
 func end_game():
 	if NetworkManager.getIsHost():
 		print("End of Game, Final Tally:")
