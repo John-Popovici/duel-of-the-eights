@@ -49,7 +49,7 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-... & ... & ...\\
+2025/01/08 & Hemraj Bhatt & Added content to sections 4.1 \& 4.2\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -161,9 +161,10 @@ change.
 
 \begin{description}
 \item[\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific
-  hardware on which the software is running.
+  hardware on which the software is running. 
 \item[\refstepcounter{acnum} \actheacnum \label{acInput}:] The format of the
-  initial input data.
+  initial input data. 
+\item[\refstepcounter{acnum} \actheacnum \label{acUI}:] User Interface (UI): A rudimentary UI is currently used for development. The UI will need to be updated to accommodate the addition of animations and will have to be refreshed in order to look more appealing once the game's major features are complete.
 \item ...
 \end{description}
 
@@ -181,9 +182,8 @@ will potentially need to be modified. Hence, it is not intended that these
 decisions will be changed.
 
 \begin{description}
-\item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] Input/Output devices
-  (Input: File and/or Keyboard, Output: File, Memory, and/or Screen).
-\item ...
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] Input devices: The game is designed to play on a computer, i.e. it is designed to work with a keyboard and mouse. It is unlikely that the game will be playable through other input means such as controllers.
+
 \end{description}
 
 \section{Module Hierarchy} \label{SecMH}
