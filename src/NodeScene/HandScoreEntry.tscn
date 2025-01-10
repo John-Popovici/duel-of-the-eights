@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://yqbssvbfv48b"]
 
-[ext_resource type="Script" path="res://Scripts/OnlineGameScene_Specific/ScoreboardButton.gd" id="1_2rqcn"]
+[ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_ScoreboardButton.gd" id="1_2rqcn"]
 [ext_resource type="Theme" uid="uid://dokd457t4xs7n" path="res://Themes/Default_Pixel_Wood/Default_pixel_.Wood.tres" id="1_st541"]
 
 [node name="HBoxContainer" type="HBoxContainer"]

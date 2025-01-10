@@ -1,0 +1,494 @@
+[gd_scene load_steps=17 format=3 uid="uid://basjlqgjhw4ht"]
+
+[ext_resource type="Script" path="res://Scripts/OnlineLongFormGameScene/OLFG_game_manager.gd" id="1_vc7kp"]
+[ext_resource type="Script" path="res://Scripts/OnlineLongFormGameScene/OLFG_dynamic_dice_container.gd" id="2_m1kmb"]
+[ext_resource type="Script" path="res://Scripts/camera_toggle_controller.gd" id="3_7ourk"]
+[ext_resource type="Theme" uid="uid://dokd457t4xs7n" path="res://Themes/Default_Pixel_Wood/Default_pixel_.Wood.tres" id="4_a8mk0"]
+[ext_resource type="Material" uid="uid://cgpa3fsefx8ir" path="res://Materials/BoardLowMat.tres" id="5_deeon"]
+[ext_resource type="Material" uid="uid://dvsy8knluwv6e" path="res://Materials/BoardRaisedMat.tres" id="6_d2vhk"]
+[ext_resource type="Script" path="res://Scripts/OnlineLongFormGameScene/OLFG_Dynamic_Scoreboard.gd" id="7_e83c5"]
+[ext_resource type="StyleBox" uid="uid://bdd2m4n2as1ot" path="res://Themes/Default_Pixel_Wood/WoodBoxBackgroundStyle.tres" id="8_hymll"]
+[ext_resource type="Script" path="res://Scripts/OnlineLongFormGameScene/OLFG_score_calculator.gd" id="9_25i7c"]
+[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="10_kvfkc"]
+[ext_resource type="Script" path="res://Scripts/OnlineLongFormGameScene/OLFG_game_ui.gd" id="12_3hxyw"]
+[ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/Default_Pixel_Blue/PanelBlueBoxBackgroundStyle.tres" id="13_6cjwj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_watpb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xp632"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f2rh2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3tu6u"]
+
+[node name="GameManager" type="Node3D" groups=["SingleGameManager"]]
+script = ExtResource("1_vc7kp")
+
+[node name="DiceContainer" type="Node3D" parent="."]
+script = ExtResource("2_m1kmb")
+
+[node name="CameraController" type="Node3D" parent="."]
+script = ExtResource("3_7ourk")
+
+[node name="Positions" type="Node3D" parent="CameraController"]
+
+[node name="Angled" type="Node3D" parent="CameraController/Positions"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 21)
+
+[node name="Top Down" type="Node3D" parent="CameraController/Positions"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 3)
+
+[node name="Cinematic" type="Node3D" parent="CameraController/Positions"]
+transform = Transform3D(0.707107, -0.454519, 0.541675, 0, 0.766044, 0.642788, -0.707107, -0.454519, 0.541675, 21, 15, 21)
+
+[node name="Camera3D" type="Camera3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 21)
+
+[node name="SpotLight3D_Camera" type="SpotLight3D" parent="CameraController/Camera3D"]
+light_energy = 0.25
+spot_range = 70.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 2.37841
+
+[node name="CameraPosPanel" type="PanelContainer" parent="CameraController"]
+visible = false
+offset_top = 435.0
+offset_right = 200.0
+offset_bottom = 515.0
+theme = ExtResource("4_a8mk0")
+
+[node name="ButtonHolder" type="VBoxContainer" parent="CameraController/CameraPosPanel"]
+layout_mode = 2
+
+[node name="Angled" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Angled"
+
+[node name="Top Down" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Top Down"
+
+[node name="Cinematic" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cinematic"
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="GameBoard" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(50, 0, 0, 0, 0.5, 0, 0, 0, 50, 0, 0, 0)
+mesh = SubResource("BoxMesh_watpb")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("5_deeon")
+
+[node name="RaisedTable" type="MeshInstance3D" parent="Environment/GameBoard"]
+transform = Transform3D(0.9, 0, 0, 0, 2, 0, 0, 0, 0.9, 0, 0, 0)
+mesh = SubResource("BoxMesh_xp632")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = ExtResource("6_d2vhk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/GameBoard/RaisedTable"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/GameBoard/RaisedTable/StaticBody3D"]
+shape = SubResource("BoxShape3D_f2rh2")
+
+[node name="CollisionWall1" type="MeshInstance3D" parent="Environment/GameBoard"]
+transform = Transform3D(0.05, 0, 0, 0, 100, 0, 0, 0, 1, 0.475, 50, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/GameBoard/CollisionWall1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/GameBoard/CollisionWall1/StaticBody3D"]
+shape = SubResource("BoxShape3D_3tu6u")
+
+[node name="CollisionWall2" type="MeshInstance3D" parent="Environment/GameBoard"]
+transform = Transform3D(0.05, 0, 0, 0, 100, 0, 0, 0, 1, -0.475, 50, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/GameBoard/CollisionWall2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/GameBoard/CollisionWall2/StaticBody3D"]
+shape = SubResource("BoxShape3D_3tu6u")
+
+[node name="CollisionWall3" type="MeshInstance3D" parent="Environment/GameBoard"]
+transform = Transform3D(1, 0, 0, 0, 100, 0, 0, 0, 0.05, 0, 50, 0.475)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/GameBoard/CollisionWall3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/GameBoard/CollisionWall3/StaticBody3D"]
+shape = SubResource("BoxShape3D_3tu6u")
+
+[node name="CollisionWall4" type="MeshInstance3D" parent="Environment/GameBoard"]
+transform = Transform3D(1, 0, 0, 0, 100, 0, 0, 0, 0.05, 0, 50, -0.475)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/GameBoard/CollisionWall4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/GameBoard/CollisionWall4/StaticBody3D"]
+shape = SubResource("BoxShape3D_3tu6u")
+
+[node name="SpotLight3D_Board" type="SpotLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 0)
+spot_range = 70.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 2.37841
+
+[node name="Scoreboard" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("7_e83c5")
+
+[node name="UIBox" type="PanelContainer" parent="Scoreboard"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -198.0
+offset_bottom = 332.0
+grow_horizontal = 0
+theme_override_styles/panel = ExtResource("8_hymll")
+
+[node name="SelfHandsSectionBox" type="VBoxContainer" parent="Scoreboard/UIBox"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="Label" parent="Scoreboard/UIBox/SelfHandsSectionBox"]
+layout_mode = 2
+theme = ExtResource("4_a8mk0")
+text = "Scoreboard"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Scoreboard/UIBox/SelfHandsSectionBox"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="HandsContainer" type="VBoxContainer" parent="Scoreboard/UIBox/SelfHandsSectionBox/ScrollContainer"]
+layout_mode = 2
+
+[node name="Total" type="Label" parent="Scoreboard/UIBox/SelfHandsSectionBox"]
+layout_mode = 2
+theme = ExtResource("4_a8mk0")
+text = "Total: "
+
+[node name="ScoreCalculator" type="Node" parent="."]
+script = ExtResource("9_25i7c")
+
+[node name="RollButtons" type="VBoxContainer" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 400.0
+offset_top = -279.0
+offset_right = 548.0
+offset_bottom = -213.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("10_kvfkc")
+
+[node name="RollSelected" type="Button" parent="RollButtons"]
+layout_mode = 2
+theme = ExtResource("4_a8mk0")
+theme_override_font_sizes/font_size = 22
+text = "Roll Selected"
+
+[node name="PassRoll" type="Button" parent="RollButtons"]
+layout_mode = 2
+theme = ExtResource("4_a8mk0")
+theme_override_font_sizes/font_size = 22
+text = "Pass"
+
+[node name="GameUI" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("12_3hxyw")
+
+[node name="OpponentDiceBase" type="Control" parent="GameUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("4_a8mk0")
+
+[node name="OpponentDiceLabel" type="Label" parent="GameUI/OpponentDiceBase"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 544.0
+offset_right = 169.0
+offset_bottom = 568.0
+theme = ExtResource("4_a8mk0")
+text = "Opponent Dice Rolls:"
+
+[node name="OpponentDicePanel" type="PanelContainer" parent="GameUI/OpponentDiceBase"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 532.0
+offset_right = 568.0
+offset_bottom = 608.0
+grow_vertical = 0
+theme = ExtResource("4_a8mk0")
+
+[node name="OpponentDiceDisplay" type="HBoxContainer" parent="GameUI/OpponentDiceBase/OpponentDicePanel"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="MyPlayerDiceBase" type="Control" parent="GameUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("4_a8mk0")
+
+[node name="MyPlayerDiceLabel" type="Label" parent="GameUI/MyPlayerDiceBase"]
+layout_mode = 0
+offset_left = 1034.0
+offset_top = 543.0
+offset_right = 1146.0
+offset_bottom = 567.0
+theme = ExtResource("4_a8mk0")
+text = "My Dice Rolls:"
+horizontal_alignment = 2
+
+[node name="MyPlayerDicePanel" type="PanelContainer" parent="GameUI/MyPlayerDiceBase"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 544.0
+offset_top = 532.0
+offset_right = 1112.0
+offset_bottom = 608.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("4_a8mk0")
+
+[node name="MyPlayerDiceDisplay" type="HBoxContainer" parent="GameUI/MyPlayerDiceBase/MyPlayerDicePanel"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="RollSorter" type="PanelContainer" parent="GameUI/MyPlayerDiceBase"]
+layout_mode = 0
+offset_left = 584.0
+offset_top = 533.0
+offset_right = 889.0
+offset_bottom = 568.0
+
+[node name="ButtonHolder" type="HBoxContainer" parent="GameUI/MyPlayerDiceBase/RollSorter"]
+layout_mode = 2
+
+[node name="Asc" type="Button" parent="GameUI/MyPlayerDiceBase/RollSorter/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Asc"
+
+[node name="Desc" type="Button" parent="GameUI/MyPlayerDiceBase/RollSorter/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Desc"
+
+[node name="Freq" type="Button" parent="GameUI/MyPlayerDiceBase/RollSorter/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Freq"
+
+[node name="GameStatePanel" type="PanelContainer" parent="GameUI"]
+offset_top = 390.0
+offset_right = 199.0
+offset_bottom = 430.0
+theme = ExtResource("4_a8mk0")
+
+[node name="GameStateInfo" type="HBoxContainer" parent="GameUI/GameStatePanel"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlayerStatsPanel" type="VBoxContainer" parent="GameUI"]
+offset_right = 199.0
+offset_bottom = 385.0
+
+[node name="MyPlayerPanel" type="PanelContainer" parent="GameUI/PlayerStatsPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("4_a8mk0")
+
+[node name="MyPlayerStatBox" type="VBoxContainer" parent="GameUI/PlayerStatsPanel/MyPlayerPanel"]
+layout_mode = 2
+
+[node name="EnemyPlayerPanel" type="PanelContainer" parent="GameUI/PlayerStatsPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("4_a8mk0")
+
+[node name="EnemyPlayerStatBox" type="VBoxContainer" parent="GameUI/PlayerStatsPanel/EnemyPlayerPanel"]
+layout_mode = 2
+
+[node name="CountdownPanel" type="PanelContainer" parent="GameUI"]
+offset_left = 954.0
+offset_top = 439.0
+offset_right = 1152.0
+offset_bottom = 479.0
+theme = ExtResource("4_a8mk0")
+
+[node name="ProgressBar" type="ProgressBar" parent="GameUI/CountdownPanel"]
+layout_mode = 2
+size_flags_vertical = 1
+step = 1.0
+value = 100.0
+fill_mode = 1
+
+[node name="CountdownTimer" type="Timer" parent="GameUI"]
+wait_time = 20.0
+
+[node name="WaitingScreen" type="VBoxContainer" parent="GameUI"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="WaitMessage" type="Label" parent="GameUI/WaitingScreen"]
+layout_mode = 2
+theme = ExtResource("10_kvfkc")
+text = "Waiting for other player..."
+horizontal_alignment = 1
+
+[node name="EscBackOverlay" type="ColorRect" parent="GameUI"]
+visible = false
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 0, 0, 0.266667)
+
+[node name="EndOfGameScreen" type="VBoxContainer" parent="GameUI"]
+visible = false
+z_index = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -121.0
+offset_top = -73.5
+offset_right = 121.0
+offset_bottom = 73.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_kvfkc")
+
+[node name="HeaderLabel" type="Label" parent="GameUI/EndOfGameScreen"]
+layout_mode = 2
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="WinnerLabel" type="Label" parent="GameUI/EndOfGameScreen"]
+layout_mode = 2
+text = "Winner is:"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameUI/EndOfGameScreen"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlayerStatsLabel" type="Label" parent="GameUI/EndOfGameScreen/HBoxContainer"]
+layout_mode = 2
+text = "My Player got:"
+
+[node name="OpponentStatsLabel" type="Label" parent="GameUI/EndOfGameScreen/HBoxContainer"]
+layout_mode = 2
+text = "Opponent got:"
+horizontal_alignment = 2
+
+[node name="RestartButton" type="Button" parent="GameUI/EndOfGameScreen"]
+layout_mode = 2
+text = "Rematch?"
+
+[node name="ExitButton" type="Button" parent="GameUI/EndOfGameScreen"]
+layout_mode = 2
+text = "Exit Match"
+
+[node name="EscPanel" type="PanelContainer" parent="GameUI"]
+visible = false
+z_index = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -405.0
+offset_top = -271.0
+offset_right = 405.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("13_6cjwj")
+
+[node name="EscBox" type="VBoxContainer" parent="GameUI/EscPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GameUI/EscPanel/EscBox"]
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("10_kvfkc")
+text = "Pause Menu"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="GameUI/EscPanel/EscBox"]
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("10_kvfkc")
+text = "Game Volume:"
+horizontal_alignment = 1
+
+[node name="GameVolumeSlider" type="HSlider" parent="GameUI/EscPanel/EscBox"]
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("10_kvfkc")
+step = 5.0
+value = 50.0
+scrollable = false
+
+[node name="Label3" type="Label" parent="GameUI/EscPanel/EscBox"]
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("10_kvfkc")
+text = "Music Volume:"
+horizontal_alignment = 1
+
+[node name="MusicVolumeSlider2" type="HSlider" parent="GameUI/EscPanel/EscBox"]
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("10_kvfkc")
+step = 5.0
+value = 30.0
+scrollable = false
+
+[node name="ReturnToGameButton" type="Button" parent="GameUI/EscPanel/EscBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("10_kvfkc")
+text = "Return to Game"
+
+[node name="ExitGameButton" type="Button" parent="GameUI/EscPanel/EscBox"]
+layout_mode = 2
+theme = ExtResource("10_kvfkc")
+text = "Exit Game"

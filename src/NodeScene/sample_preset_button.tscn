@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c2y0m27eadb6i"]
 
 [ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="1_b5ufw"]
-[ext_resource type="Script" path="res://Scripts/OnlineGameScene_Specific/PresetButton.gd" id="1_yah4c"]
+[ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_PresetButton.gd" id="1_yah4c"]
 
 [node name="SamplePreset" type="Button"]
 theme = ExtResource("1_b5ufw")
