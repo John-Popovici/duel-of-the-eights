@@ -56,7 +56,9 @@ urlcolor=cyan          % color of external links
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-20/01/10 & Hemraj Bhatt & Added content to section 3\\
+20-01-10 & Hemraj Bhatt & Added content to section 3\\
+20-01-11 & John Popovici & Added content to section 4\\
+\dots & \dots & \dots\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -86,35 +88,70 @@ Complementary documents include the System Requirement Specifications
 and Module Guide.  The full documentation and implementation can be
 found at \url{https://github.com/John-Popovici/duel-of-the-eights/tree/main}.  \wss{provide the url for your repo}
 
+\newpage
 \section{Notation}
 
-\wss{You should describe your notation.  You can use what is below as
-  a starting point.}
+% \wss{You should describe your notation.  You can use what is below as a starting point.}
 
 The structure of the MIS for modules comes from \citet{HoffmanAndStrooper1995},
 with the addition that template modules have been adapted from
-\cite{GhezziEtAl2003}.
+\cite{GhezziEtAl2003}. Template used from \href{https://github.com/smiths/capTemplate}{the \progname GitHub}.\\
 %The mathematical notation comes from Chapter 3 of \citet{HoffmanAndStrooper1995}.  For instance, the symbol := is used for a multiple assignment statement and conditional rules follow the form $(c_1 \Rightarrow r_1 | c_2 \Rightarrow r_2 | ... | c_n \Rightarrow r_n )$.
 
-The following table summarizes the primitive data types used by \progname: \textit{Dice Duels: Duel of the Eights} 
+The following table summarizes the primary scene-building classes and elements used by \textit{Dice Duels: Duel of the Eights} through Godot. Many different types of nodes are used, each with specific functions and properties.
 
 \begin{center}
 \renewcommand{\arraystretch}{1.2}
 \noindent 
-\begin{tabular}{l l p{7.5cm}} 
+\begin{tabular}{l l} 
+\toprule 
+\textbf{Object} & \textbf{Description}\\ 
+\midrule
+Object & Dynamic base class holding properties, methods, signals, and scripts.\\
+Node & Inherits object, can be assigned as a child of another node.\\
+Scene & A tree of nodes.\\
+\bottomrule
+\end{tabular} 
+\end{center}
+
+The following table summarizes the primary coding data types used by \textit{Dice Duels: Duel of the Eights} through Godot.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\noindent 
+\begin{tabular}{p{1.5cm} c p{10cm}} 
 \toprule 
 \textbf{Data Type} & \textbf{Notation} & \textbf{Description}\\ 
 \midrule
-character & char & a single symbol or digit\\
-integer & $\mathbb{Z}$ & a number without a fractional component in (-$\infty$, $\infty$) \\
-natural number & $\mathbb{N}$ & a number without a fractional component in [1, $\infty$) \\
-real & $\mathbb{R}$ & any number in (-$\infty$, $\infty$)\\
+null & \textit{null} & Denotes the absence of a value. \\
+boolean & \textit{bool} & Holds one of 2 values, true or false.\\
+integer & \textit{int} & A number without a fractional component within the bounds of signed 64-bit integer type [$-2^{63}$, $2^{63} - 1$].\\
+%infinity & \textit{INF} or $\infty$ & denotes a number larger than the maximum representable. Can also be negative to denote a number smaller \\
+%not a number & \textit{NAN} & a non-numerical value that has been defined as a number \\
+float or decimal & \textit{float} & A decimal number, as representable by 64-bit double-precision floating-point.\\
+string & \textit{String} or $"\dots"$ & A sequence of unicode characters.\\
+signal & \textit{signal} & Allows connected objects to react to events.\\
+\bottomrule
+\end{tabular} 
+\end{center}
+
+The following table summarizes the primary data structures used by \textit{Dice Duels: Duel of the Eights} through Godot.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\noindent 
+\begin{tabular}{l l l} 
+\toprule 
+\textbf{Structure} & \textbf{Example} & \textbf{Description}\\ 
+\midrule
+array & $[5, "Hello", 2.3]$ & Sequence of data elements.\\
+dictionary & $\{"White": 35, "Red": 10\}$ & Set of key and value pairs.\\
 \bottomrule
 \end{tabular} 
 \end{center}
 
 \noindent
-The specification of \textit{Dice Duels: Duel of the Eights} uses some derived data types: sequences, strings, and tuples. Sequences are lists filled with elements of the same data type. Strings are sequences of characters. Tuples contain a list of values, potentially of different types. In addition, \textit{Dice Duels: Duel of the Eights} uses functions, which are defined by the data types of their inputs and outputs. Local functions are described by giving their type signature followed by their specification.
+The specification of \textit{Dice Duels: Duel of the Eights} uses some derived data types such as Vector3. Vector3 contains three floating point numbers, representing coordinates or direction vectors. In addition, \textit{Dice Duels: Duel of the Eights} uses functions, which are defined by the data types of their inputs and outputs. Local functions are described by giving their type signature followed by their specification.
 
 \section{Module Decomposition}
 
