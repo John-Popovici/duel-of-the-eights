@@ -49,7 +49,8 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-2025/01/08 & Hemraj Bhatt & Added content to sections 4.1 \& 4.2\\
+2025-01-08 & Hemraj Bhatt & Added content to sections 4.1 \& 4.2\\
+2025-01-11 & John Popovici & Formatted section 2; Added content to sections 4.1 \& 4.2\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -80,6 +81,8 @@ This section records information for easy reference.
   \wss{etc.} & \wss{...}\\
   \bottomrule
 \end{tabular}\\
+
+See \href{https://github.com/John-Popovici/duel-of-the-eights/blob/main/docs/SRS/SRS.pdf}{SRS Documentation} for any additional.
 
 \newpage
 
@@ -160,17 +163,13 @@ adapted here is called design for
 change.
 
 \begin{description}
-\item[\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific
-  hardware on which the software is running. \textbf{*Example provided in template}
-\item[\refstepcounter{acnum} \actheacnum \label{acInput}:] The format of the
-  initial input data. \textbf{*Example provided in template}
+\item[\refstepcounter{acnum} \actheacnum \label{acOS}:] Operating System: Godot makes porting the game to other operating systems simpler, but specific interfaces may have to change and testing would be required.
+\item[\refstepcounter{acnum} \actheacnum \label{acScoring}:] Scoring: The scoring calculations may be modified based on usability and player testing.
 \item[\refstepcounter{acnum} \actheacnum \label{acUI}:] User Interface (UI): A rudimentary UI is currently used for development. The UI will need to be updated to accommodate the addition of animations and will have to be refreshed in order to look more appealing once the game's major features are complete.
-\item ...
+\item[\refstepcounter{acnum} \actheacnum \label{acDice}:] Dice: Dice types can continually be added and modified as they use a simple interface and if added are simple to integrate within the larger system.
 \end{description}
 
-\wss{Anticipated changes relate to changes that would be made in requirements,
-design or implementation choices.  They are not related to changes that are made
-at run-time, like the values of parameters.}
+% \wss{Anticipated changes relate to changes that would be made in requirements, design or implementation choices.  They are not related to changes that are made at run-time, like the values of parameters.}
 
 \subsection{Unlikely Changes} \label{SecUchange}
 
@@ -182,10 +181,11 @@ will potentially need to be modified. Hence, it is not intended that these
 decisions will be changed.
 
 \begin{description}
-\item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] Input devices: The game is designed to play on a computer, i.e. it is designed to work with a keyboard and mouse. It is unlikely that the game will be playable through other input means such as controllers.
-
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] Input Devices: The game is designed to play on a computer, i.e. it is designed to work with a keyboard and mouse. It is unlikely that the game will be playable through other input means such as controllers.
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucGames}:] Game Types: Despite being likely changes in the SRS stage of development, once formed, the game types designed would require massive module changes if they were to further be modified.
 \end{description}
 
+\newpage
 \section{Module Hierarchy} \label{SecMH}
 
 This section provides an overview of the module design. Modules are summarized
