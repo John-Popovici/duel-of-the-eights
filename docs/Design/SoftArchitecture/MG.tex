@@ -51,6 +51,7 @@
 \midrule
 2025-01-08 & Hemraj Bhatt & Added content to sections 4.1 \& 4.2\\
 2025-01-11 & John Popovici & Formatted section 2; Added content to sections 4.1 \& 4.2\\
+2025-01-11 & Hemraj Bhatt & Updated content on section 4\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -164,6 +165,9 @@ change.
 
 \begin{description}
 \item[\refstepcounter{acnum} \actheacnum \label{acOS}:] Operating System: Godot makes porting the game to other operating systems simpler, but specific interfaces may have to change and testing would be required.
+\item[\refstepcounter{acnum} \actheacnum \label{acHardware}:] Hardware: The specific hardware on which the software runs is expected to evolve, particularly as the online multiplayer functionality will require a server to enable long-distance gameplay. This aspect of the project is subject to change based on cost, performance, and scalability requirements.
+\item[\refstepcounter{acnum} \actheacnum \label{acUserInput}:] User Input: The format of the initial input data is expected to evolve to accommodate users in operating the game and setting game rules. These changes will be made to minimize user errors and facilitate a smoother gameplay experience.
+\item[\refstepcounter{acnum} \actheacnum \label{acFileType}:] File Type: The file structure for saving game states and related data is expected to evolve. A file structure that ensures efficient storage and facilitates quick retrieval of game states is expected to be used. 
 \item[\refstepcounter{acnum} \actheacnum \label{acScoring}:] Scoring: The scoring calculations may be modified based on usability and player testing.
 \item[\refstepcounter{acnum} \actheacnum \label{acUI}:] User Interface (UI): A rudimentary UI is currently used for development. The UI will need to be updated to accommodate the addition of animations and will have to be refreshed in order to look more appealing once the game's major features are complete.
 \item[\refstepcounter{acnum} \actheacnum \label{acDice}:] Dice: Dice types can continually be added and modified as they use a simple interface and if added are simple to integrate within the larger system.
@@ -181,7 +185,7 @@ will potentially need to be modified. Hence, it is not intended that these
 decisions will be changed.
 
 \begin{description}
-\item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] Input Devices: The game is designed to play on a computer, i.e. it is designed to work with a keyboard and mouse. It is unlikely that the game will be playable through other input means such as controllers.
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucInput}:] Input Devices: The game is designed to play on a computer, i.e. it is designed to work with a keyboard and mouse. It is unlikely that the game will be playable through other input means such as controllers.
 \item[\refstepcounter{ucnum} \uctheucnum \label{ucGames}:] Game Types: Despite being likely changes in the SRS stage of development, once formed, the game types designed would require massive module changes if they were to further be modified.
 \end{description}
 
