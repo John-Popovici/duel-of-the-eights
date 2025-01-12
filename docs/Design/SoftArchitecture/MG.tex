@@ -234,6 +234,33 @@ actually be implemented.
 \label{TblMH}
 \end{table}
 
+This is the draft answer for this section:
+
+The modules are categorized into three types: Hardware-Hiding, Behavior-Hiding, and Software Decision modules. Below is the hierarchy:
+
+\subsection{Hardware-Hiding Modules}
+\begin{itemize}
+    \item \textbf{CustomBaseDie Module:} Handles the 3D dice models, textures, and physics.
+    \item \textbf{DynamicDiceContainer Module:} Manages dice interactions and rendering.
+    \item \textbf{NetworkManager2P Module:} Manages connection and synchronization for two-player games.
+\end{itemize}
+
+\subsection{Behavior-Hiding Modules}
+\begin{itemize}
+    \item \textbf{MultiGameManager Module:} Manages the sequence of multiple Yahtzee games and customization phases.
+    \item \textbf{PlayerManager Module:} Tracks player states, scores, and upgrades.
+    \item \textbf{GameManager Module:} Handles a single game of Yahtzee.
+    \item \textbf{CustomizationMenu Module:} Implements dice and game customization between games.
+    \item \textbf{DynamicScoreboard Module:} Tracks and displays scores dynamically.
+\end{itemize}
+
+\subsection{Software Decision Modules}
+\begin{itemize}
+    \item \textbf{ScoreCalculator Module:} Calculates scores for dice rolls based on Yahtzee rules and custom modifiers.
+    \item \textbf{GameSettings Module:} Loads and stores settings for this Yahtzee variant.
+    \item \textbf{GameUI Module:} Provides the interface for interacting with the game and displaying relevant data.
+\end{itemize}
+
 \section{Connection Between Requirements and Design} \label{SecConnection}
 
 The design of the system is intended to satisfy the requirements developed in
@@ -314,6 +341,60 @@ to be implemented.
 \end{description}
 
 \subsubsection{Etc.}
+
+\subsection{Hardware-Hiding Modules}
+\subsubsection{CustomBaseDie Module}
+\textbf{Secrets:} The interaction logic and rendering of custom dice, including dynamic face changes.\\
+\textbf{Services:} Manages dice texture changes based on player customization and handles physics and collision for rolling.\\
+\textbf{Implemented By:} SFWRENG 4G06.
+
+\subsubsection{DynamicDiceContainer Module}
+\textbf{Secrets:} The algorithms for managing a collection of dice and their rendering.\\
+\textbf{Services:} Dynamically creates and organizes dice based on game settings and updates dice states during gameplay.\\
+\textbf{Implemented By:} SFWRENG 4G06.
+
+\subsubsection{NetworkManager2P Module}
+\textbf{Secrets:} The underlying implementation of peer-to-peer communication and synchronization between two clients.\\
+\textbf{Services:} Handles connection setup, data synchronization, and disconnection handling for a 2-player game.\\
+\textbf{Implemented By:} SFWRENG 4G06.
+
+\subsection{Behavior-Hiding Modules}
+\subsubsection{MultiGameManager Module}
+\textbf{Secrets:} The logic for managing multiple games, including customization and upgrades between games.\\
+\textbf{Services:} Tracks progress and integrates player upgrades into gameplay.\\
+\textbf{Implemented By:} SFWRENG 4G06.
+
+\subsubsection{PlayerManager Module}
+\textbf{Secrets:} The data structure for tracking player-specific details, including scores, dice, and upgrades.\\
+\textbf{Services:} Tracks and updates player states, including consumables and modifiers.\\
+\textbf{Implemented By:} SFWRENG 4G06.
+
+\subsubsection{CustomizationMenu Module}
+\textbf{Secrets:} The logic for presenting and applying customization options between games.\\
+\textbf{Services:} Displays upgrade options, enforces selection rules, and updates player dice and modifiers.\\
+\textbf{Implemented By:} SFWRENG 4G06.
+
+\subsubsection{DynamicScoreboard Module}
+\textbf{Secrets:} The algorithms for dynamically generating score displays.\\
+\textbf{Services:} Updates and displays scores in real-time during gameplay.\\
+\textbf{Implemented By:} SFWRENG 4G06.
+
+\subsection{Software Decision Modules}
+\subsubsection{ScoreCalculator Module}
+\textbf{Secrets:} The scoring algorithms based on Yahtzee rules and custom modifiers.\\
+\textbf{Services:} Calculates scores for dice rolls and applies passive modifiers.\\
+\textbf{Implemented By:} SFWRENG 4G06.
+
+\subsubsection{GameSettings Module}
+\textbf{Secrets:} Configuration storage and retrieval.\\
+\textbf{Services:} Stores and loads game settings, including the number of games and customization options.\\
+\textbf{Implemented By:} SFWRENG 4G06.
+
+\subsubsection{GameUI Module}
+\textbf{Secrets:} The logic for UI components and interactions.\\
+\textbf{Services:} Displays information to players, including scores and customization options, and provides action buttons.\\
+\textbf{Implemented By:} SFWRENG 4G06.
+
 
 \section{Traceability Matrix} \label{SecTM}
 

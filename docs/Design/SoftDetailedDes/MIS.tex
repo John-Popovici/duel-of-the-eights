@@ -266,6 +266,209 @@ The following table is taken directly from the Module Guide document for this pr
 
 \newpage
 
+This is the draft MIS section
+
+\subsection*{3.1 MIS of MultiGameManager Module}
+\textbf{3.1.1 Module}\\
+MultiGameManager
+
+\textbf{3.1.2 Uses}\\
+GameManager, PlayerManager, CustomizationMenu
+
+\textbf{3.1.3 Syntax}\\
+\textbf{3.1.3.1 Exported Constants}\\
+None.  
+
+\textbf{3.1.3.2 Exported Access Programs}
+\begin{itemize}
+    \item \texttt{start\_game\_sequence()}
+    \item \texttt{finish\_game(winner: String)}
+    \item \texttt{apply\_customizations()}
+\end{itemize}
+
+\textbf{3.1.4 Semantics}\\
+\textbf{3.1.4.1 State Variables}\\
+\begin{itemize}
+    \item \texttt{games\_played}: Tracks completed games.
+    \item \texttt{total\_games}: Total number of games in the sequence.
+\end{itemize}
+
+\textbf{3.1.4.2 Environment Variables}\\
+Player inputs for selecting upgrades.
+
+\textbf{3.1.4.3 Assumptions}\\
+All dependencies, such as PlayerManager and GameManager, are initialized.
+
+\textbf{3.1.4.4 Access Routine Semantics}
+\begin{itemize}
+    \item \texttt{start\_game\_sequence()}\\
+    \textbf{Transition:} Initializes the first game in the sequence.\\
+    \textbf{Exception:} Throws error if no players are connected.
+
+    \item \texttt{finish\_game(winner: String)}\\
+    \textbf{Transition:} Updates win count and triggers customization phase.
+
+    \item \texttt{apply\_customizations()}\\
+    \textbf{Transition:} Applies player-selected upgrades to the next game.
+\end{itemize}
+
+\textbf{3.1.4.5 Local Functions}
+\begin{itemize}
+    \item \texttt{update\_scores()}
+    \item \texttt{check\_win\_conditions()}
+\end{itemize}
+
+\subsection*{3.2 MIS of GameManager Module}
+\textbf{3.2.1 Module}\\
+GameManager
+
+\textbf{3.2.2 Uses}\\
+PlayerManager, ScoreCalculator
+
+\textbf{3.2.3 Syntax}\\
+\textbf{3.2.3.1 Exported Constants}\\
+None.  
+
+\textbf{3.2.3.2 Exported Access Programs}
+\begin{itemize}
+    \item \texttt{initialize\_game()}
+    \item \texttt{end\_round()}
+    \item \texttt{finalize\_scores()}
+\end{itemize}
+
+\textbf{3.2.4 Semantics}\\
+\textbf{3.2.4.1 State Variables}\\
+\begin{itemize}
+    \item \texttt{current\_round}: Tracks the current round in the ongoing game.
+\end{itemize}
+
+\textbf{3.2.4.2 Environment Variables}\\
+Network manager for multiplayer actions.
+
+\textbf{3.2.4.3 Assumptions}\\
+Game rules are preloaded, and dice configurations are valid.
+
+\textbf{3.2.4.4 Access Routine Semantics}
+\begin{itemize}
+    \item \texttt{initialize\_game()}\\
+    \textbf{Transition:} Sets up dice, players, and round configurations.
+
+    \item \texttt{end\_round()}\\
+    \textbf{Transition:} Ends the current round and updates scores.
+
+    \item \texttt{finalize\_scores()}\\
+    \textbf{Transition:} Calculates and displays final scores for the game.
+\end{itemize}
+
+\textbf{3.2.4.5 Local Functions}
+\begin{itemize}
+    \item \texttt{process\_dice\_rolls()}
+    \item \texttt{apply\_modifiers()}
+\end{itemize}
+
+\subsection*{3.3 MIS of PlayerManager Module}
+\textbf{3.3.1 Module}\\
+PlayerManager
+
+\textbf{3.3.2 Uses}\\
+GameManager
+
+\textbf{3.3.3 Syntax}\\
+\textbf{3.3.3.1 Exported Constants}\\
+None.  
+
+\textbf{3.3.3.2 Exported Access Programs}
+\begin{itemize}
+    \item \texttt{update\_player\_stats(player\_id: String, stats: Dictionary)}
+    \item \texttt{apply\_consumable(player\_id: String, consumable: String)}
+\end{itemize}
+
+\textbf{3.3.4 Semantics}\\
+\textbf{3.3.4.1 State Variables}\\
+\begin{itemize}
+    \item \texttt{player\_stats}: A dictionary containing player-specific data (health, score, etc.).
+\end{itemize}
+
+\textbf{3.3.4.2 Environment Variables}\\
+Input from game events or player actions.
+
+\textbf{3.3.4.3 Assumptions}\\
+Each player has a unique \texttt{player\_id}.
+
+\textbf{3.3.4.4 Access Routine Semantics}
+\begin{itemize}
+    \item \texttt{update\_player\_stats(player\_id, stats)}\\
+    \textbf{Transition:} Updates player state variables based on the input dictionary.
+
+    \item \texttt{apply\_consumable(player\_id, consumable)}\\
+    \textbf{Transition:} Applies the effect of a consumable item to the specified player.
+\end{itemize}
+
+\textbf{3.3.4.5 Local Functions}
+\begin{itemize}
+    \item \texttt{track\_modifiers()}
+    \item \texttt{reset\_player\_state()}
+\end{itemize}
+
+\subsection*{3.4 MIS of NetworkManager2P Module}
+\textbf{3.4.1 Module}\\
+NetworkManager2P
+
+\textbf{3.4.2 Uses}\\
+GameManager, PlayerManager, CustomizationMenu
+
+\textbf{3.4.3 Syntax}\\
+\textbf{3.4.3.1 Exported Constants}\\
+None.  
+
+\textbf{3.4.3.2 Exported Access Programs}
+\begin{itemize}
+    \item \texttt{start\_connection()}
+    \item \texttt{disconnect()}
+    \item \texttt{send\_data(data: Dictionary)}
+    \item \texttt{receive\_data()}
+    \item \texttt{handle\_disconnection(player\_id: String)}
+\end{itemize}
+
+\textbf{3.4.4 Semantics}\\
+\textbf{3.4.4.1 State Variables}\\
+\begin{itemize}
+    \item \texttt{connected\_peers}: A dictionary tracking the status of connected players.
+\end{itemize}
+
+\textbf{3.4.4.2 Environment Variables}\\
+Network events, such as player join or disconnect signals.
+
+\textbf{3.4.4.3 Assumptions}\\
+Assumes a reliable network transport layer. Players do not exceed the 2-player limit for this module.
+
+\textbf{3.4.4.4 Access Routine Semantics}
+\begin{itemize}
+    \item \texttt{start\_connection()}\\
+    \textbf{Transition:} Establishes a peer-to-peer connection and initializes the network state.
+
+    \item \texttt{disconnect()}\\
+    \textbf{Transition:} Cleans up network state and disconnects from peers.
+
+    \item \texttt{send\_data(data)}\\
+    \textbf{Transition:} Sends serialized data to the connected peer.
+
+    \item \texttt{receive\_data()}\\
+    \textbf{Output:} Processes incoming data and synchronizes game state.
+
+    \item \texttt{handle\_disconnection(player\_id)}\\
+    \textbf{Transition:} Notifies the system of the disconnection and updates state.
+\end{itemize}
+
+\textbf{3.4.4.5 Local Functions}
+\begin{itemize}
+    \item \texttt{serialize\_data(data: Dictionary) -> String}
+    \item \texttt{deserialize\_data(data: String) -> Dictionary}
+\end{itemize}
+
+
+\newpage
+
 \section{Appendix} \label{Appendix}
 
 \wss{Extra information if required}
