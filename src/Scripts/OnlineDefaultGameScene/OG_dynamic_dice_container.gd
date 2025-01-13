@@ -10,6 +10,15 @@ var start_positions := [
 	Vector3(0, 10, -4), Vector3(4, 10, -4), Vector3(-4, 10, -4)
 ]
 
+# Define positions for setting dice aside
+var aside_positions := [
+	Vector3(20, 1, -20), Vector3(20, 1, -10), Vector3(20, 1, 0),
+	Vector3(20, 1, 10), Vector3(20, 1, 20)
+]
+# In cases of more than 5 dice we shift aside postions on x axis by this constant
+var aside_row_gap := Vector3(10, 0, 0)
+
+
 
 # Rolls all dice with random force and torque
 func roll_dice() -> void:
@@ -18,10 +27,9 @@ func roll_dice() -> void:
 
 # Rolls only selected dice
 func roll_selected_dice() -> void:
-	moveDiceAside()
-	for die in dice_nodes:
-		if die.get_selected_status():  # Check if the die is selected
-			die.roll()
+	moveDiceAside(get_unselected_dice())
+	for die in get_selected_dice():
+		die.roll()
 
 func roll_rolling_or_invalid_dice() -> void:
 	for die in dice_nodes:
@@ -45,6 +53,13 @@ func get_selected_dice() -> Array:
 		if die.get_selected_status():
 			selected_dice.append(die)
 	return selected_dice
+	
+func get_unselected_dice() -> Array:
+	var unselected_dice = []
+	for die in dice_nodes:
+		if not die.get_selected_status():
+			unselected_dice.append(die)
+	return unselected_dice
 
 # Returns a list of all selected dice
 func get_rolling_dice() -> Array:
@@ -93,10 +108,20 @@ func add_dice(dice_count: int, dice_type: int) -> void:
 		add_child(dice)
 		dice_nodes.append(dice)
 
-func moveDiceAside() -> void:
+func moveDiceAside(dice_to_move: Array) -> void:
 	#move dice that are not being rerolled (i.e. not selected at time of reroll, when this is called)
 	#to the side of the board (or other location, to not interfere with the rerolling dice)
-	pass
+	dice_to_move.sort_custom(func(a, b): return a.get_face_value() < b.get_face_value())
+	var iterator = 0
+	var current_row = 0
+	var max_slots = aside_positions.size()
+	for die in dice_to_move:
+		die.setAsideProperties(aside_positions[iterator] + (aside_row_gap*current_row))
+		die.moveToAsidePosition()
+		iterator += 1
+		if iterator >= max_slots:
+			iterator = 0
+			current_row += 1
 
 func moveDiceInLine() -> void:
 	#move dice once read to an organized display on the board

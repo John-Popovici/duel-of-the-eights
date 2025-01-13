@@ -6,6 +6,9 @@ extends RigidBody3D
 @export var num_faces: int
 @export var start_position: Vector3 = Vector3.ZERO
 @export var start_rotation: Vector3 = Vector3.ZERO
+@export var aside_position: Vector3 = Vector3.ZERO
+@export var aside_rotation: Vector3 = Vector3.ZERO
+@export var move_aside_mode: String = "lerp"
 @export var start_time: float
 @export var impulse_range: int
 @export var torque_range: int
@@ -160,6 +163,38 @@ func setStartConditions(_pos: Vector3, _rot: Vector3, _time: float) -> void:
 	start_time = _time
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
+	
+func setAsideProperties(_pos: Vector3) -> void:
+	aside_position = _pos
+	aside_rotation = self.getStraightRotation()
+	
+func moveToAsidePosition() -> void:
+	self.set_freeze_enabled(false)
+	if move_aside_mode == "snap":
+		# instantly snap die to designated aside location while not being rolled
+		global_transform.origin = self.aside_position
+		rotation_degrees = self.aside_rotation
+	elif move_aside_mode == "lerp":
+		# smoothly lerp die to designated aside location while not being rolled
+		var start_transform = global_transform
+		var start_rotation = rotation_degrees
+		var t = 0.0
+		while t < 1.0:
+			t += 0.05  # Lerp speed, adjust as needed
+			global_transform.origin = start_position
+			rotation_degrees = start_rotation
+			global_transform.origin = start_transform.origin.lerp(self.aside_position, t)
+			rotation_degrees = start_rotation.lerp(self.aside_rotation, t)
+			await get_tree().process_frame  # Wait until the next frame
+	self.set_freeze_enabled(true)
+	
+# Setter function for move_mode
+func set_move_aside_mode(mode: String) -> void:
+	if mode in ["lerp", "snap"]:
+		move_aside_mode = mode
+		
+func getStraightRotation() -> Vector3:
+	return Vector3.ZERO
 
 func _process(_delta: float) -> void:
 	# Calculate the speed by checking the length of the linear and angular velocities
