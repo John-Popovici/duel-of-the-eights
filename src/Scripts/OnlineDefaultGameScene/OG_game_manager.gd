@@ -31,7 +31,7 @@ var game_over: bool = false
 func _ready() -> void:
 	game_settings_ui.connect("game_settings_ready", self._on_settings_ready)
 	GameUI.visible = false
-	network_manager.connect("received_game_settings", self.receive_game_settings)
+	#network_manager.connect("received_game_settings", self.receive_game_settings)
 	myPlayer.connect("rollsReadandWaiting", self.set_rolls_read)
 	myPlayer.connect("rollsReadandWaiting", self.waiting_on_other_player)
 	myPlayer.connect("player_stats_updated", self.update_player_stats_signal)
