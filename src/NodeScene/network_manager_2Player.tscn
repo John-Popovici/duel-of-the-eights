@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bb1hsjv35krnk"]
 
 [ext_resource type="Script" path="res://Scripts/networkManager2P.gd" id="1_n7215"]
-[ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_connectionUI.gd" id="2_b1k17"]
+[ext_resource type="Script" path="res://Scripts/connectionUI.gd" id="2_b1k17"]
 [ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/Default_Pixel_Blue/PanelBlueBoxBackgroundStyle.tres" id="3_bplf4"]
 [ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="4_77rg4"]
 

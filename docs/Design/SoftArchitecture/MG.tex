@@ -52,6 +52,7 @@
 2025-01-08 & Hemraj Bhatt & Added content to sections 4.1 \& 4.2\\
 2025-01-11 & John Popovici & Formatted section 2; Added content to sections 4.1 \& 4.2\\
 2025-01-11 & Hemraj Bhatt & Updated content on section 4\\
+2025-01-14 & Hemraj Bhatt & Updated content on section 3\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -98,23 +99,15 @@ See \href{https://github.com/John-Popovici/duel-of-the-eights/blob/main/docs/SRS
 \pagenumbering{arabic}
 
 \section{Introduction}
+\textbf{Template introduction refactored. A few wording changes.}\\
 
-Decomposing a system into modules is a commonly accepted approach to developing
-software.  A module is a work assignment for a programmer or programming
-team~\citep{ParnasEtAl1984}.  We advocate a decomposition
-based on the principle of information hiding~\citep{Parnas1972a}.  This
-principle supports design for change, because the ``secrets'' that each module
-hides represent likely future changes.  Design for change is valuable in SC,
-where modifications are frequent, especially during initial development as the
-solution space is explored.  
+\noindent{}Decomposing a system into modules is a commonly accepted approach to developing software. A module is a work assignment for a programmer or programming team~\citep{ParnasEtAl1984}. For the Dual of the Eights project, we advocate a decomposition based on the principle of information hiding~\citep{Parnas1972a}. This principle supports design for change, as the "secrets" that each module hides represent likely future changes. This approach is particularly valuable in the context of Dual of the Eights, where modifications to game rules, mechanics, or visual elements are likely during development and playtesting phases.
 
-Our design follows the rules layed out by \citet{ParnasEtAl1984}, as follows:
+Our design follows the guidelines laid out by \citet{ParnasEtAl1984}, as follows:
 \begin{itemize}
-\item System details that are likely to change independently should be the
-  secrets of separate modules.
-\item Each data structure is implemented in only one module.
-\item Any other program that requires information stored in a module's data
-  structures must obtain it by calling access programs belonging to that module.
+\item System details that are likely to change independently, such as scoring algorithms, dice physics, or player health mechanics, should be the secrets of separate modules.
+\item Each data structure, such as those representing dice, players, or game states, is implemented in only one module.
+\item Any other module requiring information stored in a module's data structures must obtain it by calling access programs belonging to that module.
 \end{itemize}
 
 After completing the first stage of the design, the Software Requirements
