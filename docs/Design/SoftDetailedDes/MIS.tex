@@ -58,6 +58,7 @@ urlcolor=cyan          % color of external links
 \midrule
 20-01-10 & Hemraj Bhatt & Added content to section 3\\
 20-01-11 & John Popovici & Added content to section 4; Updated section 2\\
+20-01-14 & Naishan Guo & Added content to section 6\\
 \dots & \dots & \dots\\
 \bottomrule
 \end{tabularx}
@@ -270,52 +271,61 @@ This is the draft MIS section
 
 \subsection*{3.1 MIS of MultiGameManager Module}
 \textbf{3.1.1 Module}\\
-MultiGameManager
+\noindent MultiGameManager \\
 
-\textbf{3.1.2 Uses}\\
-GameManager, PlayerManager, CustomizationMenu
+\noindent \textbf{3.1.2 Uses}\\
 
-\textbf{3.1.3 Syntax}\\
+GameSettings, GameManager, CustomizationMenu, networkmanager2p\\
+
+
+\noindent \textbf{3.1.3 Syntax}\\
 \textbf{3.1.3.1 Exported Constants}\\
 None.  
 
-\textbf{3.1.3.2 Exported Access Programs}
+\noindent \textbf{3.1.3.2 Exported Access Programs}
 \begin{itemize}
-    \item \texttt{start\_game\_sequence()}
-    \item \texttt{finish\_game(winner: String)}
-    \item \texttt{apply\_customizations()}
+    \item \texttt{finish\_game(winner: String, myPlayerFinalStats: Dictionary, OpponentFinalStats: Dictionary)}
+    \item \texttt{loadGameSetup()}
 \end{itemize}
 
 \textbf{3.1.4 Semantics}\\
 \textbf{3.1.4.1 State Variables}\\
 \begin{itemize}
-    \item \texttt{games\_played}: Tracks completed games.
+    \item \texttt{current\_game\_count}: Tracks the number of completed games
     \item \texttt{total\_games}: Total number of games in the sequence.
+    \item \texttt{self\_wins}: Tracks the number of wins the user has 
+    \item \texttt{opponent\_wins}: Tracks number of wins the opponent has
+    \item \texttt{game\_settings}: Tracks the current settings and parameters for the current game
+    \item \texttt{hand\_settings}: Tracks the settings and requirements for the valid dice hands of the current game session (i.e. requirements for a full house, requirements for a yatzee, etc.)
+
 \end{itemize}
 
 \textbf{3.1.4.2 Environment Variables}\\
-Player inputs for selecting upgrades.
+
+N/A\\
 
 \textbf{3.1.4.3 Assumptions}\\
-All dependencies, such as PlayerManager and GameManager, are initialized.
+
+All dependencies, such as GameSettings and GameManager are initialized.\\
 
 \textbf{3.1.4.4 Access Routine Semantics}
 \begin{itemize}
-    \item \texttt{start\_game\_sequence()}\\
-    \textbf{Transition:} Initializes the first game in the sequence.\\
-    \textbf{Exception:} Throws error if no players are connected.
 
-    \item \texttt{finish\_game(winner: String)}\\
-    \textbf{Transition:} Updates win count and triggers customization phase.
+    \item \texttt{finish\_game(winner: String, myPlayerFinalStats: Dictionary, OpponentFinalStats: Dictionary)}\\
+    \textbf{Transition:} Updates win count, triggers customization phase.
+    
+    \item \texttt{loadGameSetup()}\\
+    \textbf{Transition:} Retrieves and implements the game settings for this session.
 
-    \item \texttt{apply\_customizations()}\\
-    \textbf{Transition:} Applies player-selected upgrades to the next game.
 \end{itemize}
 
 \textbf{3.1.4.5 Local Functions}
 \begin{itemize}
-    \item \texttt{update\_scores()}
-    \item \texttt{check\_win\_conditions()}
+    \item \texttt{start\_next\_game()}
+    \item \texttt{start\_game()}
+    \item \texttt{end\_game()}
+    \item \texttt{\_on\_settings\_ready(\_game\_settings: Dictionary, \_hand\_settings: Dictionary)}
+    \item \texttt{recieve\_game\_settings(\_game\_settings: Dictionary, \_hand\_settings: Dictionary)}
 \end{itemize}
 
 \subsection*{3.2 MIS of GameManager Module}
@@ -368,25 +378,48 @@ Game rules are preloaded, and dice configurations are valid.
 
 \subsection*{3.3 MIS of PlayerManager Module}
 \textbf{3.3.1 Module}\\
-PlayerManager
+ PlayerManager\\
 
-\textbf{3.3.2 Uses}\\
-GameManager
+\noindent \textbf{3.3.2 Uses}\\
+DynamicDiceContainer,  networkmanager2p\\
 
-\textbf{3.3.3 Syntax}\\
-\textbf{3.3.3.1 Exported Constants}\\
-None.  
+\noindent \textbf{3.3.3 Syntax}
 
+\noindent \textbf{3.3.3.1 Exported Constants}
+\begin{itemize}
+	\item \texttt{ N/A}
+\end{itemize}
 \textbf{3.3.3.2 Exported Access Programs}
 \begin{itemize}
-    \item \texttt{update\_player\_stats(player\_id: String, stats: Dictionary)}
-    \item \texttt{apply\_consumable(player\_id: String, consumable: String)}
+	\item \texttt{setup\_player(\_myPlayer: bool, initial\_health: int, \_playerName: String, \_hostDevice: bool, \_dice\_container: Node3D)}
+    \item \texttt{update\_score(new\_score: int)}
+    \item \texttt{get\_total\_score()}
+    \item \texttt{get\_Last\_score()}
+    \item \texttt{adjust\_health(points: int)}
+    \item \texttt{getHealth()}
+    \item \texttt{roll\_dice()}
+    \item \texttt{roll\_selected\_dice()}
+    \item \texttt{pass\_roll()}
+    \item \texttt{setRolls(\_rolls: Array)}
+    \item \texttt{getRolls()}
+    \item \texttt{get\_dice()}
+    \item \texttt{clearRolls()}
+    \item \texttt{getStats()}
+    \item \texttt{getState()}
 \end{itemize}
 
-\textbf{3.3.4 Semantics}\\
+\noindent \textbf{3.3.4 Semantics}\\
 \textbf{3.3.4.1 State Variables}\\
 \begin{itemize}
-    \item \texttt{player\_stats}: A dictionary containing player-specific data (health, score, etc.).
+    \item \texttt{score}: Contains the players current total score accumulated throughout the current game.
+    \item \texttt{last\_score}: Contains the most recent score achieved by the player during the last round.
+    \item \texttt{health\_points}: Contains the current health of the player.
+    \item \texttt{rolls}: Tracks the players current dice roll values
+    \item \texttt{dice}: Tracks the players physical dice.
+    \item \texttt{selected\_hand}: Tracks the players chosen dice hand for the current round 
+    \item \texttt{myPlayer}: checks if this instance of playermanager is for the player themselves, or for the player's opponent
+    \item \texttt{playerName}: Name of the player
+    \item \texttt{hostDevice}: checks if player's device is the current host of the game
 \end{itemize}
 
 \textbf{3.3.4.2 Environment Variables}\\
@@ -397,17 +430,59 @@ Each player has a unique \texttt{player\_id}.
 
 \textbf{3.3.4.4 Access Routine Semantics}
 \begin{itemize}
-    \item \texttt{update\_player\_stats(player\_id, stats)}\\
-    \textbf{Transition:} Updates player state variables based on the input dictionary.
 
-    \item \texttt{apply\_consumable(player\_id, consumable)}\\
-    \textbf{Transition:} Applies the effect of a consumable item to the specified player.
+	\item \texttt{setup\_player(\_myPlayer: bool, initial\_health: int, \_playerName: String, \_hostDevice: bool, \_dice\_container: Node3D)}\\
+	 \textbf{Transition:} Initialized the player with their default values and game settings.
+	
+    \item \texttt{update\_score(new\_score: int)}\\
+    	\textbf{Transition:} updates the total score of the player to include the new score from the most recent round, and updates the last score to be the new score achieved during that round.
+    
+    \item \texttt{get\_total\_score()}\\
+    \textbf{Output:} Returns the player's total score.
+        	
+    \item \texttt{get\_Last\_score()}\\
+    \textbf{Output:} Returns the player's last score from the previous round.
+    
+    \item \texttt{adjust\_health(points: int)}\\
+    \textbf{Transition:} updates the health of the player.
+    
+    \item \texttt{getHealth()}\\
+    \textbf{Transition:} Returns the player's health.
+    
+    \item \texttt{roll\_dice()}\\
+    \textbf{Transition:} Rolls all the Dice. The rolled dice are tracked, and the new dice roll values retrieved.
+    
+    \item \texttt{roll\_selected\_dice()}\\
+    \textbf{Transition:} Rolls only the dice specified by the player. The rolled dice are tracked, and the new dice roll values retrieved.
+    
+    \item \texttt{pass\_roll()}\\
+    \textbf{Transition:} Skips the dice roll for that turn
+    
+    \item \texttt{setRolls(\_rolls: Array)}\\
+	\textbf{Transition:} Sets the values of the player's dice to the specified value
+    
+    \item \texttt{getRolls()}\\
+    	\textbf{Output:} Returns the dice values 
+    
+    \item \texttt{get\_dice()}\\
+    	\textbf{Output:} tells the requester which dice belongs to the player
+    	
+    \item \texttt{clearRolls()}\\
+    	\textbf{Transition:} clears the dice from the board and resets the dice values.
+    	
+    \item \texttt{getStats()}\\
+    	\textbf{output:} Returns a few of the players state variables, providing the player's basic stats for the game (Name, total score, current health, etc)
+    	
+    \item \texttt{getState()}\\
+    	\textbf{output:} Returns ALL of the players state variables tracked by this module, providing all relevant information about the player for the game.
+
 \end{itemize}
 
 \textbf{3.3.4.5 Local Functions}
 \begin{itemize}
-    \item \texttt{track\_modifiers()}
-    \item \texttt{reset\_player\_state()}
+    \item \texttt{roll\_rolling\_or\_invalid\_dice()}
+    \item \texttt{checkIfDiceValidThenRead()}
+    \item \texttt{readRolls()}
 \end{itemize}
 
 \subsection*{3.4 MIS of NetworkManager2P Module}
@@ -465,6 +540,392 @@ Assumes a reliable network transport layer. Players do not exceed the 2-player l
     \item \texttt{serialize\_data(data: Dictionary) -> String}
     \item \texttt{deserialize\_data(data: String) -> Dictionary}
 \end{itemize}
+
+
+\subsection*{3.5 MIS of ScoreCalculator Module}
+\textbf{3.5.1 Module}\\
+ ScoreCalculator\\
+
+\noindent \textbf{3.5.2 Uses}\\
+N/A \\
+
+\noindent \textbf{3.5.3 Syntax}
+
+\noindent \textbf{3.5.3.1 Exported Constants}
+\begin{itemize}
+	\item \texttt{ N/A}
+\end{itemize}
+\textbf{3.5.3.2 Exported Access Programs}
+\begin{itemize}
+	\item \texttt{initializeValues()}
+	\item \texttt{calculate\_hand\_score() -> Array[int]}
+	
+\end{itemize}
+
+\noindent \textbf{3.5.4 Semantics}\\
+\textbf{3.5.4.1 State Variables}\\
+\begin{itemize}
+	\item \texttt{SinglesTotal}: Variable used to track the total score of every "singles" type hand for the purposes of bonus score calculation
+    \item \texttt{BonusThreshold}: Tracks the maximum bonus score that can be given to the player's score for that round
+    \item \texttt{BonusScore}: The bonus score added in addition to the players normal score acquired for that round.
+    \item \texttt{BonusUsed}: Checks if the bonus score has been applied yet.
+    \item \texttt{BonusExists}: Checks if a bonus score should be applied for this round
+\end{itemize}
+
+\textbf{3.5.4.2 Environment Variables}\\
+N/A
+
+\textbf{3.5.4.3 Assumptions}\\
+The dice rolls are valid, and that no invalid hand type is requested
+
+\textbf{3.5.4.4 Access Routine Semantics}
+\begin{itemize}
+
+	\item \texttt{initializeValues()}\\
+	\textbf{Transition:} Initialized the default values for the state variables of this module
+	
+	\item \texttt{calculate\_hand\_score() -> Array[int]}\\
+	\textbf{Output:} detects the type of hand. Then, based on the hand type, it calculates the score before returning the player's score for the round.\\
+	\textbf{Transition:} Depending on the type of hand, and if a bonus score is valid for this round, the state variables may be updated to track the application of the bonus score.
+
+\end{itemize}
+
+\textbf{3.5.4.5 Local Functions}
+\begin{itemize}
+    \item \texttt{setupBonus(\_bonusHand: Dictionary)}
+
+\end{itemize}
+
+\subsection*{3.6 MIS of DynamicScoreboard Module}
+\textbf{3.6.1 Module}\\
+ DynamicScoreboard\\
+
+\noindent \textbf{3.6.2 Uses}\\
+N/A \\
+
+\noindent \textbf{3.6.3 Syntax}
+
+\noindent \textbf{3.6.3.1 Exported Constants}\\
+N/A\\
+
+\textbf{3.6.3.2 Exported Access Programs}
+\begin{itemize}
+	\item \texttt{populate\_scoreboard(hand\_settings: Dictionary)}
+	\item \texttt{updateButtonScore(\_score: int)}
+	\item \texttt{updateBonusButtonScore(\_score: int)}
+	\item \texttt{setAllButtonsDisable(state: bool)}
+	
+	
+\end{itemize}
+
+\noindent \textbf{3.6.4 Semantics}\\
+\textbf{3.6.4.1 State Variables}\\
+\begin{itemize}
+	\item \texttt{lastButton}: Tracks the last button pressed by the player
+	\item \texttt{BonusButton}: Tracks the bonus button 
+	\item \texttt{AllButtons}: Tracks every single button relavent to the hands and their corrisponding scores on the scoreboard.
+	\item \texttt{hand\_selected}: tracks the currently selected hand
+	\item \texttt{bonusExists}: Checks if a bonus exists for the current hand
+	\item \texttt{TotalLabel}: Tracks the total overall score for the player.
+
+\end{itemize}
+
+\textbf{3.6.4.2 Environment Variables}
+
+\begin{itemize}
+	\item \texttt{vbox\_container}: used to help interact with the UI interface to help display the scoreboard. 
+\end{itemize}
+
+\textbf{3.6.4.3 Assumptions}\\
+Assumes that every hand option to be displayed is unique to each other and valid for the rules specified by the game settings
+
+\textbf{3.6.4.4 Access Routine Semantics}
+\begin{itemize}
+
+	\item \texttt{populate\_scoreboard(hand\_settings: Dictionary)}\\
+	\textbf{Output:} Populates the scoreboard with valid hands allowed by the game settings
+	
+	
+	\item \texttt{updateButtonScore(\_score: int)}\\
+	\textbf{Transition:} Updates the score for a selected hand
+	
+	
+	\item \texttt{updateBonusButtonScore(\_score: int)}\\
+	\textbf{Transition:} Updates the bonus score that will be added to the score for a hand
+	
+	
+	\item \texttt{setAllButtonsDisable(state: bool)}\\
+	\textbf{Transition:} enables or disables all the buttons relevant to scoring for the scoreboard.
+	
+	
+
+
+\end{itemize}
+
+\textbf{3.6.4.5 Local Functions}
+
+\begin{itemize}
+    \item \texttt{\_on\_hand\_selected(hand: Dictionary, button: Button)}
+
+\end{itemize}
+
+
+\subsection*{3.7 MIS of CustomizationMenu Module}
+\textbf{3.7.1 Module}\\
+ CustomizationMenu\\
+
+\noindent \textbf{3.7.2 Uses}\\
+N/A \\
+
+\noindent \textbf{3.7.3 Syntax}
+
+\noindent \textbf{3.7.3.1 Exported Constants}\\
+N/A\\
+
+\textbf{3.7.3.2 Exported Access Programs}
+\begin{itemize}
+	\item \texttt{show\_customization()}
+	\item \texttt{wait\_customization()}
+	
+	
+\end{itemize}
+
+\noindent \textbf{3.7.4 Semantics}\\
+\textbf{3.7.4.1 State Variables}\\
+
+N/A\\
+
+\textbf{3.7.4.2 Environment Variables}\\
+
+N/A\\
+
+
+
+\textbf{3.7.4.3 Assumptions}\\
+Assumes that a full round has been properly completed.
+
+\textbf{3.7.4.4 Access Routine Semantics}
+\begin{itemize}
+
+	\item \texttt{show\_customization()}\\
+	\textbf{Output:} Shows the customization options available to the player and allows them to select customization options in between games
+	
+	\item \texttt{wait\_customization()}\\
+	\textbf{Output:} Waits for the opponent to select customization options in between games.
+	
+	
+
+
+\end{itemize}
+
+\textbf{3.7.4.5 Local Functions}
+
+\begin{itemize}
+    \item \texttt{pass\_customization()}\\
+    	\textbf{Description:} Skips the customization phase for the player
+\end{itemize}
+
+
+\subsection*{3.8 MIS of DynamicDiceContainer Module}
+\textbf{3.8.1 Module}\\
+ DynamicDiceContainer\\
+
+\noindent \textbf{3.8.2 Uses}\\
+CustomBaseDie \\
+
+\noindent \textbf{3.8.3 Syntax}
+
+\noindent \textbf{3.8.3.1 Exported Constants}\\
+N/A\\
+
+\textbf{3.8.3.2 Exported Access Programs}
+\begin{itemize}
+	\item \texttt{roll\_dice() }
+	\item \texttt{roll\_selected\_dice() }
+	\item \texttt{roll\_rolling\_or\_invalid\_dice() }
+	\item \texttt{get\_dice\_values() -> Array[int] }
+	\item \texttt{get\_dice() -> Array[RigidBody3D]  }
+	\item \texttt{get\_selected\_dice() -> Array }
+	\item \texttt{get\_rolling\_dice() -> Array }
+	\item \texttt{get\_invalid\_dice() -> Array  }
+	\item \texttt{add\_dice(dice\_count: int, dice\_type: int)}
+	\item \texttt{move\_dice\_aside() }
+	\item \texttt{move\_dice\_in\_line() }
+	
+\end{itemize}
+
+\noindent \textbf{3.8.4 Semantics}\\
+\textbf{3.8.4.1 State Variables}\\
+\begin{itemize}
+	\item \texttt{dice\_nodes}: Tracks each dice object that is a part of this container module.
+	\item \texttt{start\_positions}: Specifies the stating positions of the dice
+
+\end{itemize}
+
+\textbf{3.8.4.2 Environment Variables}\\
+
+N/A\\
+
+\textbf{3.8.4.3 Assumptions}\\
+Assumes all dice are of the same type.
+
+\textbf{3.8.4.4 Access Routine Semantics}
+\begin{itemize}
+	\item \texttt{roll\_dice() }\\
+    	\textbf{Transition:} Rolls all the dice with a random force and torque
+	
+	\item \texttt{roll\_selected\_dice() }\\
+	\textbf{Transition:} Rolls only the dices specified by the player. 
+	
+	\item \texttt{roll\_rolling\_or\_invalid\_dice() }\\
+	\textbf{Transition:} Rerolls any dice identified as an invalid roll or trapped in an endless roll.
+	
+	\item \texttt{get\_dice\_values() -> Array[int]}\\
+	\textbf{Output:} retrieves the value of each rolled dice
+	
+	\item \texttt{get\_dice() -> Array[RigidBody3D] }\\
+	\textbf{Output:} retrives each dice object that is a part of the container
+	
+	\item \texttt{get\_selected\_dice() -> Array }\\
+	\textbf{output:} retrieves a list of each die selected by the player
+	
+	\item \texttt{get\_rolling\_dice() -> Array}\\
+	\textbf{output:} gets a list of all dice that is currently rolling
+	
+	\item \texttt{get\_invalid\_dice() -> Array }\\
+	\textbf{Output:} gets a list of all dice that have been rendered invalid, wiether due to it's improper landing position, unreadable value, improper graphic rendering, or other issue.
+	
+	\item \texttt{add\_dice(dice\_count: int, dice\_type: int)}\\
+	\textbf{Transformation:} Adds new dice objects to the container
+	
+	\item \texttt{move\_dice\_aside() }\\
+	\textbf{Transformation:} Moves dice not being re-rolled to the side of the board to prevent the dice from interfeering with the reroll
+	
+	\item \texttt{move\_dice\_in\_line() }\\
+	\textbf{Transformation:} Move dice once to an organized display on the board to make them easier to read. 
+
+	
+
+
+\end{itemize}
+
+\textbf{3.8.4.5 Local Functions}
+
+\begin{itemize}
+	
+	\item \texttt{clear\_dice() }\\
+	\textbf{Description:} removes each dice object that's part of the contianer. 
+	
+\end{itemize}
+
+
+\subsection*{3.9 MIS of CustomBaseDie Module}
+\textbf{3.9.1 Module}\\
+ CustomBaseDie\\
+
+\noindent \textbf{3.9.2 Uses}\\
+N/A \\
+
+\noindent \textbf{3.9.3 Syntax}
+
+\noindent \textbf{3.9.3.1 Exported Constants}\\
+N/A\\
+
+\textbf{3.9.3.2 Exported Access Programs}
+\begin{itemize}
+	\item \texttt{populate\_scoreboard(hand\_settings: Dictionary)}
+	
+	
+\end{itemize}
+
+\noindent \textbf{3.9.4 Semantics}\\
+\textbf{3.9.4.1 State Variables}\\
+\begin{itemize}
+	\item \texttt{lastButton}: Tracks the last button pressed by the player
+
+\end{itemize}
+
+\textbf{3.9.4.2 Environment Variables}
+
+\begin{itemize}
+	\item \texttt{vbox\_container}: used to help interact with the UI interface to help display the scoreboard. 
+\end{itemize}
+
+\textbf{3.9.4.3 Assumptions}\\
+Assumes 
+
+\textbf{3.9.4.4 Access Routine Semantics}
+\begin{itemize}
+
+	\item \texttt{populate\_scoreboard(hand\_settings: Dictionary)}\\
+	\textbf{Output:} Populates the scoreboard with valid hands allowed by the game settings
+	
+
+
+\end{itemize}
+
+\textbf{3.9.4.5 Local Functions}
+
+\begin{itemize}
+    \item \texttt{\_on\_hand\_selected(hand: Dictionary, button: Button)}
+
+\end{itemize}
+
+
+\subsection*{3.10 MIS of GameSettings Module}
+\textbf{3.10.1 Module}\\
+ GameSettings\\
+
+\noindent \textbf{3.10.2 Uses}\\
+N/A \\
+
+\noindent \textbf{3.10.3 Syntax}
+
+\noindent \textbf{3.10.3.1 Exported Constants}\\
+N/A\\
+
+\textbf{3.10.3.2 Exported Access Programs}
+\begin{itemize}
+	\item \texttt{populate\_scoreboard(hand\_settings: Dictionary)}
+	
+	
+\end{itemize}
+
+\noindent \textbf{3.10.4 Semantics}\\
+\textbf{3.10.4.1 State Variables}\\
+\begin{itemize}
+	\item \texttt{lastButton}: Tracks the last button pressed by the player
+
+
+\end{itemize}
+
+\textbf{3.10.4.2 Environment Variables}
+
+\begin{itemize}
+	\item \texttt{vbox\_container}: used 
+\end{itemize}
+
+\textbf{3.10.4.3 Assumptions}\\
+Assumes 
+
+\textbf{3.10.4.4 Access Routine Semantics}
+\begin{itemize}
+
+	\item \texttt{populate\_scoreboard(hand\_settings: Dictionary)}\\
+	\textbf{Output:} Populates the scoreboard with valid hands allowed by the game settings
+	
+	
+
+
+\end{itemize}
+
+\textbf{3.10.4.5 Local Functions}
+
+\begin{itemize}
+    \item \texttt{\_on\_hand\_selected(hand: Dictionary, button: Button)}
+
+\end{itemize}
+
 
 
 \newpage
