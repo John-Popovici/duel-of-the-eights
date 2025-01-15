@@ -321,11 +321,21 @@ All dependencies, such as GameSettings and GameManager are initialized.\\
 
 \textbf{3.1.4.5 Local Functions}
 \begin{itemize}
-    \item \texttt{start\_next\_game()}
-    \item \texttt{start\_game()}
-    \item \texttt{end\_game()}
-    \item \texttt{\_on\_settings\_ready(\_game\_settings: Dictionary, \_hand\_settings: Dictionary)}
-    \item \texttt{recieve\_game\_settings(\_game\_settings: Dictionary, \_hand\_settings: Dictionary)}
+    \item \texttt{start\_next\_game()}\\
+	\textbf{Description:} Determines whether to begin a new game or if it's time to end the multi-game session 
+    
+    \item \texttt{start\_game()}\\
+    \textbf{Description:} Initializes the game settings and starts a new game.
+    
+    \item \texttt{end\_game()}\\
+    \textbf{Description:} ends the entire multi-game session and announces the winner.
+    
+    \item \texttt{\_on\_settings\_ready(\_game\_settings: Dictionary, \_hand\_settings: Dictionary)}\\
+    \textbf{Description:} Confirms the game and hand settings selected by the user for the game, and then informs the other online players of the selected settings for the game.
+    
+    \item \texttt{recieve\_game\_settings(\_game\_settings: Dictionary, \_hand\_settings: Dictionary)}\\
+    \textbf{Description:} recieves the game and hand settings from the host player, and uses these settings when starting a new game.
+    
 \end{itemize}
 
 \subsection*{3.2 MIS of GameManager Module}
@@ -480,9 +490,16 @@ Each player has a unique \texttt{player\_id}.
 
 \textbf{3.3.4.5 Local Functions}
 \begin{itemize}
-    \item \texttt{roll\_rolling\_or\_invalid\_dice()}
-    \item \texttt{checkIfDiceValidThenRead()}
-    \item \texttt{readRolls()}
+    
+    \item \texttt{checkIfDiceValidThenRead()}\\
+    \textbf{Description:} This function checks the results of dice rolls to determine if they are valid. If there are invalid or indeterminable die results, then all the invalid dice will be re-rolled. When all the dice produce valid results, it will allow the results to be read by the system.
+    
+    \item \texttt{roll\_rolling\_or\_invalid\_dice()}\\
+    	\textbf{Description:} re-rolls any dice that is either still rolling, or has an invalid result that makes it's value unreadable due to any reason, such as rolling out of bounds for example.    
+    
+    \item \texttt{readRolls()}\\
+    \textbf{Description:} Reads the values of each die that has been rolled and tracks the results
+    
 \end{itemize}
 
 \subsection*{3.4 MIS of NetworkManager2P Module}
@@ -551,10 +568,10 @@ N/A \\
 
 \noindent \textbf{3.5.3 Syntax}
 
-\noindent \textbf{3.5.3.1 Exported Constants}
-\begin{itemize}
-	\item \texttt{ N/A}
-\end{itemize}
+\noindent \textbf{3.5.3.1 Exported Constants}\\
+
+\texttt{ N/A}\\
+
 \textbf{3.5.3.2 Exported Access Programs}
 \begin{itemize}
 	\item \texttt{initializeValues()}
@@ -585,14 +602,15 @@ The dice rolls are valid, and that no invalid hand type is requested
 	\textbf{Transition:} Initialized the default values for the state variables of this module
 	
 	\item \texttt{calculate\_hand\_score() -> Array[int]}\\
-	\textbf{Output:} detects the type of hand. Then, based on the hand type, it calculates the score before returning the player's score for the round.\\
-	\textbf{Transition:} Depending on the type of hand, and if a bonus score is valid for this round, the state variables may be updated to track the application of the bonus score.
+	\textbf{Output:} detects the type of hand. Then, based on the hand type, it calculates the score before returning the player's score for the round.
+	
 
 \end{itemize}
 
 \textbf{3.5.4.5 Local Functions}
 \begin{itemize}
-    \item \texttt{setupBonus(\_bonusHand: Dictionary)}
+    \item \texttt{setupBonus(\_bonusHand: Dictionary)}\\
+    \textbf{Description:} This function initializes the variables and parameters relevant to calculating a bonus score value. This function is used when a bonus score needs to be added to the regular score for a hand.
 
 \end{itemize}
 
@@ -665,7 +683,8 @@ Assumes that every hand option to be displayed is unique to each other and valid
 \textbf{3.6.4.5 Local Functions}
 
 \begin{itemize}
-    \item \texttt{\_on\_hand\_selected(hand: Dictionary, button: Button)}
+    \item \texttt{\_on\_hand\_selected(hand: Dictionary, button: Button)}\\
+    \textbf{Description:} A callback function that detects when a player selects a hand, and then updates the rest of the module about the selection.
 
 \end{itemize}
 
@@ -833,7 +852,14 @@ N/A\\
 
 \textbf{3.9.3.2 Exported Access Programs}
 \begin{itemize}
-	\item \texttt{populate\_scoreboard(hand\_settings: Dictionary)}
+	\item \texttt{roll() }
+	\item \texttt{ get\_face\_value() -> int }
+	\item \texttt{set\_dice\_ui(\_ui\_element) }
+	\item \texttt{clear\_dice\_ui() }
+	\item \texttt{get\_selected\_status() -> boolean}
+	\item \texttt{change\_face\_value(idx: int, value) }
+	\item \texttt{get\_is\_rolling() -> boolean }
+	\item \texttt{setstartconditions(\_pos: Vector3, \_rot: Vector3, \_time: float) }
 	
 	
 \end{itemize}
@@ -841,24 +867,62 @@ N/A\\
 \noindent \textbf{3.9.4 Semantics}\\
 \textbf{3.9.4.1 State Variables}\\
 \begin{itemize}
-	\item \texttt{lastButton}: Tracks the last button pressed by the player
+	\item \texttt{num\_faces}: Traces number of faces on the die.
+	\item \texttt{start\_position}: tracks starting position of the die on the game board .
+	\item \texttt{start\_rotation}: tracks starting rotation of the die.
+	\item \texttt{start\_time}: Tracks time when the dice is created
+	\item \texttt{impulse\_range}: contains the amount of force applied to the die when rolling.
+	\item \texttt{torque\_range}: contains amount of torque applied to the die when rolling.
+	\item \texttt{velocity\_threshold}: sets max speed dice can be moving before it's considers too fast to stop in time.
+	\item \texttt{roll\_time\_limit}: Time limit that the dice is allowed to roll for before a function is triggered.
+	\item \texttt{is\_selected}: Tracks if the die has been selected by the user.
+	\item \texttt{up\_threshold}: Threshold for detecting the "upward" ray during raycasting
+	\item \texttt{face\_rays}: Dictionary that associates the raycast nodes with face values so that the system knows which side of the die is facing up.
+	\item \texttt{dice\_faces}: tracks each face of the die
+	\item \texttt{face\_values}: tracks the values corresponding to each face on the die
+	\item \texttt{normalCustomTex}: Tracks the physical visual design of die when not selected.
+	\item \texttt{selectedCustomTex}: Tracks the physical visual design of die when selected.
+	\item \texttt{dice\_ui\_element}: controls the design of the die's ui icon
 
+	\item \texttt{is\_rolling}: checks if the die is rolling
+
+	\item \texttt{roll\_start\_time}: is the time when the die starts rolling
 \end{itemize}
 
-\textbf{3.9.4.2 Environment Variables}
 
-\begin{itemize}
-	\item \texttt{vbox\_container}: used to help interact with the UI interface to help display the scoreboard. 
-\end{itemize}
+\textbf{3.9.4.2 Environment Variables}\\
+
+N/A\\
+
 
 \textbf{3.9.4.3 Assumptions}\\
-Assumes 
+Assumes that the assets associated with creating the die exist. 
 
 \textbf{3.9.4.4 Access Routine Semantics}
 \begin{itemize}
-
-	\item \texttt{populate\_scoreboard(hand\_settings: Dictionary)}\\
-	\textbf{Output:} Populates the scoreboard with valid hands allowed by the game settings
+	\item \texttt{roll() }\\
+	\textbf{Transition:} Physically rolls the die, 
+	
+	\item \texttt{ get\_face\_value() -> int }\\
+	\textbf{Output:} determines which face is facing upwards, and returns that face as the die's value
+	
+	\item \texttt{set\_dice\_ui(\_ui\_element) }\\
+	\textbf{Transition:} changes the visible ui design of the die
+	
+	\item \texttt{clear\_dice\_ui() }\\
+	\textbf{Transition:} remove the visible changes in the die
+	
+	\item \texttt{get\_selected\_status() -> boolean}\\
+	\textbf{Output} Checks if the die has been selected
+	
+	\item \texttt{change\_face\_value(idx: int, value) }\\
+	\textbf{Output:} changes the value that the face of the die represents
+	
+	\item \texttt{get\_is\_rolling() ->boolean }\\
+	\textbf{Output:} Checks if the dice is still rolling
+	
+	\item \texttt{setstartconditions(\_pos: Vector3, \_rot: Vector3, \_time: float) }\\
+	\textbf{Transition:} sets up the starting conditions for the die, such as its starting position, it's initial time of creation, etc
 	
 
 
@@ -867,8 +931,20 @@ Assumes
 \textbf{3.9.4.5 Local Functions}
 
 \begin{itemize}
-    \item \texttt{\_on\_hand\_selected(hand: Dictionary, button: Button)}
-
+    \item \texttt{setup\_faces() }\\
+	\textbf{Description:} Initiates the faces of each die, and sets up ray-cast nodes to each face of the die so that the game can tell which face of the die is facing up.
+	\item \texttt{setup\_dice\_specific\_variables(\_faces: int) }\\
+	\textbf{Description:} initializes the starting parameters and intial state variables for each die of each die 
+	\item \texttt{\_toggle\_selection\_status() }\\
+	\textbf{Description:} detects if the die has been selected by the player or not, and alters the die's visual design accordingly.
+	\item \texttt{reset\_dice\_tex() }\\
+	\textbf{Description:} resets the design of the die to it's default, depending on whether the die is selected or not
+	\item \texttt{normal\_dice\_tex() }\\
+	\textbf{Description:} sets the physical design of the die to be the default for a non-selected die
+	\item \texttt{selected\_dice\_tex() }\\
+	\textbf{Description:} sets the physical design of the die to be the default for a selected die	
+	
+	
 \end{itemize}
 
 
@@ -877,7 +953,7 @@ Assumes
  GameSettings\\
 
 \noindent \textbf{3.10.2 Uses}\\
-N/A \\
+NetworkManager2p \\
 
 \noindent \textbf{3.10.3 Syntax}
 
@@ -886,7 +962,7 @@ N/A\\
 
 \textbf{3.10.3.2 Exported Access Programs}
 \begin{itemize}
-	\item \texttt{populate\_scoreboard(hand\_settings: Dictionary)}
+	\item \texttt{collectInfo()}
 	
 	
 \end{itemize}
@@ -894,36 +970,72 @@ N/A\\
 \noindent \textbf{3.10.4 Semantics}\\
 \textbf{3.10.4.1 State Variables}\\
 \begin{itemize}
-	\item \texttt{lastButton}: Tracks the last button pressed by the player
-
+	\item \texttt{hand\_settings\_saved}:Verifies whether the hand settings for the current game session have been saved.
+	\item \texttt{hand\_settings\_refs}: Dictionary containing the settings for each hand selected by the user during game setup.
+	\item \texttt{hand\_settings\_vals}: Dictionary containing the settings for each hand saved by the user after being selected.
+	\item \texttt{game\_settings}: Dictionary storing the game settings implemented in the game.
+	\item \texttt{dice\_count}: Counts the number of dice in the game
+	\item \texttt{dice\_type}: contains the type of dice used for this game
+	\item \texttt{win\_cond}: contains the win condition for the game
+	\item \texttt{show\_opponent\_rolls}: Checks if the ability to see opponent rolls is enabled for this game session
+	\item \texttt{timed\_rounds}: Checks if the option for timed rounds is enables for this game session
 
 \end{itemize}
 
-\textbf{3.10.4.2 Environment Variables}
+\textbf{3.10.4.2 Environment Variables}\\
 
-\begin{itemize}
-	\item \texttt{vbox\_container}: used 
-\end{itemize}
+N/A\\
 
 \textbf{3.10.4.3 Assumptions}\\
-Assumes 
+Assumes all options are valid 
 
 \textbf{3.10.4.4 Access Routine Semantics}
 \begin{itemize}
 
-	\item \texttt{populate\_scoreboard(hand\_settings: Dictionary)}\\
-	\textbf{Output:} Populates the scoreboard with valid hands allowed by the game settings
-	
-	
-
+	\item \texttt{collectInfo()}\\
+	\textbf{Transition:} Checks if the player is the host for the current game session, and if the player is the host, gives that player the ability to specify the custom game settings for their session.
 
 \end{itemize}
 
 \textbf{3.10.4.5 Local Functions}
-
 \begin{itemize}
-    \item \texttt{\_on\_hand\_selected(hand: Dictionary, button: Button)}
-
+    \item \texttt{\_on\_start\_game\_pressed() }\\
+	\textbf{Description:} Implements the chosen game settings for the current game session upon the pressing of the start game button. 
+	\item \texttt{\_win\_condition\_toggled(ID: int) }\\
+	\textbf{Description:} Toggles the win condition setting for the game session
+	\item \texttt{\_on\_advanced\_settings\_pressed() }\\
+	\textbf{Description:} When the advanced settings button is pressed, this function opens the advanced settings screen, enabling the user to further customize their game session by adjusting the advanced game settings.
+	\item \texttt{\_populate\_advanced\_settings() }\\
+	\textbf{Description:} Helper function to help populate the advanced settings screen with advanced game options.
+	\item \texttt{save\_preset() }\\
+	\textbf{Description:} Saves a new preset with its game and hand settings specified by the player
+	\item \texttt{load\_preset\_buttons()}\\
+	\textbf{Description:} Loads all existing preset options for selection by the user
+	\item \texttt{\_on\_preset\_selected(preset\_name: String)}\\
+	\textbf{Description:} Loads the game and hand settings of the chosen preset, and applies these settings to the UI.
+	\item \texttt{update\_ui\_fields(game\_settings: Dictionary, hand\_settings: Dictionary) }\\
+	\textbf{Description:} Updates the UI input fields with the loaded game and hand settings.
+	\item \texttt{\_create\_hand\_option(hand\_name: String, hand\_type: Array) -> HBoxContainer }\\
+	\textbf{Description:} Helper function that creates the settings and UI option for each hand. It also saves the created settings for each hand within a dictionary of hand settings.
+	\item \texttt{save\_advanced\_settings() }\\
+	\textbf{Description:} saves the selected hand settings and closes the advanced settings UI
+	\item \texttt{\_on\_return\_to\_settings\_pressed() }\\
+	\textbf{Description:} removes the advanced settings UI and restores the regular game settings UI.
+	\item \texttt{\_on\_roll\_visible\_toggled(\_state: boolean) }\\
+	\textbf{Description:} toggles the option that controls whether seeing the opponent's rolls is enabled during the game 
+	\item \texttt{\_on\_timed\_round\_toggled(\_state: boolean) }\\
+	\textbf{Description:} toggles the option that controls whether the rounds will be timed or not.
+	\item \texttt{dice\_values\_changed(\_state: boolean) }\\
+	\textbf{Description:} handles the unsaving of any saved hand settings when the dice values are changed, as the previously saved hand settings are no longer valid.
+	\item \texttt{copy\_hash\_to\_clipboard() }\\
+	\textbf{Description:} Copies the connect code to the system clipboard, allowing a user to paste it somewhere else so that their friends can use that code to connect to the user's game session.
+	\item \texttt{\_allow\_game\_start() }\\
+	\textbf{Description:} makes the start game button visable, allowing the user to press the button and start the game
+	\item \texttt{on\_home\_pressed() }\\
+	\textbf{Description:} returns user to the home screen and disconnects the user from any online game session
+	 
+	
+	
 \end{itemize}
 
 
