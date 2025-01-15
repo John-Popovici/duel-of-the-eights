@@ -188,55 +188,16 @@ decisions will be changed.
 \section{Module Hierarchy} \label{SecMH}
 
 This section provides an overview of the module design. Modules are summarized
-in a hierarchy decomposed by secrets in Table \ref{TblMH}. The modules listed
+in a hierarchy decomposed by secrets. The modules listed
 below, which are leaves in the hierarchy tree, are the modules that will
 actually be implemented.
-
-\begin{description}
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module
-\item ...
-\end{description}
-
-
-\begin{table}[h!]
-\centering
-\begin{tabular}{p{0.3\textwidth} p{0.6\textwidth}}
-\toprule
-\textbf{Level 1} & \textbf{Level 2}\\
-\midrule
-
-{Hardware-Hiding Module} & ~ \\
-\midrule
-
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\ 
-& ?\\
-\midrule
-
-\multirow{3}{0.3\textwidth}{Software Decision Module} & {?}\\
-& ?\\
-& ?\\
-\bottomrule
-
-\end{tabular}
-\caption{Module Hierarchy}
-\label{TblMH}
-\end{table}
-
-This is the draft answer for this section:
 
 The modules are categorized into three types: Hardware-Hiding, Behavior-Hiding, and Software Decision modules. Below is the hierarchy:
 
 \subsection{Hardware-Hiding Modules}
 \begin{itemize}
-    \item \textbf{CustomBaseDie Module:} Handles the 3D dice models, textures, and physics.
-    \item \textbf{DynamicDiceContainer Module:} Manages dice interactions and rendering.
     \item \textbf{NetworkManager2P Module:} Manages connection and synchronization for two-player games.
+    \item \textbf{GameUI Module:} Provides the interface for interacting with the game and displaying relevant data.
 \end{itemize}
 
 \subsection{Behavior-Hiding Modules}
@@ -244,15 +205,16 @@ The modules are categorized into three types: Hardware-Hiding, Behavior-Hiding, 
     \item \textbf{MultiGameManager Module:} Manages the sequence of multiple Yahtzee games and customization phases.
     \item \textbf{PlayerManager Module:} Tracks player states, scores, and upgrades.
     \item \textbf{GameManager Module:} Handles a single game of Yahtzee.
+    \item \textbf{GameSettings Module:} Loads and stores settings for this Yahtzee variant.
     \item \textbf{CustomizationMenu Module:} Implements dice and game customization between games.
     \item \textbf{DynamicScoreboard Module:} Tracks and displays scores dynamically.
+    \item \textbf{CustomBaseDie Module:} Handles the 3D dice models, textures, and physics.
+    \item \textbf{DynamicDiceContainer Module:} Manages dice interactions and rendering.
 \end{itemize}
 
 \subsection{Software Decision Modules}
 \begin{itemize}
     \item \textbf{ScoreCalculator Module:} Calculates scores for dice rolls based on Yahtzee rules and custom modifiers.
-    \item \textbf{GameSettings Module:} Loads and stores settings for this Yahtzee variant.
-    \item \textbf{GameUI Module:} Provides the interface for interacting with the game and displaying relevant data.
 \end{itemize}
 
 \section{Connection Between Requirements and Design} \label{SecConnection}
