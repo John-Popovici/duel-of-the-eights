@@ -56,9 +56,10 @@ urlcolor=cyan          % color of external links
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-20-01-10 & Hemraj Bhatt & Added content to section 3\\
-20-01-11 & John Popovici & Added content to section 4; Updated section 2\\
-20-01-14 & Naishan Guo & Added content to section 6\\
+25-01-10 & Hemraj Bhatt & Added content to section 3\\
+25-01-11 & John Popovici & Added content to section 4; Updated section 2\\
+25-01-14 & Naishan Guo & Added content to section 6\\
+25-01-14 & Nigel Moses & Added content to section 5\\
 \dots & \dots & \dots\\
 \bottomrule
 \end{tabularx}
@@ -155,39 +156,34 @@ The specification of \textit{Dice Duels: Duel of the Eights} uses some derived d
 
 \section{Module Decomposition}
 
-The following table is taken directly from the Module Guide document for this project.
+The following section is taken directly from the Module Guide document for this project.
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{p{0.3\textwidth} p{0.6\textwidth}}
-\toprule
-\textbf{Level 1} & \textbf{Level 2}\\
-\midrule
+The modules are categorized into three types: Hardware-Hiding, Behavior-Hiding, and Software Decision modules. Below is the hierarchy:
 
-{Hardware-Hiding} & ~ \\
-\midrule
+\subsection{Hardware-Hiding Modules}
+\begin{itemize}
+    \item \textbf{NetworkManager2P Module:} Manages connection and synchronization for two-player games.
+    \item \textbf{GameUI Module:} Provides the interface for interacting with the game and displaying relevant data.
+\end{itemize}
 
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding} & Input Parameters\\
-& Output Format\\
-& Output Verification\\
-& Temperature ODEs\\
-& Energy Equations\\ 
-& Control Module\\
-& Specification Parameters Module\\
-\midrule
+\subsection{Behavior-Hiding Modules}
+\begin{itemize}
+    \item \textbf{MultiGameManager Module:} Manages the sequence of multiple Yahtzee games and customization phases.
+    \item \textbf{PlayerManager Module:} Tracks player states, scores, and upgrades.
+    \item \textbf{GameManager Module:} Handles a single game of Yahtzee.
+    \item \textbf{GameSettings Module:} Loads and stores settings for this Yahtzee variant.
+    \item \textbf{CustomizationMenu Module:} Implements dice and game customization between games.
+    \item \textbf{DynamicScoreboard Module:} Tracks and displays scores dynamically.
+    \item \textbf{CustomBaseDie Module:} Handles the 3D dice models, textures, and physics.
+    \item \textbf{DynamicDiceContainer Module:} Manages dice interactions and rendering.
+\end{itemize}
 
-\multirow{3}{0.3\textwidth}{Software Decision} & {Sequence Data Structure}\\
-& ODE Solver\\
-& Plotting\\
-\bottomrule
-
-\end{tabular}
-\caption{Module Hierarchy}
-\label{TblMH}
-\end{table}
+\subsection{Software Decision Modules}
+\begin{itemize}
+    \item \textbf{ScoreCalculator Module:} Calculates scores for dice rolls based on Yahtzee rules and custom modifiers.
+\end{itemize}
 
 \newpage
-~\newpage
 
 \section{MIS of \wss{Module Name}} \label{Module} \wss{Use labels for
   cross-referencing}
