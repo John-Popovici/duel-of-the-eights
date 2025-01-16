@@ -340,7 +340,7 @@ All dependencies, such as GameSettings and GameManager are initialized.\\
 GameManager
 
 \textbf{3.2.2 Uses}\\
-PlayerManager, ScoreCalculator
+NetworkManager2P, PlayerManager, ScoreCalculator, DynamicDiceContainer, DynamicScoreboard, GameUI
 
 \textbf{3.2.3 Syntax}\\
 \textbf{3.2.3.1 Exported Constants}\\
@@ -348,15 +348,23 @@ None.
 
 \textbf{3.2.3.2 Exported Access Programs}
 \begin{itemize}
-    \item \texttt{initialize\_game()}
-    \item \texttt{end\_round()}
-    \item \texttt{finalize\_scores()}
+    \item \texttt{\_on\_settings\_ready(\_game\_settings: Dictionary, \_hand\_settings: Dictionary)}
 \end{itemize}
 
 \textbf{3.2.4 Semantics}\\
 \textbf{3.2.4.1 State Variables}\\
 \begin{itemize}
     \item \texttt{current\_round}: Tracks the current round in the ongoing game.
+    \item \texttt{roll\_count}: Tracks the current roll count in the ongoing round.
+    \item \texttt{game\_over}: Tracks if the game has ended.
+    \item \texttt{round\_start\_done}: Tracks if the start of each round has been completed. Used for Multi-player synchronization.
+    \item \texttt{rolls\_read}: Tracks if the rolls have been read. Used for Multi-player synchronization.
+    \item \texttt{start\_next\_round}: Tracks if the next round of each round can be started. Used for Multi-player synchronization.
+    \item \texttt{rematch}: Tracks if a rematch can be started. Used for Multi-player synchronization.
+    \item \texttt{roll\_selection\_done}: Tracks if the roll selection has been completed. Used for Multi-player synchronization.
+    \item \texttt{roll\_selection}: Tracks the players roll selection choice (Roll or Pass).
+    \item \texttt{hand\_selection\_done}: Tracks if the hand selection has been completed. Used for Multi-player synchronization.
+    \item \texttt{start\_next\_round}: Tracks the hand selected to score.
 \end{itemize}
 
 \textbf{3.2.4.2 Environment Variables}\\
@@ -379,8 +387,31 @@ Game rules are preloaded, and dice configurations are valid.
 
 \textbf{3.2.4.5 Local Functions}
 \begin{itemize}
-    \item \texttt{process\_dice\_rolls()}
-    \item \texttt{apply\_modifiers()}
+    \item \texttt{setup\_game() -> void}
+    \item \texttt{start\_round() -> void}
+    \item \texttt{rollPhase(roll: bool) -> void}
+    \item \texttt{recieveRolls(fromHost: bool, \_rolls: Array[int]) -> void}
+    \item \texttt{setup\_selection() -> void}
+    \item \texttt{recieveRollSelection(\_type: String) -> void}
+    \item \texttt{recieveHand(hand: Dictionary) -> void}
+    \item \texttt{recieveBonus(hand: Dictionary) -> void}
+    \item \texttt{endOfRoundEffects() -> void}
+    \item \texttt{endGame() -> void}
+    \item \texttt{restartGame() -> void}
+    \item \texttt{exitGame() -> void}
+    \item \texttt{\_on\_game\_state\_recieved(state: String, data: Dictionary) -> void}
+    \item \texttt{setup\_PlayerManager(settings: Dictionary) -> void}
+    \item \texttt{setup\_scoreboard() -> void}
+    \item \texttt{setDisableAllButtons(state: bool) -> void}
+    \item \texttt{setDisableScoreBoardButtons(state: bool) -> void}
+    \item \texttt{setDisableRollButtons(state: bool) -> void}
+    \item \texttt{\_on\_roll\_selected() -> void}
+    \item \texttt{\_on\_pass\_roll() -> void}
+    \item \texttt{waiting\_on\_other\_player(isWaiting: bool) -> void}
+    \item \texttt{\_on\_hand\_selected(hand: Dictionary) -> void}
+    \item \texttt{\_on\_bonus\_exist(\_hand: Dictionary) -> void}
+    \item \texttt{setup\_game\_environment(\_game\_settings: Dictionary) -> void}
+    \item \texttt{returnToIntro() -> void}
 \end{itemize}
 
 \subsection*{3.3 MIS of PlayerManager Module}
@@ -504,7 +535,7 @@ Each player has a unique \texttt{player\_id}.
 NetworkManager2P
 
 \textbf{3.4.2 Uses}\\
-GameManager, PlayerManager, CustomizationMenu
+None.
 
 \textbf{3.4.3 Syntax}\\
 \textbf{3.4.3.1 Exported Constants}\\
@@ -512,47 +543,69 @@ None.
 
 \textbf{3.4.3.2 Exported Access Programs}
 \begin{itemize}
-    \item \texttt{start\_connection()}
-    \item \texttt{disconnect()}
-    \item \texttt{send\_data(data: Dictionary)}
-    \item \texttt{receive\_data()}
-    \item \texttt{handle\_disconnection(player\_id: String)}
+    \item \texttt{start\_server(\_port: int)}
+    \item \texttt{connect\_to\_server(\_hash: String)}
+    \item \texttt{getIsHost() -> bool}
+    \item \texttt{getHashIP() -> String}
+    \item \texttt{getHashPort() -> String}
+    \item \texttt{disconnect\_from\_server()}
+    \item \texttt{broadcast\_game\_state(state: String, data: Dictionary)}
+    \item \texttt{send\_game\_settings(\_game\_settings: Dictionary, \_hand\_settings: Dictionary)}
 \end{itemize}
 
 \textbf{3.4.4 Semantics}\\
 \textbf{3.4.4.1 State Variables}\\
-\begin{itemize}
-    \item \texttt{connected\_peers}: A dictionary tracking the status of connected players.
-\end{itemize}
+None.
 
 \textbf{3.4.4.2 Environment Variables}\\
-Network events, such as player join or disconnect signals.
+None.
 
 \textbf{3.4.4.3 Assumptions}\\
 Assumes a reliable network transport layer. Players do not exceed the 2-player limit for this module.
 
 \textbf{3.4.4.4 Access Routine Semantics}
 \begin{itemize}
-    \item \texttt{start\_connection()}\\
+    \item \texttt{start\_server(\_port: int)}\\
     \textbf{Transition:} Establishes a peer-to-peer connection and initializes the network state.
 
-    \item \texttt{disconnect()}\\
+    \item \texttt{connect\_to\_server(\_hash: String)}\\
     \textbf{Transition:} Cleans up network state and disconnects from peers.
 
-    \item \texttt{send\_data(data)}\\
+    \item \texttt{getIsHost() -> bool}\\
     \textbf{Transition:} Sends serialized data to the connected peer.
 
-    \item \texttt{receive\_data()}\\
+    \item \texttt{getHashIP() -> String}\\
     \textbf{Output:} Processes incoming data and synchronizes game state.
 
-    \item \texttt{handle\_disconnection(player\_id)}\\
+    \item \texttt{getHashPort() -> String}\\
+    \textbf{Transition:} Notifies the system of the disconnection and updates state.
+    
+    \item \texttt{disconnect\_from\_server()}\\
+    \textbf{Transition:} Notifies the system of the disconnection and updates state.
+    
+    \item \texttt{broadcast\_game\_state(state: String, data: Dictionary)}\\
+    \textbf{Transition:} Notifies the system of the disconnection and updates state.
+    
+    \item \texttt{send\_game\_settings(\_game\_settings: Dictionary, \_hand\_settings: Dictionary)}\\
     \textbf{Transition:} Notifies the system of the disconnection and updates state.
 \end{itemize}
 
 \textbf{3.4.4.5 Local Functions}
 \begin{itemize}
-    \item \texttt{serialize\_data(data: Dictionary) -> String}
-    \item \texttt{deserialize\_data(data: String) -> Dictionary}
+    \item \texttt{\_on\_peer\_connected(id: int) -> void}
+    \item \texttt{\_on\_peer\_disconnected(id: int) -> void}
+    \item \texttt{\_on\_server\_disconnected() -> void}
+    \item \texttt{\_on\_connection\_failed() -> void}
+    \item \texttt{\_try\_reconnect() -> void}
+    \item \texttt{numberToLetters(number: int) -> String}
+    \item \texttt{lettersToNumber(letters: String) -> int}
+    \item \texttt{ip\_to\_hash(ip: String) -> String}
+    \item \texttt{hash\_to\_ip(hash\_code: String) -> String}
+    \item \texttt{broadcast\_disconnect(state: String, data: Dictionary)}
+    \item \texttt{recieve\_disconnect()}
+    \item \texttt{recieve\_game\_state(state: String, data: Dictionary) -> bool}
+    \item \texttt{ping() -> void}
+    \item \texttt{recieve\_game\_settings(\_game\_settings: Dictionary, \_hand\_settings: Dictionary)}
 \end{itemize}
 
 

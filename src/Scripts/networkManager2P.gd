@@ -4,7 +4,6 @@ extends Node
 var port
 var is_host: bool = false
 var ConnectionUI: CanvasLayer
-var OnlineGameManager: Node3D
 
 signal connection_successful
 signal disconnected
