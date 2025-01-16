@@ -55,6 +55,7 @@
 2025-01-14 & Hemraj Bhatt & Updated content on section 3\\
 2025-01-15 & John Popovici & Added content to section 10\\
 2025-01-15 & Nigel Moses & Added content to sections 5 \& 10\\
+2025-01-16 & Isaac Giles & Added content to sections 6 \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -222,14 +223,60 @@ The modules are categorized into three types: Hardware-Hiding, Behavior-Hiding, 
 
 The design of the system is intended to satisfy the requirements developed in
 the SRS. In this stage, the system is decomposed into modules. The connection
-between requirements and modules is listed in Table~\ref{TblRT}.
+between requirements and modules is listed in Section 7.
 
-\wss{The intention of this section is to document decisions that are made
-  ``between'' the requirements and the design.  To satisfy some requirements,
-  design decisions need to be made.  Rather than make these decisions implicit,
-  they are explicitly recorded here.  For instance, if a program has security
-  requirements, a specific design decision may be made to satisfy those
-  requirements with a password.}
+\begin{table}[H]
+  \centering
+  \resizebox{\textwidth}{!}{
+  \begin{tabular}{|l|p{6cm}|p{4cm}|p{5cm}|}
+  \hline
+  \textbf{Requirement ID} & \textbf{Requirement Description} & \textbf{Module(s) Involved} & \textbf{Design Decision} \\
+  \hline
+  R1 & Support for online player vs player mode. & NetworkManager2P & Peer-to-peer communication and synchronization are handled by the NetworkManager2P module. \\
+  \hline
+  R2 & Handle score calculations using Yahtzee rules. & ScoreCalculator & The ScoreCalculator module handles scoring algorithms for standard and non-standard Yahtzee rules. \\
+  \hline
+  R3 & Simulate realistic physics for 3D dice rolls. & CustomBaseDie, DynamicDiceContainer & Physics for dice rolls are managed by the CustomBaseDie module, and the DynamicDiceContainer deals with dice rendering and states. \\
+  \hline
+  R4 & Use the real outcome of a roll to get dice values. & CustomBaseDie & The CustomBaseDie module ensures that roll outcomes are derived from physics-based interactions and values are read directly. \\
+  \hline
+  R5 & Support for dice with different numbers of sides. & CustomBaseDie & The CustomBaseDie module allows updates to dice textures and supports multiple dice variations/configurations. \\
+  \hline
+  R6 & Implement simultaneous turn-based gameplay. & GameManager, NetworkManager2P & The GameManager controls game flow, while the NetworkManager2P ensures synchronization of simultaneous turns. \\
+  \hline
+  \end{tabular}}
+  \caption{Connection Between Requirements and Modules (Part 1)}
+  \label{tab:req_module_connection_part1}
+  \end{table}
+  
+  \begin{table}[H]
+  \centering
+  \resizebox{\textwidth}{!}{
+  \begin{tabular}{|l|p{6cm}|p{4cm}|p{5cm}|}
+  \hline
+  \textbf{Requirement ID} & \textbf{Requirement Description} & \textbf{Module(s) Involved} & \textbf{Design Decision} \\
+  \hline
+  R7 & Allow players to pick and omit dice for each roll. & GameManager, DynamicDiceContainer & The GameManager tracks player decisions, and the DynamicDiceContainer updates dice states accordingly. \\
+  \hline
+  R8 & Display a user interface with scores, dice states, and player information. & GameUI, DynamicScoreboard & The GameUI presents game information, while the DynamicScoreboard provides real-time score updates. \\
+  \hline
+  R9 & Provide controls for modifying game settings. & GameSettings, CustomizationMenu & The GameSettings module stores configurations, and the CustomizationMenu allows changes to these configurations. \\
+  \hline
+  R10 & Provide presets for different game modes. & GameSettings & Presets are stored and retrieved through the GameSettings module. \\
+  \hline
+  R17 & Always show the correct current state accurately. & GameUI, GameManager & State synchronization is managed by the GameManager, while GameUI reflects the current state. \\
+  \hline
+  NFR2 & Implement a clear and easy-to-use interface. & GameUI & The GameUI module prioritizes usability through intuitive design. \\
+  \hline
+  NFR6 & Ensure modular, easily extendable codebase. & All Modules & Modular decomposition of functionality ensures extensibility and maintainability. \\
+  \hline
+  NFR9 & Maintain a consistent UI and 3D visual style. & GameUI, DynamicDiceContainer & Style guidelines and visual coherence are maintained across all UI and gameplay elements. \\
+  \hline
+  \end{tabular}}
+  \caption{Connection Between Requirements and Modules (Part 2)}
+  \label{tab:req_module_connection_part2}
+  \end{table}
+
 
 \section{Module Decomposition} \label{SecMD}
 
