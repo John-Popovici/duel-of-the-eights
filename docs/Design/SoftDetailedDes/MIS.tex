@@ -375,43 +375,86 @@ Game rules are preloaded, and dice configurations are valid.
 
 \textbf{3.2.4.4 Access Routine Semantics}
 \begin{itemize}
-    \item \texttt{initialize\_game()}\\
-    \textbf{Transition:} Sets up dice, players, and round configurations.
-
-    \item \texttt{end\_round()}\\
-    \textbf{Transition:} Ends the current round and updates scores.
-
-    \item \texttt{finalize\_scores()}\\
-    \textbf{Transition:} Calculates and displays final scores for the game.
+    \item \texttt{\_on\_settings\_ready(\_game\_settings: Dictionary, \_hand\_settings: Dictionary)}\\
+    \textbf{Transition:} Receives settings to set up the game and start.
 \end{itemize}
 
 \textbf{3.2.4.5 Local Functions}
 \begin{itemize}
-    \item \texttt{setup\_game() -> void}
-    \item \texttt{start\_round() -> void}
-    \item \texttt{rollPhase(roll: bool) -> void}
-    \item \texttt{recieveRolls(fromHost: bool, \_rolls: Array[int]) -> void}
-    \item \texttt{setup\_selection() -> void}
-    \item \texttt{recieveRollSelection(\_type: String) -> void}
-    \item \texttt{recieveHand(hand: Dictionary) -> void}
-    \item \texttt{recieveBonus(hand: Dictionary) -> void}
-    \item \texttt{endOfRoundEffects() -> void}
-    \item \texttt{endGame() -> void}
-    \item \texttt{restartGame() -> void}
-    \item \texttt{exitGame() -> void}
-    \item \texttt{\_on\_game\_state\_recieved(state: String, data: Dictionary) -> void}
-    \item \texttt{setup\_PlayerManager(settings: Dictionary) -> void}
-    \item \texttt{setup\_scoreboard() -> void}
-    \item \texttt{setDisableAllButtons(state: bool) -> void}
-    \item \texttt{setDisableScoreBoardButtons(state: bool) -> void}
-    \item \texttt{setDisableRollButtons(state: bool) -> void}
-    \item \texttt{\_on\_roll\_selected() -> void}
-    \item \texttt{\_on\_pass\_roll() -> void}
-    \item \texttt{waiting\_on\_other\_player(isWaiting: bool) -> void}
-    \item \texttt{\_on\_hand\_selected(hand: Dictionary) -> void}
-    \item \texttt{\_on\_bonus\_exist(\_hand: Dictionary) -> void}
-    \item \texttt{setup\_game\_environment(\_game\_settings: Dictionary) -> void}
-    \item \texttt{returnToIntro() -> void}
+    \item \texttt{setup\_game() -> void}\\
+    \textbf{Description:} Calls other related setup and game initialization functions then starts the game 
+    
+    \item \texttt{start\_round() -> void}\\
+    \textbf{Description:} Starts each round
+    
+    \item \texttt{rollPhase(roll: bool) -> void}\\
+    \textbf{Description:} Triggers the effect of the chose roll phase (roll/pass)
+    
+    \item \texttt{recieveRolls(fromHost: bool, \_rolls: Array[int]) -> void}\\
+    \textbf{Description:} Receives the values of the dice to continue the game flow
+    
+    \item \texttt{setup\_selection() -> void}\\
+    \textbf{Description:} Sets up the roll selection options
+    
+    \item \texttt{recieveRollSelection(\_type: String) -> void}\\
+    \textbf{Description:} Receives Roll Selection to continue the game flow
+    
+    \item \texttt{recieveHand(hand: Dictionary) -> void}\\
+    \textbf{Description:} Receives had selection to trigger scoring
+    
+    \item \texttt{recieveBonus(hand: Dictionary) -> void}\\
+    \textbf{Description:} Receives Bonus if applicable from hand for scoring
+    
+    \item \texttt{endOfRoundEffects() -> void}\\
+    \textbf{Description:} Triggers end of round effects
+    
+    \item \texttt{endGame() -> void}\\
+    \textbf{Description:}  Triggers End Game effects
+    
+    \item \texttt{restartGame() -> void}\\
+    \textbf{Description:} Triggers the start of a new game
+    
+    \item \texttt{exitGame() -> void}\\
+    \textbf{Description:} Exits game and returns to Intro Scene
+    
+    \item \texttt{\_on\_game\_state\_recieved(state: String, data: Dictionary) -> void}\\
+    \textbf{Description:} Triggers effects of receiving game state from connect peer device
+    
+    \item \texttt{setup\_PlayerManager(settings: Dictionary) -> void}\\
+    \textbf{Description:} Initializes Player Manager for self and enemy player
+    
+    \item \texttt{setup\_scoreboard() -> void}\\
+    \textbf{Description:} Sets up Scoreboard with hands available
+    
+    \item \texttt{setDisableAllButtons(state: bool) -> void}\\
+    \textbf{Description:} Used to toggle the disabled state of all buttons
+    
+    \item \texttt{setDisableScoreBoardButtons(state: bool) -> void}\\
+    \textbf{Description:} Used to toggle the disabled state of the scoreboard buttons
+    
+    \item \texttt{setDisableRollButtons(state: bool) -> void}\\
+    \textbf{Description:} Used to toggle the disabled state of the roll buttons (Roll/ Pass)
+    
+    \item \texttt{\_on\_roll\_selected() -> void}\\
+    \textbf{Description:} Triggers the effects of selecting the roll button
+    
+    \item \texttt{\_on\_pass\_roll() -> void}\\
+    \textbf{Description:} Triggers the effects of selecting the pass button
+    
+    \item \texttt{waiting\_on\_other\_player(isWaiting: bool) -> void}\\
+    \textbf{Description:} Used to Toggle the visibility of the waiting for other player overlay
+    
+    \item \texttt{\_on\_hand\_selected(hand: Dictionary) -> void}\\
+    \textbf{Description:} Triggers the effects of selecting a hand
+    
+    \item \texttt{\_on\_bonus\_exist(\_hand: Dictionary) -> void}\\
+    \textbf{Description:} Triggers the effects of a bonus against the current hand
+    
+    \item \texttt{setup\_game\_environment(\_game\_settings: Dictionary) -> void}\\
+    \textbf{Description:} Sets up the game environment (3D elements)
+    
+    \item \texttt{returnToIntro() -> void}\\
+    \textbf{Description:} Triggers the effects of returning to Intro Scene
 \end{itemize}
 
 \subsection*{3.3 MIS of PlayerManager Module}
@@ -566,46 +609,73 @@ Assumes a reliable network transport layer. Players do not exceed the 2-player l
 \textbf{3.4.4.4 Access Routine Semantics}
 \begin{itemize}
     \item \texttt{start\_server(\_port: int)}\\
-    \textbf{Transition:} Establishes a peer-to-peer connection and initializes the network state.
+    \textbf{Transition:} Establishes a server on the host device for other player to connect to.
 
     \item \texttt{connect\_to\_server(\_hash: String)}\\
-    \textbf{Transition:} Cleans up network state and disconnects from peers.
+    \textbf{Transition:} Attempts to establish a connection to a host server to join a game.
 
     \item \texttt{getIsHost() -> bool}\\
-    \textbf{Transition:} Sends serialized data to the connected peer.
+    \textbf{Transition:} Returns if the device is the host or client of the game.
 
     \item \texttt{getHashIP() -> String}\\
-    \textbf{Output:} Processes incoming data and synchronizes game state.
+    \textbf{Output:} Returns the Hash code for communication to other connecting player.
 
     \item \texttt{getHashPort() -> String}\\
-    \textbf{Transition:} Notifies the system of the disconnection and updates state.
+    \textbf{Transition:} Returns the Hash code for the port for communication to the other connecting player.
     
     \item \texttt{disconnect\_from\_server()}\\
-    \textbf{Transition:} Notifies the system of the disconnection and updates state.
+    \textbf{Transition:} Disconnects from the host server and cleans state.
     
     \item \texttt{broadcast\_game\_state(state: String, data: Dictionary)}\\
-    \textbf{Transition:} Notifies the system of the disconnection and updates state.
+    \textbf{Transition:} Broadcasts the game state to the other player for synchronization.
     
     \item \texttt{send\_game\_settings(\_game\_settings: Dictionary, \_hand\_settings: Dictionary)}\\
-    \textbf{Transition:} Notifies the system of the disconnection and updates state.
+    \textbf{Transition:} Broadcasts the game settings to the other player to start the game.
 \end{itemize}
 
 \textbf{3.4.4.5 Local Functions}
 \begin{itemize}
-    \item \texttt{\_on\_peer\_connected(id: int) -> void}
-    \item \texttt{\_on\_peer\_disconnected(id: int) -> void}
-    \item \texttt{\_on\_server\_disconnected() -> void}
-    \item \texttt{\_on\_connection\_failed() -> void}
-    \item \texttt{\_try\_reconnect() -> void}
-    \item \texttt{numberToLetters(number: int) -> String}
-    \item \texttt{lettersToNumber(letters: String) -> int}
-    \item \texttt{ip\_to\_hash(ip: String) -> String}
-    \item \texttt{hash\_to\_ip(hash\_code: String) -> String}
-    \item \texttt{broadcast\_disconnect(state: String, data: Dictionary)}
-    \item \texttt{recieve\_disconnect()}
-    \item \texttt{recieve\_game\_state(state: String, data: Dictionary) -> bool}
-    \item \texttt{ping() -> void}
-    \item \texttt{recieve\_game\_settings(\_game\_settings: Dictionary, \_hand\_settings: Dictionary)}
+    \item \texttt{\_on\_peer\_connected(id: int) -> void}\\
+    \textbf{Description:} Triggers the effects of a peer connection
+    
+    \item \texttt{\_on\_peer\_disconnected(id: int) -> void}\\
+    \textbf{Description:} Triggers the effects of a peer disconnection
+    
+    \item \texttt{\_on\_server\_disconnected() -> void}\\
+    \textbf{Description:} Triggers the effects of the server disconnection
+    
+    \item \texttt{\_on\_connection\_failed() -> void}\\
+    \textbf{Description:} Triggers the effects of a failed connection
+    
+    \item \texttt{\_try\_reconnect() -> void}\\
+    \textbf{Description:} Triggers attempting to reconnect to other player
+    
+    \item \texttt{numberToLetters(number: int) -> String}\\
+    \textbf{Description:} Helper function of the ip to hash function
+    
+    \item \texttt{lettersToNumber(letters: String) -> int}\\
+    \textbf{Description:} Helper function for the has to ip function
+    
+    \item \texttt{ip\_to\_hash(ip: String) -> String}\\
+    \textbf{Description:} Returns a the hashed IP for easy communication of IP
+    
+    \item \texttt{hash\_to\_ip(hash\_code: String) -> String}\\
+    \textbf{Description:} Returns the IP from its Hashed version
+    
+    \item \texttt{broadcast\_disconnect(state: String, data: Dictionary)}\\
+    \textbf{Description:} Broadcasts disconnection to other player on forced disconnect
+    
+    \item \texttt{recieve\_disconnect()}\\
+    \textbf{Description:} Receives disconnection from other player
+    
+    \item \texttt{recieve\_game\_state(state: String, data: Dictionary) -> bool}\\
+    \textbf{Description:} Receives game state from other player to transmit to listening modules
+    
+    \item \texttt{ping() -> void}\\
+    \textbf{Description:} Sends a ping (triggered on a regular basis) to check status of connection
+    
+    \item \texttt{recieve\_game\_settings(\_game\_settings: Dictionary, \_hand\_settings: Dictionary)}\\
+    \textbf{Description:} Receives game settings from host player
 \end{itemize}
 
 
