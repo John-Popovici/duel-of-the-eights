@@ -504,7 +504,7 @@ DynamicDiceContainer,  networkmanager2p\\
 \end{itemize}
 
 \textbf{3.3.4.2 Environment Variables}\\
-Input from game events or player actions.
+N/A\\
 
 \textbf{3.3.4.3 Assumptions}\\
 Each player has a unique \texttt{player\_id}.
@@ -832,7 +832,10 @@ N/A\\
 \noindent \textbf{3.7.4 Semantics}\\
 \textbf{3.7.4.1 State Variables}\\
 
-N/A\\
+\begin{itemize}
+    \item \texttt{active\_customizations\_dictionary (Dictionary)}: Stores the active customizations for each player 
+
+\end{itemize}
 
 \textbf{3.7.4.2 Environment Variables}\\
 
@@ -906,7 +909,7 @@ N/A\\
 N/A\\
 
 \textbf{3.8.4.3 Assumptions}\\
-Assumes all dice are of the same type.
+Assumes all dice generated are of the same type.
 
 \textbf{3.8.4.4 Access Routine Semantics}
 \begin{itemize}
@@ -1091,7 +1094,6 @@ N/A\\
 \textbf{3.10.4.1 State Variables}\\
 \begin{itemize}
 	\item \texttt{hand\_settings\_saved}:Verifies whether the hand settings for the current game session have been saved.
-	\item \texttt{hand\_settings\_refs}: Dictionary containing the settings for each hand selected by the user during game setup.
 	\item \texttt{hand\_settings\_vals}: Dictionary containing the settings for each hand saved by the user after being selected.
 	\item \texttt{game\_settings}: Dictionary storing the game settings implemented in the game.
 	\item \texttt{dice\_count}: Counts the number of dice in the game
@@ -1158,9 +1160,88 @@ Assumes all options are valid
 	
 \end{itemize}
 
+\subsection*{3.11 MIS of GameUI Module}
+\textbf{3.11.1 Module}\\
+ GameUI\\
 
+\noindent \textbf{3.11.2 Uses}\\
+N/A \\
+
+\noindent \textbf{3.11.3 Syntax}
+
+\noindent \textbf{3.11.3.1 Exported Constants}\\
+N/A\\
+
+\textbf{3.11.3.2 Exported Access Programs}
+\begin{itemize}
+	\item \texttt{collectInfo()}
+	
+	
+\end{itemize}
+
+\noindent \textbf{3.11.4 Semantics}\\
+\textbf{3.11.4.1 State Variables}\\
+\begin{itemize}
+	\item \texttt{myPlayerName (String)}: Contains the name of the player running the game.
+	\item \texttt{enemyPlayerName (String)}: Contains the name of the player's opponent.
+	\item \texttt{health\_points (int)}: contains the amount of hit points both players initially start out with.
+	\item \texttt{total\_rounds (int)}: Contains the total number of rounds in a game.
+	\item \texttt{total\_round\_rolls (int)}: Contains the total number of rolls each player is allowed to make in a round.
+	\item \texttt{dice\_count (int)}: tracks the total amount of dice each player will use in the game.
+	\item \texttt{dice\_type (int)}: represents the type of dice the players will use.
+	\item \texttt{sortMethod (int)}: Determines method used to sort the dice in the UI
+	\item \texttt{escScreenAllowed (boolean)}: Regulates the players ability to access the pause menu by pressing the escape key.
+	\item \texttt{isHost (boolean)}: Checks if the user is the host for this game.
+
+
+\end{itemize}
+
+\textbf{3.11.4.2 Environment Variables}\\
+
+N/A\\
+
+\textbf{3.11.4.3 Assumptions}\\
+Assume that each UI asset exists and can be created upon being requested by the module. 
+
+\textbf{3.11.4.4 Access Routine Semantics}
+\begin{itemize}
+
+	\item \texttt{col()}\\
+	\textbf{Transition:} 
+
+\end{itemize}
+
+\textbf{3.11.4.5 Local Functions}
+\begin{itemize}
+    \item \texttt{\_on\_start\_game\_pressed() }\\
+	\textbf{Description:} Implements the chosen game settings for the current game session upon the pressing of the start game button. 
+
+	 
+	
+	
+\end{itemize}
 
 \newpage
+
+\section{Strategy for exception Handling} 
+
+The exception handling strategy for this project focuses on minimizing user input errors by limiting input to buttons and pre-defined UI elements. By designing the user interface to only accept interactions through controlled mechanisms, such as buttons, dropdown menus, and sliders, the system ensures that invalid inputs are effectively prevented at the source.\\
+
+Key elements of this strategy include:
+
+\begin{itemize}
+    \item \textbf{Predefined Input Options: }All user inputs are constrained to predefined choices, such as selecting from lists, toggling switches, or clicking buttons. This approach eliminates the possibility of invalid free-text or numeric inputs.
+    \item \textbf{Input Validation: }Wherever applicable, additional checks will ensure that UI elements are only active when user actions are valid. For example, disabling buttons when their associated actions are not available.
+    \item \textbf{Error Prevention Over Error Correction: }The focus is on designing the UI to prevent errors rather than handling them reactively. This ensures a smooth and error-free user experience.
+By adhering to this strategy, the system reduces the need for complex exception handling mechanisms, creating a more user-friendly and robust application.
+
+\end{itemize}
+
+By adhering to this strategy, the system reduces the need for complex exception handling mechanisms, creating a more user-friendly and robust application.
+
+
+
+\newpage{}
 
 \section{Appendix} \label{Appendix}
 
