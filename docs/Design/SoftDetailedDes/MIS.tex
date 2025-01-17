@@ -61,6 +61,7 @@ urlcolor=cyan          % color of external links
 25-01-14 & Naishan Guo & Added content to section 6\\
 25-01-14 & Nigel Moses & Added content to section 5\\
 25-01-15 & Naishan Guo & Updated content to section 6\\
+25-01-16 & Naishan Guo and Nigel Moses &  Addressed Exception handling in section 7 and Updated content to section 6 \\
 \dots & \dots & \dots\\
 \bottomrule
 \end{tabularx}
@@ -265,46 +266,46 @@ The modules are categorized into three types: Hardware-Hiding, Behavior-Hiding, 
 
 This is the draft MIS section
 
-\subsection*{3.1 MIS of MultiGameManager Module}
-\textbf{3.1.1 Module}\\
+\subsection*{6.1 MIS of MultiGameManager Module}
+\textbf{6.1.1 Module}\\
 \noindent MultiGameManager \\
 
-\noindent \textbf{3.1.2 Uses}\\
+\noindent \textbf{6.1.2 Uses}\\
 
 GameSettings, GameManager, CustomizationMenu, networkmanager2p\\
 
 
-\noindent \textbf{3.1.3 Syntax}\\
-\textbf{3.1.3.1 Exported Constants}\\
+\noindent \textbf{6.1.3 Syntax}\\
+\textbf{6.1.3.1 Exported Constants}\\
 None.  
 
-\noindent \textbf{3.1.3.2 Exported Access Programs}
+\noindent \textbf{6.1.3.2 Exported Access Programs}
 \begin{itemize}
     \item \texttt{finish\_game(winner: String, myPlayerFinalStats: Dictionary, OpponentFinalStats: Dictionary)}
     \item \texttt{loadGameSetup()}
 \end{itemize}
 
-\textbf{3.1.4 Semantics}\\
-\textbf{3.1.4.1 State Variables}\\
+\textbf{6.1.4 Semantics}\\
+\textbf{6.1.4.1 State Variables}\\
 \begin{itemize}
-    \item \texttt{current\_game\_count}: Tracks the number of completed games
-    \item \texttt{total\_games}: Total number of games in the sequence.
-    \item \texttt{self\_wins}: Tracks the number of wins the user has 
-    \item \texttt{opponent\_wins}: Tracks number of wins the opponent has
-    \item \texttt{game\_settings}: Tracks the current settings and parameters for the current game
-    \item \texttt{hand\_settings}: Tracks the settings and requirements for the valid dice hands of the current game session (i.e. requirements for a full house, requirements for a yatzee, etc.)
+    \item \texttt{current\_game\_count (int)}: Tracks the number of completed games
+    \item \texttt{total\_games (int)}: Total number of games in the sequence.
+    \item \texttt{self\_wins (int)}: Tracks the number of wins the user has 
+    \item \texttt{opponent\_wins (int)}: Tracks number of wins the opponent has
+    \item \texttt{game\_settings (Dictionary)}: Tracks the current settings and parameters for the current game
+    \item \texttt{hand\_settings (Dictionary)}: Tracks the settings and requirements for the valid dice hands of the current game session (i.e. requirements for a full house, requirements for a yatzee, etc.)
 
 \end{itemize}
 
-\textbf{3.1.4.2 Environment Variables}\\
+\textbf{6.1.4.2 Environment Variables}\\
 
 N/A\\
 
-\textbf{3.1.4.3 Assumptions}\\
+\textbf{6.1.4.3 Assumptions}\\
 
 All dependencies, such as GameSettings and GameManager are initialized.\\
 
-\textbf{3.1.4.4 Access Routine Semantics}
+\textbf{6.1.4.4 Access Routine Semantics}
 \begin{itemize}
 
     \item \texttt{finish\_game(winner: String, myPlayerFinalStats: Dictionary, OpponentFinalStats: Dictionary)}\\
@@ -315,7 +316,7 @@ All dependencies, such as GameSettings and GameManager are initialized.\\
 
 \end{itemize}
 
-\textbf{3.1.4.5 Local Functions}
+\textbf{6.1.4.5 Local Functions}
 \begin{itemize}
     \item \texttt{start\_next\_game()}\\
 	\textbf{Description:} Determines whether to begin a new game or if it's time to end the multi-game session 
@@ -334,51 +335,51 @@ All dependencies, such as GameSettings and GameManager are initialized.\\
     
 \end{itemize}
 
-\subsection*{3.2 MIS of GameManager Module}
-\textbf{3.2.1 Module}\\
+\subsection*{6.2 MIS of GameManager Module}
+\textbf{6.2.1 Module}\\
 GameManager
 
-\textbf{3.2.2 Uses}\\
+\textbf{6.2.2 Uses}\\
 NetworkManager2P, PlayerManager, ScoreCalculator, DynamicDiceContainer, DynamicScoreboard, GameUI
 
-\textbf{3.2.3 Syntax}\\
-\textbf{3.2.3.1 Exported Constants}\\
+\textbf{6.2.3 Syntax}\\
+\textbf{6.2.3.1 Exported Constants}\\
 None.  
 
-\textbf{3.2.3.2 Exported Access Programs}
+\textbf{6.2.3.2 Exported Access Programs}
 \begin{itemize}
     \item \texttt{\_on\_settings\_ready(\_game\_settings: Dictionary, \_hand\_settings: Dictionary)}
 \end{itemize}
 
-\textbf{3.2.4 Semantics}\\
-\textbf{3.2.4.1 State Variables}\\
+\textbf{6.2.4 Semantics}\\
+\textbf{6.2.4.1 State Variables}\\
 \begin{itemize}
-    \item \texttt{current\_round}: Tracks the current round in the ongoing game.
-    \item \texttt{roll\_count}: Tracks the current roll count in the ongoing round.
-    \item \texttt{game\_over}: Tracks if the game has ended.
-    \item \texttt{round\_start\_done}: Tracks if the start of each round has been completed. Used for Multi-player synchronization.
-    \item \texttt{rolls\_read}: Tracks if the rolls have been read. Used for Multi-player synchronization.
-    \item \texttt{start\_next\_round}: Tracks if the next round of each round can be started. Used for Multi-player synchronization.
-    \item \texttt{rematch}: Tracks if a rematch can be started. Used for Multi-player synchronization.
-    \item \texttt{roll\_selection\_done}: Tracks if the roll selection has been completed. Used for Multi-player synchronization.
-    \item \texttt{roll\_selection}: Tracks the players roll selection choice (Roll or Pass).
-    \item \texttt{hand\_selection\_done}: Tracks if the hand selection has been completed. Used for Multi-player synchronization.
-    \item \texttt{start\_next\_round}: Tracks the hand selected to score.
+    \item \texttt{current\_round (int)}: Tracks the current round in the ongoing game.
+    \item \texttt{roll\_count (int)}: Tracks the current roll count in the ongoing round.
+    \item \texttt{game\_over (boolean)}: Tracks if the game has ended.
+    \item \texttt{round\_start\_done (boolean)}: Tracks if the start of each round has been completed. Used for Multi-player synchronization.
+    \item \texttt{rolls\_read (boolean)}: Tracks if the rolls have been read. Used for Multi-player synchronization.
+    \item \texttt{start\_next\_round (boolean)}: Tracks if the next round of each round can be started. Used for Multi-player synchronization.
+    \item \texttt{rematch (boolean)}: Tracks if a rematch can be started. Used for Multi-player synchronization.
+    \item \texttt{roll\_selection\_done (boolean)}: Tracks if the roll selection has been completed. Used for Multi-player synchronization.
+    \item \texttt{roll\_selection (boolean)}: Tracks the players roll selection choice (Roll or Pass).
+    \item \texttt{hand\_selection\_done (boolean)}: Tracks if the hand selection has been completed. Used for Multi-player synchronization.
+    \item \texttt{hand\_selection (Dictionary)}: Tracks the hand selected to score.
 \end{itemize}
 
-\textbf{3.2.4.2 Environment Variables}\\
+\textbf{6.2.4.2 Environment Variables}\\
 Network manager for multiplayer actions.
 
-\textbf{3.2.4.3 Assumptions}\\
+\textbf{6.2.4.3 Assumptions}\\
 Game rules are preloaded, and dice configurations are valid.
 
-\textbf{3.2.4.4 Access Routine Semantics}
+\textbf{6.2.4.4 Access Routine Semantics}
 \begin{itemize}
     \item \texttt{\_on\_settings\_ready(\_game\_settings: Dictionary, \_hand\_settings: Dictionary)}\\
     \textbf{Transition:} Receives settings to set up the game and start.
 \end{itemize}
 
-\textbf{3.2.4.5 Local Functions}
+\textbf{6.2.4.5 Local Functions}
 \begin{itemize}
     \item \texttt{setup\_game() -> void}\\
     \textbf{Description:} Calls other related setup and game initialization functions then starts the game 
@@ -456,20 +457,20 @@ Game rules are preloaded, and dice configurations are valid.
     \textbf{Description:} Triggers the effects of returning to Intro Scene
 \end{itemize}
 
-\subsection*{3.3 MIS of PlayerManager Module}
-\textbf{3.3.1 Module}\\
+\subsection*{6.3 MIS of PlayerManager Module}
+\textbf{6.3.1 Module}\\
  PlayerManager\\
 
-\noindent \textbf{3.3.2 Uses}\\
+\noindent \textbf{6.3.2 Uses}\\
 DynamicDiceContainer,  networkmanager2p\\
 
-\noindent \textbf{3.3.3 Syntax}
+\noindent \textbf{6.3.3 Syntax}
 
-\noindent \textbf{3.3.3.1 Exported Constants}
+\noindent \textbf{6.3.3.1 Exported Constants}
 \begin{itemize}
 	\item \texttt{ N/A}
 \end{itemize}
-\textbf{3.3.3.2 Exported Access Programs}
+\textbf{6.3.3.2 Exported Access Programs}
 \begin{itemize}
 	\item \texttt{setup\_player(\_myPlayer: bool, initial\_health: int, \_playerName: String, \_hostDevice: bool, \_dice\_container: Node3D)}
     \item \texttt{update\_score(new\_score: int)}
@@ -488,8 +489,8 @@ DynamicDiceContainer,  networkmanager2p\\
     \item \texttt{getState()}
 \end{itemize}
 
-\noindent \textbf{3.3.4 Semantics}\\
-\textbf{3.3.4.1 State Variables}\\
+\noindent \textbf{6.3.4 Semantics}\\
+\textbf{6.3.4.1 State Variables}\\
 \begin{itemize}
     \item \texttt{score}: Contains the players current total score accumulated throughout the current game.
     \item \texttt{last\_score}: Contains the most recent score achieved by the player during the last round.
@@ -502,13 +503,13 @@ DynamicDiceContainer,  networkmanager2p\\
     \item \texttt{hostDevice}: checks if player's device is the current host of the game
 \end{itemize}
 
-\textbf{3.3.4.2 Environment Variables}\\
+\textbf{6.3.4.2 Environment Variables}\\
 N/A\\
 
-\textbf{3.3.4.3 Assumptions}\\
+\textbf{6.3.4.3 Assumptions}\\
 Each player has a unique \texttt{player\_id}.
 
-\textbf{3.3.4.4 Access Routine Semantics}
+\textbf{6.3.4.4 Access Routine Semantics}
 \begin{itemize}
 
 	\item \texttt{setup\_player(\_myPlayer: bool, initial\_health: int, \_playerName: String, \_hostDevice: bool, \_dice\_container: Node3D)}\\
@@ -558,7 +559,7 @@ Each player has a unique \texttt{player\_id}.
 
 \end{itemize}
 
-\textbf{3.3.4.5 Local Functions}
+\textbf{6.3.4.5 Local Functions}
 \begin{itemize}
     
     \item \texttt{checkIfDiceValidThenRead()}\\
@@ -572,18 +573,18 @@ Each player has a unique \texttt{player\_id}.
     
 \end{itemize}
 
-\subsection*{3.4 MIS of NetworkManager2P Module}
-\textbf{3.4.1 Module}\\
+\subsection*{6.4 MIS of NetworkManager2P Module}
+\textbf{6.4.1 Module}\\
 NetworkManager2P
 
-\textbf{3.4.2 Uses}\\
+\textbf{6.4.2 Uses}\\
 None.
 
-\textbf{3.4.3 Syntax}\\
-\textbf{3.4.3.1 Exported Constants}\\
+\textbf{6.4.3 Syntax}\\
+\textbf{6.4.3.1 Exported Constants}\\
 None.  
 
-\textbf{3.4.3.2 Exported Access Programs}
+\textbf{6.4.3.2 Exported Access Programs}
 \begin{itemize}
     \item \texttt{start\_server(\_port: int)}
     \item \texttt{connect\_to\_server(\_hash: String)}
@@ -595,17 +596,17 @@ None.
     \item \texttt{send\_game\_settings(\_game\_settings: Dictionary, \_hand\_settings: Dictionary)}
 \end{itemize}
 
-\textbf{3.4.4 Semantics}\\
-\textbf{3.4.4.1 State Variables}\\
+\textbf{6.4.4 Semantics}\\
+\textbf{6.4.4.1 State Variables}\\
 None.
 
-\textbf{3.4.4.2 Environment Variables}\\
+\textbf{6.4.4.2 Environment Variables}\\
 None.
 
-\textbf{3.4.4.3 Assumptions}\\
+\textbf{6.4.4.3 Assumptions}\\
 Assumes a reliable network transport layer. Players do not exceed the 2-player limit for this module.
 
-\textbf{3.4.4.4 Access Routine Semantics}
+\textbf{6.4.4.4 Access Routine Semantics}
 \begin{itemize}
     \item \texttt{start\_server(\_port: int)}\\
     \textbf{Transition:} Establishes a server on the host device for other player to connect to.
@@ -632,7 +633,7 @@ Assumes a reliable network transport layer. Players do not exceed the 2-player l
     \textbf{Transition:} Broadcasts the game settings to the other player to start the game.
 \end{itemize}
 
-\textbf{3.4.4.5 Local Functions}
+\textbf{6.4.4.5 Local Functions}
 \begin{itemize}
     \item \texttt{\_on\_peer\_connected(id: int) -> void}\\
     \textbf{Description:} Triggers the effects of a peer connection
@@ -678,43 +679,44 @@ Assumes a reliable network transport layer. Players do not exceed the 2-player l
 \end{itemize}
 
 
-\subsection*{3.5 MIS of ScoreCalculator Module}
-\textbf{3.5.1 Module}\\
+\subsection*{6.5 MIS of ScoreCalculator Module}
+\textbf{6.5.1 Module}\\
  ScoreCalculator\\
 
-\noindent \textbf{3.5.2 Uses}\\
+\noindent \textbf{6.5.2 Uses}\\
+
 N/A \\
 
-\noindent \textbf{3.5.3 Syntax}
+\noindent \textbf{6.5.3 Syntax}
 
-\noindent \textbf{3.5.3.1 Exported Constants}\\
+\noindent \textbf{6.5.3.1 Exported Constants}\\
 
-\texttt{ N/A}\\
+ \noindent N/A\\
 
-\textbf{3.5.3.2 Exported Access Programs}
+\textbf{6.5.3.2 Exported Access Programs}
 \begin{itemize}
 	\item \texttt{initializeValues()}
 	\item \texttt{calculate\_hand\_score() -> Array[int]}
 	
 \end{itemize}
 
-\noindent \textbf{3.5.4 Semantics}\\
-\textbf{3.5.4.1 State Variables}\\
+\noindent \textbf{6.5.4 Semantics}\\
+\textbf{6.5.4.1 State Variables}\\
 \begin{itemize}
-	\item \texttt{SinglesTotal}: Variable used to track the total score of every "singles" type hand for the purposes of bonus score calculation
-    \item \texttt{BonusThreshold}: Tracks the maximum bonus score that can be given to the player's score for that round
-    \item \texttt{BonusScore}: The bonus score added in addition to the players normal score acquired for that round.
-    \item \texttt{BonusUsed}: Checks if the bonus score has been applied yet.
-    \item \texttt{BonusExists}: Checks if a bonus score should be applied for this round
+	\item \texttt{SinglesTotal (int)}: Variable used to track the total score of every "singles" type hand for the purposes of bonus score calculation
+    \item \texttt{BonusThreshold (int)}: Tracks the maximum bonus score that can be given to the player's score for that round
+    \item \texttt{BonusScore (int)}: The bonus score added in addition to the players normal score acquired for that round.
+    \item \texttt{BonusUsed (boolean)}: Checks if the bonus score has been applied yet.
+    \item \texttt{BonusExists (boolean)}: Checks if a bonus score should be applied for this round
 \end{itemize}
 
-\textbf{3.5.4.2 Environment Variables}\\
+\textbf{6.5.4.2 Environment Variables}\\
 N/A
 
-\textbf{3.5.4.3 Assumptions}\\
+\textbf{6.5.4.3 Assumptions}\\
 The dice rolls are valid, and that no invalid hand type is requested
 
-\textbf{3.5.4.4 Access Routine Semantics}
+\textbf{6.5.4.4 Access Routine Semantics}
 \begin{itemize}
 
 	\item \texttt{initializeValues()}\\
@@ -726,26 +728,28 @@ The dice rolls are valid, and that no invalid hand type is requested
 
 \end{itemize}
 
-\textbf{3.5.4.5 Local Functions}
+\textbf{6.5.4.5 Local Functions}
 \begin{itemize}
     \item \texttt{setupBonus(\_bonusHand: Dictionary)}\\
     \textbf{Description:} This function initializes the variables and parameters relevant to calculating a bonus score value. This function is used when a bonus score needs to be added to the regular score for a hand.
 
 \end{itemize}
 
-\subsection*{3.6 MIS of DynamicScoreboard Module}
-\textbf{3.6.1 Module}\\
+\subsection*{6.6 MIS of DynamicScoreboard Module}
+\textbf{6.6.1 Module}\\
  DynamicScoreboard\\
 
-\noindent \textbf{3.6.2 Uses}\\
+\noindent \textbf{6.6.2 Uses}\\
+
 N/A \\
 
-\noindent \textbf{3.6.3 Syntax}
+\noindent \textbf{6.6.3 Syntax}
 
-\noindent \textbf{3.6.3.1 Exported Constants}\\
-N/A\\
+\noindent \textbf{6.6.3.1 Exported Constants}\\
 
-\textbf{3.6.3.2 Exported Access Programs}
+\noindent N/A\\
+
+\textbf{6.6.3.2 Exported Access Programs}
 \begin{itemize}
 	\item \texttt{populate\_scoreboard(hand\_settings: Dictionary)}
 	\item \texttt{updateButtonScore(\_score: int)}
@@ -755,28 +759,28 @@ N/A\\
 	
 \end{itemize}
 
-\noindent \textbf{3.6.4 Semantics}\\
-\textbf{3.6.4.1 State Variables}\\
+\noindent \textbf{6.6.4 Semantics}\\
+\textbf{6.6.4.1 State Variables}\\
 \begin{itemize}
-	\item \texttt{lastButton}: Tracks the last button pressed by the player
-	\item \texttt{BonusButton}: Tracks the bonus button 
-	\item \texttt{AllButtons}: Tracks every single button relavent to the hands and their corrisponding scores on the scoreboard.
-	\item \texttt{hand\_selected}: tracks the currently selected hand
-	\item \texttt{bonusExists}: Checks if a bonus exists for the current hand
+	\item \texttt{lastButton (button)}: Tracks the last button pressed by the player
+	\item \texttt{BonusButton (button)}: Tracks the bonus button 
+	\item \texttt{AllButtons (Array[Button])}: Tracks every single button relavent to the hands and their corrisponding scores on the scoreboard.
 	\item \texttt{TotalLabel}: Tracks the total overall score for the player.
+	\item \texttt{hand\_selected (dictionary)}: tracks the currently selected hand
+	\item \texttt{bonusExists (dictionary)}: Checks if a bonus exists for the current hand
 
 \end{itemize}
 
-\textbf{3.6.4.2 Environment Variables}
+\textbf{6.6.4.2 Environment Variables}
 
 \begin{itemize}
 	\item \texttt{vbox\_container}: used to help interact with the UI interface to help display the scoreboard. 
 \end{itemize}
 
-\textbf{3.6.4.3 Assumptions}\\
+\textbf{6.6.4.3 Assumptions}\\
 Assumes that every hand option to be displayed is unique to each other and valid for the rules specified by the game settings
 
-\textbf{3.6.4.4 Access Routine Semantics}
+\textbf{6.6.4.4 Access Routine Semantics}
 \begin{itemize}
 
 	\item \texttt{populate\_scoreboard(hand\_settings: Dictionary)}\\
@@ -799,7 +803,7 @@ Assumes that every hand option to be displayed is unique to each other and valid
 
 \end{itemize}
 
-\textbf{3.6.4.5 Local Functions}
+\textbf{6.6.4.5 Local Functions}
 
 \begin{itemize}
     \item \texttt{\_on\_hand\_selected(hand: Dictionary, button: Button)}\\
@@ -808,19 +812,19 @@ Assumes that every hand option to be displayed is unique to each other and valid
 \end{itemize}
 
 
-\subsection*{3.7 MIS of CustomizationMenu Module}
-\textbf{3.7.1 Module}\\
+\subsection*{6.7 MIS of CustomizationMenu Module}
+\textbf{6.7.1 Module}\\
  CustomizationMenu\\
 
-\noindent \textbf{3.7.2 Uses}\\
+\noindent \textbf{6.7.2 Uses}\\
 N/A \\
 
-\noindent \textbf{3.7.3 Syntax}
+\noindent \textbf{6.7.3 Syntax}
 
-\noindent \textbf{3.7.3.1 Exported Constants}\\
+\noindent \textbf{6.7.3.1 Exported Constants}\\
 N/A\\
 
-\textbf{3.7.3.2 Exported Access Programs}
+\textbf{6.7.3.2 Exported Access Programs}
 \begin{itemize}
 	\item \texttt{show\_customization()}
 	\item \texttt{wait\_customization()}
@@ -828,38 +832,38 @@ N/A\\
 	
 \end{itemize}
 
-\noindent \textbf{3.7.4 Semantics}\\
-\textbf{3.7.4.1 State Variables}\\
+\noindent \textbf{6.7.4 Semantics}\\
+\textbf{6.7.4.1 State Variables}\\
 
 \begin{itemize}
     \item \texttt{active\_customizations\_dictionary (Dictionary)}: Stores the active customizations for each player 
 
 \end{itemize}
 
-\textbf{3.7.4.2 Environment Variables}\\
+\textbf{6.7.4.2 Environment Variables}\\
 
 N/A\\
 
 
 
-\textbf{3.7.4.3 Assumptions}\\
+\textbf{6.7.4.3 Assumptions}\\
 Assumes that a full round has been properly completed.
 
-\textbf{3.7.4.4 Access Routine Semantics}
+\textbf{6.7.4.4 Access Routine Semantics}
 \begin{itemize}
 
 	\item \texttt{show\_customization()}\\
-	\textbf{Output:} Shows the customization options available to the player and allows them to select customization options in between games
+	\textbf{Transition:} Shows the customization options available to the player and allows them to select customization options in between games
 	
 	\item \texttt{wait\_customization()}\\
-	\textbf{Output:} Waits for the opponent to select customization options in between games.
+	\textbf{Transition:} Waits for the opponent to select customization options in between games.
 	
 	
 
 
 \end{itemize}
 
-\textbf{3.7.4.5 Local Functions}
+\textbf{6.7.4.5 Local Functions}
 
 \begin{itemize}
     \item \texttt{pass\_customization()}\\
@@ -867,19 +871,19 @@ Assumes that a full round has been properly completed.
 \end{itemize}
 
 
-\subsection*{3.8 MIS of DynamicDiceContainer Module}
-\textbf{3.8.1 Module}\\
+\subsection*{6.8 MIS of DynamicDiceContainer Module}
+\textbf{6.8.1 Module}\\
  DynamicDiceContainer\\
 
-\noindent \textbf{3.8.2 Uses}\\
+\noindent \textbf{6.8.2 Uses}\\
 CustomBaseDie \\
 
-\noindent \textbf{3.8.3 Syntax}
+\noindent \textbf{6.8.3 Syntax}
 
-\noindent \textbf{3.8.3.1 Exported Constants}\\
+\noindent \textbf{6.8.3.1 Exported Constants}\\
 N/A\\
 
-\textbf{3.8.3.2 Exported Access Programs}
+\textbf{6.8.3.2 Exported Access Programs}
 \begin{itemize}
 	\item \texttt{roll\_dice() }
 	\item \texttt{roll\_selected\_dice() }
@@ -895,22 +899,22 @@ N/A\\
 	
 \end{itemize}
 
-\noindent \textbf{3.8.4 Semantics}\\
-\textbf{3.8.4.1 State Variables}\\
+\noindent \textbf{6.8.4 Semantics}\\
+\textbf{6.8.4.1 State Variables}\\
 \begin{itemize}
-	\item \texttt{dice\_nodes}: Tracks each dice object that is a part of this container module.
-	\item \texttt{start\_positions}: Specifies the stating positions of the dice
+	\item \texttt{dice\_nodes (Array[RigidBody3D])}: Tracks each dice object that is a part of this container module.
+	\item \texttt{start\_positions (list) }: Specifies the stating positions of the dice
 
 \end{itemize}
 
-\textbf{3.8.4.2 Environment Variables}\\
+\textbf{6.8.4.2 Environment Variables}\\
 
 N/A\\
 
-\textbf{3.8.4.3 Assumptions}\\
+\textbf{6.8.4.3 Assumptions}\\
 Assumes all dice generated are of the same type.
 
-\textbf{3.8.4.4 Access Routine Semantics}
+\textbf{6.8.4.4 Access Routine Semantics}
 \begin{itemize}
 	\item \texttt{roll\_dice() }\\
     	\textbf{Transition:} Rolls all the dice with a random force and torque
@@ -937,20 +941,20 @@ Assumes all dice generated are of the same type.
 	\textbf{Output:} gets a list of all dice that have been rendered invalid, wiether due to it's improper landing position, unreadable value, improper graphic rendering, or other issue.
 	
 	\item \texttt{add\_dice(dice\_count: int, dice\_type: int)}\\
-	\textbf{Transformation:} Adds new dice objects to the container
+	\textbf{Output:} Adds new dice objects to the container
 	
 	\item \texttt{move\_dice\_aside() }\\
-	\textbf{Transformation:} Moves dice not being re-rolled to the side of the board to prevent the dice from interfeering with the reroll
+	\textbf{Transition:} Moves dice not being re-rolled to the side of the board to prevent the dice from interfeering with the reroll
 	
 	\item \texttt{move\_dice\_in\_line() }\\
-	\textbf{Transformation:} Move dice once to an organized display on the board to make them easier to read. 
+	\textbf{Transition:} Move dice once to an organized display on the board to make them easier to read. 
 
 	
 
 
 \end{itemize}
 
-\textbf{3.8.4.5 Local Functions}
+\textbf{6.8.4.5 Local Functions}
 
 \begin{itemize}
 	
@@ -960,19 +964,19 @@ Assumes all dice generated are of the same type.
 \end{itemize}
 
 
-\subsection*{3.9 MIS of CustomBaseDie Module}
-\textbf{3.9.1 Module}\\
+\subsection*{6.9 MIS of CustomBaseDie Module}
+\textbf{6.9.1 Module}\\
  CustomBaseDie\\
 
-\noindent \textbf{3.9.2 Uses}\\
+\noindent \textbf{6.9.2 Uses}\\
 N/A \\
 
-\noindent \textbf{3.9.3 Syntax}
+\noindent \textbf{6.9.3 Syntax}
 
-\noindent \textbf{3.9.3.1 Exported Constants}\\
+\noindent \textbf{6.9.3.1 Exported Constants}\\
 N/A\\
 
-\textbf{3.9.3.2 Exported Access Programs}
+\textbf{6.9.3.2 Exported Access Programs}
 \begin{itemize}
 	\item \texttt{roll() }
 	\item \texttt{ get\_face\_value() -> int }
@@ -986,41 +990,41 @@ N/A\\
 	
 \end{itemize}
 
-\noindent \textbf{3.9.4 Semantics}\\
-\textbf{3.9.4.1 State Variables}\\
+\noindent \textbf{6.9.4 Semantics}\\
+\textbf{6.9.4.1 State Variables}\\
 \begin{itemize}
-	\item \texttt{num\_faces}: Traces number of faces on the die.
-	\item \texttt{start\_position}: tracks starting position of the die on the game board .
-	\item \texttt{start\_rotation}: tracks starting rotation of the die.
-	\item \texttt{start\_time}: Tracks time when the dice is created
-	\item \texttt{impulse\_range}: contains the amount of force applied to the die when rolling.
-	\item \texttt{torque\_range}: contains amount of torque applied to the die when rolling.
-	\item \texttt{velocity\_threshold}: sets max speed dice can be moving before it's considers too fast to stop in time.
-	\item \texttt{roll\_time\_limit}: Time limit that the dice is allowed to roll for before a function is triggered.
-	\item \texttt{is\_selected}: Tracks if the die has been selected by the user.
-	\item \texttt{up\_threshold}: Threshold for detecting the "upward" ray during raycasting
-	\item \texttt{face\_rays}: Dictionary that associates the raycast nodes with face values so that the system knows which side of the die is facing up.
-	\item \texttt{dice\_faces}: tracks each face of the die
-	\item \texttt{face\_values}: tracks the values corresponding to each face on the die
+	\item \texttt{num\_faces (int)}: Traces number of faces on the die.
+	\item \texttt{start\_position (Vector3)}: tracks starting position of the die on the game board .
+	\item \texttt{start\_rotation (Vector3)}: tracks starting rotation of the die.
+	\item \texttt{start\_time (float)}: Tracks time when the dice is created
+	\item \texttt{impulse\_range (int)}: contains the amount of force applied to the die when rolling.
+	\item \texttt{torque\_range (int)}: contains amount of torque applied to the die when rolling.
+	\item \texttt{velocity\_threshold (float)}: sets max speed dice can be moving before it's considers too fast to stop in time.
+	\item \texttt{roll\_time\_limit (float)}: Time limit that the dice is allowed to roll for before a function is triggered.
+	\item \texttt{is\_selected (boolean)}: Tracks if the die has been selected by the user.
+	\item \texttt{up\_threshold (float)}: Threshold for detecting the "upward" ray during raycasting
+	\item \texttt{face\_rays (dictionary)}: Dictionary that associates the raycast nodes with face values so that the system knows which side of the die is facing up.
+	\item \texttt{dice\_faces (dictionary)}: tracks each face of the die
+	\item \texttt{face\_values (dictionary)}: tracks the values corresponding to each face on the die
 	\item \texttt{normalCustomTex}: Tracks the physical visual design of die when not selected.
 	\item \texttt{selectedCustomTex}: Tracks the physical visual design of die when selected.
 	\item \texttt{dice\_ui\_element}: controls the design of the die's ui icon
 
-	\item \texttt{is\_rolling}: checks if the die is rolling
+	\item \texttt{is\_rolling (boolean)}: checks if the die is rolling
 
-	\item \texttt{roll\_start\_time}: is the time when the die starts rolling
+	\item \texttt{roll\_start\_time (float)}: is the time when the die starts rolling
 \end{itemize}
 
 
-\textbf{3.9.4.2 Environment Variables}\\
+\textbf{6.9.4.2 Environment Variables}\\
 
 N/A\\
 
 
-\textbf{3.9.4.3 Assumptions}\\
+\textbf{6.9.4.3 Assumptions}\\
 Assumes that the assets associated with creating the die exist. 
 
-\textbf{3.9.4.4 Access Routine Semantics}
+\textbf{6.9.4.4 Access Routine Semantics}
 \begin{itemize}
 	\item \texttt{roll() }\\
 	\textbf{Transition:} Physically rolls the die, 
@@ -1050,7 +1054,7 @@ Assumes that the assets associated with creating the die exist.
 
 \end{itemize}
 
-\textbf{3.9.4.5 Local Functions}
+\textbf{6.9.4.5 Local Functions}
 
 \begin{itemize}
     \item \texttt{setup\_faces() }\\
@@ -1070,47 +1074,47 @@ Assumes that the assets associated with creating the die exist.
 \end{itemize}
 
 
-\subsection*{3.10 MIS of GameSettings Module}
-\textbf{3.10.1 Module}\\
+\subsection*{6.10 MIS of GameSettings Module}
+\textbf{6.10.1 Module}\\
  GameSettings\\
 
-\noindent \textbf{3.10.2 Uses}\\
+\noindent \textbf{6.10.2 Uses}\\
 NetworkManager2p \\
 
-\noindent \textbf{3.10.3 Syntax}
+\noindent \textbf{6.10.3 Syntax}
 
-\noindent \textbf{3.10.3.1 Exported Constants}\\
+\noindent \textbf{6.10.3.1 Exported Constants}\\
 N/A\\
 
-\textbf{3.10.3.2 Exported Access Programs}
+\textbf{6.10.3.2 Exported Access Programs}
 \begin{itemize}
 	\item \texttt{collectInfo()}
 	
 	
 \end{itemize}
 
-\noindent \textbf{3.10.4 Semantics}\\
-\textbf{3.10.4.1 State Variables}\\
+\noindent \textbf{6.10.4 Semantics}\\
+\textbf{6.10.4.1 State Variables}\\
 \begin{itemize}
-	\item \texttt{hand\_settings\_saved}:Verifies whether the hand settings for the current game session have been saved.
-	\item \texttt{hand\_settings\_vals}: Dictionary containing the settings for each hand saved by the user after being selected.
-	\item \texttt{game\_settings}: Dictionary storing the game settings implemented in the game.
-	\item \texttt{dice\_count}: Counts the number of dice in the game
-	\item \texttt{dice\_type}: contains the type of dice used for this game
-	\item \texttt{win\_cond}: contains the win condition for the game
-	\item \texttt{show\_opponent\_rolls}: Checks if the ability to see opponent rolls is enabled for this game session
-	\item \texttt{timed\_rounds}: Checks if the option for timed rounds is enables for this game session
+	\item \texttt{hand\_settings\_saved (boolean)}:Verifies whether the hand settings for the current game session have been saved.
+	\item \texttt{hand\_settings\_vals (Dictionary)}: Dictionary containing the settings for each hand saved by the user after being selected.
+	\item \texttt{game\_settings (Dictionary)}: Dictionary storing the game settings implemented in the game.
+	\item \texttt{dice\_count (int)}: Counts the number of dice in the game
+	\item \texttt{dice\_type (int)}: contains the type of dice used for this game
+	\item \texttt{win\_cond (String)}: contains the win condition for the game
+	\item \texttt{show\_opponent\_rolls (boolean)}: Checks if the ability to see opponent rolls is enabled for this game session
+	\item \texttt{timed\_rounds (boolean)}: Checks if the option for timed rounds is enables for this game session
 
 \end{itemize}
 
-\textbf{3.10.4.2 Environment Variables}\\
+\textbf{6.10.4.2 Environment Variables}\\
 
 N/A\\
 
-\textbf{3.10.4.3 Assumptions}\\
+\textbf{6.10.4.3 Assumptions}\\
 Assumes all options are valid 
 
-\textbf{3.10.4.4 Access Routine Semantics}
+\textbf{6.10.4.4 Access Routine Semantics}
 \begin{itemize}
 
 	\item \texttt{collectInfo()}\\
@@ -1118,7 +1122,7 @@ Assumes all options are valid
 
 \end{itemize}
 
-\textbf{3.10.4.5 Local Functions}
+\textbf{6.10.4.5 Local Functions}
 \begin{itemize}
     \item \texttt{\_on\_start\_game\_pressed() }\\
 	\textbf{Description:} Implements the chosen game settings for the current game session upon the pressing of the start game button. 
@@ -1159,27 +1163,45 @@ Assumes all options are valid
 	
 \end{itemize}
 
-\subsection*{3.11 MIS of GameUI Module}
-\textbf{3.11.1 Module}\\
+\subsection*{6.11 MIS of GameUI Module}
+\textbf{6.11.1 Module}\\
  GameUI\\
 
-\noindent \textbf{3.11.2 Uses}\\
+\noindent \textbf{6.11.2 Uses}\\
 N/A \\
 
-\noindent \textbf{3.11.3 Syntax}
+\noindent \textbf{6.11.3 Syntax}
 
-\noindent \textbf{3.11.3.1 Exported Constants}\\
+\noindent \textbf{6.11.3.1 Exported Constants}\\
 N/A\\
 
-\textbf{3.11.3.2 Exported Access Programs}
+\textbf{6.11.3.2 Exported Access Programs}
 \begin{itemize}
-	\item \texttt{collectInfo()}
+	\item \texttt{setup\_game\_ui(game\_settings: Dictionary, \_isHost: bool)}
+	\item \texttt{update\_opponent\_dice\_display(rolls: Array)}
+	\item \texttt{update\_my\_player\_dice\_display(dice: Array[RigidBody3D])}
+	\item \texttt{blank\_opponent\_dice\_display()}
+	\item \texttt{blank\_my\_player\_dice\_display()}
+	\item \texttt{update\_round\_info(current\_round: int, \_total\_rounds: int = total\_rounds)}
+	\item \texttt{update\_roll\_info(current\_roll: int, total\_rolls: int = total\_round\_rolls)}
+	\item \texttt{update\_player\_stats(player\_type: String, \_player\_info: Dictionary) } 
+	\item \texttt{show\_waiting\_screen() } 
+	\item \texttt{hide\_waiting\_screen() } 
+	\item \texttt{show\_end\_of\_game\_screen(resultText: String, player\_stats: Dictionary, opponent\_stats: Dictionary) } 
+	\item \texttt{hide\_end\_of\_game\_screen() } 
+	\item \texttt{hide\_all\_ui() } 
+	\item \texttt{hide\_camera\_options()  }
+	\item \texttt{show\_camera\_options()  }
+	\item \texttt{toggle\_pause\_menu() }
+	\item \texttt{startTimer(\_duration: int)  }
+	\item \texttt{stopTimer() }
+	
 	
 	
 \end{itemize}
 
-\noindent \textbf{3.11.4 Semantics}\\
-\textbf{3.11.4.1 State Variables}\\
+\noindent \textbf{6.11.4 Semantics}\\
+\textbf{6.11.4.1 State Variables}\\
 \begin{itemize}
 	\item \texttt{myPlayerName (String)}: Contains the name of the player running the game.
 	\item \texttt{enemyPlayerName (String)}: Contains the name of the player's opponent.
@@ -1195,27 +1217,143 @@ N/A\\
 
 \end{itemize}
 
-\textbf{3.11.4.2 Environment Variables}\\
+\textbf{6.11.4.2 Environment Variables}\\
 
 N/A\\
 
-\textbf{3.11.4.3 Assumptions}\\
+\textbf{6.11.4.3 Assumptions}\\
 Assume that each UI asset exists and can be created upon being requested by the module. 
 
-\textbf{3.11.4.4 Access Routine Semantics}
+\textbf{6.11.4.4 Access Routine Semantics}
 \begin{itemize}
 
-	\item \texttt{col()}\\
-	\textbf{Transition:} 
+	\item \texttt{setup\_game\_ui(game\_settings: Dictionary, \_isHost: bool)}\\
+	\textbf{Transition:} sets up the game UI based on the initial game settings
+	
+	\item \texttt{update\_opponent\_dice\_display(rolls: Array)}\\
+	\textbf{Transition:} Updates the opponent player's dice display UI to show the opponent's dice roll results. 
+
+	\item \texttt{update\_my\_player\_dice\_display(dice: Array[RigidBody3D])}\\
+	\textbf{Transition:} Updates the player's dice display UI to show the player's dice roll results.
+	
+	\item \texttt{blank\_opponent\_dice\_display()}\\
+	\textbf{Transition:} Updates the opponent's dice display UI into blanks.
+	
+	\item \texttt{blank\_my\_player\_dice\_display()}
+	\textbf{Transition:} Updates the player's dice display UI into blanks.
+	
+	\item \texttt{update\_round\_info(current\_round: int, \_total\_rounds: int = total\_rounds)}\\
+	\textbf{Transition:} tracks the current round the players are on.
+	
+	\item \texttt{update\_roll\_info(current\_roll: int, total\_rolls: int = total\_round\_rolls)}\\
+	\textbf{Transition:} Tracks the current dice roll for the round the players are currently on. This is based on the number of rolls completed during that round, as well as the total rolls allowed for that round.
+	
+	\item \texttt{update\_player\_stats(player\_type: String, \_player\_info: Dictionary) } \\
+	\textbf{Transition:}Updates either the player's in game stats, or the in game stats of the opponent.
+	
+	\item \texttt{show\_waiting\_screen() } \\
+	\textbf{Transition:} Initializes the waiting screen
+	
+	\item \texttt{hide\_waiting\_screen() } \\
+	\textbf{Transition:} Hides the waiting screen from view
+	
+	\item \texttt{show\_end\_of\_game\_screen(resultText: String, player\_stats: Dictionary, opponent\_stats: Dictionary) } \\
+	\textbf{Transition:} Initiizes the end of game screen, displaying the winner and the player stats.
+	
+	\item \texttt{hide\_end\_of\_game\_screen() } \\
+	\textbf{Transition:} Hides the end of game screen.
+	
+	\item \texttt{hide\_all\_ui() } \\
+	\textbf{Transition:} Hides ALL of the UI screens in this module.
+	
+	\item \texttt{hide\_camera\_options()  }\\
+	\textbf{Transition:} Hides the camera options menu
+	
+	\item \texttt{show\_camera\_options()  }\\
+	\textbf{Transition:} Shows the camera options menu
+	
+	\item \texttt{toggle\_pause\_menu() }\\
+	\textbf{Transition:} Toggles the pause menu on or off depending 
+	
+	\item \texttt{startTimer(\_duration: int)  }\\
+	\textbf{Transition:} Starts the in game round timer.
+	
+	\item \texttt{stopTimer() }\\
+	\textbf{Transition:} Stops the in game round timer.
+	
 
 \end{itemize}
 
-\textbf{3.11.4.5 Local Functions}
+\textbf{6.11.4.5 Local Functions}
 \begin{itemize}
-    \item \texttt{\_on\_start\_game\_pressed() }\\
-	\textbf{Description:} Implements the chosen game settings for the current game session upon the pressing of the start game button. 
-
-	 
+    \item \texttt{initialize\_stat\_labels(stat\_box: VBoxContainer, player\_type: String) }\\
+	\textbf{Description:}  Helper function to assist in initializing player stat labels.
+	
+	\item \texttt{initialize\_opponent\_dice\_display() }\\
+	\textbf{Description:} Initializes the dice display of the opponent with empty sprites
+	
+	\item \texttt{initialize\_my\_player\_dice\_display() }\\
+	\textbf{Description:} Initializes the dice display of the player with empty sprites
+	
+	\item \texttt{sortDice(\_dice: Array[RigidBody3D], \_sortMethod: int = 1)-> Array[RigidBody3D] }\\
+	\textbf{Description:} Helper function to determine which sorting method to use in order to sort a set of dice. Once the desired sorting method is applied, it will return the sorted set of dice.
+	
+	\item \texttt{custom\_sort\_ascending(a, b) }\\
+	\textbf{Description:} Sorts the dice in ascending order.
+	
+	\item \texttt{custom\_sort\_descending(a, b) }\\
+	\textbf{Description:} Sorts the dice in descending order.
+	
+	\item \texttt{sort\_by\_frequency(\_dice: Array[RigidBody3D]) -> Array[RigidBody3D] }\\
+	\textbf{Description:} Sorts the dice based on the frequency of roll values.
+	
+	\item \texttt{format\_dictionary\_to\_string(data: Dictionary) -> String }\\
+	\textbf{Description:} Translates the data inside a dictionary data structure into string form. 
+	
+	\item \texttt{hide\_pause\_menu()}\\
+	\textbf{Description:} removes the pause menu from view.
+	
+	\item \texttt{show\_pause\_menu() }\\
+	\textbf{Description:} Initializes the pause menu, allowing the player to access the options on the pause menu.
+	
+	\item \texttt{hide\_opponent\_rolls() }\\
+	\textbf{Description:} Hides the UI displaying the opponent's roll results from the player's view.
+	
+	\item \texttt{show\_opponent\_rolls() }\\
+	\textbf{Description:} Reveals the UI displaying the opponent's roll, and makes the results of the opponent's roll visible to the player.
+	
+	\item \texttt{hide\_my\_player\_rolls() }\\
+	\textbf{Description:} Hides the UI displaying the player's roll results from the player's view
+	
+	\item \texttt{show\_my\_player\_rolls() }\\
+	\textbf{Description:} Reveals the UI displaying the player's roll, and makes the results of the player's roll visible to the player.
+	
+	\item \texttt{hide\_game\_state\_info() }\\
+	\textbf{Description:} Hides the UI displaying information related to the current state of the game.
+	
+	\item \texttt{show\_game\_state\_info() }\\
+	\textbf{Description:} Reveals the UI displaying information related to the current state of the game.
+	
+	\item \texttt{hide\_player\_stats\_panel() }\\
+	\textbf{Description:} Hides the UI panel showing the player's stats.
+	
+	\item \texttt{show\_player\_stats\_panel() }\\
+	\textbf{Description:} Reveals the UI panel showing the player's stats.
+	
+	\item \texttt{hide\_countdown\_panel() }\\
+	\textbf{Description:} Hides the round countdown timer
+	
+	\item \texttt{show\_countdown\_panel() }\\
+	\textbf{Description:} Reveals the round countdown timer
+	
+	\item \texttt{\_on\_asc\_sort\_pressed() }\\
+	\textbf{Description:} Initializes the process to sort the rolled dice results in ascending order.
+	
+	\item \texttt{\_on\_desc\_sort\_pressed() }\\
+	\textbf{Description:} Initializes the process to sort the rolled dice results in descending order.
+	
+	\item \texttt{\_on\_freq\_sort\_pressed() }\\
+	\textbf{Description:} Initializes the process to sort the rolled dice results based on the frequency of the rolled values.
 	
 	
 \end{itemize}
