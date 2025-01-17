@@ -62,6 +62,7 @@ urlcolor=cyan          % color of external links
 25-01-14 & Nigel Moses & Added content to section 5\\
 25-01-15 & Naishan Guo & Updated content to section 6\\
 25-01-17 & Hemraj Bhatt & Added content to reflection\\
+25-01-17 & John Popovici & Added content to reflection\\
 \dots & \dots & \dots\\
 \bottomrule
 \end{tabularx}
@@ -1251,15 +1252,15 @@ By adhering to this strategy, the system reduces the need for complex exception 
 
 \section*{Appendix --- Reflection}
 
-\wss{Not required for CAS 741 projects}
+%\wss{Not required for CAS 741 projects}
 
 The information in this section will be used to evaluate the team members on the
 graduate attribute of Problem Analysis and Design.
 
-\input{../../Reflection.tex}
+%\input{../../Reflection.tex}
 
 \begin{enumerate}
-  \item \textbf{What went well while writing this deliverable?} \\
+  \item \textbf{What went well while writing this deliverable?} 
   
   Due to having done previous documents, the team was able to divide document sections equally and efficiently as many sections coincided with previous document sections. Therefore, each person assigned a section had either done the section or some semblance of it before. For any completely new sections, the individuals who had the most knowledge pertaining to the section were chosen. This way of task division led to an equal distribution.
 
@@ -1270,6 +1271,9 @@ graduate attribute of Problem Analysis and Design.
   \item \textbf{Which of your design decisions stemmed from speaking to your client(s)
   or a proxy (e.g. your peers, stakeholders, potential users)? For those that
   were not, why, and where did they come from?}
+  
+One of the major design decisions in this project came in the form of having very high modularity. This would firstly be for the ability for players to customize their game such as the number of dice, round timers, or the scoring methods, and each of these different elements must be flexible and compatible with other such modules. This design choice came primarily from the need of having to design for a "family of games" which stemmed from speaking with the course professor, but this was carried fourth to help us design a highly customizable and fun game. The second reason the high modularity is designed into our program is because we are looking to design different game versions, such as an online customizable version, but also an offline customizable version, and a singleplayer campaign version. We wish to be able to reuse elements wherever possible, so for example the networking modules must be interchangeable and the dice modules and probability calculations must be reusable. Despite leading to a similar design choice, this aspect came from internal discussions and a desire for different visions to be fulfilled using the same game system we put in place.
+  
   \item \textbf{While creating the design doc, what parts of your other documents (e.g.
   requirements, hazard analysis, etc), it any, needed to be changed, and why?}
   \item \textbf{What are the limitations of your solution?  Put another way, given
