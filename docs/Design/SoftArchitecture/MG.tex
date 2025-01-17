@@ -517,7 +517,63 @@ Elements of the game creation user interface:
 ~\newpage
 \section{Design of Communication Protocols}
 
-\wss{If appropriate}
+The communication protocols for this project leverage Godot's built-in multiplayer networking libraries to facilitate data synchronization and interactions between players. The design supports two key modes of communication: local area network (LAN) and online multiplayer through a server-based hosting system.
+
+\subsection{Use of Godot Multiplayer Networking Libraries}
+
+Godot's multiplayer networking system provides the foundation for real-time communication between players. The networking stack includes:
+\begin{itemize}
+    \item \textbf{ENet Protocol:} A reliable UDP-based protocol for efficient and low-latency data transmission.
+    \item \textbf{@rpc and @rpc("any\_peer") Functions:} Remote Procedure Calls (RPCs) are used to synchronize state and transmit data between connected peers. The \texttt{@rpc} and \texttt{@rpc("any\_peer")} functions allow for targeted and efficient communication.
+\end{itemize}
+
+The networking manager (`networkManager2P`) is designed to handle peer-to-peer communication for two players over a LAN or via an online server. The system uses a host-client architecture, where the host player is responsible for maintaining the game state and transmitting updates to connected clients.
+
+\subsection{Server-Based Hosting for Online Multiplayer}
+
+For online multiplayer, a server will be implemented to host game lobbies for players who are not on the same network. The server's responsibilities include:
+\begin{itemize}
+    \item Managing multiple lobbies and connections simultaneously.
+    \item Authenticating and assigning unique identifiers to each connected player.
+    \item Relaying data between the host and clients, ensuring seamless communication.
+\end{itemize}
+
+This server-based approach allows players from different locations to connect and ensures a consistent experience by maintaining a central point of synchronization for game state.
+
+\subsection{Types of Data Passed Between Players}
+
+The communication protocol is designed to handle various types of data to synchronize game state and ensure fair gameplay. Based on the `networkManager2P` module, the following types of data are transmitted:
+\begin{itemize}
+    \item \textbf{Game State Updates:} Includes information about the current round, dice rolls, and scores. These updates ensure both players are in sync at all times.
+    \item \textbf{Player Actions:} Data related to specific player interactions, such as dice selections, re-rolls, and scoring decisions.
+    \item \textbf{Customization Choices:} Information about selected customizations, such as dice face changes, passive modifiers, and consumables.
+    \item \textbf{Connection Management:} Includes data for handling player connections and disconnections. This ensures smooth transitions when players join or leave a game.
+\end{itemize}
+
+\subsection{Functions for Data Communication}
+
+The following functions from the `networkManager2P` module facilitate communication:
+\begin{itemize}
+    \item \texttt{broadcast\_disconnect(state: String, data: Dictionary)}: Calls the rpc receive\_disconnect on peers to notify.
+    \item \texttt{receive\_disconnect()}: The rpc function that can be calls to receive a disconnect notification.
+    \item \texttt{broadcast\_game\_state(state: String, data: Dictionary)}: Calls the rpc receive\_game\_state on peer to notify each other of game their state.
+    \item \texttt{receive\_game\_state(state: String, data: Dictionary)}: The rpc function that is called to receive the other peer's game state.
+    \item \texttt{ping()}: Calls itself on all connected peers to track connection status.
+    \item \texttt{send\_game\_settings(\_game\_settings: Dictionary,\_hand\_settings: Dictionary)}: Calls the rpc receive\_game\_settings on peer to send the game settings to the client device.
+    \item \texttt{receive\_game\_settings(\_game\_settings: Dictionary, \_hand\_settings: Dictionary)}: The rpc function that recieves the game settings from the host device.
+\end{itemize}
+
+\subsection{Design Considerations}
+
+The communication protocols are designed with the following considerations:
+\begin{itemize}
+    \item \textbf{Reliability:} The ENet protocol ensures that all critical game state data is reliably delivered to connected peers.
+    \item \textbf{Low Latency:} The use of UDP minimizes delays, ensuring real-time synchronization during gameplay.
+    \item \textbf{Scalability:} While the current implementation supports two-player games, the architecture can be extended to handle larger multiplayer games if required.
+\end{itemize}
+
+This protocol design ensures a robust and flexible communication system for the Yahtzee game, providing a seamless multiplayer experience across both LAN and online environments.
+
 
 \section{Timeline}
 
