@@ -15,13 +15,14 @@ signal game_settings_ready(game_settings,hand_settings)
 @onready var player1Name = settingsSetup.get_node("OptionsVBox/PlayerNames/Player1Name")
 @onready var player2Name = settingsSetup.get_node("OptionsVBox/PlayerNames/Player2Name")
 @onready var WinCondition = settingsSetup.get_node("OptionsVBox/WinCondition/ConditionSelect")
-@onready var HealthPoints = settingsSetup.get_node("OptionsVBox/HealthPoints/HealthPoints")
+@onready var HealthPoints = settingsSetup.get_node("OptionsVBox/HealthPoints/HealthPoints").get_line_edit()
 @onready var HealthPointsBox = settingsSetup.get_node("OptionsVBox/HealthPoints")
-@onready var Rounds = settingsSetup.get_node("OptionsVBox/Rounds/Rounds")
-@onready var RoundRolls = settingsSetup.get_node("OptionsVBox/Rounds/RoundRolls")
+@onready var Rounds = settingsSetup.get_node("OptionsVBox/Rounds/Rounds").get_line_edit()
+@onready var RoundRolls = settingsSetup.get_node("OptionsVBox/Rounds/RoundRolls").get_line_edit()
 @onready var DiceCountRef = settingsSetup.get_node("OptionsVBox/Dice/DiceCount").get_line_edit()
 @onready var timed_rounds_button = settingsSetup.get_node("OptionsVBox/TimedRounds/TimedRoundsToggle")
-@onready var round_time = settingsSetup.get_node("OptionsVBox/TimedRounds/RoundTime")
+@onready var round_time = settingsSetup.get_node("OptionsVBox/TimedRounds/RoundTime").get_line_edit()
+@onready var round_time_box = settingsSetup.get_node("OptionsVBox/TimedRounds/RoundTime")
 @onready var DiceCountRange = settingsSetup.get_node("OptionsVBox/Dice/DiceCount")
 @onready var DiceType = settingsSetup.get_node("OptionsVBox/Dice/DiceType")
 @onready var opponent_roll_visible_button = settingsSetup.get_node("OptionsVBox/HandLimit/OpponentRollVisible")
@@ -372,10 +373,10 @@ func _on_timed_round_toggled(_state) -> void:
 	print("Was ", timed_rounds)
 	if timed_rounds:
 		timed_rounds = false
-		round_time.visible = false
+		round_time_box.visible = false
 	else:
 		timed_rounds = true
-		round_time.visible = true
+		round_time_box.visible = true
 	print("Is ", timed_rounds)
 
 func _dice_values_changed(_state) -> void:

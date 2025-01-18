@@ -1,13 +1,12 @@
 [gd_scene load_steps=5 format=3 uid="uid://canc50wskx2cl"]
 
-[ext_resource type="Script" path="res://Scripts/OnlineLongFormGameScene/OLFG_game_settings.gd" id="1_jhs13"]
+[ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_settings.gd" id="1_5hf6s"]
 [ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/Default_Pixel_Blue/PanelBlueBoxBackgroundStyle.tres" id="2_t71mh"]
 [ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="3_il4in"]
 [ext_resource type="PackedScene" uid="uid://c2y0m27eadb6i" path="res://NodeScene/sample_preset_button.tscn" id="4_o2ime"]
 
 [node name="GameSettings" type="CanvasLayer"]
-visible = false
-script = ExtResource("1_jhs13")
+script = ExtResource("1_5hf6s")
 
 [node name="UIBox" type="PanelContainer" parent="."]
 anchors_preset = 8
@@ -98,13 +97,15 @@ size_flags_horizontal = 3
 text = "Health Points Per Player:"
 horizontal_alignment = 1
 
-[node name="HealthPoints" type="LineEdit" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/HealthPoints"]
+[node name="HealthPoints" type="SpinBox" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/HealthPoints"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_il4in")
-text = "5"
-placeholder_text = "Health Points per player"
-alignment = 1
+min_value = 1.0
+max_value = 1000.0
+value = 5.0
+update_on_text_changed = true
+suffix = "Hp"
 
 [node name="Rounds" type="HBoxContainer" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox"]
 layout_mode = 2
@@ -112,23 +113,32 @@ layout_mode = 2
 [node name="Instructions3" type="Label" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/Rounds"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Total number of Rounds:"
+text = "Hands:"
 horizontal_alignment = 1
 
-[node name="Rounds" type="LineEdit" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/Rounds"]
+[node name="Rounds" type="SpinBox" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/Rounds"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_il4in")
-text = "8"
-alignment = 1
+min_value = 1.0
+max_value = 50.0
+value = 8.0
+update_on_text_changed = true
 
-[node name="RoundRolls" type="LineEdit" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/Rounds"]
+[node name="Instructions4" type="Label" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/Rounds"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Rolls per Hand:"
+horizontal_alignment = 1
+
+[node name="RoundRolls" type="SpinBox" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/Rounds"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_il4in")
-text = "3"
-placeholder_text = "Rolls per round"
-alignment = 1
+min_value = 1.0
+max_value = 10.0
+value = 3.0
+update_on_text_changed = true
 
 [node name="Dice" type="HBoxContainer" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox"]
 layout_mode = 2
@@ -192,11 +202,14 @@ theme = ExtResource("3_il4in")
 button_pressed = true
 text = "Timed Rounds:"
 
-[node name="RoundTime" type="LineEdit" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/TimedRounds"]
+[node name="RoundTime" type="SpinBox" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/TimedRounds"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "20"
-placeholder_text = "seconds"
+size_flags_vertical = 4
+theme = ExtResource("3_il4in")
+min_value = 1.0
+max_value = 60.0
+value = 20.0
 alignment = 1
 
 [node name="Buttons" type="HBoxContainer" parent="UIBox/SettingsSplitBox/Settings_Setup"]
