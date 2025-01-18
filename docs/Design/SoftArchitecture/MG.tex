@@ -58,6 +58,7 @@
 2025-01-16 & Isaac Giles & Added content to sections 6 \& 8\\
 2025-01-16 & Hemraj Bhatt & Added content to section 12\\
 2025-01-16 & Naishan Guo & Added content to section 9\\
+2025-01-17 & John Popovici & Program name and figure 1\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -76,16 +77,14 @@ This section records information for easy reference.
   \textbf{symbol} & \textbf{description}\\
   \midrule 
   AC & Anticipated Change\\
-  DAG & Directed Acyclic Graph \\
   M & Module \\
   MG & Module Guide \\
   OS & Operating System \\
   R & Requirement\\
   SC & Scientific Computing \\
   SRS & Software Requirements Specification\\
-  \progname & Explanation of program name\\
+  \progname & Software Engineering Capstone Course\\
   UC & Unlikely Change \\
-  \wss{etc.} & \wss{...}\\
   \bottomrule
 \end{tabular}\\
 
@@ -289,72 +288,72 @@ module. The \emph{Services} field specifies \emph{what} the module will do
 without documenting \emph{how} to do it. For each module, a suggestion for the
 implementing software is given under the \emph{Implemented By} title. If the
 entry is \emph{OS}, this means that the module is provided by the operating
-system or by standard programming language libraries.  \emph{\progname{}} means the
-module will be implemented by the \progname{} software.
+system or by standard programming language libraries.  \emph{\textit{Dice Duels: Duel of the Eights}} means the
+module will be implemented by the \textit{Dice Duels: Duel of the Eights} software.
 
 \subsection{Hardware-Hiding Modules}
 \subsubsection{NetworkManager2P Module}
 \textbf{Secrets:} The underlying implementation of peer-to-peer communication and synchronization between two clients.\\
 \textbf{Services:} Handles connection setup, data synchronization, and disconnection handling for a 2-player game.\\
-\textbf{Implemented By:} SFWRENG 4G06.
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
 
 \subsubsection{GameUI Module}
 \textbf{Secrets:} The logic for UI components and interactions.\\
 \textbf{Services:} Displays information to players, including scores and customization options, and provides action buttons.\\
-\textbf{Implemented By:} SFWRENG 4G06.
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
 
 \subsection{Behavior-Hiding Modules}
 \subsubsection{MultiGameManager Module}
 \textbf{Secrets:} The logic for managing multiple games, including customization and upgrades between games.\\
 \textbf{Services:} Tracks progress and integrates player upgrades into gameplay.\\
-\textbf{Implemented By:} SFWRENG 4G06.
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
 
 \subsubsection{PlayerManager Module}
 \textbf{Secrets:} The data structure for tracking player-specific details, including scores, dice, and upgrades.\\
 \textbf{Services:} Tracks and updates player states, including consumables and modifiers.\\
-\textbf{Implemented By:} SFWRENG 4G06.
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
 
 \subsubsection{GameManager Module}
 \textbf{Secrets:} The logic for managing the flow of the game.\\
 \textbf{Services:} Tracks game progress and controls flow and state of the game.\\
-\textbf{Implemented By:} SFWRENG 4G06.
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
 
 \subsubsection{GameSettings Module}
 \textbf{Secrets:} Configuration storage and retrieval.\\
 \textbf{Services:} Stores and loads game settings, including the number of games and customization options.\\
-\textbf{Implemented By:} SFWRENG 4G06.
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
 
 \subsubsection{CustomizationMenu Module}
 \textbf{Secrets:} The logic for presenting and applying customization options between games.\\
 \textbf{Services:} Displays upgrade options, enforces selection rules, and updates player dice and modifiers.\\
-\textbf{Implemented By:} SFWRENG 4G06.
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
 
 \subsubsection{DynamicScoreboard Module}
 \textbf{Secrets:} The algorithms for dynamically generating score displays.\\
 \textbf{Services:} Updates and displays scores in real-time during gameplay.\\
-\textbf{Implemented By:} SFWRENG 4G06.
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
 
 \subsubsection{CustomBaseDie Module}
 \textbf{Secrets:} The interaction logic and rendering of custom dice, including dynamic face changes.\\
 \textbf{Services:} Manages dice texture changes based on player customization and handles physics and collision for rolling.\\
-\textbf{Implemented By:} SFWRENG 4G06.
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
 
 \subsubsection{DynamicDiceContainer Module}
 \textbf{Secrets:} The algorithms for managing a collection of dice and their rendering.\\
 \textbf{Services:} Dynamically creates and organizes dice based on game settings and updates dice states during gameplay.\\
-\textbf{Implemented By:} SFWRENG 4G06.
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
 
 \subsection{Software Decision Modules}
 \subsubsection{ScoreCalculator Module}
 \textbf{Secrets:} The scoring algorithms based on Yahtzee rules and custom modifiers.\\
 \textbf{Services:} Calculates scores for dice rolls and applies passive modifiers.\\
-\textbf{Implemented By:} SFWRENG 4G06.
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
 
 
 
 
 
-
+\newpage
 \section{Traceability Matrix} \label{SecTM}
 
 This section shows two traceability matrices: between the modules and the
@@ -402,6 +401,7 @@ requirements and between the modules and the anticipated changes.
   \label{TblACT}
   \end{table}
 
+\newpage
 \section{Use Hierarchy Between Modules} \label{SecUse}
 
 In this section, the uses hierarchy between modules is
@@ -419,7 +419,7 @@ because they use modules from the lower levels.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1.1\textwidth]{figures/UsesHierarchy}
+\includegraphics[width=0.8\textwidth]{figures/UsesHierarchy}
 \caption{Use hierarchy among modules}
 \label{FigUH}
 \end{figure}
@@ -571,7 +571,7 @@ This protocol design ensures a robust and flexible communication system for the 
 
 \section{Timeline}
 
-A Gantt chart was created to effectively assign tasks to team members. The chart can be accessed using the link below:\\
+A Gantt chart was created to effectively assign work on modules to team members. The chart can be accessed using the link below:\\
 
 \href{https://mcmasteru365-my.sharepoint.com/:x:/r/personal/bhatth14_mcmaster_ca/Documents/Rev0%20Gnatt%20Chart.xlsx?d=w7c7c84af07004c328dc311a8721a5adb&csf=1&web=1&e=d8G3hJ}{Access Gantt chart}
 
