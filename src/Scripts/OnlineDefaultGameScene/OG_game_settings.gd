@@ -403,9 +403,10 @@ func _copy_hash_to_clipboard():
 	DisplayServer.clipboard_set(NetworkManager.getHashIP()+NetworkManager.getHashPort())
 	print("Connect code copied to clipboard: ", DisplayServer.clipboard_get())
 
-func _allow_game_start() -> void:
+func _allow_game_start(_client_name: String) -> void:
 	copy_connect_code_button.visible = false
 	start_game_button.visible = true
+	player2Name.text = _client_name
 
 func on_home_pressed() -> void:
 	#Add disconnect code here and network manager
