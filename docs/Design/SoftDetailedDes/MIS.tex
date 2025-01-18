@@ -1414,12 +1414,12 @@ graduate attribute of Problem Analysis and Design.
   or a proxy (e.g. your peers, stakeholders, potential users)? For those that
   were not, why, and where did they come from?}
   
-One of the major design decisions in this project came in the form of having very high modularity. This would firstly be for the ability for players to customize their game such as the number of dice, round timers, or the scoring methods, and each of these different elements must be flexible and compatible with other such modules. This design choice came primarily from the need of having to design for a "family of games" which stemmed from speaking with the course professor, but this was carried fourth to help us design a highly customizable and fun game. The second reason the high modularity is designed into our program is because we are looking to design different game versions, such as an online customizable version, but also an offline customizable version, and a singleplayer campaign version. We wish to be able to reuse elements wherever possible, so for example the networking modules must be interchangeable and the dice modules and probability calculations must be reusable. Despite leading to a similar design choice, this aspect came from internal discussions and a desire for different visions to be fulfilled using the same game system we put in place.
+  One of the major design decisions in this project came in the form of having very high modularity. This would firstly be for the ability for players to customize their game such as the number of dice, round timers, or the scoring methods, and each of these different elements must be flexible and compatible with other such modules. This design choice came primarily from the need of having to design for a "family of games" which stemmed from speaking with the course professor, but this was carried fourth to help us design a highly customizable and fun game. The second reason the high modularity is designed into our program is because we are looking to design different game versions, such as an online customizable version, but also an offline customizable version, and a singleplayer campaign version. We wish to be able to reuse elements wherever possible, so for example the networking modules must be interchangeable and the dice modules and probability calculations must be reusable. Despite leading to a similar design choice, this aspect came from internal discussions and a desire for different visions to be fulfilled using the same game system we put in place.
   
   \item \textbf{While creating the design doc, what parts of your other documents (e.g.
   requirements, hazard analysis, etc), it any, needed to be changed, and why?}
 
-From the beginning we had a pretty good idea of what we were designing for and the patterns we were going to follow. These ideas were further confirmed through clients and discussions. As such, and due to not mentioning specifics, none of the requirements or hazards needed to be changed. The document that was assessed with greater scrutiny was that of the VnV plan, however it was written to be general enough and with enough of an idea of what our MG and MIS will be like that no modifications needed to be made.
+  From the beginning we had a pretty good idea of what we were designing for and the patterns we were going to follow. These ideas were further confirmed through clients and discussions. As such, and due to not mentioning specifics, none of the requirements or hazards needed to be changed. The document that was assessed with greater scrutiny was that of the VnV plan, however it was written to be general enough and with enough of an idea of what our MG and MIS will be like that no modifications needed to be made.
 
   \item \textbf{What are the limitations of your solution?  Put another way, given
   unlimited resources, what could you do to make the project better? (LO\_ProbSolutions)}
@@ -1428,8 +1428,16 @@ From the beginning we had a pretty good idea of what we were designing for and t
   
   \item \textbf{Give a brief overview of other design solutions you considered.  What
   are the benefits and tradeoffs of those other designs compared with the chosen
-  design?  From all the potential options, why did you select the documented design?}
-  (LO\_Explores)
+  design?  From all the potential options, why did you select the documented design?
+  (LO\_Explores)}
+
+  As a team, we decided on a hybrid networking solution combining peer-to-peer communication and server-based hosting. The networkManager2P module handles peer-to-peer communication between two players, with the host maintaining the game state and transmitting updates to clients. For online multiplayer, a server will manage game lobbies, authenticate players, and relay game state updates, ensuring synchronization between the host and clients. This approach combines the low-latency benefits of peer-to-peer communication with the reliability and scalability of server-based hosting, ensuring a seamless multiplayer experience for both LAN and online play.
+
+  While we considered a server-only solution, we ultimately rejected it due to higher resource usage and the lack of responsiveness compared to peer-to-peer communication. If an individual were to play with someone else on the same network, a peer-to-peer connection would be easier. Additionally, a server-only approach would require additional overhead leading to higher game maintenance costs and potential delays in game-state communication. Due to these issues, we considered a peer-to-peer-only solution, which would reduce resource usage and provide faster communication. However, this approach was not selected because it would disable any way of playing together when players are not on the same network. It does not provide the same level of power a server provides as the data can be centralized on a server to allow for game state storage. 
+
+  Therefore, a hybrid approach combining both peer-to-peer and server-based hosting was chosen, as it provides the best balance of low latency, reliability and scalability, all while keeping the game accessible both locally and online. 
+
+  Lastly, our goal was to innovate Yahtzee by introducing multiple game modes, offering fresh challenges for all players. This is supported by flexible modules like GameUI and MultiGameManager, which allow smooth transitions between modes. Other modules, such as the CustomizationMenu and ScoreCalculator, can be adapted for different modes, ensuring customizable and dynamic gameplay options.
 \end{enumerate}
 
 
