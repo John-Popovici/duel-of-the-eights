@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bv1diwskvph82"]
+[gd_scene load_steps=7 format=3 uid="uid://bv1diwskvph82"]
 
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_online_game_scene.gd" id="1_qoyeu"]
 [ext_resource type="PackedScene" uid="uid://bb1hsjv35krnk" path="res://NodeScene/network_manager_2Player.tscn" id="2_a1b70"]
-[ext_resource type="PackedScene" uid="uid://canc50wskx2cl" path="res://NodeScene/game_settings.tscn" id="3_v282i"]
-[ext_resource type="PackedScene" uid="uid://basjlqgjhw4ht" path="res://NodeScene/OLFG_game_manager.tscn" id="19_ibpfm"]
-[ext_resource type="Script" path="res://Scripts/OnlineLongFormGameScene/OLFG_PlayerManager.gd" id="20_y2akv"]
+[ext_resource type="PackedScene" uid="uid://canc50wskx2cl" path="res://NodeScene/custom_game_settings.tscn" id="3_v282i"]
+[ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_settings.gd" id="4_3bjxd"]
+[ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_PlayerManager.gd" id="5_tocqe"]
+[ext_resource type="PackedScene" uid="uid://d0icyj31p2tgw" path="res://NodeScene/game_manager.tscn" id="5_xuu8o"]
 
 [node name="OnlineGameScene" type="Node3D"]
 script = ExtResource("1_qoyeu")
@@ -12,11 +13,12 @@ script = ExtResource("1_qoyeu")
 [node name="NetworkManager" parent="." instance=ExtResource("2_a1b70")]
 
 [node name="GameSettings" parent="." instance=ExtResource("3_v282i")]
+script = ExtResource("4_3bjxd")
 
 [node name="myPlayer" type="Node" parent="."]
-script = ExtResource("20_y2akv")
+script = ExtResource("5_tocqe")
 
 [node name="enemyPlayer" type="Node" parent="."]
-script = ExtResource("20_y2akv")
+script = ExtResource("5_tocqe")
 
-[node name="GameManager" parent="." instance=ExtResource("19_ibpfm")]
+[node name="GameManager" parent="." instance=ExtResource("5_xuu8o")]

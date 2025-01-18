@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bb1hsjv35krnk" path="res://NodeScene/network_manager_2Player.tscn" id="1_62gfc"]
 [ext_resource type="Script" path="res://Scripts/OnlineLongFormGameScene/OLFG_game_scene.gd" id="1_cwa8m"]
 [ext_resource type="Script" path="res://Scripts/OnlineLongFormGameScene/OLFG_multi_game_manager.gd" id="3_c1urj"]
-[ext_resource type="PackedScene" uid="uid://canc50wskx2cl" path="res://NodeScene/game_settings.tscn" id="4_cx2cm"]
+[ext_resource type="PackedScene" uid="uid://canc50wskx2cl" path="res://NodeScene/custom_game_settings.tscn" id="4_cx2cm"]
 [ext_resource type="Script" path="res://Scripts/OnlineLongFormGameScene/OLFG_customization_menu.gd" id="9_4edwa"]
 [ext_resource type="Script" path="res://Scripts/OnlineLongFormGameScene/OLFG_PlayerManager.gd" id="17_38ctl"]
 
