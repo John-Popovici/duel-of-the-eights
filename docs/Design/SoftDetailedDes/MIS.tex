@@ -267,10 +267,9 @@ The modules are categorized into three types: Hardware-Hiding, Behavior-Hiding, 
 
 
 \newpage
+\section{Module Interface Specifications}
 
-This is the draft MIS section
-
-\subsection*{6.1 MIS of MultiGameManager Module}
+\subsection{MIS of MultiGameManager Module}
 \textbf{6.1.1 Module}\\
 \noindent MultiGameManager \\
 
@@ -339,7 +338,7 @@ All dependencies, such as GameSettings and GameManager are initialized.\\
     
 \end{itemize}
 
-\subsection*{6.2 MIS of GameManager Module}
+\subsection{MIS of GameManager Module}
 \textbf{6.2.1 Module}\\
 GameManager
 
@@ -461,7 +460,7 @@ Game rules are preloaded, and dice configurations are valid.
     \textbf{Description:} Triggers the effects of returning to Intro Scene
 \end{itemize}
 
-\subsection*{6.3 MIS of PlayerManager Module}
+\subsection{MIS of PlayerManager Module}
 \textbf{6.3.1 Module}\\
  PlayerManager\\
 
@@ -577,7 +576,7 @@ Each player has a unique \texttt{player\_id}.
     
 \end{itemize}
 
-\subsection*{6.4 MIS of NetworkManager2P Module}
+\subsection{MIS of NetworkManager2P Module}
 \textbf{6.4.1 Module}\\
 NetworkManager2P
 
@@ -683,7 +682,7 @@ Assumes a reliable network transport layer. Players do not exceed the 2-player l
 \end{itemize}
 
 
-\subsection*{6.5 MIS of ScoreCalculator Module}
+\subsection{MIS of ScoreCalculator Module}
 \textbf{6.5.1 Module}\\
  ScoreCalculator\\
 
@@ -739,7 +738,7 @@ The dice rolls are valid, and that no invalid hand type is requested
 
 \end{itemize}
 
-\subsection*{6.6 MIS of DynamicScoreboard Module}
+\subsection{MIS of DynamicScoreboard Module}
 \textbf{6.6.1 Module}\\
  DynamicScoreboard\\
 
@@ -816,7 +815,7 @@ Assumes that every hand option to be displayed is unique to each other and valid
 \end{itemize}
 
 
-\subsection*{6.7 MIS of CustomizationMenu Module}
+\subsection{MIS of CustomizationMenu Module}
 \textbf{6.7.1 Module}\\
  CustomizationMenu\\
 
@@ -875,7 +874,7 @@ Assumes that a full round has been properly completed.
 \end{itemize}
 
 
-\subsection*{6.8 MIS of DynamicDiceContainer Module}
+\subsection{MIS of DynamicDiceContainer Module}
 \textbf{6.8.1 Module}\\
  DynamicDiceContainer\\
 
@@ -968,7 +967,7 @@ Assumes all dice generated are of the same type.
 \end{itemize}
 
 
-\subsection*{6.9 MIS of CustomBaseDie Module}
+\subsection{MIS of CustomBaseDie Module}
 \textbf{6.9.1 Module}\\
  CustomBaseDie\\
 
@@ -1078,7 +1077,7 @@ Assumes that the assets associated with creating the die exist.
 \end{itemize}
 
 
-\subsection*{6.10 MIS of GameSettings Module}
+\subsection{MIS of GameSettings Module}
 \textbf{6.10.1 Module}\\
  GameSettings\\
 
@@ -1167,7 +1166,7 @@ Assumes all options are valid
 	
 \end{itemize}
 
-\subsection*{6.11 MIS of GameUI Module}
+\subsection{MIS of GameUI Module}
 \textbf{6.11.1 Module}\\
  GameUI\\
 
