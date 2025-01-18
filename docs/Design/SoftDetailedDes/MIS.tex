@@ -166,25 +166,25 @@ The modules are categorized into three types: Hardware-Hiding, Behavior-Hiding, 
 
 \subsection{Hardware-Hiding Modules}
 \begin{itemize}
-    \item \textbf{NetworkManager2P Module:} Manages connection and synchronization for two-player games.
-    \item \textbf{GameUI Module:} Provides the interface for interacting with the game and displaying relevant data.
+    \item \hyperref[NetworkManager2P]{\textbf{NetworkManager2P Module:}} Manages connection and synchronization for two-player games.
+    \item \hyperref[GameUI]{\textbf{GameUI Module:}} Provides the interface for interacting with the game and displaying relevant data.
 \end{itemize}
 
 \subsection{Behavior-Hiding Modules}
 \begin{itemize}
-    \item \textbf{MultiGameManager Module:} Manages the sequence of multiple Yahtzee games and customization phases.
-    \item \textbf{PlayerManager Module:} Tracks player states, scores, and upgrades.
-    \item \textbf{GameManager Module:} Handles a single game of Yahtzee.
-    \item \textbf{GameSettings Module:} Loads and stores settings for this Yahtzee variant.
-    \item \textbf{CustomizationMenu Module:} Implements dice and game customization between games.
-    \item \textbf{DynamicScoreboard Module:} Tracks and displays scores dynamically.
-    \item \textbf{CustomBaseDie Module:} Handles the 3D dice models, textures, and physics.
-    \item \textbf{DynamicDiceContainer Module:} Manages dice interactions and rendering.
+    \item \hyperref[MultiGameManager]{\textbf{MultiGameManager Module:}} Manages the sequence of multiple Yahtzee games and customization phases.
+    \item \hyperref[PlayerManager]{\textbf{PlayerManager Module:}} Tracks player states, scores, and upgrades.
+    \item \hyperref[GameManager]{\textbf{GameManager Module:}} Handles a single game of Yahtzee.
+    \item \hyperref[GameSettings]{\textbf{GameSettings Module:}} Loads and stores settings for this Yahtzee variant.
+    \item \hyperref[CustomizationMenu]{\textbf{CustomizationMenu Module:}} Implements dice and game customization between games.
+    \item \hyperref[DynamicScoreboard]{\textbf{DynamicScoreboard Module:}} Tracks and displays scores dynamically.
+    \item \hyperref[CustomBaseDie]{\textbf{CustomBaseDie Module:}} Handles the 3D dice models, textures, and physics.
+    \item \hyperref[DynamicDiceContainer]{\textbf{DynamicDiceContainer Module:}} Manages dice interactions and rendering.
 \end{itemize}
 
 \subsection{Software Decision Modules}
 \begin{itemize}
-    \item \textbf{ScoreCalculator Module:} Calculates scores for dice rolls based on Yahtzee rules and custom modifiers.
+    \item \hyperref[ScoreCalculator]{\textbf{ScoreCalculator Module:}} Calculates scores for dice rolls based on Yahtzee rules and custom modifiers.
 \end{itemize}
 
 \newpage
@@ -269,7 +269,7 @@ The modules are categorized into three types: Hardware-Hiding, Behavior-Hiding, 
 \newpage
 \section{Module Interface Specifications}
 
-\subsection{MIS of MultiGameManager Module}
+\subsection{MIS of MultiGameManager Module}\label{MultiGameManager}
 \textbf{6.1.1 Module}\\
 \noindent MultiGameManager \\
 
@@ -338,7 +338,7 @@ All dependencies, such as GameSettings and GameManager are initialized.\\
     
 \end{itemize}
 
-\subsection{MIS of GameManager Module}
+\subsection{MIS of GameManager Module}\label{GameManager}
 \textbf{6.2.1 Module}\\
 GameManager
 
@@ -460,7 +460,7 @@ Game rules are preloaded, and dice configurations are valid.
     \textbf{Description:} Triggers the effects of returning to Intro Scene
 \end{itemize}
 
-\subsection{MIS of PlayerManager Module}
+\subsection{MIS of PlayerManager Module}\label{PlayerManager}
 \textbf{6.3.1 Module}\\
  PlayerManager\\
 
@@ -576,7 +576,7 @@ Each player has a unique \texttt{player\_id}.
     
 \end{itemize}
 
-\subsection{MIS of NetworkManager2P Module}
+\subsection{MIS of NetworkManager2P Module}\label{NetworkManager2P}
 \textbf{6.4.1 Module}\\
 NetworkManager2P
 
@@ -682,7 +682,7 @@ Assumes a reliable network transport layer. Players do not exceed the 2-player l
 \end{itemize}
 
 
-\subsection{MIS of ScoreCalculator Module}
+\subsection{MIS of ScoreCalculator Module}\label{ScoreCalculator}
 \textbf{6.5.1 Module}\\
  ScoreCalculator\\
 
@@ -738,7 +738,7 @@ The dice rolls are valid, and that no invalid hand type is requested
 
 \end{itemize}
 
-\subsection{MIS of DynamicScoreboard Module}
+\subsection{MIS of DynamicScoreboard Module}\label{DynamicScoreboard}
 \textbf{6.6.1 Module}\\
  DynamicScoreboard\\
 
@@ -815,7 +815,7 @@ Assumes that every hand option to be displayed is unique to each other and valid
 \end{itemize}
 
 
-\subsection{MIS of CustomizationMenu Module}
+\subsection{MIS of CustomizationMenu Module}\label{CustomizationMenu}
 \textbf{6.7.1 Module}\\
  CustomizationMenu\\
 
@@ -874,7 +874,7 @@ Assumes that a full round has been properly completed.
 \end{itemize}
 
 
-\subsection{MIS of DynamicDiceContainer Module}
+\subsection{MIS of DynamicDiceContainer Module}\label{DynamicDiceContainer}
 \textbf{6.8.1 Module}\\
  DynamicDiceContainer\\
 
@@ -967,7 +967,7 @@ Assumes all dice generated are of the same type.
 \end{itemize}
 
 
-\subsection{MIS of CustomBaseDie Module}
+\subsection{MIS of CustomBaseDie Module}\label{CustomBaseDie}
 \textbf{6.9.1 Module}\\
  CustomBaseDie\\
 
@@ -1077,7 +1077,7 @@ Assumes that the assets associated with creating the die exist.
 \end{itemize}
 
 
-\subsection{MIS of GameSettings Module}
+\subsection{MIS of GameSettings Module}\label{GameSettings}
 \textbf{6.10.1 Module}\\
  GameSettings\\
 
@@ -1166,7 +1166,7 @@ Assumes all options are valid
 	
 \end{itemize}
 
-\subsection{MIS of GameUI Module}
+\subsection{MIS of GameUI Module}\label{GameUI}
 \textbf{6.11.1 Module}\\
  GameUI\\
 
