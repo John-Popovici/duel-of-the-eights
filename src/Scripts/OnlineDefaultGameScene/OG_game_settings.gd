@@ -84,6 +84,8 @@ func _win_condition_toggled(ID):
 		0: #score
 			HealthPointsBox.visible = false
 			win_cond = "Score"
+			bluff_active = false
+			BluffButton.set_pressed(false)
 			print("Score Condition")
 		1: #healthpoints
 			HealthPointsBox.visible = true
