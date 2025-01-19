@@ -104,6 +104,7 @@ theme = ExtResource("3_il4in")
 min_value = 1.0
 max_value = 1000.0
 value = 5.0
+alignment = 1
 update_on_text_changed = true
 suffix = "Hp"
 
@@ -123,6 +124,7 @@ theme = ExtResource("3_il4in")
 min_value = 1.0
 max_value = 50.0
 value = 8.0
+alignment = 1
 update_on_text_changed = true
 
 [node name="Instructions4" type="Label" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/Rounds"]
@@ -138,6 +140,7 @@ theme = ExtResource("3_il4in")
 min_value = 1.0
 max_value = 10.0
 value = 3.0
+alignment = 1
 update_on_text_changed = true
 
 [node name="Dice" type="HBoxContainer" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox"]

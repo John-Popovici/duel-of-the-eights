@@ -47,6 +47,7 @@ var dice_type: int
 var win_cond: String
 var show_opponent_rolls: bool = false
 var timed_rounds: bool = true
+var bluff_active: bool = true
 
 func _on_start_game_pressed():
 	start_game_button.disabled = true
@@ -62,6 +63,7 @@ func _on_start_game_pressed():
 		"dice_type": DiceType.get_selected_id(),  # e.g., 6-sided or 8-sided
 		"show_rolls": show_opponent_rolls,
 		"timed_rounds": timed_rounds,
+		"bluff_active": bluff_active,
 		"round_time": int(round_time.text) if int(round_time.text) > 0 else 25,
 	}
 	if !hand_settings_saved:

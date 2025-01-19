@@ -197,8 +197,30 @@ theme = ExtResource("4_h4ers")
 theme_override_font_sizes/font_size = 22
 text = "Pass"
 
-[node name="GameUI" type="CanvasLayer" parent="."]
+[node name="BluffContainer" type="VBoxContainer" parent="."]
 visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -74.0
+offset_right = 74.0
+offset_bottom = 66.0
+grow_horizontal = 2
+theme = ExtResource("10_ks8nt")
+
+[node name="RaiseTheStakesButton" type="Button" parent="BluffContainer"]
+layout_mode = 2
+theme = ExtResource("4_h4ers")
+theme_override_font_sizes/font_size = 22
+text = "Raise the Stakes"
+
+[node name="FoldButton" type="Button" parent="BluffContainer"]
+layout_mode = 2
+theme = ExtResource("4_h4ers")
+theme_override_font_sizes/font_size = 22
+text = "Fold"
+
+[node name="GameUI" type="CanvasLayer" parent="."]
 script = ExtResource("11_0d724")
 
 [node name="OpponentDiceBase" type="Control" parent="GameUI"]

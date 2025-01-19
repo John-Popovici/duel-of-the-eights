@@ -14,9 +14,15 @@ var hand_settings
 @onready var rollButtons = get_node("RollButtons")
 @onready var rollSelected: Button = get_node("RollButtons/RollSelected")
 @onready var passRoll: Button = get_node("RollButtons/PassRoll")
+@onready var BluffButtons = get_node("BluffContainer")
+@onready var raiseTheStakesButton: Button = get_node("BluffContainer/RaiseTheStakesButton")
+@onready var foldButton: Button = get_node("BluffContainer/FoldButton")
 var isHost: bool
 var baseTimer: int
 var timedRounds: bool
+var bluffMechanicActive: bool
+var raiseInEffect: bool
+var blockRaise: bool
 
 var max_rounds: int
 var max_rolls_per_round: int
@@ -48,6 +54,7 @@ func _on_settings_ready(_game_settings: Dictionary, _hand_settings: Dictionary) 
 	win_cond = game_settings["win_condition"]
 	baseTimer = game_settings["round_time"]
 	timedRounds = game_settings["timed_rounds"]
+	bluffMechanicActive = game_settings["bluff_active"]
 	# Set up the game environment with these settings
 	setup_game()
 
@@ -64,12 +71,23 @@ func setup_game() -> void:
 	network_manager.connect("game_state_received", self._on_game_state_received)
 	rollSelected.connect("pressed", self._on_roll_selected)
 	passRoll.connect("pressed", self._on_pass_roll)
+	raiseTheStakesButton.connect("pressed", self._on_raise)
+	foldButton.connect("pressed", self._on_fold)
 	setDisableAllButtons(true)
 	GameUI.visible = true
 	GameUI.hide_waiting_screen()
 	current_round = 0
 	max_rolls_per_round = game_settings["round_rolls"]
 	max_rounds = game_settings["rounds"]
+	if bluffMechanicActive:
+		BluffButtons.visible = true
+		raiseTheStakesButton.visible = true
+		foldButton.visible = false
+		raiseInEffect = false
+		blockRaise = false
+		setDisableRaiseButtons(true)
+	else:
+		BluffButtons.visible = false
 	print("Setup Game Done on Host: ", isHost)
 	if isHost:
 		await get_tree().create_timer(1.0).timeout
@@ -114,13 +132,21 @@ func rollPhase(roll: bool) -> void:
 	GameUI.blank_opponent_dice_display()
 	GameUI.blank_my_player_dice_display()
 	set_rolls_read(false)
+	blockRaise = false
 	if roll_count == 0:
 		myPlayer.roll_dice()
+		resetRaise()
 	elif roll:
 		myPlayer.roll_selected_dice()
 	elif !roll:
 		myPlayer.pass_roll()
 	roll_count += 1
+	if roll_count == max_rolls_per_round: #Check if this comp is correct
+		blockRaiseButton(true)
+		setDisableRaiseButtons(true)
+	else:
+		blockRaiseButton(false)
+		setDisableRaiseButtons(false)
 	GameUI.update_roll_info(roll_count)
 
 func recieveRolls(fromHost: bool, _rolls: Array[int]) ->void:
@@ -200,13 +226,52 @@ func endOfRoundEffects() -> void:
 			var scoreDiff = myPlayer.getLastScore() - enemyPlayer.getLastScore()
 			print("MyPlayer Host: ", isHost, " scored: ", myPlayer.getLastScore(), " and EnemyPlayer Host: ", !isHost, " scored: ", enemyPlayer.getLastScore())
 			if scoreDiff < 0:
+				if raiseInEffect:
+					myPlayer.adjust_health(-1) # make this dyanmic
 				myPlayer.adjust_health(-1) # make this dyanmic
 				print("Player Host: ", isHost, "scored less, took damage")
 			elif scoreDiff > 0:
+				if raiseInEffect:
+					enemyPlayer.adjust_health(-1) # make this dyanmic
 				enemyPlayer.adjust_health(-1) # make this dyanmic
 				print("Player Host: ", isHost, " scored more")
 			else:
 				print("Players scored the same")
+			if current_round >= max_rounds or myPlayer.getHealth() <= 0 or enemyPlayer.getHealth() <= 0:
+				end_condition_reached = true
+	
+	#check engGame Criteria
+	if end_condition_reached:
+		endGame()
+	else:
+		network_manager.broadcast_game_state("synchronize_next_round", { "round": current_round })
+		start_next_round = true
+
+func foldEndOfRoundEffects() -> void:
+	#have a tree of end of round Effects instances to pass the score through and get updated result
+	
+	#add logic for damage taken and other end of turn effects 
+	#calculated locally based on score and totalscore
+	var end_condition_reached = false
+	print("WinCondition: ",win_cond)
+	match win_cond:
+		0: #score
+			var scoreDiff = myPlayer.getLastScore() - enemyPlayer.getLastScore()
+			if scoreDiff < 0:
+				print("Player Host: ", isHost, " scored less")
+			elif scoreDiff > 0:
+				print("Player Host: ", isHost, " scored more")
+			else:
+				print("Players scored the same")
+			#check engGame Criteria
+			if current_round >= max_rounds:
+				end_condition_reached = true
+		1: #Health Points
+			if IFolded:
+				myPlayer.adjust_health(-1) # make this dyanmic
+			else:
+				enemyPlayer.adjust_health(-1) # make this dyanmic
+			print("MyPlayer Host: ", isHost, " scored: ", myPlayer.getLastScore(), " and EnemyPlayer Host: ", !isHost, " scored: ", enemyPlayer.getLastScore(), ", I Folded: ", IFolded)
 			if current_round >= max_rounds or myPlayer.getHealth() <= 0 or enemyPlayer.getHealth() <= 0:
 				end_condition_reached = true
 	
@@ -297,7 +362,7 @@ func synchronizeRematch() -> void:
 func exitGame() -> void:
 	network_manager.broadcast_game_state("end_game", {})
 	network_manager.disconnect_from_server()
-	get_parent().get_parent().returnToIntro()
+	get_parent().returnToIntro()
 	pass
 
 func timer_complete() -> void:
@@ -326,6 +391,10 @@ func _on_game_state_received(state: String, data: Dictionary):
 			synchronizeRematch()
 		"test":
 			connectionTest(data)
+		"raise":
+			_raised()
+		"fold":
+			_folded()
 
 func connectionTest(data: Dictionary) -> void:
 	print(data)
@@ -354,6 +423,15 @@ func setDisableRollButtons(state: bool) -> void:
 	rollSelected.disabled = state
 	passRoll.disabled = state
 
+func setDisableRaiseButtons(state: bool) -> void:
+	if !blockRaise:
+		raiseTheStakesButton.disabled = state
+	foldButton.disabled = state
+
+func blockRaiseButton(state: bool) -> void:
+	blockRaise = state
+	raiseTheStakesButton.disabled = state
+
 var roll_selection_done: bool = false
 var roll_selection: bool
 
@@ -374,6 +452,39 @@ func _on_pass_roll() -> void:
 	if timedRounds:
 			GameUI.stopTimer()
 	waiting_on_other_player(true)
+
+func _on_raise() -> void:
+	setDisableRaiseButtons(true)
+	network_manager.broadcast_game_state("raise", { "type": "Raise" })
+	raiseInEffect = true
+	print("Raised")
+
+func _raised() -> void:
+	foldButton.visible = true
+	raiseTheStakesButton.visible = false
+	raiseInEffect = true
+	print("received raise")
+
+var IFolded = false
+func _on_fold() -> void:
+	setDisableRaiseButtons(true)
+	network_manager.broadcast_game_state("fold", { "type": "Fold" })
+	raiseInEffect = false
+	print("Folded")
+	IFolded = true
+	foldEndOfRoundEffects()
+
+func _folded() -> void:
+	print("received fold")
+	IFolded = false
+	foldEndOfRoundEffects()
+
+func resetRaise() -> void:
+	raiseTheStakesButton.visible = true
+	foldButton.visible = false
+	raiseInEffect = false
+	blockRaise = false
+	IFolded = false
 
 func waiting_on_other_player(isWaiting: bool) -> void:
 	if isWaiting:
