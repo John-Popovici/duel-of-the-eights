@@ -94,7 +94,7 @@ layout_mode = 2
 [node name="Instructions2" type="Label" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/HealthPoints"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Health Points Per Player:"
+text = "Player Hp:"
 horizontal_alignment = 1
 
 [node name="HealthPoints" type="SpinBox" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/HealthPoints"]
@@ -104,8 +104,14 @@ theme = ExtResource("3_il4in")
 min_value = 1.0
 max_value = 1000.0
 value = 5.0
+alignment = 1
 update_on_text_changed = true
 suffix = "Hp"
+
+[node name="BluffButton" type="CheckButton" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/HealthPoints"]
+layout_mode = 2
+theme = ExtResource("3_il4in")
+text = "Bluff Mode: "
 
 [node name="Rounds" type="HBoxContainer" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox"]
 layout_mode = 2
@@ -123,6 +129,7 @@ theme = ExtResource("3_il4in")
 min_value = 1.0
 max_value = 50.0
 value = 8.0
+alignment = 1
 update_on_text_changed = true
 
 [node name="Instructions4" type="Label" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/Rounds"]
@@ -138,6 +145,7 @@ theme = ExtResource("3_il4in")
 min_value = 1.0
 max_value = 10.0
 value = 3.0
+alignment = 1
 update_on_text_changed = true
 
 [node name="Dice" type="HBoxContainer" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox"]

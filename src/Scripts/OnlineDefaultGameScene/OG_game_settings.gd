@@ -17,6 +17,7 @@ signal game_settings_ready(game_settings,hand_settings)
 @onready var WinCondition = settingsSetup.get_node("OptionsVBox/WinCondition/ConditionSelect")
 @onready var HealthPoints = settingsSetup.get_node("OptionsVBox/HealthPoints/HealthPoints").get_line_edit()
 @onready var HealthPointsBox = settingsSetup.get_node("OptionsVBox/HealthPoints")
+@onready var BluffButton = settingsSetup.get_node("OptionsVBox/HealthPoints/BluffButton")
 @onready var Rounds = settingsSetup.get_node("OptionsVBox/Rounds/Rounds").get_line_edit()
 @onready var RoundRolls = settingsSetup.get_node("OptionsVBox/Rounds/RoundRolls").get_line_edit()
 @onready var DiceCountRef = settingsSetup.get_node("OptionsVBox/Dice/DiceCount").get_line_edit()
@@ -47,6 +48,7 @@ var dice_type: int
 var win_cond: String
 var show_opponent_rolls: bool = false
 var timed_rounds: bool = true
+var bluff_active: bool = false
 
 func _on_start_game_pressed():
 	start_game_button.disabled = true
@@ -62,6 +64,7 @@ func _on_start_game_pressed():
 		"dice_type": DiceType.get_selected_id(),  # e.g., 6-sided or 8-sided
 		"show_rolls": show_opponent_rolls,
 		"timed_rounds": timed_rounds,
+		"bluff_active": bluff_active,
 		"round_time": int(round_time.text) if int(round_time.text) > 0 else 25,
 	}
 	if !hand_settings_saved:
@@ -75,15 +78,19 @@ func _on_start_game_pressed():
 	self.visible = false
 
 func _win_condition_toggled(ID):
-	print("Win Condition Toggled: ",ID)
-	var win_cond_num = ID
+	print("Win Condition Toggled: ", int(ID))
+	var win_cond_num = int(ID)
 	match win_cond_num:
 		0: #score
 			HealthPointsBox.visible = false
 			win_cond = "Score"
+			bluff_active = false
+			BluffButton.set_pressed(false)
+			print("Score Condition")
 		1: #healthpoints
 			HealthPointsBox.visible = true
 			win_cond = "Health"
+			print("Health Condition")
 
 func _on_advanced_settings_pressed() -> void:
 	dice_count = int(DiceCountRef.text)
@@ -139,6 +146,7 @@ func save_preset():
 		"dice_type": DiceType.get_selected_id(),  # e.g., 6-sided or 8-sided
 		"show_rolls": show_opponent_rolls,
 		"timed_rounds": timed_rounds,
+		"bluff_active": bluff_active,
 		"round_time": int(round_time.text) if int(round_time.text) > 0 else 25,
 	}
 	
@@ -205,6 +213,8 @@ func _on_preset_selected(preset_name: String):
 func update_ui_fields(game_settings: Dictionary, hand_settings: Dictionary):
 	# Example updates; adjust to fit actual input nodes in your UI
 	WinCondition.select(game_settings.get("win_condition", 0))
+	_win_condition_toggled(game_settings.get("win_condition", 0))
+	BluffButton.set_pressed(bool(game_settings.get("bluff_active", false)))
 	HealthPoints.text = str(game_settings.get("health_points", 0))
 	Rounds.text = str(game_settings.get("rounds", 0))
 	RoundRolls.text = str(game_settings.get("round_rolls", 0))
@@ -354,6 +364,8 @@ func _ready() -> void:
 	DiceType.set_toggle_mode(true)
 	timed_rounds_button.set_toggle_mode(true)
 	timed_rounds_button.connect("toggled", self._on_timed_round_toggled)
+	BluffButton.set_toggle_mode(true)
+	BluffButton.connect("toggled", self._on_bluff_toggled)
 	timed_rounds = true
 	DiceType.connect("item_selected", self._dice_values_changed)
 	DiceCountRange.connect("value_changed", self._dice_values_changed)
@@ -370,14 +382,22 @@ func _on_roll_visible_toggled(_state) -> void:
 	print("Is ", show_opponent_rolls)
 
 func _on_timed_round_toggled(_state) -> void:
-	print("Was ", timed_rounds)
+	print("Timer Was ", timed_rounds)
 	if timed_rounds:
 		timed_rounds = false
 		round_time_box.visible = false
 	else:
 		timed_rounds = true
 		round_time_box.visible = true
-	print("Is ", timed_rounds)
+	print("Timer Is ", timed_rounds)
+
+func _on_bluff_toggled(_state) -> void:
+	print("Bluff Was ", bluff_active)
+	if bluff_active:
+		bluff_active = false
+	else:
+		bluff_active = true
+	print("Bluff Is ", bluff_active)
 
 func _dice_values_changed(_state) -> void:
 	if hand_settings_saved:
