@@ -65,6 +65,7 @@ urlcolor=cyan          % color of external links
 25-01-17 & Hemraj Bhatt & Added content to reflection\\
 25-01-17 & John Popovici & Added content to reflection and formatted section 6\\
 25-01-17 & Naishan Guo & Added content to section 6\\
+25-01-20 & John Popovici & Reviewed document based on peer feedback\\
 \dots & \dots & \dots\\
 \bottomrule
 \end{tabularx}
@@ -196,7 +197,7 @@ The modules are categorized into three types: Hardware-Hiding, Behavior-Hiding, 
 
 \wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
 
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
+\wss{It is also possible to use \LaTeX for hyperlinks to external documents.}
 
 \subsection{Module}
 
@@ -334,7 +335,7 @@ All dependencies, such as GameSettings and GameManager are initialized.\\
     \textbf{Description:} Confirms the game and hand settings selected by the user for the game, and then informs the other online players of the selected settings for the game.
     
     \item \texttt{recieve\_game\_settings(\_game\_settings: Dictionary, \_hand\_settings: Dictionary)}\\
-    \textbf{Description:} recieves the game and hand settings from the host player, and uses these settings when starting a new game.
+    \textbf{Description:} receives the game and hand settings from the host player, and uses these settings when starting a new game.
     
 \end{itemize}
 
@@ -767,7 +768,7 @@ N/A \\
 \begin{itemize}
 	\item \texttt{lastButton (button)}: Tracks the last button pressed by the player
 	\item \texttt{BonusButton (button)}: Tracks the bonus button 
-	\item \texttt{AllButtons (Array[Button])}: Tracks every single button relavent to the hands and their corrisponding scores on the scoreboard.
+	\item \texttt{AllButtons (Array[Button])}: Tracks every single button relevant to the hands and their corrisponding scores on the scoreboard.
 	\item \texttt{TotalLabel}: Tracks the total overall score for the player.
 	\item \texttt{hand\_selected (dictionary)}: tracks the currently selected hand
 	\item \texttt{bonusExists (dictionary)}: Checks if a bonus exists for the current hand
@@ -932,7 +933,7 @@ Assumes all dice generated are of the same type.
 	\textbf{Output:} retrieves the value of each rolled dice
 	
 	\item \texttt{get\_dice() -> Array[RigidBody3D] }\\
-	\textbf{Output:} retrives each dice object that is a part of the container
+	\textbf{Output:} retrieves each dice object that is a part of the container
 	
 	\item \texttt{get\_selected\_dice() -> Array }\\
 	\textbf{output:} retrieves a list of each die selected by the player
@@ -941,13 +942,13 @@ Assumes all dice generated are of the same type.
 	\textbf{output:} gets a list of all dice that is currently rolling
 	
 	\item \texttt{get\_invalid\_dice() -> Array }\\
-	\textbf{Output:} gets a list of all dice that have been rendered invalid, wiether due to it's improper landing position, unreadable value, improper graphic rendering, or other issue.
+	\textbf{Output:} gets a list of all dice that have been rendered invalid, whether due to it's improper landing position, unreadable value, improper graphic rendering, or other issue.
 	
 	\item \texttt{add\_dice(dice\_count: int, dice\_type: int)}\\
 	\textbf{Output:} Adds new dice objects to the container
 	
 	\item \texttt{move\_dice\_aside() }\\
-	\textbf{Transition:} Moves dice not being re-rolled to the side of the board to prevent the dice from interfeering with the reroll
+	\textbf{Transition:} Moves dice not being re-rolled to the side of the board to prevent the dice from interfering with the reroll
 	
 	\item \texttt{move\_dice\_in\_line() }\\
 	\textbf{Transition:} Move dice once to an organized display on the board to make them easier to read. 
@@ -962,7 +963,7 @@ Assumes all dice generated are of the same type.
 \begin{itemize}
 	
 	\item \texttt{clear\_dice() }\\
-	\textbf{Description:} removes each dice object that's part of the contianer. 
+	\textbf{Description:} removes each dice object that's part of the container. 
 	
 \end{itemize}
 
@@ -1011,7 +1012,7 @@ N/A\\
 	\item \texttt{face\_values (dictionary)}: tracks the values corresponding to each face on the die
 	\item \texttt{normalCustomTex}: Tracks the physical visual design of die when not selected.
 	\item \texttt{selectedCustomTex}: Tracks the physical visual design of die when selected.
-	\item \texttt{dice\_ui\_element}: controls the design of the die's ui icon
+	\item \texttt{dice\_ui\_element}: controls the design of the die's UI icon
 
 	\item \texttt{is\_rolling (boolean)}: checks if the die is rolling
 
@@ -1036,7 +1037,7 @@ Assumes that the assets associated with creating the die exist.
 	\textbf{Output:} determines which face is facing upwards, and returns that face as the die's value
 	
 	\item \texttt{set\_dice\_ui(\_ui\_element) }\\
-	\textbf{Transition:} changes the visible ui design of the die
+	\textbf{Transition:} changes the visible UI design of the die
 	
 	\item \texttt{clear\_dice\_ui() }\\
 	\textbf{Transition:} remove the visible changes in the die
@@ -1063,7 +1064,7 @@ Assumes that the assets associated with creating the die exist.
     \item \texttt{setup\_faces() }\\
 	\textbf{Description:} Initiates the faces of each die, and sets up ray-cast nodes to each face of the die so that the game can tell which face of the die is facing up.
 	\item \texttt{setup\_dice\_specific\_variables(\_faces: int) }\\
-	\textbf{Description:} initializes the starting parameters and intial state variables for each die of each die 
+	\textbf{Description:} initializes the starting parameters and initial state variables for each die of each die 
 	\item \texttt{\_toggle\_selection\_status() }\\
 	\textbf{Description:} detects if the die has been selected by the player or not, and alters the die's visual design accordingly.
 	\item \texttt{reset\_dice\_tex() }\\
@@ -1158,7 +1159,7 @@ Assumes all options are valid
 	\item \texttt{copy\_hash\_to\_clipboard() }\\
 	\textbf{Description:} Copies the connect code to the system clipboard, allowing a user to paste it somewhere else so that their friends can use that code to connect to the user's game session.
 	\item \texttt{\_allow\_game\_start() }\\
-	\textbf{Description:} makes the start game button visable, allowing the user to press the button and start the game
+	\textbf{Description:} makes the start game button visible, allowing the user to press the button and start the game
 	\item \texttt{on\_home\_pressed() }\\
 	\textbf{Description:} returns user to the home screen and disconnects the user from any online game session
 	 
@@ -1261,7 +1262,7 @@ Assume that each UI asset exists and can be created upon being requested by the 
 	\textbf{Transition:} Hides the waiting screen from view
 	
 	\item \texttt{show\_end\_of\_game\_screen(resultText: String, player\_stats: Dictionary, opponent\_stats: Dictionary) } \\
-	\textbf{Transition:} Initiizes the end of game screen, displaying the winner and the player stats.
+	\textbf{Transition:} Initializes the end of game screen, displaying the winner and the player stats.
 	
 	\item \texttt{hide\_end\_of\_game\_screen() } \\
 	\textbf{Transition:} Hides the end of game screen.
