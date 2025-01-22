@@ -24,15 +24,17 @@ jobs:
       id: modified-files
       run: |
         # Get the list of modified .tex files
-        MODIFIED_FILES=$(git diff --name-only origin/${{ github.event.pull_request.base.ref }}...HEAD | grep '\.tex$' || true)
+        MODIFIED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} | grep '\.tex$' || true)
         echo "Modified .tex files:"
         echo "$MODIFIED_FILES"
-        echo "::set-output name=files::$MODIFIED_FILES"
+        echo "$MODIFIED_FILES" >> $GITHUB_ENV
+      env:
+        MODIFIED_FILES: ""
 
     - name: Clean and Build PDFs
-      if: steps.modified-files.outputs.files != ''
+      if: steps.modified-files.outputs.MODIFIED_FILES != ''
       run: |
-        for file in ${{ steps.modified-files.outputs.files }}; do
+        for file in $MODIFIED_FILES; do
           echo "Processing $file"
           DIR=$(dirname "$file")
           echo "Changing directory to $DIR"
@@ -41,9 +43,11 @@ jobs:
           make all || exit 1       # Build the new PDF
           cd -
         done
+      env:
+        MODIFIED_FILES: ${{ env.MODIFIED_FILES }}
 
     - name: Commit and Push Updated PDFs
-      if: steps.modified-files.outputs.files != ''
+      if: steps.modified-files.outputs.MODIFIED_FILES != ''
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
