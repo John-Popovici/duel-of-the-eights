@@ -55,6 +55,7 @@ func setup_dice_specific_variables(_faces: int) -> void:
 # Applies random torque and force to simulate a roll
 func roll() -> void:
 	self.set_freeze_enabled(false)
+	self.disableCollisions(false)
 	await get_tree().create_timer(start_time+0.5).timeout
 	
 	is_selected = false
@@ -198,8 +199,14 @@ func setAsideProperties(_pos: Vector3) -> void:
 	aside_position = _pos
 	aside_rotation = self.getStraightRotation()
 	
+func disableCollisions(_remove: bool) -> void:
+	var collision_shape = $CollisionShape3D
+	if collision_shape:
+		collision_shape.disabled = _remove
+	
 func moveToAsidePosition() -> void:
 	self.set_freeze_enabled(false)
+	self.disableCollisions(true)
 	if move_aside_mode == "snap":
 		# instantly snap die to designated aside location while not being rolled
 		global_transform.origin = self.aside_position
@@ -223,8 +230,16 @@ func set_move_aside_mode(mode: String) -> void:
 	if mode in ["lerp", "snap"]:
 		move_aside_mode = mode
 
+# Getter function to return the straigtened rotation vector for a particular die
 func getStraightRotation() -> Vector3:
-	return Vector3.ZERO
+	return Vector3(rotation_degrees.x, 0, rotation_degrees.z)
+
+# Getter function to get the x, y, or x component of a die's current position
+func getAxisPos(axis: String) -> float:
+	if axis in "xyzXYZ":
+		return global_transform.origin[axis.to_lower()]
+	else:
+		return 0
 
 func _process(_delta: float) -> void:
 	# Calculate the speed by checking the length of the linear and angular velocities

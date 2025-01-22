@@ -12,11 +12,11 @@ var start_positions := [
 
 # Define positions for setting dice aside
 var aside_positions := [
-	Vector3(20, 1, -20), Vector3(20, 1, -10), Vector3(20, 1, 0),
-	Vector3(20, 1, 10), Vector3(20, 1, 20)
+	Vector3(18, 0, -15), Vector3(18, 0, -10), Vector3(18, 0, -5),
+	Vector3(18, 0, 0), Vector3(18, 0, 5), Vector3(18, 0, 10), Vector3(18, 0, 15)
 ]
 # In cases of more than 5 dice we shift aside postions on x axis by this constant
-var aside_row_gap := Vector3(10, 0, 0)
+var aside_row_gap := Vector3(5, 0, 0)
 
 
 
@@ -109,19 +109,23 @@ func add_dice(dice_count: int, dice_type: int) -> void:
 		dice_nodes.append(dice)
 
 func moveDiceAside(dice_to_move: Array) -> void:
-	#move dice that are not being rerolled (i.e. not selected at time of reroll, when this is called)
-	#to the side of the board (or other location, to not interfere with the rerolling dice)
+	#move dice that are not being rerolled to the side of the board
 	dice_to_move.sort_custom(func(a, b): return a.get_face_value() < b.get_face_value())
 	var iterator = 0
 	var current_row = 0
 	var max_slots = aside_positions.size()
 	for die in dice_to_move:
-		die.setAsideProperties(aside_positions[iterator] + (aside_row_gap*current_row))
+		var curr_aside_position = Vector3(aside_positions[iterator].x, die.getAxisPos("y"), aside_positions[iterator].z)
+		die.setAsideProperties(curr_aside_position - (aside_row_gap*current_row))
 		die.moveToAsidePosition()
 		iterator += 1
 		if iterator >= max_slots:
 			iterator = 0
 			current_row += 1
+			
+func enable_collisions() -> void:
+	for die in get_dice():
+		die.disableCollisions(false)
 
 func moveDiceInLine() -> void:
 	#move dice once read to an organized display on the board
