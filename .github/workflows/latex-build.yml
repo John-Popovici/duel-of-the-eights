@@ -1,0 +1,29 @@
+name: Build LaTeX PDFs
+
+on:
+  pull_request:
+    paths:
+      - '**/*.tex'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install LaTeX
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y texlive-full make
+
+    - name: Build PDFs
+      run: |
+        find . -name 'Makefile' -execdir make all \;
+
+    - name: Upload PDFs
+      uses: actions/upload-artifact@v3
+      with:
+        name: pdfs
+        path: "**/*.pdf"
