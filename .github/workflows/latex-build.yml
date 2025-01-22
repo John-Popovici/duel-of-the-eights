@@ -1,9 +1,9 @@
-name: Build LaTeX PDFs
+name: Build LaTeX PDFs and Commit to Pull Request
 
 on:
-  push:
+  pull_request:
     paths:
-      - '**/*.tex' # Trigger only when .tex files are committed
+      - '**/*.tex' # Trigger only when .tex files are modified
 
 jobs:
   build:
@@ -12,18 +12,41 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.pull_request.head.ref }} # Ensure it checks out the PR branch
 
     - name: Install LaTeX
       run: |
         sudo apt-get update
         sudo apt-get install -y texlive-full make
 
-    - name: Build PDFs
+    - name: Identify Modified Files
+      id: modified-files
       run: |
-        find . -name 'Makefile' -execdir make all \;
+        # Get the list of modified .tex files
+        MODIFIED_FILES=$(git diff --name-only origin/${{ github.event.pull_request.base.ref }}...HEAD | grep '\.tex$' || true)
+        echo "Modified .tex files:"
+        echo "$MODIFIED_FILES"
+        echo "::set-output name=files::$MODIFIED_FILES"
 
-    - name: Upload PDFs
-      uses: actions/upload-artifact@v3
-      with:
-        name: pdfs
-        path: "**/*.pdf"
+    - name: Clean and Build PDFs
+      if: steps.modified-files.outputs.files != ''
+      run: |
+        for file in ${{ steps.modified-files.outputs.files }}; do
+          echo "Processing $file"
+          DIR=$(dirname "$file")
+          echo "Changing directory to $DIR"
+          cd "$DIR"
+          make clean-all || exit 1 # Clean existing PDFs and other files
+          make all || exit 1       # Build the new PDF
+          cd -
+        done
+
+    - name: Commit and Push Updated PDFs
+      if: steps.modified-files.outputs.files != ''
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add .
+        git commit -m "Update PDFs for modified LaTeX files"
+        git push origin ${{ github.event.pull_request.head.ref }}
