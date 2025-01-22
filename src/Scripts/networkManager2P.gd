@@ -44,8 +44,8 @@ func connect_to_server(_hash: String):
 	multiplayer.set_multiplayer_peer(peer)
 	is_host = false
 	print("Hash code recieved: ", _hash)
-	print("Hash to IP: ",hash_to_ip(_hash))
-	print("Attempting to connect to server at ", hash_to_ip(_hash), " on port ", port)
+	print("Hash to IP: ",ip)
+	print("Attempting to connect to server at ", ip, " on port ", port)
 	
 	# Check if connection is successful
 	multiplayer.multiplayer_peer.connect("peer_connected", self._on_peer_connected)
