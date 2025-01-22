@@ -52,6 +52,13 @@
 2025-01-08 & Hemraj Bhatt & Added content to sections 4.1 \& 4.2\\
 2025-01-11 & John Popovici & Formatted section 2; Added content to sections 4.1 \& 4.2\\
 2025-01-11 & Hemraj Bhatt & Updated content on section 4\\
+2025-01-14 & Hemraj Bhatt & Updated content on section 3\\
+2025-01-15 & John Popovici & Added content to section 10\\
+2025-01-15 & Nigel Moses & Added content to sections 5 \& 10\\
+2025-01-16 & Isaac Giles & Added content to sections 6 \& 8\\
+2025-01-16 & Hemraj Bhatt & Added content to section 12\\
+2025-01-16 & Naishan Guo & Added content to section 9\\
+2025-01-17 & John Popovici & Program name and figure 1\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -70,16 +77,14 @@ This section records information for easy reference.
   \textbf{symbol} & \textbf{description}\\
   \midrule 
   AC & Anticipated Change\\
-  DAG & Directed Acyclic Graph \\
   M & Module \\
   MG & Module Guide \\
   OS & Operating System \\
   R & Requirement\\
   SC & Scientific Computing \\
   SRS & Software Requirements Specification\\
-  \progname & Explanation of program name\\
+  \progname & Software Engineering Capstone Course\\
   UC & Unlikely Change \\
-  \wss{etc.} & \wss{...}\\
   \bottomrule
 \end{tabular}\\
 
@@ -98,23 +103,15 @@ See \href{https://github.com/John-Popovici/duel-of-the-eights/blob/main/docs/SRS
 \pagenumbering{arabic}
 
 \section{Introduction}
+\textbf{Template introduction refactored. A few wording changes.}\\
 
-Decomposing a system into modules is a commonly accepted approach to developing
-software.  A module is a work assignment for a programmer or programming
-team~\citep{ParnasEtAl1984}.  We advocate a decomposition
-based on the principle of information hiding~\citep{Parnas1972a}.  This
-principle supports design for change, because the ``secrets'' that each module
-hides represent likely future changes.  Design for change is valuable in SC,
-where modifications are frequent, especially during initial development as the
-solution space is explored.  
+\noindent{}Decomposing a system into modules is a commonly accepted approach to developing software. A module is a work assignment for a programmer or programming team~\citep{ParnasEtAl1984}. For the Dual of the Eights project, we advocate a decomposition based on the principle of information hiding~\citep{Parnas1972a}. This principle supports design for change, as the "secrets" that each module hides represent likely future changes. This approach is particularly valuable in the context of Dual of the Eights, where modifications to game rules, mechanics, or visual elements are likely during development and playtesting phases.
 
-Our design follows the rules layed out by \citet{ParnasEtAl1984}, as follows:
+Our design follows the guidelines laid out by \citet{ParnasEtAl1984}, as follows:
 \begin{itemize}
-\item System details that are likely to change independently should be the
-  secrets of separate modules.
-\item Each data structure is implemented in only one module.
-\item Any other program that requires information stored in a module's data
-  structures must obtain it by calling access programs belonging to that module.
+\item System details that are likely to change independently, such as scoring algorithms, dice physics, or player health mechanics, should be the secrets of separate modules.
+\item Each data structure, such as those representing dice, players, or game states, is implemented in only one module.
+\item Any other module requiring information stored in a module's data structures must obtain it by calling access programs belonging to that module.
 \end{itemize}
 
 After completing the first stage of the design, the Software Requirements
@@ -194,55 +191,16 @@ decisions will be changed.
 \section{Module Hierarchy} \label{SecMH}
 
 This section provides an overview of the module design. Modules are summarized
-in a hierarchy decomposed by secrets in Table \ref{TblMH}. The modules listed
+in a hierarchy decomposed by secrets. The modules listed
 below, which are leaves in the hierarchy tree, are the modules that will
 actually be implemented.
-
-\begin{description}
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module
-\item ...
-\end{description}
-
-
-\begin{table}[h!]
-\centering
-\begin{tabular}{p{0.3\textwidth} p{0.6\textwidth}}
-\toprule
-\textbf{Level 1} & \textbf{Level 2}\\
-\midrule
-
-{Hardware-Hiding Module} & ~ \\
-\midrule
-
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\ 
-& ?\\
-\midrule
-
-\multirow{3}{0.3\textwidth}{Software Decision Module} & {?}\\
-& ?\\
-& ?\\
-\bottomrule
-
-\end{tabular}
-\caption{Module Hierarchy}
-\label{TblMH}
-\end{table}
-
-This is the draft answer for this section:
 
 The modules are categorized into three types: Hardware-Hiding, Behavior-Hiding, and Software Decision modules. Below is the hierarchy:
 
 \subsection{Hardware-Hiding Modules}
 \begin{itemize}
-    \item \textbf{CustomBaseDie Module:} Handles the 3D dice models, textures, and physics.
-    \item \textbf{DynamicDiceContainer Module:} Manages dice interactions and rendering.
     \item \textbf{NetworkManager2P Module:} Manages connection and synchronization for two-player games.
+    \item \textbf{GameUI Module:} Provides the interface for interacting with the game and displaying relevant data.
 \end{itemize}
 
 \subsection{Behavior-Hiding Modules}
@@ -250,29 +208,76 @@ The modules are categorized into three types: Hardware-Hiding, Behavior-Hiding, 
     \item \textbf{MultiGameManager Module:} Manages the sequence of multiple Yahtzee games and customization phases.
     \item \textbf{PlayerManager Module:} Tracks player states, scores, and upgrades.
     \item \textbf{GameManager Module:} Handles a single game of Yahtzee.
+    \item \textbf{GameSettings Module:} Loads and stores settings for this Yahtzee variant.
     \item \textbf{CustomizationMenu Module:} Implements dice and game customization between games.
     \item \textbf{DynamicScoreboard Module:} Tracks and displays scores dynamically.
+    \item \textbf{CustomBaseDie Module:} Handles the 3D dice models, textures, and physics.
+    \item \textbf{DynamicDiceContainer Module:} Manages dice interactions and rendering.
 \end{itemize}
 
 \subsection{Software Decision Modules}
 \begin{itemize}
     \item \textbf{ScoreCalculator Module:} Calculates scores for dice rolls based on Yahtzee rules and custom modifiers.
-    \item \textbf{GameSettings Module:} Loads and stores settings for this Yahtzee variant.
-    \item \textbf{GameUI Module:} Provides the interface for interacting with the game and displaying relevant data.
 \end{itemize}
 
 \section{Connection Between Requirements and Design} \label{SecConnection}
 
 The design of the system is intended to satisfy the requirements developed in
 the SRS. In this stage, the system is decomposed into modules. The connection
-between requirements and modules is listed in Table~\ref{TblRT}.
+between requirements and modules is listed in Section 7.
 
-\wss{The intention of this section is to document decisions that are made
-  ``between'' the requirements and the design.  To satisfy some requirements,
-  design decisions need to be made.  Rather than make these decisions implicit,
-  they are explicitly recorded here.  For instance, if a program has security
-  requirements, a specific design decision may be made to satisfy those
-  requirements with a password.}
+\begin{table}[H]
+  \centering
+  \resizebox{\textwidth}{!}{
+  \begin{tabular}{|l|p{6cm}|p{4cm}|p{5cm}|}
+  \hline
+  \textbf{Requirement ID} & \textbf{Requirement Description} & \textbf{Module(s) Involved} & \textbf{Design Decision} \\
+  \hline
+  R1 & Support for online player vs player mode. & NetworkManager2P & Peer-to-peer communication and synchronization are handled by the NetworkManager2P module. \\
+  \hline
+  R2 & Handle score calculations using Yahtzee rules. & ScoreCalculator & The ScoreCalculator module handles scoring algorithms for standard and non-standard Yahtzee rules. \\
+  \hline
+  R3 & Simulate realistic physics for 3D dice rolls. & CustomBaseDie, DynamicDiceContainer & Physics for dice rolls are managed by the CustomBaseDie module, and the DynamicDiceContainer deals with dice rendering and states. \\
+  \hline
+  R4 & Use the real outcome of a roll to get dice values. & CustomBaseDie & The CustomBaseDie module ensures that roll outcomes are derived from physics-based interactions and values are read directly. \\
+  \hline
+  R5 & Support for dice with different numbers of sides. & CustomBaseDie & The CustomBaseDie module allows updates to dice textures and supports multiple dice variations/configurations. \\
+  \hline
+  R6 & Implement simultaneous turn-based gameplay. & GameManager, NetworkManager2P & The GameManager controls game flow, while the NetworkManager2P ensures synchronization of simultaneous turns. \\
+  \hline
+  \end{tabular}}
+  \caption{Connection Between Requirements and Modules (Part 1)}
+  \label{tab:req_module_connection_part1}
+  \end{table}
+  
+  \begin{table}[H]
+  \centering
+  \resizebox{\textwidth}{!}{
+  \begin{tabular}{|l|p{6cm}|p{4cm}|p{5cm}|}
+  \hline
+  \textbf{Requirement ID} & \textbf{Requirement Description} & \textbf{Module(s) Involved} & \textbf{Design Decision} \\
+  \hline
+  R7 & Allow players to pick and omit dice for each roll. & GameManager, DynamicDiceContainer & The GameManager tracks player decisions, and the DynamicDiceContainer updates dice states accordingly. \\
+  \hline
+  R8 & Display a user interface with scores, dice states, and player information. & GameUI, DynamicScoreboard & The GameUI presents game information, while the DynamicScoreboard provides real-time score updates. \\
+  \hline
+  R9 & Provide controls for modifying game settings. & GameSettings, CustomizationMenu & The GameSettings module stores configurations, and the CustomizationMenu allows changes to these configurations. \\
+  \hline
+  R10 & Provide presets for different game modes. & GameSettings & Presets are stored and retrieved through the GameSettings module. \\
+  \hline
+  R17 & Always show the correct current state accurately. & GameUI, GameManager & State synchronization is managed by the GameManager, while GameUI reflects the current state. \\
+  \hline
+  NFR2 & Implement a clear and easy-to-use interface. & GameUI & The GameUI module prioritizes usability through intuitive design. \\
+  \hline
+  NFR6 & Ensure modular, easily extendable codebase. & All Modules & Modular decomposition of functionality ensures extensibility and maintainability. \\
+  \hline
+  NFR9 & Maintain a consistent UI and 3D visual style. & GameUI, DynamicDiceContainer & Style guidelines and visual coherence are maintained across all UI and gameplay elements. \\
+  \hline
+  \end{tabular}}
+  \caption{Connection Between Requirements and Modules (Part 2)}
+  \label{tab:req_module_connection_part2}
+  \end{table}
+
 
 \section{Module Decomposition} \label{SecMD}
 
@@ -283,173 +288,120 @@ module. The \emph{Services} field specifies \emph{what} the module will do
 without documenting \emph{how} to do it. For each module, a suggestion for the
 implementing software is given under the \emph{Implemented By} title. If the
 entry is \emph{OS}, this means that the module is provided by the operating
-system or by standard programming language libraries.  \emph{\progname{}} means the
-module will be implemented by the \progname{} software.
-
-Only the leaf modules in the hierarchy have to be implemented. If a dash
-(\emph{--}) is shown, this means that the module is not a leaf and will not have
-to be implemented.
-
-\subsection{Hardware Hiding Modules (\mref{mHH})}
-
-\begin{description}
-\item[Secrets:]The data structure and algorithm used to implement the virtual
-  hardware.
-\item[Services:]Serves as a virtual hardware used by the rest of the
-  system. This module provides the interface between the hardware and the
-  software. So, the system can use it to display outputs or to accept inputs.
-\item[Implemented By:] OS
-\end{description}
-
-\subsection{Behaviour-Hiding Module}
-
-\begin{description}
-\item[Secrets:]The contents of the required behaviours.
-\item[Services:]Includes programs that provide externally visible behaviour of
-  the system as specified in the software requirements specification (SRS)
-  documents. This module serves as a communication layer between the
-  hardware-hiding module and the software decision module. The programs in this
-  module will need to change if there are changes in the SRS.
-\item[Implemented By:] --
-\end{description}
-
-\subsubsection{Input Format Module (\mref{mInput})}
-
-\begin{description}
-\item[Secrets:]The format and structure of the input data.
-\item[Services:]Converts the input data into the data structure used by the
-  input parameters module.
-\item[Implemented By:] [Your Program Name Here]
-\item[Type of Module:] [Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]
-\end{description}
-
-\subsubsection{Etc.}
-
-
-\subsection{Software Decision Module}
-
-\begin{description}
-\item[Secrets:] The design decision based on mathematical theorems, physical
-  facts, or programming considerations. The secrets of this module are
-  \emph{not} described in the SRS.
-\item[Services:] Includes data structure and algorithms used in the system that
-  do not provide direct interaction with the user. 
-  % Changes in these modules are more likely to be motivated by a desire to
-  % improve performance than by externally imposed changes.
-\item[Implemented By:] --
-\end{description}
-
-\subsubsection{Etc.}
+system or by standard programming language libraries.  \emph{\textit{Dice Duels: Duel of the Eights}} means the
+module will be implemented by the \textit{Dice Duels: Duel of the Eights} software.
 
 \subsection{Hardware-Hiding Modules}
-\subsubsection{CustomBaseDie Module}
-\textbf{Secrets:} The interaction logic and rendering of custom dice, including dynamic face changes.\\
-\textbf{Services:} Manages dice texture changes based on player customization and handles physics and collision for rolling.\\
-\textbf{Implemented By:} SFWRENG 4G06.
-
-\subsubsection{DynamicDiceContainer Module}
-\textbf{Secrets:} The algorithms for managing a collection of dice and their rendering.\\
-\textbf{Services:} Dynamically creates and organizes dice based on game settings and updates dice states during gameplay.\\
-\textbf{Implemented By:} SFWRENG 4G06.
-
 \subsubsection{NetworkManager2P Module}
 \textbf{Secrets:} The underlying implementation of peer-to-peer communication and synchronization between two clients.\\
 \textbf{Services:} Handles connection setup, data synchronization, and disconnection handling for a 2-player game.\\
-\textbf{Implemented By:} SFWRENG 4G06.
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
+
+\subsubsection{GameUI Module}
+\textbf{Secrets:} The logic for UI components and interactions.\\
+\textbf{Services:} Displays information to players, including scores and customization options, and provides action buttons.\\
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
 
 \subsection{Behavior-Hiding Modules}
 \subsubsection{MultiGameManager Module}
 \textbf{Secrets:} The logic for managing multiple games, including customization and upgrades between games.\\
 \textbf{Services:} Tracks progress and integrates player upgrades into gameplay.\\
-\textbf{Implemented By:} SFWRENG 4G06.
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
 
 \subsubsection{PlayerManager Module}
 \textbf{Secrets:} The data structure for tracking player-specific details, including scores, dice, and upgrades.\\
 \textbf{Services:} Tracks and updates player states, including consumables and modifiers.\\
-\textbf{Implemented By:} SFWRENG 4G06.
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
+
+\subsubsection{GameManager Module}
+\textbf{Secrets:} The logic for managing the flow of the game.\\
+\textbf{Services:} Tracks game progress and controls flow and state of the game.\\
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
+
+\subsubsection{GameSettings Module}
+\textbf{Secrets:} Configuration storage and retrieval.\\
+\textbf{Services:} Stores and loads game settings, including the number of games and customization options.\\
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
 
 \subsubsection{CustomizationMenu Module}
 \textbf{Secrets:} The logic for presenting and applying customization options between games.\\
 \textbf{Services:} Displays upgrade options, enforces selection rules, and updates player dice and modifiers.\\
-\textbf{Implemented By:} SFWRENG 4G06.
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
 
 \subsubsection{DynamicScoreboard Module}
 \textbf{Secrets:} The algorithms for dynamically generating score displays.\\
 \textbf{Services:} Updates and displays scores in real-time during gameplay.\\
-\textbf{Implemented By:} SFWRENG 4G06.
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
+
+\subsubsection{CustomBaseDie Module}
+\textbf{Secrets:} The interaction logic and rendering of custom dice, including dynamic face changes.\\
+\textbf{Services:} Manages dice texture changes based on player customization and handles physics and collision for rolling.\\
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
+
+\subsubsection{DynamicDiceContainer Module}
+\textbf{Secrets:} The algorithms for managing a collection of dice and their rendering.\\
+\textbf{Services:} Dynamically creates and organizes dice based on game settings and updates dice states during gameplay.\\
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
 
 \subsection{Software Decision Modules}
 \subsubsection{ScoreCalculator Module}
 \textbf{Secrets:} The scoring algorithms based on Yahtzee rules and custom modifiers.\\
 \textbf{Services:} Calculates scores for dice rolls and applies passive modifiers.\\
-\textbf{Implemented By:} SFWRENG 4G06.
-
-\subsubsection{GameSettings Module}
-\textbf{Secrets:} Configuration storage and retrieval.\\
-\textbf{Services:} Stores and loads game settings, including the number of games and customization options.\\
-\textbf{Implemented By:} SFWRENG 4G06.
-
-\subsubsection{GameUI Module}
-\textbf{Secrets:} The logic for UI components and interactions.\\
-\textbf{Services:} Displays information to players, including scores and customization options, and provides action buttons.\\
-\textbf{Implemented By:} SFWRENG 4G06.
+\textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
 
 
+
+
+
+\newpage
 \section{Traceability Matrix} \label{SecTM}
 
 This section shows two traceability matrices: between the modules and the
 requirements and between the modules and the anticipated changes.
 
-% the table should use mref, the requirements should be named, use something
-% like fref
 \begin{table}[H]
-\centering
-\begin{tabular}{p{0.2\textwidth} p{0.6\textwidth}}
-\toprule
-\textbf{Req.} & \textbf{Modules}\\
-\midrule
-R1 & \mref{mHH}, \mref{mInput}, \mref{mParams}, \mref{mControl}\\
-R2 & \mref{mInput}, \mref{mParams}\\
-R3 & \mref{mVerify}\\
-R4 & \mref{mOutput}, \mref{mControl}\\
-R5 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}, \mref{mSeqDS}, \mref{mSolver}, \mref{mPlot}\\
-R6 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}, \mref{mSeqDS}, \mref{mSolver}, \mref{mPlot}\\
-R7 & \mref{mOutput}, \mref{mEnergy}, \mref{mControl}, \mref{mSeqDS}, \mref{mPlot}\\
-R8 & \mref{mOutput}, \mref{mEnergy}, \mref{mControl}, \mref{mSeqDS}, \mref{mPlot}\\
-R9 & \mref{mVerifyOut}\\
-R10 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}\\
-R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
-\bottomrule
-\end{tabular}
-\caption{Trace Between Requirements and Modules}
-\label{TblRT}
-\end{table}
+  \centering
+  \begin{tabular}{p{0.2\textwidth} p{0.6\textwidth}}
+  \toprule
+  \textbf{Req.} & \textbf{Modules}\\
+  \midrule
+  R1 & NetworkManager2P, GameManager\\
+  R2 & ScoreCalculator\\
+  R3 & CustomBaseDie, DynamicDiceContainer\\
+  R4 & CustomBaseDie\\
+  R5 & CustomBaseDie\\
+  R6 & GameManager, NetworkManager2P\\
+  R7 & GameManager, DynamicDiceContainer\\
+  R8 & GameUI, DynamicScoreboard\\
+  R9 & GameSettings, CustomizationMenu\\
+  R10 & GameSettings\\
+  R17 & GameManager, GameUI\\
+  \bottomrule
+  \end{tabular}
+  \caption{Trace Between Requirements and Modules}
+  \label{TblRT}
+  \end{table}
+  
+  \begin{table}[H]
+  \centering
+  \begin{tabular}{p{0.2\textwidth} p{0.6\textwidth}}
+  \toprule
+  \textbf{AC} & \textbf{Modules}\\
+  \midrule
+  AC1 & GameUI, NetworkManager2P\\
+  AC2 & NetworkManager2P\\
+  AC3 & GameUI, GameSettings\\
+  AC4 & GameManager, GameSettings\\
+  AC5 & ScoreCalculator\\
+  AC6 & GameUI\\
+  AC7 & CustomBaseDie, DynamicDiceContainer\\
+  \bottomrule
+  \end{tabular}
+  \caption{Trace Between Anticipated Changes and Modules}
+  \label{TblACT}
+  \end{table}
 
-\begin{table}[H]
-\centering
-\begin{tabular}{p{0.2\textwidth} p{0.6\textwidth}}
-\toprule
-\textbf{AC} & \textbf{Modules}\\
-\midrule
-\acref{acHardware} & \mref{mHH}\\
-\acref{acInput} & \mref{mInput}\\
-\acref{acParams} & \mref{mParams}\\
-\acref{acVerify} & \mref{mVerify}\\
-\acref{acOutput} & \mref{mOutput}\\
-\acref{acVerifyOut} & \mref{mVerifyOut}\\
-\acref{acODEs} & \mref{mODEs}\\
-\acref{acEnergy} & \mref{mEnergy}\\
-\acref{acControl} & \mref{mControl}\\
-\acref{acSeqDS} & \mref{mSeqDS}\\
-\acref{acSolver} & \mref{mSolver}\\
-\acref{acPlot} & \mref{mPlot}\\
-\bottomrule
-\end{tabular}
-\caption{Trace Between Anticipated Changes and Modules}
-\label{TblACT}
-\end{table}
-
+\newpage
 \section{Use Hierarchy Between Modules} \label{SecUse}
 
 In this section, the uses hierarchy between modules is
@@ -463,38 +415,165 @@ the modules. It can be seen that the graph is a directed acyclic graph
 system, and modules in the higher level of the hierarchy are essentially simpler
 because they use modules from the lower levels.
 
-\wss{The uses relation is not a data flow diagram.  In the code there will often
-be an import statement in module A when it directly uses module B.  Module B
-provides the services that module A needs.  The code for module A needs to be
-able to see these services (hence the import statement).  Since the uses
-relation is transitive, there is a use relation without an import, but the
-arrows in the diagram typically correspond to the presence of import statement.}
 
-\wss{If module A uses module B, the arrow is directed from A to B.}
 
 \begin{figure}[H]
 \centering
-%\includegraphics[width=0.7\textwidth]{UsesHierarchy.png}
+\includegraphics[width=0.8\textwidth]{figures/UsesHierarchy}
 \caption{Use hierarchy among modules}
 \label{FigUH}
 \end{figure}
 
 %\section*{References}
 
+\newpage
 \section{User Interfaces}
 
-\wss{Design of user interface for software and hardware.  Attach an appendix if
-needed. Drawings, Sketches, Figma}
+% \wss{Design of user interface for software and hardware.  Attach an appendix if needed. Drawings, Sketches, Figma}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[h!]
+\caption{Main Menu User Interface Sketch}
+\centering
+\includegraphics[width=0.9\textwidth]{figures/main_menu}
+\end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[h!]
+\caption{Settings Menu User Interface Sketch}
+\centering
+\includegraphics[width=0.9\textwidth]{figures/settings}
+\end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[h!]
+\caption{Game User Interface Sketch}
+\centering
+\includegraphics[width=0.9\textwidth]{figures/game_interface}
+\end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[h!]
+\caption{Game Creation User Interface Sketch}
+\centering
+\includegraphics[width=0.9\textwidth]{figures/game_creation}
+\end{figure}
+
+
+
+~
+\newpage
+~
+\newpage
+
+\noindent
+Elements of the main menu user interface:
+\begin{itemize}
+  \item A: Title and game name
+  \item B: Menu and game options
+  \item C: Options and settings
+\end{itemize}
+Elements of the settings menu user interface:
+\begin{itemize}
+  \item D: Back to main menu
+  \item E: Dice example display
+  \item F: Customization options
+\end{itemize}
+Elements of the game user interface:
+\begin{itemize}
+  \item G: Opponent display dice information
+  \item H: Player display dice information
+  \item I: Game board display
+  \item J: Scorecard and score
+  \item K: Game turn controls
+\end{itemize}
+Elements of the game creation user interface:
+\begin{itemize}
+  \item L: Game presets controls
+  \item M: Customizable game settings
+  \item N: Game connection and start information
+\end{itemize}
+
+
+
+
+
+
+
+
+
+~\newpage
 \section{Design of Communication Protocols}
 
-\wss{If appropriate}
+The communication protocols for this project leverage Godot's built-in multiplayer networking libraries to facilitate data synchronization and interactions between players. The design supports two key modes of communication: local area network (LAN) and online multiplayer through a server-based hosting system.
+
+\subsection{Use of Godot Multiplayer Networking Libraries}
+
+Godot's multiplayer networking system provides the foundation for real-time communication between players. The networking stack includes:
+\begin{itemize}
+    \item \textbf{ENet Protocol:} A reliable UDP-based protocol for efficient and low-latency data transmission.
+    \item \textbf{@rpc and @rpc("any\_peer") Functions:} Remote Procedure Calls (RPCs) are used to synchronize state and transmit data between connected peers. The \texttt{@rpc} and \texttt{@rpc("any\_peer")} functions allow for targeted and efficient communication.
+\end{itemize}
+
+The networking manager (`networkManager2P`) is designed to handle peer-to-peer communication for two players over a LAN or via an online server. The system uses a host-client architecture, where the host player is responsible for maintaining the game state and transmitting updates to connected clients.
+
+\subsection{Server-Based Hosting for Online Multiplayer}
+
+For online multiplayer, a server will be implemented to host game lobbies for players who are not on the same network. The server's responsibilities include:
+\begin{itemize}
+    \item Managing multiple lobbies and connections simultaneously.
+    \item Authenticating and assigning unique identifiers to each connected player.
+    \item Relaying data between the host and clients, ensuring seamless communication.
+\end{itemize}
+
+This server-based approach allows players from different locations to connect and ensures a consistent experience by maintaining a central point of synchronization for game state.
+
+\subsection{Types of Data Passed Between Players}
+
+The communication protocol is designed to handle various types of data to synchronize game state and ensure fair gameplay. Based on the `networkManager2P` module, the following types of data are transmitted:
+\begin{itemize}
+    \item \textbf{Game State Updates:} Includes information about the current round, dice rolls, and scores. These updates ensure both players are in sync at all times.
+    \item \textbf{Player Actions:} Data related to specific player interactions, such as dice selections, re-rolls, and scoring decisions.
+    \item \textbf{Customization Choices:} Information about selected customizations, such as dice face changes, passive modifiers, and consumables.
+    \item \textbf{Connection Management:} Includes data for handling player connections and disconnections. This ensures smooth transitions when players join or leave a game.
+\end{itemize}
+
+\subsection{Functions for Data Communication}
+
+The following functions from the `networkManager2P` module facilitate communication:
+\begin{itemize}
+    \item \texttt{broadcast\_disconnect(state: String, data: Dictionary)}: Calls the rpc receive\_disconnect on peers to notify.
+    \item \texttt{receive\_disconnect()}: The rpc function that can be calls to receive a disconnect notification.
+    \item \texttt{broadcast\_game\_state(state: String, data: Dictionary)}: Calls the rpc receive\_game\_state on peer to notify each other of game their state.
+    \item \texttt{receive\_game\_state(state: String, data: Dictionary)}: The rpc function that is called to receive the other peer's game state.
+    \item \texttt{ping()}: Calls itself on all connected peers to track connection status.
+    \item \texttt{send\_game\_settings(\_game\_settings: Dictionary,\_hand\_settings: Dictionary)}: Calls the rpc receive\_game\_settings on peer to send the game settings to the client device.
+    \item \texttt{receive\_game\_settings(\_game\_settings: Dictionary, \_hand\_settings: Dictionary)}: The rpc function that recieves the game settings from the host device.
+\end{itemize}
+
+\subsection{Design Considerations}
+
+The communication protocols are designed with the following considerations:
+\begin{itemize}
+    \item \textbf{Reliability:} The ENet protocol ensures that all critical game state data is reliably delivered to connected peers.
+    \item \textbf{Low Latency:} The use of UDP minimizes delays, ensuring real-time synchronization during gameplay.
+    \item \textbf{Scalability:} While the current implementation supports two-player games, the architecture can be extended to handle larger multiplayer games if required.
+\end{itemize}
+
+This protocol design ensures a robust and flexible communication system for the Yahtzee game, providing a seamless multiplayer experience across both LAN and online environments.
+
 
 \section{Timeline}
 
-\wss{Schedule of tasks and who is responsible}
+A Gantt chart was created to effectively assign work on modules to team members. The chart can be accessed using the link below:\\
 
-\wss{You can point to GitHub if this information is included there}
+\href{https://mcmasteru365-my.sharepoint.com/:x:/r/personal/bhatth14_mcmaster_ca/Documents/Rev0%20Gnatt%20Chart.xlsx?d=w7c7c84af07004c328dc311a8721a5adb&csf=1&web=1&e=d8G3hJ}{Access Gantt chart}
 
 \bibliographystyle {plainnat}
 \bibliography{../../../refs/References}

@@ -4,7 +4,6 @@ extends Node
 var port
 var is_host: bool = false
 var ConnectionUI: CanvasLayer
-var OnlineGameManager: Node3D
 
 signal connection_successful
 signal disconnected
@@ -45,8 +44,8 @@ func connect_to_server(_hash: String):
 	multiplayer.set_multiplayer_peer(peer)
 	is_host = false
 	print("Hash code recieved: ", _hash)
-	print("Hash to IP: ",hash_to_ip(_hash))
-	print("Attempting to connect to server at ", hash_to_ip(_hash), " on port ", port)
+	print("Hash to IP: ",ip)
+	print("Attempting to connect to server at ", ip, " on port ", port)
 	
 	# Check if connection is successful
 	multiplayer.multiplayer_peer.connect("peer_connected", self._on_peer_connected)
@@ -58,10 +57,10 @@ func _on_peer_connected(id: int):
 	print("Connected peers: ", multiplayer.has_multiplayer_peer())
 	check_ping = true
 	emit_signal("connection_successful")
-
-signal second_player_connected
+##### Add stuff to _on_peer_connected or _second_player_connected to transmit name info or profile info
+signal second_player_connected(Name: String)
 func _second_player_connected():
-	emit_signal("second_player_connected")
+	emit_signal("second_player_connected","Client") #Change to be the players profile name
 
 func _on_peer_disconnected(id: int):
 	print("Disconnected from peer with ID: ", id)
