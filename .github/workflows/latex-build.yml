@@ -1,9 +1,9 @@
 name: Build LaTeX PDFs
 
 on:
-  pull_request:
+  push:
     paths:
-      - '**/*.tex'
+      - '**/*.tex' # Trigger only when .tex files are committed
 
 jobs:
   build:
