@@ -31,7 +31,7 @@ jobs:
         echo "MODIFIED_FILES=$MODIFIED_FILES" >> $GITHUB_ENV
 
     - name: Clean and Build PDFs
-      if: steps.modified-files.outputs.MODIFIED_FILES != ''
+      if: env.MODIFIED_FILES != ''
       run: |
         for file in $MODIFIED_FILES; do
           echo "Processing $file"
@@ -42,12 +42,16 @@ jobs:
           make all || exit 1       # Build the new PDF
           cd -
         done
+      env:
+        MODIFIED_FILES: ${{ env.MODIFIED_FILES }}
 
     - name: Commit and Push Updated PDFs
-      if: steps.modified-files.outputs.MODIFIED_FILES != ''
+      if: env.MODIFIED_FILES != ''
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git add .
         git commit -m "Update PDFs for modified LaTeX files"
         git push origin ${{ github.event.pull_request.head.ref }}
+      env:
+        MODIFIED_FILES: ${{ env.MODIFIED_FILES }}
