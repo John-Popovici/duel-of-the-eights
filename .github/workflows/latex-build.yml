@@ -1,0 +1,68 @@
+name: Build LaTeX PDFs and Commit to Pull Request
+
+on:
+  pull_request:
+    paths:
+      - '**/*.tex' # Trigger only when .tex files are modified
+
+permissions:
+  contents: write # Grant write access to the repository
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.pull_request.head.ref }} # Ensure it checks out the PR branch
+        fetch-depth: 0 # Fetch full history to access base and head commits
+
+    - name: Install LaTeX
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y texlive-full make
+
+    - name: Identify Modified Files
+      id: modified-files
+      run: |
+        # Get the list of modified .tex files
+        MODIFIED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} | grep '\.tex$' || true)
+        echo "Modified .tex files:"
+        echo "$MODIFIED_FILES"
+        echo "MODIFIED_FILES=$MODIFIED_FILES" >> $GITHUB_ENV
+
+    - name: Clean and Build PDFs
+      if: env.MODIFIED_FILES != ''
+      run: |
+        for file in $MODIFIED_FILES; do
+          echo "Processing $file"
+          DIR=$(dirname "$file")
+          echo "Changing directory to $DIR"
+          cd "$DIR"
+          
+          # Clean files
+          make clean-all || exit 1
+          
+          # Build PDF with multiple runs
+          pdflatex $(basename "$file" .tex).tex || exit 1
+          bibtex $(basename "$file" .tex) || echo "BibTeX failed. Check your .bib file." # Handle missing bibliography gracefully
+          pdflatex $(basename "$file" .tex).tex || exit 1
+          pdflatex $(basename "$file" .tex).tex || exit 1
+          
+          cd -
+        done
+      env:
+        MODIFIED_FILES: ${{ env.MODIFIED_FILES }}
+
+    - name: Commit and Push Updated PDFs
+      if: env.MODIFIED_FILES != ''
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add .
+        git commit -m ":scroll: Update PDFs for modified LaTeX files"
+        git push origin ${{ github.event.pull_request.head.ref }}
+      env:
+        MODIFIED_FILES: ${{ env.MODIFIED_FILES }}
