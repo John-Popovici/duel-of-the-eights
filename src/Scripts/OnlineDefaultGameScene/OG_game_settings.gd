@@ -30,7 +30,7 @@ signal game_settings_ready(game_settings,hand_settings)
 @onready var advanced_settings_vbox = settingsAdvanced.get_node("ScrollContainer/advanced_settings_vbox")
 
 @onready var presetsPanel = get_node("UIBox/SettingsSplitBox/PresetsPanelBox")
-@export var presets_folder = "res://Presets"
+@onready var presets_folder = "res://Presets"
 @onready var preset_name_input = presetsPanel.get_node("NewPresetName")
 @onready var save_preset_button = presetsPanel.get_node("AddPreset")
 @onready var presetsButtonsBox = presetsPanel.get_node("PresetsScrollBar/PresetsButtons")
@@ -224,7 +224,6 @@ func update_ui_fields(game_settings: Dictionary, hand_settings: Dictionary):
 	show_opponent_rolls = bool(game_settings.get("show_rolls", false))
 	timed_rounds_button.set_pressed(bool(game_settings.get("timed_rounds", true)))
 	timed_rounds = bool(game_settings.get("timed_rounds",true))
-	round_time.text = str(game_settings.get("round_time", 25))
 
 	# Update any hand settings-related fields if necessary
 	# (for example, list of hand rules or settings if part of the UI)

@@ -7,7 +7,6 @@
 
 [node name="GameSettings" type="CanvasLayer"]
 script = ExtResource("1_5hf6s")
-presets_folder = "res://Presets/Custom"
 
 [node name="UIBox" type="PanelContainer" parent="."]
 anchors_preset = 8
@@ -24,7 +23,6 @@ grow_vertical = 2
 scale = Vector2(1.44, 2.28)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = ExtResource("3_il4in")
 theme_override_styles/panel = ExtResource("2_t71mh")
 
 [node name="SettingsSplitBox" type="HSplitContainer" parent="UIBox"]
