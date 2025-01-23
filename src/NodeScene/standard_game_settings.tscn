@@ -1,13 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://canc50wskx2cl"]
+[gd_scene load_steps=5 format=3 uid="uid://c5010erpn74kt"]
 
-[ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_settings.gd" id="1_5hf6s"]
-[ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/Default_Pixel_Blue/PanelBlueBoxBackgroundStyle.tres" id="2_t71mh"]
-[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="3_il4in"]
-[ext_resource type="PackedScene" uid="uid://c2y0m27eadb6i" path="res://NodeScene/sample_preset_button.tscn" id="4_o2ime"]
+[ext_resource type="Script" path="res://Scripts/StandardVariants/variant_game_settings.gd" id="1_rq1yi"]
+[ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/Default_Pixel_Blue/PanelBlueBoxBackgroundStyle.tres" id="2_1lwmu"]
+[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="3_8ldqx"]
+[ext_resource type="PackedScene" uid="uid://c2y0m27eadb6i" path="res://NodeScene/sample_preset_button.tscn" id="4_yjqjv"]
 
 [node name="GameSettings" type="CanvasLayer"]
-script = ExtResource("1_5hf6s")
-presets_folder = "res://Presets/Custom"
+script = ExtResource("1_rq1yi")
 
 [node name="UIBox" type="PanelContainer" parent="."]
 anchors_preset = 8
@@ -24,10 +23,84 @@ grow_vertical = 2
 scale = Vector2(1.44, 2.28)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = ExtResource("3_il4in")
-theme_override_styles/panel = ExtResource("2_t71mh")
+theme = ExtResource("3_8ldqx")
+theme_override_styles/panel = ExtResource("2_1lwmu")
+
+[node name="SimplePresetsBox" type="VBoxContainer" parent="UIBox"]
+layout_mode = 2
+theme = ExtResource("3_8ldqx")
+
+[node name="TitleBox" type="CenterContainer" parent="UIBox/SimplePresetsBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UIBox/SimplePresetsBox/TitleBox"]
+layout_mode = 2
+text = "Select Game Dice"
+
+[node name="PresetsBox" type="CenterContainer" parent="UIBox/SimplePresetsBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PresetsButtonsContainer" type="GridContainer" parent="UIBox/SimplePresetsBox/PresetsBox"]
+layout_mode = 2
+columns = 4
+
+[node name="d4Tex" type="TextureRect" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer"]
+layout_mode = 2
+
+[node name="d6Tex" type="TextureRect" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer"]
+layout_mode = 2
+
+[node name="d8Tex" type="TextureRect" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer"]
+layout_mode = 2
+
+[node name="d12Tex" type="TextureRect" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer"]
+layout_mode = 2
+
+[node name="d4" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer" instance=ExtResource("4_yjqjv")]
+layout_mode = 2
+text = "4-Sided"
+
+[node name="d6" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer" instance=ExtResource("4_yjqjv")]
+layout_mode = 2
+text = "6-Sided"
+
+[node name="d8" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer" instance=ExtResource("4_yjqjv")]
+layout_mode = 2
+text = "8-Sided"
+
+[node name="d12" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer" instance=ExtResource("4_yjqjv")]
+layout_mode = 2
+text = "12-Sided"
+
+[node name="ControlButtonsBox" type="CenterContainer" parent="UIBox/SimplePresetsBox"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIBox/SimplePresetsBox/ControlButtonsBox"]
+layout_mode = 2
+
+[node name="ConnectCode" type="Button" parent="UIBox/SimplePresetsBox/ControlButtonsBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Copy Connect Code"
+
+[node name="StartGame" type="Button" parent="UIBox/SimplePresetsBox/ControlButtonsBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Start Game"
+
+[node name="AdvancedSettings" type="Button" parent="UIBox/SimplePresetsBox/ControlButtonsBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Advanced Settings"
+
+[node name="BacktoHome" type="Button" parent="UIBox/SimplePresetsBox/ControlButtonsBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Back to Home"
 
 [node name="SettingsSplitBox" type="HSplitContainer" parent="UIBox"]
+visible = false
 layout_mode = 2
 split_offset = 2
 dragger_visibility = 1
@@ -58,14 +131,14 @@ alignment = 1
 [node name="Player1Name" type="LineEdit" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/PlayerNames"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
 placeholder_text = "Host Player Name"
 alignment = 1
 
 [node name="Player2Name" type="LineEdit" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/PlayerNames"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
 placeholder_text = "Client Player Name"
 alignment = 1
 
@@ -81,7 +154,7 @@ horizontal_alignment = 1
 [node name="ConditionSelect" type="OptionButton" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/WinCondition"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
 alignment = 1
 selected = 0
 allow_reselect = true
@@ -89,6 +162,7 @@ item_count = 2
 popup/item_0/text = "Score"
 popup/item_1/text = "Health Points"
 popup/item_1/id = 1
+popup/item_1/disabled = true
 
 [node name="HealthPoints" type="HBoxContainer" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox"]
 layout_mode = 2
@@ -102,7 +176,7 @@ horizontal_alignment = 1
 [node name="HealthPoints" type="SpinBox" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/HealthPoints"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
 min_value = 1.0
 max_value = 1000.0
 value = 5.0
@@ -112,7 +186,8 @@ suffix = "Hp"
 
 [node name="BluffButton" type="CheckButton" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/HealthPoints"]
 layout_mode = 2
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
+disabled = true
 text = "Bluff Mode: "
 
 [node name="Rounds" type="HBoxContainer" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox"]
@@ -127,7 +202,7 @@ horizontal_alignment = 1
 [node name="Rounds" type="SpinBox" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/Rounds"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
 min_value = 1.0
 max_value = 50.0
 value = 8.0
@@ -143,7 +218,7 @@ horizontal_alignment = 1
 [node name="RoundRolls" type="SpinBox" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/Rounds"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
 min_value = 1.0
 max_value = 10.0
 value = 3.0
@@ -163,7 +238,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
 min_value = 1.0
 max_value = 9.0
 value = 7.0
@@ -172,7 +247,7 @@ alignment = 1
 [node name="DiceType" type="OptionButton" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/Dice"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
 alignment = 1
 selected = 1
 allow_reselect = true
@@ -192,14 +267,15 @@ layout_mode = 2
 [node name="OpponentRollVisible" type="CheckButton" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/HandLimit"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
+disabled = true
 text = "Show Opponent Roll:"
 
 [node name="AdvancedSettingsButton" type="Button" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/HandLimit"]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Modify Hand restrictions"
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
 text = "Modify Hand Rules"
 
 [node name="TimedRounds" type="HBoxContainer" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox"]
@@ -208,7 +284,7 @@ layout_mode = 2
 [node name="TimedRoundsToggle" type="CheckButton" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/TimedRounds"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
 button_pressed = true
 text = "Timed Rounds:"
 
@@ -216,7 +292,7 @@ text = "Timed Rounds:"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
 min_value = 1.0
 max_value = 60.0
 value = 20.0
@@ -229,20 +305,20 @@ alignment = 1
 [node name="CopyConnectButton" type="Button" parent="UIBox/SettingsSplitBox/Settings_Setup/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
 text = "Copy Connect Code"
 
 [node name="StartGame" type="Button" parent="UIBox/SettingsSplitBox/Settings_Setup/Buttons"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
 text = "Start Game"
 
 [node name="BackToHomeButton" type="Button" parent="UIBox/SettingsSplitBox/Settings_Setup/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
 text = "Back to Home"
 
 [node name="PresetsPanelBox" type="VBoxContainer" parent="UIBox/SettingsSplitBox"]
@@ -262,18 +338,18 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SamplePreset" parent="UIBox/SettingsSplitBox/PresetsPanelBox/PresetsScrollBar/PresetsButtons" instance=ExtResource("4_o2ime")]
+[node name="SamplePreset" parent="UIBox/SettingsSplitBox/PresetsPanelBox/PresetsScrollBar/PresetsButtons" instance=ExtResource("4_yjqjv")]
 layout_mode = 2
 
 [node name="NewPresetName" type="LineEdit" parent="UIBox/SettingsSplitBox/PresetsPanelBox"]
 layout_mode = 2
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
 placeholder_text = "New Preset Name"
 alignment = 1
 
 [node name="AddPreset" type="Button" parent="UIBox/SettingsSplitBox/PresetsPanelBox"]
 layout_mode = 2
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
 text = "Add Current Settings as Preset"
 
 [node name="Settings_Advanced" type="VBoxContainer" parent="UIBox"]
@@ -282,7 +358,7 @@ layout_mode = 2
 
 [node name="AdvancedInfo" type="Label" parent="UIBox/Settings_Advanced"]
 layout_mode = 2
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
 text = "Modify Rules for Individual hands"
 horizontal_alignment = 1
 
@@ -302,12 +378,12 @@ theme_override_constants/separation = 3
 
 [node name="SaveSettings" type="Button" parent="UIBox/Settings_Advanced"]
 layout_mode = 2
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
 text = "Save Settings"
 
 [node name="ReturnToSettings" type="Button" parent="UIBox/Settings_Advanced"]
 layout_mode = 2
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
 text = "Return"
 
 [node name="Settings_Wait" type="VBoxContainer" parent="UIBox"]
@@ -316,12 +392,12 @@ layout_mode = 2
 
 [node name="WaitInfo" type="Label" parent="UIBox/Settings_Wait"]
 layout_mode = 2
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
 text = "Waiting for host to
 set up game rules"
 horizontal_alignment = 1
 
 [node name="ExitGameButton" type="Button" parent="UIBox/Settings_Wait"]
 layout_mode = 2
-theme = ExtResource("3_il4in")
+theme = ExtResource("3_8ldqx")
 text = "Exit Game"
