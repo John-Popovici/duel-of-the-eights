@@ -80,7 +80,7 @@ theme_override_styles/disabled = ExtResource("7_sypxc")
 theme_override_styles/hover = ExtResource("8_mpfnf")
 theme_override_styles/pressed = ExtResource("9_lucfa")
 theme_override_styles/normal = ExtResource("10_3uy0t")
-text = "Start Standard Game"
+text = "Play Standard Game"
 
 [node name="StartBluffGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -90,7 +90,7 @@ theme_override_styles/disabled = ExtResource("7_sypxc")
 theme_override_styles/hover = ExtResource("8_mpfnf")
 theme_override_styles/pressed = ExtResource("9_lucfa")
 theme_override_styles/normal = ExtResource("10_3uy0t")
-text = "Start Bluff Game"
+text = "Play Bluff Game"
 
 [node name="StartBlitzGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -100,7 +100,7 @@ theme_override_styles/disabled = ExtResource("7_sypxc")
 theme_override_styles/hover = ExtResource("8_mpfnf")
 theme_override_styles/pressed = ExtResource("9_lucfa")
 theme_override_styles/normal = ExtResource("10_3uy0t")
-text = "Start Blitz Game"
+text = "Play Blitz Game"
 
 [node name="StartOnlineGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -110,7 +110,7 @@ theme_override_styles/disabled = ExtResource("7_sypxc")
 theme_override_styles/hover = ExtResource("8_mpfnf")
 theme_override_styles/pressed = ExtResource("9_lucfa")
 theme_override_styles/normal = ExtResource("10_3uy0t")
-text = "Start Custom Game"
+text = "Play Custom Game"
 
 [node name="StartOnlineLongFormGame" type="Button" parent="VBoxContainer"]
 visible = false
