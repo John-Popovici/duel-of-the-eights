@@ -4,7 +4,12 @@ extends Node
 var BonusThreshold: int
 var BonusScore: int
 var BonusUsed: bool
+var bonusScoringRule
 @onready var BonusExists: bool = false
+var DiceType: int
+var DiceCount: int
+var straight_modifier: int
+var full_house_modifier: int
 
 # Main scoring function
 func calculate_hand_score(hand_dict: Dictionary, dice_rolls: Array) -> Array[int]:
@@ -31,14 +36,27 @@ func calculate_hand_score(hand_dict: Dictionary, dice_rolls: Array) -> Array[int
 
 func setupBonus(_bonusHand: Dictionary) -> void:
 	#Add logic to read host input
+	bonusScoringRule = _bonusHand["scoring_rule"]
+	if bonusScoringRule != "":
+		BonusScore = int(bonusScoringRule)
 	BonusExists = true
+
+func initializeValues(_game_settings: Dictionary) -> void:
+	BonusExists = false
+	BonusUsed = false
+	SinglesTotal = 0
+	DiceCount = _game_settings["dice_count"]
+	DiceType = int(_game_settings["dice_type"])
+	straight_modifier = 10
+	full_house_modifier = 5
 	BonusScore = 35
 	BonusThreshold = 63
-	BonusUsed = false
-
-func initializeValues() -> void:
-	BonusExists = false
-	SinglesTotal = 0
+	#Modify to use Dice type and number unless specified in scoring rule when scored
+	#has to fit standard Yahtzee and Prof's 8 sided Yahtzee
+	straight_modifier = roundi(-0.125*pow(DiceType,2) + 2.75*DiceType - 2)
+	full_house_modifier = roundi(0.0114*pow(DiceType,2) + 0.5864*DiceType + 1.3636)
+	BonusScore = roundi(-0.1563*pow(DiceType,3) + 3.4375*pow(DiceType,2) - 15*DiceType + 35)
+	BonusThreshold = roundi(0.125*pow(DiceType,3) - 3.625*pow(DiceType,2) + 38.25*DiceType - 63)
 
 # Calculates score for Singles (like Ones, Twos, etc.)
 func _calculate_singles_score(target_value: int, dice_rolls: Array) -> Array[int]:
@@ -96,7 +114,7 @@ func _calculate_straight_score(target_length: int, dice_rolls: Array) -> int:
 			current_straight = 1
 	
 	if longest_straight >= target_length:
-		return target_length * 10  # Example score based on length
+		return target_length * straight_modifier  # Example score based on length
 	
 	return 0
 
@@ -118,7 +136,7 @@ func _calculate_full_house_score(setSize1: int, setSize2: int, dice_rolls: Array
 			has_smallSet = true
 	
 	if has_smallSet and has_largeSet:
-		return (setSize1+setSize2)*5  # Full House score
+		return (setSize1+setSize2)*full_house_modifier  # Full House score
 	
 	return 0
 
