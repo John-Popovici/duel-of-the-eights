@@ -384,6 +384,7 @@ func _ready() -> void:
 	simple_copy_connect_code_button.visible = true
 	advanced_settings_button.connect("pressed",self._on_advanced_settings_pressed)
 	simple_advanced_settings_button.connect("pressed",self._simple_to_advanced_settings)
+	simple_advanced_settings_button.disabled = true
 	save_advanced_settings_button.connect("pressed",self.save_advanced_settings)
 	return_to_settings_button.connect("pressed",self._on_return_to_settings_pressed)
 	home_button.connect("pressed",self.on_home_pressed)
@@ -484,6 +485,7 @@ func _allow_game_start(_client_name: String) -> void:
 
 func _allow_simple_start() -> void:
 	simple_start_game_button.disabled = false
+	simple_advanced_settings_button.disabled = false
 
 func on_home_pressed() -> void:
 	#Add disconnect code here and network manager
