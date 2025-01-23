@@ -61,7 +61,7 @@ func _on_settings_ready(_game_settings: Dictionary, _hand_settings: Dictionary) 
 
 func setup_game() -> void:
 	setup_game_environment(game_settings)
-	setup_scoreboard(hand_settings)
+	setup_scoreboard(game_settings,hand_settings)
 	setup_PlayerManager(game_settings)
 	print("Setup UI Called on Host: ", network_manager.getIsHost())
 	GameUI.setup_game_ui(game_settings,network_manager.getIsHost())
@@ -404,9 +404,9 @@ func setup_PlayerManager(settings: Dictionary) -> void:
 	myPlayer.setup_player(true, settings["health_points"],game_settings["player_names"][0] if network_manager.getIsHost() else game_settings["player_names"][1], network_manager.getIsHost(),dice_container)
 	enemyPlayer.setup_player(false, settings["health_points"],game_settings["player_names"][1] if network_manager.getIsHost() else game_settings["player_names"][0], network_manager.getIsHost(),dice_container)
 
-func setup_scoreboard(_hand_settings: Dictionary) -> void:
+func setup_scoreboard(_game_settings: Dictionary, _hand_settings: Dictionary) -> void:
 	#clear anything generated and re build
-	scoreCalc.initializeValues()
+	scoreCalc.initializeValues(_game_settings)
 	scoreboard.bonusExists.connect(self._on_bonus_exist)
 	scoreboard.populate_scoreboard(_hand_settings)
 	scoreboard.hand_selected.connect(self._on_hand_selected)
