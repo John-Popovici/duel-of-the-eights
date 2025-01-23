@@ -27,6 +27,7 @@ theme = ExtResource("3_8ldqx")
 theme_override_styles/panel = ExtResource("2_1lwmu")
 
 [node name="SimplePresetsBox" type="VBoxContainer" parent="UIBox"]
+visible = false
 layout_mode = 2
 theme = ExtResource("3_8ldqx")
 

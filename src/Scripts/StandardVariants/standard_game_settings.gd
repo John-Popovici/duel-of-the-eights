@@ -43,7 +43,7 @@ signal game_settings_ready(game_settings,hand_settings)
 @onready var advanced_settings_vbox = settingsAdvanced.get_node("ScrollContainer/advanced_settings_vbox")
 
 @onready var presetsPanel = get_node("UIBox/SettingsSplitBox/PresetsPanelBox")
-@onready var presets_folder = "res://Presets/Standard"
+@export var presets_folder = "res://Presets/Standard"
 @onready var preset_name_input = presetsPanel.get_node("NewPresetName")
 @onready var save_preset_button = presetsPanel.get_node("AddPreset")
 @onready var presetsButtonsBox = presetsPanel.get_node("PresetsScrollBar/PresetsButtons")
@@ -235,6 +235,7 @@ func _on_preset_selected(preset_name: String):
 	print(preset_data)
 	# Update UI fields based on the loaded settings
 	update_ui_fields(game_settings, hand_settings_vals)
+	_allow_simple_start()
 
 # Update the input fields with loaded game and hand settings
 func update_ui_fields(game_settings: Dictionary, hand_settings: Dictionary):
@@ -376,6 +377,7 @@ func _ready() -> void:
 	simple_start_game_button.connect("pressed",self._on_start_game_pressed)
 	start_game_button.visible = false
 	simple_start_game_button.visible = false
+	simple_start_game_button.disabled = true
 	copy_connect_code_button.connect("pressed",self._copy_hash_to_clipboard)
 	simple_copy_connect_code_button.connect("pressed",self._copy_hash_to_clipboard)
 	copy_connect_code_button.visible = true
@@ -479,6 +481,9 @@ func _allow_game_start(_client_name: String) -> void:
 	simple_copy_connect_code_button.visible = false
 	simple_start_game_button.visible = true
 	player2Name.text = _client_name
+
+func _allow_simple_start() -> void:
+	simple_start_game_button.disabled = false
 
 func on_home_pressed() -> void:
 	#Add disconnect code here and network manager
