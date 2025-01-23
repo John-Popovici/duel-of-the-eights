@@ -1,9 +1,11 @@
 extends CanvasLayer
 
 signal game_settings_ready(game_settings,hand_settings)
+@onready var SettingsSplitBox = get_node("UIBox/SettingsSplitBox")
 @onready var settingsSetup = get_node("UIBox/SettingsSplitBox/Settings_Setup")
 @onready var settingsAdvanced = get_node("UIBox/Settings_Advanced")
 @onready var settingsWait = get_node("UIBox/Settings_Wait")
+@onready var simpleSettings = get_node("UIBox/SimplePresetsBox")
 @onready var start_game_button = settingsSetup.get_node("Buttons/StartGame")
 @onready var copy_connect_code_button = settingsSetup.get_node("Buttons/CopyConnectButton")
 @onready var advanced_settings_button = settingsSetup.get_node("OptionsVBox/HandLimit/AdvancedSettingsButton")
@@ -11,6 +13,17 @@ signal game_settings_ready(game_settings,hand_settings)
 @onready var save_advanced_settings_button = settingsAdvanced.get_node("SaveSettings")
 @onready var home_button = settingsSetup.get_node("Buttons/BackToHomeButton")
 @onready var wait_home_button = settingsWait.get_node("ExitGameButton")
+
+@onready var simplePresetsContatiner = get_node("UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer")
+@onready var d4_preset_button = simplePresetsContatiner.get_node("d4")
+@onready var d6_preset_button = simplePresetsContatiner.get_node("d6")
+@onready var d8_preset_button = simplePresetsContatiner.get_node("d8")
+@onready var d12_preset_button = simplePresetsContatiner.get_node("d12")
+@onready var simpleControlButtonsBox = get_node("UIBox/SimplePresetsBox/ControlButtonsBox/HBoxContainer")
+@onready var simple_copy_connect_code_button = simpleControlButtonsBox.get_node("ConnectCode")
+@onready var simple_start_game_button = simpleControlButtonsBox.get_node("StartGame")
+@onready var simple_advanced_settings_button = simpleControlButtonsBox.get_node("AdvancedSettings")
+@onready var simple_home_button = simpleControlButtonsBox.get_node("BacktoHome")
 
 @onready var player1Name = settingsSetup.get_node("OptionsVBox/PlayerNames/Player1Name")
 @onready var player2Name = settingsSetup.get_node("OptionsVBox/PlayerNames/Player2Name")
@@ -30,7 +43,7 @@ signal game_settings_ready(game_settings,hand_settings)
 @onready var advanced_settings_vbox = settingsAdvanced.get_node("ScrollContainer/advanced_settings_vbox")
 
 @onready var presetsPanel = get_node("UIBox/SettingsSplitBox/PresetsPanelBox")
-@export var presets_folder = "res://Presets"
+@export var presets_folder = "res://Presets/Standard"
 @onready var preset_name_input = presetsPanel.get_node("NewPresetName")
 @onready var save_preset_button = presetsPanel.get_node("AddPreset")
 @onready var presetsButtonsBox = presetsPanel.get_node("PresetsScrollBar/PresetsButtons")
@@ -193,6 +206,20 @@ func load_preset_buttons():
 				presetsButtonsBox.add_child(button)
 			file_name = dir.get_next()
 		dir.list_dir_end()
+	#Simple presets
+	var select_callable = Callable(self, "_on_preset_selected")
+	d4_preset_button.text = "4-sided"
+	d4_preset_button.setSettings("4-sided")
+	d4_preset_button.setCallable(select_callable)
+	d6_preset_button.text = "6-sided"
+	d6_preset_button.setSettings("6-sided")
+	d6_preset_button.setCallable(select_callable)
+	d8_preset_button.text = "8-sided"
+	d8_preset_button.setSettings("8-sided")
+	d8_preset_button.setCallable(select_callable)
+	d12_preset_button.text = "12-sided"
+	d12_preset_button.setSettings("12-sided")
+	d12_preset_button.setCallable(select_callable)
 
 # Load a preset's data and apply it to the UI
 func _on_preset_selected(preset_name: String):
@@ -208,6 +235,7 @@ func _on_preset_selected(preset_name: String):
 	print(preset_data)
 	# Update UI fields based on the loaded settings
 	update_ui_fields(game_settings, hand_settings_vals)
+	_allow_simple_start()
 
 # Update the input fields with loaded game and hand settings
 func update_ui_fields(game_settings: Dictionary, hand_settings: Dictionary):
@@ -347,13 +375,21 @@ func _on_return_to_settings_pressed() -> void:
 func _ready() -> void:
 	self.visible = false
 	start_game_button.connect("pressed",self._on_start_game_pressed)
+	simple_start_game_button.connect("pressed",self._on_start_game_pressed)
 	start_game_button.visible = false
+	simple_start_game_button.visible = false
+	simple_start_game_button.disabled = true
 	copy_connect_code_button.connect("pressed",self._copy_hash_to_clipboard)
+	simple_copy_connect_code_button.connect("pressed",self._copy_hash_to_clipboard)
 	copy_connect_code_button.visible = true
+	simple_copy_connect_code_button.visible = true
 	advanced_settings_button.connect("pressed",self._on_advanced_settings_pressed)
+	simple_advanced_settings_button.connect("pressed",self._simple_to_advanced_settings)
+	simple_advanced_settings_button.disabled = true
 	save_advanced_settings_button.connect("pressed",self.save_advanced_settings)
 	return_to_settings_button.connect("pressed",self._on_return_to_settings_pressed)
 	home_button.connect("pressed",self.on_home_pressed)
+	simple_home_button.connect("pressed",self.on_home_pressed)
 	wait_home_button.connect("pressed",self.on_home_pressed)
 	WinCondition.set_toggle_mode(true)
 	WinCondition.connect("item_selected", self._win_condition_toggled)
@@ -409,17 +445,33 @@ func _dice_values_changed(_state) -> void:
 func collectInfo() -> void:
 	self.visible = true
 	if NetworkManager.getIsHost():
-		settingsSetup.visible = true
+		SettingsSplitBox.visible = false
+		simpleSettings.visible = true
+		settingsSetup.visible = false
 		settingsAdvanced.visible = false
 		settingsWait.visible = false
-		presetsPanel.visible = true
+		presetsPanel.visible = false
 		copy_connect_code_button.text = "Code: " + NetworkManager.getHashIP()+NetworkManager.getHashPort()
+		simple_copy_connect_code_button.text = "Code: " + NetworkManager.getHashIP()+NetworkManager.getHashPort()
 		load_preset_buttons()
 	else:
 		settingsSetup.visible = false
 		settingsAdvanced.visible = false
 		settingsWait.visible = true
 		presetsPanel.visible = false
+		simpleSettings.visible = false
+		SettingsSplitBox.visible = false
+
+func _simple_to_advanced_settings() -> void:
+	SettingsSplitBox.visible = true
+	simpleSettings.visible = false
+	settingsSetup.visible = true
+	settingsAdvanced.visible = false
+	settingsWait.visible = false
+	presetsPanel.visible = true
+	copy_connect_code_button.text = "Code: " + NetworkManager.getHashIP()+NetworkManager.getHashPort()
+	simple_copy_connect_code_button.text = "Code: " + NetworkManager.getHashIP()+NetworkManager.getHashPort()
+	load_preset_buttons()
 
 func _copy_hash_to_clipboard():
 	DisplayServer.clipboard_set(NetworkManager.getHashIP()+NetworkManager.getHashPort())
@@ -428,7 +480,13 @@ func _copy_hash_to_clipboard():
 func _allow_game_start(_client_name: String) -> void:
 	copy_connect_code_button.visible = false
 	start_game_button.visible = true
+	simple_copy_connect_code_button.visible = false
+	simple_start_game_button.visible = true
 	player2Name.text = _client_name
+
+func _allow_simple_start() -> void:
+	simple_start_game_button.disabled = false
+	simple_advanced_settings_button.disabled = false
 
 func on_home_pressed() -> void:
 	#Add disconnect code here and network manager
