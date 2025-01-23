@@ -5,6 +5,9 @@ on:
     paths:
       - '**/*.tex' # Trigger only when .tex files are modified
 
+permissions:
+  contents: write # Grant write access to the repository
+
 jobs:
   build:
     runs-on: ubuntu-latest
