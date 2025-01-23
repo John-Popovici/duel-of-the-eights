@@ -119,7 +119,7 @@ func lettersToNumber(letters: String) -> int:
 	return result - 1  # Adjust final result to account for the offset
 
 func ip_to_hash(ip: String) -> String:
-	# Converts an IP address (e.g., "192.168.0.1") to a 10-character uppercase string
+	# Converts an IP address to a 10-character uppercase string
 	var octets = ip.split(".")
 	if octets.size() != 4:
 		return ""  # Invalid IP format
@@ -131,8 +131,8 @@ func ip_to_hash(ip: String) -> String:
 	return code
 
 func hash_to_ip(hash_code: String) -> String:
-	# Converts a 10-character code back to an IP address (e.g., "C0A80001")
-	if hash_code.length() != 8:
+	# Converts a 10-character code back to an IP address
+	if hash_code.length() != 10:
 		return ""  # Invalid code length
 
 	var ip = []
