@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0j5ml7vr5kxj"
-path="res://.godot/imported/dice-selected-six-faces-0.png-0b9424faede7394f185a17aa8a510d8c.ctex"
+path="res://.godot/imported/dice-selected-six-faces-0.png-44b2a2ba3038a5ed9c864bb690387330.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/2D Assets/DiceSprites/dice-selected-six-faces-0.png"
-dest_files=["res://.godot/imported/dice-selected-six-faces-0.png-0b9424faede7394f185a17aa8a510d8c.ctex"]
+source_file="res://Assets/2D Assets/DiceSprites/6 Sided/dice-selected-six-faces-0.png"
+dest_files=["res://.godot/imported/dice-selected-six-faces-0.png-44b2a2ba3038a5ed9c864bb690387330.ctex"]
 
 [params]
 

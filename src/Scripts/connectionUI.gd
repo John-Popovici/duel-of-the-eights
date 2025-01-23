@@ -15,6 +15,8 @@ var network_manager: Node
 @onready var ErrorBack = $EscBackOverlay
 @onready var ErrorSourceLabel = $"UIBox/Connection_Error/Error Source"
 
+signal returnToIntro
+
 func _ready():
 	self.visible = true
 	host_checkbutton.set_toggle_mode(true)
@@ -43,7 +45,7 @@ func setupNetworkManagerRef() -> void:
 	network_manager.connect("disconnected", self._on_disconnected)
 	network_manager.connect("connection_failed", self._on_connection_failed)
 	connect_button.connect("pressed", self._on_connect_pressed)
-	back_to_home_button.connect("pressed",self._on_home)
+	back_to_home_button.connect("pressed",self._on_disconnected)
 
 func _cancel_hosting() -> void:
 	self.visible = false
@@ -88,11 +90,6 @@ func _on_disconnected():
 	print("Disconnected")
 	#network_manager.disconnect_from_server()
 	await get_tree().create_timer(2.0).timeout
-
-func _on_home():
-	self.visible = false
-	print("Disconnected")
-	get_parent().get_parent().returnToIntro()
 
 func _on_connection_failed():
 	# Hide the ConnectionUI once connected
