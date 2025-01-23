@@ -7,6 +7,7 @@
 
 [node name="GameSettings" type="CanvasLayer"]
 script = ExtResource("1_5hf6s")
+presets_folder = "res://Presets/Custom"
 
 [node name="UIBox" type="PanelContainer" parent="."]
 anchors_preset = 8

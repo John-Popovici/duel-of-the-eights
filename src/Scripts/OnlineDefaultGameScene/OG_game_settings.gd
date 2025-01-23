@@ -30,7 +30,7 @@ signal game_settings_ready(game_settings,hand_settings)
 @onready var advanced_settings_vbox = settingsAdvanced.get_node("ScrollContainer/advanced_settings_vbox")
 
 @onready var presetsPanel = get_node("UIBox/SettingsSplitBox/PresetsPanelBox")
-@onready var presets_folder = "res://Presets"
+@export var presets_folder = "res://Presets"
 @onready var preset_name_input = presetsPanel.get_node("NewPresetName")
 @onready var save_preset_button = presetsPanel.get_node("AddPreset")
 @onready var presetsButtonsBox = presetsPanel.get_node("PresetsScrollBar/PresetsButtons")
