@@ -39,7 +39,6 @@ scale = Vector2(2.01922, 2.61369)
 theme_override_constants/separation = 5
 
 [node name="Player1Entry" type="LineEdit" parent="VBoxContainer"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_j2iul")
@@ -50,7 +49,6 @@ placeholder_text = "Enter Name 1"
 alignment = 1
 
 [node name="Player2Entry" type="LineEdit" parent="VBoxContainer"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_j2iul")
@@ -61,7 +59,6 @@ placeholder_text = "Enter Name 2"
 alignment = 1
 
 [node name="StartLocalGame" type="Button" parent="VBoxContainer"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_j2iul")
@@ -72,36 +69,6 @@ theme_override_styles/normal = ExtResource("10_3uy0t")
 disabled = true
 text = "Start Local Game!"
 
-[node name="StartStandardGame" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("2_j2iul")
-theme_override_styles/disabled = ExtResource("7_sypxc")
-theme_override_styles/hover = ExtResource("8_mpfnf")
-theme_override_styles/pressed = ExtResource("9_lucfa")
-theme_override_styles/normal = ExtResource("10_3uy0t")
-text = "Play Standard Game"
-
-[node name="StartBluffGame" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("2_j2iul")
-theme_override_styles/disabled = ExtResource("7_sypxc")
-theme_override_styles/hover = ExtResource("8_mpfnf")
-theme_override_styles/pressed = ExtResource("9_lucfa")
-theme_override_styles/normal = ExtResource("10_3uy0t")
-text = "Play Bluff Game"
-
-[node name="StartBlitzGame" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("2_j2iul")
-theme_override_styles/disabled = ExtResource("7_sypxc")
-theme_override_styles/hover = ExtResource("8_mpfnf")
-theme_override_styles/pressed = ExtResource("9_lucfa")
-theme_override_styles/normal = ExtResource("10_3uy0t")
-text = "Play Blitz Game"
-
 [node name="StartOnlineGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -110,10 +77,9 @@ theme_override_styles/disabled = ExtResource("7_sypxc")
 theme_override_styles/hover = ExtResource("8_mpfnf")
 theme_override_styles/pressed = ExtResource("9_lucfa")
 theme_override_styles/normal = ExtResource("10_3uy0t")
-text = "Play Custom Game"
+text = "Start Custom Online Game"
 
 [node name="StartOnlineLongFormGame" type="Button" parent="VBoxContainer"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_j2iul")
