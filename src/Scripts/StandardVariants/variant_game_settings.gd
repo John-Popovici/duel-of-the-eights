@@ -252,6 +252,7 @@ func update_ui_fields(game_settings: Dictionary, hand_settings: Dictionary):
 	show_opponent_rolls = bool(game_settings.get("show_rolls", false))
 	timed_rounds_button.set_pressed(bool(game_settings.get("timed_rounds", true)))
 	timed_rounds = bool(game_settings.get("timed_rounds",true))
+	round_time.text = str(game_settings.get("round_time", 25))
 
 	# Update any hand settings-related fields if necessary
 	# (for example, list of hand rules or settings if part of the UI)

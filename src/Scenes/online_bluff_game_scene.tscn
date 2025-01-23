@@ -12,6 +12,7 @@ script = ExtResource("1_tdalv")
 [node name="NetworkManager" parent="." instance=ExtResource("2_e7y7e")]
 
 [node name="GameSettings" parent="." instance=ExtResource("3_h8ru8")]
+visible = false
 
 [node name="myPlayer" type="Node" parent="."]
 script = ExtResource("4_j20pp")
