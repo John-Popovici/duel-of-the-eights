@@ -433,6 +433,11 @@ func stopTimer() -> void:
 	timer.stop()
 	countdownBar.set_value(100)
 
+func pauseTimer() -> void:
+	pass
+
+func playTimer() -> void:
+	pass
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
