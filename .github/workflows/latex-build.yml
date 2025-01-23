@@ -38,8 +38,16 @@ jobs:
           DIR=$(dirname "$file")
           echo "Changing directory to $DIR"
           cd "$DIR"
-          make clean-all || exit 1 # Clean existing PDFs and other files
-          make all || exit 1       # Build the new PDF
+          
+          # Clean files
+          make clean-all || exit 1
+          
+          # Build PDF with multiple runs
+          pdflatex $(basename "$file" .tex).tex || exit 1
+          bibtex $(basename "$file" .tex) || echo "BibTeX failed. Check your .bib file." # Handle missing bibliography gracefully
+          pdflatex $(basename "$file" .tex).tex || exit 1
+          pdflatex $(basename "$file" .tex).tex || exit 1
+          
           cd -
         done
       env:
