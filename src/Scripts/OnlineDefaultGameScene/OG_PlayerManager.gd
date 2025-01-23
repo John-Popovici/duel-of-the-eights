@@ -72,6 +72,7 @@ func checkIfDiceValidThenRead() -> void:
 			timeTillReroll = diceContainer.get_dice()[0].roll_time_limit
 			roll_rolling_or_invalid_dice()
 			await get_tree().create_timer(1.0).timeout
+	diceContainer.enable_collisions()
 	readRolls()
 
 signal rollsReadandWaiting(state: bool)
