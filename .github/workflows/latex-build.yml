@@ -1,7 +1,7 @@
-name: Build LaTeX PDFs and Commit to Pull Request
+name: Build LaTeX PDFs and Add to Commit
 
 on:
-  pull_request:
+  push:
     paths:
       - '**/*.tex' # Trigger only when .tex files are modified
 
@@ -16,8 +16,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
       with:
-        ref: ${{ github.event.pull_request.head.ref }} # Ensure it checks out the PR branch
-        fetch-depth: 0 # Fetch full history to access base and head commits
+        fetch-depth: 0 # Fetch full commit history to access HEAD~1
 
     - name: Install LaTeX
       run: |
@@ -28,7 +27,7 @@ jobs:
       id: modified-files
       run: |
         # Get the list of modified .tex files
-        MODIFIED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} | grep '\.tex$' || true)
+        MODIFIED_FILES=$(git diff --name-only HEAD~1 HEAD | grep '\.tex$' || true)
         echo "Modified .tex files:"
         echo "$MODIFIED_FILES"
         echo "MODIFIED_FILES=$MODIFIED_FILES" >> $GITHUB_ENV
@@ -56,13 +55,13 @@ jobs:
       env:
         MODIFIED_FILES: ${{ env.MODIFIED_FILES }}
 
-    - name: Commit and Push Updated PDFs
+    - name: Commit Updated PDFs
       if: env.MODIFIED_FILES != ''
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git add .
         git commit -m ":scroll: Update PDFs for modified LaTeX files"
-        git push origin ${{ github.event.pull_request.head.ref }}
+        git push
       env:
         MODIFIED_FILES: ${{ env.MODIFIED_FILES }}
