@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://d0icyj31p2tgw"]
+[gd_scene load_steps=20 format=3 uid="uid://d0icyj31p2tgw"]
 
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_manager.gd" id="1_q3ti8"]
+[ext_resource type="Shader" path="res://Themes/Shaders/pixelate.gdshader" id="2_5xgxj"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_dynamic_dice_container.gd" id="2_n4duv"]
 [ext_resource type="Script" path="res://Scripts/camera_toggle_controller.gd" id="3_4x4th"]
 [ext_resource type="Theme" uid="uid://dokd457t4xs7n" path="res://Themes/Default_Pixel_Wood/Default_pixel_.Wood.tres" id="4_h4ers"]
@@ -13,6 +14,13 @@
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_ui.gd" id="11_0d724"]
 [ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/Default_Pixel_Blue/PanelBlueBoxBackgroundStyle.tres" id="12_vxxtv"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qbqgu"]
+shader = ExtResource("2_5xgxj")
+shader_parameter/pixel_count = Vector2(256, 256)
+
+[sub_resource type="Environment" id="Environment_e61rm"]
+background_mode = 1
+
 [sub_resource type="BoxMesh" id="BoxMesh_watpb"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_xp632"]
@@ -24,113 +32,131 @@
 [node name="GameManager" type="Node3D" groups=["SingleGameManager"]]
 script = ExtResource("1_q3ti8")
 
-[node name="DiceContainer" type="Node3D" parent="."]
-script = ExtResource("2_n4duv")
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_qbqgu")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
 
-[node name="CameraController" type="Node3D" parent="."]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+size = Vector2i(1152, 648)
+
+[node name="CameraController" type="Node3D" parent="SubViewportContainer/SubViewport"]
 script = ExtResource("3_4x4th")
 
-[node name="Positions" type="Node3D" parent="CameraController"]
+[node name="Positions" type="Node3D" parent="SubViewportContainer/SubViewport/CameraController"]
 
-[node name="Angled" type="Node3D" parent="CameraController/Positions"]
+[node name="Angled" type="Node3D" parent="SubViewportContainer/SubViewport/CameraController/Positions"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 21)
 
-[node name="Top Down" type="Node3D" parent="CameraController/Positions"]
+[node name="Top Down" type="Node3D" parent="SubViewportContainer/SubViewport/CameraController/Positions"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 3)
 
-[node name="Cinematic" type="Node3D" parent="CameraController/Positions"]
+[node name="Cinematic" type="Node3D" parent="SubViewportContainer/SubViewport/CameraController/Positions"]
 transform = Transform3D(0.707107, -0.454519, 0.541675, 0, 0.766044, 0.642788, -0.707107, -0.454519, 0.541675, 21, 15, 21)
 
-[node name="Camera3D" type="Camera3D" parent="CameraController"]
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/CameraController"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 21)
 
-[node name="SpotLight3D_Camera" type="SpotLight3D" parent="CameraController/Camera3D"]
+[node name="SpotLight3D_Camera" type="SpotLight3D" parent="SubViewportContainer/SubViewport/CameraController/Camera3D"]
+layers = 3
 light_energy = 0.25
 spot_range = 70.0
 spot_attenuation = -0.5
 spot_angle_attenuation = 2.37841
 
-[node name="CameraPosPanel" type="PanelContainer" parent="CameraController"]
+[node name="CameraPosPanel" type="PanelContainer" parent="SubViewportContainer/SubViewport/CameraController"]
 visible = false
 offset_top = 435.0
 offset_right = 200.0
 offset_bottom = 515.0
 theme = ExtResource("4_h4ers")
 
-[node name="ButtonHolder" type="VBoxContainer" parent="CameraController/CameraPosPanel"]
+[node name="ButtonHolder" type="VBoxContainer" parent="SubViewportContainer/SubViewport/CameraController/CameraPosPanel"]
 layout_mode = 2
 
-[node name="Angled" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder"]
+[node name="Angled" type="Button" parent="SubViewportContainer/SubViewport/CameraController/CameraPosPanel/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Angled"
 
-[node name="Top Down" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder"]
+[node name="Top Down" type="Button" parent="SubViewportContainer/SubViewport/CameraController/CameraPosPanel/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Top Down"
 
-[node name="Cinematic" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder"]
+[node name="Cinematic" type="Button" parent="SubViewportContainer/SubViewport/CameraController/CameraPosPanel/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Cinematic"
 
-[node name="Environment" type="Node3D" parent="."]
+[node name="Environment" type="Node3D" parent="SubViewportContainer/SubViewport"]
 
-[node name="GameBoard" type="MeshInstance3D" parent="Environment"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/Environment"]
+environment = SubResource("Environment_e61rm")
+
+[node name="GameBoard" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Environment"]
 transform = Transform3D(50, 0, 0, 0, 0.5, 0, 0, 0, 50, 0, 0, 0)
 mesh = SubResource("BoxMesh_watpb")
-skeleton = NodePath("../../../..")
+skeleton = NodePath("../../../../../..")
 surface_material_override/0 = ExtResource("5_f33k2")
 
-[node name="RaisedTable" type="MeshInstance3D" parent="Environment/GameBoard"]
+[node name="RaisedTable" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Environment/GameBoard"]
 transform = Transform3D(0.9, 0, 0, 0, 2, 0, 0, 0, 0.9, 0, 0, 0)
 mesh = SubResource("BoxMesh_xp632")
-skeleton = NodePath("../../../../..")
+skeleton = NodePath("../../../../../../..")
 surface_material_override/0 = ExtResource("6_hbv13")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Environment/GameBoard/RaisedTable"]
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Environment/GameBoard/RaisedTable"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/GameBoard/RaisedTable/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Environment/GameBoard/RaisedTable/StaticBody3D"]
 shape = SubResource("BoxShape3D_f2rh2")
 
-[node name="CollisionWall1" type="MeshInstance3D" parent="Environment/GameBoard"]
+[node name="CollisionWall1" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Environment/GameBoard"]
 transform = Transform3D(0.05, 0, 0, 0, 100, 0, 0, 0, 1, 0.475, 50, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Environment/GameBoard/CollisionWall1"]
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Environment/GameBoard/CollisionWall1"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/GameBoard/CollisionWall1/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Environment/GameBoard/CollisionWall1/StaticBody3D"]
 shape = SubResource("BoxShape3D_3tu6u")
 
-[node name="CollisionWall2" type="MeshInstance3D" parent="Environment/GameBoard"]
+[node name="CollisionWall2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Environment/GameBoard"]
 transform = Transform3D(0.05, 0, 0, 0, 100, 0, 0, 0, 1, -0.475, 50, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Environment/GameBoard/CollisionWall2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Environment/GameBoard/CollisionWall2"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/GameBoard/CollisionWall2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Environment/GameBoard/CollisionWall2/StaticBody3D"]
 shape = SubResource("BoxShape3D_3tu6u")
 
-[node name="CollisionWall3" type="MeshInstance3D" parent="Environment/GameBoard"]
+[node name="CollisionWall3" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Environment/GameBoard"]
 transform = Transform3D(1, 0, 0, 0, 100, 0, 0, 0, 0.05, 0, 50, 0.475)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Environment/GameBoard/CollisionWall3"]
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Environment/GameBoard/CollisionWall3"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/GameBoard/CollisionWall3/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Environment/GameBoard/CollisionWall3/StaticBody3D"]
 shape = SubResource("BoxShape3D_3tu6u")
 
-[node name="CollisionWall4" type="MeshInstance3D" parent="Environment/GameBoard"]
+[node name="CollisionWall4" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Environment/GameBoard"]
 transform = Transform3D(1, 0, 0, 0, 100, 0, 0, 0, 0.05, 0, 50, -0.475)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Environment/GameBoard/CollisionWall4"]
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Environment/GameBoard/CollisionWall4"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/GameBoard/CollisionWall4/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Environment/GameBoard/CollisionWall4/StaticBody3D"]
 shape = SubResource("BoxShape3D_3tu6u")
 
-[node name="SpotLight3D_Board" type="SpotLight3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 0)
+[node name="SpotLight3D_Board" type="SpotLight3D" parent="SubViewportContainer/SubViewport/Environment"]
+transform = Transform3D(1, 0, 0, 0, -0.490235, 0.871591, 0, -0.871591, -0.490235, 0, 35, -22.0787)
+layers = 3
 spot_range = 70.0
 spot_attenuation = -0.5
 spot_angle_attenuation = 2.37841
+
+[node name="DiceContainer" type="Node3D" parent="."]
+script = ExtResource("2_n4duv")
 
 [node name="Scoreboard" type="CanvasLayer" parent="."]
 visible = false

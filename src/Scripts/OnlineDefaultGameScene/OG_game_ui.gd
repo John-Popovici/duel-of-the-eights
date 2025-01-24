@@ -349,10 +349,10 @@ func hide_all_ui():
 	hide_countdown_panel()
 
 func hide_camera_options() -> void:
-	get_parent().get_node("CameraController").set_options_visible(false)
+	get_parent().get_node("SubViewportContainer").get_node("SubViewport").get_node("CameraController").set_options_visible(false)
 
 func show_camera_options() -> void:
-	get_parent().get_node("CameraController").set_options_visible(true)
+	get_parent().get_node("SubViewportContainer").get_node("SubViewport").get_node("CameraController").set_options_visible(true)
 
 func hide_pause_menu():
 	PausePanel.visible = false
@@ -407,15 +407,15 @@ func show_player_stats_panel():
 
 func _on_asc_sort_pressed():
 	sortMethod = 1
-	update_my_player_dice_display(get_parent().get_node("myPlayer").get_dice())
+	update_my_player_dice_display(get_parent().get_parent().get_node("myPlayer").get_dice())
 
 func _on_desc_sort_pressed():
 	sortMethod = 2
-	update_my_player_dice_display(get_parent().get_node("myPlayer").get_dice())
+	update_my_player_dice_display(get_parent().get_parent().get_node("myPlayer").get_dice())
 
 func _on_freq_sort_pressed():
 	sortMethod = 3
-	update_my_player_dice_display(get_parent().get_node("myPlayer").get_dice())
+	update_my_player_dice_display(get_parent().get_parent().get_node("myPlayer").get_dice())
 
 var currentDuration: float
 var continueCountdown: bool = false
