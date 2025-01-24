@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5010erpn74kt"]
+[gd_scene load_steps=9 format=3 uid="uid://c5010erpn74kt"]
 
 [ext_resource type="Script" path="res://Scripts/StandardVariants/variant_game_settings.gd" id="1_rq1yi"]
 [ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/Default_Pixel_Blue/PanelBlueBoxBackgroundStyle.tres" id="2_1lwmu"]
 [ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="3_8ldqx"]
+[ext_resource type="Texture2D" uid="uid://bput4ufl60a8d" path="res://Assets/2D Assets/DiceSprites/4 Sided/dice-four-faces-4.png" id="4_k35ff"]
 [ext_resource type="PackedScene" uid="uid://c2y0m27eadb6i" path="res://NodeScene/sample_preset_button.tscn" id="4_yjqjv"]
+[ext_resource type="Texture2D" uid="uid://dg11no5e2wj2q" path="res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-6.png" id="5_li0ar"]
+[ext_resource type="Texture2D" uid="uid://c1evogae8wvad" path="res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-8.png" id="6_sw2p8"]
+[ext_resource type="Texture2D" uid="uid://b6xvkxut6v2vv" path="res://Assets/2D Assets/DiceSprites/12 Sided/dice-twelve-faces-12.png" id="7_2dk0i"]
 
 [node name="GameSettings" type="CanvasLayer"]
 script = ExtResource("1_rq1yi")
@@ -47,15 +51,27 @@ columns = 4
 
 [node name="d4Tex" type="TextureRect" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer"]
 layout_mode = 2
+texture = ExtResource("4_k35ff")
+expand_mode = 5
+stretch_mode = 5
 
 [node name="d6Tex" type="TextureRect" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer"]
 layout_mode = 2
+texture = ExtResource("5_li0ar")
+expand_mode = 5
+stretch_mode = 5
 
 [node name="d8Tex" type="TextureRect" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer"]
 layout_mode = 2
+texture = ExtResource("6_sw2p8")
+expand_mode = 5
+stretch_mode = 5
 
 [node name="d12Tex" type="TextureRect" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer"]
 layout_mode = 2
+texture = ExtResource("7_2dk0i")
+expand_mode = 5
+stretch_mode = 5
 
 [node name="d4" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer" instance=ExtResource("4_yjqjv")]
 layout_mode = 2
