@@ -293,3 +293,5 @@ TSWLatexianTemp*
 
 # DS_Store file from Mac computers
 .DS_Store
+src/Themes/Default_Pixel_Blue/Default_pixel_Blue.tres
+src/Themes/Default_Pixel_Wood/Default_pixel_.Wood.tres
