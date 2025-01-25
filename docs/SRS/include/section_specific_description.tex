@@ -20,23 +20,31 @@ easier to correctly understand the requirements:
 
 \begin{itemize}
 
-\item Dice rolls can be given in the form AdX where A and X are variables representing the number of dice and number of sides, respectively. When A is 1, its inclusion is optional. For example 4d6 represents rolling 4 6-sided dice, and a d12 represent 1 die with 12 sides. These terms can also be used in contexts such as "we are playing with d8s".
+\item Dice rolls can be given in the form $AdX$ where $A$ and $X$ are variables representing the number of dice and number of sides, respectively. When $A$ is $1$, its inclusion is optional. For example $4d6$ represents rolling 4 6-sided dice, and $d12$ represent 1 die with 12 sides. These terms can also be used in contexts such as "we are playing with d8s".
 
-\item Since a fundamental mechanic of \textit{Dice Duels: Duel of the Eights} is that of re-rolling dice, an additional variable will be added to the notation to denote the number of rolls, AdXrB. For example, typical Yahtzee with 3 rolls would be denoted as 5d6r3.
+\item Since a fundamental mechanic of \textit{Dice Duels: Duel of the Eights} is that of re-rolling dice, an additional variable will be added to the notation to denote the number of rolls, $AdXrB$. For example, typical Yahtzee with 3 rolls would be denoted as $5d6r3$.
+
+\item Limits on dice parameters can be expressed as inequalities. For example:
+\begin{itemize}
+	\item $1 \geq A \geq A_{max}$ where $A$ is the number of dice and $A_{max}$ is the maximum allowable dice.
+	\item $1 \geq X \geq X_{max}$ where $X$ is the number of dice sides and $X_{max}$ is the maximum allowable dice sides, in values acceptable and modeled by the system.
+	\item $1 \geq B \geq B_{max}$ where $B$ is the number of dice rolls and $B_{max}$ is the maximum allowable dice rolls.
+\end{itemize}
+These limits can vary by game mode or player-defined settings.
 
 \item Dice typically take the forms of platonic solids, meaning where the dice faces are congruent regular polygons. The five such polyhedra are:
 \begin{itemize}
-	\item A tetrahedron has four faces (d4)
-	\item A cube has six faces (d6)
-	\item An octahedron has eight faces (d8)
-	\item A dodecahedron has twelve faces (d12)
-	\item An icosahedron has twenty faces (d20)
+	\item A tetrahedron has four faces ($d4$)
+	\item A cube has six faces ($d6$)
+	\item An octahedron has eight faces ($d8$)
+	\item A dodecahedron has twelve faces ($d12$)
+	\item An icosahedron has twenty faces ($d20$)
 \end{itemize}
-Other die shapes can be used such as a pentagonal trapezohedron with ten faces (d10) or even dice meant to be rolled lengthwise such as a triangular prism which despite having five total faces, is used as having three (d3), or has caps to prevent rolling an unintended face.
+Other die shapes can be used such as a pentagonal trapezohedron with ten faces ($d10$) or even dice meant to be rolled lengthwise such as a triangular prism which despite having five total faces, is used as having three ($d3$), or has caps to prevent rolling an unintended face.
 
 \item Dice rolls indicate a value integer when rolled. These can be represented by the numeric value of the integer or by representing the integer value as dots, called pips.
 
-\item In typical Yahtzee some patterns for scoring have terms. These will have to be added to and abstracted for a game with a different number of dice, but for a 5d6r3 these would be the scoring opportunities:
+\item In typical Yahtzee some patterns for scoring have terms. These will have to be added to and abstracted for a game with a different number of dice, but for a $5d6r3$ these would be the scoring opportunities:
 \begin{itemize}
 	\item Rolling for aces, twos, threes, fours, fives, or sixes is rolling for as many of the number.
 	\item Chance is any combination of dice as a sum of all dice values.
