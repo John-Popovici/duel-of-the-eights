@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://d05a7cco5s8tg"]
+[gd_scene load_steps=12 format=3 uid="uid://d05a7cco5s8tg"]
 
 [ext_resource type="Script" path="res://Scripts/IntroScene/IS_IntroScene.gd" id="1_datn8"]
 [ext_resource type="Theme" uid="uid://dokd457t4xs7n" path="res://Themes/Default_Pixel_Wood/Default_pixel_.Wood.tres" id="2_buat0"]
 [ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="2_j2iul"]
+[ext_resource type="Texture2D" uid="uid://bi1bhdmidy4te" path="res://Assets/2D Assets/Background_1.jpg" id="2_ux2dh"]
 [ext_resource type="StyleBox" uid="uid://b2sm7qo5hu1s1" path="res://Themes/Default_Pixel_Blue/LineEditFocus_style_box_texture.tres" id="4_ns1si"]
 [ext_resource type="StyleBox" uid="uid://deahfg1g1m00d" path="res://Themes/Default_Pixel_Blue/LineEditReadOnly_style_box_texture.tres" id="5_dpqr0"]
 [ext_resource type="StyleBox" uid="uid://bxto0q8vlrsee" path="res://Themes/Default_Pixel_Blue/LineEditNormal_style_box_texture.tres" id="6_f7cih"]
@@ -14,6 +15,28 @@
 [node name="IntroScene" type="Node3D"]
 script = ExtResource("1_datn8")
 
+[node name="Node" type="Node" parent="."]
+
+[node name="Control" type="Control" parent="Node"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Node/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("2_ux2dh")
+expand_mode = 1
+
 [node name="Title" type="VBoxContainer" parent="."]
 anchors_preset = 5
 anchor_left = 0.5
@@ -22,6 +45,7 @@ offset_left = -173.0
 offset_right = 173.0
 offset_bottom = 43.0
 grow_horizontal = 2
+theme = ExtResource("2_buat0")
 
 [node name="Label" type="Label" parent="Title"]
 layout_mode = 2
@@ -36,6 +60,7 @@ offset_top = 233.0
 offset_right = 240.0
 offset_bottom = 388.0
 scale = Vector2(2.01922, 2.61369)
+theme = ExtResource("2_buat0")
 theme_override_constants/separation = 5
 
 [node name="Player1Entry" type="LineEdit" parent="VBoxContainer"]
@@ -75,48 +100,32 @@ text = "Start Local Game!"
 [node name="StartStandardGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_j2iul")
-theme_override_styles/disabled = ExtResource("7_sypxc")
-theme_override_styles/hover = ExtResource("8_mpfnf")
-theme_override_styles/pressed = ExtResource("9_lucfa")
-theme_override_styles/normal = ExtResource("10_3uy0t")
+theme = ExtResource("2_buat0")
 text = "Play Standard Game"
 
 [node name="StartBluffGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_j2iul")
-theme_override_styles/disabled = ExtResource("7_sypxc")
-theme_override_styles/hover = ExtResource("8_mpfnf")
-theme_override_styles/pressed = ExtResource("9_lucfa")
-theme_override_styles/normal = ExtResource("10_3uy0t")
+theme = ExtResource("2_buat0")
 text = "Play Bluff Game"
 
 [node name="StartBlitzGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_j2iul")
-theme_override_styles/disabled = ExtResource("7_sypxc")
-theme_override_styles/hover = ExtResource("8_mpfnf")
-theme_override_styles/pressed = ExtResource("9_lucfa")
-theme_override_styles/normal = ExtResource("10_3uy0t")
+theme = ExtResource("2_buat0")
 text = "Play Blitz Game"
 
 [node name="StartOnlineGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_j2iul")
-theme_override_styles/disabled = ExtResource("7_sypxc")
-theme_override_styles/hover = ExtResource("8_mpfnf")
-theme_override_styles/pressed = ExtResource("9_lucfa")
-theme_override_styles/normal = ExtResource("10_3uy0t")
+theme = ExtResource("2_buat0")
 text = "Play Custom Game"
 
 [node name="StartOnlineLongFormGame" type="Button" parent="VBoxContainer"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_j2iul")
+theme = ExtResource("2_buat0")
 theme_override_styles/disabled = ExtResource("7_sypxc")
 theme_override_styles/hover = ExtResource("8_mpfnf")
 theme_override_styles/pressed = ExtResource("9_lucfa")
@@ -130,19 +139,22 @@ anchor_right = 1.0
 offset_left = -218.0
 offset_bottom = 108.0
 grow_horizontal = 0
-theme = ExtResource("2_j2iul")
+theme = ExtResource("2_buat0")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OptionsPanel"]
 layout_mode = 2
 
 [node name="Customization" type="Button" parent="OptionsPanel/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Cosmetic Customization"
 
 [node name="Settings" type="Button" parent="OptionsPanel/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Settings"
 
 [node name="Profile" type="Button" parent="OptionsPanel/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Profile"
