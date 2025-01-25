@@ -3,7 +3,7 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	get_node("DiceDisplay/CameraController").set_options_visible(true)
+	get_node("DiceDisplay/CanvasLayer/CameraController").set_options_visible(true)
 
 func returnToIntro() -> void:
 	var intro_scene = load("res://Scenes/IntroScene.tscn").instantiate()

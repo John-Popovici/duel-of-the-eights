@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://dbuevipki6jra"]
+[gd_scene load_steps=15 format=3 uid="uid://dbuevipki6jra"]
 
 [ext_resource type="Script" path="res://Scripts/GlobalCustomization/GC_scene.gd" id="1_2co8p"]
-[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="1_odr4a"]
 [ext_resource type="PackedScene" uid="uid://cu4mb4w4jgh2e" path="res://NodeScene/six_dice.tscn" id="2_18byj"]
 [ext_resource type="Script" path="res://Scripts/GlobalCustomization/GC_customization_ui.gd" id="2_61s26"]
+[ext_resource type="Texture2D" uid="uid://bo71jtegw4ilv" path="res://Assets/2D Assets/Background_3.jpeg" id="2_x4u4h"]
+[ext_resource type="Theme" uid="uid://dokd457t4xs7n" path="res://Themes/Default_Pixel_Wood/Default_pixel_.Wood.tres" id="3_u1o8i"]
 [ext_resource type="PackedScene" uid="uid://dvqod4aw6sxvo" path="res://NodeScene/button.tscn" id="4_aknih"]
 [ext_resource type="Material" uid="uid://dvsy8knluwv6e" path="res://Materials/BoardRaisedMat.tres" id="6_tmny7"]
 [ext_resource type="Material" uid="uid://cgpa3fsefx8ir" path="res://Materials/BoardLowMat.tres" id="7_kk2ga"]
@@ -20,6 +21,33 @@ size = Vector3(10, 1, 10)
 [node name="GlobalCustomizationScene" type="Node3D"]
 script = ExtResource("1_2co8p")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Node" type="Node" parent="CanvasLayer"]
+
+[node name="Control" type="Control" parent="CanvasLayer/Node"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Node/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("2_x4u4h")
+expand_mode = 1
+
 [node name="CustomizationUI" type="CanvasLayer" parent="."]
 script = ExtResource("2_61s26")
 
@@ -30,7 +58,7 @@ offset_right = 834.0
 offset_bottom = 591.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("1_odr4a")
+theme = ExtResource("3_u1o8i")
 
 [node name="Sections" type="VBoxContainer" parent="CustomizationUI/BackPanel"]
 layout_mode = 2
@@ -218,34 +246,36 @@ surface_material_override/0 = ExtResource("7_kk2ga")
 
 [node name="TwelveDice" parent="DiceDisplay/D12Display" instance=ExtResource("10_imfv7")]
 
-[node name="CameraController" type="Node3D" parent="DiceDisplay"]
+[node name="CanvasLayer" type="CanvasLayer" parent="DiceDisplay"]
+
+[node name="CameraController" type="Node3D" parent="DiceDisplay/CanvasLayer"]
 script = ExtResource("10_cj1yu")
 
-[node name="Positions" type="Node3D" parent="DiceDisplay/CameraController"]
+[node name="Positions" type="Node3D" parent="DiceDisplay/CanvasLayer/CameraController"]
 
-[node name="D6" type="Node3D" parent="DiceDisplay/CameraController/Positions"]
+[node name="D6" type="Node3D" parent="DiceDisplay/CanvasLayer/CameraController/Positions"]
 transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 10, 7, 12)
 
-[node name="D8" type="Node3D" parent="DiceDisplay/CameraController/Positions"]
+[node name="D8" type="Node3D" parent="DiceDisplay/CanvasLayer/CameraController/Positions"]
 transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 10, 7, 62)
 
-[node name="D4" type="Node3D" parent="DiceDisplay/CameraController/Positions"]
+[node name="D4" type="Node3D" parent="DiceDisplay/CanvasLayer/CameraController/Positions"]
 transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 10, 7, -38)
 
-[node name="D12" type="Node3D" parent="DiceDisplay/CameraController/Positions"]
+[node name="D12" type="Node3D" parent="DiceDisplay/CanvasLayer/CameraController/Positions"]
 transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 10, 7, -88)
 
-[node name="Camera3D" type="Camera3D" parent="DiceDisplay/CameraController"]
+[node name="Camera3D" type="Camera3D" parent="DiceDisplay/CanvasLayer/CameraController"]
 transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 10, 7, 12)
 
-[node name="SpotLight3D_Camera" type="SpotLight3D" parent="DiceDisplay/CameraController/Camera3D"]
+[node name="SpotLight3D_Camera" type="SpotLight3D" parent="DiceDisplay/CanvasLayer/CameraController/Camera3D"]
 transform = Transform3D(0.95658, 0.145735, -0.252421, -0.145735, 0.989145, 0.0188015, 0.252421, 0.0188015, 0.967435, 0, 0, 0)
 light_energy = 0.25
 spot_range = 70.0
 spot_attenuation = -0.5
 spot_angle_attenuation = 2.37841
 
-[node name="CameraPosPanel" type="PanelContainer" parent="DiceDisplay/CameraController"]
+[node name="CameraPosPanel" type="PanelContainer" parent="DiceDisplay/CanvasLayer/CameraController"]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -255,22 +285,25 @@ offset_left = -200.0
 offset_top = -108.0
 grow_horizontal = 0
 grow_vertical = 0
-theme = ExtResource("1_odr4a")
+theme = ExtResource("3_u1o8i")
 
-[node name="ButtonHolder" type="VBoxContainer" parent="DiceDisplay/CameraController/CameraPosPanel"]
+[node name="ButtonHolder" type="VBoxContainer" parent="DiceDisplay/CanvasLayer/CameraController/CameraPosPanel"]
 layout_mode = 2
 
-[node name="Angled" type="Button" parent="DiceDisplay/CameraController/CameraPosPanel/ButtonHolder"]
+[node name="Angled" type="Button" parent="DiceDisplay/CanvasLayer/CameraController/CameraPosPanel/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "Angled"
 
-[node name="Top Down" type="Button" parent="DiceDisplay/CameraController/CameraPosPanel/ButtonHolder"]
+[node name="Top Down" type="Button" parent="DiceDisplay/CanvasLayer/CameraController/CameraPosPanel/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "Top Down"
 
-[node name="Cinematic" type="Button" parent="DiceDisplay/CameraController/CameraPosPanel/ButtonHolder"]
+[node name="Cinematic" type="Button" parent="DiceDisplay/CanvasLayer/CameraController/CameraPosPanel/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "Cinematic"
