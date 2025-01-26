@@ -10,6 +10,7 @@ extends Node3D
 @onready var start_blitz_button = $VBoxContainer/StartBlitzGame # Reference to the Start Button
 @onready var start_online_button = $VBoxContainer/StartOnlineGame # Reference to the Start Button
 @onready var start_online_long_form_button = $VBoxContainer/StartOnlineLongFormGame # Reference to the Start Button
+@onready var start_online_server_button = $VBoxContainer/StartServer
 @onready var customization_button = $OptionsPanel/VBoxContainer/Customization
 @onready var settings_button = $OptionsPanel/VBoxContainer/Settings
 
@@ -21,6 +22,7 @@ func _ready() -> void:
 	start_bluff_button.pressed.connect(_on_start_bluff_game_pressed)
 	start_blitz_button.pressed.connect(_on_start_blitz_game_pressed)
 	start_online_long_form_button.pressed.connect(_on_start_online_long_form_game_pressed)
+	start_online_server_button.pressed.connect(_on_start_online_server_pressed);
 	customization_button.pressed.connect(_on_customization_pressed)
 	settings_button.pressed.connect(_on_settings_pressed)
 
@@ -74,6 +76,14 @@ func _on_start_blitz_game_pressed() -> void:
 func _on_start_online_long_form_game_pressed() -> void:
 	# Load GameScene
 	var online_game_scene = load("res://Scenes/online_long_form_pvp_scene.tscn").instantiate()
+	
+	# Change scene to GameScene
+	get_tree().root.add_child(online_game_scene)
+	queue_free()  # Free IntroScene
+
+func _on_start_online_server_pressed() -> void:
+	# Load GameScene
+	var online_game_scene = load("res://Scenes/online_server_game_scene.tscn").instantiate()
 	
 	# Change scene to GameScene
 	get_tree().root.add_child(online_game_scene)
