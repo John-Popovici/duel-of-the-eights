@@ -12,6 +12,10 @@ offset_bottom = 441.0
 [node name="ServerOnlineCheck" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="ServerConnectButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Connect"
+
+[node name="ServerDisconnectButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Disconnect"
