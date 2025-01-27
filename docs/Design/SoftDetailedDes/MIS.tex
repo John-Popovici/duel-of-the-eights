@@ -1378,7 +1378,25 @@ By adhering to this strategy, the system reduces the need for complex exception 
 
 \end{itemize}
 
-By adhering to this strategy, the system reduces the need for complex exception handling mechanisms, creating a more user-friendly and robust application.
+Additionally, to ensure robustness, the system accounts for potential failure scenarios, including:
+
+\begin{itemize}
+	\item \textbf{Player Disconnection in NetworkManager2P: } 
+	In the event of a player disconnecting mid-game, the system will:
+	\begin{itemize}
+		\item Notify the remaining player about the disconnection.
+		\item Attempt to reconnect the disconnected player automatically within a predefined timeout period.
+		\item Allow the remaining player to either wait for the disconnected player to re-join or leave the game.
+	\end{itemize}
+    \item \textbf{GameSettings Module Missing or Corrupted: } 
+    If the desired settings are not set or transmitted properly, the system will:
+    \begin{itemize}
+        \item Display an error message to the user, indicating the issue and prompting them to address it.
+        \item Apply predefined settings to overwrite and ensure functionality in the absence of proper settings.
+    \end{itemize}
+\end{itemize}
+
+Therefore, by adhering to the strategies listed, the system reduces the need for complex exception handling mechanisms, creating a more user-friendly and robust application. Additionally, the design choices, which act as failsafes to address potential failure points, significantly reduce the likelihood of game issues that could cause crashes. Any remaining failures would primarily result from external factors beyond the system's control.
 
 
 
