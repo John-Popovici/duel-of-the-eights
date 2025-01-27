@@ -417,11 +417,13 @@ func _on_freq_sort_pressed():
 	sortMethod = 3
 	update_my_player_dice_display(get_parent().get_node("myPlayer").get_dice())
 
+var startTime: float
 var currentDuration: float
 var continueCountdown: bool = false
 func startTimer(_duration: int) -> void:
+	startTime = float(_duration)
 	currentDuration = float(_duration)
-	timer.set_wait_time(currentDuration)
+	timer.set_wait_time(startTime)
 	timer.connect("timeout",get_parent().timer_complete)
 	timer.start()
 	continueCountdown = true
@@ -434,10 +436,17 @@ func stopTimer() -> void:
 	countdownBar.set_value(100)
 
 func pauseTimer() -> void:
-	pass
+	if timer.is_stopped():
+		return
+	currentDuration = timer.time_left
+	continueCountdown = false
+	timer.stop()
 
 func playTimer() -> void:
-	pass
+	if currentDuration > 0:
+		timer.wait_time = currentDuration
+		timer.start()
+		continueCountdown = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -454,4 +463,4 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	pass
 	if continueCountdown: #loop break/start var
-		countdownBar.set_value(ceil(timer.get_time_left()/currentDuration*100))
+		countdownBar.set_value(ceil(timer.get_time_left()/startTime*100))
