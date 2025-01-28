@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2r3nd3o42j20"]
+[gd_scene load_steps=4 format=3 uid="uid://b2r3nd3o42j20"]
 
 [ext_resource type="Script" path="res://Scripts/ServerScripts/online_server_game_scene.gd" id="1_mol3t"]
+[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="2_5rlkn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t5ruj"]
 
@@ -16,12 +17,15 @@ layout_mode = 2
 
 [node name="ServerConnectButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_5rlkn")
 text = "Connect"
 
 [node name="ServerDisconnectButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_5rlkn")
 text = "Disconnect"
 
 [node name="ConnectionProgressBar" type="ProgressBar" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_5rlkn")
 theme_override_styles/fill = SubResource("StyleBoxFlat_t5ruj")

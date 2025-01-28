@@ -125,6 +125,7 @@ text = "Start Online Long Form Game"
 
 [node name="StartServer" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_j2iul")
 text = "Connect to Server"
 
 [node name="OptionsPanel" type="PanelContainer" parent="."]
