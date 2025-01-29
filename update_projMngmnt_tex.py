@@ -37,7 +37,7 @@ def update_tex_file(commits, total_commits):
 
 
     # Update the total commit count
-    tex_content = re.sub(r"\\pgfmathsetmacro{\\CN}{\d+}", f"\\pgfmathsetmacro{{\\CN}}{{{total_commits}}}", tex_content)
+    tex_content = re.sub(r"\pgfmathsetmacro{\CN}{\d+}", f"\\pgfmathsetmacro{{\\CN}}{{{total_commits}}}", tex_content)
     
     # Write the updated content back to the file
     with open("docs/projMngmnt/Rev0_Team_Contrib.tex", "w") as file:
