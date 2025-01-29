@@ -10,7 +10,7 @@ start_date = "2024-11-25T00:00:00Z"  # From Nov 25, 2024
 end_date = datetime.utcnow().isoformat() + "Z"  # Current UTC time
 
 # Authenticate using GITHUB_TOKEN
-github_token = os.getenv("GITHUB_TOKEN")
+github_token = os.getenv("")
 if not github_token:
     raise ValueError("GITHUB_TOKEN is not set in the environment variables.")
 
