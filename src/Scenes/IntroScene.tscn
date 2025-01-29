@@ -123,6 +123,11 @@ theme_override_styles/pressed = ExtResource("9_lucfa")
 theme_override_styles/normal = ExtResource("10_3uy0t")
 text = "Start Online Long Form Game"
 
+[node name="StartServer" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_j2iul")
+text = "Connect to Server"
+
 [node name="OptionsPanel" type="PanelContainer" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
