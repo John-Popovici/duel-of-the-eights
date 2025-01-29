@@ -6,7 +6,7 @@ from datetime import datetime
 # GitHub API settings
 repo_owner = "John-Popovici"
 repo_name = "duel-of-the-eights"
-token = os.getenv("GH_TOKEN")  # Access the token from environment variables
+token = os.getenv("GITHUB_TOKEN")  # Access the token from environment variables
 
 # Date from which you want to start counting commits
 start_date = datetime(2024, 11, 25)
