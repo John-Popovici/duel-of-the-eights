@@ -17,6 +17,10 @@ offset_bottom = 646.0
 layout_mode = 2
 horizontal_alignment = 1
 
+[node name="PingLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+
 [node name="ServerConnectButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_5rlkn")

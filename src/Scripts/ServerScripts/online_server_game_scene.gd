@@ -4,11 +4,22 @@ extends Node3D
 @export var server_port: int = 9999
 
 var multiplayer_peer: ENetMultiplayerPeer
+var ping_label: Label
 var online_label: Label  
 var connection_timer: Timer  
 var progress_bar: ProgressBar  
 
 func _ready():
+	
+	ping_label = $VBoxContainer/PingLabel  # Ensure this Label exists in your UI
+	var ping_timer = Timer.new()
+	ping_timer.wait_time = 1  # Update every second
+	ping_timer.autostart = true
+	ping_timer.connect("timeout", Callable(self, "_update_ping"))
+	add_child(ping_timer)
+	
+	
+	
 	# Connect the button's "pressed" signal to the connect function using Callable
 	var button = $VBoxContainer/ServerConnectButton  
 	button.connect("pressed", Callable(self, "_on_button_pressed")) 
@@ -80,6 +91,15 @@ func connect_to_server():
 	online_label.text = "Connecting to server..."
 	connection_timer.start()  # Start the timer for the connection attempt
 
+func _update_ping():
+	if multiplayer_peer != null and multiplayer_peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED:
+		var peer_id = 1  # The ID of the server, assuming it is always 1. Adjust if necessary.
+		var ping = multiplayer_peer.get_peer_ping(peer_id)
+		print("Ping: ", ping, " ms")
+		ping_label.text = "Ping: %d ms" % ping  # Update the ping label in the UI
+	elif online_label.text == "Connecting to server...":
+		print("Still attempting to connect to server at ", server_ip, " on port ", server_port)
+
 # Signal handler when a peer is connected
 func _on_peer_connected(id: int):
 	print("Peer connected with ID: ", id)
@@ -101,6 +121,7 @@ func _on_connection_timeout():
 	# If the connection failed and no peer was connected, update the label
 	if online_label.text == "Connecting to server...":
 		online_label.text = "Failed - server offline"
+		ping_label.text = "Ping: N/A"
 		progress_bar.value = 100  
 		progress_bar.get("theme_override_styles/fill").bg_color = Color(1, 0, 0)  # Red for timeout
 		print("Connection attempt timed out.")
