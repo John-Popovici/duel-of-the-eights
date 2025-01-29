@@ -11,7 +11,7 @@ repo = g.get_repo(repo_name)
 # Get the current date and the start date (Nov 25th)
 # Get the current date and the start date (Nov 25th)
 current_date = datetime(2025, 1, 29)
-start_date = datetime(2024, 11, 29)
+start_date = datetime(2024, 12, 29)
 
 # Function to fetch commits from the repository
 def get_commits():
@@ -30,9 +30,9 @@ def update_tex_file(commits, total_commits):
 
     # Replace the commit values for each team member in the LaTeX macros
      # Replace the commit values for each team member in the LaTeX macros
-    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CJ}{78}", f"\\pgfmathsetmacro{{\\CJ}}{{{commits.get('John-Popovici', 0)}}}")
-    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CN}{7}", f"\\pgfmathsetmacro{{\\CN}}{{{commits.get('nigelmoses32', 0)}}}")
-    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CNS}{0}", f"\\pgfmathsetmacro{{\\CNS}}{{{commits.get('STARS952', 0)}}}")
+    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CJ}{11}", f"\\pgfmathsetmacro{{\\CJ}}{{{commits.get('John-Popovici', 0)}}}")
+    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CN}{2}", f"\\pgfmathsetmacro{{\\CN}}{{{commits.get('nigelmoses32', 0)}}}")
+    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CNS}{11}", f"\\pgfmathsetmacro{{\\CNS}}{{{commits.get('STARS952', 0)}}}")
     tex_content = tex_content.replace(r"\pgfmathsetmacro{\CI}{0}", f"\\pgfmathsetmacro{{\\CI}}{{{commits.get('Isaac020717', 0)}}}")
     tex_content = tex_content.replace(r"\pgfmathsetmacro{\CH}{0}", f"\\pgfmathsetmacro{{\\CH}}{{{commits.get('HemrajB87', 0)}}}")
 
