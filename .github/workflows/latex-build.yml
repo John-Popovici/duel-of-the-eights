@@ -4,10 +4,6 @@ on:
   push:
     paths:
       - '**/*.tex'
-  workflow_run:
-    workflows: ["Build LaTeX PDFs and Add to Commit"]
-    types:
-      - completed
 
 permissions:
   contents: write
