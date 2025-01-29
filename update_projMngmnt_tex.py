@@ -14,6 +14,7 @@ github_token = os.getenv("GITHUB_TOKEN")
 if not github_token:
     raise ValueError("GITHUB_TOKEN is not set in the environment variables.")
 
+# Authenticate to GitHub
 g = Github(github_token)
 repo = g.get_repo(repo_name)
 
@@ -53,4 +54,4 @@ tex_content = re.sub(r"\\pgfmathsetmacro{\\CT}{\d+}", f"\\pgfmathsetmacro{{\\CT}
 with open(file_path, "w", encoding="utf-8") as file:
     file.write(tex_content)
 
-print("Updated the Commits section of progMngmnt tex file.")
+print("Updated the Commits section of projMngmnt tex file.")
