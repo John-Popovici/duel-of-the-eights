@@ -9,11 +9,13 @@
 script = ExtResource("1_mol3t")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_right = 829.0
-offset_bottom = 441.0
+offset_top = 227.0
+offset_right = 1154.0
+offset_bottom = 646.0
 
 [node name="ServerOnlineCheck" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+horizontal_alignment = 1
 
 [node name="ServerConnectButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -29,3 +31,8 @@ text = "Disconnect"
 layout_mode = 2
 theme = ExtResource("2_5rlkn")
 theme_override_styles/fill = SubResource("StyleBoxFlat_t5ruj")
+
+[node name="ReturnToIntroButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_5rlkn")
+text = "Back to Home"

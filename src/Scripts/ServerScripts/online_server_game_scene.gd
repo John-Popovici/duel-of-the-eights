@@ -40,6 +40,9 @@ func _ready():
 	progress_bar.min_value = 0
 	progress_bar.max_value = 100
 	progress_bar.value = 0
+	
+	var return_button = $VBoxContainer/ReturnToIntroButton  # Add the return button
+	return_button.connect("pressed", Callable(self, "_on_return_to_intro_pressed"))
 
 # Function to handle connection to the server
 func _on_button_pressed():
@@ -118,3 +121,11 @@ func disconnect_from_server():
 	else:
 		print("No active connection to disconnect.")
 		online_label.text = "No active connection"
+
+# Function to handle return to main menu
+func _on_return_to_intro_pressed():
+	var intro_scene = load("res://Scenes/IntroScene.tscn").instantiate()
+	
+	# Change scene to intro scene
+	get_tree().root.add_child(intro_scene)
+	queue_free()
