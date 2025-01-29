@@ -20,7 +20,7 @@ jobs:
 
     - name: Clear Git Cache
       run: |
-        git fetch --prune --unshallow
+        git fetch --prune
         git reset --hard
 
     - name: Install LaTeX
