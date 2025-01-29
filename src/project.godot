@@ -24,6 +24,10 @@ SceneSwitcher="*res://Scripts/UniversalScripts/scene_switcher.gd"
 
 shapes/collision/shape_color=Color(0.167061, 0.393987, 0.975937, 1)
 
+[display]
+
+window/stretch/mode="viewport"
+
 [dotnet]
 
 project/assembly_name="duel-of-the-eights"
