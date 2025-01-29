@@ -2,7 +2,12 @@ name: Update Team Contributions
 on:
   schedule:
     - cron: '0 0 * * *'  # Runs every day at midnight UTC
-  workflow_dispatch:  # Allows manual trigger of the action
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to run the workflow on'
+        required: true
+        default: 'main'
 jobs:
   update_tex:
     runs-on: ubuntu-latest
