@@ -9,45 +9,17 @@ repo_name = "duel-of-the-eights"  # Replace with your repository name
 access_token = os.getenv("GITHUB_TOKEN")  # GitHub token will be used from the environment variable
 
 # Set the dates for the range (Nov 25th to Jan 29th)
-current_date = datetime(2025, 1, 29)
-start_date = datetime(2024, 11, 29)
+
+# Function to get commit count by author within a date range
+start_date = datetime.datetime(2024, 12, 29)
+end_date = datetime.datetime(2025, 1, 29)
 
 # Function to get commit count by author within a date range
 def get_commits_by_author():
     commits = {}
-    page = 1
-    while True:
-        url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/commits'
-        params = {
-            'since': start_date.isoformat(),
-            'until': current_date.isoformat(),
-            'page': page,
-            'per_page': 100
-        }
-        headers = {'Authorization': f'token {access_token}'}
-        response = requests.get(url, params=params, headers=headers)
-
-        # Check if the response is valid JSON
-        try:
-            commits_data = response.json()
-        except ValueError:
-            print(f"Error parsing response: {response.text}")
-            break
-
-        # If no commits are returned, exit the loop
-        if not commits_data:
-            break
-
-        # Process each commit
-        for commit in commits_data:
-            if isinstance(commit, dict):
-                author = commit['commit']['author']['name']
-                commits[author] = commits.get(author, 0) + 1
-            else:
-                print(f"Unexpected commit data: {commit}")
-
-        page += 1
-
+    for commit in repo.get_commits(since=start_date, until=end_date):
+        author = commit.commit.author.name
+        commits[author] = commits.get(author, 0) + 1
     return commits
 
 # Function to update the LaTeX file with commit counts
