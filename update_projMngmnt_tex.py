@@ -8,17 +8,15 @@ access_token = os.getenv("GITHUB_TOKEN")  # GitHub token will be used from the e
 g = Github(access_token)
 repo = g.get_repo(repo_name)
 # Get the current date and the start date (Nov 25th)
+# Get the current date and the start date (Nov 25th)
 current_date = datetime(2024, 11, 28)
 start_date = datetime(2024, 11, 25)
-# Convert to ISO format for GitHub API
-start_date_str = start_date.isoformat()
-current_date_str = current_date.isoformat()
 
 # Function to fetch commits from the repository
 def get_commits():
     commits = {}
     total_commits = 0
-    for commit in repo.get_commits(since=start_date_str, until=current_date_str):
+    for commit in repo.get_commits(since=start_date, until=current_date):  # Pass datetime objects directly
         author = commit.commit.author.name
         commits[author] = commits.get(author, 0) + 1
         total_commits += 1
@@ -44,7 +42,7 @@ def update_tex_file(commits, total_commits):
             # Replace each member's commit count
             tex_content = tex_content.replace(f"\\pgfmathsetmacro{{\\CJ}}", f"\\pgfmathsetmacro{{\\CJ}} {count}")
 
-        tex_content = tex_content.replace(r"\\pgfmathsetmacro{\\CN}{137}", f"\\pgfmathsetmacro{{\\CN}} {total_commits}")
+        tex_content = tex_content.replace(r"\pgfmathsetmacro{\CN}{137}", f"\\pgfmathsetmacro{{\\CN}} {total_commits}")
     
     # Write the updated content back to the file
     with open("docs/projMngmnt/Rev0_Team_Contrib.tex", "w") as file:
