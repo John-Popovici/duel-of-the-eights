@@ -38,8 +38,8 @@ def update_tex_file(commits, total_commits, issues):
         tex_content = file.read()
     # Update commits section
     for author, count in commits.items():
-        tex_content = tex_content.replace(f"{author} & Num", f"{author} & {count}")
-    tex_content = tex_content.replace("Num", str(total_commits))
+        tex_content = tex_content.replace(f"{author} & 161", f"{author} & {count}")
+    tex_content = tex_content.replace("161", str(total_commits))
     # Update issues section
     for author, data in issues.items():
         tex_content = tex_content.replace(f"{author} & Num & Num", 
