@@ -7,51 +7,61 @@
     \item \label{R1} The game shall support an online player vs player mode, where 2 players can play against each other.
     \begin{description}
         \item[Rationale:] Player vs player support is a central functionality for this game and one that enhances the overall enjoyment of the game by fostering a more social game dynamic.
+        \item[Fit Criterion:] 2 players can connect to each other over an internet connection.
     \end{description}
 
     \item \label{R2} The game shall handle score calculations using similar rules to standard Yahtzee under default game settings.
     \begin{description}
         \item[Rationale:] Score calculations that follow from a well established, and well balanced game will help users jump into the game faster and foster a more fair game experience.
+        \item[Fit Criterion:] Scores in default Yahtzee must match those obtained from an official Yahtzee score calculator (depending on house rules).
     \end{description}
 
     \item \label{R3} The game shall simulate realistic physics for 3D dice rolls with pseudo-randomness on every roll that replicates accurately to all users. If rolling $AdX$ dice, $A$ numbers will have to be determined from the range $1 \geq A_{i} \geq X$.
     \begin{description}
         \item[Rationale:] It is important that players get to visually see the dice roll and feel that the outcome of the roll is not clearly predetermined in order to enhance the user experience and maintain continuity between the game and real life.
+        \item[Fit Criterion:] The result of a roll must be pseudo-random, adhere to physics-based simulation, and be accurately displayed to all players.
     \end{description}
 
     \item \label{R4} The game shall use the real outcome of a roll to get the values from the dice.
     \begin{description}
         \item[Rationale:] In order to get true randomness off a simulated dice roll, it makes the most sense to actually just simulate the roll and read the result rather than precalculating the results and forcing the roll to match the output.
+        \item[Fit Criterion:] Dice values displayed on the UI must match the final resting state of the 3D dice model after rolling.
     \end{description}
 
     \item \label{R5} The game shall support both regular six-sided dice and a set of dice with different number of sides, such as octahedral dice.
     \begin{description}
         \item[Rationale:] By providing support for more dice types, we can increase the level of complexity of the game for users that are looking for a more interesting variation of the game.
+        \item[Fit Criterion:] Players can select dice with different numbers of sides, and the game correctly processes rolls for all supported dice types.
     \end{description}
 
     \item \label{R6} The game shall implement a simultaneous turn based mechanism such that each player (or computer) takes a turn at the same time and then results are revealed simultaneously to each other at each dice roll.
     \begin{description}
         \item[Rationale:] This allows users to play together syncronously, while preserving the secrecy of each dice roll so that no player gets an advantage by knowing whether their opponent has rolled well or not.
+        \item[Fit Criterion:] Each player takes actions simultaneously, and results are revealed to both players once each has selected an action.
     \end{description}
 
     \item \label{R7} The game shall allow players to pick which dice they would like to use for each roll, and which dice they would like to omit. Selected dice will be a subset of the current dice in play belonging to that player $D' \subseteq D$.
     \begin{description}
         \item[Rationale:] This is an important part of standard game rules, and also increases the range of strategic decision making that players get to have.
+        \item[Fit Criterion:] Players can select a subset of their dice before rolling, and the game correctly rolls only the selected dice.
     \end{description}
 
     \item \label{R8} The game shall display some sort of user interface to display scores, number of rolls, time limits, state of dice, and player names.
     \begin{description}
         \item[Rationale:] Some form of user interface is necessary to convey important game information to the player.
+        \item[Fit Criterion:] The UI must display the score, roll count, time limits, dice states, and player names without omissions or inconsistencies.
     \end{description}
 
     \item \label{R9} The game shall provide controls for the player to modify the game settings to access unique variants of the game.
     \begin{description}
-        \item[Rationale:] A core part of our team's vision for this game is that players should be able to customize their playing experience by altering things like; number of dice, type of dice used, time settings, and scoring methods.
+        \item[Rationale:] A core part of our team's vision for this game is that players should be able to customize their playing experience by altering things like the number of dice, type of dice used, and time settings.
+        \item[Fit Criterion:] Players must be able to access and modify at least 3 game settings before a game is started.
     \end{description}
 
     \item \label{R10} The game shall provide presets for different game modes.
     \begin{description}
         \item[Rationale:] This should help new players get used to the game before exploring more unique setting configurations.
+        \item[Fit Criterion:] Players must be able to select from at least one preset game mode in the settings menu.
     \end{description}
 
 %   REQUIREMENTS RELATING TO STRETCH GOALS LISTED BELOW:::::::
@@ -59,31 +69,37 @@
     \item \label{R11} The game shall support a local player vs player mode, where 2 players can play against each other on the same computer.
     \begin{description}
         \item[Rationale:] Given that this is a turn based game it is perfectly possible for this game to be setup with 2 player functionality on one device. This simply increases the number of ways in which the game can be played.
+        \item[Fit Criterion:] Two players can take turns using the same computer without errors or UI conflicts.
     \end{description}
 
     \item \label{R12} The game shall support a player vs computer mode, where 1 player can play against another entity without needing to find a human match.
     \begin{description}
         \item[Rationale:] Player vs computer support is important for instances where a user may not be able to find a human match to play against.
+        \item[Fit Criterion:] A player can start a game against a computer opponent without needing a human opponent.
     \end{description}
 
     \item \label{R13} The game shall implement some sort of algorithmic computer opponent for  player vs computer gameplay option.
     \begin{description}
         \item[Rationale:] For player vs computer to function, some sort of algorithmic opponent will be necessary to implement the computer player or else there will be no challenge for the human player.
+        \item[Fit Criterion:] The computer opponent makes legal and strategic moves, ensuring a playable experience.
     \end{description}
 
     \item \label{R14} The game shall implement online matchmaking.
     \begin{description}
         \item[Rationale:] For players that want to play the game against a real opponent but don't know anyone who is available to play against them, this is a great way for that player to find someone to play against.
+        \item[Fit Criterion:] Players can search for and be matched with online opponents.
     \end{description}
 
     \item \label{R15} The game shall provide the option to save specific game settings to be reused in future sessions.
     \begin{description}
         \item[Rationale:] For frequent players of the game, they may have a preferred custom variation of the game settings that they may wish to save rather than having to input the game settings on every new game.
+        \item[Fit Criterion:] Players can save and load custom game settings across different play sessions.
     \end{description}
 
     \item \label{R16} The game shall display round statistics to each player at the end of every round.
     \begin{description}
         \item[Rationale:] Players will likely want to see some statistics at the end of the round to quantify how well they played.
+        \item[Fit Criterion:] At the end of a round, the game displays statistics such as total score, average roll, and average score per round.
     \end{description}
 
 %   REQUIREMENTS ADDED DUE TO HAZARD ANALYSIS LISTED BELOW:::::::
@@ -91,6 +107,7 @@
     \item \label{R17} The game shall always show the correct current state accurately.
     \begin{description}
         \item[Rationale:] The player needs to be able to understand the current state of the game to understand their current standings, and strategic the next move. Similarly, the current state indicates what is the next action to be done by the user. This is extended to states outside of an active game such as game settings selection, match-up, and system settings selection.
+        \item[Fit Criterion:] The game state (e.g., current scores, dice states, turn order) is always correctly updated and visible to the player.
     \end{description}
 
 \end{enumerate}
@@ -102,46 +119,55 @@
     \item \label{NFR1} \textbf{Performance} The game shall maintain a frame rate of at least 30 FPS at all times.
     \begin{description}
         \item[Rationale:] Players need the frame rate of the game to be high enough at all times to see what’s going on.
+        \item[Fit Criterion:] The game consistently runs at 30 FPS or higher on supported hardware.
     \end{description}
 
     \item \label{NFR2} \textbf{Usability} The game shall implement a clear and easy to use/understand user interface.
     \begin{description}
         \item[Rationale:] Users should not struggle to figure out where controls are or how certain features work. This would create a barrier to entry for new players, and it would be best if players could pick up this game and its controls with little difficulty or time required.
+        \item[Fit Criterion:] Players can navigate the UI and access game functions without external instructions or confusion.
     \end{description}
 
     \item \label{NFR3} \textbf{Portability} The game shall be supported on systems running Windows 10 or later.
     \begin{description}
         \item[Rationale:] Most PC users use Windows 10 or 11, so ensuring that the game ports well to these operating systems is an important requirement if we want to reach a large demographic of users.
+        \item[Fit Criterion:] The game successfully installs and runs on Windows 10 and later without compatibility issues.
     \end{description}
 
     \item \label{NFR4} \textbf{Reliability} Multiplayer games of Yahtzee should crash less than 1\% of the time.
     \begin{description}
         \item[Rationale:] Players need to feel that the game is reliable and should not need to be concerned about the game crashing in the middle of a round.
+        \item[Fit Criterion:] Multiplayer sessions have a crash rate of less than 1\% across 100 test runs.
     \end{description}
 
     \item \label{NFR5} \textbf{Responsiveness} The game shall respond to inputs from the user within 500 milliseconds in the worst case.
     \begin{description}
         \item[Rationale:] This figure represents a minimum acceptable response. If a user needs to wait longer than this to see the result of their input, they may become frustrated and even try spamming the control.
+        \item[Fit Criterion:] User input results in a visible response within 500ms in at least 99\% of interactions.
     \end{description}
 
     \item \label{NFR6} \textbf{Modularity} The game’s codebase shall be modular, such that it is easily extendable and reusable, and allows for quick fixes to bugs that may occur.
     \begin{description}
         \item[Rationale:] Our team has minimum goals in mind for what this game must be upon release, but to be able to continue updating the game to meet stretch goals, our codebase should be designed with modularity in mind to streamline the development process.
+        \item[Fit Criterion:] Developers can add new game modes and dice types without altering existing unrelated code.
     \end{description}
 
     \item \label{NFR7} \textbf{Efficiency} The game shall be optimized to run on lower end systems which might have minimal CPU and GPU resources.
     \begin{description}
         \item[Rationale:] The game that our team is developing is not such a graphically or computationally intensive game that it should require high-end PCs to run. Additionally, being able to run the game on lower-end systems will allow our game to reach a broader audience.
+        \item[Fit Criterion:] The game runs smoothly on systems meeting the minimum system requirements, with no major performance drops.
     \end{description}
 
     \item \label{NFR8} \textbf{Enjoyability} The game shall be found enjoyable by at least 75\% of users.
     \begin{description}
         \item[Rationale:] The game should appeal to the majority of its users, because if it doesn't then the game serves no particular purpose.
+        \item[Fit Criterion:] At least 75\% of users, as measured by post-game surveys or analytics, should find the game enjoyable based on scoring and qualitative feedback.
     \end{description}
 
     \item \label{NFR9} \textbf{Appearance} The game shall maintain a consistent UI style and 3D visual style throughout all in game views.
     \begin{description}
         \item[Rationale:] A style that evokes some sense of continuity throughout the game is important to help users get used to the layout faster and to give the appearance of a more professionally developed gaming experience.
+        \item[Fit Criterion:] A usability test with at least 10 users should confirm no major inconsistencies with UI elements and 3D assets adhering to a predefined style guide.
     \end{description}
 
 %   REQUIREMENTS RELATING TO STRETCH GOALS LISTED BELOW:::::::
@@ -149,6 +175,7 @@
     \item \label{NFR10} \textbf{Portability} The game shall be supported on MacOS devices.
     \begin{description}
         \item[Rationale:] There are many users who use MacOS devices and would be a good target audience for this game.
+        \item[Fit Criterion:] The game must run on MacOS devices without major performance issues or compatibility errors, as verified through testing on at least two different MacOS versions.
     \end{description}
 
 \end{enumerate}
