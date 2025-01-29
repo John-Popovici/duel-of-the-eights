@@ -3,13 +3,18 @@ import requests
 import json
 from datetime import datetime
 
-# GitHub API settings
-repo_owner = "John-Popovici"
-repo_name = "duel-of-the-eights"
-token = os.getenv("GITHUB_TOKEN")  # Access the token from environment variables
+repo_name = "John-Popovici/duel-of-the-eights"
+file_path = "docs/projMngmnt/Rev0_Team_Contrib.tex"
+start_date = "2024-11-25T00:00:00Z"  # From Nov 25, 2024
+current_date = datetime.utcnow().isoformat() + "Z"  # Current UTC time
 
-# Date from which you want to start counting commits
-start_date = datetime(2024, 11, 25)
+# Authenticate using GITHUB_TOKEN
+github_token = os.getenv("GITHUB_TOKEN")
+if not github_token:
+    raise ValueError("GITHUB_TOKEN is not set in the environment variables.")
+
+g = Github(github_token)
+repo = g.get_repo(repo_name)
 
 # Define team members and their GitHub usernames
 team_members = {
