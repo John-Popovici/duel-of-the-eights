@@ -40,3 +40,19 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_t5ruj")
 layout_mode = 2
 theme = ExtResource("2_5rlkn")
 text = "Back to Home"
+
+[node name="ChatTextEdit" type="TextEdit" parent="VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="ChatInput" type="LineEdit" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+placeholder_text = "Enter Message"
+alignment = 1
+
+[node name="SendButton" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Send Message"

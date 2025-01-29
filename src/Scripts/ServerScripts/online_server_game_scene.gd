@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var server_ip: String = ""  # EC2 public IP
+@export var server_ip: String = "54.174.171.0"  # EC2 public IP
 @export var server_port: int = 9999
 
 var multiplayer_peer: ENetMultiplayerPeer
@@ -8,17 +8,22 @@ var ping_label: Label
 var online_label: Label  
 var connection_timer: Timer  
 var progress_bar: ProgressBar  
+var chat_text_edit: TextEdit  
+var chat_input: LineEdit  
+var send_button: Button 
+var ping_timer: Timer
+
+var last_ping_time: float = 0  
+var ping_delay: float = -1  
 
 func _ready():
 	
-	ping_label = $VBoxContainer/PingLabel  # Ensure this Label exists in your UI
+	ping_label = $VBoxContainer/PingLabel
 	var ping_timer = Timer.new()
 	ping_timer.wait_time = 1  # Update every second
 	ping_timer.autostart = true
 	ping_timer.connect("timeout", Callable(self, "_update_ping"))
 	add_child(ping_timer)
-	
-	
 	
 	# Connect the button's "pressed" signal to the connect function using Callable
 	var button = $VBoxContainer/ServerConnectButton  
@@ -52,8 +57,18 @@ func _ready():
 	progress_bar.max_value = 100
 	progress_bar.value = 0
 	
-	var return_button = $VBoxContainer/ReturnToIntroButton  # Add the return button
+	var return_button = $VBoxContainer/ReturnToIntroButton  
 	return_button.connect("pressed", Callable(self, "_on_return_to_intro_pressed"))
+	
+	# Setup chat UI elements
+	chat_text_edit = $VBoxContainer/ChatTextEdit  
+	chat_input = $VBoxContainer/ChatInput  
+	send_button = $VBoxContainer/SendButton  
+	
+	send_button.connect("pressed", Callable(self, "_on_send_button_pressed"))
+	chat_input.connect("text_submitted", Callable(self, "_on_send_button_pressed"))
+	# Initialize chat display (clear the chat)
+	chat_text_edit.text = ""
 
 # Function to handle connection to the server
 func _on_button_pressed():
@@ -91,14 +106,6 @@ func connect_to_server():
 	online_label.text = "Connecting to server..."
 	connection_timer.start()  # Start the timer for the connection attempt
 
-func _update_ping():
-	if multiplayer_peer != null and multiplayer_peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED:
-		var peer_id = 1  # The ID of the server, assuming it is always 1. Adjust if necessary.
-		var ping = multiplayer_peer.get_peer_ping(peer_id)
-		print("Ping: ", ping, " ms")
-		ping_label.text = "Ping: %d ms" % ping  # Update the ping label in the UI
-	elif online_label.text == "Connecting to server...":
-		print("Still attempting to connect to server at ", server_ip, " on port ", server_port)
 
 # Signal handler when a peer is connected
 func _on_peer_connected(id: int):
@@ -134,19 +141,19 @@ func _on_disconnect_button_pressed():
 func disconnect_from_server():
 	if multiplayer_peer != null:
 		# Disconnect the peer from the server
-		multiplayer_peer.disconnect_peer((multiplayer.get_unique_id()), true)
+		multiplayer_peer.disconnect_peer(1)
 		print("Disconnected from server")
 		online_label.text = "Disconnected from server"
-		progress_bar.value = 100 
+		progress_bar.value = 100
 		progress_bar.get("theme_override_styles/fill").bg_color = Color(1, 0, 0)
 	else:
 		print("No active connection to disconnect.")
 		online_label.text = "No active connection"
 
+
 # Function to handle return to main menu
 func _on_return_to_intro_pressed():
 	var intro_scene = load("res://Scenes/IntroScene.tscn").instantiate()
-	
 	# Change scene to intro scene
 	get_tree().root.add_child(intro_scene)
 	queue_free()

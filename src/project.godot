@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GlobalSettings="*res://Scripts/global_settings.gd"
 SceneSwitcher="*res://Scripts/UniversalScripts/scene_switcher.gd"
+OnlineServer="*res://Scripts/ServerScripts/online_server.gd"
 
 [debug]
 
