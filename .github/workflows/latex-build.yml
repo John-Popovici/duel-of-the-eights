@@ -3,10 +3,14 @@ name: Build LaTeX PDFs and Add to Commit
 on:
   push:
     paths:
-      - '**/*.tex' # Trigger only when .tex files are modified
+      - '**/*.tex'
+  workflow_run:
+    workflows: ["Build LaTeX PDFs and Add to Commit"]
+    types:
+      - completed
 
 permissions:
-  contents: write # Grant write access to the repository
+  contents: write
 
 jobs:
   build:
@@ -16,7 +20,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
       with:
-        fetch-depth: 0 # Fetch full commit history to access HEAD~1
+        fetch-depth: 0
+
+    - name: Clear Git Cache
+      run: |
+        git fetch --prune --unshallow
+        git reset --hard
 
     - name: Install LaTeX
       run: |
@@ -26,8 +35,12 @@ jobs:
     - name: Identify Modified Files
       id: modified-files
       run: |
-        # Get the list of modified .tex files
-        MODIFIED_FILES=$(git diff --name-only HEAD~1 HEAD | grep '\.tex$' || true)
+        if git rev-parse HEAD^ >/dev/null 2>&1; then
+          MODIFIED_FILES=$(git diff --name-only HEAD^ HEAD | grep '\.tex$' || true)
+        else
+          MODIFIED_FILES=$(git ls-files | grep '\.tex$' || true)
+        fi
+
         echo "Modified .tex files:"
         echo "$MODIFIED_FILES"
         echo "MODIFIED_FILES=$MODIFIED_FILES" >> $GITHUB_ENV
@@ -43,7 +56,7 @@ jobs:
           
           # Clean files
           make clean-all || exit 1
-          
+
           # Build PDF with multiple runs
           pdflatex $(basename "$file" .tex).tex || exit 1
           bibtex $(basename "$file" .tex) || echo "BibTeX failed. Check your .bib file." # Handle missing bibliography gracefully
