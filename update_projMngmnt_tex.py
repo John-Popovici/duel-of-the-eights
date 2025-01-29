@@ -8,7 +8,7 @@ access_token = os.getenv("GITHUB_TOKEN")  # GitHub token will be used from the e
 g = Github(access_token)
 repo = g.get_repo(repo_name)
 # Get the current date and the start date (Nov 25th)
-current_date = datetime.now()
+current_date = datetime(2024, 11, 28)
 start_date = datetime(2024, 11, 25)
 # Function to fetch commits from the repository
 def get_commits():
