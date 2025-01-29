@@ -3,18 +3,23 @@ name: Update Team Contributions
 on:
   schedule:
     - cron: '0 0 * * *'  # Runs every day at midnight UTC
-  workflow_dispatch:  # Allows manual trigger of the action
+  workflow_dispatch:  # Allows manual trigger
 
 jobs:
   update_tex:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write  # Explicitly allow writing to the repository
+
     steps:
     - name: Checkout the repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v3
       with:
         python-version: 3.9
 
@@ -31,7 +36,7 @@ jobs:
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
         git add docs/projMngmnt/Rev0_Team_Contrib.tex
-        git commit -m "Update team contributions"
-        git push
+        git commit -m "Update team contributions" || echo "No changes to commit"
+        git push origin ActionsTesting  # Replace 'your-branch' with the target branch
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
