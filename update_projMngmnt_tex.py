@@ -11,7 +11,7 @@ repo = g.get_repo(repo_name)
 # Get the current date and the start date (Nov 25th)
 # Get the current date and the start date (Nov 25th)
 current_date = datetime(2025, 1, 29)
-start_date = datetime(2024, 12, 29)
+start_date = datetime(2024, 11, 29)
 
 # Function to fetch commits from the repository
 def get_commits():
