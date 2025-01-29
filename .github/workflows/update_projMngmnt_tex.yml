@@ -1,7 +1,5 @@
 name: Update Team Contributions
 on:
-  schedule:
-    - cron: '0 0 * * *'  # Runs every day at midnight UTC
   workflow_dispatch:
     inputs:
       branch:

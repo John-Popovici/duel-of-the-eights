@@ -30,11 +30,11 @@ def update_tex_file(commits, total_commits):
 
     # Replace the commit values for each team member in the LaTeX macros
      # Replace the commit values for each team member in the LaTeX macros
-    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CJ}{\\d+}", f"\\pgfmathsetmacro{{\\CJ}}{{{commits.get('John-Popovici', 0)}}}")
-    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CN}{\d+}", f"\\pgfmathsetmacro{{\\CN}}{{{commits.get('nigelmoses32', 0)}}}")
-    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CNS}{\d+}", f"\\pgfmathsetmacro{{\\CNS}}{{{commits.get('STARS952', 0)}}}")
-    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CI}{\d+}", f"\\pgfmathsetmacro{{\\CI}}{{{commits.get('Isaac020717', 0)}}}")
-    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CH}{\d+}", f"\\pgfmathsetmacro{{\\CH}}{{{commits.get('HemrajB87', 0)}}}")
+    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CJ}{78}", f"\\pgfmathsetmacro{{\\CJ}}{{{commits.get('John-Popovici', 0)}}}")
+    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CN}{7}", f"\\pgfmathsetmacro{{\\CN}}{{{commits.get('nigelmoses32', 0)}}}")
+    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CNS}{0}", f"\\pgfmathsetmacro{{\\CNS}}{{{commits.get('STARS952', 0)}}}")
+    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CI}{0}", f"\\pgfmathsetmacro{{\\CI}}{{{commits.get('Isaac020717', 0)}}}")
+    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CH}{0}", f"\\pgfmathsetmacro{{\\CH}}{{{commits.get('HemrajB87', 0)}}}")
 
     # Update the total commit count
     #tex_content = tex_content.replace(r"\pgfmathsetmacro{\CN}{137}", f"\\pgfmathsetmacro{{\\CN}}{{{total_commits}}}")
