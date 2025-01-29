@@ -1,6 +1,7 @@
 import os
 from datetime import datetime
 from github import Github
+import re
 # Set the repository details
 repo_name = "John-Popovici/duel-of-the-eights"  # Replace with your repository name
 access_token = os.getenv("GITHUB_TOKEN")  # GitHub token will be used from the environment variable
@@ -36,7 +37,7 @@ def update_tex_file(commits, total_commits):
 
 
     # Update the total commit count
-    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CN}{137}", f"\\pgfmathsetmacro{{\\CN}}{{{total_commits}}}")
+    tex_content = re.sub(r"\\pgfmathsetmacro{\\CN}{\d+}", f"\\pgfmathsetmacro{{\\CN}}{{{total_commits}}}", tex_content)
     
     # Write the updated content back to the file
     with open("docs/projMngmnt/Rev0_Team_Contrib.tex", "w") as file:
