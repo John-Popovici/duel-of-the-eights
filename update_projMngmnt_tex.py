@@ -27,22 +27,15 @@ def update_tex_file(commits, total_commits):
     with open("docs/projMngmnt/Rev0_Team_Contrib.tex", "r") as file:
         tex_content = file.read()
 
-    # Find the section for commits and replace the values
-    section_start = tex_content.find(r"\section{Commits}")
-    if section_start != -1:
-        section_end = tex_content.find(r"\section", section_start + 1)  # Find next section
-        if section_end == -1:
-            section_end = len(tex_content)  # If it's the last section
+    # Replace the commit values for each team member in the LaTeX macros
+    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CJ}{78}", f"\\pgfmathsetmacro{{\\CJ}}{{{commits.get('CJ', 0)}}}")
+    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CN}{137}", f"\\pgfmathsetmacro{{\\CN}}{{{commits.get('CN', 0)}}}")
+    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CNS}{7}", f"\\pgfmathsetmacro{{\\CNS}}{{{commits.get('CNS', 0)}}}")
+    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CI}{12}", f"\\pgfmathsetmacro{{\\CI}}{{{commits.get('CI', 0)}}}")
+    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CH}{16}", f"\\pgfmathsetmacro{{\\CH}}{{{commits.get('CH', 0)}}}")
 
-        # Extract the relevant section content
-        section_content = tex_content[section_start:section_end]
-
-        # Replace the commit values in the section
-        for author, count in commits.items():
-            # Replace each member's commit count
-            tex_content = tex_content.replace(f"\\pgfmathsetmacro{{\\CJ}}", f"\\pgfmathsetmacro{{\\CJ}} {count}")
-
-        tex_content = tex_content.replace(r"\pgfmathsetmacro{\CN}{137}", f"\\pgfmathsetmacro{{\\CN}} {total_commits}")
+    # Update the total commit count
+    tex_content = tex_content.replace(r"\pgfmathsetmacro{\CN}{137}", f"\\pgfmathsetmacro{{\\CN}}{{{total_commits}}}")
     
     # Write the updated content back to the file
     with open("docs/projMngmnt/Rev0_Team_Contrib.tex", "w") as file:
