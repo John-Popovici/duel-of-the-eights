@@ -1,42 +1,40 @@
-name: Update Team Contributions
+name: Update Commit Numbers
 
 on:
-  schedule:
-    - cron: '0 0 * * *'  # Runs every day at midnight UTC
-  workflow_dispatch:  # Allows manual trigger
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to run the workflow on'
+        required: true
+        default: 'main'
 
 jobs:
-  update_tex:
+  update-commits:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write  # Explicitly allow writing to the repository
-
     steps:
-    - name: Checkout the repository
-      uses: actions/checkout@v3
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.branch }}  # Checkout the selected branch
 
-    - name: Set up Python
-      uses: actions/setup-python@v3
-      with:
-        python-version: 3.9
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
 
-    - name: Install dependencies
-      run: |
-        pip install PyGithub
+      - name: Install dependencies
+        run: |
+          pip install requests
 
-    - name: Run Python script to update LaTeX file
-      run: |
-        python update_projMngmnt_tex.py
+      - name: Run commit update script
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: python path/to/your/script.py
 
-    - name: Commit and push changes
-      run: |
-        git config --global user.name "GitHub Actions"
-        git config --global user.email "actions@github.com"
-        git add docs/projMngmnt/Rev0_Team_Contrib.tex
-        git commit -m "Update team contributions" || echo "No changes to commit"
-        git push origin ActionsTesting  # Replace 'your-branch' with the target branch
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add docs/projMngmnt/Rev0_Team_Contrib.tex
+          git commit -m "Update commit numbers"
+          git push origin ${{ github.event.inputs.branch }}  # Push to the selected branch

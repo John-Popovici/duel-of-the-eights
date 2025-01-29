@@ -1,24 +1,17 @@
-import re
 import os
-from github import Github
+import requests
+import json
 from datetime import datetime
 
-# Repository details
-repo_name = "John-Popovici/duel-of-the-eights"
-file_path = "docs/projMngmnt/Rev0_Team_Contrib.tex"
-start_date = "2024-11-25T00:00:00Z"  # From Nov 25, 2024
-end_date = datetime.utcnow().isoformat() + "Z"  # Current UTC time
+# GitHub API settings
+repo_owner = "John-Popovici"
+repo_name = "duel-of-the-eights"
+token = os.getenv("GH_TOKEN")  # Access the token from environment variables
 
-# Authenticate using GITHUB_TOKEN
-github_token = os.getenv("GITHUB_TOKEN")
-if not github_token:
-    raise ValueError("GITHUB_TOKEN is not set in the environment variables.")
+# Date from which you want to start counting commits
+start_date = datetime(2024, 11, 25)
 
-# Authenticate to GitHub
-g = Github(github_token)
-repo = g.get_repo(repo_name)
-
-# Team members' GitHub usernames
+# Define team members and their GitHub usernames
 team_members = {
     "CJ": "John-Popovici",
     "CN": "nigelmoses32",
@@ -27,31 +20,69 @@ team_members = {
     "CH": "HemrajB87",
 }
 
-# Fetch commit counts per member
-commit_counts = {key: 0 for key in team_members}
-for commit in repo.get_commits(since=start_date, until=end_date):
-    if commit.author and commit.author.login in team_members.values():
-        for key, username in team_members.items():
-            if commit.author.login == username:
-                commit_counts[key] += 1
+# GitHub API URL for commits
+url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/commits"
 
-# Calculate total commits and percentages
-total_commits = sum(commit_counts.values())
-percentages = {key: (count / total_commits * 100) if total_commits else 0 for key, count in commit_counts.items()}
+# Function to fetch commits from GitHub
+def fetch_commits():
+    commits = []
+    page = 1
+    while True:
+        response = requests.get(
+            url,
+            params={"page": page, "per_page": 100},
+            headers={"Authorization": f"token {token}"},
+        )
+        if response.status_code != 200:
+            print(f"Error fetching commits: {response.status_code}")
+            break
 
-# Read LaTeX file
-with open(file_path, "r", encoding="utf-8") as file:
-    tex_content = file.read()
+        data = response.json()
+        if not data:
+            break
 
-# Update only the \section{Commits} part
-for key, count in commit_counts.items():
-    tex_content = re.sub(rf"\\pgfmathsetmacro{{\\{key}}}{{\d+}}", f"\\pgfmathsetmacro{{\\{key}}}{{{count}}}", tex_content)
+        commits.extend(data)
+        page += 1
 
-# Update total commits
-tex_content = re.sub(r"\\pgfmathsetmacro{\\CT}{\d+}", f"\\pgfmathsetmacro{{\\CT}}{{{total_commits}}}", tex_content)
+    return commits
 
-# Write updated content back to the file
-with open(file_path, "w", encoding="utf-8") as file:
-    file.write(tex_content)
+# Function to count commits for each team member
+def count_commits(commits):
+    commit_counts = {member: 0 for member in team_members}
+    total_commits = 0
 
-print("Updated the Commits section of projMngmnt tex file.")
+    for commit in commits:
+        commit_date = datetime.strptime(commit["commit"]["author"]["date"], "%Y-%m-%dT%H:%M:%SZ")
+        if commit_date >= start_date:
+            author = commit["commit"]["author"]["name"]
+            for member, username in team_members.items():
+                if username in author:
+                    commit_counts[member] += 1
+                    total_commits += 1
+
+    return commit_counts, total_commits
+
+# Function to update the LaTeX file
+def update_latex(commit_counts, total_commits):
+    latex_file_path = "docs/projMngmnt/Rev0_Team_Contrib.tex"
+    with open(latex_file_path, "r") as file:
+        content = file.read()
+
+    # Update the commit numbers in LaTeX
+    for member, count in commit_counts.items():
+        content = content.replace(f"\\pgfmathsetmacro{{\\{member}}}{{0}}", f"\\pgfmathsetmacro{{\\{member}}}{{{count}}}")
+
+    content = content.replace("\\pgfmathsetmacro{\\totalCommits}{0}", f"\\pgfmathsetmacro{{\\totalCommits}}{{{total_commits}}}")
+
+    # Write the updated content back to the file
+    with open(latex_file_path, "w") as file:
+        file.write(content)
+
+# Main function to run the process
+def main():
+    commits = fetch_commits()
+    commit_counts, total_commits = count_commits(commits)
+    update_latex(commit_counts, total_commits)
+
+if __name__ == "__main__":
+    main()
