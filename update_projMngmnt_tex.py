@@ -11,8 +11,8 @@ access_token = os.getenv("GITHUB_TOKEN")  # GitHub token will be used from the e
 # Set the dates for the range (Nov 25th to Jan 29th)
 
 # Function to get commit count by author within a date range
-start_date = datetime.datetime(2024, 12, 29)
-end_date = datetime.datetime(2025, 1, 29)
+start_date = datetime(2024, 12, 29)
+end_date = datetime(2025, 1, 29)
 
 # Function to get commit count by author within a date range
 def get_commits_by_author():
