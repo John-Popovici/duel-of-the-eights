@@ -29,7 +29,7 @@ jobs:
       - name: Run commit update script
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: python path/to/your/script.py
+        run: python update_projMngmnt_tex.py
 
       - name: Commit and push changes
         run: |
