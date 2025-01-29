@@ -1,25 +1,23 @@
 import os
 import requests
-from datetime import datetime
-from github import Github
 import re
+from datetime import datetime
+
 # Set the repository details
-repo_name = "John-Popovici/duel-of-the-eights"  # Replace with your repository name
+repo_owner = "John-Popovici"  # Replace with the repository owner
+repo_name = "duel-of-the-eights"  # Replace with your repository name
 access_token = os.getenv("GITHUB_TOKEN")  # GitHub token will be used from the environment variable
-# Initialize GitHub API
-g = Github(access_token)
-repo = g.get_repo(repo_name)
-# Get the current date and the start date (Nov 25th)
-# Get the current date and the start date (Nov 25th)
+
+# Set the dates for the range (Nov 25th to Jan 29th)
 current_date = datetime(2025, 1, 29)
-start_date = datetime(2024, 12, 29)
+start_date = datetime(2024, 11, 29)
 
 # Function to get commit count by author within a date range
 def get_commits_by_author():
     commits = {}
     page = 1
     while True:
-        url = f'https://api.github.com/repos/{repo_name}/commits'
+        url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/commits'
         params = {
             'since': start_date.isoformat(),
             'until': current_date.isoformat(),
@@ -28,14 +26,25 @@ def get_commits_by_author():
         }
         headers = {'Authorization': f'token {access_token}'}
         response = requests.get(url, params=params, headers=headers)
-        commits_data = response.json()
 
+        # Check if the response is valid JSON
+        try:
+            commits_data = response.json()
+        except ValueError:
+            print(f"Error parsing response: {response.text}")
+            break
+
+        # If no commits are returned, exit the loop
         if not commits_data:
-            break  # No more commits, exit the loop
+            break
 
+        # Process each commit
         for commit in commits_data:
-            author = commit['commit']['author']['name']
-            commits[author] = commits.get(author, 0) + 1
+            if isinstance(commit, dict):
+                author = commit['commit']['author']['name']
+                commits[author] = commits.get(author, 0) + 1
+            else:
+                print(f"Unexpected commit data: {commit}")
 
         page += 1
 
