@@ -47,14 +47,6 @@ extends Node
 	12 : d12Settings
 }
 
-@onready var normalCustomDiceTex : Dictionary
-@onready var selectedCustomDiceTex : Dictionary
-@onready var custom_dice_tex_folder_paths : Dictionary = {
-	"Red" : "res://Materials/CustomDiceTextures/Red",
-	"Purple" : "res://Materials/CustomDiceTextures/Purple"
-} 
-@onready var allCustomDiceTextures : Dictionary = {}
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var dir = DirAccess.open(dice_tex_folder)
@@ -68,21 +60,4 @@ func _ready() -> void:
 				allDiceTextures[texture_name] = load(texture_path)
 			file_name = dir.get_next()
 		dir.list_dir_end()
-	
-	for pathName in custom_dice_tex_folder_paths.keys():
-		var customdir = DirAccess.open(custom_dice_tex_folder_paths[pathName])
-		if customdir:
-			customdir.list_dir_begin()
-			var file_name = customdir.get_next()
-			var tempDict = {}
-			while file_name != "":
-				if file_name.ends_with(".tres"):
-					var texture_name = file_name.replace(".tres", "").capitalize()
-					var texture_path = custom_dice_tex_folder_paths[pathName] + "/" + file_name
-					tempDict[texture_name] = load(texture_path)
-				file_name = customdir.get_next()
-			customdir.list_dir_end()
-			allCustomDiceTextures[pathName] = tempDict
-	normalCustomDiceTex = allCustomDiceTextures["Red"]
-	selectedCustomDiceTex = allCustomDiceTextures["Purple"]
-	print(allCustomDiceTextures["Red"])
+	print("Dice Tex: ",allDiceTextures)

@@ -1,6 +1,0 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://djyij58opey5s"]
-
-[ext_resource type="Texture2D" uid="uid://e5vc7wvv7hpu" path="res://Materials/CustomDiceTextures/Purple/d6-3.png" id="1_87idy"]
-
-[resource]
-albedo_texture = ExtResource("1_87idy")
