@@ -228,10 +228,6 @@ Hemraj B. & 2 & 3 \\
 \newpage
 \section{CICD}
 
-%TODO EXPLAIN
-\wss{Say how CICD is used in your project}
-
-\wss{If your team has additional metrics of productivity, please feel free to
-add them to this report.}
+CI/CD has been implemented to automate pdf generation. Our team has implemented a github action that takes advantage of the existing Makefiles in our project to automatically build pdfs whenever latex files are committed to our repository. This action cleans existing pdfs and artifacts, and automatically generates bibliographies and pdf outputs on commits.
 
 \end{document}
