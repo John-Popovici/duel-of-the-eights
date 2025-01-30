@@ -1,11 +1,23 @@
 extends Node
 
-@onready var normalDiceTex = load("res://Materials/DiceTextures/Red.tres")
-@onready var selectedDiceTex = load("res://Materials/DiceTextures/Purple.tres")
-@onready var dicebaseTex = load("res://Materials/DiceTextures/White.tres")
+@onready var normalDiceTex = preload("res://Materials/DiceTextures/Red.tres")
+@onready var selectedDiceTex = preload("res://Materials/DiceTextures/Purple.tres")
+@onready var dicebaseTex = preload("res://Materials/DiceTextures/White.tres")
 
 @onready var dice_tex_folder = "res://Materials/DiceTextures"
-@onready var allDiceTextures : Dictionary = {}
+@onready var allDiceTextures : Dictionary = {
+	"Blue": preload("res://Materials/DiceTextures/Blue.tres"),
+	"Red": preload("res://Materials/DiceTextures/Red.tres"),
+	"Forest Green": preload("res://Materials/DiceTextures/ForestGreen.tres"),
+	"Gold": preload("res://Materials/DiceTextures/Gold.tres"),
+	"Green": preload("res://Materials/DiceTextures/Green.tres"),
+	"Orange": preload("res://Materials/DiceTextures/Orange.tres"),
+	"Pink": preload("res://Materials/DiceTextures/Pink.tres"),
+	"Purple": preload("res://Materials/DiceTextures/Purple.tres"),
+	"White": preload("res://Materials/DiceTextures/White.tres"),
+	"Yellow": preload("res://Materials/DiceTextures/Yellow.tres"),
+	"Black": preload("res://Materials/DiceTextures/Black.tres"),
+}
 
 @onready var d4Settings : Dictionary = {
 	"start_time" : 0,
@@ -49,6 +61,7 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	pass
 	var dir = DirAccess.open(dice_tex_folder)
 	if dir:
 		dir.list_dir_begin()
