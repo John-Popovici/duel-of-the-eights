@@ -19,6 +19,10 @@ func returnToIntro() -> void:
 	get_tree().root.add_child(currentScene)
 
 func changeScene(path: String) -> void:
+	if not ResourceLoader.exists(path):
+		push_error("Scene path does not exist: " + path)
+		return
+	
 	if currentScene != null:
 		currentScene.queue_free()
 	else: # brute force clear of all nodes (in progress)
