@@ -54,6 +54,10 @@ func _on_start_game_pressed():
 	start_game_button.disabled = true
 	home_button.disabled = true
 	advanced_settings_button.disabled = true
+	GlobalSettings.show_toast("Win Condition: " + str(WinCondition.get_selected_id()))
+	print("Win Condition: " + str(WinCondition.get_selected_id()))
+	if WinCondition.get_selected_id() == 0:
+		bluff_active = false
 	game_settings = {
 		"player_names": [player1Name.text, player2Name.text],
 		"win_condition": WinCondition.get_selected_id(),
@@ -394,10 +398,7 @@ func _on_timed_round_toggled(_state) -> void:
 
 func _on_bluff_toggled(_state) -> void:
 	print("Bluff Was ", bluff_active)
-	if bluff_active:
-		bluff_active = false
-	else:
-		bluff_active = true
+	bluff_active = _state
 	print("Bluff Is ", bluff_active)
 
 func _dice_values_changed(_state) -> void:

@@ -59,6 +59,13 @@ extends Node
 	12 : d12Settings
 }
 
+@export var debug_mode: bool = false
+func show_toast(message: String) -> void:
+	if !debug_mode:
+		return
+	print("Sending toast message P1: ", message)
+	ToastLayer.set_message(message)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass

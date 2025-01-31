@@ -32,6 +32,7 @@ theme = ExtResource("2_wgrsm")
 theme_override_styles/panel = ExtResource("3_fxb24")
 
 [node name="SimplePresetsBox" type="VBoxContainer" parent="UIBox"]
+visible = false
 layout_mode = 2
 theme = ExtResource("2_wgrsm")
 
@@ -117,7 +118,6 @@ size_flags_horizontal = 3
 text = "Back to Home"
 
 [node name="SettingsSplitBox" type="HSplitContainer" parent="UIBox"]
-visible = false
 layout_mode = 2
 split_offset = 2
 dragger_visibility = 1
