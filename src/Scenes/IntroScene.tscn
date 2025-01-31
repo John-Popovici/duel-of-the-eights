@@ -16,6 +16,59 @@
 [node name="IntroScene" type="Node3D"]
 script = ExtResource("1_datn8")
 
+[node name="CameraController" type="Node3D" parent="."]
+script = ExtResource("30_3kqoe")
+
+[node name="Positions" type="Node3D" parent="CameraController"]
+
+[node name="Angled" type="Node3D" parent="CameraController/Positions"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 21)
+
+[node name="Top Down" type="Node3D" parent="CameraController/Positions"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 3)
+
+[node name="Cinematic" type="Node3D" parent="CameraController/Positions"]
+transform = Transform3D(0.777146, -0.265962, 0.570358, 0, 0.906307, 0.422618, -0.629321, -0.328436, 0.704333, 105, 55, 48)
+
+[node name="Camera3D" type="Camera3D" parent="CameraController"]
+transform = Transform3D(0.777146, -0.265962, 0.570358, 0, 0.906308, 0.422618, -0.62932, -0.328436, 0.704333, 105, 55, 48)
+
+[node name="SpotLight3D_Camera" type="SpotLight3D" parent="CameraController/Camera3D"]
+transform = Transform3D(1, 0, -2.98023e-08, -1.49012e-08, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0)
+light_energy = 0.001
+shadow_enabled = true
+spot_range = 1292.23
+spot_attenuation = -0.5
+spot_angle = 89.99
+spot_angle_attenuation = 2.37841
+
+[node name="CameraPosPanel" type="PanelContainer" parent="CameraController"]
+visible = false
+offset_top = 435.0
+offset_right = 200.0
+offset_bottom = 515.0
+theme = ExtResource("2_buat0")
+
+[node name="ButtonHolder" type="VBoxContainer" parent="CameraController/CameraPosPanel"]
+layout_mode = 2
+
+[node name="Angled" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Angled"
+
+[node name="Top Down" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Top Down"
+
+[node name="Cinematic" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cinematic"
+
+[node name="BackgroundObjects" parent="." instance=ExtResource("12_1wfsc")]
+
 [node name="Title" type="VBoxContainer" parent="."]
 anchors_preset = 5
 anchor_left = 0.5
@@ -153,56 +206,3 @@ text = "Settings"
 [node name="Profile" type="Button" parent="OptionsPanel/VBoxContainer"]
 layout_mode = 2
 text = "Profile"
-
-[node name="CameraController" type="Node3D" parent="."]
-script = ExtResource("30_3kqoe")
-
-[node name="Positions" type="Node3D" parent="CameraController"]
-
-[node name="Angled" type="Node3D" parent="CameraController/Positions"]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 21)
-
-[node name="Top Down" type="Node3D" parent="CameraController/Positions"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 3)
-
-[node name="Cinematic" type="Node3D" parent="CameraController/Positions"]
-transform = Transform3D(0.777146, -0.265962, 0.570358, 0, 0.906307, 0.422618, -0.629321, -0.328436, 0.704333, 105, 55, 48)
-
-[node name="Camera3D" type="Camera3D" parent="CameraController"]
-transform = Transform3D(0.777146, -0.265962, 0.570358, 0, 0.906308, 0.422618, -0.62932, -0.328436, 0.704333, 105, 55, 48)
-
-[node name="SpotLight3D_Camera" type="SpotLight3D" parent="CameraController/Camera3D"]
-transform = Transform3D(1, 0, -2.98023e-08, -1.49012e-08, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0)
-light_energy = 0.001
-shadow_enabled = true
-spot_range = 1292.23
-spot_attenuation = -0.5
-spot_angle = 89.99
-spot_angle_attenuation = 2.37841
-
-[node name="CameraPosPanel" type="PanelContainer" parent="CameraController"]
-visible = false
-offset_top = 435.0
-offset_right = 200.0
-offset_bottom = 515.0
-theme = ExtResource("2_buat0")
-
-[node name="ButtonHolder" type="VBoxContainer" parent="CameraController/CameraPosPanel"]
-layout_mode = 2
-
-[node name="Angled" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Angled"
-
-[node name="Top Down" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Top Down"
-
-[node name="Cinematic" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Cinematic"
-
-[node name="BackgroundObjects" parent="." instance=ExtResource("12_1wfsc")]
