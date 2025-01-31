@@ -34,6 +34,14 @@ window/stretch/mode="viewport"
 
 project/assembly_name="duel-of-the-eights"
 
+[file_customization]
+
+folder_colors={
+"res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/fbx(unity)/": "red",
+"res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/fbx/": "red",
+"res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/obj/": "red"
+}
+
 [filesystem]
 
 import/blender/enabled=false
