@@ -92,7 +92,7 @@ func _on_disconnected():
 func _on_home():
 	self.visible = false
 	print("Disconnected")
-	get_parent().get_parent().returnToIntro()
+	SceneSwitcher.returnToIntro()
 
 func _on_connection_failed():
 	# Hide the ConnectionUI once connected

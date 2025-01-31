@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dtfhgeprlq86m"
+path="res://.godot/imported/banner_triple_blue.obj-4e54d456daa5ae90d9f6b9858a77a94c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/banner_triple_blue.obj-4e54d456daa5ae90d9f6b9858a77a94c.mesh"]
+
+source_file="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/obj/banner_triple_blue.obj"
+dest_files=["res://.godot/imported/banner_triple_blue.obj-4e54d456daa5ae90d9f6b9858a77a94c.mesh", "res://.godot/imported/banner_triple_blue.obj-4e54d456daa5ae90d9f6b9858a77a94c.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

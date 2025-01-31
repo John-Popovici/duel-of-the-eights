@@ -7,4 +7,4 @@ func _ready() -> void:
 
 # Function that is called when the back button is pressed
 func _on_backbutton_pressed() -> void:
-	get_tree().change_scene("res://Scenes/IntroScene.tscn")
+	SceneSwitcher.returnToIntro()

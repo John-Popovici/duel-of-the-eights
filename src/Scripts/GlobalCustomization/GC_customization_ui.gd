@@ -49,7 +49,7 @@ func _reset_dice()->void:
 	get_parent().get_node("DiceDisplay/D12Display/TwelveDice").reset_dice_tex()
 
 func returnToIntro() -> void:
-	get_parent().returnToIntro()
+	SceneSwitcher.returnToIntro()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

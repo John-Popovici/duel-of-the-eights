@@ -363,7 +363,7 @@ func synchronizeRematch() -> void:
 func exitGame() -> void:
 	network_manager.broadcast_game_state("end_game", {})
 	network_manager.disconnect_from_server()
-	get_parent().returnToIntro()
+	SceneSwitcher.returnToIntro()
 	pass
 
 func timer_complete() -> void:
@@ -535,4 +535,4 @@ func setup_game_environment(_game_settings: Dictionary) -> void:
 		print("Client Game Environment initialized with settings:", _game_settings)
 
 func returnToIntro()-> void:
-	get_parent().returnToIntro()
+	SceneSwitcher.returnToIntro()

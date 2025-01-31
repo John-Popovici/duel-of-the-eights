@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c1akenjkwitgi"
+path="res://.godot/imported/floor_tile_big_spikes_spikes.obj-8b5863742155416907cd112353b185ca.mesh"
+
+[deps]
+
+files=["res://.godot/imported/floor_tile_big_spikes_spikes.obj-8b5863742155416907cd112353b185ca.mesh"]
+
+source_file="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/obj/floor_tile_big_spikes_spikes.obj"
+dest_files=["res://.godot/imported/floor_tile_big_spikes_spikes.obj-8b5863742155416907cd112353b185ca.mesh", "res://.godot/imported/floor_tile_big_spikes_spikes.obj-8b5863742155416907cd112353b185ca.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

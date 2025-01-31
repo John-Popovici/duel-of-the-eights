@@ -11,7 +11,7 @@ func _ready() -> void:
 
 func _on_back_button_pressed() -> void:
 	print("Back button pressed, switching to IntroScene...")
-	get_parent().returnToIntro()  # once SceneSwitch is fixed, will be used
+	SceneSwitcher.returnToIntro()
 
 func _process(_delta: float) -> void:
 	pass

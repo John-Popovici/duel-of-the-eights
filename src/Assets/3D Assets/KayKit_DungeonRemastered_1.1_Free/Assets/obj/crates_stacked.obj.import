@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://5wnejlhk0ls8"
+path="res://.godot/imported/crates_stacked.obj-4e7e8e15f777f4850fa54a112297bb1e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/crates_stacked.obj-4e7e8e15f777f4850fa54a112297bb1e.mesh"]
+
+source_file="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/obj/crates_stacked.obj"
+dest_files=["res://.godot/imported/crates_stacked.obj-4e7e8e15f777f4850fa54a112297bb1e.mesh", "res://.godot/imported/crates_stacked.obj-4e7e8e15f777f4850fa54a112297bb1e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
