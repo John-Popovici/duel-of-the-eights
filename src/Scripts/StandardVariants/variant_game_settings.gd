@@ -256,6 +256,7 @@ func update_ui_fields(game_settings: Dictionary, hand_settings: Dictionary):
 	WinCondition.select(game_settings.get("win_condition", 0))
 	_win_condition_toggled(game_settings.get("win_condition", 0))
 	BluffButton.set_pressed(bool(game_settings.get("bluff_active", false)))
+	bluff_active = bool(game_settings.get("bluff_active", false))
 	HealthPoints.text = str(game_settings.get("health_points", 0))
 	Rounds.text = str(game_settings.get("rounds", 0))
 	RoundRolls.text = str(game_settings.get("round_rolls", 0))
