@@ -1,25 +1,32 @@
 extends Node3D
-# Use SceneSwitcher.returnToIntro("path to scene")
-# Not in use currently
+
+@onready var currentScene
+@export var introScene = preload("res://Scenes/IntroScene.tscn")
+
 func _ready() -> void:
-	pass
+	currentScene = get_parent().get_node("IntroScene")
+	currentScene.print_tree_pretty()
 
 func returnToIntro() -> void:
-	var current_scene = get_tree().current_scene
-
 	# Only free the current scene if it's still valid
-	if current_scene != null:
-		current_scene.queue_free()
+	if currentScene != null:
+		currentScene.queue_free()
 	else: # brute force clear of all nodes (in progress)
-		var root = get_tree().root
-		for child in root.get_children():
-			child.queue_free()
+		print("Do not have scene to free")
+		GlobalSettings.show_toast("Do not have scene to free")
 
-	var intro_scene = load("res://Scenes/IntroScene.tscn").instantiate()
+	currentScene = introScene.instantiate()
+	get_tree().root.add_child(currentScene)
 
-	get_tree().root.add_child(intro_scene)
-
-	get_tree().current_scene = intro_scene
+func changeScene(path: String) -> void:
+	if currentScene != null:
+		currentScene.queue_free()
+	else: # brute force clear of all nodes (in progress)
+		print("Do not have scene to free")
+		GlobalSettings.show_toast("Do not have scene to free")
+	
+	currentScene = load(path).instantiate()
+	get_tree().root.add_child(currentScene)
 
 func _process(delta: float) -> void:
 	pass

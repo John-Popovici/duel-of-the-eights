@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bgk884y8tbn53"]
 
-[ext_resource type="Script" path="res://Scripts/toast_popup.gd" id="1_low2a"]
+[ext_resource type="Script" path="res://Scripts/UniversalScripts/toast_popup.gd" id="1_low2a"]
 
 [node name="Toast" type="Label"]
 size_flags_vertical = 6

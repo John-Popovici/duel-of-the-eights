@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bnelushpd884f"]
 
 [ext_resource type="Theme" uid="uid://dokd457t4xs7n" path="res://Themes/Default_Pixel_Wood/Default_pixel_.Wood.tres" id="1_n30wl"]
-[ext_resource type="Script" path="res://Scripts/toast_layer.gd" id="2_r2t64"]
+[ext_resource type="Script" path="res://Scripts/UniversalScripts/toast_layer.gd" id="2_r2t64"]
 
 [node name="ToastPopup" type="Control"]
 z_index = 20

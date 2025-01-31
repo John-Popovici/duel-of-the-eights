@@ -14,11 +14,7 @@ func start_game() -> void:
 	
 
 func returnToIntro() -> void:
-	var intro_scene = load("res://Scenes/IntroScene.tscn").instantiate()
-	
-	# Change scene to GameScene
-	get_tree().root.add_child(intro_scene)
-	queue_free()  # Free IntroScene
+	SceneSwitcher.returnToIntro()
 
 # Start game logic with player names
 func _ready() -> void:

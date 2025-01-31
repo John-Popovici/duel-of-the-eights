@@ -153,7 +153,4 @@ func disconnect_from_server():
 
 # Function to handle return to main menu
 func _on_return_to_intro_pressed():
-	var intro_scene = load("res://Scenes/IntroScene.tscn").instantiate()
-	# Change scene to intro scene
-	get_tree().root.add_child(intro_scene)
-	queue_free()
+	SceneSwitcher.returnToIntro()

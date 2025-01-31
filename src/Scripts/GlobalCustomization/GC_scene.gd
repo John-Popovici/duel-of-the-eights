@@ -6,11 +6,7 @@ func _ready() -> void:
 	get_node("DiceDisplay/CameraController").set_options_visible(true)
 
 func returnToIntro() -> void:
-	var intro_scene = load("res://Scenes/IntroScene.tscn").instantiate()
-	
-	# Change scene to GameScene
-	get_tree().root.add_child(intro_scene)
-	queue_free()  # Free IntroScene
+	SceneSwitcher.returnToIntro()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

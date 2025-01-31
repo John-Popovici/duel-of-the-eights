@@ -43,68 +43,36 @@ func _on_start_local_game_pressed() -> void:
 
 func _on_start_online_game_pressed() -> void:
 	# Load GameScene
-	var online_game_scene = load("res://Scenes/online_game_scene.tscn").instantiate()
-	
-	# Change scene to GameScene
-	get_tree().root.add_child(online_game_scene)
-	queue_free()  # Free IntroScene
+	SceneSwitcher.changeScene("res://Scenes/online_game_scene.tscn")
 
 func _on_start_standard_game_pressed() -> void:
 	# Load GameScene
-	var online_game_scene = load("res://Scenes/online_standard_game_scene.tscn").instantiate()
-	
-	# Change scene to GameScene
-	get_tree().root.add_child(online_game_scene)
-	queue_free()  # Free IntroScene
+	SceneSwitcher.changeScene("res://Scenes/online_standard_game_scene.tscn")
 
 func _on_start_bluff_game_pressed() -> void:
 	# Load GameScene
-	var online_game_scene = load("res://Scenes/online_bluff_game_scene.tscn").instantiate()
-	
-	# Change scene to GameScene
-	get_tree().root.add_child(online_game_scene)
-	queue_free()  # Free IntroScene
+	SceneSwitcher.changeScene("res://Scenes/online_bluff_game_scene.tscn")
 
 func _on_start_blitz_game_pressed() -> void:
 	# Load GameScene
-	var online_game_scene = load("res://Scenes/online_blitz_game_scene.tscn").instantiate()
-	
-	# Change scene to GameScene
-	get_tree().root.add_child(online_game_scene)
-	queue_free()  # Free IntroScene
+	SceneSwitcher.changeScene("res://Scenes/online_blitz_game_scene.tscn")
 
 func _on_start_online_long_form_game_pressed() -> void:
 	# Load GameScene
-	var online_game_scene = load("res://Scenes/online_long_form_pvp_scene.tscn").instantiate()
-	
-	# Change scene to GameScene
-	get_tree().root.add_child(online_game_scene)
-	queue_free()  # Free IntroScene
+	SceneSwitcher.changeScene("res://Scenes/online_long_form_pvp_scene.tscn")
 
 func _on_start_online_server_pressed() -> void:
 	# Load GameScene
-	var online_game_scene = load("res://Scenes/online_server_game_scene.tscn").instantiate()
-	
-	# Change scene to GameScene
-	get_tree().root.add_child(online_game_scene)
-	queue_free()  # Free IntroScene
+	SceneSwitcher.changeScene("res://Scenes/online_server_game_scene.tscn")
 
 # Transition to GameScene with player names
 func _on_customization_pressed() -> void:
 	# Load GameScene
-	var customization = load("res://Scenes/global_customization_scene.tscn").instantiate()
-	
-	# Change scene to GameScene
-	get_tree().root.add_child(customization)
-	queue_free()  # Free IntroScene
+	SceneSwitcher.changeScene("res://Scenes/global_customization_scene.tscn")
 
 func _on_settings_pressed() -> void:
 	# Load GameScene
-	var settings = load("res://Scenes/player_settings_scene.tscn").instantiate()
-	
-	# Change scene to GameScene
-	get_tree().root.add_child(settings)
-	queue_free()  # Free IntroScene 
+	SceneSwitcher.changeScene("res://Scenes/player_settings_scene.tscn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
