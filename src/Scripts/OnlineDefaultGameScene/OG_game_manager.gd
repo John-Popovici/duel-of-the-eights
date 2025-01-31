@@ -9,6 +9,8 @@ var hand_settings
 @onready var scoreCalc = get_node("ScoreCalculator")
 @onready var myPlayer = get_parent().get_node("myPlayer")
 @onready var enemyPlayer = get_parent().get_node("enemyPlayer")
+@onready var cameraController = get_node("CameraController")
+@onready var cameraGameLocation = get_node("CameraController/Positions/Angled")
 
 @onready var GameUI: CanvasLayer = get_node("GameUI")
 @onready var rollButtons = get_node("RollButtons")
@@ -525,9 +527,10 @@ func setup_game_environment(_game_settings: Dictionary) -> void:
 	# Initialize game variables and UI, create dice dynamically
 	dice_container.clear_dice()
 	dice_container.add_dice(_game_settings["dice_count"],int(_game_settings["dice_type"]))
-
+	
 	#add any other physical 3D setup
-
+	cameraController.lerp_camera_to_position(cameraGameLocation, 0.01)
+	
 	# Additional setup can go here
 	if network_manager.getIsHost():
 		print("Host Game Environment initialized with settings:", _game_settings)

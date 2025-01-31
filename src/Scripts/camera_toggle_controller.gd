@@ -37,12 +37,12 @@ func snap_camera_to_position(target: Node3D) -> void:
 	camera.global_transform = target.global_transform
 
 # Lerps the camera to the specified position and rotation
-func lerp_camera_to_position(target: Node3D) -> void:
+func lerp_camera_to_position(target: Node3D, lerp_speed: float = 0.05) -> void:
 	var start_transform = camera.global_transform
 	var end_transform = target.global_transform
 	var t = 0.0
 	while t < 1.0:
-		t += 0.05  # Lerp speed, adjust as needed
+		t += lerp_speed  # Lerp speed, adjust as needed
 		camera.global_transform.origin = start_transform.origin.lerp(end_transform.origin, t)
 		camera.global_transform.basis = start_transform.basis.slerp(end_transform.basis, t)
 		await get_tree().process_frame  # Wait until the next frame
