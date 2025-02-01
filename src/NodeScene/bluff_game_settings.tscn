@@ -32,7 +32,6 @@ theme = ExtResource("2_wgrsm")
 theme_override_styles/panel = ExtResource("3_fxb24")
 
 [node name="SimplePresetsBox" type="VBoxContainer" parent="UIBox"]
-visible = false
 layout_mode = 2
 theme = ExtResource("2_wgrsm")
 
@@ -97,27 +96,28 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="UIBox/SimplePresetsBox/ControlButtonsBox"]
 layout_mode = 2
 
-[node name="ConnectCode" type="Button" parent="UIBox/SimplePresetsBox/ControlButtonsBox/HBoxContainer"]
+[node name="ConnectCode" type="Button" parent="UIBox/SimplePresetsBox/ControlButtonsBox/HBoxContainer" groups=["ConfirmButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Copy Connect Code"
 
-[node name="StartGame" type="Button" parent="UIBox/SimplePresetsBox/ControlButtonsBox/HBoxContainer"]
+[node name="StartGame" type="Button" parent="UIBox/SimplePresetsBox/ControlButtonsBox/HBoxContainer" groups=["ConfirmButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Start Game"
 
-[node name="AdvancedSettings" type="Button" parent="UIBox/SimplePresetsBox/ControlButtonsBox/HBoxContainer"]
+[node name="AdvancedSettings" type="Button" parent="UIBox/SimplePresetsBox/ControlButtonsBox/HBoxContainer" groups=["ConfirmButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Advanced Settings"
 
-[node name="BacktoHome" type="Button" parent="UIBox/SimplePresetsBox/ControlButtonsBox/HBoxContainer"]
+[node name="BacktoHome" type="Button" parent="UIBox/SimplePresetsBox/ControlButtonsBox/HBoxContainer" groups=["BackButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Back to Home"
 
 [node name="SettingsSplitBox" type="HSplitContainer" parent="UIBox"]
+visible = false
 layout_mode = 2
 split_offset = 2
 dragger_visibility = 1
@@ -321,20 +321,20 @@ alignment = 1
 layout_mode = 2
 alignment = 1
 
-[node name="CopyConnectButton" type="Button" parent="UIBox/SettingsSplitBox/Settings_Setup/Buttons"]
+[node name="CopyConnectButton" type="Button" parent="UIBox/SettingsSplitBox/Settings_Setup/Buttons" groups=["ConfirmButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_wgrsm")
 text = "Copy Connect Code"
 
-[node name="StartGame" type="Button" parent="UIBox/SettingsSplitBox/Settings_Setup/Buttons"]
+[node name="StartGame" type="Button" parent="UIBox/SettingsSplitBox/Settings_Setup/Buttons" groups=["ConfirmButtons"]]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_wgrsm")
 text = "Start Game"
 
-[node name="BackToHomeButton" type="Button" parent="UIBox/SettingsSplitBox/Settings_Setup/Buttons"]
+[node name="BackToHomeButton" type="Button" parent="UIBox/SettingsSplitBox/Settings_Setup/Buttons" groups=["BackButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_wgrsm")
@@ -366,7 +366,7 @@ theme = ExtResource("2_wgrsm")
 placeholder_text = "New Preset Name"
 alignment = 1
 
-[node name="AddPreset" type="Button" parent="UIBox/SettingsSplitBox/PresetsPanelBox"]
+[node name="AddPreset" type="Button" parent="UIBox/SettingsSplitBox/PresetsPanelBox" groups=["ConfirmButtons"]]
 layout_mode = 2
 theme = ExtResource("2_wgrsm")
 text = "Add Current Settings as Preset"

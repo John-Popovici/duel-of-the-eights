@@ -1,5 +1,5 @@
 [gd_scene format=3 uid="uid://dvqod4aw6sxvo"]
 
-[node name="Button" type="Button"]
+[node name="Button" type="Button" groups=["ConfirmButtons"]]
 size_flags_horizontal = 3
 text = "Blank"

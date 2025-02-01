@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="1_b5ufw"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_PresetButton.gd" id="1_yah4c"]
 
-[node name="SamplePreset" type="Button"]
+[node name="SamplePreset" type="Button" groups=["ConfirmButtons"]]
 theme = ExtResource("1_b5ufw")
 text = "Yahtzee!"
 script = ExtResource("1_yah4c")

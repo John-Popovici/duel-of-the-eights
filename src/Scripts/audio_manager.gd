@@ -5,9 +5,12 @@ extends Node
 
 # Dictionary of sound effects
 var sfx_library = {
-	#"dice_roll": preload("res://Audio/SFX/dice_roll.wav"),
-	#"button_click": preload("res://Audio/SFX/button_click.wav"),
-	#"win_sound": preload("res://Audio/SFX/win_sound.wav")
+	"back_button_click": preload("res://Assets/Audio/SFX/back_style_2_001.ogg"),
+	"confirm_button_click": preload("res://Assets/Audio/SFX/confirm_style_2_001.ogg"),
+	"confirm_echo_button_click": preload("res://Assets/Audio/SFX/confirm_style_2_echo_001.ogg"),
+	"error_button_click": preload("res://Assets/Audio/SFX/error_style_2_001.ogg"),
+	"win_sound": preload("res://Assets/Audio/SFX/magic_003.wav"),
+	"lose_sound": preload("res://Assets/Audio/SFX/explosion_02.wav")
 }
 
 var dice_sfx_library = {
@@ -52,10 +55,25 @@ var music_library = {
 
 func _ready():
 	# Set default volume levels
-	music_player.volume_db = -10  # Default lower volume
-	#music_player.loop = true
-	sfx_player.volume_db = -5  
+	set_music_volume(0.2)
+	set_sfx_volume(0.4)
 	AudioManager.play_music("main_menu")
+	connect_buttons()
+
+func connect_buttons() -> void:
+	var confirm_buttons: Array = get_tree().get_nodes_in_group("ConfirmButtons")
+	for inst in confirm_buttons:
+		inst.connect("pressed", self.on_confirm_button_pressed)
+	
+	var back_buttons: Array = get_tree().get_nodes_in_group("BackButtons")
+	for inst in back_buttons:
+		inst.connect("pressed", self.on_back_button_pressed)
+
+func on_confirm_button_pressed()->void:
+	play_sfx("confirm_button_click")
+
+func on_back_button_pressed()->void:
+	play_sfx("back_button_click")
 
 func play_music(track_name: String, loop: bool = true):
 	if track_name in music_library:
@@ -85,8 +103,8 @@ func play_dice_sfx():
 	sfx_player.stream = dice_sfx_library[random_key]  # Assign the audio stream
 	sfx_player.play()  # Play the sound
 
-func set_music_volume(volume: float):
+func set_music_volume(volume: float): #float 0 to 1
 	music_player.volume_db = linear_to_db(volume)  
 
-func set_sfx_volume(volume: float):
+func set_sfx_volume(volume: float): #float 0 to 1
 	sfx_player.volume_db = linear_to_db(volume)  

@@ -2,7 +2,7 @@ extends Node3D
 
 
 func _ready() -> void:
-	pass
+	AudioManager.connect_buttons()
 
 func returnToIntro() -> void:
 	SceneSwitcher.returnToIntro()

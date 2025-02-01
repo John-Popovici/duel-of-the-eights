@@ -25,6 +25,7 @@ func _ready() -> void:
 	start_online_server_button.pressed.connect(_on_start_online_server_pressed);
 	customization_button.pressed.connect(_on_customization_pressed)
 	settings_button.pressed.connect(_on_settings_pressed)
+	AudioManager.connect_buttons()
 
 # Transition to GameScene with player names
 func _on_start_local_game_pressed() -> void:
