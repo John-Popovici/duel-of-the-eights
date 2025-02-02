@@ -35,6 +35,7 @@ func _ready() -> void:
 	network_manager.connect("connection_failed", self.returnToIntro)
 	GameSettings.connect("game_settings_ready", self._on_settings_ready)
 	network_manager.connect("received_game_settings", self._on_settings_ready)
+	AudioManager.connect_buttons()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

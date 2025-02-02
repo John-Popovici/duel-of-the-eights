@@ -42,6 +42,8 @@ func _ready() -> void:
 	myPlayer.connect("rollsReadandWaiting", self.waiting_on_other_player)
 	myPlayer.connect("player_stats_updated", self.update_player_stats_signal)
 	enemyPlayer.connect("player_stats_updated", self.update_player_stats_signal)
+	AudioManager.play_music("gameplay")
+	AudioManager.connect_buttons()
 
 signal update_player_stats(_player: String, Stats: Dictionary)
 func update_player_stats_signal(_player: String, Stats: Dictionary) -> void:
@@ -344,10 +346,11 @@ func endGame() -> void:
 	print("Game ended")
 	GameUI.hide_all_ui()
 	rollButtons.visible = false
+	if winner == "none" or winner =="self":
+		AudioManager.play_sfx("win_sound")
+	else:
+		AudioManager.play_sfx("lose_sound")
 	GameUI.show_end_of_game_screen(resultText, myPlayerFinalStats, OpponentFinalStats)
-	await get_tree().create_timer(5).timeout
-	#Add button instead of timer
-	get_parent().finish_game(winner, myPlayerFinalStats, OpponentFinalStats)
 
 var rematch = false
 func restartGame() ->void:

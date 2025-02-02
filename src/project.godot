@@ -21,6 +21,7 @@ GlobalSettings="*res://Scripts/UniversalScripts/global_settings.gd"
 SceneSwitcher="*res://Scripts/UniversalScripts/scene_switcher.gd"
 OnlineServer="*res://Scripts/ServerScripts/online_server.gd"
 ToastLayer="*res://NodeScene/toast_layer.tscn"
+AudioManager="*res://NodeScene/AudioManager.tscn"
 
 [debug]
 
@@ -50,6 +51,8 @@ import/blender/enabled=false
 
 NetworkHandlingNodes="Nodes for Network handling, must only have one at most in the group simultaneously"
 SingleGameManager="Group for Single Game Manager Instance"
+ConfirmButtons="Audio Group for Confirm Buttons"
+BackButtons="Audio Group for Back Buttons"
 
 [gui]
 

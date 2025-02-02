@@ -125,7 +125,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Blank"
 
-[node name="BackToHomeButton" type="Button" parent="CustomizationUI/BackPanel/Sections"]
+[node name="BackToHomeButton" type="Button" parent="CustomizationUI/BackPanel/Sections" groups=["BackButtons"]]
 layout_mode = 2
 text = "Back To Home"
 

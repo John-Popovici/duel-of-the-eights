@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cs4s2lce6gojq"
+path="res://.godot/imported/AJP 3 Constellate impromptu only 0m18s.mp3-18a0007655737b25f4ba24a68e483ca3.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Music/AJP 3 Constellate impromptu only 0m18s.mp3"
+dest_files=["res://.godot/imported/AJP 3 Constellate impromptu only 0m18s.mp3-18a0007655737b25f4ba24a68e483ca3.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

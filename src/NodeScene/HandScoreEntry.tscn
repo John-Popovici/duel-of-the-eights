@@ -12,7 +12,7 @@ layout_mode = 2
 theme = ExtResource("1_st541")
 text = "Hand Name:"
 
-[node name="Select" type="Button" parent="."]
+[node name="Select" type="Button" parent="." groups=["ConfirmButtons"]]
 layout_mode = 2
 theme = ExtResource("1_st541")
 text = "Select"

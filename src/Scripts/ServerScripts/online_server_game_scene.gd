@@ -69,6 +69,8 @@ func _ready():
 	chat_input.connect("text_submitted", Callable(self, "_on_send_button_pressed"))
 	# Initialize chat display (clear the chat)
 	chat_text_edit.text = ""
+	
+	AudioManager.connect_buttons()
 
 # Function to handle connection to the server
 func _on_button_pressed():

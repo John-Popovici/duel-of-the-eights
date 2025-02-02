@@ -22,16 +22,19 @@ var aside_row_gap := Vector3(5, 0, 0)
 
 # Rolls all dice with random force and torque
 func roll_dice() -> void:
+	AudioManager.play_dice_sfx()
 	for die in dice_nodes:
 		die.roll()  # Call the roll function on each die
 
 # Rolls only selected dice
 func roll_selected_dice() -> void:
 	moveDiceAside(get_unselected_dice())
+	AudioManager.play_dice_sfx()
 	for die in get_selected_dice():
 		die.roll()
 
 func roll_rolling_or_invalid_dice() -> void:
+	AudioManager.play_dice_sfx()
 	for die in dice_nodes:
 		if die.getIsRolling() or (die.get_face_value() == -1):
 			die.roll()

@@ -63,17 +63,17 @@ theme = ExtResource("4_h4ers")
 [node name="ButtonHolder" type="VBoxContainer" parent="CameraController/CameraPosPanel"]
 layout_mode = 2
 
-[node name="Angled" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder"]
+[node name="Angled" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder" groups=["ConfirmButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Angled"
 
-[node name="Top Down" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder"]
+[node name="Top Down" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder" groups=["ConfirmButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Top Down"
 
-[node name="Cinematic" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder"]
+[node name="Cinematic" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder" groups=["ConfirmButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Cinematic"
@@ -185,13 +185,13 @@ grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("10_ks8nt")
 
-[node name="RollSelected" type="Button" parent="RollButtons"]
+[node name="RollSelected" type="Button" parent="RollButtons" groups=["ConfirmButtons"]]
 layout_mode = 2
 theme = ExtResource("4_h4ers")
 theme_override_font_sizes/font_size = 22
 text = "Roll Selected"
 
-[node name="PassRoll" type="Button" parent="RollButtons"]
+[node name="PassRoll" type="Button" parent="RollButtons" groups=["ConfirmButtons"]]
 layout_mode = 2
 theme = ExtResource("4_h4ers")
 theme_override_font_sizes/font_size = 22

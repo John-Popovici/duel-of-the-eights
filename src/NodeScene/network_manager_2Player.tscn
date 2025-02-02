@@ -10,7 +10,6 @@ script = ExtResource("1_n7215")
 
 [node name="ConnectionUI" type="CanvasLayer" parent="."]
 layer = 3
-visible = false
 script = ExtResource("2_b1k17")
 
 [node name="UIBox" type="PanelContainer" parent="ConnectionUI"]
@@ -48,12 +47,12 @@ theme = ExtResource("4_77rg4")
 placeholder_text = "Port - 5 digits"
 alignment = 1
 
-[node name="ConnectButton" type="Button" parent="ConnectionUI/UIBox/Connection_Setup"]
+[node name="ConnectButton" type="Button" parent="ConnectionUI/UIBox/Connection_Setup" groups=["ConfirmButtons"]]
 layout_mode = 2
 theme = ExtResource("4_77rg4")
 text = "Connect"
 
-[node name="BackToHomeButton" type="Button" parent="ConnectionUI/UIBox/Connection_Setup"]
+[node name="BackToHomeButton" type="Button" parent="ConnectionUI/UIBox/Connection_Setup" groups=["BackButtons"]]
 layout_mode = 2
 theme = ExtResource("4_77rg4")
 text = "Back to Home"
