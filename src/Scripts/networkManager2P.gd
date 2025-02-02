@@ -34,6 +34,7 @@ func start_server(_port: int = default_port):
 func connect_to_server(_hash: String):
 	var peer = ENetMultiplayerPeer.new()
 	var ip = hash_to_ip(_hash.substr(0,8))
+	print("IP code is ", _hash.substr(0,8))
 	port = lettersToNumber(_hash.substr(8,-1))
 	var error = peer.create_client(ip, port)
 	if error != OK:
@@ -132,14 +133,16 @@ func ip_to_hash(ip: String) -> String:
 
 func hash_to_ip(hash_code: String) -> String:
 	# Converts a 10-character code back to an IP address
-	if hash_code.length() != 10:
+	print("Hash code to convert: ", hash_code)
+	if hash_code.length() != 8:
+		print("invalid lenght")
 		return ""  # Invalid code length
 
 	var ip = []
 	for i in range(0, hash_code.length(), 2):
 		var octet_code = hash_code.substr(i, 2)
 		ip.append(str(lettersToNumber(octet_code)))  # Convert each 2-character code back to octet
-
+	print("ip before join: ", ip)
 	return ".".join(ip)
 
 
