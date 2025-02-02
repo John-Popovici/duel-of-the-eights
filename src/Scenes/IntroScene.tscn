@@ -188,7 +188,7 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -218.0
-offset_bottom = 108.0
+offset_bottom = 152.0
 grow_horizontal = 0
 theme = ExtResource("2_j2iul")
 
@@ -197,12 +197,20 @@ layout_mode = 2
 
 [node name="Customization" type="Button" parent="OptionsPanel/VBoxContainer" groups=["ConfirmButtons"]]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Cosmetic Customization"
 
 [node name="Settings" type="Button" parent="OptionsPanel/VBoxContainer" groups=["ConfirmButtons"]]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Settings"
 
 [node name="Profile" type="Button" parent="OptionsPanel/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Profile"
+
+[node name="Tutorial" type="Button" parent="OptionsPanel/VBoxContainer" groups=["ConfirmButtons"]]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Tutorial"

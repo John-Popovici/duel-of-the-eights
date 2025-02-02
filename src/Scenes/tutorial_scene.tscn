@@ -1,0 +1,124 @@
+[gd_scene load_steps=7 format=3 uid="uid://d03vnrh4n7bba"]
+
+[ext_resource type="Theme" uid="uid://dokd457t4xs7n" path="res://Themes/Default_Pixel_Wood/Default_pixel_.Wood.tres" id="1_ghucw"]
+[ext_resource type="Script" path="res://Scripts/Tutorial/TutorialScene.gd" id="2_2fbom"]
+[ext_resource type="PackedScene" uid="uid://dvqod4aw6sxvo" path="res://NodeScene/button.tscn" id="3_5g33q"]
+[ext_resource type="Texture2D" uid="uid://c5kht6olibl0a" path="res://Assets/2D Assets/TutorialImages/Standard1.png" id="3_lcype"]
+[ext_resource type="PackedScene" uid="uid://bg5xnvw62vip6" path="res://NodeScene/background_objects_Dungeon_Tavern.tscn" id="4_3lroh"]
+[ext_resource type="Script" path="res://Scripts/camera_toggle_controller.gd" id="5_y4rc3"]
+
+[node name="TutorialScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ghucw")
+script = ExtResource("2_2fbom")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.588235)
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -395.5
+offset_top = -246.0
+offset_right = 395.5
+offset_bottom = 246.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+
+[node name="ImageDisplay" type="TextureRect" parent="Panel/Container"]
+layout_mode = 2
+texture = ExtResource("3_lcype")
+expand_mode = 5
+
+[node name="CaptionBox" type="VBoxContainer" parent="Panel/Container"]
+layout_mode = 2
+
+[node name="CaptionLabel" type="Label" parent="Panel/Container/CaptionBox"]
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="NavigationButtons" type="HBoxContainer" parent="Panel/Container"]
+layout_mode = 2
+
+[node name="PreviousButton" parent="Panel/Container/NavigationButtons" instance=ExtResource("3_5g33q")]
+layout_mode = 2
+text = "Previous"
+
+[node name="NextButton" parent="Panel/Container/NavigationButtons" instance=ExtResource("3_5g33q")]
+layout_mode = 2
+text = "Next"
+
+[node name="SkipButton" parent="Panel/Container/NavigationButtons" instance=ExtResource("3_5g33q")]
+layout_mode = 2
+text = "Exit Tutorial"
+
+[node name="BackgroundObjects" parent="." instance=ExtResource("4_3lroh")]
+
+[node name="CameraController" type="Node3D" parent="."]
+script = ExtResource("5_y4rc3")
+
+[node name="Positions" type="Node3D" parent="CameraController"]
+
+[node name="Angled" type="Node3D" parent="CameraController/Positions"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 21)
+
+[node name="Top Down" type="Node3D" parent="CameraController/Positions"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 3)
+
+[node name="Cinematic" type="Node3D" parent="CameraController/Positions"]
+transform = Transform3D(0.777146, -0.265962, 0.570358, 0, 0.906307, 0.422618, -0.629321, -0.328436, 0.704333, 105, 55, 48)
+
+[node name="Camera3D" type="Camera3D" parent="CameraController"]
+transform = Transform3D(0.777146, -0.265962, 0.570358, 0, 0.906308, 0.422618, -0.62932, -0.328436, 0.704333, 105, 55, 48)
+
+[node name="SpotLight3D_Camera" type="SpotLight3D" parent="CameraController/Camera3D"]
+transform = Transform3D(1, 0, -2.98023e-08, -1.49012e-08, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0)
+light_energy = 0.001
+shadow_enabled = true
+spot_range = 1292.23
+spot_attenuation = -0.5
+spot_angle = 89.99
+spot_angle_attenuation = 2.37841
+
+[node name="CameraPosPanel" type="PanelContainer" parent="CameraController"]
+visible = false
+offset_top = 435.0
+offset_right = 200.0
+offset_bottom = 515.0
+theme = ExtResource("1_ghucw")
+
+[node name="ButtonHolder" type="VBoxContainer" parent="CameraController/CameraPosPanel"]
+layout_mode = 2
+
+[node name="Angled" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Angled"
+
+[node name="Top Down" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Top Down"
+
+[node name="Cinematic" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cinematic"

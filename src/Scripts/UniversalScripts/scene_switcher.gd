@@ -5,7 +5,7 @@ extends Node3D
 
 func _ready() -> void:
 	currentScene = get_parent().get_node("IntroScene")
-	currentScene.print_tree_pretty()
+	#currentScene.print_tree_pretty()
 
 func returnToIntro() -> void:
 	# Only free the current scene if it's still valid
