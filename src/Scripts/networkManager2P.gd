@@ -135,7 +135,7 @@ func hash_to_ip(hash_code: String) -> String:
 	# Converts a 10-character code back to an IP address
 	print("Hash code to convert: ", hash_code)
 	if hash_code.length() != 8:
-		print("invalid lenght")
+		print("invalid length")
 		return ""  # Invalid code length
 
 	var ip = []
