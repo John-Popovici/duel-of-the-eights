@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmflsd1qcdwnv"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerProfile/player_profile_scene.gd" id="1_bp5l0"]
+[ext_resource type="Script" path="res://Scripts/PlayerProfile/player_profile_ui.gd" id="2_w6kjf"]
+
+[node name="player_profile_scene" type="Node3D"]
+script = ExtResource("1_bp5l0")
+
+[node name="PlayerProfileUI" type="CanvasLayer" parent="."]
+script = ExtResource("2_w6kjf")
+
+[node name="BackPanel" type="PanelContainer" parent="PlayerProfileUI"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sections" type="VBoxContainer" parent="PlayerProfileUI/BackPanel"]
+layout_mode = 2
