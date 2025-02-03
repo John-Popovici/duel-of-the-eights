@@ -2,6 +2,8 @@ extends Node
 
 @onready var music_player = $MusicPlayer
 @onready var sfx_player = $SFXPlayer
+@onready var musicVol
+@onready var sfxVol
 
 # Dictionary of sound effects
 var sfx_library = {
@@ -105,6 +107,14 @@ func play_dice_sfx():
 
 func set_music_volume(volume: float): #float 0 to 1
 	music_player.volume_db = linear_to_db(volume)  
+	musicVol = volume
 
 func set_sfx_volume(volume: float): #float 0 to 1
-	sfx_player.volume_db = linear_to_db(volume)  
+	sfx_player.volume_db = linear_to_db(volume)
+	sfxVol = volume
+
+func get_music_volume() -> float:
+	return db_to_linear(music_player.volume_db)
+
+func get_sfx_volume() -> float:
+	return db_to_linear(sfx_player.volume_db)
