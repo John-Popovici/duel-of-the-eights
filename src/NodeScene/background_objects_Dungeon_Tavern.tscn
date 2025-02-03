@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bg5xnvw62vip6"]
+[gd_scene load_steps=24 format=3 uid="uid://bg5xnvw62vip6"]
 
 [ext_resource type="PackedScene" uid="uid://cjpab24rlyc84" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_long_decorated_A.gltf" id="1_27pwu"]
 [ext_resource type="PackedScene" uid="uid://brsidrd06qil2" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_long_tablecloth_decorated_A.gltf" id="2_51s1v"]
@@ -22,6 +22,10 @@
 [ext_resource type="PackedScene" uid="uid://djsh6mlx4uxmm" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_archedwindow_gated_scaffold.gltf" id="20_v6rpf"]
 [ext_resource type="PackedScene" uid="uid://jw75ou1pnybp" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_arched.gltf" id="21_pi0vq"]
 [ext_resource type="PackedScene" uid="uid://bogakujbmoqmh" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/stairs_wall_left.gltf" id="22_iopg7"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_j1tbi"]
+height = 2.05582
+radius = 0.110577
 
 [node name="BackgroundObjects" type="Node3D"]
 
@@ -59,7 +63,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
 [node name="candle_thin_lit2" parent="GameTable" instance=ExtResource("8_aoelk")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.75, 1, -0.5)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.75, 1, -0.5)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="GameTable/candle_thin_lit2"]
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0, 0.885345, 0)
@@ -71,6 +75,12 @@ shadow_opacity = 0.7
 distance_fade_begin = 75.0
 distance_fade_length = 100.0
 omni_range = 50.0
+
+[node name="RigidBody3D" type="RigidBody3D" parent="GameTable/candle_thin_lit2"]
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameTable/candle_thin_lit2/RigidBody3D"]
+shape = SubResource("CylinderShape3D_j1tbi")
 
 [node name="Floor" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25.8, 0)
