@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bg5xnvw62vip6"]
+[gd_scene load_steps=47 format=3 uid="uid://bg5xnvw62vip6"]
 
 [ext_resource type="PackedScene" uid="uid://cjpab24rlyc84" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_long_decorated_A.gltf" id="1_27pwu"]
 [ext_resource type="PackedScene" uid="uid://brsidrd06qil2" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_long_tablecloth_decorated_A.gltf" id="2_51s1v"]
@@ -27,12 +27,16 @@
 [ext_resource type="PackedScene" uid="uid://cesdhsch2oi5m" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_archedwindow_open.gltf" id="17_kjc5o"]
 [ext_resource type="PackedScene" uid="uid://b2vybu872oxk1" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/fbx(unity)/wall_corner_scaffold.fbx" id="18_xfhhp"]
 [ext_resource type="PackedScene" uid="uid://55melk6otw81" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/banner_shield_green.gltf" id="19_6r1cu"]
+[ext_resource type="PackedScene" uid="uid://b5gs64n4itaaw" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/bottle_A_labeled_brown.gltf" id="20_4fk18"]
 [ext_resource type="PackedScene" uid="uid://djsh6mlx4uxmm" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_archedwindow_gated_scaffold.gltf" id="20_v6rpf"]
 [ext_resource type="PackedScene" uid="uid://b23qkyb1ysv7p" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/sword_shield_gold.gltf" id="21_3g6on"]
+[ext_resource type="PackedScene" uid="uid://cfgbrkjm8frqw" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/bottle_A_labeled_green.gltf" id="21_j44s1"]
 [ext_resource type="PackedScene" uid="uid://jw75ou1pnybp" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_arched.gltf" id="21_pi0vq"]
 [ext_resource type="PackedScene" uid="uid://dqcxgbpu7epul" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/barrier.gltf" id="22_cjxv3"]
 [ext_resource type="PackedScene" uid="uid://bogakujbmoqmh" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/stairs_wall_left.gltf" id="22_iopg7"]
+[ext_resource type="PackedScene" uid="uid://cl2njqojys6dg" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/bottle_C_brown.gltf" id="22_j3bie"]
 [ext_resource type="PackedScene" uid="uid://bfvvj44ulabb" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/barrier_half.gltf" id="23_2xh7r"]
+[ext_resource type="PackedScene" uid="uid://dpspjbhkjaxpf" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/shelf_large.gltf" id="23_wln1m"]
 [ext_resource type="PackedScene" uid="uid://dsw31tt3igfhl" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/barrier_colum_half.gltf" id="24_c1xn4"]
 [ext_resource type="PackedScene" uid="uid://i1tj46sw05g2" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/pillar.gltf" id="26_2ynmn"]
 [ext_resource type="PackedScene" uid="uid://cy6drhghdmgv" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/shelf_small_candles.gltf" id="28_h85qy"]
@@ -314,13 +318,25 @@ transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -35
 [node name="wall_archedwindow_open2" parent="Walls/LeftWall" instance=ExtResource("17_kjc5o")]
 transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -350, 0, 0)
 
+[node name="bottle_A_labeled_brown2" parent="Walls/LeftWall/wall_archedwindow_open2" instance=ExtResource("20_4fk18")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.628861, 1.0351, -1.77636e-15)
+
+[node name="bottle_A_labeled_green2" parent="Walls/LeftWall/wall_archedwindow_open2" instance=ExtResource("21_j44s1")]
+transform = Transform3D(0.46749, 0, 0.17735, 0, 0.5, 0, -0.17735, 0, 0.46749, -0.828673, 1.05613, 0.271975)
+
+[node name="bottle_C_brown2" parent="Walls/LeftWall/wall_archedwindow_open2" instance=ExtResource("22_j3bie")]
+transform = Transform3D(0.478501, 0, 0.145042, 0, 0.5, 0, -0.145042, 0, 0.478501, 0.7207, 1.05819, 0.0646069)
+
 [node name="wall12" parent="Walls/LeftWall" instance=ExtResource("10_ndojk")]
 transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -350, 0, 100)
 
 [node name="wall13" parent="Walls/LeftWall" instance=ExtResource("10_ndojk")]
 transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -450, 0, -100)
 
-[node name="wall14" parent="Walls/LeftWall" instance=ExtResource("10_ndojk")]
+[node name="shelf_large2" parent="Walls/LeftWall/wall13" instance=ExtResource("23_wln1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.60555, 0.711287, 0.387695)
+
+[node name="wall_shelves3" parent="Walls/LeftWall" instance=ExtResource("16_tgok1")]
 transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -450, 0, 0)
 
 [node name="wall15" parent="Walls/LeftWall" instance=ExtResource("10_ndojk")]
@@ -484,3 +500,61 @@ transform = Transform3D(20.7947, 0, -13.8773, 0, 25, 0, 13.8773, 0, 20.7947, -14
 
 [node name="table_medium_broken2" parent="FloatingObjects" instance=ExtResource("38_jppj4")]
 transform = Transform3D(20.8044, 0, 13.8628, 0, 25, 0, -13.8628, 0, 20.8044, -164.666, -25, 82.072)
+
+[node name="InsideRoom" type="Node3D" parent="."]
+
+[node name="shelf_small_candles2" parent="InsideRoom" instance=ExtResource("28_h85qy")]
+transform = Transform3D(-1.09278e-06, 0, -25, 0, 25, 0, 25, 0, -1.09278e-06, -355.948, 25.395, 58.2759)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="InsideRoom/shelf_small_candles2"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, -0.164498, 0.699067, 0.196813)
+light_color = Color(0.931627, 0.741943, 0.578706, 1)
+light_energy = 16.0
+light_indirect_energy = 10.0
+omni_range = 85.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="InsideRoom/shelf_small_candles2/OmniLight3D2"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
+[node name="shelf_small_candles3" parent="InsideRoom" instance=ExtResource("28_h85qy")]
+transform = Transform3D(-1.09278e-06, 0, -25, 0, 25, 0, 25, 0, -1.09278e-06, -355.948, 25.395, -58.0121)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="InsideRoom/shelf_small_candles3"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, -0.164498, 0.699067, 0.196813)
+light_color = Color(0.931627, 0.741943, 0.578706, 1)
+light_energy = 16.0
+light_indirect_energy = 10.0
+omni_range = 85.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="InsideRoom/shelf_small_candles3/OmniLight3D2"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
+[node name="shelf_small_candles4" parent="InsideRoom" instance=ExtResource("28_h85qy")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -444.051, 25.395, -58.0121)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="InsideRoom/shelf_small_candles4"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, -0.164498, 0.699067, 0.196813)
+light_color = Color(0.931627, 0.741943, 0.578706, 1)
+light_energy = 16.0
+light_indirect_energy = 10.0
+omni_range = 85.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="InsideRoom/shelf_small_candles4/OmniLight3D2"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
+[node name="SpotLight3D" type="SpotLight3D" parent="InsideRoom"]
+transform = Transform3D(0.819982, -0.165544, 0.547927, -1.49012e-08, 0.957264, 0.289216, -0.572389, -0.237152, 0.784939, -360.433, 47.9298, 37.1253)
+light_color = Color(0.933333, 0.741176, 0.580392, 1)
+light_energy = 16.0
+light_indirect_energy = 4.177
+spot_range = 365.953
+spot_angle = 89.99
