@@ -354,6 +354,11 @@ transform = Transform3D(24.499, 0, -4.97992, 0, 25, 0, 4.97992, 0, 24.499, 0, -2
 [node name="table_small_decorated_B2" parent="FloatingObjects" instance=ExtResource("4_b3rd5")]
 transform = Transform3D(22.3788, 0, 11.144, 0, 25, 0, -11.144, 0, 22.3788, -318.853, -24.5, -49.8812)
 
+[node name="OmniLight3D" type="OmniLight3D" parent="FloatingObjects/table_small_decorated_B2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 2, 0.3)
+light_energy = 5.27811
+omni_range = 20.2985
+
 [node name="crates_stacked2" parent="FloatingObjects" instance=ExtResource("5_73elg")]
 transform = Transform3D(22.5716, 0, -10.7482, 0, 25, 0, 10.7482, 0, 22.5716, -315.395, -24.5, 65.495)
 
