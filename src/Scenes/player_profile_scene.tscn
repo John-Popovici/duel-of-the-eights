@@ -1,17 +1,160 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmflsd1qcdwnv"]
+[gd_scene load_steps=6 format=3 uid="uid://503osc6reblk"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerProfile/player_profile_scene.gd" id="1_bp5l0"]
+[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="2_4h1a3"]
 [ext_resource type="Script" path="res://Scripts/PlayerProfile/player_profile_ui.gd" id="2_w6kjf"]
+[ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/Default_Pixel_Blue/PanelBlueBoxBackgroundStyle.tres" id="3_hr4t2"]
+[ext_resource type="Texture2D" uid="uid://dxqthyrktxgfq" path="res://Assets/2D Assets/OtherImages/defaultUser.webp" id="3_v3pu7"]
 
-[node name="player_profile_scene" type="Node3D"]
-script = ExtResource("1_bp5l0")
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iwiv5"]
 
-[node name="PlayerProfileUI" type="CanvasLayer" parent="."]
+[node name="PlayerProfileUI" type="CanvasLayer"]
 script = ExtResource("2_w6kjf")
 
-[node name="BackPanel" type="PanelContainer" parent="PlayerProfileUI"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="UIBox" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -469.0
+offset_top = -310.0
+offset_right = 182.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.44, 2.28)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_4h1a3")
+theme_override_styles/panel = ExtResource("3_hr4t2")
 
-[node name="Sections" type="VBoxContainer" parent="PlayerProfileUI/BackPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UIBox"]
 layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UIBox/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIBox/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="UserDetailsContainer" type="HBoxContainer" parent="UIBox/VBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(50, 45)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="ProfileBackground" type="Panel" parent="UIBox/VBoxContainer/MarginContainer/VBoxContainer/UserDetailsContainer"]
+custom_minimum_size = Vector2(65, 45)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="TextureButton" type="TextureButton" parent="UIBox/VBoxContainer/MarginContainer/VBoxContainer/UserDetailsContainer/ProfileBackground"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.175, 0.175)
+pivot_offset = Vector2(100, 100)
+texture_normal = ExtResource("3_v3pu7")
+stretch_mode = 5
+
+[node name="UsernameFrame" type="Panel" parent="UIBox/VBoxContainer/MarginContainer/VBoxContainer/UserDetailsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 7.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_iwiv5")
+
+[node name="UsernameBox" type="LineEdit" parent="UIBox/VBoxContainer/MarginContainer/VBoxContainer/UserDetailsContainer/UsernameFrame"]
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -25.0
+offset_right = 200.0
+grow_vertical = 0
+size_flags_vertical = 8
+placeholder_text = "User Name"
+max_length = 50
+expand_to_text_length = true
+
+[node name="HorizontalLine" type="ColorRect" parent="UIBox/VBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0, 0, 0, 0.321569)
+
+[node name="InvertSelectMethodContainer" type="HBoxContainer" parent="UIBox/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="InvertSelectMethodLabel" type="Label" parent="UIBox/VBoxContainer/MarginContainer/VBoxContainer/InvertSelectMethodContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 1
+text = " Invert Selection Method : "
+
+[node name="CheckButton" type="CheckButton" parent="UIBox/VBoxContainer/MarginContainer/VBoxContainer/InvertSelectMethodContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="SFXVolumeContainer" type="HBoxContainer" parent="UIBox/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SFXVolumeLabel" type="Label" parent="UIBox/VBoxContainer/MarginContainer/VBoxContainer/SFXVolumeContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 1
+text = " SFX Volume : "
+
+[node name="SliderContainer" type="HBoxContainer" parent="UIBox/VBoxContainer/MarginContainer/VBoxContainer/SFXVolumeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Slider" type="HSlider" parent="UIBox/VBoxContainer/MarginContainer/VBoxContainer/SFXVolumeContainer/SliderContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.8
+
+[node name="Value" type="Label" parent="UIBox/VBoxContainer/MarginContainer/VBoxContainer/SFXVolumeContainer/SliderContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "0%"
+horizontal_alignment = 1
+
+[node name="MusicVolumeContainer" type="HBoxContainer" parent="UIBox/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MusicVolumeLabel" type="Label" parent="UIBox/VBoxContainer/MarginContainer/VBoxContainer/MusicVolumeContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 1
+text = " Music Volume : "
+
+[node name="SliderContainer" type="HBoxContainer" parent="UIBox/VBoxContainer/MarginContainer/VBoxContainer/MusicVolumeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Slider" type="HSlider" parent="UIBox/VBoxContainer/MarginContainer/VBoxContainer/MusicVolumeContainer/SliderContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.8
+
+[node name="Value" type="Label" parent="UIBox/VBoxContainer/MarginContainer/VBoxContainer/MusicVolumeContainer/SliderContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "0%"
+horizontal_alignment = 1
