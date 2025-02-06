@@ -17,7 +17,7 @@ func play_drink():
 	AudioManager.play_ambience("drink_sip")
 
 func start_drinking_timer():
-	var random_interval = randf_range(5.0, 10.0)  # Randomize between 4-7 sec
+	var random_interval = randf_range(10.0, 25.0)  # Randomize between 4-7 sec
 	await get_tree().create_timer(random_interval).timeout
 	play_drink()
 	await animation_player.animation_finished
