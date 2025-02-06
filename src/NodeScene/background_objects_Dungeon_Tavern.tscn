@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://bg5xnvw62vip6"]
+[gd_scene load_steps=66 format=3 uid="uid://bg5xnvw62vip6"]
 
 [ext_resource type="PackedScene" uid="uid://cayt468qqmnac" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_small_decorated_A.gltf" id="3_8t0tc"]
 [ext_resource type="PackedScene" uid="uid://q0rsd7fpxbad" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_small_decorated_B.gltf" id="4_b3rd5"]
@@ -52,9 +52,12 @@
 [ext_resource type="PackedScene" uid="uid://b0fsjo012idhw" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Bartender_mod.tscn" id="43_8qiv2"]
 [ext_resource type="Script" path="res://Scripts/NPCAnimations/bartender.gd" id="44_bw6ji"]
 [ext_resource type="PackedScene" uid="uid://bbwsjnrbve4tf" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Assets/gltf/axe_2handed.gltf" id="49_krlcb"]
+[ext_resource type="PackedScene" uid="uid://dtohuamct7vwq" path="res://Assets/dice/d6/DiceMakerD6.glb" id="51_amppq"]
 [ext_resource type="PackedScene" uid="uid://chexd6ln6vo33" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Mage_Drinker.tscn" id="52_womj8"]
 [ext_resource type="PackedScene" uid="uid://dnjtv5p8lpclx" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Rouge_Drinker.tscn" id="52_xaghr"]
 [ext_resource type="Script" path="res://Scripts/NPCAnimations/Drinker.gd" id="54_07g65"]
+[ext_resource type="PackedScene" uid="uid://b2spaaxl76xrh" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Barbarian_Gambler.tscn" id="58_7txcq"]
+[ext_resource type="PackedScene" uid="uid://b5lkom3a2vrnc" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Knight_Gambler.tscn" id="59_32sge"]
 
 [sub_resource type="Animation" id="Animation_gpu3b"]
 resource_name = "GlowingLoop"
@@ -95,6 +98,68 @@ _data = {
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_j1tbi"]
 height = 2.05582
 radius = 0.110577
+
+[sub_resource type="Animation" id="Animation_ihi8b"]
+resource_name = "Dice_Bump"
+length = 1.0667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.833333, 0.933333, 1.06667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 13.6877, 0), Vector3(0, 7.82156, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.833333, 0.933333, 1.06667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0.815522, 2.41028e-08, -0.842942), Vector3(-0.0834962, -2.65076, -2.25894), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qt1cn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xngax"]
+_data = {
+"Dice_Bump": SubResource("Animation_ihi8b"),
+"RESET": SubResource("Animation_qt1cn")
+}
 
 [node name="BackgroundObjects" type="Node3D"]
 
@@ -546,7 +611,10 @@ transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, 113
 transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, 163.603, -25.8, -165.917)
 
 [node name="stool4" parent="FloatingObjects" instance=ExtResource("7_7ekul")]
-transform = Transform3D(23.8234, 0, -7.57921, 0, 25, 0, 7.57921, 0, 23.8234, -110.618, -24.5, -101.819)
+transform = Transform3D(23.8234, 0, -7.57921, 0, 25, 0, 7.57921, 0, 23.8234, -152.82, -28.8967, -126.183)
+
+[node name="stool7" parent="FloatingObjects" instance=ExtResource("7_7ekul")]
+transform = Transform3D(23.8234, 0, -7.57921, 0, 25, 0, 7.57921, 0, 23.8234, -197.204, -28.8967, -94.0929)
 
 [node name="stool5" parent="FloatingObjects" instance=ExtResource("7_7ekul")]
 transform = Transform3D(24.989, 0, 0.738632, 0, 25, 0, -0.738632, 0, 24.989, -224.82, -24.5, -59.2292)
@@ -637,3 +705,69 @@ script = ExtResource("54_07g65")
 [node name="Rogue_Hooded" parent="Characters" instance=ExtResource("52_xaghr")]
 transform = Transform3D(-16.6363, 0, 18.661, 0, 25, 0, -18.661, 0, -16.6363, 57.3961, -24.7759, -150.991)
 script = ExtResource("54_07g65")
+
+[node name="Barbarian" parent="Characters" instance=ExtResource("58_7txcq")]
+transform = Transform3D(2.96486, 0, 24.8236, 0, 25, 0, -24.8236, 0, 2.96486, -199.662, -16.371, -98.129)
+
+[node name="Knight" parent="Characters" instance=ExtResource("59_32sge")]
+transform = Transform3D(24.9084, 0, 2.1376, 0, 25, 0, -2.1376, 0, 24.9084, -154.494, -16.3712, -126.821)
+
+[node name="DiceAnimation" type="Node3D" parent="Characters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -158.583, 1.65668, -86.535)
+
+[node name="DiceMakerD6_1" parent="Characters/DiceAnimation" instance=ExtResource("51_amppq")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Characters/DiceAnimation/DiceMakerD6_1"]
+libraries = {
+"": SubResource("AnimationLibrary_xngax")
+}
+autoplay = "Dice_Bump"
+
+[node name="DiceAnimation2" type="Node3D" parent="Characters"]
+transform = Transform3D(0.863114, 0, 0.50501, 0, 1, 0, -0.50501, 0, 0.863114, -158.621, 1.65668, -97.4426)
+
+[node name="DiceMakerD6_1" parent="Characters/DiceAnimation2" instance=ExtResource("51_amppq")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Characters/DiceAnimation2/DiceMakerD6_1"]
+libraries = {
+"": SubResource("AnimationLibrary_xngax")
+}
+autoplay = "Dice_Bump"
+
+[node name="DiceAnimation3" type="Node3D" parent="Characters"]
+transform = Transform3D(0.876399, 0, -0.481585, 0, 1, 0, 0.481585, 0, 0.876399, -163.951, 1.65668, -84.375)
+
+[node name="DiceMakerD6_1" parent="Characters/DiceAnimation3" instance=ExtResource("51_amppq")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Characters/DiceAnimation3/DiceMakerD6_1"]
+libraries = {
+"": SubResource("AnimationLibrary_xngax")
+}
+autoplay = "Dice_Bump"
+
+[node name="DiceAnimation4" type="Node3D" parent="Characters"]
+transform = Transform3D(0.92442, 0, 0.381377, 0, 1, 0, -0.381377, 0, 0.92442, -151.032, 1.65668, -76.9948)
+
+[node name="DiceMakerD6_1" parent="Characters/DiceAnimation4" instance=ExtResource("51_amppq")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Characters/DiceAnimation4/DiceMakerD6_1"]
+libraries = {
+"": SubResource("AnimationLibrary_xngax")
+}
+autoplay = "Dice_Bump"
+
+[node name="DiceAnimation5" type="Node3D" parent="Characters"]
+transform = Transform3D(0.958775, 0, 0.284166, 0, 1, 0, -0.284166, 0, 0.958775, -151.149, 1.65668, -89.3688)
+
+[node name="DiceMakerD6_1" parent="Characters/DiceAnimation5" instance=ExtResource("51_amppq")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Characters/DiceAnimation5/DiceMakerD6_1"]
+libraries = {
+"": SubResource("AnimationLibrary_xngax")
+}
+autoplay = "Dice_Bump"
