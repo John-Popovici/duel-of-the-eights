@@ -1,168 +1,68 @@
-[gd_scene load_steps=6 format=3 uid="uid://503osc6reblk"]
+[gd_scene load_steps=7 format=3 uid="uid://e0m2u55h4xmd"]
 
-[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="2_4h1a3"]
-[ext_resource type="Script" path="res://Scripts/PlayerProfile/player_profile_ui.gd" id="2_w6kjf"]
-[ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/Default_Pixel_Blue/PanelBlueBoxBackgroundStyle.tres" id="3_hr4t2"]
-[ext_resource type="Texture2D" uid="uid://dxqthyrktxgfq" path="res://Assets/2D Assets/OtherImages/defaultUser.webp" id="3_v3pu7"]
+[ext_resource type="Script" path="res://Scripts/player_profile_scene.gd" id="1_6ta5e"]
+[ext_resource type="Script" path="res://Scripts/camera_toggle_controller.gd" id="2_iiqs7"]
+[ext_resource type="Theme" uid="uid://dokd457t4xs7n" path="res://Themes/Default_Pixel_Wood/Default_pixel_.Wood.tres" id="3_2ft3i"]
+[ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_PlayerManager.gd" id="3_yina3"]
+[ext_resource type="PackedScene" uid="uid://503osc6reblk" path="res://NodeScene/player_profile_settings.tscn" id="5_1w2ke"]
+[ext_resource type="PackedScene" uid="uid://bg5xnvw62vip6" path="res://NodeScene/background_objects_Dungeon_Tavern.tscn" id="5_enmkh"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iwiv5"]
+[node name="PlayerProfileScene" type="Node3D"]
+script = ExtResource("1_6ta5e")
 
-[node name="PlayerProfileUI" type="CanvasLayer"]
-script = ExtResource("2_w6kjf")
+[node name="CameraController" type="Node3D" parent="."]
+script = ExtResource("2_iiqs7")
 
-[node name="MainBackground" type="PanelContainer" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -469.0
-offset_top = -310.0
-offset_right = 182.0
-offset_bottom = -36.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.44, 2.28)
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("2_4h1a3")
-theme_override_styles/panel = ExtResource("3_hr4t2")
+[node name="Positions" type="Node3D" parent="CameraController"]
 
-[node name="MainContainer" type="VBoxContainer" parent="MainBackground"]
-layout_mode = 2
+[node name="Angled" type="Node3D" parent="CameraController/Positions"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 21)
 
-[node name="MarginContainer" type="MarginContainer" parent="MainBackground/MainContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_right = 20
+[node name="Top Down" type="Node3D" parent="CameraController/Positions"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 3)
 
-[node name="HListingsContainer" type="VBoxContainer" parent="MainBackground/MainContainer/MarginContainer"]
-layout_mode = 2
+[node name="Cinematic" type="Node3D" parent="CameraController/Positions"]
+transform = Transform3D(0.777146, -0.265962, 0.570358, 0, 0.906307, 0.422618, -0.629321, -0.328436, 0.704333, 105, 55, 48)
 
-[node name="UserDetailsContainer" type="HBoxContainer" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
-custom_minimum_size = Vector2(50, 45)
-layout_mode = 2
-size_flags_vertical = 0
+[node name="Camera3D" type="Camera3D" parent="CameraController"]
+transform = Transform3D(0.777146, -0.265962, 0.570358, 0, 0.906308, 0.422618, -0.62932, -0.328436, 0.704333, 105, 55, 48)
 
-[node name="ProfileBackground" type="Panel" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/UserDetailsContainer"]
-custom_minimum_size = Vector2(65, 45)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 3
+[node name="SpotLight3D_Camera" type="SpotLight3D" parent="CameraController/Camera3D"]
+light_energy = 0.001
+shadow_enabled = true
+spot_range = 1292.23
+spot_attenuation = -0.5
+spot_angle = 89.99
+spot_angle_attenuation = 2.37841
 
-[node name="ProfilePicButton" type="TextureButton" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/UserDetailsContainer/ProfileBackground"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -100.0
-offset_right = 100.0
-offset_bottom = 100.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.175, 0.175)
-pivot_offset = Vector2(100, 100)
-texture_normal = ExtResource("3_v3pu7")
-stretch_mode = 5
-
-[node name="UsernameFrame" type="Panel" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/UserDetailsContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 7.0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_iwiv5")
-
-[node name="UsernameBox" type="LineEdit" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/UserDetailsContainer/UsernameFrame"]
-custom_minimum_size = Vector2(200, 25)
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -25.0
+[node name="CameraPosPanel" type="PanelContainer" parent="CameraController"]
+visible = false
+offset_top = 435.0
 offset_right = 200.0
-grow_vertical = 0
-size_flags_vertical = 8
-placeholder_text = "User Name"
-max_length = 50
-expand_to_text_length = true
+offset_bottom = 515.0
+theme = ExtResource("3_2ft3i")
 
-[node name="HorizontalLine" type="ColorRect" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
-custom_minimum_size = Vector2(0, 1)
+[node name="ButtonHolder" type="VBoxContainer" parent="CameraController/CameraPosPanel"]
+layout_mode = 2
+
+[node name="Angled" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder" groups=["ConfirmButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
-color = Color(0, 0, 0, 0.321569)
+text = "Angled"
 
-[node name="InvertSelectMethodContainer" type="HBoxContainer" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
-layout_mode = 2
-
-[node name="InvertSelectMethodLabel" type="Label" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/InvertSelectMethodContainer"]
-layout_mode = 2
-size_flags_horizontal = 2
-size_flags_vertical = 1
-text = " Invert Selection Method : "
-
-[node name="CheckButton" type="CheckButton" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/InvertSelectMethodContainer"]
-layout_mode = 2
-size_flags_horizontal = 2
-
-[node name="SFXVolumeContainer" type="HBoxContainer" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
-layout_mode = 2
-
-[node name="SFXVolumeLabel" type="Label" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/SFXVolumeContainer"]
-layout_mode = 2
-size_flags_horizontal = 2
-size_flags_vertical = 1
-text = " SFX Volume : "
-
-[node name="SliderContainer" type="HBoxContainer" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/SFXVolumeContainer"]
+[node name="Top Down" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder" groups=["ConfirmButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
+text = "Top Down"
 
-[node name="Slider" type="HSlider" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/SFXVolumeContainer/SliderContainer"]
+[node name="Cinematic" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder" groups=["ConfirmButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 1
-size_flags_stretch_ratio = 4.8
+text = "Cinematic"
 
-[node name="Value" type="Label" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/SFXVolumeContainer/SliderContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-text = "0%"
-horizontal_alignment = 1
+[node name="myPlayer" type="Node" parent="."]
+script = ExtResource("3_yina3")
 
-[node name="MusicVolumeContainer" type="HBoxContainer" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
-layout_mode = 2
+[node name="PlayerProfileUI" parent="." instance=ExtResource("5_1w2ke")]
 
-[node name="MusicVolumeLabel" type="Label" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/MusicVolumeContainer"]
-layout_mode = 2
-size_flags_horizontal = 2
-size_flags_vertical = 1
-text = " Music Volume : "
-
-[node name="SliderContainer" type="HBoxContainer" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/MusicVolumeContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Slider" type="HSlider" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/MusicVolumeContainer/SliderContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-size_flags_stretch_ratio = 4.8
-
-[node name="Value" type="Label" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/MusicVolumeContainer/SliderContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-text = "0%"
-horizontal_alignment = 1
-
-[node name="FileDialog" type="FileDialog" parent="."]
-title = "Open a File"
-size = Vector2i(310, 151)
-ok_button_text = "Open"
-file_mode = 0
-access = 2
-filters = PackedStringArray("*.png", "*.jpg", "*.jpeg", "*.bmp")
+[node name="BackgroundObjects" parent="." instance=ExtResource("5_enmkh")]

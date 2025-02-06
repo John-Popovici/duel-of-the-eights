@@ -53,11 +53,15 @@ var music_library = {
 	#Tense music can be changed to be be just a sound effect
 }
 
+@export var musicVolume: float = 0.2
+@export var sfxVolume: float = 0.4
+
 func _ready():
 	# Set default volume levels
-	set_music_volume(0.2)
-	set_sfx_volume(0.4)
+	set_music_volume(self.musicVolume)
+	set_sfx_volume(self.sfxVolume)
 	AudioManager.play_music("main_menu")
+	
 	connect_buttons()
 
 func connect_buttons() -> void:
@@ -104,7 +108,15 @@ func play_dice_sfx():
 	sfx_player.play()  # Play the sound
 
 func set_music_volume(volume: float): #float 0 to 1
-	music_player.volume_db = linear_to_db(volume)  
+	self.musicVolume = volume
+	music_player.volume_db = linear_to_db(volume)
+	
+func get_music_volume()->float:
+	return self.musicVolume
 
 func set_sfx_volume(volume: float): #float 0 to 1
-	sfx_player.volume_db = linear_to_db(volume)  
+	self.sfxVolume = volume
+	sfx_player.volume_db = linear_to_db(volume)
+	
+func get_sfx_volume()->float:
+	return self.sfxVolume
