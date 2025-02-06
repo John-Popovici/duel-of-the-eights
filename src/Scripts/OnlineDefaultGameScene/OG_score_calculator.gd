@@ -62,7 +62,7 @@ func _calculate_singles_score(target_value: int, dice_rolls: Array, _scoring_rul
 	var score = 0
 	var bonus_send = 0
 	var scoring_rule
-	if _scoring_rule == "":
+	if _scoring_rule.is_empty():
 		scoring_rule = 1
 	else:
 		scoring_rule = float(_scoring_rule)
@@ -79,7 +79,7 @@ func _calculate_singles_score(target_value: int, dice_rolls: Array, _scoring_rul
 func _calculate_chance_score(dice_rolls: Array, _scoring_rule: String) -> int:
 	var score = 0
 	var scoring_rule
-	if _scoring_rule == "":
+	if _scoring_rule.is_empty():
 		scoring_rule = 1
 	else:
 		scoring_rule = float(_scoring_rule)
@@ -115,7 +115,7 @@ func _calculate_straight_score(target_length: int, dice_rolls: Array, _scoring_r
 	var longest_straight = 1
 	var current_straight = 1
 	var scoring_rule
-	if _scoring_rule == "":
+	if _scoring_rule.is_empty():
 		scoring_rule = straight_modifier
 	else:
 		scoring_rule = float(_scoring_rule)
@@ -127,6 +127,8 @@ func _calculate_straight_score(target_length: int, dice_rolls: Array, _scoring_r
 			current_straight = 1
 	
 	if longest_straight >= target_length:
+		if _scoring_rule.begins_with("="):
+			return int(_scoring_rule.substr(1,-1))
 		return int(target_length * scoring_rule)  # Example score based on length
 	
 	return 0
@@ -141,7 +143,7 @@ func _calculate_full_house_score(setSize1: int, setSize2: int, dice_rolls: Array
 	var has_largeSet = false
 	
 	var scoring_rule
-	if _scoring_rule == "":
+	if _scoring_rule.is_empty():
 		scoring_rule = full_house_modifier
 	else:
 		scoring_rule = float(_scoring_rule)
@@ -155,6 +157,8 @@ func _calculate_full_house_score(setSize1: int, setSize2: int, dice_rolls: Array
 			has_smallSet = true
 	
 	if has_smallSet and has_largeSet:
+		if _scoring_rule.begins_with("="):
+			return int(_scoring_rule.substr(1,-1))
 		return int((setSize1+setSize2)*scoring_rule)  # Full House score
 	
 	return 0
