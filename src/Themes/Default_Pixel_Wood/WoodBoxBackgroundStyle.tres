@@ -1,11 +1,11 @@
 [gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://bdd2m4n2as1ot"]
 
-[ext_resource type="Texture2D" uid="uid://d0woq1ow15nbk" path="res://Themes/GUI.png" id="1_bi6ov"]
+[ext_resource type="Texture2D" uid="uid://d1sttre0b1uhw" path="res://Themes/custom_GUI.png" id="1_7bh63"]
 
 [resource]
-texture = ExtResource("1_bi6ov")
+texture = ExtResource("1_7bh63")
 texture_margin_left = 6.0
 texture_margin_top = 6.0
 texture_margin_right = 6.0
-texture_margin_bottom = 5.0
-region_rect = Rect2(0, 96, 48, 32)
+texture_margin_bottom = 6.0
+region_rect = Rect2(4, 4, 36, 36)
