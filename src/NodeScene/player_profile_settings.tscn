@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://503osc6reblk"]
+[gd_scene load_steps=7 format=3 uid="uid://503osc6reblk"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerProfile/player_profile_ui.gd" id="1_lt7c1"]
 [ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="2_5setl"]
 [ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/Default_Pixel_Blue/PanelBlueBoxBackgroundStyle.tres" id="3_ohg7g"]
 [ext_resource type="Texture2D" uid="uid://dxqthyrktxgfq" path="res://Assets/2D Assets/OtherImages/defaultUser.webp" id="4_pus15"]
+[ext_resource type="Texture2D" uid="uid://clguc45t1tq2o" path="res://Assets/2D Assets/OtherImages/defaultUserHover.webp" id="5_xe1gp"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iwiv5"]
 
@@ -51,7 +52,6 @@ size_flags_horizontal = 6
 size_flags_vertical = 3
 
 [node name="ProfilePicButton" type="TextureButton" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/UserDetailsContainer/ProfileBackground"]
-custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -67,7 +67,8 @@ grow_vertical = 2
 scale = Vector2(0.175, 0.175)
 pivot_offset = Vector2(100, 100)
 texture_normal = ExtResource("4_pus15")
-stretch_mode = 0
+texture_hover = ExtResource("5_xe1gp")
+stretch_mode = 5
 
 [node name="UsernameFrame" type="Panel" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/UserDetailsContainer"]
 layout_mode = 2
