@@ -11,6 +11,7 @@ var hand_settings
 @onready var enemyPlayer = get_parent().get_node("enemyPlayer")
 @onready var cameraController = get_node("CameraController")
 @onready var cameraGameLocation = get_node("CameraController/Positions/Angled")
+@onready var cameraCinematicLocation = get_node("CameraController/Positions/Cinematic")
 
 @onready var GameUI: CanvasLayer = get_node("GameUI")
 @onready var rollButtons = get_node("RollButtons")
@@ -300,7 +301,7 @@ func synchronizeNextRound() -> void:
 
 func endGame() -> void:
 	#have a tree of end of game instances to check who wins/ apply effects
-	
+	cameraController.lerp_camera_to_position(cameraCinematicLocation, 0.01)
 	var myPlayerStats = myPlayer.getState()
 	var OpponentStats = enemyPlayer.getState()
 	var myPlayerFinalStats: Dictionary

@@ -58,7 +58,8 @@ var music_library = {
 
 var ambience_library ={
 	"tavern_background": preload("res://Assets/Audio/Ambience/tavern-ambience-with-openfire-effect-no-loops-86151.mp3"),
-	"wind_background": preload("res://Assets/Audio/Ambience/soft-wind-trees-moving-ambience-22292.mp3")
+	"wind_background": preload("res://Assets/Audio/Ambience/soft-wind-trees-moving-ambience-22292.mp3"),
+	"drink_sip": preload("res://Assets/Audio/Ambience/drink-sip-and-swallow-6974.mp3")
 }
 
 func _ready():

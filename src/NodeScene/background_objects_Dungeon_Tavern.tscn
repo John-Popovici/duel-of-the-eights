@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://bg5xnvw62vip6"]
+[gd_scene load_steps=49 format=3 uid="uid://bg5xnvw62vip6"]
 
 [ext_resource type="PackedScene" uid="uid://cjpab24rlyc84" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_long_decorated_A.gltf" id="1_27pwu"]
 [ext_resource type="PackedScene" uid="uid://brsidrd06qil2" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_long_tablecloth_decorated_A.gltf" id="2_51s1v"]
@@ -42,6 +42,8 @@
 [ext_resource type="PackedScene" uid="uid://cy6drhghdmgv" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/shelf_small_candles.gltf" id="28_h85qy"]
 [ext_resource type="PackedScene" uid="uid://br3qslty71dm4" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/candle_lit.gltf" id="33_v5qsq"]
 [ext_resource type="PackedScene" uid="uid://cqh8v4hjtwigf" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_medium_broken.gltf" id="38_jppj4"]
+[ext_resource type="PackedScene" uid="uid://b0fsjo012idhw" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Bartender_mod.tscn" id="43_8qiv2"]
+[ext_resource type="Script" path="res://Scripts/NPCAnimations/bartender.gd" id="44_bw6ji"]
 
 [sub_resource type="Animation" id="Animation_gpu3b"]
 resource_name = "GlowingLoop"
@@ -558,3 +560,9 @@ light_energy = 16.0
 light_indirect_energy = 4.177
 spot_range = 365.953
 spot_angle = 89.99
+
+[node name="Characters" type="Node3D" parent="."]
+
+[node name="Bartender" parent="Characters" instance=ExtResource("43_8qiv2")]
+transform = Transform3D(-3.67581, 0, 24.7283, 0, 25, 0, -24.7283, 0, -3.67581, -378.25, -16.4222, -1.27919)
+script = ExtResource("44_bw6ji")
