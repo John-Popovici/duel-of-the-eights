@@ -52,6 +52,7 @@ signal game_settings_ready(game_settings,hand_settings)
 @onready var NetworkManager = networkManagers[0]
 
 var hand_settings_saved = false
+var hand_settings_loaded = false
 @export var hand_settings_refs: Dictionary = {}
 @export var hand_settings_vals: Dictionary = {}
 @export var game_settings: Dictionary = {}
@@ -114,7 +115,8 @@ func _on_advanced_settings_pressed() -> void:
 	dice_type = DiceType.get_selected_id()
 	settingsSetup.visible = false
 	presetsPanel.visible = false
-	_populate_advanced_settings()
+	if !hand_settings_saved or !hand_settings_loaded:
+		_populate_advanced_settings()
 	settingsAdvanced.visible = true
 
 # Populates the advanced settings based on dice count and type
@@ -143,6 +145,8 @@ func _populate_advanced_settings():
 	
 	advanced_settings_vbox.add_child(_create_label("All in"))
 	_generate_chance()
+	
+	hand_settings_loaded = true
 
 # Save a new preset with game and hand settings
 func save_preset():
@@ -240,6 +244,7 @@ func _on_preset_selected(preset_name: String):
 	game_settings = json.data.get("game_settings", {})
 	hand_settings_vals = json.data.get("hand_settings", {})
 	hand_settings_saved = true
+	hand_settings_loaded = false
 	GlobalSettings.show_toast("Preset data retrieved")
 	print(preset_data)
 	# Update UI fields based on the loaded settings
@@ -375,12 +380,13 @@ func save_advanced_settings():
 			"scoring_rule": settings["scoring_rule"].text
 		}
 	hand_settings_saved = true
+	_on_return_to_settings_pressed()
 	#print("Hand settings saved:", hand_settings)
 
 func _on_return_to_settings_pressed() -> void:
 	# Clear current advanced settings nodes
-	for child in advanced_settings_vbox.get_children():
-		child.queue_free()
+	#for child in advanced_settings_vbox.get_children():
+	#	child.queue_free()
 	settingsSetup.visible = true
 	presetsPanel.visible = true
 	settingsAdvanced.visible = false
