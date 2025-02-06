@@ -303,9 +303,10 @@ theme_override_constants/separation = 3
 [node name="SaveSettings" type="Button" parent="UIBox/Settings_Advanced"]
 layout_mode = 2
 theme = ExtResource("3_il4in")
-text = "Save Settings"
+text = "Save Settings and Return"
 
 [node name="ReturnToSettings" type="Button" parent="UIBox/Settings_Advanced"]
+visible = false
 layout_mode = 2
 theme = ExtResource("3_il4in")
 text = "Return"
