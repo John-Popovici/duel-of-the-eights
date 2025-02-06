@@ -54,3 +54,6 @@ func set_move_mode(mode: String) -> void:
 
 func set_options_visible(state: bool) -> void:
 	button_panel.visible = state
+
+func _process(delta):
+	camera.rotation_degrees.y += sin(Time.get_ticks_msec() * 0.0001 * 5) * 0.005

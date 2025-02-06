@@ -1,27 +1,168 @@
-[gd_scene load_steps=23 format=3 uid="uid://bg5xnvw62vip6"]
+[gd_scene load_steps=69 format=3 uid="uid://bg5xnvw62vip6"]
 
-[ext_resource type="PackedScene" uid="uid://cjpab24rlyc84" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_long_decorated_A.gltf" id="1_27pwu"]
-[ext_resource type="PackedScene" uid="uid://brsidrd06qil2" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_long_tablecloth_decorated_A.gltf" id="2_51s1v"]
 [ext_resource type="PackedScene" uid="uid://cayt468qqmnac" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_small_decorated_A.gltf" id="3_8t0tc"]
 [ext_resource type="PackedScene" uid="uid://q0rsd7fpxbad" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_small_decorated_B.gltf" id="4_b3rd5"]
 [ext_resource type="PackedScene" uid="uid://c5bsn28ccej60" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/crates_stacked.gltf" id="5_73elg"]
+[ext_resource type="PackedScene" uid="uid://cbda6yacn2ltw" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/keg.gltf" id="5_413ur"]
+[ext_resource type="PackedScene" uid="uid://dhwl8ifomds73" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/chair.gltf" id="6_jia60"]
+[ext_resource type="PackedScene" uid="uid://by43armwfycg6" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Assets/gltf/mug_full.gltf" id="6_oa68t"]
+[ext_resource type="PackedScene" uid="uid://cqspp2ayck0f1" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/box_stacked.gltf" id="6_ve2v0"]
 [ext_resource type="PackedScene" uid="uid://mshgfe1w4iig" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_medium_tablecloth.gltf" id="6_xvnu8"]
 [ext_resource type="PackedScene" uid="uid://bcwefsnet07bs" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/stool.gltf" id="7_7ekul"]
+[ext_resource type="PackedScene" uid="uid://btgyqyofee8xp" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/coin_stack_small.gltf" id="7_78fjg"]
+[ext_resource type="PackedScene" uid="uid://i5gxpntt221i" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/keg_decorated.gltf" id="8_3lnlm"]
 [ext_resource type="PackedScene" uid="uid://ccb64kqd880ai" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/candle_thin_lit.gltf" id="8_aoelk"]
 [ext_resource type="PackedScene" uid="uid://duisil3b3vik0" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/floor_wood_large.gltf" id="9_b604e"]
 [ext_resource type="PackedScene" uid="uid://j4fcwa70xgs2" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall.gltf" id="10_ndojk"]
+[ext_resource type="PackedScene" uid="uid://boqceysypysfo" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/pillar_decorated.gltf" id="10_w6scr"]
 [ext_resource type="PackedScene" uid="uid://dt6wo47jko2hd" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_doorway_scaffold.gltf" id="11_rssdl"]
 [ext_resource type="PackedScene" uid="uid://c3x5dn7c8x052" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/torch_mounted.gltf" id="12_srehg"]
 [ext_resource type="PackedScene" uid="uid://cp6rfxo3woegb" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_cracked.gltf" id="13_43vi0"]
+[ext_resource type="PackedScene" uid="uid://d1rs2f4lpf44t" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/keyring_hanging.gltf" id="13_y53gw"]
 [ext_resource type="PackedScene" uid="uid://dcw5inl4flxp" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_half.gltf" id="14_ui317"]
+[ext_resource type="PackedScene" uid="uid://pitt32nqy55h" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/shelf_small.gltf" id="15_8ifws"]
 [ext_resource type="PackedScene" uid="uid://ddyfba2ygvyif" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_window_closed_scaffold.gltf" id="15_cgd84"]
 [ext_resource type="PackedScene" uid="uid://bqcb384rabej7" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_shelves.gltf" id="16_tgok1"]
+[ext_resource type="PackedScene" uid="uid://b4h53lv4vrd4d" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Assets/gltf/staff.gltf" id="16_ubrq1"]
 [ext_resource type="PackedScene" uid="uid://cesdhsch2oi5m" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_archedwindow_open.gltf" id="17_kjc5o"]
+[ext_resource type="PackedScene" uid="uid://bq4cbrba8odvg" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Assets/gltf/mug_empty.gltf" id="17_ttxxe"]
 [ext_resource type="PackedScene" uid="uid://b2vybu872oxk1" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/fbx(unity)/wall_corner_scaffold.fbx" id="18_xfhhp"]
 [ext_resource type="PackedScene" uid="uid://55melk6otw81" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/banner_shield_green.gltf" id="19_6r1cu"]
+[ext_resource type="PackedScene" uid="uid://b5gs64n4itaaw" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/bottle_A_labeled_brown.gltf" id="20_4fk18"]
 [ext_resource type="PackedScene" uid="uid://djsh6mlx4uxmm" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_archedwindow_gated_scaffold.gltf" id="20_v6rpf"]
+[ext_resource type="PackedScene" uid="uid://b23qkyb1ysv7p" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/sword_shield_gold.gltf" id="21_3g6on"]
+[ext_resource type="PackedScene" uid="uid://cfgbrkjm8frqw" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/bottle_A_labeled_green.gltf" id="21_j44s1"]
 [ext_resource type="PackedScene" uid="uid://jw75ou1pnybp" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_arched.gltf" id="21_pi0vq"]
+[ext_resource type="PackedScene" uid="uid://dqcxgbpu7epul" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/barrier.gltf" id="22_cjxv3"]
 [ext_resource type="PackedScene" uid="uid://bogakujbmoqmh" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/stairs_wall_left.gltf" id="22_iopg7"]
+[ext_resource type="PackedScene" uid="uid://cl2njqojys6dg" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/bottle_C_brown.gltf" id="22_j3bie"]
+[ext_resource type="PackedScene" uid="uid://bfvvj44ulabb" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/barrier_half.gltf" id="23_2xh7r"]
+[ext_resource type="PackedScene" uid="uid://dpspjbhkjaxpf" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/shelf_large.gltf" id="23_wln1m"]
+[ext_resource type="PackedScene" uid="uid://dsw31tt3igfhl" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/barrier_colum_half.gltf" id="24_c1xn4"]
+[ext_resource type="PackedScene" uid="uid://i1tj46sw05g2" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/pillar.gltf" id="26_2ynmn"]
+[ext_resource type="PackedScene" uid="uid://cy6drhghdmgv" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/shelf_small_candles.gltf" id="28_h85qy"]
+[ext_resource type="PackedScene" uid="uid://br3qslty71dm4" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/candle_lit.gltf" id="33_v5qsq"]
+[ext_resource type="PackedScene" uid="uid://kn7dqa407k1a" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_long_decorated_C.gltf" id="37_7junv"]
+[ext_resource type="PackedScene" uid="uid://cqh8v4hjtwigf" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_medium_broken.gltf" id="38_jppj4"]
+[ext_resource type="PackedScene" uid="uid://i16jdnu81odc" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_long_tablecloth.gltf" id="39_gjenj"]
+[ext_resource type="PackedScene" uid="uid://u0h5rdbp7ljm" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Assets/gltf/spellbook_open.gltf" id="40_pkiyd"]
+[ext_resource type="PackedScene" uid="uid://ddr5yrfwkqqjt" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Assets/gltf/spellbook_closed.gltf" id="41_nnk3y"]
+[ext_resource type="PackedScene" uid="uid://7trg6g3hfabd" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Assets/gltf/quiver.gltf" id="41_x8gqs"]
+[ext_resource type="PackedScene" uid="uid://enpa3rua2n8p" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Assets/gltf/dagger.gltf" id="42_y73py"]
+[ext_resource type="PackedScene" uid="uid://b0fsjo012idhw" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Bartender_mod.tscn" id="43_8qiv2"]
+[ext_resource type="Script" path="res://Scripts/NPCAnimations/bartender.gd" id="44_bw6ji"]
+[ext_resource type="PackedScene" uid="uid://bbwsjnrbve4tf" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Assets/gltf/axe_2handed.gltf" id="49_krlcb"]
+[ext_resource type="PackedScene" uid="uid://dtohuamct7vwq" path="res://Assets/dice/d6/DiceMakerD6.glb" id="51_amppq"]
+[ext_resource type="PackedScene" uid="uid://chexd6ln6vo33" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Mage_Drinker.tscn" id="52_womj8"]
+[ext_resource type="PackedScene" uid="uid://dnjtv5p8lpclx" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Rouge_Drinker.tscn" id="52_xaghr"]
+[ext_resource type="Script" path="res://Scripts/NPCAnimations/Drinker.gd" id="54_07g65"]
+[ext_resource type="PackedScene" uid="uid://b2spaaxl76xrh" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Barbarian_Gambler.tscn" id="58_7txcq"]
+[ext_resource type="PackedScene" uid="uid://8nmgtisgb17" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Rogue_Walker.tscn" id="59_1ygrc"]
+[ext_resource type="PackedScene" uid="uid://b5lkom3a2vrnc" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Knight_Gambler.tscn" id="59_32sge"]
+[ext_resource type="Script" path="res://Scripts/NPCAnimations/WanderingNPC.gd" id="59_x5c3i"]
+[ext_resource type="Curve3D" uid="uid://js6qx4or6y0t" path="res://Scripts/NPCAnimations/Curve_P1.tres" id="60_rel37"]
+
+[sub_resource type="Animation" id="Animation_gpu3b"]
+resource_name = "GlowingLoop"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(16, -0.25, 0, 0.25, 0, 2.973, -0.25, 0, 0.25, 0, 16, -0.233333, -14, 0.25, 0),
+"times": PackedFloat32Array(0, 2.5, 5)
+}
+
+[sub_resource type="Animation" id="Animation_4ymsg"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(16, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nhexg"]
+_data = {
+"GlowingLoop": SubResource("Animation_gpu3b"),
+"RESET": SubResource("Animation_4ymsg")
+}
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_j1tbi"]
+height = 2.05582
+radius = 0.110577
+
+[sub_resource type="Animation" id="Animation_ihi8b"]
+resource_name = "Dice_Bump"
+length = 1.0667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.833333, 0.933333, 1.06667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 13.6877, 0), Vector3(0, 7.82156, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.833333, 0.933333, 1.06667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0.815522, 2.41028e-08, -0.842942), Vector3(-0.0834962, -2.65076, -2.25894), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qt1cn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xngax"]
+_data = {
+"Dice_Bump": SubResource("Animation_ihi8b"),
+"RESET": SubResource("Animation_qt1cn")
+}
 
 [node name="BackgroundObjects" type="Node3D"]
 
@@ -34,21 +175,6 @@ shadow_enabled = true
 directional_shadow_fade_start = 0.0
 directional_shadow_max_distance = 8192.0
 
-[node name="table_long_decorated_A2" parent="." instance=ExtResource("1_27pwu")]
-transform = Transform3D(-1.09278e-06, 0, -25, 0, 25, 0, 25, 0, -1.09278e-06, 128.252, -24.5, -123.958)
-
-[node name="table_long_tablecloth_decorated_A2" parent="." instance=ExtResource("2_51s1v")]
-transform = Transform3D(21.5655, 0, -12.6463, 0, 25, 0, 12.6463, 0, 21.5655, -169.277, -24.5, -63.9354)
-
-[node name="table_small_decorated_A2" parent="." instance=ExtResource("3_8t0tc")]
-transform = Transform3D(24.499, 0, -4.97992, 0, 25, 0, 4.97992, 0, 24.499, 0, -24.5, -210.342)
-
-[node name="table_small_decorated_B2" parent="." instance=ExtResource("4_b3rd5")]
-transform = Transform3D(22.3788, 0, 11.144, 0, 25, 0, -11.144, 0, 22.3788, -318.853, -24.5, -49.8812)
-
-[node name="crates_stacked2" parent="." instance=ExtResource("5_73elg")]
-transform = Transform3D(22.5716, 0, -10.7482, 0, 25, 0, 10.7482, 0, 22.5716, -315.395, -24.5, 65.495)
-
 [node name="GameTable" parent="." instance=ExtResource("6_xvnu8")]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, -24.5, 0)
 
@@ -59,18 +185,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
 [node name="candle_thin_lit2" parent="GameTable" instance=ExtResource("8_aoelk")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.75, 1, -0.5)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.75, 1, -0.5)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="GameTable/candle_thin_lit2"]
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0, 0.885345, 0)
 light_color = Color(0.787116, 0.669645, 0.591936, 1)
-light_energy = 4.827
+light_energy = 16.0
 light_indirect_energy = 9.566
 shadow_enabled = true
 shadow_opacity = 0.7
 distance_fade_begin = 75.0
 distance_fade_length = 100.0
 omni_range = 50.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameTable/candle_thin_lit2/OmniLight3D"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
+[node name="RigidBody3D" type="RigidBody3D" parent="GameTable/candle_thin_lit2"]
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameTable/candle_thin_lit2/RigidBody3D"]
+shape = SubResource("CylinderShape3D_j1tbi")
 
 [node name="Floor" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25.8, 0)
@@ -144,6 +282,12 @@ transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -300, 0, 100)
 [node name="floor_wood_large24" parent="Floor" instance=ExtResource("9_b604e")]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -300, 0, -100)
 
+[node name="keg2" parent="Floor/floor_wood_large24" instance=ExtResource("5_413ur")]
+transform = Transform3D(0.383538, 0, 0.923525, 0, 1, 0, -0.923525, 0, 0.383538, 0.418566, 0, -0.58057)
+
+[node name="mug_full2" parent="Floor/floor_wood_large24/keg2" instance=ExtResource("6_oa68t")]
+transform = Transform3D(0.975527, 0, -0.21988, 0, 1, 0, 0.21988, 0, 0.975527, -0.0928919, 2.22561, 3.72529e-09)
+
 [node name="floor_wood_large25" parent="Floor" instance=ExtResource("9_b604e")]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -300, 0, -200)
 
@@ -162,11 +306,19 @@ transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -400, 0, -200)
 [node name="floor_wood_large30" parent="Floor" instance=ExtResource("9_b604e")]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -400, 100, -200)
 
+[node name="box_stacked2" parent="Floor/floor_wood_large30" instance=ExtResource("6_ve2v0")]
+
+[node name="coin_stack_small2" parent="Floor/floor_wood_large30/box_stacked2" instance=ExtResource("7_78fjg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.793701, 1.88912, 0.182761)
+
 [node name="floor_wood_large31" parent="Floor" instance=ExtResource("9_b604e")]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -400, 100, -100)
 
 [node name="floor_wood_large32" parent="Floor" instance=ExtResource("9_b604e")]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -400, 100, 0)
+
+[node name="keg_decorated2" parent="Floor/floor_wood_large32" instance=ExtResource("8_3lnlm")]
+transform = Transform3D(-0.256897, 0, 0.966439, 0, 1, 0, -0.966439, 0, -0.256897, 0, 0, 0)
 
 [node name="floor_wood_large33" parent="Floor" instance=ExtResource("9_b604e")]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -400, 100, 100)
@@ -178,6 +330,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25.8, 0)
 
 [node name="wall2" parent="Walls/BackWall" instance=ExtResource("10_ndojk")]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, -250)
+
+[node name="pillar_decorated2" parent="Walls/BackWall/wall2" instance=ExtResource("10_w6scr")]
 
 [node name="wall_doorway_scaffold2" parent="Walls/BackWall" instance=ExtResource("11_rssdl")]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -100, 0, -250)
@@ -192,6 +346,12 @@ light_energy = 16.0
 light_indirect_energy = 10.0
 omni_range = 85.0
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Walls/BackWall/wall_doorway_scaffold2/torch_mounted2/OmniLight3D"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
 [node name="torch_mounted3" parent="Walls/BackWall/wall_doorway_scaffold2" instance=ExtResource("12_srehg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.83238, 2.3, 0.35)
 
@@ -202,11 +362,34 @@ light_energy = 16.0
 light_indirect_energy = 10.0
 omni_range = 85.0
 
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Walls/BackWall/wall_doorway_scaffold2/torch_mounted3/OmniLight3D2"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
+[node name="keyring_hanging2" parent="Walls/BackWall/wall_doorway_scaffold2/torch_mounted3" instance=ExtResource("13_y53gw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.138699, 0.103336)
+
 [node name="wall_cracked2" parent="Walls/BackWall" instance=ExtResource("13_43vi0")]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -200, 0, -250)
 
+[node name="pillar_decorated2" parent="Walls/BackWall/wall_cracked2" instance=ExtResource("10_w6scr")]
+
+[node name="staff2" parent="Walls/BackWall/wall_cracked2" instance=ExtResource("16_ubrq1")]
+transform = Transform3D(0.916433, 0.0927702, -0.389288, -1.6542e-08, 0.97276, 0.231816, 0.400189, -0.212444, 0.891469, 1.65074, 0.895753, 0.786927)
+
 [node name="wall5" parent="Walls/BackWall" instance=ExtResource("10_ndojk")]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -300, 0, -250)
+
+[node name="shelf_small2" parent="Walls/BackWall/wall5" instance=ExtResource("15_8ifws")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.88044, 2.74271, 0.291386)
+
+[node name="mug_empty2" parent="Walls/BackWall/wall5/shelf_small2" instance=ExtResource("17_ttxxe")]
+transform = Transform3D(-0.645831, 8.74228e-08, 0.76348, -5.64603e-08, -1, 6.67456e-08, 0.76348, 0, 0.645831, 0.278902, 0.344449, 0.287545)
+
+[node name="mug_empty3" parent="Walls/BackWall/wall5/shelf_small2" instance=ExtResource("17_ttxxe")]
+transform = Transform3D(-0.873475, 8.74228e-08, 0.486869, -7.63616e-08, -1, 4.25634e-08, 0.486869, 0, 0.873475, -0.224739, 0.344449, 0.344774)
 
 [node name="wall_half" parent="Walls/BackWall" instance=ExtResource("14_ui317")]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -400, 0, -250)
@@ -228,13 +411,25 @@ transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -35
 [node name="wall_archedwindow_open2" parent="Walls/LeftWall" instance=ExtResource("17_kjc5o")]
 transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -350, 0, 0)
 
+[node name="bottle_A_labeled_brown2" parent="Walls/LeftWall/wall_archedwindow_open2" instance=ExtResource("20_4fk18")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.628861, 1.0351, -1.77636e-15)
+
+[node name="bottle_A_labeled_green2" parent="Walls/LeftWall/wall_archedwindow_open2" instance=ExtResource("21_j44s1")]
+transform = Transform3D(0.46749, 0, 0.17735, 0, 0.5, 0, -0.17735, 0, 0.46749, -0.828673, 1.05613, 0.271975)
+
+[node name="bottle_C_brown2" parent="Walls/LeftWall/wall_archedwindow_open2" instance=ExtResource("22_j3bie")]
+transform = Transform3D(0.478501, 0, 0.145042, 0, 0.5, 0, -0.145042, 0, 0.478501, 0.7207, 1.05819, 0.0646069)
+
 [node name="wall12" parent="Walls/LeftWall" instance=ExtResource("10_ndojk")]
 transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -350, 0, 100)
 
 [node name="wall13" parent="Walls/LeftWall" instance=ExtResource("10_ndojk")]
 transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -450, 0, -100)
 
-[node name="wall14" parent="Walls/LeftWall" instance=ExtResource("10_ndojk")]
+[node name="shelf_large2" parent="Walls/LeftWall/wall13" instance=ExtResource("23_wln1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.60555, 0.711287, 0.387695)
+
+[node name="wall_shelves3" parent="Walls/LeftWall" instance=ExtResource("16_tgok1")]
 transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -450, 0, 0)
 
 [node name="wall15" parent="Walls/LeftWall" instance=ExtResource("10_ndojk")]
@@ -254,11 +449,26 @@ transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -45
 [node name="wall16" parent="Walls/UpperLeftWall" instance=ExtResource("10_ndojk")]
 transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -450, 100, -100)
 
+[node name="sword_shield_gold2" parent="Walls/UpperLeftWall/wall16" instance=ExtResource("21_3g6on")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.77636e-15, 1.9294, 0.482594)
+
 [node name="wall17" parent="Walls/UpperLeftWall" instance=ExtResource("10_ndojk")]
 transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -450, 100, 0)
 
 [node name="wall18" parent="Walls/UpperLeftWall" instance=ExtResource("10_ndojk")]
 transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -450, 100, 100)
+
+[node name="barrier2" parent="Walls/UpperLeftWall" instance=ExtResource("22_cjxv3")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -350, 100, 100)
+
+[node name="barrier3" parent="Walls/UpperLeftWall" instance=ExtResource("22_cjxv3")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -350, 100, 0)
+
+[node name="barrier_half2" parent="Walls/UpperLeftWall" instance=ExtResource("23_2xh7r")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -350, 100, -50)
+
+[node name="barrier_colum_half2" parent="Walls/UpperLeftWall" instance=ExtResource("24_c1xn4")]
+transform = Transform3D(-1.09278e-06, 0, -25, 0, 25, 0, 25, 0, -1.09278e-06, -350, 100, -150)
 
 [node name="UpperBackWall" type="Node3D" parent="Walls"]
 
@@ -269,6 +479,9 @@ transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -400, 100, -250)
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 100, -250)
 
 [node name="banner_shield_green2" parent="Walls/UpperBackWall/wall3" instance=ExtResource("19_6r1cu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.282642)
+
+[node name="pillar2" parent="Walls/UpperBackWall/wall3" instance=ExtResource("26_2ynmn")]
 
 [node name="wall_archedwindow_gated_scaffold2" parent="Walls/UpperBackWall" instance=ExtResource("20_v6rpf")]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -100, 100, -250)
@@ -277,9 +490,28 @@ transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -100, 100, -250)
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -200, 100, -250)
 
 [node name="banner_shield_green2" parent="Walls/UpperBackWall/wall2" instance=ExtResource("19_6r1cu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.292186)
+
+[node name="pillar2" parent="Walls/UpperBackWall/wall2" instance=ExtResource("26_2ynmn")]
 
 [node name="wall6" parent="Walls/UpperBackWall" instance=ExtResource("10_ndojk")]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -300, 100, -250)
+
+[node name="shelf_small_candles2" parent="Walls/UpperBackWall/wall6" instance=ExtResource("28_h85qy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17455, 0.23999)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Walls/UpperBackWall/wall6/shelf_small_candles2"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0.0762317, 0.58499, 0.185193)
+light_color = Color(0.931627, 0.741943, 0.578706, 1)
+light_energy = 16.0
+light_indirect_energy = 10.0
+omni_range = 85.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Walls/UpperBackWall/wall6/shelf_small_candles2/OmniLight3D2"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
 
 [node name="wall_arched2" parent="Walls/UpperBackWall" instance=ExtResource("21_pi0vq")]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 100, 100, -250)
@@ -289,3 +521,272 @@ transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 200, 100, -250)
 
 [node name="stairs_wall_left2" parent="Walls" instance=ExtResource("22_iopg7")]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -300, 0, -250)
+
+[node name="FloatingObjects" type="Node3D" parent="."]
+
+[node name="table_long_decorated_C2" parent="FloatingObjects" instance=ExtResource("37_7junv")]
+transform = Transform3D(-1.09278e-06, 0, -25, 0, 25, 0, 25, 0, -1.09278e-06, 128.252, -24.5, -123.958)
+
+[node name="candle_lit2" parent="FloatingObjects/table_long_decorated_C2" instance=ExtResource("33_v5qsq")]
+transform = Transform3D(1, 0, 3.55271e-15, 0, 1, 0, -3.55271e-15, 0, 1, 0.849693, 0.997142, 0.0258476)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="FloatingObjects/table_long_decorated_C2/candle_lit2"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0.00298723, 0.885702, -0.00864941)
+light_color = Color(0.931627, 0.741943, 0.578706, 1)
+light_energy = 16.0
+light_indirect_energy = 10.0
+omni_range = 85.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="FloatingObjects/table_long_decorated_C2/candle_lit2/OmniLight3D2"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
+[node name="candle_lit3" parent="FloatingObjects/table_long_decorated_C2" instance=ExtResource("33_v5qsq")]
+transform = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, -0.625144, 0.997142, 1.42569)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="FloatingObjects/table_long_decorated_C2/candle_lit3"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0.00298723, 0.885702, -0.00864941)
+light_color = Color(0.931627, 0.741943, 0.578706, 1)
+light_energy = 16.0
+light_indirect_energy = 10.0
+omni_range = 85.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="FloatingObjects/table_long_decorated_C2/candle_lit3/OmniLight3D2"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
+[node name="table_long_tablecloth2" parent="FloatingObjects" instance=ExtResource("39_gjenj")]
+transform = Transform3D(21.5655, 0, -12.6463, 0, 25, 0, 12.6463, 0, 21.5655, -169.277, -24.5, -63.9354)
+
+[node name="candle_lit2" parent="FloatingObjects/table_long_tablecloth2" instance=ExtResource("33_v5qsq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.799781, 0.997142, -0.107065)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="FloatingObjects/table_long_tablecloth2/candle_lit2"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0.00298723, 0.885702, -0.00864941)
+light_color = Color(0.931627, 0.741943, 0.578706, 1)
+light_energy = 16.0
+light_indirect_energy = 10.0
+omni_range = 85.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="FloatingObjects/table_long_tablecloth2/candle_lit2/OmniLight3D2"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
+[node name="spellbook_open2" parent="FloatingObjects/table_long_tablecloth2" instance=ExtResource("40_pkiyd")]
+transform = Transform3D(0.637628, -0.686367, -0.349758, 0.0501519, 0.490051, -0.87025, 0.76871, 0.537355, 0.346893, 0.557999, 1.2396, 1.224)
+
+[node name="spellbook_closed2" parent="FloatingObjects/table_long_tablecloth2" instance=ExtResource("41_nnk3y")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.315869, 1.11567, 1.60143)
+
+[node name="mug_full2" parent="FloatingObjects/table_long_tablecloth2" instance=ExtResource("6_oa68t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.130052, 1.29446, 1.25061)
+
+[node name="dagger2" parent="FloatingObjects/table_long_tablecloth2" instance=ExtResource("42_y73py")]
+transform = Transform3D(0.45161, 0.891792, -0.0274768, -0.0418948, 0.0519579, 0.99777, 0.891232, -0.449451, 0.0608261, -0.0520705, 1.05252, 0.776685)
+
+[node name="table_small_decorated_A2" parent="FloatingObjects" instance=ExtResource("3_8t0tc")]
+transform = Transform3D(24.499, 0, -4.97992, 0, 25, 0, 4.97992, 0, 24.499, 0, -24.5, -210.342)
+
+[node name="quiver2" parent="FloatingObjects/table_small_decorated_A2" instance=ExtResource("41_x8gqs")]
+transform = Transform3D(0.362022, -0.286139, 0.887167, 0.0187239, 0.953762, 0.299978, -0.931982, -0.0919872, 0.35064, 0.670647, 0.432572, 0.00391415)
+
+[node name="table_small_decorated_B2" parent="FloatingObjects" instance=ExtResource("4_b3rd5")]
+transform = Transform3D(22.3788, 0, 11.144, 0, 25, 0, -11.144, 0, 22.3788, -318.853, -24.5, -49.8812)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="FloatingObjects/table_small_decorated_B2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 2, 0.3)
+light_energy = 5.27811
+omni_range = 20.2985
+
+[node name="crates_stacked2" parent="FloatingObjects" instance=ExtResource("5_73elg")]
+transform = Transform3D(22.5716, 0, -10.7482, 0, 25, 0, 10.7482, 0, 22.5716, -315.395, -24.5, 65.495)
+
+[node name="chair2" parent="FloatingObjects" instance=ExtResource("6_jia60")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, 113.633, -25.8, -173.348)
+
+[node name="chair3" parent="FloatingObjects" instance=ExtResource("6_jia60")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, 163.603, -25.8, -165.917)
+
+[node name="stool4" parent="FloatingObjects" instance=ExtResource("7_7ekul")]
+transform = Transform3D(23.8234, 0, -7.57921, 0, 25, 0, 7.57921, 0, 23.8234, -152.82, -28.8967, -126.183)
+
+[node name="stool7" parent="FloatingObjects" instance=ExtResource("7_7ekul")]
+transform = Transform3D(23.8234, 0, -7.57921, 0, 25, 0, 7.57921, 0, 23.8234, -197.204, -28.8967, -94.0929)
+
+[node name="stool5" parent="FloatingObjects" instance=ExtResource("7_7ekul")]
+transform = Transform3D(24.989, 0, 0.738632, 0, 25, 0, -0.738632, 0, 24.989, -224.82, -24.5, -59.2292)
+
+[node name="stool6" parent="FloatingObjects" instance=ExtResource("7_7ekul")]
+transform = Transform3D(20.7947, 0, -13.8773, 0, 25, 0, 13.8773, 0, 20.7947, -144.033, -24.5, -25.8628)
+
+[node name="table_medium_broken2" parent="FloatingObjects" instance=ExtResource("38_jppj4")]
+transform = Transform3D(20.8044, 0, 13.8628, 0, 25, 0, -13.8628, 0, 20.8044, -164.666, -25, 82.072)
+
+[node name="mug_empty2" parent="FloatingObjects/table_medium_broken2" instance=ExtResource("17_ttxxe")]
+transform = Transform3D(0.884548, 0.466448, 1.77636e-15, 2.03891e-08, -3.86648e-08, -1, -0.466448, 0.884548, -4.37114e-08, 0.309446, 0.214764, -1.59778)
+
+[node name="mug_empty3" parent="FloatingObjects/table_medium_broken2" instance=ExtResource("17_ttxxe")]
+transform = Transform3D(0.884548, -0.146515, 0.44284, 0, 0.949387, 0.314108, -0.466448, -0.277844, 0.839779, 0.610965, 0.195073, 1.20272)
+
+[node name="axe_2handed2" parent="FloatingObjects/table_medium_broken2" instance=ExtResource("49_krlcb")]
+transform = Transform3D(-0.053017, -0.285776, -0.956829, -0.983223, 0.182407, 2.98023e-08, 0.174532, 0.940776, -0.290652, 0.643937, 1.07215, -1.41388)
+
+[node name="InsideRoom" type="Node3D" parent="."]
+
+[node name="shelf_small_candles2" parent="InsideRoom" instance=ExtResource("28_h85qy")]
+transform = Transform3D(-1.09278e-06, 0, -25, 0, 25, 0, 25, 0, -1.09278e-06, -355.948, 25.395, 58.2759)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="InsideRoom/shelf_small_candles2"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, -0.164498, 0.699067, 0.196813)
+light_color = Color(0.931627, 0.741943, 0.578706, 1)
+light_energy = 16.0
+light_indirect_energy = 10.0
+omni_range = 85.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="InsideRoom/shelf_small_candles2/OmniLight3D2"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
+[node name="shelf_small_candles3" parent="InsideRoom" instance=ExtResource("28_h85qy")]
+transform = Transform3D(-1.09278e-06, 0, -25, 0, 25, 0, 25, 0, -1.09278e-06, -355.948, 25.395, -58.0121)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="InsideRoom/shelf_small_candles3"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, -0.164498, 0.699067, 0.196813)
+light_color = Color(0.931627, 0.741943, 0.578706, 1)
+light_energy = 16.0
+light_indirect_energy = 10.0
+omni_range = 85.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="InsideRoom/shelf_small_candles3/OmniLight3D2"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
+[node name="shelf_small_candles4" parent="InsideRoom" instance=ExtResource("28_h85qy")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -444.051, 25.395, -58.0121)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="InsideRoom/shelf_small_candles4"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, -0.164498, 0.699067, 0.196813)
+light_color = Color(0.931627, 0.741943, 0.578706, 1)
+light_energy = 16.0
+light_indirect_energy = 10.0
+omni_range = 85.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="InsideRoom/shelf_small_candles4/OmniLight3D2"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
+[node name="SpotLight3D" type="SpotLight3D" parent="InsideRoom"]
+transform = Transform3D(0.819982, -0.165544, 0.547927, -1.49012e-08, 0.957264, 0.289216, -0.572389, -0.237152, 0.784939, -360.433, 47.9298, 37.1253)
+light_color = Color(0.933333, 0.741176, 0.580392, 1)
+light_energy = 16.0
+light_indirect_energy = 4.177
+spot_range = 365.953
+spot_angle = 89.99
+
+[node name="Characters" type="Node3D" parent="."]
+
+[node name="Bartender" parent="Characters" instance=ExtResource("43_8qiv2")]
+transform = Transform3D(-3.67581, 0, 24.7283, 0, 25, 0, -24.7283, 0, -3.67581, -378.25, -16.4222, -1.27919)
+script = ExtResource("44_bw6ji")
+
+[node name="Mage" parent="Characters" instance=ExtResource("52_womj8")]
+transform = Transform3D(21.9487, 0, -11.9688, 0, 25, 0, 11.9688, 0, 21.9487, 82.157, -24.7759, -189.899)
+script = ExtResource("54_07g65")
+
+[node name="Rogue_Hooded" parent="Characters" instance=ExtResource("52_xaghr")]
+transform = Transform3D(-16.6363, 0, 18.661, 0, 25, 0, -18.661, 0, -16.6363, 57.3961, -24.7759, -150.991)
+script = ExtResource("54_07g65")
+
+[node name="Barbarian" parent="Characters" instance=ExtResource("58_7txcq")]
+transform = Transform3D(2.96486, 0, 24.8236, 0, 25, 0, -24.8236, 0, 2.96486, -199.662, -16.371, -98.129)
+
+[node name="Knight" parent="Characters" instance=ExtResource("59_32sge")]
+transform = Transform3D(24.9084, 0, 2.1376, 0, 25, 0, -2.1376, 0, 24.9084, -154.494, -16.3712, -126.821)
+
+[node name="DiceAnimation" type="Node3D" parent="Characters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -158.583, 1.65668, -86.535)
+
+[node name="DiceMakerD6_1" parent="Characters/DiceAnimation" instance=ExtResource("51_amppq")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Characters/DiceAnimation/DiceMakerD6_1"]
+libraries = {
+"": SubResource("AnimationLibrary_xngax")
+}
+autoplay = "Dice_Bump"
+
+[node name="DiceAnimation2" type="Node3D" parent="Characters"]
+transform = Transform3D(0.863114, 0, 0.50501, 0, 1, 0, -0.50501, 0, 0.863114, -158.621, 1.65668, -97.4426)
+
+[node name="DiceMakerD6_1" parent="Characters/DiceAnimation2" instance=ExtResource("51_amppq")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Characters/DiceAnimation2/DiceMakerD6_1"]
+libraries = {
+"": SubResource("AnimationLibrary_xngax")
+}
+autoplay = "Dice_Bump"
+
+[node name="DiceAnimation3" type="Node3D" parent="Characters"]
+transform = Transform3D(0.876399, 0, -0.481585, 0, 1, 0, 0.481585, 0, 0.876399, -163.951, 1.65668, -84.375)
+
+[node name="DiceMakerD6_1" parent="Characters/DiceAnimation3" instance=ExtResource("51_amppq")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Characters/DiceAnimation3/DiceMakerD6_1"]
+libraries = {
+"": SubResource("AnimationLibrary_xngax")
+}
+autoplay = "Dice_Bump"
+
+[node name="DiceAnimation4" type="Node3D" parent="Characters"]
+transform = Transform3D(0.92442, 0, 0.381377, 0, 1, 0, -0.381377, 0, 0.92442, -151.032, 1.65668, -76.9948)
+
+[node name="DiceMakerD6_1" parent="Characters/DiceAnimation4" instance=ExtResource("51_amppq")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Characters/DiceAnimation4/DiceMakerD6_1"]
+libraries = {
+"": SubResource("AnimationLibrary_xngax")
+}
+autoplay = "Dice_Bump"
+
+[node name="DiceAnimation5" type="Node3D" parent="Characters"]
+transform = Transform3D(0.958775, 0, 0.284166, 0, 1, 0, -0.284166, 0, 0.958775, -151.149, 1.65668, -89.3688)
+
+[node name="DiceMakerD6_1" parent="Characters/DiceAnimation5" instance=ExtResource("51_amppq")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Characters/DiceAnimation5/DiceMakerD6_1"]
+libraries = {
+"": SubResource("AnimationLibrary_xngax")
+}
+autoplay = "Dice_Bump"
+
+[node name="WanderingNPC" type="Node3D" parent="Characters"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -310.627, -25, -10.3586)
+visible = false
+
+[node name="Path3D" type="Path3D" parent="Characters/WanderingNPC"]
+curve = ExtResource("60_rel37")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Characters/WanderingNPC/Path3D"]
+transform = Transform3D(-0.891176, 0, 0.453658, 0, 1, 0, -0.453658, 0, -0.891176, 0, 0, 0)
+use_model_front = true
+loop = false
+script = ExtResource("59_x5c3i")
+
+[node name="Rogue" parent="Characters/WanderingNPC/Path3D/PathFollow3D" instance=ExtResource("59_1ygrc")]
+transform = Transform3D(22.2779, 0, 11.3407, 0, 25, 0, -11.3407, 0, 22.2779, 0, 0, 0)

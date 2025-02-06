@@ -449,7 +449,6 @@ layout_mode = 2
 text = "Exit Match"
 
 [node name="EscPanel" type="PanelContainer" parent="GameUI"]
-visible = false
 z_index = 2
 anchors_preset = 8
 anchor_left = 0.5
@@ -462,29 +461,31 @@ offset_right = 405.0
 offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_h4ers")
 theme_override_styles/panel = ExtResource("12_vxxtv")
 
 [node name="EscBox" type="VBoxContainer" parent="GameUI/EscPanel"]
 layout_mode = 2
+theme = ExtResource("4_h4ers")
 
 [node name="Label" type="Label" parent="GameUI/EscPanel/EscBox"]
 layout_mode = 2
 size_flags_vertical = 6
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("4_h4ers")
 text = "Pause Menu"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="GameUI/EscPanel/EscBox"]
 layout_mode = 2
 size_flags_vertical = 6
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("4_h4ers")
 text = "Game Volume:"
 horizontal_alignment = 1
 
-[node name="GameVolumeSlider" type="HSlider" parent="GameUI/EscPanel/EscBox"]
+[node name="SFXVolumeSlider" type="HSlider" parent="GameUI/EscPanel/EscBox"]
 layout_mode = 2
-size_flags_vertical = 2
-theme = ExtResource("10_ks8nt")
+size_flags_vertical = 3
+theme = ExtResource("4_h4ers")
 step = 5.0
 value = 50.0
 scrollable = false
@@ -492,14 +493,14 @@ scrollable = false
 [node name="Label3" type="Label" parent="GameUI/EscPanel/EscBox"]
 layout_mode = 2
 size_flags_vertical = 6
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("4_h4ers")
 text = "Music Volume:"
 horizontal_alignment = 1
 
-[node name="MusicVolumeSlider2" type="HSlider" parent="GameUI/EscPanel/EscBox"]
+[node name="MusicVolumeSlider" type="HSlider" parent="GameUI/EscPanel/EscBox"]
 layout_mode = 2
-size_flags_vertical = 2
-theme = ExtResource("10_ks8nt")
+size_flags_vertical = 3
+theme = ExtResource("4_h4ers")
 step = 5.0
 value = 30.0
 scrollable = false
@@ -507,10 +508,10 @@ scrollable = false
 [node name="ReturnToGameButton" type="Button" parent="GameUI/EscPanel/EscBox"]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("4_h4ers")
 text = "Return to Game"
 
 [node name="ExitGameButton" type="Button" parent="GameUI/EscPanel/EscBox"]
 layout_mode = 2
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("4_h4ers")
 text = "Exit Game"
