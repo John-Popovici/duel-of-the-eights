@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://bg5xnvw62vip6"]
+[gd_scene load_steps=69 format=3 uid="uid://bg5xnvw62vip6"]
 
 [ext_resource type="PackedScene" uid="uid://cayt468qqmnac" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_small_decorated_A.gltf" id="3_8t0tc"]
 [ext_resource type="PackedScene" uid="uid://q0rsd7fpxbad" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_small_decorated_B.gltf" id="4_b3rd5"]
@@ -57,7 +57,10 @@
 [ext_resource type="PackedScene" uid="uid://dnjtv5p8lpclx" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Rouge_Drinker.tscn" id="52_xaghr"]
 [ext_resource type="Script" path="res://Scripts/NPCAnimations/Drinker.gd" id="54_07g65"]
 [ext_resource type="PackedScene" uid="uid://b2spaaxl76xrh" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Barbarian_Gambler.tscn" id="58_7txcq"]
+[ext_resource type="PackedScene" uid="uid://8nmgtisgb17" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Rogue_Walker.tscn" id="59_1ygrc"]
 [ext_resource type="PackedScene" uid="uid://b5lkom3a2vrnc" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Knight_Gambler.tscn" id="59_32sge"]
+[ext_resource type="Script" path="res://Scripts/NPCAnimations/WanderingNPC.gd" id="59_x5c3i"]
+[ext_resource type="Curve3D" uid="uid://js6qx4or6y0t" path="res://Scripts/NPCAnimations/Curve_P1.tres" id="60_rel37"]
 
 [sub_resource type="Animation" id="Animation_gpu3b"]
 resource_name = "GlowingLoop"
@@ -771,3 +774,19 @@ libraries = {
 "": SubResource("AnimationLibrary_xngax")
 }
 autoplay = "Dice_Bump"
+
+[node name="WanderingNPC" type="Node3D" parent="Characters"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -310.627, -25, -10.3586)
+visible = false
+
+[node name="Path3D" type="Path3D" parent="Characters/WanderingNPC"]
+curve = ExtResource("60_rel37")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Characters/WanderingNPC/Path3D"]
+transform = Transform3D(-0.891176, 0, 0.453658, 0, 1, 0, -0.453658, 0, -0.891176, 0, 0, 0)
+use_model_front = true
+loop = false
+script = ExtResource("59_x5c3i")
+
+[node name="Rogue" parent="Characters/WanderingNPC/Path3D/PathFollow3D" instance=ExtResource("59_1ygrc")]
+transform = Transform3D(22.2779, 0, 11.3407, 0, 25, 0, -11.3407, 0, 22.2779, 0, 0, 0)
