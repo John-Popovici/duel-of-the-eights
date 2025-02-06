@@ -3,6 +3,7 @@ extends Node3D
 @export var move_mode: String = "lerp"  # Can be "lerp" or "snap"
 
 @onready var camera = get_node("Camera3D")
+@onready var start_pos = camera.global_transform
 @onready var positions_holder = get_node("Positions")
 @onready var button_container = get_node("CameraPosPanel/ButtonHolder")
 @onready var button_panel = get_node("CameraPosPanel")
@@ -46,6 +47,7 @@ func lerp_camera_to_position(target: Node3D, lerp_speed: float = 0.05) -> void:
 		camera.global_transform.origin = start_transform.origin.lerp(end_transform.origin, t)
 		camera.global_transform.basis = start_transform.basis.slerp(end_transform.basis, t)
 		await get_tree().process_frame  # Wait until the next frame
+	print("Reached Lerp pos")
 
 # Setter function for move_mode
 func set_move_mode(mode: String) -> void:
@@ -54,6 +56,10 @@ func set_move_mode(mode: String) -> void:
 
 func set_options_visible(state: bool) -> void:
 	button_panel.visible = state
+
+func set_options_disabled(state: bool) -> void:
+	for child in button_container.get_children():
+		child.disabled = state
 
 func _process(delta):
 	camera.rotation_degrees.y += sin(Time.get_ticks_msec() * 0.0001 * 5) * 0.005

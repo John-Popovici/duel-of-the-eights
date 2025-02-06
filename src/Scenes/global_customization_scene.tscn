@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dbuevipki6jra"]
+[gd_scene load_steps=22 format=3 uid="uid://dbuevipki6jra"]
 
 [ext_resource type="Script" path="res://Scripts/GlobalCustomization/GC_scene.gd" id="1_2co8p"]
 [ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="1_odr4a"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://Scripts/camera_toggle_controller.gd" id="10_cj1yu"]
 [ext_resource type="PackedScene" uid="uid://b62jxmiwvswon" path="res://NodeScene/twelve_dice.tscn" id="10_imfv7"]
 [ext_resource type="PackedScene" uid="uid://bg5xnvw62vip6" path="res://NodeScene/background_objects_Dungeon_Tavern.tscn" id="12_iaxf0"]
+[ext_resource type="Script" path="res://Scripts/GlobalCustomization/global _customization_startup_background_movement.gd" id="13_c1i8e"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kermc"]
 size = Vector3(10, 1, 10)
@@ -423,7 +424,7 @@ transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18
 transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 10, 7, -88)
 
 [node name="Camera3D" type="Camera3D" parent="DiceDisplay/CameraController"]
-transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 10, 7, 12)
+transform = Transform3D(0.104528, -0.420303, 0.901343, 0, 0.906307, 0.422618, -0.994522, -0.0441756, 0.0947349, 105, 55, 48)
 
 [node name="SpotLight3D_Camera" type="SpotLight3D" parent="DiceDisplay/CameraController/Camera3D"]
 transform = Transform3D(0.95658, 0.145735, -0.252421, -0.145735, 0.989145, 0.0188015, 0.252421, 0.0188015, 0.967435, 0, 0, 0)
@@ -432,8 +433,9 @@ spot_range = 70.0
 spot_attenuation = -0.5
 spot_angle_attenuation = 2.37841
 
-[node name="BackgroundObjects" parent="DiceDisplay/CameraController/Camera3D" instance=ExtResource("12_iaxf0")]
-transform = Transform3D(0.707107, 0, -0.707107, -0.353554, 0.866025, -0.353553, 0.612372, 0.5, 0.612372, 12, -2.79423, -13.1603)
+[node name="BackgroundObjects" parent="DiceDisplay/CameraController" instance=ExtResource("12_iaxf0")]
+transform = Transform3D(0.707107, 2.10734e-08, 0.707107, -2.98023e-08, 1, 1.77636e-15, -0.707107, -2.10734e-08, 0.707107, 9.53674e-07, -2, 9.53674e-07)
+script = ExtResource("13_c1i8e")
 
 [node name="CameraPosPanel" type="PanelContainer" parent="DiceDisplay/CameraController"]
 anchors_preset = 3
