@@ -1,8 +1,7 @@
-[gd_resource type="Theme" load_steps=19 format=3 uid="uid://w0bhlln4xhbw"]
+[gd_resource type="Theme" load_steps=18 format=3 uid="uid://w0bhlln4xhbw"]
 
 [ext_resource type="FontFile" uid="uid://cd1k1hhelt07u" path="res://Pixelme.ttf" id="1_b06sd"]
 [ext_resource type="Texture2D" uid="uid://d1sttre0b1uhw" path="res://Themes/custom_GUI.png" id="2_mvctd"]
-[ext_resource type="Texture2D" uid="uid://d0woq1ow15nbk" path="res://Themes/GUI.png" id="2_vnpui"]
 [ext_resource type="FontVariation" uid="uid://cvgef1a2mvfea" path="res://Themes/SystemFont_Pixel1.tres" id="3_w7nol"]
 [ext_resource type="StyleBox" uid="uid://bdd2m4n2as1ot" path="res://Themes/Default_Pixel_Wood/WoodBoxBackgroundStyle.tres" id="4_8gcwi"]
 
@@ -102,36 +101,36 @@ data = {
 image = SubResource("Image_hww1p")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w6x80"]
-texture = ExtResource("2_vnpui")
-texture_margin_left = 2.0
-texture_margin_top = 2.0
-texture_margin_right = 2.0
-texture_margin_bottom = 2.0
-region_rect = Rect2(96, 36, 26, 24)
+texture = ExtResource("2_mvctd")
+texture_margin_left = 11.0
+texture_margin_top = 8.0
+texture_margin_right = 11.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(50, 4, 36, 36)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vyuec"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
-texture = ExtResource("2_vnpui")
-texture_margin_left = 2.0
-texture_margin_top = 2.0
-texture_margin_right = 2.0
-texture_margin_bottom = 2.0
-region_rect = Rect2(96, 36, 26, 24)
+texture = ExtResource("2_mvctd")
+texture_margin_left = 11.0
+texture_margin_top = 8.0
+texture_margin_right = 11.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(50, 4, 36, 36)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ktis8"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
-texture = ExtResource("2_vnpui")
-texture_margin_left = 2.0
-texture_margin_top = 2.0
-texture_margin_right = 2.0
-texture_margin_bottom = 2.0
-region_rect = Rect2(96, 36, 26, 24)
+texture = ExtResource("2_mvctd")
+texture_margin_left = 10.0
+texture_margin_top = 8.0
+texture_margin_right = 10.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(4, 4, 36, 36)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7teya"]
 texture = ExtResource("2_mvctd")
@@ -150,13 +149,13 @@ texture_margin_bottom = 12.0
 region_rect = Rect2(4, 4, 36, 36)
 
 [resource]
-Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
-Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_disabled_color = Color(0.25098, 0.25098, 0.25098, 0.835294)
 Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
 Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
-Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 Button/colors/font_outline_color = Color(0, 0, 0, 1)
-Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
 Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
 Button/colors/icon_focus_color = Color(1, 1, 1, 1)
 Button/colors/icon_hover_color = Color(1, 1, 1, 1)
@@ -188,10 +187,10 @@ Label/styles/normal = SubResource("StyleBoxTexture_j10xv")
 LineEdit/colors/caret_color = Color(0.95, 0.95, 0.95, 1)
 LineEdit/colors/clear_button_color = Color(0.875, 0.875, 0.875, 1)
 LineEdit/colors/clear_button_color_pressed = Color(1, 1, 1, 1)
-LineEdit/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+LineEdit/colors/font_color = Color(0, 0, 0, 1)
 LineEdit/colors/font_outline_color = Color(0, 0, 0, 1)
-LineEdit/colors/font_placeholder_color = Color(0.875, 0.875, 0.875, 0.6)
-LineEdit/colors/font_selected_color = Color(1, 1, 1, 1)
+LineEdit/colors/font_placeholder_color = Color(0.298039, 0.298039, 0.298039, 1)
+LineEdit/colors/font_selected_color = Color(0.125911, 0.125911, 0.125911, 1)
 LineEdit/colors/font_uneditable_color = Color(0.875, 0.875, 0.875, 0.5)
 LineEdit/colors/selection_color = Color(0.5, 0.5, 0.5, 1)
 LineEdit/constants/caret_width = 1
@@ -204,7 +203,7 @@ LineEdit/styles/focus = SubResource("StyleBoxTexture_w6x80")
 LineEdit/styles/normal = SubResource("StyleBoxTexture_vyuec")
 LineEdit/styles/read_only = SubResource("StyleBoxTexture_ktis8")
 PanelContainer/styles/panel = ExtResource("4_8gcwi")
-ProgressBar/colors/font_color = Color(0.95, 0.95, 0.95, 1)
+ProgressBar/colors/font_color = Color(0, 0, 0, 1)
 ProgressBar/colors/font_outline_color = Color(0, 0, 0, 1)
 ProgressBar/constants/outline_size = 0
 ProgressBar/font_sizes/font_size = 16

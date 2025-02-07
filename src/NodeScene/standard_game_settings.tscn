@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5010erpn74kt"]
+[gd_scene load_steps=8 format=3 uid="uid://c5010erpn74kt"]
 
 [ext_resource type="Script" path="res://Scripts/StandardVariants/variant_game_settings.gd" id="1_rq1yi"]
-[ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/Default_Pixel_Blue/PanelBlueBoxBackgroundStyle.tres" id="2_1lwmu"]
 [ext_resource type="Theme" uid="uid://w0bhlln4xhbw" path="res://Themes/Custom_Default/Custom_Default_Wood.tres" id="2_hp12w"]
 [ext_resource type="Texture2D" uid="uid://bput4ufl60a8d" path="res://Assets/2D Assets/DiceSprites/4 Sided/dice-four-faces-4.png" id="4_k35ff"]
 [ext_resource type="PackedScene" uid="uid://c2y0m27eadb6i" path="res://NodeScene/sample_preset_button.tscn" id="4_yjqjv"]
@@ -28,10 +27,8 @@ scale = Vector2(1.44, 2.28)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("2_hp12w")
-theme_override_styles/panel = ExtResource("2_1lwmu")
 
 [node name="SimplePresetsBox" type="VBoxContainer" parent="UIBox"]
-visible = false
 layout_mode = 2
 theme = ExtResource("2_hp12w")
 

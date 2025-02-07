@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d0icyj31p2tgw"]
+[gd_scene load_steps=16 format=3 uid="uid://d0icyj31p2tgw"]
 
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_manager.gd" id="1_q3ti8"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_dynamic_dice_container.gd" id="2_n4duv"]
@@ -8,11 +8,9 @@
 [ext_resource type="Material" uid="uid://dvsy8knluwv6e" path="res://Materials/BoardRaisedMat.tres" id="6_hbv13"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_Dynamic_Scoreboard.gd" id="7_0kcih"]
 [ext_resource type="PackedScene" uid="uid://bg5xnvw62vip6" path="res://NodeScene/background_objects_Dungeon_Tavern.tscn" id="7_scqsd"]
-[ext_resource type="StyleBox" uid="uid://bdd2m4n2as1ot" path="res://Themes/Default_Pixel_Wood/WoodBoxBackgroundStyle.tres" id="8_n6aig"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_score_calculator.gd" id="9_b1f1p"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_ui.gd" id="11_0d724"]
 [ext_resource type="Theme" uid="uid://w0bhlln4xhbw" path="res://Themes/Custom_Default/Custom_Default_Wood.tres" id="11_is8sm"]
-[ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/Default_Pixel_Blue/PanelBlueBoxBackgroundStyle.tres" id="12_vxxtv"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_watpb"]
 
@@ -148,7 +146,6 @@ offset_left = -198.0
 offset_bottom = 332.0
 grow_horizontal = 0
 theme = ExtResource("11_is8sm")
-theme_override_styles/panel = ExtResource("8_n6aig")
 
 [node name="SelfHandsSectionBox" type="VBoxContainer" parent="Scoreboard/UIBox"]
 layout_mode = 2
@@ -482,7 +479,6 @@ offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("11_is8sm")
-theme_override_styles/panel = ExtResource("12_vxxtv")
 
 [node name="EscBox" type="VBoxContainer" parent="GameUI/EscPanel"]
 layout_mode = 2
