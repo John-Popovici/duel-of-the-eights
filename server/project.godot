@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="duel-of-the-eights Server"
+config/name="server"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [dotnet]
 
-project/assembly_name="duel-of-the-eights Server"
+project/assembly_name="server"
