@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bb1hsjv35krnk"]
 
-[ext_resource type="Script" path="res://Presets/networkManager2P.gd" id="1_n7215"]
+[ext_resource type="Script" path="res://Scripts/networkManager2P.gd" id="1_n7215"]
 [ext_resource type="Script" path="res://Scripts/connectionUI.gd" id="2_b1k17"]
 [ext_resource type="Theme" uid="uid://w0bhlln4xhbw" path="res://Themes/Custom_Default/Custom_Default_Wood.tres" id="3_cqgb1"]
 
