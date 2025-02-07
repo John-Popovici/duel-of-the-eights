@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgk884y8tbn53"]
+[gd_scene load_steps=3 format=3 uid="uid://bgk884y8tbn53"]
 
 [ext_resource type="Script" path="res://Scripts/UniversalScripts/toast_popup.gd" id="1_low2a"]
+[ext_resource type="Theme" uid="uid://w0bhlln4xhbw" path="res://Themes/Custom_Default/Custom_Default_Wood.tres" id="1_nj2nk"]
 
 [node name="Toast" type="Label"]
 size_flags_vertical = 6
+theme = ExtResource("1_nj2nk")
 text = "You've got Toast!"
 script = ExtResource("1_low2a")
 

@@ -1,9 +1,9 @@
 [gd_scene load_steps=22 format=3 uid="uid://dbuevipki6jra"]
 
 [ext_resource type="Script" path="res://Scripts/GlobalCustomization/GC_scene.gd" id="1_2co8p"]
-[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="1_odr4a"]
 [ext_resource type="PackedScene" uid="uid://cu4mb4w4jgh2e" path="res://NodeScene/six_dice.tscn" id="2_18byj"]
 [ext_resource type="Script" path="res://Scripts/GlobalCustomization/GC_customization_ui.gd" id="2_61s26"]
+[ext_resource type="Theme" uid="uid://w0bhlln4xhbw" path="res://Themes/Custom_Default/Custom_Default_Wood.tres" id="3_jyaf7"]
 [ext_resource type="PackedScene" uid="uid://dvqod4aw6sxvo" path="res://NodeScene/button.tscn" id="4_aknih"]
 [ext_resource type="Material" uid="uid://dvsy8knluwv6e" path="res://Materials/BoardRaisedMat.tres" id="6_tmny7"]
 [ext_resource type="Material" uid="uid://cgpa3fsefx8ir" path="res://Materials/BoardLowMat.tres" id="7_kk2ga"]
@@ -19,8 +19,10 @@ size = Vector3(10, 1, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_36lpi"]
 
-[sub_resource type="Animation" id="Animation_oxtph"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_wxpxb"]
+resource_name = "Display_Dice_Bounce_d12"
+length = 4.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -28,10 +30,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 2.5, 0)]
+"values": [Vector3(0, 0.6, 0), Vector3(0, 2.1, 0), Vector3(0, 0.6, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -40,10 +42,39 @@ tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3t5i0"]
+resource_name = "Display_Dice_Bounce_d4"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.5, 0), Vector3(0, 1.5, 0), Vector3(0, -0.5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0), Vector3(0, 6.28319, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_txdmv"]
@@ -104,10 +135,8 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0), Vector3(0, 6.28319, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_3t5i0"]
-resource_name = "Display_Dice_Bounce_d4"
-length = 4.0
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_oxtph"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -115,10 +144,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2, 4),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, -0.5, 0), Vector3(0, 1.5, 0), Vector3(0, -0.5, 0)]
+"values": [Vector3(0, 2.5, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -127,39 +156,10 @@ tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 2, 4),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0), Vector3(0, 6.28319, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_wxpxb"]
-resource_name = "Display_Dice_Bounce_d12"
-length = 4.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2, 4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0.6, 0), Vector3(0, 2.1, 0), Vector3(0, 0.6, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 2, 4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0), Vector3(0, 6.28319, 0)]
+"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k28vk"]
@@ -184,7 +184,7 @@ offset_right = 834.0
 offset_bottom = 591.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("1_odr4a")
+theme = ExtResource("3_jyaf7")
 
 [node name="Sections" type="VBoxContainer" parent="CustomizationUI/BackPanel"]
 layout_mode = 2
@@ -447,7 +447,7 @@ offset_left = -200.0
 offset_top = -108.0
 grow_horizontal = 0
 grow_vertical = 0
-theme = ExtResource("1_odr4a")
+theme = ExtResource("3_jyaf7")
 
 [node name="ButtonHolder" type="VBoxContainer" parent="DiceDisplay/CameraController/CameraPosPanel"]
 layout_mode = 2

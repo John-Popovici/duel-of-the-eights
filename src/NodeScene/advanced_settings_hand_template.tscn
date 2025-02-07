@@ -1,34 +1,35 @@
 [gd_scene load_steps=2 format=3 uid="uid://d00h8gkr653j2"]
 
-[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="1_4c1f1"]
+[ext_resource type="Theme" uid="uid://w0bhlln4xhbw" path="res://Themes/Custom_Default/Custom_Default_Wood.tres" id="1_kseyc"]
 
 [node name="AdvancedSettingsHandTemplate" type="HBoxContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
+theme = ExtResource("1_kseyc")
 
 [node name="HandName" type="Label" parent="."]
 layout_mode = 2
-theme = ExtResource("1_4c1f1")
+theme = ExtResource("1_kseyc")
 
 [node name="Allowed" type="CheckBox" parent="."]
 layout_mode = 2
-theme = ExtResource("1_4c1f1")
+theme = ExtResource("1_kseyc")
 text = "Allowed"
 
 [node name="Repeatable" type="CheckBox" parent="."]
 layout_mode = 2
-theme = ExtResource("1_4c1f1")
+theme = ExtResource("1_kseyc")
 text = "Repeatable"
 
 [node name="MaxPlays" type="SpinBox" parent="."]
 layout_mode = 2
-theme = ExtResource("1_4c1f1")
+theme = ExtResource("1_kseyc")
 max_value = 99.0
 value = 1.0
 suffix = "Play"
 
 [node name="ScoringRule" type="LineEdit" parent="."]
 layout_mode = 2
-theme = ExtResource("1_4c1f1")
+theme = ExtResource("1_kseyc")
 placeholder_text = "Scoring Rule"
