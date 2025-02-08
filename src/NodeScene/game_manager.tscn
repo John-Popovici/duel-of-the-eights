@@ -176,6 +176,7 @@ text = "Total: "
 script = ExtResource("9_b1f1p")
 
 [node name="RollButtons" type="VBoxContainer" parent="."]
+visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -236,10 +237,10 @@ theme = ExtResource("11_is8sm")
 
 [node name="OpponentDiceLabel" type="Label" parent="GameUI/OpponentDiceBase"]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 544.0
-offset_right = 169.0
-offset_bottom = 568.0
+offset_left = 7.0
+offset_top = 543.0
+offset_right = 177.0
+offset_bottom = 571.0
 theme = ExtResource("11_is8sm")
 text = "Opponent Dice Rolls:"
 
