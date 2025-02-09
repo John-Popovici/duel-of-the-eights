@@ -51,7 +51,7 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
 
-[node name="ProfilePicButton" type="TextureButton" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/UserDetailsContainer/ProfileBackground"]
+[node name="ProfilePicButton" type="TextureButton" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/UserDetailsContainer/ProfileBackground" groups=["ConfirmButtons"]]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -105,7 +105,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 1
 text = " Invert Selection Method : "
 
-[node name="CheckButton" type="CheckButton" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/InvertSelectMethodContainer"]
+[node name="CheckButton" type="CheckButton" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/InvertSelectMethodContainer" groups=["SwitchButtons"]]
 layout_mode = 2
 size_flags_horizontal = 2
 
@@ -122,7 +122,7 @@ text = " SFX Volume : "
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Slider" type="HSlider" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/SFXVolumeContainer/SliderContainer"]
+[node name="Slider" type="HSlider" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/SFXVolumeContainer/SliderContainer" groups=["Sliders"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -149,7 +149,7 @@ text = " Music Volume : "
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Slider" type="HSlider" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/MusicVolumeContainer/SliderContainer"]
+[node name="Slider" type="HSlider" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/MusicVolumeContainer/SliderContainer" groups=["Sliders"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -168,14 +168,14 @@ custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="BackToHomeButton" type="Button" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
+[node name="BackToHomeButton" type="Button" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer" groups=["BackButtons"]]
 layout_mode = 2
 size_flags_vertical = 10
 text = "Back To Home"
 
 [node name="FileDialog" type="FileDialog" parent="."]
 title = "Open a File"
-size = Vector2i(310, 151)
+size = Vector2i(310, 400)
 ok_button_text = "Open"
 file_mode = 0
 access = 2

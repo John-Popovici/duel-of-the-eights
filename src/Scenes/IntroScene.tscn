@@ -205,7 +205,7 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Settings"
 
-[node name="Profile" type="Button" parent="OptionsPanel/VBoxContainer"]
+[node name="Profile" type="Button" parent="OptionsPanel/VBoxContainer" groups=["ConfirmButtons"]]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Profile"

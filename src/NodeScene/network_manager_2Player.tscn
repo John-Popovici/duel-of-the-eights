@@ -29,7 +29,7 @@ theme = ExtResource("4_77rg4")
 text = "Select Multiplayer Options:"
 horizontal_alignment = 1
 
-[node name="HostCheckButton" type="CheckButton" parent="ConnectionUI/UIBox/Connection_Setup"]
+[node name="HostCheckButton" type="CheckButton" parent="ConnectionUI/UIBox/Connection_Setup" groups=["SwitchButtons"]]
 layout_mode = 2
 theme = ExtResource("4_77rg4")
 text = "Host?"

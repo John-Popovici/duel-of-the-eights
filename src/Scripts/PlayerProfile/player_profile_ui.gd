@@ -18,7 +18,6 @@ signal profile_settings_ready(profile_settings)
 @export var presets_folder = "res://Presets"
 @export var player_settings_path = (presets_folder + "/profile_settings.json")
 
-var profile_settings_saved = false
 @export var profile_settings: Dictionary = {}
 @export var username: String
 @export var invertedSelection: bool
@@ -74,6 +73,8 @@ func _on_image_file_selected(path: String):
 	var texture = ImageTexture.new()
 	texture.set_image(image)
 	texture.set_size_override(Vector2(200,200))
+	# share profile pic to global settings
+	GlobalSettings.profile_pic = texture
 	profile_pic_button.texture_normal = texture
 	profile_pic_button.texture_hover = null
 	
@@ -98,6 +99,8 @@ func save_profile_settings():
 		"sfx_volume": self.sfxVolume,
 		"music_volume": self.musicVolume
 	}
+	# share changes to global settings
+	GlobalSettings.profile_settings = self.profile_settings
 
 	print("Writing to: ", player_settings_path)
 	var file = FileAccess.open(player_settings_path, FileAccess.WRITE)
@@ -109,37 +112,21 @@ func save_profile_settings():
 
 # Load existing profile settings
 func load_profile_settings():
-	if not FileAccess.file_exists(player_settings_path):
-		print("no data to load")
-		return
-		
-	var file = FileAccess.open(player_settings_path, FileAccess.READ)
-	var content = file.get_as_text()
-	var json_data = JSON.parse_string(content)
-	
-	if json_data == null:
-		print("Error parsing JSON")
-		return
-	
 	# load username
-	if json_data["player_name"] != null:
-		self.username = json_data["player_name"]
-		self.username_box.text = json_data["player_name"]
+	self.username = GlobalSettings.profile_settings["player_name"]
+	self.username_box.text = self.username
 	# load selection method
-	if json_data["invert_selection_method"] != null:
-		self.invertedSelection = json_data["invert_selection_method"]
-		invert_select_method.button_pressed = self.invertedSelection
-		# load sfx_volume
-	if json_data["sfx_volume"] != null:
-		self.set_sfx_volume(json_data["sfx_volume"], true)
-		# load music_volume
-	if json_data["music_volume"] != null:
-		self.set_music_volume(json_data["music_volume"], true)
-		
+	self.invertedSelection = GlobalSettings.profile_settings["invert_selection_method"]
+	invert_select_method.button_pressed = self.invertedSelection
+	# load sfx_volume
+	self.set_sfx_volume(GlobalSettings.profile_settings["sfx_volume"], true)
+	# load music_volume
+	self.set_music_volume(GlobalSettings.profile_settings["music_volume"], true)
+	
 	# load profile pic
-	var save_path1 = presets_folder + "/Images/profile_pic.png"
-	if FileAccess.file_exists(save_path1):
-		self._on_image_file_selected(save_path1)
+	if GlobalSettings.profile_pic != null:
+		profile_pic_button.texture_normal = GlobalSettings.profile_pic
+		profile_pic_button.texture_hover = null
 
 # Load default settings
 func load_default_settings():

@@ -74,7 +74,7 @@ func _on_peer_connected(id: int):
 ##### Add stuff to _on_peer_connected or _second_player_connected to transmit name info or profile info
 signal second_player_connected(Name: String)
 func _second_player_connected():
-	emit_signal("second_player_connected","Client") #Change to be the players profile name
+	emit_signal("second_player_connected", GlobalSettings.profile_settings["player_name"])
 
 func _on_peer_disconnected(id: int):
 	print("Disconnected from peer with ID: ", id)

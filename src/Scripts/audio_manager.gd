@@ -10,7 +10,10 @@ var sfx_library = {
 	"confirm_echo_button_click": preload("res://Assets/Audio/SFX/confirm_style_2_echo_001.ogg"),
 	"error_button_click": preload("res://Assets/Audio/SFX/error_style_2_001.ogg"),
 	"win_sound": preload("res://Assets/Audio/SFX/magic_003.wav"),
-	"lose_sound": preload("res://Assets/Audio/SFX/explosion_02.wav")
+	"lose_sound": preload("res://Assets/Audio/SFX/explosion_02.wav"),
+	"switch_on": preload("res://Assets/Audio/SFX/switch_on.wav"),
+	"switch_off": preload("res://Assets/Audio/SFX/switch_on.wav"),
+	"slider_ended": preload("res://Assets/Audio/SFX/slider_ended.wav")
 }
 
 var dice_sfx_library = {
@@ -58,8 +61,14 @@ var music_library = {
 
 func _ready():
 	# Set default volume levels
-	set_music_volume(self.musicVolume)
-	set_sfx_volume(self.sfxVolume)
+	if GlobalSettings.profile_settings["music_volume"] != null:
+		set_music_volume(float(GlobalSettings.profile_settings["music_volume"]/100))
+	else:
+		set_music_volume(self.musicVolume)
+	if GlobalSettings.profile_settings["sfx_volume"] != null:
+		set_sfx_volume(float(GlobalSettings.profile_settings["sfx_volume"]/100))
+	else:
+		set_sfx_volume(self.sfxVolume)
 	AudioManager.play_music("main_menu")
 	
 	connect_buttons()
@@ -72,12 +81,29 @@ func connect_buttons() -> void:
 	var back_buttons: Array = get_tree().get_nodes_in_group("BackButtons")
 	for inst in back_buttons:
 		inst.connect("pressed", self.on_back_button_pressed)
+		
+	var switch_buttons: Array = get_tree().get_nodes_in_group("SwitchButtons")
+	for inst in switch_buttons:
+		inst.connect("toggled", self.on_switch_button_toggled)
+		
+	var sliders: Array = get_tree().get_nodes_in_group("Sliders")
+	for inst in sliders:
+		inst.connect("drag_ended", self.on_slider_ended)
 
 func on_confirm_button_pressed()->void:
 	play_sfx("confirm_button_click")
 
 func on_back_button_pressed()->void:
 	play_sfx("back_button_click")
+
+func on_switch_button_toggled(button_pressed: bool)->void:
+	if button_pressed:
+		play_sfx("switch_on")
+	else:
+		play_sfx("switch_off")
+		
+func on_slider_ended(value_changed)->void:
+	play_sfx("slider_ended")
 
 func play_music(track_name: String, loop: bool = true):
 	if track_name in music_library:
@@ -110,6 +136,7 @@ func play_dice_sfx():
 func set_music_volume(volume: float): #float 0 to 1
 	self.musicVolume = volume
 	music_player.volume_db = linear_to_db(volume)
+	GlobalSettings.profile_settings["music_volume"] = int(volume*100)
 	
 func get_music_volume()->float:
 	return self.musicVolume
@@ -117,6 +144,7 @@ func get_music_volume()->float:
 func set_sfx_volume(volume: float): #float 0 to 1
 	self.sfxVolume = volume
 	sfx_player.volume_db = linear_to_db(volume)
+	GlobalSettings.profile_settings["sfx_volume"] = int(volume*100)
 	
 func get_sfx_volume()->float:
 	return self.sfxVolume

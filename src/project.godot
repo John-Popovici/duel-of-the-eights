@@ -53,6 +53,8 @@ NetworkHandlingNodes="Nodes for Network handling, must only have one at most in 
 SingleGameManager="Group for Single Game Manager Instance"
 ConfirmButtons="Audio Group for Confirm Buttons"
 BackButtons="Audio Group for Back Buttons"
+SwitchButtons=""
+Sliders=""
 
 [gui]
 
