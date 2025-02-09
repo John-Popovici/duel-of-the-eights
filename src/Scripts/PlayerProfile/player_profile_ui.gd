@@ -79,6 +79,8 @@ func _on_image_file_selected(path: String):
 	profile_pic_button.texture_hover = null
 	
 func set_sfx_volume(volume: float, setSlider: bool):
+	if volume == null:
+		return
 	self.sfxVolume = volume
 	sfx_slider_value.text = str(volume) + "%"
 	AudioManager.set_sfx_volume(float(volume)/100)
@@ -86,6 +88,8 @@ func set_sfx_volume(volume: float, setSlider: bool):
 		sfx_slider.value = volume
 
 func set_music_volume(volume: float, setSlider: bool):
+	if volume == null:
+		return
 	self.musicVolume = volume
 	music_slider_value.text = str(volume) + "%"
 	AudioManager.set_music_volume(float(volume)/100)

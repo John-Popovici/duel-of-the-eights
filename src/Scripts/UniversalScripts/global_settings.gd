@@ -25,8 +25,8 @@ extends Node
 @onready var profile_settings : Dictionary = {
 	"player_name": "",
 	"invert_selection_method": false,
-	"sfx_volume": 0,
-	"music_volume": 0
+	"sfx_volume": null,
+	"music_volume": null
 }
 @onready var profile_pic : Texture
 
