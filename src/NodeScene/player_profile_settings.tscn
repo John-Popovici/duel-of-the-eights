@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://503osc6reblk"]
+[gd_scene load_steps=6 format=3 uid="uid://503osc6reblk"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerProfile/player_profile_ui.gd" id="1_lt7c1"]
-[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="2_5setl"]
-[ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/Default_Pixel_Blue/PanelBlueBoxBackgroundStyle.tres" id="3_ohg7g"]
+[ext_resource type="Theme" uid="uid://w0bhlln4xhbw" path="res://Themes/Custom_Default/Custom_Default_Wood.tres" id="2_pql38"]
 [ext_resource type="Texture2D" uid="uid://dxqthyrktxgfq" path="res://Assets/2D Assets/OtherImages/defaultUser.webp" id="4_pus15"]
 [ext_resource type="Texture2D" uid="uid://clguc45t1tq2o" path="res://Assets/2D Assets/OtherImages/defaultUserHover.webp" id="5_xe1gp"]
 
@@ -26,8 +25,7 @@ grow_vertical = 2
 scale = Vector2(1.44, 2.28)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = ExtResource("2_5setl")
-theme_override_styles/panel = ExtResource("3_ohg7g")
+theme = ExtResource("2_pql38")
 
 [node name="MainContainer" type="VBoxContainer" parent="MainBackground"]
 layout_mode = 2

@@ -470,8 +470,8 @@ func _ready() -> void:
 	sort_desc_button.pressed.connect(_on_desc_sort_pressed)
 	sort_freq_button.pressed.connect(_on_freq_sort_pressed)
 	game_manager.connect("update_player_stats", self.update_player_stats)
-	SFXVolumeSlider.value = AudioManager.get_sfx_volume()*100
-	MusicVolumeSlider.value = AudioManager.get_music_volume()*100
+	SFXVolumeSlider.value = int(AudioManager.get_sfx_volume()*100)
+	MusicVolumeSlider.value = int(AudioManager.get_music_volume()*100)
 	SFXVolumeSlider.value_changed.connect(change_sfx_vol)
 	MusicVolumeSlider.value_changed.connect(change_music_vol)
 
