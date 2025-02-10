@@ -115,12 +115,17 @@ func add_dice(dice_count: int, dice_type: int) -> void:
 		add_child(dice)
 		dice_nodes.append(dice)
 
+func toggleDiceCollisions(toggle: bool) -> void:
+	for die in self.get_dice():
+		die.disableCollisions(toggle)
+
 func moveDiceAside(dice_to_move: Array) -> void:
 	#move dice that are not being rerolled to the side of the board
 	dice_to_move.sort_custom(func(a, b): return a.get_face_value() < b.get_face_value())
 	var iterator = 0
 	var current_row = 0
 	var max_slots = aside_positions.size()
+	self.toggleDiceCollisions(true)
 	for die in dice_to_move:
 		var curr_aside_position = Vector3(aside_positions[iterator].x, die.getAxisPos("y"), aside_positions[iterator].z)
 		die.setAsideProperties(curr_aside_position - (aside_row_gap*current_row))
