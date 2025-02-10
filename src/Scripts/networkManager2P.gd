@@ -171,15 +171,18 @@ func _ready() -> void:
 signal startGame
 
 # Broadcasts disconnect
-func broadcast_disconnect(state: String, data: Dictionary):
+func broadcast_disconnect(state: String = "", data: Dictionary = {}):
+	print("Broadcasting Disconnect")
 	rpc("receive_disconnect")
 	remove_from_group("NetworkHandlingNodes")
 
 # Remote function to handle incoming game state updates
 @rpc("any_peer")
 func receive_disconnect():
+	print("Recieved Disconnect")
 	emit_signal("disconnected")
-	remove_from_group("NetworkHandlingNodes")
+	SceneSwitcher.returnToIntro()
+	#remove_from_group("NetworkHandlingNodes")
 
 signal game_state_received(state: String, data: Dictionary)
 

@@ -10,6 +10,11 @@ func _ready() -> void:
 func returnToIntro() -> void:
 	# Only free the current scene if it's still valid
 	if currentScene != null:
+		var networkManagers = get_tree().get_nodes_in_group("NetworkHandlingNodes")
+		if networkManagers.size() > 0:
+			var network_manager = networkManagers[0]
+			network_manager.broadcast_disconnect("ReturnToIntro")
+			await get_tree().create_timer(1.0).timeout
 		currentScene.queue_free()
 	else: # brute force clear of all nodes (in progress)
 		print("Do not have scene to free")
