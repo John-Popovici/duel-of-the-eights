@@ -23,7 +23,7 @@ extends Node
 @onready var player_settings_path = (presets_folder + "/profile_settings.json")
 
 @onready var profile_settings : Dictionary = {
-	"player_name": "",
+	"player_name": "New Player",
 	"invert_selection_method": false,
 	"sfx_volume": null,
 	"music_volume": null
