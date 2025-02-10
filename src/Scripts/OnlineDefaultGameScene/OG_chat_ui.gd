@@ -46,6 +46,10 @@ func send_chat_message(message: String):
 func _add_message_to_chat(message: String):
 	var label = Label.new()
 	label.set_autowrap_mode(3)
+	if message.substr(0,3) == "You":
+		label.set_horizontal_alignment(2)
+	else:
+		label.set_horizontal_alignment(0)
 	label.text = message
 	chat_messages.add_child(label)
 	last_chat = label
