@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_manager.gd" id="1_q3ti8"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_dynamic_dice_container.gd" id="2_n4duv"]
 [ext_resource type="Script" path="res://Scripts/camera_toggle_controller.gd" id="3_4x4th"]
+[ext_resource type="Theme" uid="uid://w0bhlln4xhbw" path="res://Themes/Custom_Default/Custom_Default_Wood.tres" id="4_eudyq"]
 [ext_resource type="Theme" uid="uid://dokd457t4xs7n" path="res://Themes/Default_Pixel_Wood/Default_pixel_.Wood.tres" id="4_h4ers"]
 [ext_resource type="Material" uid="uid://cgpa3fsefx8ir" path="res://Materials/BoardLowMat.tres" id="5_f33k2"]
 [ext_resource type="Material" uid="uid://dvsy8knluwv6e" path="res://Materials/BoardRaisedMat.tres" id="6_hbv13"]
@@ -10,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://bg5xnvw62vip6" path="res://NodeScene/background_objects_Dungeon_Tavern.tscn" id="7_scqsd"]
 [ext_resource type="StyleBox" uid="uid://bdd2m4n2as1ot" path="res://Themes/Default_Pixel_Wood/WoodBoxBackgroundStyle.tres" id="8_n6aig"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_score_calculator.gd" id="9_b1f1p"]
-[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="10_ks8nt"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_ui.gd" id="11_0d724"]
 [ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/Default_Pixel_Blue/PanelBlueBoxBackgroundStyle.tres" id="12_vxxtv"]
 
@@ -58,7 +58,7 @@ visible = false
 offset_top = 435.0
 offset_right = 200.0
 offset_bottom = 515.0
-theme = ExtResource("4_h4ers")
+theme = ExtResource("4_eudyq")
 
 [node name="ButtonHolder" type="VBoxContainer" parent="CameraController/CameraPosPanel"]
 layout_mode = 2
@@ -183,17 +183,17 @@ offset_right = 548.0
 offset_bottom = -213.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("4_eudyq")
 
 [node name="RollSelected" type="Button" parent="RollButtons" groups=["ConfirmButtons"]]
 layout_mode = 2
-theme = ExtResource("4_h4ers")
+theme = ExtResource("4_eudyq")
 theme_override_font_sizes/font_size = 22
 text = "Roll Selected"
 
 [node name="PassRoll" type="Button" parent="RollButtons" groups=["ConfirmButtons"]]
 layout_mode = 2
-theme = ExtResource("4_h4ers")
+theme = ExtResource("4_eudyq")
 theme_override_font_sizes/font_size = 22
 text = "Pass"
 
@@ -206,17 +206,17 @@ offset_left = -74.0
 offset_right = 74.0
 offset_bottom = 66.0
 grow_horizontal = 2
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("4_eudyq")
 
 [node name="RaiseTheStakesButton" type="Button" parent="BluffContainer"]
 layout_mode = 2
-theme = ExtResource("4_h4ers")
+theme = ExtResource("4_eudyq")
 theme_override_font_sizes/font_size = 22
 text = "Raise the Stakes"
 
 [node name="FoldButton" type="Button" parent="BluffContainer"]
 layout_mode = 2
-theme = ExtResource("4_h4ers")
+theme = ExtResource("4_eudyq")
 theme_override_font_sizes/font_size = 22
 text = "Fold"
 
@@ -309,16 +309,19 @@ layout_mode = 2
 [node name="Asc" type="Button" parent="GameUI/MyPlayerDiceBase/RollSorter/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("4_eudyq")
 text = "Asc"
 
 [node name="Desc" type="Button" parent="GameUI/MyPlayerDiceBase/RollSorter/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("4_eudyq")
 text = "Desc"
 
 [node name="Freq" type="Button" parent="GameUI/MyPlayerDiceBase/RollSorter/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("4_eudyq")
 text = "Freq"
 
 [node name="GameStatePanel" type="PanelContainer" parent="GameUI"]
@@ -381,11 +384,12 @@ offset_right = 200.0
 offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_eudyq")
 alignment = 1
 
 [node name="WaitMessage" type="Label" parent="GameUI/WaitingScreen"]
 layout_mode = 2
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("4_eudyq")
 text = "Waiting for other player..."
 horizontal_alignment = 1
 
@@ -415,7 +419,7 @@ offset_right = 121.0
 offset_bottom = 73.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("4_eudyq")
 
 [node name="HeaderLabel" type="Label" parent="GameUI/EndOfGameScreen"]
 layout_mode = 2
@@ -462,29 +466,31 @@ offset_right = 405.0
 offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_eudyq")
 theme_override_styles/panel = ExtResource("12_vxxtv")
 
 [node name="EscBox" type="VBoxContainer" parent="GameUI/EscPanel"]
 layout_mode = 2
+theme = ExtResource("4_eudyq")
 
 [node name="Label" type="Label" parent="GameUI/EscPanel/EscBox"]
 layout_mode = 2
 size_flags_vertical = 6
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("4_eudyq")
 text = "Pause Menu"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="GameUI/EscPanel/EscBox"]
 layout_mode = 2
 size_flags_vertical = 6
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("4_eudyq")
 text = "Game Volume:"
 horizontal_alignment = 1
 
 [node name="SFXVolumeSlider" type="HSlider" parent="GameUI/EscPanel/EscBox"]
 layout_mode = 2
 size_flags_vertical = 2
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("4_eudyq")
 step = 5.0
 value = 50.0
 scrollable = false
@@ -492,14 +498,14 @@ scrollable = false
 [node name="Label3" type="Label" parent="GameUI/EscPanel/EscBox"]
 layout_mode = 2
 size_flags_vertical = 6
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("4_eudyq")
 text = "Music Volume:"
 horizontal_alignment = 1
 
 [node name="MusicVolumeSlider" type="HSlider" parent="GameUI/EscPanel/EscBox"]
 layout_mode = 2
 size_flags_vertical = 2
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("4_eudyq")
 step = 5.0
 value = 30.0
 scrollable = false
@@ -507,10 +513,10 @@ scrollable = false
 [node name="ReturnToGameButton" type="Button" parent="GameUI/EscPanel/EscBox"]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("4_eudyq")
 text = "Return to Game"
 
 [node name="ExitGameButton" type="Button" parent="GameUI/EscPanel/EscBox"]
 layout_mode = 2
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("4_eudyq")
 text = "Exit Game"
