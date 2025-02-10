@@ -62,6 +62,7 @@ func _on_peer_connected(id: int):
 signal second_player_connected(Name: String)
 func _second_player_connected():
 	emit_signal("second_player_connected", GlobalSettings.profile_settings["player_name"])
+	AudioManager.enable_VOIP(true)
 
 func _on_peer_disconnected(id: int):
 	print("Disconnected from peer with ID: ", id)
@@ -229,6 +230,13 @@ signal chat_received(message: String)
 @rpc("any_peer","reliable")
 func receive_chat_rpc(message: String):
 	chat_received.emit(message)
+
+signal voice_data_received(data : PackedVector2Array)
+@rpc("any_peer","call_remote", "reliable") #@rpc("any_peer", "call_remote", "reliable")
+func send_data(data : PackedVector2Array):
+	print("Network Manager Revieved VOIP")
+	voice_data_received.emit(data)
+
 
 func _process(delta: float) -> void:
 	if is_host:

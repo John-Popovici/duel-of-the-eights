@@ -3,6 +3,15 @@ extends Node
 @onready var music_player = $MusicPlayer
 @onready var sfx_player = $SFXPlayer
 @onready var ambience_player = $AmbiencePlayer
+@onready var inputMic = $VoiceInput
+@onready var playback : AudioStreamGeneratorPlayback
+@onready var outputVoiceGenerator = $VoiceOutput
+
+var networkManagers
+var network_manager
+var idx
+var effect
+var VOIPActive = false
 
 # Dictionary of sound effects
 var sfx_library = {
@@ -65,6 +74,7 @@ var ambience_library ={
 
 @export var musicVolume: float = 0.2
 @export var sfxVolume: float = 0.4
+@export var VOIPVolume: float = 0.4
 
 func _ready():
 	# Set default volume levels
@@ -79,7 +89,25 @@ func _ready():
 	AudioManager.play_music("main_menu")
 	AudioManager.play_ambience("tavern_background")
 	AudioManager.play_ambience("wind_background")
+	
+	inputMic.stream = AudioStreamMicrophone.new()
+	#inputMic.play()
+	outputVoiceGenerator.play()
+	idx = AudioServer.get_bus_index("Record")
+	effect = AudioServer.get_bus_effect(idx, 0) # or whatever index your capture effect is
+	playback = outputVoiceGenerator.get_stream_playback()
+	
+	enable_VOIP(false)
+	
 	connect_buttons()
+
+func _process(delta: float) -> void:
+	if (!VOIPActive): return
+	if (effect.can_get_buffer(512) && playback.can_push_buffer(512) && network_manager != null):
+		network_manager.send_data.rpc(effect.get_buffer(512))
+		print("Sending VOIP Data")
+	effect.clear_buffer()
+
 
 func connect_buttons() -> void:
 	var confirm_buttons: Array = get_tree().get_nodes_in_group("ConfirmButtons")
@@ -132,6 +160,29 @@ func play_ambience(ambience_name: String):
 
 func stop_music():
 	music_player.stop()
+
+func enable_VOIP(state: bool):
+	print("VOIP State: ", state)
+	if state:
+		set_process(true)
+		inputMic.play()
+		networkManagers = get_tree().get_nodes_in_group("NetworkHandlingNodes")
+		network_manager = networkManagers[0]
+		VOIPActive = true
+		network_manager.connect("voice_data_received", self.play_VOIP)
+	else:
+		set_process(false)
+		inputMic.stop()
+		if network_manager != null and network_manager.is_connected("voice_data_received", self.play_VOIP):
+			network_manager.disconnect("voice_data_received", self.play_VOIP)
+		networkManagers = null
+		network_manager = null
+		VOIPActive = false
+
+func play_VOIP(data : PackedVector2Array):
+	print("Received VOIP")
+	for i in range(0,512):
+		playback.push_frame(data[i])
 
 func play_sfx(sfx_name: String):
 	if sfx_name in sfx_library:

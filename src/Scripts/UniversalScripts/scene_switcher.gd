@@ -14,6 +14,7 @@ func returnToIntro() -> void:
 		if networkManagers.size() > 0:
 			var network_manager = networkManagers[0]
 			network_manager.broadcast_disconnect("ReturnToIntro")
+			AudioManager.enable_VOIP(false)
 			await get_tree().create_timer(1.0).timeout
 		currentScene.queue_free()
 	else: # brute force clear of all nodes (in progress)

@@ -46,6 +46,7 @@ func _ready() -> void:
 	enemyPlayer.connect("player_stats_updated", self.update_player_stats_signal)
 	AudioManager.play_music("gameplay")
 	AudioManager.connect_buttons()
+	
 	#invertSelection = GlobalSettings.invertSelection
 
 signal update_player_stats(_player: String, Stats: Dictionary)
