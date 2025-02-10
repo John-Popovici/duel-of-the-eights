@@ -210,13 +210,18 @@ func setup_selection() -> void:
 		if timedRounds:
 			GameUI.startTimer(baseTimer)
 
+var other_player_roll_selection = false
+
 func recieveRollSelection(_type: String) -> void:
+	other_player_roll_selection = true
 	#wait on roll selection locally
-	while !(roll_selection_done):
-		await get_tree().create_timer(1.0).timeout
-	roll_selection_done = false
-	waiting_on_other_player(false)
-	rollPhase(roll_selection)
+	#while !(roll_selection_done):
+	#	await get_tree().create_timer(1.0).timeout
+	if other_player_roll_selection and roll_selection_done:
+		roll_selection_done = false
+		other_player_roll_selection = false
+		waiting_on_other_player(false)
+		rollPhase(roll_selection)
 
 func recievehand(hand: Dictionary) -> void:
 	enemyPlayer.update_score(hand["score"])
@@ -475,6 +480,11 @@ func _on_roll_selected() -> void:
 	if timedRounds:
 			GameUI.stopTimer()
 	waiting_on_other_player(true)
+	if other_player_roll_selection and roll_selection_done:
+		roll_selection_done = false
+		other_player_roll_selection = false
+		waiting_on_other_player(false)
+		rollPhase(roll_selection)
 
 func _on_pass_roll() -> void:	  
 	setDisableRollButtons(true)
@@ -484,6 +494,11 @@ func _on_pass_roll() -> void:
 	if timedRounds:
 			GameUI.stopTimer()
 	waiting_on_other_player(true)
+	if other_player_roll_selection and roll_selection_done:
+		roll_selection_done = false
+		other_player_roll_selection = false
+		waiting_on_other_player(false)
+		rollPhase(roll_selection)
 
 func _on_raise() -> void:
 	setDisableRaiseButtons(true)
