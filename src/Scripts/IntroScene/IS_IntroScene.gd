@@ -81,6 +81,11 @@ func _on_profile_pressed() -> void:
 	# Load profile overlay
 	SceneSwitcher.changeScene("res://Scenes/player_profile_scene.tscn")
 
+func _input(event):
+	if event is InputEventKey:
+		if event.is_pressed() and event.keycode == KEY_ESCAPE :
+			_on_profile_pressed()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
