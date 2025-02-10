@@ -124,25 +124,17 @@ func start_round() ->void:
 		await get_tree().create_timer(1.0).timeout
 	network_manager.broadcast_game_state("synchronize_start_round", { "round": current_round })
 	await get_tree().create_timer(0.1).timeout  # Short delay to ensure propagation
-	myPlayerRoundStarted()
-
-var otherPlayerRoundStarted = false
+	round_start_done = true
 
 func synchronizeStartRound() -> void:
 	print("synchronize start round called by Host: ", !isHost, " on Host: ", isHost)
-	otherPlayerRoundStarted = true
+	#wait for round to start locally
+	while !(round_start_done):
+		await get_tree().create_timer(1.0).timeout
+	round_start_done = false
 	#start rolls phase
-	if otherPlayerRoundStarted and round_start_done:
-		round_start_done = false
-		otherPlayerRoundStarted = false
-		rollPhase(true)
-
-func myPlayerRoundStarted() -> void:
-	round_start_done = true
-	if otherPlayerRoundStarted and round_start_done:
-		round_start_done = false
-		otherPlayerRoundStarted = false
-		rollPhase(true)
+	rollPhase(true)
+	
 
 func rollPhase(roll: bool) -> void:
 	setDisableAllButtons(true)
@@ -174,27 +166,19 @@ func recieveRolls(fromHost: bool, _rolls: Array[int]) ->void:
 	enemyPlayer.setRolls(_rolls)
 	GameUI.update_opponent_dice_display(_rolls)
 	print("Received enemy rolls ", _rolls, " from Host: ", fromHost)
-	other_players_rolls_read = true
-	if other_players_rolls_read and rolls_read:
-		GameUI.update_my_player_dice_display(myPlayer.get_dice())
-		rolls_read = false
-		other_players_rolls_read = false
+	#wait of rolls read locally
+	while !(rolls_read):
 		await get_tree().create_timer(1.0).timeout
-		waiting_on_other_player(false)
-		setup_selection()
+	GameUI.update_my_player_dice_display(myPlayer.get_dice())
+	rolls_read = false
+	await get_tree().create_timer(1.0).timeout
+	waiting_on_other_player(false)
+	setup_selection()
 
 var rolls_read: bool = false
-var other_players_rolls_read: bool = false
 
 func set_rolls_read(state: bool) ->void:
 	rolls_read = state
-	if other_players_rolls_read and rolls_read:
-		GameUI.update_my_player_dice_display(myPlayer.get_dice())
-		rolls_read = false
-		other_players_rolls_read = false
-		await get_tree().create_timer(1.0).timeout
-		waiting_on_other_player(false)
-		setup_selection()
 
 func setup_selection() -> void:
 	if roll_count >= max_rolls_per_round:
