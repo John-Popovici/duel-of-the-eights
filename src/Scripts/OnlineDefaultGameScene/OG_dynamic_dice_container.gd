@@ -39,6 +39,10 @@ func roll_rolling_or_invalid_dice() -> void:
 		if die.getIsRolling() or (die.get_face_value() == -1):
 			die.roll()
 
+func invert_selection() -> void:
+	for die in dice_nodes:
+		die._toggle_selection_status()
+
 # Retrieves the values of each die after rolling
 func get_dice_values() -> Array[int]:
 	var dice_values: Array[int] = []

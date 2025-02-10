@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d0icyj31p2tgw"]
+[gd_scene load_steps=17 format=3 uid="uid://d0icyj31p2tgw"]
 
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_manager.gd" id="1_q3ti8"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_dynamic_dice_container.gd" id="2_n4duv"]
@@ -8,11 +8,9 @@
 [ext_resource type="Material" uid="uid://dvsy8knluwv6e" path="res://Materials/BoardRaisedMat.tres" id="6_hbv13"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_Dynamic_Scoreboard.gd" id="7_0kcih"]
 [ext_resource type="PackedScene" uid="uid://bg5xnvw62vip6" path="res://NodeScene/background_objects_Dungeon_Tavern.tscn" id="7_scqsd"]
-[ext_resource type="StyleBox" uid="uid://bdd2m4n2as1ot" path="res://Themes/Default_Pixel_Wood/WoodBoxBackgroundStyle.tres" id="8_n6aig"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_score_calculator.gd" id="9_b1f1p"]
-[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="10_ks8nt"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_ui.gd" id="11_0d724"]
-[ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/Default_Pixel_Blue/PanelBlueBoxBackgroundStyle.tres" id="12_vxxtv"]
+[ext_resource type="Theme" uid="uid://w0bhlln4xhbw" path="res://Themes/Custom_Default/Custom_Default_Wood.tres" id="11_is8sm"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_watpb"]
 
@@ -21,6 +19,8 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_f2rh2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3tu6u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kxswp"]
 
 [node name="GameManager" type="Node3D" groups=["SingleGameManager"]]
 script = ExtResource("1_q3ti8")
@@ -58,24 +58,28 @@ visible = false
 offset_top = 435.0
 offset_right = 200.0
 offset_bottom = 515.0
-theme = ExtResource("4_h4ers")
+theme = ExtResource("11_is8sm")
 
 [node name="ButtonHolder" type="VBoxContainer" parent="CameraController/CameraPosPanel"]
 layout_mode = 2
+theme = ExtResource("11_is8sm")
 
 [node name="Angled" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder" groups=["ConfirmButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("11_is8sm")
 text = "Angled"
 
 [node name="Top Down" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder" groups=["ConfirmButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("11_is8sm")
 text = "Top Down"
 
 [node name="Cinematic" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder" groups=["ConfirmButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("11_is8sm")
 text = "Cinematic"
 
 [node name="Environment" type="Node3D" parent="."]
@@ -133,7 +137,6 @@ shape = SubResource("BoxShape3D_3tu6u")
 [node name="BackgroundObjects" parent="Environment" instance=ExtResource("7_scqsd")]
 
 [node name="Scoreboard" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("7_0kcih")
 
 [node name="UIBox" type="PanelContainer" parent="Scoreboard"]
@@ -143,7 +146,7 @@ anchor_right = 1.0
 offset_left = -198.0
 offset_bottom = 332.0
 grow_horizontal = 0
-theme_override_styles/panel = ExtResource("8_n6aig")
+theme = ExtResource("11_is8sm")
 
 [node name="SelfHandsSectionBox" type="VBoxContainer" parent="Scoreboard/UIBox"]
 layout_mode = 2
@@ -151,20 +154,22 @@ theme_override_constants/separation = 0
 
 [node name="Header" type="Label" parent="Scoreboard/UIBox/SelfHandsSectionBox"]
 layout_mode = 2
-theme = ExtResource("4_h4ers")
+theme = ExtResource("11_is8sm")
 text = "Scoreboard"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Scoreboard/UIBox/SelfHandsSectionBox"]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
+theme = ExtResource("11_is8sm")
 horizontal_scroll_mode = 0
 
 [node name="HandsContainer" type="VBoxContainer" parent="Scoreboard/UIBox/SelfHandsSectionBox/ScrollContainer"]
 layout_mode = 2
+theme = ExtResource("11_is8sm")
 
 [node name="Total" type="Label" parent="Scoreboard/UIBox/SelfHandsSectionBox"]
 layout_mode = 2
-theme = ExtResource("4_h4ers")
+theme = ExtResource("11_is8sm")
 text = "Total: "
 
 [node name="ScoreCalculator" type="Node" parent="."]
@@ -177,23 +182,23 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 400.0
-offset_top = -279.0
-offset_right = 548.0
-offset_bottom = -213.0
+offset_left = 398.0
+offset_top = -273.0
+offset_right = 550.0
+offset_bottom = -207.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("11_is8sm")
 
 [node name="RollSelected" type="Button" parent="RollButtons" groups=["ConfirmButtons"]]
 layout_mode = 2
-theme = ExtResource("4_h4ers")
+theme = ExtResource("11_is8sm")
 theme_override_font_sizes/font_size = 22
 text = "Roll Selected"
 
 [node name="PassRoll" type="Button" parent="RollButtons" groups=["ConfirmButtons"]]
 layout_mode = 2
-theme = ExtResource("4_h4ers")
+theme = ExtResource("11_is8sm")
 theme_override_font_sizes/font_size = 22
 text = "Pass"
 
@@ -206,17 +211,17 @@ offset_left = -74.0
 offset_right = 74.0
 offset_bottom = 66.0
 grow_horizontal = 2
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("11_is8sm")
 
 [node name="RaiseTheStakesButton" type="Button" parent="BluffContainer"]
 layout_mode = 2
-theme = ExtResource("4_h4ers")
+theme = ExtResource("11_is8sm")
 theme_override_font_sizes/font_size = 22
 text = "Raise the Stakes"
 
 [node name="FoldButton" type="Button" parent="BluffContainer"]
 layout_mode = 2
-theme = ExtResource("4_h4ers")
+theme = ExtResource("11_is8sm")
 theme_override_font_sizes/font_size = 22
 text = "Fold"
 
@@ -228,15 +233,15 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme = ExtResource("4_h4ers")
+theme = ExtResource("11_is8sm")
 
 [node name="OpponentDiceLabel" type="Label" parent="GameUI/OpponentDiceBase"]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 544.0
-offset_right = 169.0
-offset_bottom = 568.0
-theme = ExtResource("4_h4ers")
+offset_left = 7.0
+offset_top = 543.0
+offset_right = 177.0
+offset_bottom = 571.0
+theme = ExtResource("11_is8sm")
 text = "Opponent Dice Rolls:"
 
 [node name="OpponentDicePanel" type="PanelContainer" parent="GameUI/OpponentDiceBase"]
@@ -255,6 +260,7 @@ layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("11_is8sm")
 alignment = 1
 
 [node name="MyPlayerDiceBase" type="Control" parent="GameUI"]
@@ -262,7 +268,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme = ExtResource("4_h4ers")
+theme = ExtResource("11_is8sm")
 
 [node name="MyPlayerDiceLabel" type="Label" parent="GameUI/MyPlayerDiceBase"]
 layout_mode = 0
@@ -270,7 +276,7 @@ offset_left = 1034.0
 offset_top = 543.0
 offset_right = 1146.0
 offset_bottom = 567.0
-theme = ExtResource("4_h4ers")
+theme = ExtResource("11_is8sm")
 text = "My Dice Rolls:"
 horizontal_alignment = 2
 
@@ -294,6 +300,7 @@ layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("11_is8sm")
 alignment = 1
 
 [node name="RollSorter" type="PanelContainer" parent="GameUI/MyPlayerDiceBase"]
@@ -302,9 +309,11 @@ offset_left = 584.0
 offset_top = 533.0
 offset_right = 889.0
 offset_bottom = 568.0
+theme = ExtResource("11_is8sm")
 
 [node name="ButtonHolder" type="HBoxContainer" parent="GameUI/MyPlayerDiceBase/RollSorter"]
 layout_mode = 2
+theme = ExtResource("11_is8sm")
 
 [node name="Asc" type="Button" parent="GameUI/MyPlayerDiceBase/RollSorter/ButtonHolder"]
 layout_mode = 2
@@ -319,48 +328,56 @@ text = "Desc"
 [node name="Freq" type="Button" parent="GameUI/MyPlayerDiceBase/RollSorter/ButtonHolder"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("11_is8sm")
 text = "Freq"
 
 [node name="GameStatePanel" type="PanelContainer" parent="GameUI"]
-offset_top = 390.0
-offset_right = 199.0
-offset_bottom = 430.0
-theme = ExtResource("4_h4ers")
+offset_left = 1.0
+offset_top = 221.0
+offset_right = 200.0
+offset_bottom = 261.0
+theme = ExtResource("11_is8sm")
 
 [node name="GameStateInfo" type="HBoxContainer" parent="GameUI/GameStatePanel"]
 layout_mode = 2
+theme = ExtResource("11_is8sm")
 alignment = 1
 
 [node name="PlayerStatsPanel" type="VBoxContainer" parent="GameUI"]
-offset_right = 199.0
-offset_bottom = 385.0
+offset_right = 211.0
+offset_bottom = 214.0
+theme = ExtResource("11_is8sm")
 
 [node name="MyPlayerPanel" type="PanelContainer" parent="GameUI/PlayerStatsPanel"]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("4_h4ers")
+theme = ExtResource("11_is8sm")
 
 [node name="MyPlayerStatBox" type="VBoxContainer" parent="GameUI/PlayerStatsPanel/MyPlayerPanel"]
 layout_mode = 2
+theme = ExtResource("11_is8sm")
 
 [node name="EnemyPlayerPanel" type="PanelContainer" parent="GameUI/PlayerStatsPanel"]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("4_h4ers")
+theme = ExtResource("11_is8sm")
 
 [node name="EnemyPlayerStatBox" type="VBoxContainer" parent="GameUI/PlayerStatsPanel/EnemyPlayerPanel"]
 layout_mode = 2
+theme = ExtResource("11_is8sm")
 
 [node name="CountdownPanel" type="PanelContainer" parent="GameUI"]
 offset_left = 954.0
-offset_top = 439.0
+offset_top = 444.0
 offset_right = 1152.0
-offset_bottom = 479.0
-theme = ExtResource("4_h4ers")
+offset_bottom = 484.0
+theme = ExtResource("11_is8sm")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_kxswp")
 
 [node name="ProgressBar" type="ProgressBar" parent="GameUI/CountdownPanel"]
 layout_mode = 2
 size_flags_vertical = 1
+theme = ExtResource("11_is8sm")
 step = 1.0
 value = 100.0
 fill_mode = 1
@@ -381,11 +398,12 @@ offset_right = 200.0
 offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("11_is8sm")
 alignment = 1
 
 [node name="WaitMessage" type="Label" parent="GameUI/WaitingScreen"]
 layout_mode = 2
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("11_is8sm")
 text = "Waiting for other player..."
 horizontal_alignment = 1
 
@@ -399,6 +417,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("11_is8sm")
 color = Color(0, 0, 0, 0.266667)
 
 [node name="EndOfGameScreen" type="VBoxContainer" parent="GameUI"]
@@ -415,7 +434,7 @@ offset_right = 121.0
 offset_bottom = 73.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("11_is8sm")
 
 [node name="HeaderLabel" type="Label" parent="GameUI/EndOfGameScreen"]
 layout_mode = 2
@@ -462,29 +481,30 @@ offset_right = 405.0
 offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("12_vxxtv")
+theme = ExtResource("11_is8sm")
 
 [node name="EscBox" type="VBoxContainer" parent="GameUI/EscPanel"]
 layout_mode = 2
+theme = ExtResource("11_is8sm")
 
 [node name="Label" type="Label" parent="GameUI/EscPanel/EscBox"]
 layout_mode = 2
 size_flags_vertical = 6
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("11_is8sm")
 text = "Pause Menu"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="GameUI/EscPanel/EscBox"]
 layout_mode = 2
 size_flags_vertical = 6
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("11_is8sm")
 text = "Game Volume:"
 horizontal_alignment = 1
 
-[node name="GameVolumeSlider" type="HSlider" parent="GameUI/EscPanel/EscBox"]
+[node name="SFXVolumeSlider" type="HSlider" parent="GameUI/EscPanel/EscBox"]
 layout_mode = 2
-size_flags_vertical = 2
-theme = ExtResource("10_ks8nt")
+size_flags_vertical = 3
+theme = ExtResource("11_is8sm")
 step = 5.0
 value = 50.0
 scrollable = false
@@ -492,14 +512,14 @@ scrollable = false
 [node name="Label3" type="Label" parent="GameUI/EscPanel/EscBox"]
 layout_mode = 2
 size_flags_vertical = 6
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("11_is8sm")
 text = "Music Volume:"
 horizontal_alignment = 1
 
-[node name="MusicVolumeSlider2" type="HSlider" parent="GameUI/EscPanel/EscBox"]
+[node name="MusicVolumeSlider" type="HSlider" parent="GameUI/EscPanel/EscBox"]
 layout_mode = 2
-size_flags_vertical = 2
-theme = ExtResource("10_ks8nt")
+size_flags_vertical = 3
+theme = ExtResource("11_is8sm")
 step = 5.0
 value = 30.0
 scrollable = false
@@ -507,10 +527,10 @@ scrollable = false
 [node name="ReturnToGameButton" type="Button" parent="GameUI/EscPanel/EscBox"]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("11_is8sm")
 text = "Return to Game"
 
 [node name="ExitGameButton" type="Button" parent="GameUI/EscPanel/EscBox"]
 layout_mode = 2
-theme = ExtResource("10_ks8nt")
+theme = ExtResource("11_is8sm")
 text = "Exit Game"

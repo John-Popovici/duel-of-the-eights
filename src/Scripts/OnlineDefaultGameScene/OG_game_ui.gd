@@ -14,6 +14,8 @@ extends CanvasLayer
 @onready var EscBackground = get_node("EscBackOverlay")
 @onready var ReturnToGameButton = get_node("EscPanel/EscBox/ReturnToGameButton")
 @onready var ExitGameButton = get_node("EscPanel/EscBox/ExitGameButton")
+@onready var SFXVolumeSlider = get_node("EscPanel/EscBox/SFXVolumeSlider")
+@onready var MusicVolumeSlider = get_node("EscPanel/EscBox/MusicVolumeSlider")
 @onready var timer = get_node("CountdownTimer")
 @onready var countdownBar = get_node("CountdownPanel/ProgressBar")
 @onready var countdownPanel = get_node("CountdownPanel")
@@ -29,6 +31,7 @@ extends CanvasLayer
 @onready var sort_freq_button = get_node("MyPlayerDiceBase/RollSorter/ButtonHolder/Freq")
 
 var myPlayerName: String
+var myPlayerDice
 var enemyPlayerName: String
 var health_points:int
 var total_rounds:int
@@ -161,31 +164,33 @@ func update_opponent_dice_display(rolls: Array):
 				var dice_sprite = opponent_dice_display.get_node("OpponentDie%d" % i) as TextureRect
 				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/12 Sided/dice-twelve-faces-%d.png" % rolls[i])  # Adjust path to dice textures
 
-func update_my_player_dice_display(dice: Array[RigidBody3D]):
-	dice = sortDice(dice,sortMethod)
-	for i in range(dice.size()):
-		var face_value = dice[i].get_face_value()
+func update_my_player_dice_display(_dice: Array[RigidBody3D]):
+	if _dice == null:
+		return
+	myPlayerDice = sortDice(_dice,sortMethod)
+	for i in range(myPlayerDice.size()):
+		var face_value = myPlayerDice[i].get_face_value()
 		match dice_type:
 			6:
 				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
 				var _norm_tex = load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-six-faces-%d.png" % face_value)
 				var _selected_tex = load("res://Assets/2D Assets/DiceSprites/6 Sided/dice-selected-six-faces-%d.png" % face_value)
-				dice_sprite.setDie(dice[i],_norm_tex,_selected_tex)
+				dice_sprite.setDie(myPlayerDice[i],_norm_tex,_selected_tex)
 			8:
 				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
 				var _norm_tex = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-eight-faces-%d.png" % face_value)
 				var _selected_tex = load("res://Assets/2D Assets/DiceSprites/8 Sided/dice-selected-eight-faces-%d.png" % face_value)
-				dice_sprite.setDie(dice[i],_norm_tex,_selected_tex)
+				dice_sprite.setDie(myPlayerDice[i],_norm_tex,_selected_tex)
 			4:
 				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
 				var _norm_tex = load("res://Assets/2D Assets/DiceSprites/4 Sided/dice-four-faces-%d.png" % face_value)
 				var _selected_tex = load("res://Assets/2D Assets/DiceSprites/4 Sided/dice-selected-four-faces-%d.png" % face_value)
-				dice_sprite.setDie(dice[i],_norm_tex,_selected_tex)
+				dice_sprite.setDie(myPlayerDice[i],_norm_tex,_selected_tex)
 			12:
 				var dice_sprite = my_player_dice_display.get_node("OpponentDie%d" % i) as TextureRect
 				var _norm_tex = load("res://Assets/2D Assets/DiceSprites/12 Sided/dice-twelve-faces-%d.png" % face_value)
 				var _selected_tex = load("res://Assets/2D Assets/DiceSprites/12 Sided/dice-selected-twelve-faces-%d.png" % face_value)
-				dice_sprite.setDie(dice[i],_norm_tex,_selected_tex)
+				dice_sprite.setDie(myPlayerDice[i],_norm_tex,_selected_tex)
 
 func sortDice(_dice: Array[RigidBody3D], _sortMethod: int = 1)-> Array[RigidBody3D]:
 	match _sortMethod:
@@ -255,6 +260,7 @@ func blank_opponent_dice_display():
 				dice_sprite.texture = load("res://Assets/2D Assets/DiceSprites/12 Sided/dice-twelve-faces-0.png")  # Adjust path to dice textures
 
 func blank_my_player_dice_display():
+	myPlayerDice = null
 	for i in range(dice_count):
 		match dice_type:
 			6:
@@ -407,15 +413,21 @@ func show_player_stats_panel():
 
 func _on_asc_sort_pressed():
 	sortMethod = 1
-	update_my_player_dice_display(get_parent().get_node("myPlayer").get_dice())
+	if myPlayerDice == null:
+		return
+	update_my_player_dice_display(myPlayerDice)
 
 func _on_desc_sort_pressed():
 	sortMethod = 2
-	update_my_player_dice_display(get_parent().get_node("myPlayer").get_dice())
+	if myPlayerDice == null:
+		return
+	update_my_player_dice_display(myPlayerDice)
 
 func _on_freq_sort_pressed():
 	sortMethod = 3
-	update_my_player_dice_display(get_parent().get_node("myPlayer").get_dice())
+	if myPlayerDice == null:
+		return
+	update_my_player_dice_display(myPlayerDice)
 
 var startTime: float
 var currentDuration: float
@@ -458,6 +470,18 @@ func _ready() -> void:
 	sort_desc_button.pressed.connect(_on_desc_sort_pressed)
 	sort_freq_button.pressed.connect(_on_freq_sort_pressed)
 	game_manager.connect("update_player_stats", self.update_player_stats)
+	SFXVolumeSlider.value = AudioManager.get_sfx_volume()*100
+	MusicVolumeSlider.value = AudioManager.get_music_volume()*100
+	SFXVolumeSlider.value_changed.connect(change_sfx_vol)
+	MusicVolumeSlider.value_changed.connect(change_music_vol)
+
+func change_sfx_vol(_val: float)-> void:
+	AudioManager.set_sfx_volume(_val/100)
+	print("Vol set to: ",_val)
+
+func change_music_vol(_val: float)-> void:
+	AudioManager.set_music_volume(_val/100)
+	print("Vol set to: ",_val)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

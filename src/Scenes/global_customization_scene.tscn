@@ -1,9 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://dbuevipki6jra"]
+[gd_scene load_steps=22 format=3 uid="uid://dbuevipki6jra"]
 
 [ext_resource type="Script" path="res://Scripts/GlobalCustomization/GC_scene.gd" id="1_2co8p"]
-[ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="1_odr4a"]
 [ext_resource type="PackedScene" uid="uid://cu4mb4w4jgh2e" path="res://NodeScene/six_dice.tscn" id="2_18byj"]
 [ext_resource type="Script" path="res://Scripts/GlobalCustomization/GC_customization_ui.gd" id="2_61s26"]
+[ext_resource type="Theme" uid="uid://w0bhlln4xhbw" path="res://Themes/Custom_Default/Custom_Default_Wood.tres" id="3_jyaf7"]
 [ext_resource type="PackedScene" uid="uid://dvqod4aw6sxvo" path="res://NodeScene/button.tscn" id="4_aknih"]
 [ext_resource type="Material" uid="uid://dvsy8knluwv6e" path="res://Materials/BoardRaisedMat.tres" id="6_tmny7"]
 [ext_resource type="Material" uid="uid://cgpa3fsefx8ir" path="res://Materials/BoardLowMat.tres" id="7_kk2ga"]
@@ -11,11 +11,165 @@
 [ext_resource type="PackedScene" uid="uid://dhfe5d2eygmel" path="res://NodeScene/four_dice.tscn" id="9_jmq6d"]
 [ext_resource type="Script" path="res://Scripts/camera_toggle_controller.gd" id="10_cj1yu"]
 [ext_resource type="PackedScene" uid="uid://b62jxmiwvswon" path="res://NodeScene/twelve_dice.tscn" id="10_imfv7"]
+[ext_resource type="PackedScene" uid="uid://bg5xnvw62vip6" path="res://NodeScene/background_objects_Dungeon_Tavern.tscn" id="12_iaxf0"]
+[ext_resource type="Script" path="res://Scripts/GlobalCustomization/global _customization_startup_background_movement.gd" id="13_c1i8e"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kermc"]
 size = Vector3(10, 1, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_36lpi"]
+
+[sub_resource type="Animation" id="Animation_wxpxb"]
+resource_name = "Display_Dice_Bounce_d12"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.6, 0), Vector3(0, 2.1, 0), Vector3(0, 0.6, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3t5i0"]
+resource_name = "Display_Dice_Bounce_d4"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.5, 0), Vector3(0, 1.5, 0), Vector3(0, -0.5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_txdmv"]
+resource_name = "Display_Dice_Bounce_2"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.5, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_q32a0"]
+resource_name = "Display_Dice_Bounce"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.5, 0), Vector3(0, 3, 0), Vector3(0, 1.5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_oxtph"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 2.5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k28vk"]
+_data = {
+"Display_Dice_Bounce_d12": SubResource("Animation_wxpxb"),
+"Display_Dice_Bounce_d4": SubResource("Animation_3t5i0"),
+"Display_Dice_Bounce_d6": SubResource("Animation_txdmv"),
+"Display_Dice_Bounce_d8": SubResource("Animation_q32a0"),
+"RESET": SubResource("Animation_oxtph")
+}
 
 [node name="GlobalCustomizationScene" type="Node3D"]
 script = ExtResource("1_2co8p")
@@ -30,7 +184,7 @@ offset_right = 834.0
 offset_bottom = 591.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("1_odr4a")
+theme = ExtResource("3_jyaf7")
 
 [node name="Sections" type="VBoxContainer" parent="CustomizationUI/BackPanel"]
 layout_mode = 2
@@ -133,6 +287,7 @@ text = "Back To Home"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="DiceDisplay"]
 transform = Transform3D(0.853553, 0.146447, 0.5, -0.5, 0.5, 0.707107, -0.146447, -0.853553, 0.5, 0, 0, 0)
+visible = false
 sky_mode = 1
 
 [node name="D6Display" type="RigidBody3D" parent="DiceDisplay"]
@@ -145,15 +300,24 @@ shape = SubResource("BoxShape3D_kermc")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DiceDisplay/D6Display"]
 transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -2, 0)
+visible = false
 mesh = SubResource("BoxMesh_36lpi")
 surface_material_override/0 = ExtResource("6_tmny7")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="DiceDisplay/D6Display"]
 transform = Transform3D(12, 0, 0, 0, 1, 0, 0, 0, 12, 0, -2.5, 0)
+visible = false
 mesh = SubResource("BoxMesh_36lpi")
 surface_material_override/0 = ExtResource("7_kk2ga")
 
 [node name="Six_Dice" parent="DiceDisplay/D6Display" instance=ExtResource("2_18byj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DiceDisplay/D6Display/Six_Dice"]
+libraries = {
+"": SubResource("AnimationLibrary_k28vk")
+}
+autoplay = "Display_Dice_Bounce_d6"
 
 [node name="D8Display" type="RigidBody3D" parent="DiceDisplay"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
@@ -166,15 +330,23 @@ shape = SubResource("BoxShape3D_kermc")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DiceDisplay/D8Display"]
 transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -2, 0)
+visible = false
 mesh = SubResource("BoxMesh_36lpi")
 surface_material_override/0 = ExtResource("6_tmny7")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="DiceDisplay/D8Display"]
 transform = Transform3D(12, 0, 0, 0, 1, 0, 0, 0, 12, 0, -2.5, 0)
+visible = false
 mesh = SubResource("BoxMesh_36lpi")
 surface_material_override/0 = ExtResource("7_kk2ga")
 
 [node name="EightDice" parent="DiceDisplay/D8Display" instance=ExtResource("8_smb06")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DiceDisplay/D8Display/EightDice"]
+libraries = {
+"": SubResource("AnimationLibrary_k28vk")
+}
+autoplay = "Display_Dice_Bounce_d8"
 
 [node name="D4Display" type="RigidBody3D" parent="DiceDisplay"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50)
@@ -187,15 +359,23 @@ shape = SubResource("BoxShape3D_kermc")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DiceDisplay/D4Display"]
 transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -2, 0)
+visible = false
 mesh = SubResource("BoxMesh_36lpi")
 surface_material_override/0 = ExtResource("6_tmny7")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="DiceDisplay/D4Display"]
 transform = Transform3D(12, 0, 0, 0, 1, 0, 0, 0, 12, 0, -2.5, 0)
+visible = false
 mesh = SubResource("BoxMesh_36lpi")
 surface_material_override/0 = ExtResource("7_kk2ga")
 
 [node name="FourDice" parent="DiceDisplay/D4Display" instance=ExtResource("9_jmq6d")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DiceDisplay/D4Display/FourDice"]
+libraries = {
+"": SubResource("AnimationLibrary_k28vk")
+}
+autoplay = "Display_Dice_Bounce_d4"
 
 [node name="D12Display" type="RigidBody3D" parent="DiceDisplay"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100)
@@ -208,20 +388,31 @@ shape = SubResource("BoxShape3D_kermc")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DiceDisplay/D12Display"]
 transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -2, 0)
+visible = false
 mesh = SubResource("BoxMesh_36lpi")
 surface_material_override/0 = ExtResource("6_tmny7")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="DiceDisplay/D12Display"]
 transform = Transform3D(12, 0, 0, 0, 1, 0, 0, 0, 12, 0, -2.5, 0)
+visible = false
 mesh = SubResource("BoxMesh_36lpi")
 surface_material_override/0 = ExtResource("7_kk2ga")
 
 [node name="TwelveDice" parent="DiceDisplay/D12Display" instance=ExtResource("10_imfv7")]
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DiceDisplay/D12Display/TwelveDice"]
+libraries = {
+"": SubResource("AnimationLibrary_k28vk")
+}
+autoplay = "Display_Dice_Bounce_d12"
+
 [node name="CameraController" type="Node3D" parent="DiceDisplay"]
 script = ExtResource("10_cj1yu")
 
 [node name="Positions" type="Node3D" parent="DiceDisplay/CameraController"]
+
+[node name="D4" type="Node3D" parent="DiceDisplay/CameraController/Positions"]
+transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 10, 7, -38)
 
 [node name="D6" type="Node3D" parent="DiceDisplay/CameraController/Positions"]
 transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 10, 7, 12)
@@ -229,21 +420,22 @@ transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18
 [node name="D8" type="Node3D" parent="DiceDisplay/CameraController/Positions"]
 transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 10, 7, 62)
 
-[node name="D4" type="Node3D" parent="DiceDisplay/CameraController/Positions"]
-transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 10, 7, -38)
-
 [node name="D12" type="Node3D" parent="DiceDisplay/CameraController/Positions"]
 transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 10, 7, -88)
 
 [node name="Camera3D" type="Camera3D" parent="DiceDisplay/CameraController"]
-transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 10, 7, 12)
+transform = Transform3D(0.104528, -0.420303, 0.901343, 0, 0.906307, 0.422618, -0.994522, -0.0441756, 0.0947349, 105, 55, 48)
 
 [node name="SpotLight3D_Camera" type="SpotLight3D" parent="DiceDisplay/CameraController/Camera3D"]
 transform = Transform3D(0.95658, 0.145735, -0.252421, -0.145735, 0.989145, 0.0188015, 0.252421, 0.0188015, 0.967435, 0, 0, 0)
-light_energy = 0.25
+light_energy = 0.0
 spot_range = 70.0
 spot_attenuation = -0.5
 spot_angle_attenuation = 2.37841
+
+[node name="BackgroundObjects" parent="DiceDisplay/CameraController" instance=ExtResource("12_iaxf0")]
+transform = Transform3D(0.707107, 2.10734e-08, 0.707107, -2.98023e-08, 1, 1.77636e-15, -0.707107, -2.10734e-08, 0.707107, 9.53674e-07, -2, 9.53674e-07)
+script = ExtResource("13_c1i8e")
 
 [node name="CameraPosPanel" type="PanelContainer" parent="DiceDisplay/CameraController"]
 anchors_preset = 3
@@ -255,7 +447,7 @@ offset_left = -200.0
 offset_top = -108.0
 grow_horizontal = 0
 grow_vertical = 0
-theme = ExtResource("1_odr4a")
+theme = ExtResource("3_jyaf7")
 
 [node name="ButtonHolder" type="VBoxContainer" parent="DiceDisplay/CameraController/CameraPosPanel"]
 layout_mode = 2

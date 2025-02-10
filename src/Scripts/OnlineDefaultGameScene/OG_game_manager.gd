@@ -11,6 +11,7 @@ var hand_settings
 @onready var enemyPlayer = get_parent().get_node("enemyPlayer")
 @onready var cameraController = get_node("CameraController")
 @onready var cameraGameLocation = get_node("CameraController/Positions/Angled")
+@onready var cameraCinematicLocation = get_node("CameraController/Positions/Cinematic")
 
 @onready var GameUI: CanvasLayer = get_node("GameUI")
 @onready var rollButtons = get_node("RollButtons")
@@ -25,6 +26,7 @@ var timedRounds: bool
 var bluffMechanicActive: bool
 var raiseInEffect: bool
 var blockRaise: bool
+var invertSelection: bool = false #Toggle Manually until prfile page is done
 
 var max_rounds: int
 var max_rolls_per_round: int
@@ -44,6 +46,7 @@ func _ready() -> void:
 	enemyPlayer.connect("player_stats_updated", self.update_player_stats_signal)
 	AudioManager.play_music("gameplay")
 	AudioManager.connect_buttons()
+	#invertSelection = GlobalSettings.invertSelection
 
 signal update_player_stats(_player: String, Stats: Dictionary)
 func update_player_stats_signal(_player: String, Stats: Dictionary) -> void:
@@ -74,6 +77,8 @@ func setup_game() -> void:
 	isHost = network_manager.getIsHost()
 	network_manager.connect("game_state_received", self._on_game_state_received)
 	rollSelected.connect("pressed", self._on_roll_selected)
+	if invertSelection:
+		rollSelected.text = "Keep Selected"
 	passRoll.connect("pressed", self._on_pass_roll)
 	raiseTheStakesButton.connect("pressed", self._on_raise)
 	foldButton.connect("pressed", self._on_fold)
@@ -142,6 +147,9 @@ func rollPhase(roll: bool) -> void:
 		myPlayer.roll_dice()
 		resetRaise()
 	elif roll:
+		if invertSelection:
+			myPlayer.invert_selection()
+			await get_tree().create_timer(0.5).timeout
 		myPlayer.roll_selected_dice()
 	elif !roll:
 		myPlayer.pass_roll()
@@ -300,7 +308,7 @@ func synchronizeNextRound() -> void:
 
 func endGame() -> void:
 	#have a tree of end of game instances to check who wins/ apply effects
-	
+	cameraController.lerp_camera_to_position(cameraCinematicLocation, 0.01)
 	var myPlayerStats = myPlayer.getState()
 	var OpponentStats = enemyPlayer.getState()
 	var myPlayerFinalStats: Dictionary

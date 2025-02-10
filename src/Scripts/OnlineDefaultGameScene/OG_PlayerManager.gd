@@ -50,6 +50,9 @@ func roll_dice() -> void:
 	await get_tree().create_timer(1.0).timeout
 	checkIfDiceValidThenRead()
 
+func invert_selection() -> void:
+	diceContainer.invert_selection()
+
 func roll_selected_dice() -> void:
 	diceContainer.roll_selected_dice()
 	await get_tree().create_timer(1.0).timeout

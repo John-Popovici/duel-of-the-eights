@@ -2,6 +2,7 @@ extends Node
 
 @onready var music_player = $MusicPlayer
 @onready var sfx_player = $SFXPlayer
+@onready var ambience_player = $AmbiencePlayer
 
 # Dictionary of sound effects
 var sfx_library = {
@@ -56,6 +57,12 @@ var music_library = {
 	#Tense music can be changed to be be just a sound effect
 }
 
+var ambience_library ={
+	"tavern_background": preload("res://Assets/Audio/Ambience/tavern-ambience-with-openfire-effect-no-loops-86151.mp3"),
+	"wind_background": preload("res://Assets/Audio/Ambience/soft-wind-trees-moving-ambience-22292.mp3"),
+	"drink_sip": preload("res://Assets/Audio/Ambience/drink-sip-and-swallow-6974.mp3")
+}
+
 @export var musicVolume: float = 0.2
 @export var sfxVolume: float = 0.4
 
@@ -70,7 +77,8 @@ func _ready():
 	else:
 		set_sfx_volume(self.sfxVolume)
 	AudioManager.play_music("main_menu")
-	
+	AudioManager.play_ambience("tavern_background")
+	AudioManager.play_ambience("wind_background")
 	connect_buttons()
 
 func connect_buttons() -> void:
@@ -114,6 +122,14 @@ func play_music(track_name: String, loop: bool = true):
 	else:
 		push_error("Music track not found: " + track_name)
 
+func play_ambience(ambience_name: String):
+	if ambience_name in ambience_library:
+		ambience_player.stream = ambience_library[ambience_name]
+		print("Ambience Audio Playing: ", ambience_name)
+		ambience_player.play()
+	else:
+		push_error("Ambience not found: " + ambience_name)
+
 func stop_music():
 	music_player.stop()
 
@@ -137,14 +153,15 @@ func set_music_volume(volume: float): #float 0 to 1
 	self.musicVolume = volume
 	music_player.volume_db = linear_to_db(volume)
 	GlobalSettings.profile_settings["music_volume"] = int(volume*100)
-	
-func get_music_volume()->float:
-	return self.musicVolume
+	ambience_player.volume_db = linear_to_db(volume)
 
 func set_sfx_volume(volume: float): #float 0 to 1
-	self.sfxVolume = volume
 	sfx_player.volume_db = linear_to_db(volume)
+	self.sfxVolume = volume
 	GlobalSettings.profile_settings["sfx_volume"] = int(volume*100)
-	
-func get_sfx_volume()->float:
-	return self.sfxVolume
+
+func get_music_volume() -> float:
+	return db_to_linear(music_player.volume_db)
+
+func get_sfx_volume() -> float:
+	return db_to_linear(sfx_player.volume_db)

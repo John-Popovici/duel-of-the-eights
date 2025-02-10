@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://d05a7cco5s8tg"]
+[gd_scene load_steps=14 format=3 uid="uid://d05a7cco5s8tg"]
 
 [ext_resource type="Script" path="res://Scripts/IntroScene/IS_IntroScene.gd" id="1_datn8"]
 [ext_resource type="Theme" uid="uid://dokd457t4xs7n" path="res://Themes/Default_Pixel_Wood/Default_pixel_.Wood.tres" id="2_buat0"]
 [ext_resource type="Theme" uid="uid://c3fas6jlnx7pa" path="res://Themes/Default_Pixel_Blue/Default_pixel_Blue.tres" id="2_j2iul"]
 [ext_resource type="StyleBox" uid="uid://b2sm7qo5hu1s1" path="res://Themes/Default_Pixel_Blue/LineEditFocus_style_box_texture.tres" id="4_ns1si"]
+[ext_resource type="Theme" uid="uid://w0bhlln4xhbw" path="res://Themes/Custom_Default/Custom_Default_Wood.tres" id="5_bq53n"]
 [ext_resource type="StyleBox" uid="uid://deahfg1g1m00d" path="res://Themes/Default_Pixel_Blue/LineEditReadOnly_style_box_texture.tres" id="5_dpqr0"]
 [ext_resource type="StyleBox" uid="uid://bxto0q8vlrsee" path="res://Themes/Default_Pixel_Blue/LineEditNormal_style_box_texture.tres" id="6_f7cih"]
 [ext_resource type="StyleBox" uid="uid://detnn7sb2gxs8" path="res://Themes/Default_Pixel_Blue/ButtonDisabled_style_box_texture.tres" id="7_sypxc"]
@@ -74,23 +75,27 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -173.0
+offset_top = 10.0
 offset_right = 173.0
-offset_bottom = 43.0
+offset_bottom = 60.0
 grow_horizontal = 2
 
 [node name="Label" type="Label" parent="Title"]
+texture_filter = 3
 layout_mode = 2
-theme = ExtResource("2_buat0")
+size_flags_vertical = 6
+theme = ExtResource("5_bq53n")
 text = "Dice Duels:
 Duel of the Eights"
 horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_left = 6.0
-offset_top = 233.0
-offset_right = 240.0
-offset_bottom = 388.0
-scale = Vector2(2.01922, 2.61369)
+texture_filter = 3
+offset_left = 13.0
+offset_top = 403.0
+offset_right = 359.0
+offset_bottom = 605.0
+theme = ExtResource("5_bq53n")
 theme_override_constants/separation = 5
 
 [node name="Player1Entry" type="LineEdit" parent="VBoxContainer"]
@@ -130,41 +135,25 @@ text = "Start Local Game!"
 [node name="StartStandardGame" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_j2iul")
-theme_override_styles/disabled = ExtResource("7_sypxc")
-theme_override_styles/hover = ExtResource("8_mpfnf")
-theme_override_styles/pressed = ExtResource("9_lucfa")
-theme_override_styles/normal = ExtResource("10_3uy0t")
+theme = ExtResource("5_bq53n")
 text = "Play Standard Game"
 
 [node name="StartBluffGame" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_j2iul")
-theme_override_styles/disabled = ExtResource("7_sypxc")
-theme_override_styles/hover = ExtResource("8_mpfnf")
-theme_override_styles/pressed = ExtResource("9_lucfa")
-theme_override_styles/normal = ExtResource("10_3uy0t")
+theme = ExtResource("5_bq53n")
 text = "Play Bluff Game"
 
 [node name="StartBlitzGame" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_j2iul")
-theme_override_styles/disabled = ExtResource("7_sypxc")
-theme_override_styles/hover = ExtResource("8_mpfnf")
-theme_override_styles/pressed = ExtResource("9_lucfa")
-theme_override_styles/normal = ExtResource("10_3uy0t")
+theme = ExtResource("5_bq53n")
 text = "Play Blitz Game"
 
 [node name="StartOnlineGame" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_j2iul")
-theme_override_styles/disabled = ExtResource("7_sypxc")
-theme_override_styles/hover = ExtResource("8_mpfnf")
-theme_override_styles/pressed = ExtResource("9_lucfa")
-theme_override_styles/normal = ExtResource("10_3uy0t")
+theme = ExtResource("5_bq53n")
 text = "Play Custom Game"
 
 [node name="StartOnlineLongFormGame" type="Button" parent="VBoxContainer"]
@@ -180,17 +169,19 @@ text = "Start Online Long Form Game"
 
 [node name="StartServer" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
 layout_mode = 2
-theme = ExtResource("2_j2iul")
+size_flags_vertical = 3
+theme = ExtResource("5_bq53n")
 text = "Connect to Server"
 
 [node name="OptionsPanel" type="PanelContainer" parent="."]
+texture_filter = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -218.0
 offset_bottom = 152.0
 grow_horizontal = 0
-theme = ExtResource("2_j2iul")
+theme = ExtResource("5_bq53n")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OptionsPanel"]
 layout_mode = 2
@@ -199,11 +190,6 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 text = "Cosmetic Customization"
-
-[node name="Settings" type="Button" parent="OptionsPanel/VBoxContainer" groups=["ConfirmButtons"]]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Settings"
 
 [node name="Profile" type="Button" parent="OptionsPanel/VBoxContainer" groups=["ConfirmButtons"]]
 layout_mode = 2
