@@ -124,17 +124,25 @@ func start_round() ->void:
 		await get_tree().create_timer(1.0).timeout
 	network_manager.broadcast_game_state("synchronize_start_round", { "round": current_round })
 	await get_tree().create_timer(0.1).timeout  # Short delay to ensure propagation
-	round_start_done = true
+	myPlayerRoundStarted()
+
+var otherPlayerRoundStarted = false
 
 func synchronizeStartRound() -> void:
 	print("synchronize start round called by Host: ", !isHost, " on Host: ", isHost)
-	#wait for round to start locally
-	while !(round_start_done):
-		await get_tree().create_timer(1.0).timeout
-	round_start_done = false
+	otherPlayerRoundStarted = true
 	#start rolls phase
-	rollPhase(true)
-	
+	if otherPlayerRoundStarted and round_start_done:
+		round_start_done = false
+		otherPlayerRoundStarted = false
+		rollPhase(true)
+
+func myPlayerRoundStarted() -> void:
+	round_start_done = true
+	if otherPlayerRoundStarted and round_start_done:
+		round_start_done = false
+		otherPlayerRoundStarted = false
+		rollPhase(true)
 
 func rollPhase(roll: bool) -> void:
 	setDisableAllButtons(true)
@@ -166,19 +174,27 @@ func recieveRolls(fromHost: bool, _rolls: Array[int]) ->void:
 	enemyPlayer.setRolls(_rolls)
 	GameUI.update_opponent_dice_display(_rolls)
 	print("Received enemy rolls ", _rolls, " from Host: ", fromHost)
-	#wait of rolls read locally
-	while !(rolls_read):
+	other_players_rolls_read = true
+	if other_players_rolls_read and rolls_read:
+		GameUI.update_my_player_dice_display(myPlayer.get_dice())
+		rolls_read = false
+		other_players_rolls_read = false
 		await get_tree().create_timer(1.0).timeout
-	GameUI.update_my_player_dice_display(myPlayer.get_dice())
-	rolls_read = false
-	await get_tree().create_timer(1.0).timeout
-	waiting_on_other_player(false)
-	setup_selection()
+		waiting_on_other_player(false)
+		setup_selection()
 
 var rolls_read: bool = false
+var other_players_rolls_read: bool = false
 
 func set_rolls_read(state: bool) ->void:
 	rolls_read = state
+	if other_players_rolls_read and rolls_read:
+		GameUI.update_my_player_dice_display(myPlayer.get_dice())
+		rolls_read = false
+		other_players_rolls_read = false
+		await get_tree().create_timer(1.0).timeout
+		waiting_on_other_player(false)
+		setup_selection()
 
 func setup_selection() -> void:
 	if roll_count >= max_rolls_per_round:
@@ -189,28 +205,34 @@ func setup_selection() -> void:
 			GameUI.startTimer(baseTimer*2)
 	else:
 		roll_selection_done = false
+		other_player_roll_selection = false
 		print("Host: ", isHost, " reached roll selection on roll_count: ", roll_count, " of max: ", max_rolls_per_round)
 		setDisableRollButtons(false)
 		if timedRounds:
 			GameUI.startTimer(baseTimer)
 
+var other_player_roll_selection = false
+
 func recieveRollSelection(_type: String) -> void:
+	other_player_roll_selection = true
 	#wait on roll selection locally
-	while !(roll_selection_done):
-		await get_tree().create_timer(1.0).timeout
-	roll_selection_done = false
-	waiting_on_other_player(false)
-	rollPhase(roll_selection)
+	if other_player_roll_selection and roll_selection_done:
+		roll_selection_done = false
+		other_player_roll_selection = false
+		waiting_on_other_player(false)
+		rollPhase(roll_selection)
+
+var other_player_hand_selection_done = false
 
 func recievehand(hand: Dictionary) -> void:
 	enemyPlayer.update_score(hand["score"])
+	other_player_hand_selection_done = true
 	#add code to enemy player to log all hands in order with score
-	#wait on hand selection locally
-	while !(hand_selection_done):
-		await get_tree().create_timer(1.0).timeout
-	hand_selection_done = false
-	endOfRoundEffects()
-	waiting_on_other_player(false)
+	if hand_selection_done and other_player_hand_selection_done:
+		hand_selection_done = false
+		other_player_hand_selection_done = false
+		endOfRoundEffects()
+		waiting_on_other_player(false)
 
 func recievebonus(hand: Dictionary) -> void:
 	enemyPlayer.update_score(hand["score"])
@@ -259,6 +281,11 @@ func endOfRoundEffects() -> void:
 	else:
 		network_manager.broadcast_game_state("synchronize_next_round", { "round": current_round })
 		start_next_round = true
+		if start_next_round and other_player_start_next_round:
+			start_next_round = false
+			other_player_start_next_round = false
+			if(isHost):
+				start_round()
 
 func foldEndOfRoundEffects() -> void:
 	#have a tree of end of round Effects instances to pass the score through and get updated result
@@ -294,17 +321,23 @@ func foldEndOfRoundEffects() -> void:
 	else:
 		network_manager.broadcast_game_state("synchronize_next_round", { "round": current_round })
 		start_next_round = true
+		if start_next_round and other_player_start_next_round:
+			start_next_round = false
+			other_player_start_next_round = false
+			if(isHost):
+				start_round()
 
 var start_next_round = false
+var other_player_start_next_round = false
 
 func synchronizeNextRound() -> void:
 	print("synchronize next round called by Host: ", !isHost, " on Host: ", isHost)
-	#wait for next round locally
-	while !(start_next_round):
-		await get_tree().create_timer(1.0).timeout
-	start_next_round = false
-	if(isHost):
-		start_round()
+	other_player_start_next_round = true
+	if start_next_round and other_player_start_next_round:
+		start_next_round = false
+		other_player_start_next_round = false
+		if(isHost):
+			start_round()
 
 func endGame() -> void:
 	#have a tree of end of game instances to check who wins/ apply effects
@@ -364,14 +397,19 @@ var rematch = false
 func restartGame() ->void:
 	network_manager.broadcast_game_state("rematch", {})
 	rematch = true
+	if rematch and other_player_rematch:
+		rematch = false
+		other_player_rematch = false
+		setup_game()
 
+var other_player_rematch = false
 func synchronizeRematch() -> void:
 	print("synchronize rematch round called by Host: ", !isHost, " on Host: ", isHost)
-	#wait for round to start locally
-	while !(rematch):
-		await get_tree().create_timer(1.0).timeout
-	rematch = false
-	setup_game()
+	other_player_rematch = true
+	if rematch and other_player_rematch:
+		rematch = false
+		other_player_rematch = false
+		setup_game()
 
 func exitGame() -> void:
 	network_manager.broadcast_game_state("end_game", {})
@@ -459,6 +497,11 @@ func _on_roll_selected() -> void:
 	if timedRounds:
 			GameUI.stopTimer()
 	waiting_on_other_player(true)
+	if other_player_roll_selection and roll_selection_done:
+		roll_selection_done = false
+		other_player_roll_selection = false
+		waiting_on_other_player(false)
+		rollPhase(roll_selection)
 
 func _on_pass_roll() -> void:	  
 	setDisableRollButtons(true)
@@ -468,6 +511,11 @@ func _on_pass_roll() -> void:
 	if timedRounds:
 			GameUI.stopTimer()
 	waiting_on_other_player(true)
+	if other_player_roll_selection and roll_selection_done:
+		roll_selection_done = false
+		other_player_roll_selection = false
+		waiting_on_other_player(false)
+		rollPhase(roll_selection)
 
 func _on_raise() -> void:
 	setDisableRaiseButtons(true)
@@ -531,6 +579,11 @@ func _on_hand_selected(hand: Dictionary):
 	print(hand)
 	network_manager.broadcast_game_state("hand", { "score": score[0], "hand": hand["hand_type"] })
 	# Logic to proceed to next player's turn if necessary
+	if hand_selection_done and other_player_hand_selection_done:
+		hand_selection_done = false
+		other_player_hand_selection_done = false
+		endOfRoundEffects()
+		waiting_on_other_player(false)
 
 func _on_bonus_exist(_hand: Dictionary) -> void:
 	scoreCalc.setupBonus(_hand)
