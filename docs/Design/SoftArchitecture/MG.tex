@@ -292,6 +292,7 @@ system or by standard programming language libraries.  \emph{\textit{Dice Duels:
 module will be implemented by the \textit{Dice Duels: Duel of the Eights} software.
 
 \subsection{Hardware-Hiding Modules}
+The Hardware-Hiding Modules provide an abstraction layer between the system's hardware-dependent functionalities and the rest of the software. These modules ensure that the game interacts efficiently with network communication protocols, rendering processes, and user interface elements. By encapsulating these low-level implementations, other modules can remain independent of platform-specific changes and focus solely on gameplay logic.
 \subsubsection{NetworkManager2P Module}
 \textbf{Secrets:} The underlying implementation of peer-to-peer communication and synchronization between two clients.\\
 \textbf{Services:} Handles connection setup, data synchronization, and disconnection handling for a 2-player game.\\
@@ -303,6 +304,7 @@ module will be implemented by the \textit{Dice Duels: Duel of the Eights} softwa
 \textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
 
 \subsection{Behavior-Hiding Modules}
+The Behavior-Hiding Modules define the core functionality and game flow in Dice Duels. These modules are responsible for handling game management, player state tracking, customization systems, and dynamic score calculations. By isolating gameplay mechanics from low-level interactions, these modules ensure flexibility, scalability, and ease of modification without impacting the underlying hardware or system-dependent components.
 \subsubsection{MultiGameManager Module}
 \textbf{Secrets:} The logic for managing multiple games, including customization and upgrades between games.\\
 \textbf{Services:} Tracks progress and integrates player upgrades into gameplay.\\
@@ -344,6 +346,7 @@ module will be implemented by the \textit{Dice Duels: Duel of the Eights} softwa
 \textbf{Implemented By:} \textit{Dice Duels: Duel of the Eights}
 
 \subsection{Software Decision Modules}
+The Software Decision Modules contain mathematical and algorithmic implementations that are not explicitly outlined in the system's specifications but are essential for achieving key functionalities. These modules include scoring calculations and rule enforcement, ensuring accurate scorekeeping and rule adherence throughout the game. These components work independently of user interaction but provide crucial support for the game logic.
 \subsubsection{ScoreCalculator Module}
 \textbf{Secrets:} The scoring algorithms based on Yahtzee rules and custom modifiers.\\
 \textbf{Services:} Calculates scores for dice rolls and applies passive modifiers.\\
