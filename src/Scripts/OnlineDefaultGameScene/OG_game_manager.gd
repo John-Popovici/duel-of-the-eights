@@ -440,6 +440,8 @@ func setDisableRollButtons(state: bool) -> void:
 func setDisableRaiseButtons(state: bool) -> void:
 	if !blockRaise:
 		raiseTheStakesButton.disabled = state
+	if raiseInEffect:
+		raiseTheStakesButton.disabled = true
 	foldButton.disabled = state
 
 func blockRaiseButton(state: bool) -> void:
