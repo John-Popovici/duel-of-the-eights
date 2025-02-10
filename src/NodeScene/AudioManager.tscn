@@ -16,7 +16,6 @@ max_polyphony = 20
 max_polyphony = 20
 
 [node name="VoiceInput" type="AudioStreamPlayer" parent="."]
-autoplay = true
 bus = &"Record"
 
 [node name="VoiceOutput" type="AudioStreamPlayer" parent="."]
