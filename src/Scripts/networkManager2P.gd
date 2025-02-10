@@ -234,8 +234,9 @@ func receive_chat_rpc(message: String):
 signal voice_data_received(data : PackedVector2Array)
 @rpc("any_peer","call_remote", "reliable") #@rpc("any_peer", "call_remote", "reliable")
 func send_data(data : PackedVector2Array):
-	print("Network Manager Revieved VOIP")
-	voice_data_received.emit(data)
+	#print("Network Manager Revieved VOIP")
+	#emit_signal("voice_data_received",data)
+	AudioManager.play_VOIP(data)
 
 
 func _process(delta: float) -> void:

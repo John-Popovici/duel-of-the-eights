@@ -105,7 +105,7 @@ func _process(delta: float) -> void:
 	if (!VOIPActive): return
 	if (effect.can_get_buffer(512) && playback.can_push_buffer(512) && network_manager != null):
 		network_manager.send_data.rpc(effect.get_buffer(512))
-		print("Sending VOIP Data")
+		#print("Sending VOIP Data")
 	effect.clear_buffer()
 
 
