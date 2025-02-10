@@ -92,7 +92,6 @@ func _ready():
 	AudioManager.play_ambience("wind_background")
 	
 	inputMic.stream = AudioStreamMicrophone.new()
-	#inputMic.play()
 	outputVoiceGenerator.play()
 	idx = AudioServer.get_bus_index("Record")
 	effect = AudioServer.get_bus_effect(idx, 0) # or whatever index your capture effect is
@@ -106,7 +105,7 @@ func _process(delta: float) -> void:
 	if (!VOIPActive): return
 	if (effect.can_get_buffer(VOIPBufferSize) && playback.can_push_buffer(VOIPBufferSize) && network_manager != null):
 		network_manager.send_data.rpc(effect.get_buffer(VOIPBufferSize))
-		#print("Sending VOIP Data")
+		print("Sending VOIP Data")
 	effect.clear_buffer()
 
 

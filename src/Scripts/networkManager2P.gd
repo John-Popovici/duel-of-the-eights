@@ -235,7 +235,6 @@ signal voice_data_received(data : PackedVector2Array)
 @rpc("any_peer","call_remote", "reliable") #@rpc("any_peer", "call_remote", "reliable")
 func send_data(data : PackedVector2Array):
 	#print("Network Manager Revieved VOIP")
-	#emit_signal("voice_data_received",data)
 	AudioManager.play_VOIP(data)
 
 
