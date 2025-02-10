@@ -23,7 +23,7 @@ extends Node
 @onready var player_settings_path = (presets_folder + "/profile_settings.json")
 
 @onready var profile_settings : Dictionary = {
-	"player_name": "",
+	"player_name": "New Player",
 	"invert_selection_method": false,
 	"sfx_volume": null,
 	"music_volume": null
@@ -79,25 +79,26 @@ func show_toast(message: String) -> void:
 	
 # Load existing profile settings
 func load_profile_settings():
-	if not FileAccess.file_exists(player_settings_path):
+	if FileAccess.file_exists(player_settings_path):
+		var file = FileAccess.open(player_settings_path, FileAccess.READ)
+		var content = file.get_as_text()
+		var json_data = JSON.parse_string(content)
+		
+		if json_data == null:
+			print("Error parsing JSON")
+			return
+			
+		for key in json_data:
+			print("loading ", key, ": ", json_data[key])
+			self.profile_settings[key] = json_data[key]
+	else:
 		print("no data to load")
-		return
-		
-	var file = FileAccess.open(player_settings_path, FileAccess.READ)
-	var content = file.get_as_text()
-	var json_data = JSON.parse_string(content)
-	
-	if json_data == null:
-		print("Error parsing JSON")
-		return
-		
-	for key in json_data:
-		print("loading ", key, ": ", json_data[key])
-		self.profile_settings[key] = json_data[key]
 		
 	# load profile pic
+	print("checking for profile picture")
 	var save_path = presets_folder + "/Images/profile_pic.png"
 	if FileAccess.file_exists(save_path):
+		print("profile picture found")
 		self.profile_pic = self.load_image_texture(save_path)
 		
 func load_image_texture(path: String) -> Texture:
