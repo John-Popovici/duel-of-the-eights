@@ -75,6 +75,7 @@ var ambience_library ={
 @export var musicVolume: float = 0.2
 @export var sfxVolume: float = 0.4
 @export var VOIPVolume: float = 0.4
+@export var VOIPBufferSize: int = 512
 
 func _ready():
 	# Set default volume levels
@@ -103,8 +104,8 @@ func _ready():
 
 func _process(delta: float) -> void:
 	if (!VOIPActive): return
-	if (effect.can_get_buffer(512) && playback.can_push_buffer(512) && network_manager != null):
-		network_manager.send_data.rpc(effect.get_buffer(512))
+	if (effect.can_get_buffer(VOIPBufferSize) && playback.can_push_buffer(VOIPBufferSize) && network_manager != null):
+		network_manager.send_data.rpc(effect.get_buffer(VOIPBufferSize))
 		#print("Sending VOIP Data")
 	effect.clear_buffer()
 
@@ -181,7 +182,7 @@ func enable_VOIP(state: bool):
 
 func play_VOIP(data : PackedVector2Array):
 	print("Received VOIP")
-	for i in range(0,512):
+	for i in range(0,VOIPBufferSize):
 		playback.push_frame(data[i])
 
 func play_sfx(sfx_name: String):
