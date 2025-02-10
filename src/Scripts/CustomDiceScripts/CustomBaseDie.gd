@@ -55,7 +55,6 @@ func setup_dice_specific_variables(_faces: int) -> void:
 # Applies random torque and force to simulate a roll
 func roll() -> void:
 	self.set_freeze_enabled(false)
-	self.disableCollisions(false)
 	await get_tree().create_timer(start_time+0.5).timeout
 	
 	is_selected = false
@@ -67,6 +66,8 @@ func roll() -> void:
 	# Reset position and rotation to start values
 	global_transform.origin = start_position
 	rotation_degrees = start_rotation
+	
+	self.disableCollisions(false)
 	
 	# Apply random force for linear movement
 	apply_impulse(Vector3.ZERO, Vector3(
@@ -206,7 +207,6 @@ func disableCollisions(_remove: bool) -> void:
 	
 func moveToAsidePosition() -> void:
 	self.set_freeze_enabled(false)
-	self.disableCollisions(true)
 	if move_aside_mode == "snap":
 		# instantly snap die to designated aside location while not being rolled
 		global_transform.origin = self.aside_position
@@ -224,6 +224,7 @@ func moveToAsidePosition() -> void:
 			rotation_degrees = start_rotation.lerp(self.aside_rotation, t)
 			await get_tree().process_frame  # Wait until the next frame
 	self.set_freeze_enabled(true)
+	self.disableCollisions(false)
 	
 # Setter function for move_mode
 func set_move_aside_mode(mode: String) -> void:
