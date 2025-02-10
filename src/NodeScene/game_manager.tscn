@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d0icyj31p2tgw"]
+[gd_scene load_steps=19 format=3 uid="uid://d0icyj31p2tgw"]
 
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_manager.gd" id="1_q3ti8"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_dynamic_dice_container.gd" id="2_n4duv"]
@@ -12,7 +12,8 @@
 [ext_resource type="StyleBox" uid="uid://bdd2m4n2as1ot" path="res://Themes/Default_Pixel_Wood/WoodBoxBackgroundStyle.tres" id="8_n6aig"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_score_calculator.gd" id="9_b1f1p"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_ui.gd" id="11_0d724"]
-[ext_resource type="StyleBox" uid="uid://ppu0fdqcrko2" path="res://Themes/Default_Pixel_Blue/PanelBlueBoxBackgroundStyle.tres" id="12_vxxtv"]
+[ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_chat_ui.gd" id="14_rpv4e"]
+[ext_resource type="Texture2D" uid="uid://cbbiofkoc88y1" path="res://Assets/2D Assets/OtherImages/message_read.svg" id="15_3hw5t"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_watpb"]
 
@@ -467,7 +468,6 @@ offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_eudyq")
-theme_override_styles/panel = ExtResource("12_vxxtv")
 
 [node name="EscBox" type="VBoxContainer" parent="GameUI/EscPanel"]
 layout_mode = 2
@@ -520,3 +520,55 @@ text = "Return to Game"
 layout_mode = 2
 theme = ExtResource("4_eudyq")
 text = "Exit Game"
+
+[node name="ChatUI" type="Control" parent="GameUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("4_eudyq")
+script = ExtResource("14_rpv4e")
+
+[node name="ChatButton" type="TextureButton" parent="GameUI/ChatUI"]
+layout_mode = 0
+offset_left = 522.0
+offset_top = 533.0
+offset_right = 562.0
+offset_bottom = 571.0
+texture_normal = ExtResource("15_3hw5t")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ChatPopup" type="PanelContainer" parent="GameUI/ChatUI"]
+visible = false
+layout_mode = 0
+offset_left = 312.0
+offset_top = 220.0
+offset_right = 564.0
+offset_bottom = 525.0
+
+[node name="VSplitContainer" type="VSplitContainer" parent="GameUI/ChatUI/ChatPopup"]
+layout_mode = 2
+dragger_visibility = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GameUI/ChatUI/ChatPopup/VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="ChatMessages" type="VBoxContainer" parent="GameUI/ChatUI/ChatPopup/VSplitContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="InputUI" type="VBoxContainer" parent="GameUI/ChatUI/ChatPopup/VSplitContainer"]
+layout_mode = 2
+
+[node name="ChatInput" type="LineEdit" parent="GameUI/ChatUI/ChatPopup/VSplitContainer/InputUI"]
+layout_mode = 2
+placeholder_text = "Input Message"
+
+[node name="SendButton" type="Button" parent="GameUI/ChatUI/ChatPopup/VSplitContainer/InputUI"]
+layout_mode = 2
+text = "Send Message"

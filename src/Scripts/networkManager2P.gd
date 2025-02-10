@@ -217,6 +217,19 @@ func send_game_settings(_game_settings: Dictionary,_hand_settings: Dictionary) -
 	print("Network Manager sent settings")
 	rpc("receive_game_settings",_game_settings, _hand_settings)
 
+#@rpc("any_peer","reliable")
+func send_chat_rpc(message: String):
+	if multiplayer.is_server():
+		rpc("receive_chat_rpc", message)  # Broadcast to all clients
+	else:
+		rpc_id(1, "receive_chat_rpc", message)  # Send to server
+
+signal chat_received(message: String)
+
+@rpc("any_peer","reliable")
+func receive_chat_rpc(message: String):
+	chat_received.emit(message)
+
 func _process(delta: float) -> void:
 	if is_host:
 		# Broadcast a ping every second (adjust interval as necessary)
