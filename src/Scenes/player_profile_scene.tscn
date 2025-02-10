@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://e0m2u55h4xmd"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerProfile/player_profile_scene.gd" id="1_6ta5e"]
+[ext_resource type="Script" path="res://Scripts/camera_toggle_controller.gd" id="2_iiqs7"]
+[ext_resource type="Theme" uid="uid://dokd457t4xs7n" path="res://Themes/Default_Pixel_Wood/Default_pixel_.Wood.tres" id="3_2ft3i"]
+[ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_PlayerManager.gd" id="3_yina3"]
+[ext_resource type="PackedScene" uid="uid://503osc6reblk" path="res://NodeScene/player_profile_settings.tscn" id="5_1w2ke"]
+[ext_resource type="PackedScene" uid="uid://bg5xnvw62vip6" path="res://NodeScene/background_objects_Dungeon_Tavern.tscn" id="5_enmkh"]
+
+[node name="PlayerProfileScene" type="Node3D"]
+script = ExtResource("1_6ta5e")
+
+[node name="CameraController" type="Node3D" parent="."]
+script = ExtResource("2_iiqs7")
+
+[node name="Positions" type="Node3D" parent="CameraController"]
+
+[node name="Angled" type="Node3D" parent="CameraController/Positions"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 25, 21)
+
+[node name="Top Down" type="Node3D" parent="CameraController/Positions"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 35, 3)
+
+[node name="Cinematic" type="Node3D" parent="CameraController/Positions"]
+transform = Transform3D(0.777146, -0.265962, 0.570358, 0, 0.906307, 0.422618, -0.629321, -0.328436, 0.704333, 105, 55, 48)
+
+[node name="Camera3D" type="Camera3D" parent="CameraController"]
+transform = Transform3D(0.777146, -0.265962, 0.570358, 0, 0.906308, 0.422618, -0.62932, -0.328436, 0.704333, 105, 55, 48)
+
+[node name="SpotLight3D_Camera" type="SpotLight3D" parent="CameraController/Camera3D"]
+light_energy = 0.001
+shadow_enabled = true
+spot_range = 1292.23
+spot_attenuation = -0.5
+spot_angle = 89.99
+spot_angle_attenuation = 2.37841
+
+[node name="CameraPosPanel" type="PanelContainer" parent="CameraController"]
+visible = false
+offset_top = 435.0
+offset_right = 200.0
+offset_bottom = 515.0
+theme = ExtResource("3_2ft3i")
+
+[node name="ButtonHolder" type="VBoxContainer" parent="CameraController/CameraPosPanel"]
+layout_mode = 2
+
+[node name="Angled" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder" groups=["ConfirmButtons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Angled"
+
+[node name="Top Down" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder" groups=["ConfirmButtons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Top Down"
+
+[node name="Cinematic" type="Button" parent="CameraController/CameraPosPanel/ButtonHolder" groups=["ConfirmButtons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cinematic"
+
+[node name="myPlayer" type="Node" parent="."]
+script = ExtResource("3_yina3")
+
+[node name="PlayerProfileUI" parent="." instance=ExtResource("5_1w2ke")]
+
+[node name="BackgroundObjects" parent="." instance=ExtResource("5_enmkh")]

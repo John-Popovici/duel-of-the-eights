@@ -3,8 +3,6 @@ extends Node
 @onready var music_player = $MusicPlayer
 @onready var sfx_player = $SFXPlayer
 @onready var ambience_player = $AmbiencePlayer
-@onready var musicVol
-@onready var sfxVol
 
 # Dictionary of sound effects
 var sfx_library = {
@@ -13,7 +11,10 @@ var sfx_library = {
 	"confirm_echo_button_click": preload("res://Assets/Audio/SFX/confirm_style_2_echo_001.ogg"),
 	"error_button_click": preload("res://Assets/Audio/SFX/error_style_2_001.ogg"),
 	"win_sound": preload("res://Assets/Audio/SFX/magic_003.wav"),
-	"lose_sound": preload("res://Assets/Audio/SFX/explosion_02.wav")
+	"lose_sound": preload("res://Assets/Audio/SFX/explosion_02.wav"),
+	"switch_on": preload("res://Assets/Audio/SFX/switch_on.wav"),
+	"switch_off": preload("res://Assets/Audio/SFX/switch_on.wav"),
+	"slider_ended": preload("res://Assets/Audio/SFX/slider_ended.wav")
 }
 
 var dice_sfx_library = {
@@ -62,10 +63,19 @@ var ambience_library ={
 	"drink_sip": preload("res://Assets/Audio/Ambience/drink-sip-and-swallow-6974.mp3")
 }
 
+@export var musicVolume: float = 0.2
+@export var sfxVolume: float = 0.4
+
 func _ready():
 	# Set default volume levels
-	set_music_volume(0.2)
-	set_sfx_volume(0.4)
+	if GlobalSettings.profile_settings["music_volume"] != null:
+		set_music_volume(float(GlobalSettings.profile_settings["music_volume"]/100))
+	else:
+		set_music_volume(self.musicVolume)
+	if GlobalSettings.profile_settings["sfx_volume"] != null:
+		set_sfx_volume(float(GlobalSettings.profile_settings["sfx_volume"]/100))
+	else:
+		set_sfx_volume(self.sfxVolume)
 	AudioManager.play_music("main_menu")
 	AudioManager.play_ambience("tavern_background")
 	AudioManager.play_ambience("wind_background")
@@ -79,12 +89,29 @@ func connect_buttons() -> void:
 	var back_buttons: Array = get_tree().get_nodes_in_group("BackButtons")
 	for inst in back_buttons:
 		inst.connect("pressed", self.on_back_button_pressed)
+		
+	var switch_buttons: Array = get_tree().get_nodes_in_group("SwitchButtons")
+	for inst in switch_buttons:
+		inst.connect("toggled", self.on_switch_button_toggled)
+		
+	var sliders: Array = get_tree().get_nodes_in_group("Sliders")
+	for inst in sliders:
+		inst.connect("drag_ended", self.on_slider_ended)
 
 func on_confirm_button_pressed()->void:
 	play_sfx("confirm_button_click")
 
 func on_back_button_pressed()->void:
 	play_sfx("back_button_click")
+
+func on_switch_button_toggled(button_pressed: bool)->void:
+	if button_pressed:
+		play_sfx("switch_on")
+	else:
+		play_sfx("switch_off")
+		
+func on_slider_ended(value_changed)->void:
+	play_sfx("slider_ended")
 
 func play_music(track_name: String, loop: bool = true):
 	if track_name in music_library:
@@ -123,13 +150,15 @@ func play_dice_sfx():
 	sfx_player.play()  # Play the sound
 
 func set_music_volume(volume: float): #float 0 to 1
-	music_player.volume_db = linear_to_db(volume)  
+	self.musicVolume = volume
+	music_player.volume_db = linear_to_db(volume)
+	GlobalSettings.profile_settings["music_volume"] = int(volume*100)
 	ambience_player.volume_db = linear_to_db(volume)
-	musicVol = volume
 
 func set_sfx_volume(volume: float): #float 0 to 1
 	sfx_player.volume_db = linear_to_db(volume)
-	sfxVol = volume
+	self.sfxVolume = volume
+	GlobalSettings.profile_settings["sfx_volume"] = int(volume*100)
 
 func get_music_volume() -> float:
 	return db_to_linear(music_player.volume_db)

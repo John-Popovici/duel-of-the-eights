@@ -175,6 +175,7 @@ size_flags_horizontal = 3
 theme = ExtResource("2_hp12w")
 placeholder_text = "Client Player Name"
 alignment = 1
+editable = false
 
 [node name="WinCondition" type="HBoxContainer" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox"]
 layout_mode = 2
@@ -222,7 +223,7 @@ alignment = 1
 update_on_text_changed = true
 suffix = "Hp"
 
-[node name="BluffButton" type="CheckButton" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/HealthPoints"]
+[node name="BluffButton" type="CheckButton" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/HealthPoints" groups=["SwitchButtons"]]
 layout_mode = 2
 theme = ExtResource("2_hp12w")
 disabled = true
@@ -308,7 +309,7 @@ popup/item_3/id = 12
 layout_mode = 2
 theme = ExtResource("2_hp12w")
 
-[node name="OpponentRollVisible" type="CheckButton" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/HandLimit"]
+[node name="OpponentRollVisible" type="CheckButton" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/HandLimit" groups=["SwitchButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_hp12w")
@@ -326,7 +327,7 @@ text = "Modify Hand Rules"
 layout_mode = 2
 theme = ExtResource("2_hp12w")
 
-[node name="TimedRoundsToggle" type="CheckButton" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/TimedRounds"]
+[node name="TimedRoundsToggle" type="CheckButton" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/TimedRounds" groups=["SwitchButtons"]]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_hp12w")

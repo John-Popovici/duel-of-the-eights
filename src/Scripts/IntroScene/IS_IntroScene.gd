@@ -13,6 +13,7 @@ extends Node3D
 @onready var start_online_server_button = $VBoxContainer/StartServer
 @onready var customization_button = $OptionsPanel/VBoxContainer/Customization
 @onready var tutorial_button = $OptionsPanel/VBoxContainer/Tutorial
+@onready var profile_button = $OptionsPanel/VBoxContainer/Profile
 
 # Called when the node enters the scene tree
 func _ready() -> void:
@@ -25,6 +26,7 @@ func _ready() -> void:
 	start_online_server_button.pressed.connect(_on_start_online_server_pressed);
 	customization_button.pressed.connect(_on_customization_pressed)
 	tutorial_button.pressed.connect(_on_tutorial_button)
+	profile_button.pressed.connect(_on_profile_pressed)
 	AudioManager.connect_buttons()
 
 # Transition to GameScene with player names
@@ -74,6 +76,10 @@ func _on_customization_pressed() -> void:
 func _on_tutorial_button() -> void:
 	# Load GameScene
 	SceneSwitcher.changeScene("res://Scenes/tutorial_scene.tscn")
+	
+func _on_profile_pressed() -> void:
+	# Load profile overlay
+	SceneSwitcher.changeScene("res://Scenes/player_profile_scene.tscn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

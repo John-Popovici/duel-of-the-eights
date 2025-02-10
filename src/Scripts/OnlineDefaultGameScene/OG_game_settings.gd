@@ -382,6 +382,14 @@ func _ready() -> void:
 	DiceCountRange.connect("value_changed", self._dice_values_changed)
 	save_preset_button.connect("pressed",self.save_preset)
 	NetworkManager.connect("second_player_connected", self._allow_game_start)
+	player1Name.connect("text_changed", self._on_player_name_modified)
+	
+	# load player name
+	if GlobalSettings.profile_settings["player_name"] != "":
+		player1Name.text = GlobalSettings.profile_settings["player_name"]
+
+func _on_player_name_modified(new_name) -> void:
+	GlobalSettings.profile_settings["player_name"] = new_name
 	
 
 func _on_roll_visible_toggled(_state) -> void:

@@ -19,6 +19,17 @@ extends Node
 	"Black": preload("res://Materials/DiceTextures/Black.tres"),
 }
 
+@onready var presets_folder = "res://Presets"
+@onready var player_settings_path = (presets_folder + "/profile_settings.json")
+
+@onready var profile_settings : Dictionary = {
+	"player_name": "",
+	"invert_selection_method": false,
+	"sfx_volume": null,
+	"music_volume": null
+}
+@onready var profile_pic : Texture
+
 @onready var d4Settings : Dictionary = {
 	"start_time" : 0,
 	"impulse_range" : 15,
@@ -65,6 +76,45 @@ func show_toast(message: String) -> void:
 		return
 	print("Sending toast message P1: ", message)
 	ToastLayer.set_message(message)
+	
+# Load existing profile settings
+func load_profile_settings():
+	if not FileAccess.file_exists(player_settings_path):
+		print("no data to load")
+		return
+		
+	var file = FileAccess.open(player_settings_path, FileAccess.READ)
+	var content = file.get_as_text()
+	var json_data = JSON.parse_string(content)
+	
+	if json_data == null:
+		print("Error parsing JSON")
+		return
+		
+	for key in json_data:
+		print("loading ", key, ": ", json_data[key])
+		self.profile_settings[key] = json_data[key]
+		
+	# load profile pic
+	var save_path = presets_folder + "/Images/profile_pic.png"
+	if FileAccess.file_exists(save_path):
+		self.profile_pic = self.load_image_texture(save_path)
+		
+func load_image_texture(path: String) -> Texture:
+	# Create a new Image instance
+	var image = Image.new()
+	
+	# Load the image from the selected file path
+	var err = image.load(path)
+	if err != OK:
+		push_error("Failed to load image at: " + path)
+		return
+	
+	# Create an ImageTexture, assign the loaded image to it, and give to profile pic
+	var texture = ImageTexture.new()
+	texture.set_image(image)
+	texture.set_size_override(Vector2(200,200))
+	return texture
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -81,3 +131,4 @@ func _ready() -> void:
 			file_name = dir.get_next()
 		dir.list_dir_end()
 	print("Dice Tex: ",allDiceTextures)
+	load_profile_settings()
