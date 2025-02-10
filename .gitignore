@@ -6,6 +6,10 @@
 export.cfg
 export_presets.cfg
 
+# Presets/Other Saved Local Data
+profile_settings.json
+**/Presets/Images/
+
 # Imported translations (automatically generated from CSV files)
 *.translation
 
