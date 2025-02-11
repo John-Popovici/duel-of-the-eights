@@ -64,6 +64,7 @@ var ambience_library ={
 }
 
 @export var musicVolume: float = 0.2
+@export var ambienceVolume: float = 0.2
 @export var sfxVolume: float = 0.4
 
 func _ready():
@@ -153,7 +154,11 @@ func set_music_volume(volume: float): #float 0 to 1
 	self.musicVolume = volume
 	music_player.volume_db = linear_to_db(volume)
 	GlobalSettings.profile_settings["music_volume"] = int(volume*100)
+
+func set_ambience_volume(volume: float): #float 0 to 1
+	self.ambienceVolume = volume
 	ambience_player.volume_db = linear_to_db(volume)
+	GlobalSettings.profile_settings["ambience_volume"] = int(volume*100)
 
 func set_sfx_volume(volume: float): #float 0 to 1
 	sfx_player.volume_db = linear_to_db(volume)
@@ -162,6 +167,9 @@ func set_sfx_volume(volume: float): #float 0 to 1
 
 func get_music_volume() -> float:
 	return db_to_linear(music_player.volume_db)
+	
+func get_ambience_volume() -> float:
+	return db_to_linear(ambience_player.volume_db)
 
 func get_sfx_volume() -> float:
 	return db_to_linear(sfx_player.volume_db)
