@@ -25,6 +25,7 @@ extends Node
 @onready var profile_settings : Dictionary = {
 	"player_name": "New Player",
 	"invert_selection_method": false,
+	"align_rolled_dice": false,
 	"sfx_volume": null,
 	"music_volume": null
 }

@@ -17,9 +17,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -469.0
-offset_top = -310.0
+offset_top = -325.0
 offset_right = 182.0
-offset_bottom = -36.0
+offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.44, 2.28)
@@ -107,6 +107,19 @@ text = " Invert Selection Method : "
 layout_mode = 2
 size_flags_horizontal = 2
 
+[node name="AlignDiceContainer" type="HBoxContainer" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
+layout_mode = 2
+
+[node name="AlignDiceLabel" type="Label" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/AlignDiceContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 1
+text = "Auto Align Rolled Dice : "
+
+[node name="CheckButton" type="CheckButton" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/AlignDiceContainer" groups=["SwitchButtons"]]
+layout_mode = 2
+size_flags_horizontal = 2
+
 [node name="SFXVolumeContainer" type="HBoxContainer" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
 layout_mode = 2
 
@@ -162,7 +175,7 @@ text = "100%"
 horizontal_alignment = 1
 
 [node name="Spacing" type="Control" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_vertical = 3
 

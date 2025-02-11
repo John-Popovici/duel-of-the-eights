@@ -15,23 +15,37 @@ var aside_positions := [
 	Vector3(18, 0, -15), Vector3(18, 0, -10), Vector3(18, 0, -5),
 	Vector3(18, 0, 0), Vector3(18, 0, 5), Vector3(18, 0, 10), Vector3(18, 0, 15)
 ]
-# In cases of more than 5 dice we shift aside postions on x axis by this constant
+# In cases of more than 7 dice we shift aside postions on x axis by this constant
 var aside_row_gap := Vector3(5, 0, 0)
 
+# Define positions for lining up dice
+var inline_positions := [
+	Vector3(-15, 0, 15), Vector3(-10, 0, 15), Vector3(-5, 0, 15),
+	Vector3(0, 0, 15), Vector3(5, 0, 15)
+]
+# In cases of more than 5 dice we shift alined postions on z axis by this constant
+var inline_row_gap := Vector3(0, 0, 5)
+
+# Keep track of all dice that were just rolled
+var prev_dice_rolled = []
 
 
 # Rolls all dice with random force and torque
 func roll_dice() -> void:
 	AudioManager.play_dice_sfx()
+	prev_dice_rolled = []
 	for die in dice_nodes:
 		die.roll()  # Call the roll function on each die
+		prev_dice_rolled.append(die)
 
 # Rolls only selected dice
 func roll_selected_dice() -> void:
 	moveDiceAside(get_unselected_dice())
 	AudioManager.play_dice_sfx()
+	prev_dice_rolled = []
 	for die in get_selected_dice():
 		die.roll()
+		prev_dice_rolled.append(die)
 
 func roll_rolling_or_invalid_dice() -> void:
 	AudioManager.play_dice_sfx()
@@ -125,8 +139,8 @@ func moveDiceAside(dice_to_move: Array) -> void:
 	var iterator = 0
 	var current_row = 0
 	var max_slots = aside_positions.size()
-	self.toggleDiceCollisions(true)
 	for die in dice_to_move:
+		die.disableCollisions(true)
 		var curr_aside_position = Vector3(aside_positions[iterator].x, die.getAxisPos("y"), aside_positions[iterator].z)
 		die.setAsideProperties(curr_aside_position - (aside_row_gap*current_row))
 		die.moveToAsidePosition()
@@ -135,9 +149,23 @@ func moveDiceAside(dice_to_move: Array) -> void:
 			iterator = 0
 			current_row += 1
 			
-func enable_collisions() -> void:
-	for die in get_dice():
-		die.disableCollisions(false)
+func moveDiceInline() -> void:
+	#organize dice that were just rolled
+	if prev_dice_rolled == []:
+		return
+	prev_dice_rolled.sort_custom(func(a, b): return a.get_face_value() < b.get_face_value())
+	var iterator = 0
+	var current_row = floori(prev_dice_rolled.size()/inline_positions.size())
+	var max_slots = inline_positions.size()
+	for die in prev_dice_rolled:
+		die.disableCollisions(true)
+		var curr_inline_position = Vector3(inline_positions[iterator].x, die.getAxisPos("y"), inline_positions[iterator].z)
+		die.setInlineProperties(curr_inline_position - (inline_row_gap*current_row))
+		die.moveToInlinePosition()
+		iterator += 1
+		if iterator >= max_slots:
+			iterator = 0
+			current_row -= 1
 
 func moveDiceInLine() -> void:
 	#move dice once read to an organized display on the board
