@@ -7,6 +7,7 @@ signal profile_settings_ready(profile_settings)
 @onready var profile_pic_button = userDetailsContainer.get_node("ProfileBackground/ProfilePicButton")
 @onready var username_box = userDetailsContainer.get_node("UsernameFrame/UsernameBox")
 @onready var invert_select_method = listingsContainer.get_node("InvertSelectMethodContainer/CheckButton")
+@onready var align_dice = listingsContainer.get_node("AlignDiceContainer/CheckButton")
 @onready var sfxContainer = listingsContainer.get_node("SFXVolumeContainer/SliderContainer")
 @onready var sfx_slider = sfxContainer.get_node("Slider")
 @onready var sfx_slider_value = sfxContainer.get_node("Value")
@@ -21,6 +22,7 @@ signal profile_settings_ready(profile_settings)
 @export var profile_settings: Dictionary = {}
 @export var username: String
 @export var invertedSelection: bool
+@export var alignDice: bool
 @export var sfxVolume: int
 @export var musicVolume: int
 
@@ -38,6 +40,12 @@ func _on_invert_select_method_toggled(button_pressed: bool):
 	self.invertedSelection = button_pressed
 	# ACTUAL LOGIC STILL TO BE IMPLEMENTED
 	# save new selection method
+	self.save_profile_settings()
+	
+func _on_align_dice_toggled(button_pressed: bool):
+	print("align dice is now set to: ", button_pressed)
+	self.alignDice = button_pressed
+	# save new dice alignment decision
 	self.save_profile_settings()
 	
 func _on_sfx_slider_drag_ended(value):
@@ -97,9 +105,10 @@ func set_music_volume(volume: float, setSlider: bool):
 		music_slider.value = volume
 
 func save_profile_settings():
-	profile_settings = {
+	self.profile_settings = {
 		"player_name": self.username,
 		"invert_selection_method": self.invertedSelection,
+		"align_rolled_dice": self.alignDice,
 		"sfx_volume": self.sfxVolume,
 		"music_volume": self.musicVolume
 	}
@@ -122,6 +131,9 @@ func load_profile_settings():
 	# load selection method
 	self.invertedSelection = GlobalSettings.profile_settings["invert_selection_method"]
 	invert_select_method.button_pressed = self.invertedSelection
+	# load align decisions
+	self.alignDice = GlobalSettings.profile_settings["align_rolled_dice"]
+	align_dice.button_pressed = self.alignDice
 	# load sfx_volume
 	self.set_sfx_volume(GlobalSettings.profile_settings["sfx_volume"], true)
 	# load music_volume
@@ -139,17 +151,17 @@ func load_default_settings():
 
 func _ready() -> void:
 	self.load_default_settings()
+	self.load_profile_settings()
 	
 	fileDialog.filters = ["*.png ; PNG Images", "*.jpg ; JPEG Images"]
 	fileDialog.file_selected.connect(self._on_image_file_selected)
 	profile_pic_button.connect("pressed",self._on_profile_pic_button_pressed)
 	username_box.connect("text_changed", self._on_username_box_modified)
 	invert_select_method.connect("toggled", self._on_invert_select_method_toggled)
+	align_dice.connect("toggled", self._on_align_dice_toggled)
 	sfx_slider.connect("value_changed", self._on_sfx_slider_drag_ended)
 	music_slider.connect("value_changed", self._on_music_slider_drag_ended)
 	back_to_home_button.connect("pressed",self.returnToIntro)
-	
-	self.load_profile_settings()
 	
 	AudioManager.connect_buttons()
 

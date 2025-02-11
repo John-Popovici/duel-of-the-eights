@@ -75,7 +75,7 @@ func checkIfDiceValidThenRead() -> void:
 			timeTillReroll = diceContainer.get_dice()[0].roll_time_limit
 			roll_rolling_or_invalid_dice()
 			await get_tree().create_timer(1.0).timeout
-	diceContainer.enable_collisions()
+	diceContainer.toggleDiceCollisions(false)
 	readRolls()
 
 signal rollsReadandWaiting(state: bool)
@@ -92,7 +92,13 @@ func readRolls() -> void:
 	print("Player Manger: Host: ", hostDevice, ", Rolls: ", rolls)
 	if len(networkManagers) ==1:
 		network_manager.broadcast_game_state("roll_values", { "host": hostDevice, "rolls": rolls })
-
+		
+func move_dice_inline() -> void:
+	diceContainer.moveDiceInline()
+	await get_tree().create_timer(1.0).timeout
+	
+func toggle_dice_collisions(toggle: bool) -> void:
+	diceContainer.toggleDiceCollisions(toggle)
 
 func setRolls(_rolls: Array) -> void:
 	rolls = _rolls

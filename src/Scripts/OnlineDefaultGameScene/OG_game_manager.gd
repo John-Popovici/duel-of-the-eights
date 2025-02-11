@@ -197,6 +197,9 @@ func set_rolls_read(state: bool) ->void:
 		setup_selection()
 
 func setup_selection() -> void:
+	if GlobalSettings.profile_settings["align_rolled_dice"]:
+			myPlayer.move_dice_inline()
+	myPlayer.toggle_dice_collisions(false)
 	if roll_count >= max_rolls_per_round:
 		hand_selection_done = false
 		print("Host: ", isHost, " reached hand selection on roll_count: ", roll_count, " of max: ", max_rolls_per_round)
