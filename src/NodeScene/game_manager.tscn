@@ -484,10 +484,10 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_vertical = 6
 theme = ExtResource("4_eudyq")
-text = "Game Volume:"
+text = "SFX Volume:"
 horizontal_alignment = 1
 
-[node name="SFXVolumeSlider" type="HSlider" parent="GameUI/EscPanel/EscBox"]
+[node name="SFXVolumeSlider" type="HSlider" parent="GameUI/EscPanel/EscBox" groups=["Sliders"]]
 layout_mode = 2
 size_flags_vertical = 2
 theme = ExtResource("4_eudyq")
@@ -502,7 +502,7 @@ theme = ExtResource("4_eudyq")
 text = "Music Volume:"
 horizontal_alignment = 1
 
-[node name="MusicVolumeSlider" type="HSlider" parent="GameUI/EscPanel/EscBox"]
+[node name="MusicVolumeSlider" type="HSlider" parent="GameUI/EscPanel/EscBox" groups=["Sliders"]]
 layout_mode = 2
 size_flags_vertical = 2
 theme = ExtResource("4_eudyq")
@@ -510,7 +510,22 @@ step = 5.0
 value = 30.0
 scrollable = false
 
-[node name="ReturnToGameButton" type="Button" parent="GameUI/EscPanel/EscBox"]
+[node name="Label4" type="Label" parent="GameUI/EscPanel/EscBox"]
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("4_eudyq")
+text = "Ambience Volume:"
+horizontal_alignment = 1
+
+[node name="AmbienceVolumeSlider2" type="HSlider" parent="GameUI/EscPanel/EscBox" groups=["Sliders"]]
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("4_eudyq")
+step = 5.0
+value = 30.0
+scrollable = false
+
+[node name="ReturnToGameButton" type="Button" parent="GameUI/EscPanel/EscBox" groups=["BackButtons"]]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("4_eudyq")

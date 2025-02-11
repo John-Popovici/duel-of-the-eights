@@ -16,6 +16,7 @@ extends CanvasLayer
 @onready var ExitGameButton = get_node("EscPanel/EscBox/ExitGameButton")
 @onready var SFXVolumeSlider = get_node("EscPanel/EscBox/SFXVolumeSlider")
 @onready var MusicVolumeSlider = get_node("EscPanel/EscBox/MusicVolumeSlider")
+@onready var AmbientVolumeSlider = get_node("EscPanel/EscBox/AmbientVolumeSlider")
 @onready var timer = get_node("CountdownTimer")
 @onready var countdownBar = get_node("CountdownPanel/ProgressBar")
 @onready var countdownPanel = get_node("CountdownPanel")
@@ -472,8 +473,10 @@ func _ready() -> void:
 	game_manager.connect("update_player_stats", self.update_player_stats)
 	SFXVolumeSlider.value = int(AudioManager.get_sfx_volume()*100)
 	MusicVolumeSlider.value = int(AudioManager.get_music_volume()*100)
+	AmbientVolumeSlider.value = int(AudioManager.get_ambient_volume()*100)
 	SFXVolumeSlider.value_changed.connect(change_sfx_vol)
 	MusicVolumeSlider.value_changed.connect(change_music_vol)
+	AmbientVolumeSlider.value_changed.connect(change_ambient_vol)
 
 func change_sfx_vol(_val: float)-> void:
 	AudioManager.set_sfx_volume(_val/100)
@@ -481,6 +484,10 @@ func change_sfx_vol(_val: float)-> void:
 
 func change_music_vol(_val: float)-> void:
 	AudioManager.set_music_volume(_val/100)
+	print("Vol set to: ",_val)
+	
+func change_ambient_vol(_val: float)-> void:
+	AudioManager.set_ambient_volume(_val/100)
 	print("Vol set to: ",_val)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
