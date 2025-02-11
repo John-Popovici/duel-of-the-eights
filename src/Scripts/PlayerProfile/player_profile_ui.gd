@@ -14,6 +14,9 @@ signal profile_settings_ready(profile_settings)
 @onready var musicContainer = listingsContainer.get_node("MusicVolumeContainer/SliderContainer")
 @onready var music_slider = musicContainer.get_node("Slider")
 @onready var music_slider_value = musicContainer.get_node("Value")
+@onready var ambienceContainer = listingsContainer.get_node("AmbientVolumeContainer/SliderContainer")
+@onready var ambience_slider = ambienceContainer.get_node("Slider")
+@onready var ambience_slider_value = ambienceContainer.get_node("Value")
 @onready var back_to_home_button = listingsContainer.get_node("BackToHomeButton")
 
 @export var presets_folder = "res://Presets"
@@ -25,6 +28,7 @@ signal profile_settings_ready(profile_settings)
 @export var alignDice: bool
 @export var sfxVolume: int
 @export var musicVolume: int
+@export var ambienceVolume: int
 
 func _on_profile_pic_button_pressed():
 	fileDialog.popup_centered()
@@ -50,13 +54,19 @@ func _on_align_dice_toggled(button_pressed: bool):
 	
 func _on_sfx_slider_drag_ended(value):
 	print("sfx volume set to: ", value)
-	set_sfx_volume(value, false)
+	set_sfx_volume(value, true, false)
 	# save modified sfx volume preferences
 	self.save_profile_settings()
 	
 func _on_music_slider_drag_ended(value):
 	print("music volume set to: ", value)
-	set_music_volume(value, false)
+	set_music_volume(value, true, false)
+	# save modified music volume preferences
+	self.save_profile_settings()
+	
+func _on_ambience_slider_drag_ended(value):
+	print("ambience volume set to: ", value)
+	set_ambience_volume(value, true, false)
 	# save modified music volume preferences
 	self.save_profile_settings()
 	
@@ -86,23 +96,35 @@ func _on_image_file_selected(path: String):
 	profile_pic_button.texture_normal = texture
 	profile_pic_button.texture_hover = null
 	
-func set_sfx_volume(volume: float, setSlider: bool):
+func set_sfx_volume(volume: float, setAudioManager: bool, setSlider: bool):
 	if volume == null:
 		return
 	self.sfxVolume = volume
 	sfx_slider_value.text = str(volume) + "%"
-	AudioManager.set_sfx_volume(float(volume)/100)
+	if setAudioManager:
+		AudioManager.set_sfx_volume(float(volume)/100)
 	if setSlider:
 		sfx_slider.value = volume
 
-func set_music_volume(volume: float, setSlider: bool):
+func set_music_volume(volume: float, setAudioManager: bool, setSlider: bool):
 	if volume == null:
 		return
 	self.musicVolume = volume
 	music_slider_value.text = str(volume) + "%"
-	AudioManager.set_music_volume(float(volume)/100)
+	if setAudioManager:
+		AudioManager.set_music_volume(float(volume)/100)
 	if setSlider:
 		music_slider.value = volume
+		
+func set_ambience_volume(volume: float, setAudioManager: bool, setSlider: bool):
+	if volume == null:
+		return
+	self.ambienceVolume = volume
+	ambience_slider_value.text = str(volume) + "%"
+	if setAudioManager:
+		AudioManager.set_ambience_volume(float(volume)/100)
+	if setSlider:
+		ambience_slider.value = volume
 
 func save_profile_settings():
 	self.profile_settings = {
@@ -110,7 +132,8 @@ func save_profile_settings():
 		"invert_selection_method": self.invertedSelection,
 		"align_rolled_dice": self.alignDice,
 		"sfx_volume": self.sfxVolume,
-		"music_volume": self.musicVolume
+		"music_volume": self.musicVolume,
+		"ambience_volume": self.ambienceVolume
 	}
 	# share changes to global settings
 	GlobalSettings.profile_settings = self.profile_settings
@@ -135,9 +158,11 @@ func load_profile_settings():
 	self.alignDice = GlobalSettings.profile_settings["align_rolled_dice"]
 	align_dice.button_pressed = self.alignDice
 	# load sfx_volume
-	self.set_sfx_volume(GlobalSettings.profile_settings["sfx_volume"], true)
+	self.set_sfx_volume(GlobalSettings.profile_settings["sfx_volume"], true, true)
 	# load music_volume
-	self.set_music_volume(GlobalSettings.profile_settings["music_volume"], true)
+	self.set_music_volume(GlobalSettings.profile_settings["music_volume"], true, true)
+	# load ambience_volume
+	self.set_ambience_volume(GlobalSettings.profile_settings["ambience_volume"], true, true)
 	
 	# load profile pic
 	if GlobalSettings.profile_pic != null:
@@ -146,8 +171,9 @@ func load_profile_settings():
 
 # Load default settings
 func load_default_settings():
-	set_sfx_volume(int(AudioManager.get_sfx_volume()*100), true)
-	set_music_volume(int(AudioManager.get_music_volume()*100), true)
+	set_sfx_volume(int(AudioManager.get_sfx_volume()*100), false, true)
+	set_music_volume(int(AudioManager.get_music_volume()*100), false, true)
+	set_ambience_volume(int(AudioManager.get_ambience_volume()*100), false, true)
 
 func _ready() -> void:
 	self.load_default_settings()
@@ -161,6 +187,7 @@ func _ready() -> void:
 	align_dice.connect("toggled", self._on_align_dice_toggled)
 	sfx_slider.connect("value_changed", self._on_sfx_slider_drag_ended)
 	music_slider.connect("value_changed", self._on_music_slider_drag_ended)
+	ambience_slider.connect("value_changed", self._on_ambience_slider_drag_ended)
 	back_to_home_button.connect("pressed",self.returnToIntro)
 	
 	AudioManager.connect_buttons()

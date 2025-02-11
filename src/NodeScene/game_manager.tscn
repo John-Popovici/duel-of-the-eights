@@ -517,7 +517,7 @@ theme = ExtResource("4_eudyq")
 text = "Ambience Volume:"
 horizontal_alignment = 1
 
-[node name="AmbienceVolumeSlider2" type="HSlider" parent="GameUI/EscPanel/EscBox" groups=["Sliders"]]
+[node name="AmbientVolumeSlider" type="HSlider" parent="GameUI/EscPanel/EscBox" groups=["Sliders"]]
 layout_mode = 2
 size_flags_vertical = 2
 theme = ExtResource("4_eudyq")
