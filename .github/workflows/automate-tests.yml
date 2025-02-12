@@ -27,4 +27,4 @@ jobs:
 
       - name: Run GDScript Tests
         run: |
-          godot --headless -s "res://addons/gut/gut_cmdln.gd" -gdir="res://tests"
+          godot --headless -s "res://addons/gut/gut_cmdln.gd" -gdir="res://Tests"
