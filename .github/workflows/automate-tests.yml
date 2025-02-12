@@ -23,6 +23,8 @@ jobs:
           mv Godot_v4.3-stable_linux.x86_64 /usr/local/bin/godot
           chmod +x /usr/local/bin/godot
       
+      - name: Initialize Godot Project
+        run: godot --headless --quit
 
       - name: Run GDScript Tests
         run: godot --headless -s "res://addons/gut/cli/gut_cli.gd" -gdir="res://Tests"
