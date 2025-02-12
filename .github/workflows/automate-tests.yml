@@ -26,6 +26,20 @@ jobs:
       - name: Initialize Godot Project
         run: godot --headless --quit
 
+      - name: Print directory structure
+        run: |
+          echo "Current working directory:"
+          pwd
+          echo "\nHome directory:"
+          ls -la ~
+          echo "\nWorkspace structure:"
+          ls -la
+          echo "\nFull project structure:"
+          sudo apt-get update -y && sudo apt-get install -y tree
+          tree -a -L 3
+          echo "\nGUT addon verification:"
+          ls -la addons/gut/cli/
+        
       - name: Check project setup
         run: |
           echo "Checking for project.godot:"
