@@ -26,7 +26,6 @@ jobs:
       - name: Initialize Project
         working-directory: ./src
         run: |
-          godot --headless --editor --quit --path $PWD
           godot --headless --import --path $PWD  # Ensures assets are imported
 
       - name: Ensure GUT is Installed
