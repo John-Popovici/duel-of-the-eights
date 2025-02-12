@@ -30,10 +30,10 @@ jobs:
           key: godot-import-${{ github.run_id }}
           restore-keys: godot-import-
 
-      - name: Force Asset Re-import
-        working-directory: ./src
+      - name: Initialize Project
+        working-directory: ./src  # If using subdirectory
         run: |
-          rm -rf .godot/imported
+          godot --headless --quit
           godot --headless --editor --quit
 
       - name: Run GDScript Tests
