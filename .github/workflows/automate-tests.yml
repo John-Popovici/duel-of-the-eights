@@ -36,4 +36,4 @@ jobs:
       - name: Run GDScript Tests
         run: |
           cd src
-          godot -s addons/gut/cli/gut_cli.gd -d --path $PWD -ginclude_subdirs -gdir=res://Tests -gexit -gprefix=test_
+          godot --headless -s addons/gut/cli/gut_cli.gd -d --path $PWD -ginclude_subdirs -gdir=res://Tests -gexit -gprefix=test_
