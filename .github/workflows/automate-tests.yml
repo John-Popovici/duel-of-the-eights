@@ -23,19 +23,6 @@ jobs:
           mv Godot_v4.3-stable_linux.x86_64 /usr/local/bin/godot
           chmod +x /usr/local/bin/godot
 
-      - name: Cache Godot Imported Assets
-        uses: actions/cache@v3
-        with:
-          path: src/.godot/imported
-          key: godot-import-${{ github.run_id }}
-          restore-keys: godot-import-
-
-      - name: Initialize Project
-        working-directory: ./src  # If using subdirectory
-        run: |
-          godot --headless --quit
-          godot --headless --editor --quit
-
       - name: Run GDScript Tests
         working-directory: ./src
         run: |
