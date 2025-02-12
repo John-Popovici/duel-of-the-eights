@@ -25,27 +25,15 @@ jobs:
       
       - name: Initialize Godot Project
         run: godot --headless --quit
-
-      - name: Print directory structure
-        run: |
-          echo "Current working directory:"
-          pwd
-          echo "\nHome directory:"
-          ls -la ~
-          echo "\nWorkspace structure:"
-          ls -la
-          echo "\nFull project structure:"
-          sudo apt-get update -y && sudo apt-get install -y tree
-          tree -a -L 3
-          echo "\nGUT addon verification:"
-          ls -la src/addons/gut/cli/
         
       - name: Check project setup
         run: |
           echo "Checking for project.godot:"
-          ls -la project.godot
+          ls -la src/project.godot
           echo "\nChecking GUT CLI path:"
           ls -la src/addons/gut/cli/gut_cli.gd
 
       - name: Run GDScript Tests
-        run: godot --headless --path ./ -s "res://addons/gut/cli/gut_cli.gd" -gdir="res://Tests"
+        run: |
+          cd src
+          godot -s addons/gut/cli/gut_cli.gd -d --path $PWD -ginclude_subdirs -gdir=res://Tests -gexit -gprefix=test_
