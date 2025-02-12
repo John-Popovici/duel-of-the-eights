@@ -24,11 +24,27 @@ jobs:
           chmod +x /usr/local/bin/godot
 
       - name: Initialize Project
-        working-directory: ./src  # If using subdirectory
+        working-directory: ./src
         run: |
           godot --headless --editor --quit --path $PWD
+          godot --headless --import --path $PWD  # Ensures assets are imported
+
+      - name: Ensure GUT is Installed
+        working-directory: ./src
+        run: |
+          mkdir -p addons/gut
+          if [ ! -f addons/gut/gut.gd ]; then
+            echo "GUT not found! Downloading..."
+            wget https://github.com/bitwes/Gut/archive/refs/heads/master.zip -O gut.zip
+            unzip gut.zip
+            mv Gut-master/* addons/gut/
+            rm -rf Gut-master gut.zip
+          else
+            echo "GUT already installed."
+          fi
 
       - name: Run GDScript Tests
         working-directory: ./src
         run: |
-          godot --headless --import -s res://addons/gut/gut_cmdln.gd -ginclude_subdirs -gdir=res://Tests -gexit -gprefix=test_
+          godot --headless --import  # Ensure assets are properly recognized
+          godot --headless -s res://addons/gut/gut_cmdln.gd -ginclude_subdirs -gdir=res://Tests -gexit -gprefix=test_
