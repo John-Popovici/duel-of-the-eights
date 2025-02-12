@@ -26,5 +26,12 @@ jobs:
       - name: Initialize Godot Project
         run: godot --headless --quit
 
+      - name: Check project setup
+        run: |
+          echo "Checking for project.godot:"
+          ls -la project.godot
+          echo "\nChecking GUT CLI path:"
+          ls -la addons/gut/cli/gut_cli.gd
+
       - name: Run GDScript Tests
         run: godot --headless --path ./ -s "res://addons/gut/cli/gut_cli.gd" -gdir="res://Tests"
