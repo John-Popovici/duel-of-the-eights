@@ -28,7 +28,7 @@ jobs:
         run: |
           mkdir -p .godot/imported
           godot --headless --quit
-          godot --headless --editor --quit --path $PWD
+          godot --headless --editor --quit
 
       - name: Run GDScript Tests
         run: |
