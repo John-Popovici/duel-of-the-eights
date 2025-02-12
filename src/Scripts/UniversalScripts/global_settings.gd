@@ -27,7 +27,8 @@ extends Node
 	"invert_selection_method": false,
 	"align_rolled_dice": false,
 	"sfx_volume": null,
-	"music_volume": null
+	"music_volume": null,
+	"ambience_volume": null
 }
 @onready var profile_pic : Texture
 
@@ -92,6 +93,7 @@ func load_profile_settings():
 		for key in json_data:
 			print("loading ", key, ": ", json_data[key])
 			self.profile_settings[key] = json_data[key]
+			
 	else:
 		print("no data to load")
 		

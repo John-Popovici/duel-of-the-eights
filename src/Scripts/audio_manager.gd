@@ -64,6 +64,7 @@ var ambience_library ={
 }
 
 @export var musicVolume: float = 0.2
+@export var ambienceVolume: float = 0.2
 @export var sfxVolume: float = 0.4
 
 func _ready():
@@ -76,6 +77,10 @@ func _ready():
 		set_sfx_volume(float(GlobalSettings.profile_settings["sfx_volume"]/100))
 	else:
 		set_sfx_volume(self.sfxVolume)
+	if GlobalSettings.profile_settings["ambience_volume"] != null:
+		set_ambience_volume(float(GlobalSettings.profile_settings["ambience_volume"]/100))
+	else:
+		set_ambience_volume(self.ambienceVolume)
 	AudioManager.play_music("main_menu")
 	AudioManager.play_ambience("tavern_background")
 	AudioManager.play_ambience("wind_background")
@@ -153,15 +158,22 @@ func set_music_volume(volume: float): #float 0 to 1
 	self.musicVolume = volume
 	music_player.volume_db = linear_to_db(volume)
 	GlobalSettings.profile_settings["music_volume"] = int(volume*100)
+
+func set_ambience_volume(volume: float): #float 0 to 1
+	self.ambienceVolume = volume
 	ambience_player.volume_db = linear_to_db(volume)
+	GlobalSettings.profile_settings["ambience_volume"] = int(volume*100)
 
 func set_sfx_volume(volume: float): #float 0 to 1
-	sfx_player.volume_db = linear_to_db(volume)
 	self.sfxVolume = volume
+	sfx_player.volume_db = linear_to_db(volume)
 	GlobalSettings.profile_settings["sfx_volume"] = int(volume*100)
 
 func get_music_volume() -> float:
 	return db_to_linear(music_player.volume_db)
+	
+func get_ambience_volume() -> float:
+	return db_to_linear(ambience_player.volume_db)
 
 func get_sfx_volume() -> float:
 	return db_to_linear(sfx_player.volume_db)
