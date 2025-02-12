@@ -22,15 +22,21 @@ jobs:
           unzip Godot_v4.3-stable_linux.x86_64.zip
           mv Godot_v4.3-stable_linux.x86_64 /usr/local/bin/godot
           chmod +x /usr/local/bin/godot
-      
-      - name: Initialize Project
-        working-directory: ./src  # If using subdirectory
+
+      - name: Cache Godot Imported Assets
+        uses: actions/cache@v3
+        with:
+          path: src/.godot/imported
+          key: godot-import-${{ github.run_id }}
+          restore-keys: godot-import-
+
+      - name: Force Asset Re-import
+        working-directory: ./src
         run: |
-          mkdir -p .godot/imported
-          godot --headless --quit
+          rm -rf .godot/imported
           godot --headless --editor --quit
 
       - name: Run GDScript Tests
+        working-directory: ./src
         run: |
-          cd src
           godot --headless -s addons/gut/cli/gut_cli.gd -d --path $PWD -ginclude_subdirs -gdir=res://Tests -gexit -gprefix=test_
