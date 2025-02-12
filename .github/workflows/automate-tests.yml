@@ -27,4 +27,4 @@ jobs:
         run: godot --headless --quit
 
       - name: Run GDScript Tests
-        run: godot --headless -s "res://addons/gut/cli/gut_cli.gd" -gdir="res://Tests"
+        run: godot --headless --path ./ -s "res://addons/gut/cli/gut_cli.gd" -gdir="res://Tests"
