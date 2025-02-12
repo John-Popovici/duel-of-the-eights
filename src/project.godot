@@ -35,6 +35,10 @@ window/stretch/mode="viewport"
 
 project/assembly_name="duel-of-the-eights"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
 [file_customization]
 
 folder_colors={

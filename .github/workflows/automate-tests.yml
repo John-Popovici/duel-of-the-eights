@@ -1,0 +1,30 @@
+name: Run GDScript Tests
+
+on:
+  pull_request:
+    paths:
+      - '**.gd'  # Run tests if any GDScript file is modified
+  push:
+    branches:
+      - main  # Run tests on pushes to main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Godot
+        run: |
+          sudo apt update
+          sudo apt install -y wget unzip
+          wget https://downloads.tuxfamily.org/godotengine/4.1/Godot_v4.1-stable_linux.x86_64.zip
+          unzip Godot_v4.1-stable_linux.x86_64.zip
+          mv Godot_v4.1-stable_linux.x86_64 /usr/local/bin/godot
+          chmod +x /usr/local/bin/godot
+
+      - name: Run GDScript Tests
+        run: |
+          godot --headless -s "res://addons/gut/gut_cmdln.gd" -gdir="res://tests"
