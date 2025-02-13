@@ -533,12 +533,14 @@ func _on_raise() -> void:
 	setDisableRaiseButtons(true)
 	network_manager.broadcast_game_state("raise", { "type": "Raise" })
 	raiseInEffect = true
+	AudioManager.play_sfx("Raise")
 	Debugger.log("Raised")
 
 func _raised() -> void:
 	foldButton.visible = true
 	raiseTheStakesButton.visible = false
 	raiseInEffect = true
+	AudioManager.play_sfx("Raise")
 	Debugger.log("received raise")
 
 var IFolded = false
@@ -546,11 +548,13 @@ func _on_fold() -> void:
 	setDisableRaiseButtons(true)
 	network_manager.broadcast_game_state("fold", { "type": "Fold" })
 	raiseInEffect = false
+	AudioManager.play_sfx("Fold")
 	Debugger.log("Folded")
 	IFolded = true
 	foldEndOfRoundEffects()
 
 func _folded() -> void:
+	AudioManager.play_sfx("Fold")
 	Debugger.log("received fold")
 	IFolded = false
 	foldEndOfRoundEffects()
