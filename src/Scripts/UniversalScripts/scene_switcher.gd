@@ -18,7 +18,7 @@ func returnToIntro() -> void:
 		currentScene.queue_free()
 	else: # brute force clear of all nodes (in progress)
 		print("Do not have scene to free")
-		GlobalSettings.show_toast("Do not have scene to free")
+		Debugger.log_warning("Do not have scene to free")
 
 	currentScene = introScene.instantiate()
 	get_tree().root.add_child(currentScene)
@@ -32,7 +32,7 @@ func changeScene(path: String) -> void:
 		currentScene.queue_free()
 	else: # brute force clear of all nodes (in progress)
 		print("Do not have scene to free")
-		GlobalSettings.show_toast("Do not have scene to free")
+		Debugger.log_warning("Do not have scene to free")
 	
 	currentScene = load(path).instantiate()
 	get_tree().root.add_child(currentScene)

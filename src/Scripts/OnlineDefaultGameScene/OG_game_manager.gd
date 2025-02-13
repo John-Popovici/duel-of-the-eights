@@ -89,7 +89,7 @@ func setup_game() -> void:
 	current_round = 0
 	max_rolls_per_round = game_settings["round_rolls"]
 	max_rounds = game_settings["rounds"]
-	GlobalSettings.show_toast("bluffMechanicActive: " + str(bluffMechanicActive))
+	Debugger.log("bluffMechanicActive: " + str(bluffMechanicActive))
 	if bluffMechanicActive:
 		BluffButtons.visible = true
 		raiseTheStakesButton.visible = true

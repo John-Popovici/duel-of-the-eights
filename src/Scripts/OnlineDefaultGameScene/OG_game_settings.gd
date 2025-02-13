@@ -55,7 +55,7 @@ func _on_start_game_pressed():
 	start_game_button.disabled = true
 	home_button.disabled = true
 	advanced_settings_button.disabled = true
-	GlobalSettings.show_toast("Win Condition: " + str(WinCondition.get_selected_id()))
+	Debugger.log("Win Condition: " + str(WinCondition.get_selected_id()))
 	print("Win Condition: " + str(WinCondition.get_selected_id()))
 	if WinCondition.get_selected_id() == 0:
 		bluff_active = false

@@ -68,7 +68,7 @@ func _on_start_game_pressed():
 	start_game_button.disabled = true
 	home_button.disabled = true
 	advanced_settings_button.disabled = true
-	GlobalSettings.show_toast("Win Condition: " + str(WinCondition.get_selected_id()))
+	Debugger.log("Win Condition: " + str(WinCondition.get_selected_id()))
 	print("Win Condition: " + str(WinCondition.get_selected_id()))
 	if WinCondition.get_selected_id() == 0:
 		bluff_active = false
@@ -232,12 +232,12 @@ func load_preset_buttons():
 # Load a preset's data and apply it to the UI
 func _on_preset_selected(preset_name: String):
 	print("Preset Selected")
-	GlobalSettings.show_toast("Preset Selected: " + preset_name)
+	Debugger.log("Preset Selected: " + preset_name)
 	var file_path = presets_folder + "/" + preset_name + ".json"
-	GlobalSettings.show_toast("Preset File path: " + file_path)
+	Debugger.log("Preset File path: " + file_path)
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	var preset_data = file.get_as_text()
-	GlobalSettings.show_toast("Preset Data: " + preset_data)
+	Debugger.log("Preset Data: " + preset_data)
 	file.close()
 	var json = JSON.new()
 	json.parse(preset_data)
@@ -245,19 +245,19 @@ func _on_preset_selected(preset_name: String):
 	hand_settings_vals = json.data.get("hand_settings", {})
 	hand_settings_saved = true
 	hand_settings_loaded = false
-	GlobalSettings.show_toast("Preset data retrieved")
+	Debugger.log("Preset data retrieved")
 	print(preset_data)
 	# Update UI fields based on the loaded settings
 	update_ui_fields(game_settings, hand_settings_vals)
 	_allow_simple_start()
-	GlobalSettings.show_toast("Reached Simple start")
+	Debugger.log("Reached Simple start")
 
 # Update the input fields with loaded game and hand settings
 func update_ui_fields(game_settings: Dictionary, hand_settings: Dictionary):
 	# Example updates; adjust to fit actual input nodes in your UI
-	GlobalSettings.show_toast("Bluff Setting test: "+str(game_settings.get("bluff_active")))
-	GlobalSettings.show_toast("Win Cond Setting test: "+str(game_settings.get("win_condition")))
-	#GlobalSettings.show_toast("Game Setting test: "+str(game_settings))
+	Debugger.log("Bluff Setting test: "+str(game_settings.get("bluff_active")))
+	Debugger.log("Win Cond Setting test: "+str(game_settings.get("win_condition")))
+	#Debugger.log("Game Setting test: "+str(game_settings))
 	WinCondition.select(game_settings.get("win_condition", 0))
 	_win_condition_toggled(game_settings.get("win_condition", 0))
 	BluffButton.set_pressed(bool(game_settings.get("bluff_active", false)))
@@ -394,7 +394,7 @@ func _on_return_to_settings_pressed() -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.visible = false
-	GlobalSettings.show_toast(str(presets_folder))
+	Debugger.log(str(presets_folder))
 	start_game_button.connect("pressed",self._on_start_game_pressed)
 	simple_start_game_button.connect("pressed",self._on_start_game_pressed)
 	start_game_button.visible = false

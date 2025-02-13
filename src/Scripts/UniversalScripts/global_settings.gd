@@ -72,12 +72,7 @@ extends Node
 	12 : d12Settings
 }
 
-@export var debug_mode: bool = false
-func show_toast(message: String) -> void:
-	if !debug_mode:
-		return
-	print("Sending toast message P1: ", message)
-	ToastLayer.set_message(message)
+@export var debug_mode: bool = true
 	
 # Load existing profile settings
 func load_profile_settings():
