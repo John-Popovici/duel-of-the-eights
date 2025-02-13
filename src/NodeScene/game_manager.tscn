@@ -372,6 +372,58 @@ fill_mode = 1
 [node name="CountdownTimer" type="Timer" parent="GameUI"]
 wait_time = 20.0
 
+[node name="ChatUI" type="Control" parent="GameUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("4_eudyq")
+script = ExtResource("14_rpv4e")
+
+[node name="ChatButton" type="TextureButton" parent="GameUI/ChatUI"]
+layout_mode = 0
+offset_left = 522.0
+offset_top = 533.0
+offset_right = 562.0
+offset_bottom = 571.0
+texture_normal = ExtResource("15_3hw5t")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ChatPopup" type="PanelContainer" parent="GameUI/ChatUI"]
+visible = false
+layout_mode = 0
+offset_left = 312.0
+offset_top = 220.0
+offset_right = 564.0
+offset_bottom = 525.0
+
+[node name="VSplitContainer" type="VSplitContainer" parent="GameUI/ChatUI/ChatPopup"]
+layout_mode = 2
+dragger_visibility = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GameUI/ChatUI/ChatPopup/VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="ChatMessages" type="VBoxContainer" parent="GameUI/ChatUI/ChatPopup/VSplitContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="InputUI" type="VBoxContainer" parent="GameUI/ChatUI/ChatPopup/VSplitContainer"]
+layout_mode = 2
+
+[node name="ChatInput" type="LineEdit" parent="GameUI/ChatUI/ChatPopup/VSplitContainer/InputUI"]
+layout_mode = 2
+placeholder_text = "Input Message"
+
+[node name="SendButton" type="Button" parent="GameUI/ChatUI/ChatPopup/VSplitContainer/InputUI"]
+layout_mode = 2
+text = "Send Message"
+
 [node name="WaitingScreen" type="VBoxContainer" parent="GameUI"]
 visible = false
 anchors_preset = 8
@@ -535,55 +587,3 @@ text = "Return to Game"
 layout_mode = 2
 theme = ExtResource("4_eudyq")
 text = "Exit Game"
-
-[node name="ChatUI" type="Control" parent="GameUI"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme = ExtResource("4_eudyq")
-script = ExtResource("14_rpv4e")
-
-[node name="ChatButton" type="TextureButton" parent="GameUI/ChatUI"]
-layout_mode = 0
-offset_left = 522.0
-offset_top = 533.0
-offset_right = 562.0
-offset_bottom = 571.0
-texture_normal = ExtResource("15_3hw5t")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="ChatPopup" type="PanelContainer" parent="GameUI/ChatUI"]
-visible = false
-layout_mode = 0
-offset_left = 312.0
-offset_top = 220.0
-offset_right = 564.0
-offset_bottom = 525.0
-
-[node name="VSplitContainer" type="VSplitContainer" parent="GameUI/ChatUI/ChatPopup"]
-layout_mode = 2
-dragger_visibility = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="GameUI/ChatUI/ChatPopup/VSplitContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-follow_focus = true
-horizontal_scroll_mode = 0
-
-[node name="ChatMessages" type="VBoxContainer" parent="GameUI/ChatUI/ChatPopup/VSplitContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="InputUI" type="VBoxContainer" parent="GameUI/ChatUI/ChatPopup/VSplitContainer"]
-layout_mode = 2
-
-[node name="ChatInput" type="LineEdit" parent="GameUI/ChatUI/ChatPopup/VSplitContainer/InputUI"]
-layout_mode = 2
-placeholder_text = "Input Message"
-
-[node name="SendButton" type="Button" parent="GameUI/ChatUI/ChatPopup/VSplitContainer/InputUI"]
-layout_mode = 2
-text = "Send Message"

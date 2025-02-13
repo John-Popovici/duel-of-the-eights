@@ -18,8 +18,6 @@ func _ready():
 	chat_input.connect("text_submitted", _on_text_submitted)
 	chat_button.connect("pressed", toggle_chat)
 	network_manager.connect("chat_received", self.receive_chat_message)
-	#if !GlobalSettings.mute_chat:
-	#	self.visible = false
 	
 func toggle_chat():
 	chat_popup.visible = !chat_popup.visible  # Toggle visibility

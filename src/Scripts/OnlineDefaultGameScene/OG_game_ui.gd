@@ -30,6 +30,8 @@ extends CanvasLayer
 @onready var sort_asc_button = get_node("MyPlayerDiceBase/RollSorter/ButtonHolder/Asc")
 @onready var sort_desc_button = get_node("MyPlayerDiceBase/RollSorter/ButtonHolder/Desc")
 @onready var sort_freq_button = get_node("MyPlayerDiceBase/RollSorter/ButtonHolder/Freq")
+@onready var chatUI = get_node("ChatUI")
+var chatEnabled = false
 
 var myPlayerName: String
 var myPlayerDice
@@ -61,6 +63,10 @@ func setup_game_ui(game_settings: Dictionary, _isHost: bool):
 		show_countdown_panel()
 	else:
 		hide_countdown_panel()
+	
+	#if !GlobalSettings.mute_chat:
+	chatEnabled = true
+	show_chat_ui()
 	
 	show_game_state_info()
 	show_player_stats_panel()
@@ -320,6 +326,9 @@ func show_end_of_game_screen(resultText: String, player_stats: Dictionary, oppon
 	end_of_game_screen.visible = true
 	EscBackground.visible = true
 	escScreenAllowed = false
+	
+	hide_chat_ui()
+	
 	winner_label.text = resultText
 	
 	var game_manager = get_parent()
@@ -343,6 +352,7 @@ func hide_end_of_game_screen():
 	end_of_game_screen.visible = false
 	EscBackground.visible = false
 	escScreenAllowed = true
+	show_chat_ui()
 
 func hide_all_ui():
 	hide_opponent_rolls()
@@ -354,6 +364,7 @@ func hide_all_ui():
 	hide_pause_menu()
 	hide_camera_options()
 	hide_countdown_panel()
+	hide_chat_ui()
 
 func hide_camera_options() -> void:
 	get_parent().get_node("CameraController").set_options_visible(false)
@@ -369,6 +380,15 @@ func show_pause_menu():
 	if escScreenAllowed:
 		PausePanel.visible = true
 		EscBackground.visible = true
+
+func hide_chat_ui():
+	chatUI.visible = false
+
+func show_chat_ui():
+	if chatEnabled:
+		chatUI.visible = true
+	else:
+		chatUI.visible = false
 
 func toggle_pause_menu():
 	if PausePanel.visible:
