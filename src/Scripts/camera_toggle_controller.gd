@@ -47,7 +47,7 @@ func lerp_camera_to_position(target: Node3D, lerp_speed: float = 0.05) -> void:
 		camera.global_transform.origin = start_transform.origin.lerp(end_transform.origin, t)
 		camera.global_transform.basis = start_transform.basis.slerp(end_transform.basis, t)
 		await get_tree().process_frame  # Wait until the next frame
-	print("Reached Lerp pos")
+	Debugger.log("Reached Lerp pos")
 
 # Setter function for move_mode
 func set_move_mode(mode: String) -> void:

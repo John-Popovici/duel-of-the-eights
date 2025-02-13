@@ -21,6 +21,7 @@ func _ready():
 	
 func toggle_chat():
 	chat_popup.visible = !chat_popup.visible  # Toggle visibility
+	Debugger.log("Chat Visible: " + str(chat_popup.visible))
 	if chat_popup.visible:
 		unread_messages = 0  # Reset unread count when chat opens
 		chat_button.texture_normal = preload("res://Assets/2D Assets/OtherImages/message_read.svg")  # Reset texture
@@ -40,6 +41,7 @@ func send_chat_message(message: String):
 	chat_input.clear()
 	_add_message_to_chat("You: " + message)
 	network_manager.send_chat_rpc(message)  # Send message over the network
+	Debugger.log("Send chat message: " + message)
 
 func _add_message_to_chat(message: String):
 	var label = Label.new()
@@ -60,6 +62,8 @@ func receive_chat_message(message: String):
 	if not chat_popup.visible:
 		unread_messages += 1  # Increment unread count
 		chat_button.texture_normal = preload("res://Assets/2D Assets/OtherImages/message_unread.svg")  # Change button texture
+	
+	Debugger.log("Recieve Chat Message: " + message)
 
 func _input(event):
 	return

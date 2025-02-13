@@ -24,7 +24,7 @@ func _ready():
 	port_field.visible = false
 
 func _on_hostcheck_toggled(state):
-	print("Host/Client Toggled: ",state)
+	Debugger.log(str("Host/Client Toggled: ",state))
 	host_option = state
 	if host_option:
 		ip_field.visible = false
@@ -51,7 +51,7 @@ func _cancel_hosting() -> void:
 	ErrorUI.visible = true
 	ErrorBack.visible = true
 	ErrorSourceLabel.text = "Disconnected from game"
-	print("Disconnected")
+	Debugger.log("Disconnected")
 	network_manager.disconnect_from_server()
 	await get_tree().create_timer(2.0).timeout
 
@@ -62,8 +62,8 @@ func _on_connect_pressed():
 	if host_option:
 		network_manager.start_server(port)
 		SetupUI.visible = false
-		print(network_manager.getHashIP())
-		print(network_manager.getHashPort())
+		Debugger.log(network_manager.getHashIP())
+		Debugger.log(network_manager.getHashPort())
 		_on_connection_successful()
 	else:
 		var _hash = ip_field.text
@@ -73,7 +73,7 @@ func _on_connect_pressed():
 func _on_connection_successful():
 	# Hide the ConnectionUI once connected
 	self.visible = false
-	print("Multiplayer Successfully connected")
+	Debugger.log("Multiplayer Successfully connected")
 	network_manager.disconnect("connection_successful", self._on_connection_successful)
 	network_manager.connect("connection_successful", network_manager._second_player_connected)
 	# Start the game via OnlineGameManager
@@ -85,13 +85,13 @@ func _on_disconnected():
 	ErrorUI.visible = true
 	ErrorBack.visible = true
 	ErrorSourceLabel.text = "Disconnected from game"
-	print("Disconnected")
+	Debugger.log("Disconnected")
 	#network_manager.disconnect_from_server()
 	await get_tree().create_timer(2.0).timeout
 
 func _on_home():
 	self.visible = false
-	print("Disconnected")
+	Debugger.log("Disconnected")
 	SceneSwitcher.returnToIntro()
 
 func _on_connection_failed():
@@ -101,7 +101,7 @@ func _on_connection_failed():
 	ErrorUI.visible = true
 	ErrorBack.visible = true
 	ErrorSourceLabel.text = "Connection Failed"
-	print("Connection Failed")
+	Debugger.log_error("Connection Failed")
 	await get_tree().create_timer(2.0).timeout
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

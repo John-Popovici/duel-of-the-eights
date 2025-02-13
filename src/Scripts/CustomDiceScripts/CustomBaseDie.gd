@@ -120,9 +120,7 @@ func _on_input_event(_camera: Node, event: InputEvent, _event_position: Vector3,
 
 func _toggle_selection_status() -> void:
 	is_selected = !is_selected  # Toggle selection status
-	print("Die selected status:", is_selected)
-	print(self.name)
-	print("Dice Face Value: ", get_face_value())
+	Debugger.log(str("Die selected status: ", is_selected, ". Dice: ", self.name, ". Dice Face Value: ", get_face_value()))
 	reset_dice_tex()
 	if dice_ui_element != null:
 		dice_ui_element._toggle_texture()
@@ -150,7 +148,7 @@ var changenumber = true
 func _flipfaces() -> void:
 	while true:
 		await get_tree().create_timer(4).timeout
-		print("Flipping values")
+		Debugger.log("Flipping values")
 		if changenumber:
 			for i in range(1,7):
 				change_face_value(i,7-i)
@@ -288,7 +286,7 @@ func _process(_delta: float) -> void:
 		else:
 			var current_time = Time.get_ticks_msec() / 1000.0
 			if current_time - roll_start_time > roll_time_limit:
-				print("The die has been rolling for more than, ", roll_time_limit, " seconds.")
+				Debugger.log(str("The die has been rolling for more than, ", roll_time_limit, " seconds."))
 				roll_start_time = current_time  # Reset timer to prevent repeated calls
 	else:
 		is_rolling = false

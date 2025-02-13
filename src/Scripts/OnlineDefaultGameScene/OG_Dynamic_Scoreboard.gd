@@ -20,8 +20,6 @@ func populate_scoreboard(hand_settings: Dictionary):
 	
 	for hand_name in hand_settings.keys():
 		var settings = hand_settings[hand_name]
-		#print("Allowed list")
-		#print(settings["allowed"])
 		if !settings["allowed"]:
 			continue
 		# Load the HandScoreEntry scene as a template

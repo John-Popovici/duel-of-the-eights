@@ -92,7 +92,7 @@ func setup_game_ui(game_settings: Dictionary, _isHost: bool):
 	var round_label = Label.new()
 	round_label.name = "RoundLabel"
 	game_state_info.add_child(round_label)
-	print("Label made on Host: ", isHost)
+	Debugger.log(str("Label made on Host: ", isHost))
 	var roll_label = Label.new()
 	roll_label.name = "RollLabel"
 	game_state_info.add_child(roll_label)
@@ -231,7 +231,7 @@ func sort_by_frequency(_dice: Array[RigidBody3D]) -> Array[RigidBody3D]:
 			frequency_dict[faceValue] += 1
 		else:
 			frequency_dict[faceValue] = 1
-	print(frequency_dict)
+	Debugger.log(str(frequency_dict))
 	# Sort the array by frequency (descending), and by value (ascending) if frequencies are equal
 	_dice.sort_custom(_compare_by_frequency)
 
@@ -291,8 +291,8 @@ func blank_my_player_dice_display():
 # Update game state info
 func update_round_info(current_round: int, _total_rounds: int = total_rounds):
 	var round_label = game_state_info.get_node("RoundLabel") as Label
-	print(game_state_info.get_children())
-	print("Round Label ID: ",round_label, " on Host: ", isHost)
+	Debugger.log(str(game_state_info.get_children()))
+	Debugger.log(str("Round Label ID: ",round_label, " on Host: ", isHost))
 	round_label.text = "Round: %d / %d" % [current_round, _total_rounds]
 
 func update_roll_info(current_roll: int, total_rolls: int = total_round_rolls):
@@ -500,15 +500,15 @@ func _ready() -> void:
 
 func change_sfx_vol(_val: float)-> void:
 	AudioManager.set_sfx_volume(_val/100)
-	print("Vol set to: ",_val)
+	Debugger.log(str("Vol set to: ",_val))
 
 func change_music_vol(_val: float)-> void:
 	AudioManager.set_music_volume(_val/100)
-	print("Vol set to: ",_val)
+	Debugger.log(str("Vol set to: ",_val))
 	
 func change_ambient_vol(_val: float)-> void:
 	AudioManager.set_ambience_volume(_val/100)
-	print("Vol set to: ",_val)
+	Debugger.log(str("Vol set to: ",_val))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GlobalSettings="*res://Scripts/UniversalScripts/global_settings.gd"
 Debugger="*res://Scripts/UniversalScripts/Debugger.gd"
+GlobalSettings="*res://Scripts/UniversalScripts/global_settings.gd"
 SceneSwitcher="*res://Scripts/UniversalScripts/scene_switcher.gd"
 OnlineServer="*res://Scripts/ServerScripts/online_server.gd"
 AudioManager="*res://NodeScene/AudioManager.tscn"

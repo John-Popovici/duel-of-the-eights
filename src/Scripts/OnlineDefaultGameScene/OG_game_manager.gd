@@ -71,10 +71,10 @@ func setup_game() -> void:
 	setup_game_environment(game_settings)
 	setup_scoreboard(game_settings,hand_settings)
 	setup_PlayerManager(game_settings)
-	print("Setup UI Called on Host: ", network_manager.getIsHost())
+	Debugger.log(str("Setup UI Called on Host: ", network_manager.getIsHost()))
 	GameUI.setup_game_ui(game_settings,network_manager.getIsHost())
 	rollButtons.visible = true
-	print("Setup UI Finished Calling Called on Host: ", network_manager.getIsHost())
+	Debugger.log(str("Setup UI Finished Calling Called on Host: ", network_manager.getIsHost()))
 	isHost = network_manager.getIsHost()
 	network_manager.connect("game_state_received", self._on_game_state_received)
 	rollSelected.connect("pressed", self._on_roll_selected)
@@ -100,7 +100,7 @@ func setup_game() -> void:
 		setDisableRaiseButtons(true)
 	else:
 		BluffButtons.visible = false
-	print("Setup Game Done on Host: ", isHost)
+	Debugger.log(str("Setup Game Done on Host: ", isHost))
 	if isHost:
 		await get_tree().create_timer(1.0).timeout
 		start_round()
@@ -118,11 +118,11 @@ func start_round() ->void:
 	enemyPlayer.clearRolls()
 	setDisableAllButtons(true)
 	if isHost:
-		print("Host Started Round")
+		Debugger.log("Host Started Round")
 		network_manager.broadcast_game_state("round_start", { "round": current_round })
 		await get_tree().create_timer(1.0).timeout
 	else:
-		print("Client Started Round")
+		Debugger.log("Client Started Round")
 		await get_tree().create_timer(1.0).timeout
 	network_manager.broadcast_game_state("synchronize_start_round", { "round": current_round })
 	await get_tree().create_timer(0.1).timeout  # Short delay to ensure propagation
@@ -131,7 +131,7 @@ func start_round() ->void:
 var otherPlayerRoundStarted = false
 
 func synchronizeStartRound() -> void:
-	print("synchronize start round called by Host: ", !isHost, " on Host: ", isHost)
+	Debugger.log(str("synchronize start round called by Host: ", !isHost, " on Host: ", isHost))
 	otherPlayerRoundStarted = true
 	#start rolls phase
 	if otherPlayerRoundStarted and round_start_done:
@@ -182,7 +182,7 @@ func recieveRolls(fromHost: bool, _rolls: Array[int]) ->void:
 		GameUI.update_opponent_dice_display(_rolls)
 	else:
 		GameUI.blank_opponent_dice_display()
-	print("Received enemy rolls ", _rolls, " from Host: ", fromHost)
+	Debugger.log(str("Received enemy rolls ", _rolls, " from Host: ", fromHost))
 	other_players_rolls_read = true
 	if other_players_rolls_read and rolls_read:
 		GameUI.update_my_player_dice_display(myPlayer.get_dice())
@@ -211,14 +211,14 @@ func setup_selection() -> void:
 	myPlayer.toggle_dice_collisions(false)
 	if roll_count >= max_rolls_per_round:
 		hand_selection_done = false
-		print("Host: ", isHost, " reached hand selection on roll_count: ", roll_count, " of max: ", max_rolls_per_round)
+		Debugger.log(str("Host: ", isHost, " reached hand selection on roll_count: ", roll_count, " of max: ", max_rolls_per_round))
 		setDisableScoreBoardButtons(false)
 		if timedRounds:
 			GameUI.startTimer(baseTimer*2)
 	else:
 		roll_selection_done = false
 		other_player_roll_selection = false
-		print("Host: ", isHost, " reached roll selection on roll_count: ", roll_count, " of max: ", max_rolls_per_round)
+		Debugger.log(str("Host: ", isHost, " reached roll selection on roll_count: ", roll_count, " of max: ", max_rolls_per_round))
 		setDisableRollButtons(false)
 		if timedRounds:
 			GameUI.startTimer(baseTimer)
@@ -256,34 +256,34 @@ func endOfRoundEffects() -> void:
 	#add logic for damage taken and other end of turn effects 
 	#calculated locally based on score and totalscore
 	var end_condition_reached = false
-	print("WinCondition: ",win_cond)
+	Debugger.log(str("WinCondition: ",win_cond))
 	match win_cond:
 		0: #score
 			var scoreDiff = myPlayer.getLastScore() - enemyPlayer.getLastScore()
 			if scoreDiff < 0:
-				print("Player Host: ", isHost, " scored less")
+				Debugger.log(str("Player Host: ", isHost, " scored less"))
 			elif scoreDiff > 0:
-				print("Player Host: ", isHost, " scored more")
+				Debugger.log(str("Player Host: ", isHost, " scored more"))
 			else:
-				print("Players scored the same")
+				Debugger.log("Players scored the same")
 			#check engGame Criteria
 			if current_round >= max_rounds:
 				end_condition_reached = true
 		1: #Health Points
 			var scoreDiff = myPlayer.getLastScore() - enemyPlayer.getLastScore()
-			print("MyPlayer Host: ", isHost, " scored: ", myPlayer.getLastScore(), " and EnemyPlayer Host: ", !isHost, " scored: ", enemyPlayer.getLastScore())
+			Debugger.log(str("MyPlayer Host: ", isHost, " scored: ", myPlayer.getLastScore(), " and EnemyPlayer Host: ", !isHost, " scored: ", enemyPlayer.getLastScore()))
 			if scoreDiff < 0:
 				if raiseInEffect:
 					myPlayer.adjust_health(-1) # make this dyanmic
 				myPlayer.adjust_health(-1) # make this dyanmic
-				print("Player Host: ", isHost, "scored less, took damage")
+				Debugger.log(str("Player Host: ", isHost, "scored less, took damage"))
 			elif scoreDiff > 0:
 				if raiseInEffect:
 					enemyPlayer.adjust_health(-1) # make this dyanmic
 				enemyPlayer.adjust_health(-1) # make this dyanmic
-				print("Player Host: ", isHost, " scored more")
+				Debugger.log(str("Player Host: ", isHost, " scored more"))
 			else:
-				print("Players scored the same")
+				Debugger.log("Players scored the same")
 			if current_round >= max_rounds or myPlayer.getHealth() <= 0 or enemyPlayer.getHealth() <= 0:
 				end_condition_reached = true
 	
@@ -305,16 +305,16 @@ func foldEndOfRoundEffects() -> void:
 	#add logic for damage taken and other end of turn effects 
 	#calculated locally based on score and totalscore
 	var end_condition_reached = false
-	print("WinCondition: ",win_cond)
+	Debugger.log(str("WinCondition: ",win_cond))
 	match win_cond:
 		0: #score
 			var scoreDiff = myPlayer.getLastScore() - enemyPlayer.getLastScore()
 			if scoreDiff < 0:
-				print("Player Host: ", isHost, " scored less")
+				Debugger.log(str("Player Host: ", isHost, " scored less"))
 			elif scoreDiff > 0:
-				print("Player Host: ", isHost, " scored more")
+				Debugger.log(str("Player Host: ", isHost, " scored more"))
 			else:
-				print("Players scored the same")
+				Debugger.log("Players scored the same")
 			#check engGame Criteria
 			if current_round >= max_rounds:
 				end_condition_reached = true
@@ -323,7 +323,7 @@ func foldEndOfRoundEffects() -> void:
 				myPlayer.adjust_health(-1) # make this dyanmic
 			else:
 				enemyPlayer.adjust_health(-1) # make this dyanmic
-			print("MyPlayer Host: ", isHost, " scored: ", myPlayer.getLastScore(), " and EnemyPlayer Host: ", !isHost, " scored: ", enemyPlayer.getLastScore(), ", I Folded: ", IFolded)
+			Debugger.log(str("MyPlayer Host: ", isHost, " scored: ", myPlayer.getLastScore(), " and EnemyPlayer Host: ", !isHost, " scored: ", enemyPlayer.getLastScore(), ", I Folded: ", IFolded))
 			if current_round >= max_rounds or myPlayer.getHealth() <= 0 or enemyPlayer.getHealth() <= 0:
 				end_condition_reached = true
 	
@@ -343,7 +343,7 @@ var start_next_round = false
 var other_player_start_next_round = false
 
 func synchronizeNextRound() -> void:
-	print("synchronize next round called by Host: ", !isHost, " on Host: ", isHost)
+	Debugger.log(str("synchronize next round called by Host: ", !isHost, " on Host: ", isHost))
 	other_player_start_next_round = true
 	if start_next_round and other_player_start_next_round:
 		start_next_round = false
@@ -396,7 +396,7 @@ func endGame() -> void:
 				"Health Points: ": OpponentStats["health_points"],
 				"Score: ": OpponentStats["score"],
 			}
-	print("Game ended")
+	Debugger.log("Game ended")
 	GameUI.hide_all_ui()
 	rollButtons.visible = false
 	if winner == "none" or winner =="self":
@@ -416,7 +416,7 @@ func restartGame() ->void:
 
 var other_player_rematch = false
 func synchronizeRematch() -> void:
-	print("synchronize rematch round called by Host: ", !isHost, " on Host: ", isHost)
+	Debugger.log(str("synchronize rematch round called by Host: ", !isHost, " on Host: ", isHost))
 	other_player_rematch = true
 	if rematch and other_player_rematch:
 		rematch = false
@@ -461,7 +461,7 @@ func _on_game_state_received(state: String, data: Dictionary):
 			_folded()
 
 func connectionTest(data: Dictionary) -> void:
-	print(data)
+	Debugger.log(str(data))
 	pass
 
 func setup_PlayerManager(settings: Dictionary) -> void:
@@ -533,25 +533,25 @@ func _on_raise() -> void:
 	setDisableRaiseButtons(true)
 	network_manager.broadcast_game_state("raise", { "type": "Raise" })
 	raiseInEffect = true
-	print("Raised")
+	Debugger.log("Raised")
 
 func _raised() -> void:
 	foldButton.visible = true
 	raiseTheStakesButton.visible = false
 	raiseInEffect = true
-	print("received raise")
+	Debugger.log("received raise")
 
 var IFolded = false
 func _on_fold() -> void:
 	setDisableRaiseButtons(true)
 	network_manager.broadcast_game_state("fold", { "type": "Fold" })
 	raiseInEffect = false
-	print("Folded")
+	Debugger.log("Folded")
 	IFolded = true
 	foldEndOfRoundEffects()
 
 func _folded() -> void:
-	print("received fold")
+	Debugger.log("received fold")
 	IFolded = false
 	foldEndOfRoundEffects()
 
@@ -575,11 +575,11 @@ var hand_selection: Dictionary
 
 # Function called when a hand is selected
 func _on_hand_selected(hand: Dictionary):
-	print(hand)
+	Debugger.log(str(hand))
 	setDisableScoreBoardButtons(true)
 	var score = scoreCalc.calculate_hand_score(hand, myPlayer.getRolls())
 	if score[1] >= 0:
-		print("Bonus Triggered")
+		Debugger.log("Bonus Triggered")
 		myPlayer.update_score(score[1])
 		scoreboard.updateBonusButtonScore(score[1])
 		network_manager.broadcast_game_state("bonus", { "score": score[1], "hand": hand["hand_type"] })
@@ -589,7 +589,7 @@ func _on_hand_selected(hand: Dictionary):
 	if timedRounds:
 			GameUI.stopTimer()
 	hand_selection = hand
-	print(hand)
+	Debugger.log(str(hand))
 	network_manager.broadcast_game_state("hand", { "score": score[0], "hand": hand["hand_type"] })
 	# Logic to proceed to next player's turn if necessary
 	if hand_selection_done and other_player_hand_selection_done:
@@ -612,9 +612,9 @@ func setup_game_environment(_game_settings: Dictionary) -> void:
 	
 	# Additional setup can go here
 	if network_manager.getIsHost():
-		print("Host Game Environment initialized with settings:", _game_settings)
+		Debugger.log(str("Host Game Environment initialized with settings:", _game_settings))
 	else:
-		print("Client Game Environment initialized with settings:", _game_settings)
+		Debugger.log(str("Client Game Environment initialized with settings:", _game_settings))
 
 func returnToIntro()-> void:
 	SceneSwitcher.returnToIntro()

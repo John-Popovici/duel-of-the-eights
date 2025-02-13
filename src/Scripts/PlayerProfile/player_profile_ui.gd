@@ -34,38 +34,38 @@ func _on_profile_pic_button_pressed():
 	fileDialog.popup_centered()
 	
 func _on_username_box_modified(new_username):
-	print("username changed to: ", new_username)
+	Debugger.log(str("username changed to: ", new_username))
 	self.username = new_username
 	# save new username
 	self.save_profile_settings()
 	
 func _on_invert_select_method_toggled(button_pressed: bool):
-	print("invert selection method is now set to: ", button_pressed)
+	Debugger.log(str("invert selection method is now set to: ", button_pressed))
 	self.invertedSelection = button_pressed
 	# ACTUAL LOGIC STILL TO BE IMPLEMENTED
 	# save new selection method
 	self.save_profile_settings()
 	
 func _on_align_dice_toggled(button_pressed: bool):
-	print("align dice is now set to: ", button_pressed)
+	Debugger.log(str("align dice is now set to: ", button_pressed))
 	self.alignDice = button_pressed
 	# save new dice alignment decision
 	self.save_profile_settings()
 	
 func _on_sfx_slider_drag_ended(value):
-	print("sfx volume set to: ", value)
+	Debugger.log(str("sfx volume set to: ", value))
 	set_sfx_volume(value, true, false)
 	# save modified sfx volume preferences
 	self.save_profile_settings()
 	
 func _on_music_slider_drag_ended(value):
-	print("music volume set to: ", value)
+	Debugger.log(str("music volume set to: ", value))
 	set_music_volume(value, true, false)
 	# save modified music volume preferences
 	self.save_profile_settings()
 	
 func _on_ambience_slider_drag_ended(value):
-	print("ambience volume set to: ", value)
+	Debugger.log(str("ambience volume set to: ", value))
 	set_ambience_volume(value, true, false)
 	# save modified music volume preferences
 	self.save_profile_settings()
@@ -77,15 +77,15 @@ func _on_image_file_selected(path: String):
 	# Load the image from the selected file path
 	var err = image.load(path)
 	if err != OK:
-		push_error("Failed to load image at: " + path)
+		Debugger.log_error(str("Failed to load image at: " + path))
 		return
 
 	var save_path = presets_folder + "/Images/profile_pic.png"
 	var error = image.save_png(save_path)
 	if error != OK:
-		push_error("Failed to save the image: " + str(error))
+		Debugger.log_error(str("Failed to save the image: " + str(error)))
 	else:
-		print("Image saved successfully at ", save_path)
+		Debugger.log(str("Image saved successfully at ", save_path))
 	
 	# Create an ImageTexture, assign the loaded image to it, and give to profile pic
 	var texture = ImageTexture.new()
@@ -138,13 +138,13 @@ func save_profile_settings():
 	# share changes to global settings
 	GlobalSettings.profile_settings = self.profile_settings
 
-	print("Writing to: ", player_settings_path)
+	Debugger.log(str("Writing to: ", player_settings_path))
 	var file = FileAccess.open(player_settings_path, FileAccess.WRITE)
 	var json = JSON.new()
 	var json_string = json.stringify(profile_settings)
 	file.store_string(json_string)
 	file.close()
-	print("profile settings saved.")
+	Debugger.log("profile settings saved.")
 
 # Load existing profile settings
 func load_profile_settings():

@@ -2,7 +2,7 @@ extends Node
 
 var log_file_path: String  # Stores the current log file path
 var max_log_files = 5  # Maximum number of log files to keep (optional cleanup)
-var debug_enabled = true
+@export var debug_enabled = true
 
 func _ready():
 	var timestamp = Time.get_datetime_string_from_system().replace(":", "-").replace(" ", "_")
@@ -14,10 +14,7 @@ func _ready():
 		file.store_line("[INFO] Game started at: " + Time.get_time_string_from_system())
 		file.close()
 	
-	debug_enabled = GlobalSettings.debug_mode
-	
-	if debug_enabled:
-		print("Debugger initialized. Logging to:", log_file_path)
+	print("Debugger initialized. Logging to:", log_file_path)
 	clean_old_logs()  # (Optional) Remove old log files
 
 func log(message: String, level: String = "INFO"):

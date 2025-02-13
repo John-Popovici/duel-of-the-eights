@@ -12,7 +12,6 @@ func setDie (_die: RigidBody3D, _normal_tex, _selected_tex) -> void:
 	_toggle_texture()
 
 func clearDie () -> void:
-	#print("Dice removed")
 	if die != null:
 		die._clear_dice_ui()
 	die = null
@@ -22,9 +21,9 @@ func _on_texture_rect_input_event(event) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			# Placeholder for the functionality to be executed
-			print("TextureRect clicked!")
+			Debugger.log("TextureRect clicked!")
 			if die == null:
-				print("Dice not found")
+				Debugger.log_error("Dice not found")
 				return
 			if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 				die._toggle_selection_status()
