@@ -25,8 +25,9 @@ var baseTimer: int
 var timedRounds: bool
 var bluffMechanicActive: bool
 var raiseInEffect: bool
+var raiseContinued: bool = false
 var blockRaise: bool
-var invertSelection: bool = false #Toggle Manually until prfile page is done
+var invertSelection: bool = false
 
 var max_rounds: int
 var max_rolls_per_round: int
@@ -94,6 +95,7 @@ func setup_game() -> void:
 		raiseTheStakesButton.visible = true
 		foldButton.visible = false
 		raiseInEffect = false
+		raiseContinued = false
 		blockRaise = false
 		setDisableRaiseButtons(true)
 	else:
@@ -155,11 +157,15 @@ func rollPhase(roll: bool) -> void:
 		myPlayer.roll_dice()
 		resetRaise()
 	elif roll:
+		if raiseInEffect:
+			raiseContinued = true
 		if invertSelection:
 			myPlayer.invert_selection()
 			await get_tree().create_timer(0.5).timeout
 		myPlayer.roll_selected_dice()
 	elif !roll:
+		if raiseInEffect:
+			raiseContinued = true
 		myPlayer.pass_roll()
 	roll_count += 1
 	if roll_count == max_rolls_per_round: #Check if this comp is correct
@@ -172,7 +178,10 @@ func rollPhase(roll: bool) -> void:
 
 func recieveRolls(fromHost: bool, _rolls: Array[int]) ->void:
 	enemyPlayer.setRolls(_rolls)
-	GameUI.update_opponent_dice_display(_rolls)
+	if !raiseContinued:
+		GameUI.update_opponent_dice_display(_rolls)
+	else:
+		GameUI.blank_opponent_dice_display()
 	print("Received enemy rolls ", _rolls, " from Host: ", fromHost)
 	other_players_rolls_read = true
 	if other_players_rolls_read and rolls_read:
@@ -552,6 +561,7 @@ func resetRaise() -> void:
 	raiseInEffect = false
 	blockRaise = false
 	IFolded = false
+	raiseContinued = false
 
 func waiting_on_other_player(isWaiting: bool) -> void:
 	if isWaiting:
