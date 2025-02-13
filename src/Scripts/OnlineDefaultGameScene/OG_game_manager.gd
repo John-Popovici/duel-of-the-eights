@@ -541,6 +541,7 @@ func _raised() -> void:
 	raiseTheStakesButton.visible = false
 	raiseInEffect = true
 	AudioManager.play_sfx("Raise")
+	foldButton.get_node("AnimationPlayer").play("Raise")
 	Debugger.log("received raise")
 
 var IFolded = false
