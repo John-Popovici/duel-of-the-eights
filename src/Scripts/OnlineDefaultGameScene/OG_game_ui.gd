@@ -510,8 +510,30 @@ func change_ambient_vol(_val: float)-> void:
 	AudioManager.set_ambience_volume(_val/100)
 	Debugger.log(str("Vol set to: ",_val))
 
+
+var warning_threshold = 0.4
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass
 	if continueCountdown: #loop break/start var
 		countdownBar.set_value(ceil(timer.get_time_left()/startTime*100))
+		if timer.time_left <= startTime * warning_threshold:
+			play_heartbeat()
+		else:
+			stop_heartbeat()
+	else:
+		stop_heartbeat()
+
+var heartbeat_active = false
+
+func play_heartbeat():
+	if heartbeat_active:
+		return
+	heartbeat_active = true
+	while heartbeat_active:
+		AudioManager.play_sfx("Heartbeat")
+		await get_tree().create_timer(4).timeout
+
+
+func stop_heartbeat():
+	heartbeat_active = false

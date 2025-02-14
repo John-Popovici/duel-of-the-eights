@@ -16,7 +16,8 @@ var sfx_library = {
 	"switch_off": preload("res://Assets/Audio/SFX/switch_on.wav"),
 	"slider_ended": preload("res://Assets/Audio/SFX/slider_ended.wav"),
 	"Raise": preload("res://Assets/Audio/SFX/Raise.mp3"),
-	"Fold": preload("res://Assets/Audio/SFX/Fold.mp3")
+	"Fold": preload("res://Assets/Audio/SFX/Fold.mp3"),
+	"Heartbeat": preload("res://Assets/Audio/SFX/heartbeat-3s.mp3")
 }
 
 var dice_sfx_library = {
