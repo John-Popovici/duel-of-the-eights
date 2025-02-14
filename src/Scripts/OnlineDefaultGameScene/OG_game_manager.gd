@@ -6,6 +6,7 @@ var hand_settings
 @onready var network_manager = networkManagers[0]
 @onready var dice_container = get_node("DiceContainer")
 @onready var scoreboard = get_node("Scoreboard")
+@onready var handsContainer = get_node("Scoreboard/UIBox/SelfHandsSectionBox/ScrollContainer/HandsContainer")
 @onready var scoreCalc = get_node("ScoreCalculator")
 @onready var myPlayer = get_parent().get_node("myPlayer")
 @onready var enemyPlayer = get_parent().get_node("enemyPlayer")
@@ -205,6 +206,8 @@ func set_rolls_read(state: bool) ->void:
 		waiting_on_other_player(false)
 		setup_selection()
 
+var selectionmode = "none"
+
 func setup_selection() -> void:
 	if GlobalSettings.profile_settings["align_rolled_dice"]:
 			myPlayer.move_dice_inline()
@@ -215,6 +218,7 @@ func setup_selection() -> void:
 		setDisableScoreBoardButtons(false)
 		if timedRounds:
 			GameUI.startTimer(baseTimer*2)
+		selectionmode = "hand"
 	else:
 		roll_selection_done = false
 		other_player_roll_selection = false
@@ -222,6 +226,7 @@ func setup_selection() -> void:
 		setDisableRollButtons(false)
 		if timedRounds:
 			GameUI.startTimer(baseTimer)
+		selectionmode = "roll"
 
 var other_player_roll_selection = false
 
@@ -430,7 +435,18 @@ func exitGame() -> void:
 	pass
 
 func timer_complete() -> void:
-	exitGame()
+	if selectionmode == "roll":
+		_on_pass_roll()
+		selectionmode = "none"
+	elif selectionmode == "hand":
+		for hand in handsContainer.get_children():
+			#return
+			if !hand.get_node("Select").getDisable():
+				hand.get_node("Select").playHand()
+				selectionmode = "none"
+				return
+	selectionmode = "none"
+	#exitGame()
 
 # Handles incoming game states to synchronize players
 func _on_game_state_received(state: String, data: Dictionary):
