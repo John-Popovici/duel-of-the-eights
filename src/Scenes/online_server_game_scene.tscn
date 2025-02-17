@@ -5,7 +5,7 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t5ruj"]
 
-[node name="OnlineServerGameScene" type="Node3D"]
+[node name="Main" type="Node3D"]
 script = ExtResource("1_mol3t")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -14,45 +14,61 @@ offset_right = 1154.0
 offset_bottom = 646.0
 
 [node name="ServerOnlineCheck" type="Label" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 horizontal_alignment = 1
 
 [node name="PingLabel" type="Label" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 horizontal_alignment = 1
 
 [node name="ServerConnectButton" type="Button" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("2_5rlkn")
 text = "Connect"
 
 [node name="ServerDisconnectButton" type="Button" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("2_5rlkn")
 text = "Disconnect"
 
 [node name="ConnectionProgressBar" type="ProgressBar" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("2_5rlkn")
 theme_override_styles/fill = SubResource("StyleBoxFlat_t5ruj")
 
 [node name="ReturnToIntroButton" type="Button" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("2_5rlkn")
 text = "Back to Home"
 
-[node name="ChatTextEdit" type="TextEdit" parent="VBoxContainer"]
-visible = false
+[node name="Messages" type="TextEdit" parent="VBoxContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+editable = false
 
-[node name="ChatInput" type="LineEdit" parent="VBoxContainer"]
-visible = false
+[node name="Message" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
 placeholder_text = "Enter Message"
 alignment = 1
 
-[node name="SendButton" type="Button" parent="VBoxContainer"]
-visible = false
+[node name="Send" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Send Message"
+
+[node name="Join" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Join Chat Room"
+
+[node name="Username" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Username"
+alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/Send" to="." method="_on_send_pressed"]
+[connection signal="pressed" from="VBoxContainer/Join" to="." method="_on_join_pressed"]
