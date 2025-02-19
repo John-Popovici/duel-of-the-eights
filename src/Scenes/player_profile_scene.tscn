@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://e0m2u55h4xmd"]
+[gd_scene load_steps=7 format=3 uid="uid://ym5wu1wk8bh4"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerProfile/player_profile_scene.gd" id="1_6ta5e"]
 [ext_resource type="Script" path="res://Scripts/camera_toggle_controller.gd" id="2_iiqs7"]
