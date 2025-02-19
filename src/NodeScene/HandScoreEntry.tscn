@@ -10,11 +10,13 @@ theme = ExtResource("1_0v2ve")
 
 [node name="HandName" type="Label" parent="."]
 layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("1_0v2ve")
 text = "Hand Name:"
 
 [node name="Select" type="Button" parent="." groups=["ConfirmButtons"]]
 layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("1_0v2ve")
 text = "Select"
 script = ExtResource("1_2rqcn")
