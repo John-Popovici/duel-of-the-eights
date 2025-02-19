@@ -5,7 +5,7 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t5ruj"]
 
-[node name="Main" type="Node3D"]
+[node name="Mains" type="Node3D"]
 script = ExtResource("1_mol3t")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -61,6 +61,10 @@ alignment = 1
 layout_mode = 2
 text = "Send Message"
 
+[node name="Host" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Host"
+
 [node name="Join" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Join Chat Room"
@@ -71,4 +75,5 @@ placeholder_text = "Username"
 alignment = 1
 
 [connection signal="pressed" from="VBoxContainer/Send" to="." method="_on_send_pressed"]
+[connection signal="pressed" from="VBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="VBoxContainer/Join" to="." method="_on_join_pressed"]
