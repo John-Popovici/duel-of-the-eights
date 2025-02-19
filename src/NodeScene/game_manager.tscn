@@ -547,13 +547,27 @@ offset_bottom = 568.0
 theme = ExtResource("4_h4ers")
 text = "Opponent Dice Rolls:"
 
+[node name="GreyOutOverlay" type="ColorRect" parent="GameUI/OpponentDiceBase"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 538.0
+offset_right = 500.0
+offset_bottom = 608.0
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 0, 0, 0.266667)
+
 [node name="OpponentDicePanel" type="PanelContainer" parent="GameUI/OpponentDiceBase"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = 532.0
-offset_right = 568.0
+offset_top = 538.0
+offset_right = 500.0
 offset_bottom = 608.0
 grow_vertical = 0
 theme = ExtResource("4_h4ers")
