@@ -17,27 +17,25 @@ func _ready() -> void:
 		game_manager = game_managers[0]
 		player = game_manager.myPlayer
 		scoreCalc = game_manager.scoreCalc
-		connect("mouse_entered", _on_focus_entered)
-		connect("mouse_exited", _on_focus_exited)
+		connect("mouse_entered", _on_mouse_entered)
+		connect("mouse_exited", _reset)
 	pass # Replace with function body.
 
 func playHand() -> void:
 	plays += 1
-	_on_focus_exited()
-	tempdisableText()
+	_reset()
+	textChangeable = false
+	prevState = ""
 	if plays >= maxPlays:
 		self.disabled = true
 		disable = true
 	toCall.call(settings, self)
+	await get_tree().create_timer(1.0).timeout
+	prevState = self.text
+	textChangeable = true
 	
 
 var textChangeable = true
-
-func tempdisableText():
-	textChangeable = false
-	prevState = ""
-	await get_tree().create_timer(1.0).timeout
-	textChangeable = true
 
 func setText(_text: String):
 	if textChangeable:
@@ -61,17 +59,17 @@ func _process(_delta: float) -> void:
 
 var prevState = "Select"
 
-func _on_focus_entered() -> void:
-	Debugger.log("Hover started","Testing")
-	if player == null or self.disabled:
-		Debugger.log("Returned on Hover","Testing")
+func _on_mouse_entered() -> void:
+	#Debugger.log("Hover started","Testing")
+	if player == null or self.disabled or !textChangeable:
+		#Debugger.log("Returned on Hover","Testing")
 		return
 	var rolls = player.getRolls()
-	Debugger.log(str(rolls),"Testing")
+	Debugger.log(str(rolls))
 	prevState = self.text
-	Debugger.log("Prev State: " + prevState,"Testing")
+	Debugger.log("Prev State: " + prevState)
 	var handScore = scoreCalc.calculate_hand_score(settings,rolls)
-	Debugger.log("HandScore: " + str(handScore),"Testing")
+	Debugger.log("HandScore: " + str(handScore))
 	if !(typeof(scoreCalc.calculate_hand_score(settings,rolls)) == typeof(0)):
 		handScore = handScore[0]
 	if prevState == "Select":
@@ -81,10 +79,10 @@ func _on_focus_entered() -> void:
 	pass # Replace with function body.
 
 
-func _on_focus_exited() -> void:
-	Debugger.log("Hover Exited","Testing")
+func _reset() -> void:
+	#Debugger.log("Resetting","Testing")
 	if player == null or self.disabled or prevState == "":
 		return
 	setText(str(prevState))
-	prevState = "Select"
+	#prevState = "Select"
 	pass # Replace with function body.
