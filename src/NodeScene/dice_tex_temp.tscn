@@ -14,3 +14,5 @@ stretch_mode = 4
 script = ExtResource("2_7clxd")
 
 [connection signal="gui_input" from="." to="." method="_on_texture_rect_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_hover"]
+[connection signal="mouse_exited" from="." to="." method="_on_unhover"]
