@@ -89,7 +89,7 @@ func readRolls() -> void:
 	diceContainer.moveDiceInLine()
 	emit_signal("rollsReadandWaiting",true)
 	#Communicate to other player
-	print("Player Manger: Host: ", hostDevice, ", Rolls: ", rolls)
+	Debugger.log(str("Player Manger: Host: ", hostDevice, ", Rolls: ", rolls))
 	if len(networkManagers) ==1:
 		network_manager.broadcast_game_state("roll_values", { "host": hostDevice, "rolls": rolls })
 		

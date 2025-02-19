@@ -55,8 +55,7 @@ func _on_start_game_pressed():
 	start_game_button.disabled = true
 	home_button.disabled = true
 	advanced_settings_button.disabled = true
-	GlobalSettings.show_toast("Win Condition: " + str(WinCondition.get_selected_id()))
-	print("Win Condition: " + str(WinCondition.get_selected_id()))
+	Debugger.log("Win Condition: " + str(WinCondition.get_selected_id()))
 	if WinCondition.get_selected_id() == 0:
 		bluff_active = false
 	game_settings = {
@@ -83,7 +82,7 @@ func _on_start_game_pressed():
 	self.visible = false
 
 func _win_condition_toggled(ID):
-	print("Win Condition Toggled: ", int(ID))
+	Debugger.log(str("Win Condition Toggled: ", int(ID)))
 	var win_cond_num = int(ID)
 	match win_cond_num:
 		0: #score
@@ -91,11 +90,11 @@ func _win_condition_toggled(ID):
 			win_cond = "Score"
 			bluff_active = false
 			BluffButton.set_pressed(false)
-			print("Score Condition")
+			Debugger.log("Score Condition")
 		1: #healthpoints
 			HealthPointsBox.visible = true
 			win_cond = "Health"
-			print("Health Condition")
+			Debugger.log("Health Condition")
 
 func _on_advanced_settings_pressed() -> void:
 	dice_count = int(DiceCountRef.text)
@@ -139,11 +138,11 @@ func _populate_advanced_settings():
 func save_preset():
 	var preset_name = preset_name_input.text.strip_edges()
 	preset_name_input.text = ""
-	print("Preset Name from input: ", preset_name)
+	Debugger.log(str("Preset Name from input: ", preset_name))
 	if preset_name == "":
-		print("Please enter a name for the preset.")
+		Debugger.log("Please enter a name for the preset.")
 		return
-	print("Storing Settings into Variables")
+	Debugger.log("Storing Settings into Variables")
 	game_settings = {
 		"player_names": [player1Name.text, player2Name.text],
 		"win_condition": WinCondition.get_selected_id(),
@@ -173,13 +172,13 @@ func save_preset():
 	}
 
 	var file_path = presets_folder + "/" + preset_name + ".json"
-	print("Writing to: ", file_path)
+	Debugger.log(str("Writing to: ", file_path))
 	var file = FileAccess.open(file_path, FileAccess.WRITE)
 	var json = JSON.new()
 	var json_string = json.stringify(preset_data)
 	file.store_string(json_string)
 	file.close()
-	print("Preset saved:", preset_name)
+	Debugger.log(str("Preset saved:", preset_name))
 	load_preset_buttons()  # Refresh preset buttons
 
 # Load existing presets and populate buttons
@@ -214,7 +213,7 @@ func _on_preset_selected(preset_name: String):
 	hand_settings_vals = json.data.get("hand_settings", {})
 	hand_settings_saved = true
 	hand_settings_loaded = false
-	print(preset_data)
+	Debugger.log(str(preset_data))
 	# Update UI fields based on the loaded settings
 	update_ui_fields(game_settings, hand_settings_vals)
 
@@ -237,7 +236,7 @@ func update_ui_fields(game_settings: Dictionary, hand_settings: Dictionary):
 
 	# Update any hand settings-related fields if necessary
 	# (for example, list of hand rules or settings if part of the UI)
-	print("UI fields updated with preset:", game_settings, hand_settings)
+	Debugger.log(str("UI fields updated with preset:", game_settings, hand_settings))
 
 func _create_label(_text: String) -> Label:
 	var label = Label.new()
@@ -343,7 +342,6 @@ func save_advanced_settings():
 		}
 	hand_settings_saved = true
 	_on_return_to_settings_pressed()
-	#print("Hand settings saved:", hand_settings)
 
 func _on_return_to_settings_pressed() -> void:
 	# Clear current advanced settings nodes
@@ -393,31 +391,28 @@ func _on_player_name_modified(new_name) -> void:
 	
 
 func _on_roll_visible_toggled(_state) -> void:
-	print("Was ", show_opponent_rolls)
 	if show_opponent_rolls:
 		show_opponent_rolls = false
 	else:
 		show_opponent_rolls = true
-	print("Is ", show_opponent_rolls)
+	Debugger.log(str("Is ", show_opponent_rolls))
 
 func _on_timed_round_toggled(_state) -> void:
-	print("Timer Was ", timed_rounds)
 	if timed_rounds:
 		timed_rounds = false
 		round_time_box.visible = false
 	else:
 		timed_rounds = true
 		round_time_box.visible = true
-	print("Timer Is ", timed_rounds)
+	Debugger.log(str("Timer Is ", timed_rounds))
 
 func _on_bluff_toggled(_state) -> void:
-	print("Bluff Was ", bluff_active)
 	bluff_active = _state
-	print("Bluff Is ", bluff_active)
+	Debugger.log(str("Bluff Is ", bluff_active))
 
 func _dice_values_changed(_state) -> void:
 	if hand_settings_saved:
-		print("Hand Settings lost")
+		Debugger.log("Hand Settings lost")
 		hand_settings_saved = false
 	#code to indicate
 
@@ -438,7 +433,7 @@ func collectInfo() -> void:
 
 func _copy_hash_to_clipboard():
 	DisplayServer.clipboard_set(NetworkManager.getHashIP()+NetworkManager.getHashPort())
-	print("Connect code copied to clipboard: ", DisplayServer.clipboard_get())
+	Debugger.log(str("Connect code copied to clipboard: ", DisplayServer.clipboard_get()))
 
 func _allow_game_start(_client_name: String) -> void:
 	copy_connect_code_button.visible = false

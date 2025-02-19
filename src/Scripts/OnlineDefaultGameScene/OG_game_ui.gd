@@ -30,6 +30,8 @@ extends CanvasLayer
 @onready var sort_asc_button = get_node("MyPlayerDiceBase/RollSorter/ButtonHolder/Asc")
 @onready var sort_desc_button = get_node("MyPlayerDiceBase/RollSorter/ButtonHolder/Desc")
 @onready var sort_freq_button = get_node("MyPlayerDiceBase/RollSorter/ButtonHolder/Freq")
+@onready var chatUI = get_node("ChatUI")
+var chatEnabled = false
 
 var myPlayerName: String
 var myPlayerDice
@@ -62,6 +64,10 @@ func setup_game_ui(game_settings: Dictionary, _isHost: bool):
 	else:
 		hide_countdown_panel()
 	
+	#if !GlobalSettings.mute_chat:
+	chatEnabled = true
+	show_chat_ui()
+	
 	show_game_state_info()
 	show_player_stats_panel()
 	show_my_player_rolls()
@@ -86,7 +92,7 @@ func setup_game_ui(game_settings: Dictionary, _isHost: bool):
 	var round_label = Label.new()
 	round_label.name = "RoundLabel"
 	game_state_info.add_child(round_label)
-	print("Label made on Host: ", isHost)
+	Debugger.log(str("Label made on Host: ", isHost))
 	var roll_label = Label.new()
 	roll_label.name = "RollLabel"
 	game_state_info.add_child(roll_label)
@@ -225,7 +231,7 @@ func sort_by_frequency(_dice: Array[RigidBody3D]) -> Array[RigidBody3D]:
 			frequency_dict[faceValue] += 1
 		else:
 			frequency_dict[faceValue] = 1
-	print(frequency_dict)
+	Debugger.log(str(frequency_dict))
 	# Sort the array by frequency (descending), and by value (ascending) if frequencies are equal
 	_dice.sort_custom(_compare_by_frequency)
 
@@ -285,8 +291,8 @@ func blank_my_player_dice_display():
 # Update game state info
 func update_round_info(current_round: int, _total_rounds: int = total_rounds):
 	var round_label = game_state_info.get_node("RoundLabel") as Label
-	print(game_state_info.get_children())
-	print("Round Label ID: ",round_label, " on Host: ", isHost)
+	Debugger.log(str(game_state_info.get_children()))
+	Debugger.log(str("Round Label ID: ",round_label, " on Host: ", isHost))
 	round_label.text = "Round: %d / %d" % [current_round, _total_rounds]
 
 func update_roll_info(current_roll: int, total_rolls: int = total_round_rolls):
@@ -320,6 +326,9 @@ func show_end_of_game_screen(resultText: String, player_stats: Dictionary, oppon
 	end_of_game_screen.visible = true
 	EscBackground.visible = true
 	escScreenAllowed = false
+	
+	hide_chat_ui()
+	
 	winner_label.text = resultText
 	
 	var game_manager = get_parent()
@@ -343,6 +352,7 @@ func hide_end_of_game_screen():
 	end_of_game_screen.visible = false
 	EscBackground.visible = false
 	escScreenAllowed = true
+	show_chat_ui()
 
 func hide_all_ui():
 	hide_opponent_rolls()
@@ -354,6 +364,7 @@ func hide_all_ui():
 	hide_pause_menu()
 	hide_camera_options()
 	hide_countdown_panel()
+	hide_chat_ui()
 
 func hide_camera_options() -> void:
 	get_parent().get_node("CameraController").set_options_visible(false)
@@ -369,6 +380,15 @@ func show_pause_menu():
 	if escScreenAllowed:
 		PausePanel.visible = true
 		EscBackground.visible = true
+
+func hide_chat_ui():
+	chatUI.visible = false
+
+func show_chat_ui():
+	if chatEnabled:
+		chatUI.visible = true
+	else:
+		chatUI.visible = false
 
 func toggle_pause_menu():
 	if PausePanel.visible:
@@ -480,18 +500,40 @@ func _ready() -> void:
 
 func change_sfx_vol(_val: float)-> void:
 	AudioManager.set_sfx_volume(_val/100)
-	print("Vol set to: ",_val)
+	Debugger.log(str("Vol set to: ",_val))
 
 func change_music_vol(_val: float)-> void:
 	AudioManager.set_music_volume(_val/100)
-	print("Vol set to: ",_val)
+	Debugger.log(str("Vol set to: ",_val))
 	
 func change_ambient_vol(_val: float)-> void:
 	AudioManager.set_ambience_volume(_val/100)
-	print("Vol set to: ",_val)
+	Debugger.log(str("Vol set to: ",_val))
+
+
+var warning_threshold = 0.4
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass
 	if continueCountdown: #loop break/start var
 		countdownBar.set_value(ceil(timer.get_time_left()/startTime*100))
+		if timer.time_left <= startTime * warning_threshold:
+			play_heartbeat()
+		else:
+			stop_heartbeat()
+	else:
+		stop_heartbeat()
+
+var heartbeat_active = false
+
+func play_heartbeat():
+	if heartbeat_active:
+		return
+	heartbeat_active = true
+	while heartbeat_active:
+		AudioManager.play_sfx("Heartbeat")
+		await get_tree().create_timer(4).timeout
+
+
+func stop_heartbeat():
+	heartbeat_active = false

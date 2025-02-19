@@ -72,12 +72,7 @@ extends Node
 	12 : d12Settings
 }
 
-@export var debug_mode: bool = false
-func show_toast(message: String) -> void:
-	if !debug_mode:
-		return
-	print("Sending toast message P1: ", message)
-	ToastLayer.set_message(message)
+@export var debug_mode: bool = true
 	
 # Load existing profile settings
 func load_profile_settings():
@@ -87,21 +82,21 @@ func load_profile_settings():
 		var json_data = JSON.parse_string(content)
 		
 		if json_data == null:
-			print("Error parsing JSON")
+			Debugger.log_error("Error parsing JSON")
 			return
 			
 		for key in json_data:
-			print("loading ", key, ": ", json_data[key])
+			Debugger.log(str("loading ", key, ": ", json_data[key]))
 			self.profile_settings[key] = json_data[key]
 			
 	else:
-		print("no data to load")
+		Debugger.log_warning("no data to load")
 		
 	# load profile pic
-	print("checking for profile picture")
+	Debugger.log("checking for profile picture")
 	var save_path = presets_folder + "/Images/profile_pic.png"
 	if FileAccess.file_exists(save_path):
-		print("profile picture found")
+		Debugger.log("profile picture found")
 		self.profile_pic = self.load_image_texture(save_path)
 		
 func load_image_texture(path: String) -> Texture:
@@ -134,5 +129,7 @@ func _ready() -> void:
 				allDiceTextures[texture_name] = load(texture_path)
 			file_name = dir.get_next()
 		dir.list_dir_end()
-	print("Dice Tex: ",allDiceTextures)
+	#Debugger.log(str("Dice Tex: ",allDiceTextures))
 	load_profile_settings()
+	
+	Debugger.debug_enabled = true

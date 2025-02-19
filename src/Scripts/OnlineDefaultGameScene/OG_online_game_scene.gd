@@ -10,7 +10,7 @@ var player2_name: String
 
 
 func load_game_settings() -> void:
-	print("Start Game")
+	Debugger.log("Start Game")
 	#GameManager.loadGameSetup()
 	GameSettings.collectInfo()
 	
@@ -19,7 +19,7 @@ func _on_settings_ready(game_settings,hand_settings) -> void:
 	GameManager._on_settings_ready(game_settings,hand_settings)
 	GameSettings.visible = false
 	if network_manager.getIsHost():
-		print("Reached host send")
+		Debugger.log("Reached host send")
 		network_manager.send_game_settings(game_settings,hand_settings)
 
 func finish_game(winner, myPlayerFinalStats, OpponentFinalStats) -> void:

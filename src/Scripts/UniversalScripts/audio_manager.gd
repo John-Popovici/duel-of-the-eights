@@ -14,7 +14,10 @@ var sfx_library = {
 	"lose_sound": preload("res://Assets/Audio/SFX/explosion_02.wav"),
 	"switch_on": preload("res://Assets/Audio/SFX/switch_on.wav"),
 	"switch_off": preload("res://Assets/Audio/SFX/switch_on.wav"),
-	"slider_ended": preload("res://Assets/Audio/SFX/slider_ended.wav")
+	"slider_ended": preload("res://Assets/Audio/SFX/slider_ended.wav"),
+	"Raise": preload("res://Assets/Audio/SFX/Raise.mp3"),
+	"Fold": preload("res://Assets/Audio/SFX/Fold.mp3"),
+	"Heartbeat": preload("res://Assets/Audio/SFX/heartbeat-3s.mp3")
 }
 
 var dice_sfx_library = {
@@ -121,19 +124,19 @@ func on_slider_ended(value_changed)->void:
 func play_music(track_name: String, loop: bool = true):
 	if track_name in music_library:
 		music_player.stream = music_library[track_name]
-		print("Music Audio Playing: ", track_name)
+		Debugger.log(str("Music Audio Playing: ", track_name))
 		music_player.play()
 		#music_player.loop = loop
 	else:
-		push_error("Music track not found: " + track_name)
+		Debugger.log_error(str("Music track not found: " + track_name))
 
 func play_ambience(ambience_name: String):
 	if ambience_name in ambience_library:
 		ambience_player.stream = ambience_library[ambience_name]
-		print("Ambience Audio Playing: ", ambience_name)
+		Debugger.log(str("Ambience Audio Playing: ", ambience_name))
 		ambience_player.play()
 	else:
-		push_error("Ambience not found: " + ambience_name)
+		Debugger.log_error(str("Ambience not found: " + ambience_name))
 
 func stop_music():
 	music_player.stop()
@@ -141,16 +144,16 @@ func stop_music():
 func play_sfx(sfx_name: String):
 	if sfx_name in sfx_library:
 		sfx_player.stream = sfx_library[sfx_name]
-		print("SFX Audio Playing: ", sfx_name)
+		Debugger.log(str("SFX Audio Playing: ", sfx_name))
 		sfx_player.play()
 	else:
-		push_error("SFX not found: " + sfx_name)
+		Debugger.log_error(str("SFX not found: " + sfx_name))
 
 func play_dice_sfx():
 	#Change to use collisions to emit sound or additive
 	var dice_sfx_keys = dice_sfx_library.keys()  # Get the list of dice sound keys
 	var random_key = dice_sfx_keys[randi() % dice_sfx_keys.size()]  # Pick a random key
-	print("Dice Audio Playing: ", random_key)
+	Debugger.log(str("Dice Audio Playing: ", random_key))
 	sfx_player.stream = dice_sfx_library[random_key]  # Assign the audio stream
 	sfx_player.play()  # Play the sound
 

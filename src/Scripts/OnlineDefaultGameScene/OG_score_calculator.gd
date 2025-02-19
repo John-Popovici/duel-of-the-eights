@@ -30,7 +30,7 @@ func calculate_hand_score(hand_dict: Dictionary, dice_rolls: Array) -> Array[int
 		"Chance":
 			return [_calculate_chance_score(dice_rolls, scoring_rule),0]
 		_:
-			print("Unknown hand type:", hand_type)
+			Debugger.log_error(str("Unknown hand type:", hand_type))
 			return [0,0]
 
 func setupBonus(_bonusHand: Dictionary) -> void:
