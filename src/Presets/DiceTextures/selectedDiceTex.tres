@@ -1,5 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3]
-
-[resource]
-render_priority = 3
-diffuse_mode = 3
