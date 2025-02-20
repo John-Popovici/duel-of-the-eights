@@ -64,8 +64,7 @@ func setup_game_ui(game_settings: Dictionary, _isHost: bool):
 	else:
 		hide_countdown_panel()
 	
-	#if !GlobalSettings.mute_chat:
-	chatEnabled = true
+	chatEnabled = GlobalSettings.profile_settings["chat_enabled"]
 	show_chat_ui()
 	
 	show_game_state_info()

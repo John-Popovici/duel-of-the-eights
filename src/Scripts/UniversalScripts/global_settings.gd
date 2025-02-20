@@ -28,6 +28,7 @@ extends Node
 	"player_name": "New Player",
 	"invert_selection_method": false,
 	"align_rolled_dice": false,
+	"chat_enabled": true,
 	"sfx_volume": null,
 	"music_volume": null,
 	"ambience_volume": null
