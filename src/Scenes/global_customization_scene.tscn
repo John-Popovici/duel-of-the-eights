@@ -178,6 +178,7 @@ script = ExtResource("1_2co8p")
 script = ExtResource("2_61s26")
 
 [node name="BackPanel" type="PanelContainer" parent="CustomizationUI"]
+texture_filter = 3
 offset_left = 51.0
 offset_top = 52.0
 offset_right = 834.0
@@ -187,24 +188,30 @@ size_flags_vertical = 3
 theme = ExtResource("3_jyaf7")
 
 [node name="Sections" type="VBoxContainer" parent="CustomizationUI/BackPanel"]
+texture_filter = 3
 layout_mode = 2
 
 [node name="TabsContainer" type="HBoxContainer" parent="CustomizationUI/BackPanel/Sections"]
+texture_filter = 3
 layout_mode = 2
 
 [node name="Label" type="Label" parent="CustomizationUI/BackPanel/Sections/TabsContainer"]
+texture_filter = 3
 layout_mode = 2
 text = "Customization Panel"
 
 [node name="Dice" type="Button" parent="CustomizationUI/BackPanel/Sections/TabsContainer" groups=["ConfirmButtons"]]
+texture_filter = 3
 layout_mode = 2
 text = "Dice Customization"
 
 [node name="Music" type="Button" parent="CustomizationUI/BackPanel/Sections/TabsContainer" groups=["ConfirmButtons"]]
+texture_filter = 3
 layout_mode = 2
 text = "Music Customization"
 
 [node name="Theme" type="Button" parent="CustomizationUI/BackPanel/Sections/TabsContainer" groups=["ConfirmButtons"]]
+texture_filter = 3
 layout_mode = 2
 text = "Theme Customization"
 
@@ -281,26 +288,32 @@ size_flags_horizontal = 3
 text = "Blank"
 
 [node name="ThemeCustomization" type="VBoxContainer" parent="CustomizationUI/BackPanel/Sections"]
+texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Choose Background Theme" type="Label" parent="CustomizationUI/BackPanel/Sections/ThemeCustomization"]
+texture_filter = 3
 layout_mode = 2
 text = "Dice Main Texture"
 
 [node name="Themes" type="HBoxContainer" parent="CustomizationUI/BackPanel/Sections/ThemeCustomization"]
+texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Tavern" parent="CustomizationUI/BackPanel/Sections/ThemeCustomization/Themes" instance=ExtResource("4_aknih")]
+texture_filter = 3
 layout_mode = 2
 text = "Tavern"
 
 [node name="Restaurant" parent="CustomizationUI/BackPanel/Sections/ThemeCustomization/Themes" instance=ExtResource("4_aknih")]
+texture_filter = 3
 layout_mode = 2
 text = "Restaurant"
 
 [node name="BackToHomeButton" type="Button" parent="CustomizationUI/BackPanel/Sections" groups=["BackButtons"]]
+texture_filter = 3
 layout_mode = 2
 text = "Back To Home"
 
@@ -461,6 +474,7 @@ script = ExtResource("13_c1i8e")
 transform = Transform3D(0.707107, 2.10734e-08, 0.707107, -2.98023e-08, 1, 3.17637e-21, -0.707107, -2.10734e-08, 0.707107, 9.53674e-07, -2, 9.53674e-07)
 
 [node name="CameraPosPanel" type="PanelContainer" parent="DiceDisplay/CameraController"]
+texture_filter = 3
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -473,19 +487,23 @@ grow_vertical = 0
 theme = ExtResource("3_jyaf7")
 
 [node name="ButtonHolder" type="VBoxContainer" parent="DiceDisplay/CameraController/CameraPosPanel"]
+texture_filter = 3
 layout_mode = 2
 
 [node name="Angled" type="Button" parent="DiceDisplay/CameraController/CameraPosPanel/ButtonHolder"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Angled"
 
 [node name="Top Down" type="Button" parent="DiceDisplay/CameraController/CameraPosPanel/ButtonHolder"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Top Down"
 
 [node name="Cinematic" type="Button" parent="DiceDisplay/CameraController/CameraPosPanel/ButtonHolder"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Cinematic"

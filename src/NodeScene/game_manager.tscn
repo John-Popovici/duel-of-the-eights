@@ -532,6 +532,7 @@ libraries = {
 script = ExtResource("11_0d724")
 
 [node name="OpponentDiceBase" type="Control" parent="GameUI"]
+texture_filter = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -539,6 +540,7 @@ offset_bottom = 40.0
 theme = ExtResource("4_h4ers")
 
 [node name="OpponentDiceLabel" type="Label" parent="GameUI/OpponentDiceBase"]
+texture_filter = 3
 layout_mode = 0
 offset_left = 3.0
 offset_top = 544.0
@@ -549,6 +551,7 @@ text = "Opponent Dice Rolls:"
 
 [node name="GreyOutOverlay" type="ColorRect" parent="GameUI/OpponentDiceBase"]
 z_index = 1
+texture_filter = 3
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -562,6 +565,7 @@ size_flags_vertical = 3
 color = Color(0, 0, 0, 0.266667)
 
 [node name="OpponentDicePanel" type="PanelContainer" parent="GameUI/OpponentDiceBase"]
+texture_filter = 3
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -573,6 +577,7 @@ grow_vertical = 0
 theme = ExtResource("4_h4ers")
 
 [node name="OpponentDiceDisplay" type="HBoxContainer" parent="GameUI/OpponentDiceBase/OpponentDicePanel"]
+texture_filter = 3
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
@@ -580,6 +585,7 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="MyPlayerDiceBase" type="Control" parent="GameUI"]
+texture_filter = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -587,6 +593,7 @@ offset_bottom = 40.0
 theme = ExtResource("4_h4ers")
 
 [node name="MyPlayerDiceLabel" type="Label" parent="GameUI/MyPlayerDiceBase"]
+texture_filter = 3
 layout_mode = 0
 offset_left = 1034.0
 offset_top = 543.0
@@ -597,6 +604,7 @@ text = "My Dice Rolls:"
 horizontal_alignment = 2
 
 [node name="MyPlayerDicePanel" type="PanelContainer" parent="GameUI/MyPlayerDiceBase"]
+texture_filter = 3
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -612,6 +620,7 @@ grow_vertical = 0
 theme = ExtResource("4_h4ers")
 
 [node name="MyPlayerDiceDisplay" type="HBoxContainer" parent="GameUI/MyPlayerDiceBase/MyPlayerDicePanel"]
+texture_filter = 3
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
@@ -619,6 +628,7 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="RollSorter" type="PanelContainer" parent="GameUI/MyPlayerDiceBase"]
+texture_filter = 3
 layout_mode = 0
 offset_left = 584.0
 offset_top = 533.0
@@ -626,57 +636,69 @@ offset_right = 889.0
 offset_bottom = 568.0
 
 [node name="ButtonHolder" type="HBoxContainer" parent="GameUI/MyPlayerDiceBase/RollSorter"]
+texture_filter = 3
 layout_mode = 2
 
 [node name="Asc" type="Button" parent="GameUI/MyPlayerDiceBase/RollSorter/ButtonHolder"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_eudyq")
 text = "Asc"
 
 [node name="Desc" type="Button" parent="GameUI/MyPlayerDiceBase/RollSorter/ButtonHolder"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_eudyq")
 text = "Desc"
 
 [node name="Freq" type="Button" parent="GameUI/MyPlayerDiceBase/RollSorter/ButtonHolder"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_eudyq")
 text = "Freq"
 
 [node name="GameStatePanel" type="PanelContainer" parent="GameUI"]
+texture_filter = 3
 offset_top = 390.0
 offset_right = 199.0
 offset_bottom = 430.0
 theme = ExtResource("4_h4ers")
 
 [node name="GameStateInfo" type="HBoxContainer" parent="GameUI/GameStatePanel"]
+texture_filter = 3
 layout_mode = 2
 alignment = 1
 
 [node name="PlayerStatsPanel" type="VBoxContainer" parent="GameUI"]
+texture_filter = 3
 offset_right = 199.0
 offset_bottom = 385.0
 
 [node name="MyPlayerPanel" type="PanelContainer" parent="GameUI/PlayerStatsPanel"]
+texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("4_h4ers")
 
 [node name="MyPlayerStatBox" type="VBoxContainer" parent="GameUI/PlayerStatsPanel/MyPlayerPanel"]
+texture_filter = 3
 layout_mode = 2
 
 [node name="EnemyPlayerPanel" type="PanelContainer" parent="GameUI/PlayerStatsPanel"]
+texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("4_h4ers")
 
 [node name="EnemyPlayerStatBox" type="VBoxContainer" parent="GameUI/PlayerStatsPanel/EnemyPlayerPanel"]
+texture_filter = 3
 layout_mode = 2
 
 [node name="CountdownPanel" type="PanelContainer" parent="GameUI"]
+texture_filter = 3
 offset_left = 954.0
 offset_top = 439.0
 offset_right = 1152.0
@@ -684,6 +706,7 @@ offset_bottom = 479.0
 theme = ExtResource("4_h4ers")
 
 [node name="ProgressBar" type="ProgressBar" parent="GameUI/CountdownPanel"]
+texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 1
 step = 1.0
@@ -694,6 +717,7 @@ fill_mode = 1
 wait_time = 20.0
 
 [node name="ChatUI" type="Control" parent="GameUI"]
+texture_filter = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -702,6 +726,7 @@ theme = ExtResource("4_eudyq")
 script = ExtResource("14_rpv4e")
 
 [node name="ChatButton" type="TextureButton" parent="GameUI/ChatUI"]
+texture_filter = 3
 layout_mode = 0
 offset_left = 522.0
 offset_top = 533.0

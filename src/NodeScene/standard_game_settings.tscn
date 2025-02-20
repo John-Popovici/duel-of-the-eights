@@ -12,6 +12,7 @@
 script = ExtResource("1_rq1yi")
 
 [node name="UIBox" type="PanelContainer" parent="."]
+texture_filter = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -29,29 +30,35 @@ size_flags_vertical = 4
 theme = ExtResource("2_hp12w")
 
 [node name="SimplePresetsBox" type="VBoxContainer" parent="UIBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_hp12w")
 
 [node name="TitleBox" type="CenterContainer" parent="UIBox/SimplePresetsBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_hp12w")
 
 [node name="Label" type="Label" parent="UIBox/SimplePresetsBox/TitleBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_hp12w")
 text = "Select Game Dice"
 
 [node name="PresetsBox" type="CenterContainer" parent="UIBox/SimplePresetsBox"]
+texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_hp12w")
 
 [node name="PresetsButtonsContainer" type="GridContainer" parent="UIBox/SimplePresetsBox/PresetsBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_hp12w")
 columns = 4
 
 [node name="d4Tex" type="TextureRect" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_hp12w")
 texture = ExtResource("4_k35ff")
@@ -59,6 +66,7 @@ expand_mode = 5
 stretch_mode = 5
 
 [node name="d6Tex" type="TextureRect" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_hp12w")
 texture = ExtResource("5_li0ar")
@@ -66,6 +74,7 @@ expand_mode = 5
 stretch_mode = 5
 
 [node name="d8Tex" type="TextureRect" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_hp12w")
 texture = ExtResource("6_sw2p8")
@@ -73,6 +82,7 @@ expand_mode = 5
 stretch_mode = 5
 
 [node name="d12Tex" type="TextureRect" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_hp12w")
 texture = ExtResource("7_2dk0i")
@@ -80,48 +90,58 @@ expand_mode = 5
 stretch_mode = 5
 
 [node name="d4" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer" instance=ExtResource("4_yjqjv")]
+texture_filter = 3
 layout_mode = 2
 text = "4-Sided"
 
 [node name="d6" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer" instance=ExtResource("4_yjqjv")]
+texture_filter = 3
 layout_mode = 2
 text = "6-Sided"
 
 [node name="d8" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer" instance=ExtResource("4_yjqjv")]
+texture_filter = 3
 layout_mode = 2
 text = "8-Sided"
 
 [node name="d12" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer" instance=ExtResource("4_yjqjv")]
+texture_filter = 3
 layout_mode = 2
 text = "12-Sided"
 
 [node name="ControlButtonsBox" type="CenterContainer" parent="UIBox/SimplePresetsBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_hp12w")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UIBox/SimplePresetsBox/ControlButtonsBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_hp12w")
 
 [node name="ConnectCode" type="Button" parent="UIBox/SimplePresetsBox/ControlButtonsBox/HBoxContainer" groups=["ConfirmButtons"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_hp12w")
 text = "Copy Connect Code"
 
 [node name="StartGame" type="Button" parent="UIBox/SimplePresetsBox/ControlButtonsBox/HBoxContainer" groups=["ConfirmButtons"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_hp12w")
 text = "Start Game"
 
 [node name="AdvancedSettings" type="Button" parent="UIBox/SimplePresetsBox/ControlButtonsBox/HBoxContainer" groups=["ConfirmButtons"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_hp12w")
 text = "Advanced Settings"
 
 [node name="BacktoHome" type="Button" parent="UIBox/SimplePresetsBox/ControlButtonsBox/HBoxContainer" groups=["BackButtons"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_hp12w")

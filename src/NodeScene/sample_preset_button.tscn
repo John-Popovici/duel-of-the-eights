@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_PresetButton.gd" id="1_yah4c"]
 
 [node name="SamplePreset" type="Button" groups=["ConfirmButtons"]]
+texture_filter = 3
 theme = ExtResource("1_vyrx6")
 text = "Yahtzee!"
 script = ExtResource("1_yah4c")

@@ -13,6 +13,7 @@ script = ExtResource("1_mib88")
 presets_folder = "res://Presets/Blitz"
 
 [node name="UIBox" type="PanelContainer" parent="."]
+texture_filter = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -30,28 +31,34 @@ size_flags_vertical = 4
 theme = ExtResource("2_ssdl2")
 
 [node name="SimplePresetsBox" type="VBoxContainer" parent="UIBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_ssdl2")
 
 [node name="TitleBox" type="CenterContainer" parent="UIBox/SimplePresetsBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_ssdl2")
 
 [node name="Label" type="Label" parent="UIBox/SimplePresetsBox/TitleBox"]
+texture_filter = 3
 layout_mode = 2
 text = "Select Game Dice"
 
 [node name="PresetsBox" type="CenterContainer" parent="UIBox/SimplePresetsBox"]
+texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_ssdl2")
 
 [node name="PresetsButtonsContainer" type="GridContainer" parent="UIBox/SimplePresetsBox/PresetsBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_ssdl2")
 columns = 4
 
 [node name="d4Tex2" type="TextureRect" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_ssdl2")
 texture = ExtResource("4_i2dqn")
@@ -59,6 +66,7 @@ expand_mode = 5
 stretch_mode = 5
 
 [node name="d6Tex2" type="TextureRect" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_ssdl2")
 texture = ExtResource("5_awl1b")
@@ -66,57 +74,69 @@ expand_mode = 5
 stretch_mode = 5
 
 [node name="d8Tex2" type="TextureRect" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer"]
+texture_filter = 3
 layout_mode = 2
 texture = ExtResource("6_rnvba")
 expand_mode = 5
 stretch_mode = 5
 
 [node name="d12Tex2" type="TextureRect" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer"]
+texture_filter = 3
 layout_mode = 2
 texture = ExtResource("7_meoys")
 expand_mode = 5
 stretch_mode = 5
 
 [node name="d4" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer" instance=ExtResource("4_ikotc")]
+texture_filter = 3
 layout_mode = 2
 text = "4-Sided"
 
 [node name="d6" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer" instance=ExtResource("4_ikotc")]
+texture_filter = 3
 layout_mode = 2
 text = "6-Sided"
 
 [node name="d8" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer" instance=ExtResource("4_ikotc")]
+texture_filter = 3
 layout_mode = 2
 text = "8-Sided"
 
 [node name="d12" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer" instance=ExtResource("4_ikotc")]
+texture_filter = 3
 layout_mode = 2
 text = "12-Sided"
 
 [node name="ControlButtonsBox" type="CenterContainer" parent="UIBox/SimplePresetsBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_ssdl2")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UIBox/SimplePresetsBox/ControlButtonsBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_ssdl2")
 
 [node name="ConnectCode" type="Button" parent="UIBox/SimplePresetsBox/ControlButtonsBox/HBoxContainer" groups=["ConfirmButtons"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Copy Connect Code"
 
 [node name="StartGame" type="Button" parent="UIBox/SimplePresetsBox/ControlButtonsBox/HBoxContainer" groups=["ConfirmButtons"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Start Game"
 
 [node name="AdvancedSettings" type="Button" parent="UIBox/SimplePresetsBox/ControlButtonsBox/HBoxContainer" groups=["ConfirmButtons"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Advanced Settings"
 
 [node name="BacktoHome" type="Button" parent="UIBox/SimplePresetsBox/ControlButtonsBox/HBoxContainer" groups=["BackButtons"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Back to Home"

@@ -12,6 +12,7 @@ layer = 3
 script = ExtResource("2_b1k17")
 
 [node name="UIBox" type="PanelContainer" parent="ConnectionUI"]
+texture_filter = 3
 offset_left = 176.0
 offset_top = 118.0
 offset_right = 728.0
@@ -20,39 +21,46 @@ scale = Vector2(1.44, 2.28)
 theme = ExtResource("3_cqgb1")
 
 [node name="Connection_Setup" type="VBoxContainer" parent="ConnectionUI/UIBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("3_cqgb1")
 
 [node name="Instructions" type="Label" parent="ConnectionUI/UIBox/Connection_Setup"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("3_cqgb1")
 text = "Select Multiplayer Options:"
 horizontal_alignment = 1
 
 [node name="HostCheckButton" type="CheckButton" parent="ConnectionUI/UIBox/Connection_Setup" groups=["SwitchButtons"]]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("3_cqgb1")
 text = "Host?"
 alignment = 1
 
 [node name="IP_Input" type="LineEdit" parent="ConnectionUI/UIBox/Connection_Setup"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("3_cqgb1")
 placeholder_text = "Connect Code"
 alignment = 1
 
 [node name="Port_Input" type="LineEdit" parent="ConnectionUI/UIBox/Connection_Setup"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("3_cqgb1")
 placeholder_text = "Port - 5 digits"
 alignment = 1
 
 [node name="ConnectButton" type="Button" parent="ConnectionUI/UIBox/Connection_Setup" groups=["ConfirmButtons"]]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("3_cqgb1")
 text = "Connect"
 
 [node name="BackToHomeButton" type="Button" parent="ConnectionUI/UIBox/Connection_Setup" groups=["BackButtons"]]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("3_cqgb1")
 text = "Back to Home"

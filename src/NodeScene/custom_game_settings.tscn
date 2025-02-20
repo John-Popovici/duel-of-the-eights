@@ -9,6 +9,7 @@ script = ExtResource("1_5hf6s")
 presets_folder = "res://Presets/Custom"
 
 [node name="UIBox" type="PanelContainer" parent="."]
+texture_filter = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -26,40 +27,47 @@ size_flags_vertical = 4
 theme = ExtResource("2_i6rsi")
 
 [node name="SettingsSplitBox" type="HSplitContainer" parent="UIBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_i6rsi")
 split_offset = 2
 dragger_visibility = 1
 
 [node name="Settings_Setup" type="VBoxContainer" parent="UIBox/SettingsSplitBox"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_i6rsi")
 
 [node name="MarginContainer" type="MarginContainer" parent="UIBox/SettingsSplitBox/Settings_Setup"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_i6rsi")
 theme_override_constants/margin_top = 3
 theme_override_constants/margin_bottom = 3
 
 [node name="Instructions" type="Label" parent="UIBox/SettingsSplitBox/Settings_Setup/MarginContainer"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_i6rsi")
 text = "Select Game Settings:"
 horizontal_alignment = 1
 
 [node name="OptionsVBox" type="VBoxContainer" parent="UIBox/SettingsSplitBox/Settings_Setup"]
+texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_i6rsi")
 
 [node name="PlayerNames" type="HBoxContainer" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_i6rsi")
 theme_override_constants/separation = 0
 alignment = 1
 
 [node name="Player1Name" type="LineEdit" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/PlayerNames"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_i6rsi")
@@ -67,6 +75,7 @@ placeholder_text = "Host Player Name"
 alignment = 1
 
 [node name="Player2Name" type="LineEdit" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/PlayerNames"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_i6rsi")
@@ -75,10 +84,12 @@ alignment = 1
 editable = false
 
 [node name="WinCondition" type="HBoxContainer" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_i6rsi")
 
 [node name="Instructions4" type="Label" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/WinCondition"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_i6rsi")
@@ -86,6 +97,7 @@ text = "Choose Win Condition:"
 horizontal_alignment = 1
 
 [node name="ConditionSelect" type="OptionButton" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/WinCondition"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_i6rsi")
@@ -98,10 +110,12 @@ popup/item_1/text = "Health Points"
 popup/item_1/id = 1
 
 [node name="HealthPoints" type="HBoxContainer" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_i6rsi")
 
 [node name="Instructions2" type="Label" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/HealthPoints"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_i6rsi")
@@ -109,6 +123,7 @@ text = "Player Hp:"
 horizontal_alignment = 1
 
 [node name="HealthPoints" type="SpinBox" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/HealthPoints"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_i6rsi")
@@ -120,15 +135,18 @@ update_on_text_changed = true
 suffix = "Hp"
 
 [node name="BluffButton" type="CheckButton" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/HealthPoints"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_i6rsi")
 text = "Bluff Mode: "
 
 [node name="Rounds" type="HBoxContainer" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_i6rsi")
 
 [node name="Instructions3" type="Label" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/Rounds"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_i6rsi")
@@ -136,6 +154,7 @@ text = "Hands:"
 horizontal_alignment = 1
 
 [node name="Rounds" type="SpinBox" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/Rounds"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_i6rsi")
@@ -146,6 +165,7 @@ alignment = 1
 update_on_text_changed = true
 
 [node name="Instructions4" type="Label" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/Rounds"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_i6rsi")
@@ -153,6 +173,7 @@ text = "Rolls per Hand:"
 horizontal_alignment = 1
 
 [node name="RoundRolls" type="SpinBox" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/Rounds"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_i6rsi")
@@ -163,10 +184,12 @@ alignment = 1
 update_on_text_changed = true
 
 [node name="Dice" type="HBoxContainer" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_i6rsi")
 
 [node name="Instructions4" type="Label" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/Dice"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_i6rsi")
@@ -174,6 +197,7 @@ text = "Number of Dice:"
 horizontal_alignment = 1
 
 [node name="DiceCount" type="SpinBox" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/Dice"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -184,6 +208,7 @@ value = 7.0
 alignment = 1
 
 [node name="DiceType" type="OptionButton" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/Dice"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_i6rsi")
@@ -201,16 +226,19 @@ popup/item_3/text = "12 Sided Dice"
 popup/item_3/id = 12
 
 [node name="HandLimit" type="HBoxContainer" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_i6rsi")
 
 [node name="OpponentRollVisible" type="CheckButton" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/HandLimit"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_i6rsi")
 text = "Show Opponent Roll:"
 
 [node name="AdvancedSettingsButton" type="Button" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/HandLimit"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Modify Hand restrictions"
@@ -218,10 +246,12 @@ theme = ExtResource("2_i6rsi")
 text = "Modify Hand Rules"
 
 [node name="TimedRounds" type="HBoxContainer" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_i6rsi")
 
 [node name="TimedRoundsToggle" type="CheckButton" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/TimedRounds"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_i6rsi")
@@ -229,6 +259,7 @@ button_pressed = true
 text = "Timed Rounds:"
 
 [node name="RoundTime" type="SpinBox" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/TimedRounds"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -239,11 +270,13 @@ value = 20.0
 alignment = 1
 
 [node name="Buttons" type="HBoxContainer" parent="UIBox/SettingsSplitBox/Settings_Setup"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_i6rsi")
 alignment = 1
 
 [node name="CopyConnectButton" type="Button" parent="UIBox/SettingsSplitBox/Settings_Setup/Buttons" groups=["ConfirmButtons"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_i6rsi")
@@ -257,42 +290,50 @@ theme = ExtResource("2_i6rsi")
 text = "Start Game"
 
 [node name="BackToHomeButton" type="Button" parent="UIBox/SettingsSplitBox/Settings_Setup/Buttons" groups=["BackButtons"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_i6rsi")
 text = "Back to Home"
 
 [node name="PresetsPanelBox" type="VBoxContainer" parent="UIBox/SettingsSplitBox"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_i6rsi")
 
 [node name="PresetLabel" type="Label" parent="UIBox/SettingsSplitBox/PresetsPanelBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_i6rsi")
 text = "Presets:"
 
 [node name="PresetsScrollBar" type="ScrollContainer" parent="UIBox/SettingsSplitBox/PresetsPanelBox"]
+texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_i6rsi")
 
 [node name="PresetsButtons" type="VBoxContainer" parent="UIBox/SettingsSplitBox/PresetsPanelBox/PresetsScrollBar"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("2_i6rsi")
 
 [node name="SamplePreset" parent="UIBox/SettingsSplitBox/PresetsPanelBox/PresetsScrollBar/PresetsButtons" instance=ExtResource("4_o2ime")]
+texture_filter = 3
 layout_mode = 2
 
 [node name="NewPresetName" type="LineEdit" parent="UIBox/SettingsSplitBox/PresetsPanelBox"]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_i6rsi")
 placeholder_text = "New Preset Name"
 alignment = 1
 
 [node name="AddPreset" type="Button" parent="UIBox/SettingsSplitBox/PresetsPanelBox" groups=["ConfirmButtons"]]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("2_i6rsi")
 text = "Add Current Settings as Preset"

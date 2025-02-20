@@ -37,6 +37,7 @@ spot_angle_attenuation = 2.37841
 
 [node name="CameraPosPanel" type="PanelContainer" parent="CameraController"]
 visible = false
+texture_filter = 3
 offset_top = 435.0
 offset_right = 200.0
 offset_bottom = 515.0
