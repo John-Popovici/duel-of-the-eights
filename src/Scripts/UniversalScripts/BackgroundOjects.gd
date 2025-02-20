@@ -7,15 +7,22 @@ func _ready() -> void:
 	_theme = GlobalSettings.globalTheme
 	#_theme = "Restaurant"
 	if _theme == "Tavern":
-		get_node("TavernDungeon").visible = true
-		get_node("TavernDungeon/Characters/Bartender").set_hidden(false)
-		get_node("Restaurant").visible = false
+		TavernState(true)
+		RestaurantState(false)
 	elif _theme == "Restaurant":
-		get_node("TavernDungeon").visible = false
-		get_node("TavernDungeon/Characters/Bartender").set_hidden(true)
-		get_node("Restaurant").visible = true
+		TavernState(false)
+		RestaurantState(true)
 		
 	pass # Replace with function body.
+
+func TavernState(state: bool) -> void:
+	get_node("TavernDungeon").visible = state
+	get_node("TavernDungeon/Characters/Bartender").set_hidden(!state)
+	get_node("TavernDungeon/Characters/Mage").set_hidden(!state)
+	get_node("TavernDungeon/Characters/Rogue_Hooded").set_hidden(!state)
+
+func RestaurantState(state: bool) -> void:
+	get_node("Restaurant").visible = state
 
 func reset() -> void:
 	_ready()
