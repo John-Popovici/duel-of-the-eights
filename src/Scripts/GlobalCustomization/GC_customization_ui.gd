@@ -38,11 +38,11 @@ func _generate_dice_tex_options_buttons() -> void:
 func _select_dice_tex(_tex, _layer) -> void:
 	match _layer:
 		1:
-			GlobalSettings.normalDiceTex = _tex
+			GlobalSettings.setDiceTexture("normal", _tex)
 		2:
-			GlobalSettings.selectedDiceTex = _tex
+			GlobalSettings.setDiceTexture("selected", _tex)
 		3:
-			GlobalSettings.dicebaseTex = _tex
+			GlobalSettings.setDiceTexture("base", _tex)
 	_reset_dice()
 
 func _reset_dice()->void:

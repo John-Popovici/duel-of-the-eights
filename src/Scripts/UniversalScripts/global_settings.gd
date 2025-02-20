@@ -23,6 +23,7 @@ extends Node
 
 @onready var presets_folder = "res://Presets"
 @onready var player_settings_path = (presets_folder + "/profile_settings.json")
+@onready var dice_settings_path = (presets_folder + "/dice_settings.json")
 
 @onready var profile_settings : Dictionary = {
 	"player_name": "New Player",
@@ -102,6 +103,38 @@ func load_profile_settings():
 		Debugger.log("profile picture found")
 		self.profile_pic = self.load_image_texture(save_path)
 		
+func load_dice_textures():
+	var diceTexturesPath = presets_folder + "/DiceTextures"
+	var dir = DirAccess.open(diceTexturesPath)
+
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+
+		while file_name != "":
+			if not dir.current_is_dir() and file_name.ends_with(".tres"):  # Ignore subdirectories
+				print("Loading file:", file_name)
+				var full_path = diceTexturesPath + "/" + file_name
+				set(file_name.get_basename(), load(full_path))
+				
+			file_name = dir.get_next()  # Move to the next file
+
+		dir.list_dir_end()  # Clean up
+	else:
+		print("Error: Could not open directory.")
+		
+func save_dice_textures():
+	var dice_settings = {
+		"normalDiceTex": self.normalDiceTex,
+		"selectedDiceTex": self.selectedDiceTex,
+		"dicebaseTex": self.dicebaseTex
+	}
+	
+	for dice_tex in dice_settings:
+		var save_path = presets_folder + "/DiceTextures/"+dice_tex+".tres"
+		print("saving to : ", save_path)
+		ResourceSaver.save(dice_settings[dice_tex], save_path)
+		
 func load_image_texture(path: String) -> Texture:
 	# Create a new Image instance
 	var image = Image.new()
@@ -118,9 +151,20 @@ func load_image_texture(path: String) -> Texture:
 	texture.set_size_override(Vector2(200,200))
 	return texture
 
+func setDiceTexture(text_to_set, new_tex) -> void:
+	match text_to_set:
+		"normal":
+			self.normalDiceTex = new_tex
+		"selected":
+			self.selectedDiceTex = new_tex
+		"base":
+			self.dicebaseTex = new_tex
+		_:
+			return
+	self.save_dice_textures()
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
 	var dir = DirAccess.open(dice_tex_folder)
 	if dir:
 		dir.list_dir_begin()
@@ -134,5 +178,6 @@ func _ready() -> void:
 		dir.list_dir_end()
 	#Debugger.log(str("Dice Tex: ",allDiceTextures))
 	load_profile_settings()
+	load_dice_textures()
 	
 	Debugger.debug_enabled = true
