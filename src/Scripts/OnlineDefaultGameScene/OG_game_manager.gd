@@ -216,9 +216,11 @@ func setup_selection() -> void:
 		hand_selection_done = false
 		Debugger.log(str("Host: ", isHost, " reached hand selection on roll_count: ", roll_count, " of max: ", max_rolls_per_round))
 		setDisableScoreBoardButtons(false)
+		self.selected_dice_checker(0)
 		if timedRounds:
 			GameUI.startTimer(baseTimer*2)
 		selectionmode = "hand"
+		
 	else:
 		roll_selection_done = false
 		other_player_roll_selection = false
@@ -637,12 +639,20 @@ func setup_game_environment(_game_settings: Dictionary) -> void:
 	else:
 		Debugger.log(str("Client Game Environment initialized with settings:", _game_settings))
 
-func selected_dice_checker(num: int) -> void:
-	#Invert selection variable
-	#Track how many dice in the game
-	#track if I'm in hand selection stage (don't enable if there)
+func selected_dice_checker(selected_num: int ) -> void:
+	var inverted = invertSelection
+	var dicecount = game_settings["dice_count"]
 	
-	pass
+	if roll_count >= max_rolls_per_round:
+		return
+	else:
+		if (!inverted and selected_num == 0) or (inverted and selected_num == dicecount):
+			rollSelected.disabled = true
+		else:
+			rollSelected.disabled = false
+	
+	
+	
 
 func returnToIntro()-> void:
 	SceneSwitcher.returnToIntro()
