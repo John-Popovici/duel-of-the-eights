@@ -637,5 +637,12 @@ func setup_game_environment(_game_settings: Dictionary) -> void:
 	else:
 		Debugger.log(str("Client Game Environment initialized with settings:", _game_settings))
 
+func selected_dice_checker(num: int) -> void:
+	#Invert selection variable
+	#Track how many dice in the game
+	#track if I'm in hand selection stage (don't enable if there)
+	
+	pass
+
 func returnToIntro()-> void:
 	SceneSwitcher.returnToIntro()

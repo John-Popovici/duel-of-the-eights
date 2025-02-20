@@ -26,6 +26,7 @@ var normalTex = GlobalSettings.normalDiceTex
 var selectedTex = GlobalSettings.selectedDiceTex
 var diceBaseTex = GlobalSettings.dicebaseTex
 
+
 # Threshold for detecting the "upward" ray
 @export var up_threshold: float
 # Dictionary to associate raycast nodes with face values
@@ -119,6 +120,8 @@ func _toggle_selection_status() -> void:
 		dieMesh.set_surface_override_material(0,selectedTex)
 	if dice_ui_element != null:
 		dice_ui_element._toggle_texture()
+		
+	get_parent().diceSelected()
 
 var dice_ui_element
 func _set_dice_ui(_ui_element) -> void:
