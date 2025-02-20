@@ -9,6 +9,7 @@ export_presets.cfg
 # Presets/Other Saved Local Data
 profile_settings.json
 **/Presets/Images/
+**/Presets/DiceTextures/
 
 # Imported translations (automatically generated from CSV files)
 *.translation
