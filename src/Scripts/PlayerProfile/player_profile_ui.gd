@@ -8,6 +8,7 @@ signal profile_settings_ready(profile_settings)
 @onready var username_box = userDetailsContainer.get_node("UsernameFrame/UsernameBox")
 @onready var invert_select_method = listingsContainer.get_node("InvertSelectMethodContainer/CheckButton")
 @onready var align_dice = listingsContainer.get_node("AlignDiceContainer/CheckButton")
+@onready var chat_enabled = listingsContainer.get_node("ChatEnabledContainer/CheckButton")
 @onready var sfxContainer = listingsContainer.get_node("SFXVolumeContainer/SliderContainer")
 @onready var sfx_slider = sfxContainer.get_node("Slider")
 @onready var sfx_slider_value = sfxContainer.get_node("Value")
@@ -26,6 +27,7 @@ signal profile_settings_ready(profile_settings)
 @export var username: String
 @export var invertedSelection: bool
 @export var alignDice: bool
+@export var chatEnabled: bool
 @export var sfxVolume: int
 @export var musicVolume: int
 @export var ambienceVolume: int
@@ -50,6 +52,12 @@ func _on_align_dice_toggled(button_pressed: bool):
 	Debugger.log(str("align dice is now set to: ", button_pressed))
 	self.alignDice = button_pressed
 	# save new dice alignment decision
+	self.save_profile_settings()
+
+func _on_chat_enabled_toggled(button_pressed: bool):
+	Debugger.log(str("chat enabled is now set to: ", button_pressed))
+	self.chatEnabled = button_pressed
+	# save new chat preference
 	self.save_profile_settings()
 	
 func _on_sfx_slider_drag_ended(value):
@@ -131,6 +139,7 @@ func save_profile_settings():
 		"player_name": self.username,
 		"invert_selection_method": self.invertedSelection,
 		"align_rolled_dice": self.alignDice,
+		"chat_enabled": self.chatEnabled,
 		"sfx_volume": self.sfxVolume,
 		"music_volume": self.musicVolume,
 		"ambience_volume": self.ambienceVolume
@@ -157,6 +166,9 @@ func load_profile_settings():
 	# load align decisions
 	self.alignDice = GlobalSettings.profile_settings["align_rolled_dice"]
 	align_dice.button_pressed = self.alignDice
+	# load chat decisions
+	self.chatEnabled = GlobalSettings.profile_settings["chat_enabled"]
+	chat_enabled.button_pressed = self.chatEnabled
 	# load sfx_volume
 	self.set_sfx_volume(GlobalSettings.profile_settings["sfx_volume"], true, true)
 	# load music_volume
@@ -185,6 +197,7 @@ func _ready() -> void:
 	username_box.connect("text_changed", self._on_username_box_modified)
 	invert_select_method.connect("toggled", self._on_invert_select_method_toggled)
 	align_dice.connect("toggled", self._on_align_dice_toggled)
+	chat_enabled.connect("toggled", self._on_chat_enabled_toggled)
 	sfx_slider.connect("value_changed", self._on_sfx_slider_drag_ended)
 	music_slider.connect("value_changed", self._on_music_slider_drag_ended)
 	ambience_slider.connect("value_changed", self._on_ambience_slider_drag_ended)
