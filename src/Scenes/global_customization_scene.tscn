@@ -189,26 +189,27 @@ theme = ExtResource("3_jyaf7")
 [node name="Sections" type="VBoxContainer" parent="CustomizationUI/BackPanel"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CustomizationUI/BackPanel/Sections"]
+[node name="TabsContainer" type="HBoxContainer" parent="CustomizationUI/BackPanel/Sections"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CustomizationUI/BackPanel/Sections/HBoxContainer"]
+[node name="Label" type="Label" parent="CustomizationUI/BackPanel/Sections/TabsContainer"]
 layout_mode = 2
 text = "Customization Panel"
 
-[node name="Button" type="Button" parent="CustomizationUI/BackPanel/Sections/HBoxContainer"]
+[node name="Dice" type="Button" parent="CustomizationUI/BackPanel/Sections/TabsContainer" groups=["ConfirmButtons"]]
 layout_mode = 2
 text = "Dice Customization"
 
-[node name="Button2" type="Button" parent="CustomizationUI/BackPanel/Sections/HBoxContainer"]
+[node name="Music" type="Button" parent="CustomizationUI/BackPanel/Sections/TabsContainer" groups=["ConfirmButtons"]]
 layout_mode = 2
 text = "Music Customization"
 
-[node name="Button3" type="Button" parent="CustomizationUI/BackPanel/Sections/HBoxContainer"]
+[node name="Theme" type="Button" parent="CustomizationUI/BackPanel/Sections/TabsContainer" groups=["ConfirmButtons"]]
 layout_mode = 2
 text = "Theme Customization"
 
 [node name="DiceCustomization" type="VBoxContainer" parent="CustomizationUI/BackPanel/Sections"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -278,6 +279,26 @@ text = "Blank"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Blank"
+
+[node name="ThemeCustomization" type="VBoxContainer" parent="CustomizationUI/BackPanel/Sections"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Choose Background Theme" type="Label" parent="CustomizationUI/BackPanel/Sections/ThemeCustomization"]
+layout_mode = 2
+text = "Dice Main Texture"
+
+[node name="Themes" type="HBoxContainer" parent="CustomizationUI/BackPanel/Sections/ThemeCustomization"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Tavern" parent="CustomizationUI/BackPanel/Sections/ThemeCustomization/Themes" instance=ExtResource("4_aknih")]
+layout_mode = 2
+text = "Tavern"
+
+[node name="Restaurant" parent="CustomizationUI/BackPanel/Sections/ThemeCustomization/Themes" instance=ExtResource("4_aknih")]
+layout_mode = 2
+text = "Restaurant"
 
 [node name="BackToHomeButton" type="Button" parent="CustomizationUI/BackPanel/Sections" groups=["BackButtons"]]
 layout_mode = 2
@@ -433,9 +454,11 @@ spot_range = 70.0
 spot_attenuation = -0.5
 spot_angle_attenuation = 2.37841
 
-[node name="BackgroundObjects" parent="DiceDisplay/CameraController" instance=ExtResource("12_iaxf0")]
-transform = Transform3D(0.707107, 2.10734e-08, 0.707107, -2.98023e-08, 1, 1.77636e-15, -0.707107, -2.10734e-08, 0.707107, 9.53674e-07, -2, 9.53674e-07)
+[node name="Background_Movement" type="Node3D" parent="DiceDisplay/CameraController"]
 script = ExtResource("13_c1i8e")
+
+[node name="BackgroundObjects" parent="DiceDisplay/CameraController/Background_Movement" instance=ExtResource("12_iaxf0")]
+transform = Transform3D(0.707107, 2.10734e-08, 0.707107, -2.98023e-08, 1, 3.17637e-21, -0.707107, -2.10734e-08, 0.707107, 9.53674e-07, -2, 9.53674e-07)
 
 [node name="CameraPosPanel" type="PanelContainer" parent="DiceDisplay/CameraController"]
 anchors_preset = 3
@@ -466,3 +489,8 @@ text = "Top Down"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Cinematic"
+
+[connection signal="pressed" from="CustomizationUI/BackPanel/Sections/TabsContainer/Dice" to="CustomizationUI" method="_on_dice_pressed"]
+[connection signal="pressed" from="CustomizationUI/BackPanel/Sections/TabsContainer/Theme" to="CustomizationUI" method="_on_theme_pressed"]
+[connection signal="pressed" from="CustomizationUI/BackPanel/Sections/ThemeCustomization/Themes/Tavern" to="CustomizationUI" method="_on_tavern_pressed"]
+[connection signal="pressed" from="CustomizationUI/BackPanel/Sections/ThemeCustomization/Themes/Restaurant" to="CustomizationUI" method="_on_restaurant_pressed"]

@@ -1,11 +1,14 @@
 extends CanvasLayer
 
 @onready var diceCustomization = get_node("BackPanel/Sections/DiceCustomization")
+@onready var themeCustomization = get_node("BackPanel/Sections/ThemeCustomization")
+@onready var camera = get_parent().get_node("DiceDisplay/CameraController/Camera3D")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	get_node("BackPanel/Sections/BackToHomeButton").connect("pressed",returnToIntro)
 	diceCustomization.visible = true
+	themeCustomization.visible = false
 	_generate_dice_tex_options_buttons()
 
 
@@ -48,6 +51,9 @@ func _reset_dice()->void:
 	get_parent().get_node("DiceDisplay/D4Display/FourDice").reset_dice_tex()
 	get_parent().get_node("DiceDisplay/D12Display/TwelveDice").reset_dice_tex()
 
+func changeTheme()->void:
+	pass
+
 func returnToIntro() -> void:
 	get_parent().returnToIntro()
 	#SceneSwitcher.returnToIntro()
@@ -55,3 +61,23 @@ func returnToIntro() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
+
+
+func _on_dice_pressed() -> void:
+	diceCustomization.visible = true
+	themeCustomization.visible = false
+
+
+func _on_theme_pressed() -> void:
+	diceCustomization.visible = false
+	themeCustomization.visible = true
+
+
+func _on_tavern_pressed() -> void:
+	GlobalSettings.globalTheme = "Tavern"
+	camera.get_node("Background_Movement/BackgroundObjects")._ready()
+
+
+func _on_restaurant_pressed() -> void:
+	GlobalSettings.globalTheme = "Restaurant"
+	camera.get_node("Background_Movement/BackgroundObjects")._ready()

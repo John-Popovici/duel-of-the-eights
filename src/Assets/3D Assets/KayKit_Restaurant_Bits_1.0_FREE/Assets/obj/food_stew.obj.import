@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dpvb8rlp0afe2"
+path="res://.godot/imported/food_stew.obj-5b2a6e0ff4b742f1cea7a0bd6fd68a9e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/food_stew.obj-5b2a6e0ff4b742f1cea7a0bd6fd68a9e.mesh"]
+
+source_file="res://Assets/3D Assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/food_stew.obj"
+dest_files=["res://.godot/imported/food_stew.obj-5b2a6e0ff4b742f1cea7a0bd6fd68a9e.mesh", "res://.godot/imported/food_stew.obj-5b2a6e0ff4b742f1cea7a0bd6fd68a9e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

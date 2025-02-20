@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://gmrlipoi52rm"
+path="res://.godot/imported/crate_ham.obj-11b3a41f77ea64c2bf3810a6a75b5f18.mesh"
+
+[deps]
+
+files=["res://.godot/imported/crate_ham.obj-11b3a41f77ea64c2bf3810a6a75b5f18.mesh"]
+
+source_file="res://Assets/3D Assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/crate_ham.obj"
+dest_files=["res://.godot/imported/crate_ham.obj-11b3a41f77ea64c2bf3810a6a75b5f18.mesh", "res://.godot/imported/crate_ham.obj-11b3a41f77ea64c2bf3810a6a75b5f18.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

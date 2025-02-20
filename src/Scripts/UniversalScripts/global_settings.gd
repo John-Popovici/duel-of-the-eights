@@ -4,6 +4,8 @@ extends Node
 @onready var selectedDiceTex = preload("res://Materials/DiceTextures/Purple.tres")
 @onready var dicebaseTex = preload("res://Materials/DiceTextures/White.tres")
 
+@onready var globalTheme = "Tavern"
+
 @onready var dice_tex_folder = "res://Materials/DiceTextures"
 @onready var allDiceTextures : Dictionary = {
 	"Blue": preload("res://Materials/DiceTextures/Blue.tres"),

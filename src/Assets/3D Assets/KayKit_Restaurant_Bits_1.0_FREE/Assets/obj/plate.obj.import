@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cer7i31fdoawj"
+path="res://.godot/imported/plate.obj-66cc94d0ebbedd2665b75888f427f2ac.mesh"
+
+[deps]
+
+files=["res://.godot/imported/plate.obj-66cc94d0ebbedd2665b75888f427f2ac.mesh"]
+
+source_file="res://Assets/3D Assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/plate.obj"
+dest_files=["res://.godot/imported/plate.obj-66cc94d0ebbedd2665b75888f427f2ac.mesh", "res://.godot/imported/plate.obj-66cc94d0ebbedd2665b75888f427f2ac.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

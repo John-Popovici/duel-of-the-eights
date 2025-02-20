@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ib2fc77wflet"
+path="res://.godot/imported/kitchencounter_innercorner_backsplash.obj-4230bccd38e34c2b8332286f7b88adc0.mesh"
+
+[deps]
+
+files=["res://.godot/imported/kitchencounter_innercorner_backsplash.obj-4230bccd38e34c2b8332286f7b88adc0.mesh"]
+
+source_file="res://Assets/3D Assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/kitchencounter_innercorner_backsplash.obj"
+dest_files=["res://.godot/imported/kitchencounter_innercorner_backsplash.obj-4230bccd38e34c2b8332286f7b88adc0.mesh", "res://.godot/imported/kitchencounter_innercorner_backsplash.obj-4230bccd38e34c2b8332286f7b88adc0.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

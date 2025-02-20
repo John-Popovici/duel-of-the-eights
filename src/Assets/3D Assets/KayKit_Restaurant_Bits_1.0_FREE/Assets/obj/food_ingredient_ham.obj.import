@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bljqsmvyk04iy"
+path="res://.godot/imported/food_ingredient_ham.obj-6a4425491fd2f5dccd1c0c8a544b3abf.mesh"
+
+[deps]
+
+files=["res://.godot/imported/food_ingredient_ham.obj-6a4425491fd2f5dccd1c0c8a544b3abf.mesh"]
+
+source_file="res://Assets/3D Assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/food_ingredient_ham.obj"
+dest_files=["res://.godot/imported/food_ingredient_ham.obj-6a4425491fd2f5dccd1c0c8a544b3abf.mesh", "res://.godot/imported/food_ingredient_ham.obj-6a4425491fd2f5dccd1c0c8a544b3abf.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
