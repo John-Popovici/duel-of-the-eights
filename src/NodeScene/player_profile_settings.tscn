@@ -120,6 +120,20 @@ text = "Auto Align Rolled Dice : "
 layout_mode = 2
 size_flags_horizontal = 2
 
+[node name="ChatEnabledContainer" type="HBoxContainer" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
+layout_mode = 2
+
+[node name="ChatEnabledLabel" type="Label" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/ChatEnabledContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 1
+text = "Chat Enabled : "
+
+[node name="CheckButton" type="CheckButton" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/ChatEnabledContainer" groups=["SwitchButtons"]]
+layout_mode = 2
+size_flags_horizontal = 2
+button_pressed = true
+
 [node name="SFXVolumeContainer" type="HBoxContainer" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
 layout_mode = 2
 
@@ -200,11 +214,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "100%"
 horizontal_alignment = 1
-
-[node name="Spacing" type="Control" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-size_flags_vertical = 3
 
 [node name="BackToHomeButton" type="Button" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer" groups=["BackButtons"]]
 layout_mode = 2
