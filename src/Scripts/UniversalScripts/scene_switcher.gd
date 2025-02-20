@@ -21,7 +21,7 @@ func returnToIntro() -> void:
 
 	currentScene = introScene.instantiate()
 	get_tree().root.add_child(currentScene)
-	currentScene.print_tree_pretty()
+	#currentScene.print_tree_pretty()
 
 func changeScene(path: String) -> void:
 	if not ResourceLoader.exists(path):
@@ -35,7 +35,7 @@ func changeScene(path: String) -> void:
 	
 	currentScene = load(path).instantiate()
 	get_tree().root.add_child(currentScene)
-	currentScene.print_tree_pretty()
+	#currentScene.print_tree_pretty()
 
 func _process(delta: float) -> void:
 	pass

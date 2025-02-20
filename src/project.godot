@@ -44,10 +44,7 @@ enabled=PackedStringArray("res://addons/gut/plugin.cfg")
 folder_colors={
 "res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/fbx(unity)/": "red",
 "res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/fbx/": "red",
-"res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/obj/": "red",
-"res://Assets/3D Assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/fbx (unity)/": "red",
-"res://Assets/3D Assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/fbx/": "red",
-"res://Assets/3D Assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/": "red"
+"res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/obj/": "red"
 }
 
 [filesystem]
