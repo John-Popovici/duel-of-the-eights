@@ -216,7 +216,6 @@ func setup_selection() -> void:
 		hand_selection_done = false
 		Debugger.log(str("Host: ", isHost, " reached hand selection on roll_count: ", roll_count, " of max: ", max_rolls_per_round))
 		setDisableScoreBoardButtons(false)
-		self.selected_dice_checker(0)
 		if timedRounds:
 			GameUI.startTimer(baseTimer*2)
 		selectionmode = "hand"
@@ -226,6 +225,7 @@ func setup_selection() -> void:
 		other_player_roll_selection = false
 		Debugger.log(str("Host: ", isHost, " reached roll selection on roll_count: ", roll_count, " of max: ", max_rolls_per_round))
 		setDisableRollButtons(false)
+		selected_dice_checker(0)
 		if timedRounds:
 			GameUI.startTimer(baseTimer)
 		selectionmode = "roll"
