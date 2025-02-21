@@ -4,7 +4,12 @@ extends Node
 @onready var selectedDiceTex = preload("res://Materials/DiceTextures/Purple.tres")
 @onready var dicebaseTex = preload("res://Materials/DiceTextures/White.tres")
 
-@onready var globalTheme = "Tavern"
+@onready var globalTheme : String = "Tavern":
+	get:
+		return globalTheme
+	set(value):
+		globalTheme = value
+		self.save_global_themes()
 
 @onready var dice_tex_folder = "res://Materials/DiceTextures"
 @onready var allDiceTextures : Dictionary = {
@@ -23,6 +28,7 @@ extends Node
 
 @onready var presets_folder = "res://Presets"
 @onready var player_settings_path = (presets_folder + "/profile_settings.json")
+@onready var global_theme_settings_path = (presets_folder + "/global_theme_settings.json")
 @onready var dice_settings_path = (presets_folder + "/dice_settings.json")
 
 @onready var profile_settings : Dictionary = {
@@ -163,6 +169,36 @@ func setDiceTexture(text_to_set, new_tex) -> void:
 			return
 	self.save_dice_textures()
 
+func load_global_themes():
+	if FileAccess.file_exists(global_theme_settings_path):
+		var file = FileAccess.open(global_theme_settings_path, FileAccess.READ)
+		var content = file.get_as_text()
+		var json_data = JSON.parse_string(content)
+		
+		if json_data == null:
+			Debugger.log_error("Error parsing JSON")
+			return
+			
+		for key in json_data:
+			Debugger.log(str("loading ", key, ": ", json_data[key]))
+			set(key, json_data[key])
+			
+	else:
+		Debugger.log_warning("no data to load")
+		
+func save_global_themes():
+	var global_theme_settings = {
+		"globalTheme": self.globalTheme
+	}
+	
+	Debugger.log(str("Writing to: ", global_theme_settings_path))
+	var file = FileAccess.open(global_theme_settings_path, FileAccess.WRITE)
+	var json = JSON.new()
+	var json_string = json.stringify(global_theme_settings)
+	file.store_string(json_string)
+	file.close()
+	Debugger.log("global theme settings settings saved.")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var dir = DirAccess.open(dice_tex_folder)
@@ -179,5 +215,6 @@ func _ready() -> void:
 	#Debugger.log(str("Dice Tex: ",allDiceTextures))
 	load_profile_settings()
 	load_dice_textures()
+	load_global_themes()
 	
 	Debugger.debug_enabled = true
