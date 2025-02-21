@@ -167,6 +167,10 @@ func moveDiceInline() -> void:
 			iterator = 0
 			current_row -= 1
 
+func diceSelected() -> void:
+	var diceselected = get_selected_dice().size()
+	get_parent().selected_dice_checker(diceselected)
+
 func moveDiceInLine() -> void:
 	#move dice once read to an organized display on the board
 	pass

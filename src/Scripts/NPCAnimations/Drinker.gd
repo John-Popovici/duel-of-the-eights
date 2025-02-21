@@ -2,12 +2,13 @@ extends Node3D
 
 @onready var animation_player = $AnimationPlayer
 @onready var audio_player = AudioManager
+@onready var hidden = false
 
 #var drinking_interval = 5.0  # Seconds between drinks
 
 func _ready():
 	play_idle()
-	start_drinking_timer()
+	#start_drinking_timer()
 
 func play_idle():
 	animation_player.play("Idle")
@@ -22,3 +23,8 @@ func start_drinking_timer():
 	play_toast()
 	await animation_player.animation_finished
 	start_drinking_timer()
+
+func set_hidden(state: bool):
+	hidden = state
+	if !hidden:
+		start_drinking_timer()
