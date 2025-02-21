@@ -8,6 +8,7 @@ export_presets.cfg
 
 # Presets/Other Saved Local Data
 profile_settings.json
+global_theme_settings.json
 **/Presets/Images/
 **/Presets/DiceTextures/
 

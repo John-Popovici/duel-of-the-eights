@@ -246,12 +246,6 @@ size_flags_vertical = 1
 text = "100%"
 horizontal_alignment = 1
 
-[node name="Spacing" type="Control" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
-texture_filter = 3
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-size_flags_vertical = 3
-
 [node name="BackToHomeButton" type="Button" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer" groups=["BackButtons"]]
 texture_filter = 3
 layout_mode = 2
