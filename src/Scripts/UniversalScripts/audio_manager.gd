@@ -146,7 +146,12 @@ func play_game_music(track_num: int, loop: bool = false):
 		
 		music_player.play()
 		
-		music_player.finished.connect(_on_track_finished, track_num)
+		#If needed, disconnects the finished signal to avoid a ponential issue with multiple connections
+		if music_player.finished.is_connected(Callable(self, "_on_track_finished")):
+			music_player.finished.disconnect( Callable(self, "_on_track_finished"))
+		
+		#uses the finished signal to tell the system to play the next song on the track.
+		music_player.finished.connect(Callable(self, "_on_track_finished").bind(track_num))
 		
 func _on_track_finished(track_num: int):
 	track_num += 1
