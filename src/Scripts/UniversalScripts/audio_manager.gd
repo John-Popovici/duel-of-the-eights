@@ -57,8 +57,15 @@ var music_library = {
 	"main_menu": preload("res://Assets/Audio/Music/AJP 3 Constellate impromptu only 0m18s.mp3"),
 	"gameplay": preload("res://Assets/Audio/Music/AJ4 Bucket of Stardust 0m18s.mp3"),
 	"gameplay_tense": preload("res://Assets/Audio/Music/AJ4 Bucket of Stardust 0m18s.mp3")
+	
 	#Tense music can be changed to be be just a sound effect
 }
+
+var game_music_library = [
+	["Spring_Flowers",preload("res://Assets/Audio/Music/Spring_Flowers.mp3")],
+	["beautiful_piano_melody",preload("res://Assets/Audio/Music/beautiful_piano_melody.mp3")],
+	["soft_background_piano",preload("res://Assets/Audio/Music/soft_background_piano.mp3")]
+]
 
 var ambience_library ={
 	"tavern_background": preload("res://Assets/Audio/Ambience/tavern-ambience-with-openfire-effect-no-loops-86151.mp3"),
@@ -129,6 +136,26 @@ func play_music(track_name: String, loop: bool = true):
 		#music_player.loop = loop
 	else:
 		Debugger.log_error(str("Music track not found: " + track_name))
+		
+
+func play_game_music(track_num: int, loop: bool = false):
+	
+	if track_num < game_music_library.size():
+		music_player.stream = game_music_library[track_num][1]
+		Debugger.log(str("Music Audio Playing: ", game_music_library[track_num][0]))
+		
+		music_player.play()
+		
+		music_player.finished.connect(_on_track_finished, track_num)
+		
+func _on_track_finished(track_num: int):
+	track_num += 1
+	if track_num < game_music_library.size():
+		play_game_music(track_num)
+	else:
+		track_num = 0
+		play_game_music(track_num)
+
 
 func play_ambience(ambience_name: String):
 	if ambience_name in ambience_library:
