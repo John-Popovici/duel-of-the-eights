@@ -46,7 +46,7 @@ func _ready() -> void:
 	myPlayer.connect("rollsReadandWaiting", self.waiting_on_other_player)
 	myPlayer.connect("player_stats_updated", self.update_player_stats_signal)
 	enemyPlayer.connect("player_stats_updated", self.update_player_stats_signal)
-	AudioManager.play_music("gameplay")
+	AudioManager.play_game_music(0)
 	AudioManager.connect_buttons()
 	invertSelection = GlobalSettings.profile_settings.get("invert_selection_method")
 
