@@ -1,6 +1,6 @@
 extends Node
 
-@export var default_port: int = 12345
+@export var default_port: int = 9999
 var port
 var is_host: bool = false
 var ConnectionUI: CanvasLayer
@@ -13,79 +13,83 @@ var ping_timeout: float = 10.0
 var time_since_last_ping: float = 0.0
 var check_ping: bool = false
 
-var server_ip: String = "54.174.171.0"  # Replace with your server's IP
-var server_port: int = 9999  # Replace with your server's port
+const SERVER_IP = "54.174.171.0"
+const PORT = 9999
+var peer: ENetMultiplayerPeer
 
 # Start as a server
-func start_server(_port: int = server_port):
-	var peer = ENetMultiplayerPeer.new()
-	port = _port
-	var error = peer.create_server(_port, 2)  # Set max peers to 2 (host + 1 client)
-	if error != OK:
-		print("Cannot Host: ", error)
+func start_server(_port: int = default_port):
+	peer = ENetMultiplayerPeer.new()
+	var multiplayer_api = SceneMultiplayer.new()
+
+	# 🔹 Start the server
+	if peer.create_server(PORT) != OK:
+		print("❌ Failed to start the server")
 		return
-	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
-	multiplayer.set_multiplayer_peer(peer)
+
+	multiplayer_api.multiplayer_peer = peer
+	get_tree().set_multiplayer(multiplayer_api)
+
+	print("✅ Server started. Now connecting as client...")
+
 	is_host = true
-	print("Started as server on port: ", _port)
-	print("IP: ", server_ip)
-	
-	# Connect to the server as a client
-	var multiplayer_peer = ENetMultiplayerPeer.new()
-	var result = multiplayer_peer.create_client(server_ip, server_port)
-	if result != OK:
-		print("Failed to create client connection. Error code: %d" % result)
-		return
 
-	# Set the multiplayer peer
-	multiplayer.multiplayer_peer = multiplayer_peer
+	# 🔹 The host ALSO connects as a client
+	_connect_as_client("Host_" + str(randi() % 1000))
 
-	# Connect to the signals for connection events
-	multiplayer.connect("network_peer_connected", Callable(self, "_on_peer_connected"))
-	multiplayer.connect("network_peer_disconnected", Callable(self, "_on_peer_disconnected"))
-	multiplayer_peer.connect("connection_error", Callable(self, "_on_connection_error"))
 
-	print("Attempting to connect to server at ", server_ip, " on port ", server_port)
+
+
 
 # Connect as a client
 func connect_to_server(_hash: String):
-	var multiplayer_peer = ENetMultiplayerPeer.new()
-	var result = multiplayer_peer.create_client(server_ip, server_port)
-	if result != OK:
-		print("Failed to create client connection. Error code: %d" % result)
-		return
+	is_host = false
+	_connect_as_client("Guest_" + str(randi() % 1000))
 
-	# Set the multiplayer peer
-	multiplayer.multiplayer_peer = multiplayer_peer
 
-	# Connect to the signals for connection events
-	multiplayer.connect("network_peer_connected", Callable(self, "_on_peer_connected"))
-	multiplayer.connect("network_peer_disconnected", Callable(self, "_on_peer_disconnected"))
-	multiplayer_peer.connect("connection_error", Callable(self, "_on_connection_error"))
-
-	print("Attempting to connect to server at ", server_ip, " on port ", server_port)
 
 
 func _on_peer_connected(id: int):
-	print("Connected to peer with ID: ", id)
-	print("Connected peers: ", multiplayer.has_multiplayer_peer())
+	Debugger.log(str("Connected to peer with ID: ", id))
+	Debugger.log(str("Connected peers: ", multiplayer.has_multiplayer_peer()))
 	check_ping = true
 	emit_signal("connection_successful")
 ##### Add stuff to _on_peer_connected or _second_player_connected to transmit name info or profile info
 signal second_player_connected(Name: String)
+
+func _connect_as_client(default_name: String) -> void:
+	peer = ENetMultiplayerPeer.new()
+	var multiplayer_api = SceneMultiplayer.new()
+
+	if peer.create_client(SERVER_IP, PORT) != OK:
+		print("❌ Failed to connect to server")
+		return
+
+	multiplayer_api.multiplayer_peer = peer
+	get_tree().set_multiplayer(multiplayer_api)
+
+	print("✅ Connected to server!")
+	multiplayer.multiplayer_peer.connect("peer_connected", self._on_peer_connected)
+	#Connection Failed case
+	multiplayer.multiplayer_peer.connect("connection_failed", self._on_connection_failed)
+
+
+
+
+
 func _second_player_connected():
 	emit_signal("second_player_connected", GlobalSettings.profile_settings["player_name"])
 
 func _on_peer_disconnected(id: int):
-	print("Disconnected from peer with ID: ", id)
+	Debugger.log(str("Disconnected from peer with ID: ", id))
 	_try_reconnect()
 
 func _on_server_disconnected():
-	print("Disconnected from server")
+	Debugger.log(str("Disconnected from server"))
 	_try_reconnect()
 
 func _on_connection_failed():
-	print("Connection Failed")
+	Debugger.log(str("Connection Failed"))
 	multiplayer.multiplayer_peer = null
 	emit_signal("connection_failed")
 	remove_from_group("NetworkHandlingNodes")
@@ -146,14 +150,16 @@ func ip_to_hash(ip: String) -> String:
 
 func hash_to_ip(hash_code: String) -> String:
 	# Converts a 10-character code back to an IP address
-	if hash_code.length() != 10:
+	Debugger.log(str("Hash code to convert: ", hash_code))
+	if hash_code.length() != 8:
+		Debugger.log_error("invalid length")
 		return ""  # Invalid code length
 
 	var ip = []
 	for i in range(0, hash_code.length(), 2):
 		var octet_code = hash_code.substr(i, 2)
 		ip.append(str(lettersToNumber(octet_code)))  # Convert each 2-character code back to octet
-
+	Debugger.log(str("ip before join: ", ip))
 	return ".".join(ip)
 
 
@@ -164,7 +170,7 @@ func getHashIP() -> String:
 	return ip_to_hash(str(IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1)))
 
 func getHashPort() -> String:
-	return numberToLetters(port)
+	return numberToLetters(PORT)
 
 func disconnect_from_server() -> void:
 	emit_signal("disconnected")
@@ -182,27 +188,30 @@ func _ready() -> void:
 signal startGame
 
 # Broadcasts disconnect
-func broadcast_disconnect(state: String, data: Dictionary):
+func broadcast_disconnect(state: String = "", data: Dictionary = {}):
+	Debugger.log("Broadcasting Disconnect")
 	rpc("receive_disconnect")
 	remove_from_group("NetworkHandlingNodes")
 
 # Remote function to handle incoming game state updates
 @rpc("any_peer")
 func receive_disconnect():
+	Debugger.log("Recieved Disconnect")
 	emit_signal("disconnected")
-	remove_from_group("NetworkHandlingNodes")
+	SceneSwitcher.returnToIntro()
+	#remove_from_group("NetworkHandlingNodes")
 
 signal game_state_received(state: String, data: Dictionary)
 
 # Broadcasts the game state to keep both players in sync
 func broadcast_game_state(state: String, data: Dictionary):
-	print("Broadcasting state: ", state, "with data: ", data, "from host: ", getIsHost())
-	rpc("receive_game_state", state, data)
+	Debugger.log(str("Broadcasting state: ", state, "with data: ", data, "from host: ", getIsHost()))
+	rpc_id(1,"broadcast_game_state", state, data)
 
 # Remote function to handle incoming game state updates
-@rpc("any_peer")
+@rpc("any_peer", "call_local")
 func receive_game_state(state: String, data: Dictionary):
-	print("Received state: ", state, " with data: ", data, " on host: ", getIsHost())
+	Debugger.log(str("Received state: ", state, " with data: ", data, " on host: ", getIsHost()))
 	emit_signal("game_state_received", state, data)
 
 # Reset the timer on each ping received
@@ -210,30 +219,39 @@ func receive_game_state(state: String, data: Dictionary):
 func ping() -> void:
 	time_since_last_ping = 0.0
 
+
+
+
 signal received_game_settings(_game_settings: Dictionary, _hand_settings: Dictionary)
-
-@rpc
-func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionary) -> void:
-	var game_settings = _game_settings
-	var hand_settings = _hand_settings
-	print("Network Manager recieved settings")
-	emit_signal("received_game_settings",game_settings,hand_settings)
-
+# 🟢 Send messages
 func send_game_settings(_game_settings: Dictionary,_hand_settings: Dictionary) -> void:
 	var game_settings = _game_settings
 	var hand_settings = _hand_settings
-	print("Network Manager sent settings")
-	rpc("receive_game_settings",_game_settings, _hand_settings)
+	Debugger.log("Network Manager sent settings")
+	rpc_id(1,"receive_game_settings",_game_settings, _hand_settings)
+
+# 🟢 Receive messages
+@rpc("any_peer", "call_local")
+func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionary):
+	var game_settings = _game_settings
+	var hand_settings = _hand_settings
+	Debugger.log("Network Manager recieved settings")
+	emit_signal("received_game_settings",game_settings,hand_settings)
+
+
+
+
+
 
 func _process(delta: float) -> void:
 	if is_host:
 		# Broadcast a ping every second (adjust interval as necessary)
 		if Time.get_ticks_msec() % 1000 < delta * 1000:
-			rpc("ping")
+			rpc_id(1,"ping")
 			if !multiplayer.has_multiplayer_peer():
 				emit_signal("disconnected")
 				multiplayer.multiplayer_peer = null
-				print("Client Disconnected")
+				Debugger.log("Client Disconnected")
 				remove_from_group("NetworkHandlingNodes")
 	elif !is_host and check_ping:
 		# Update the timer
@@ -241,7 +259,7 @@ func _process(delta: float) -> void:
 		
 		# Check if the timeout is exceeded
 		if time_since_last_ping >= ping_timeout:
-			print("Host Ping Timedout")
+			Debugger.log("Host Ping Timedout")
 			_on_server_disconnected()
 			check_ping = false
 	pass
