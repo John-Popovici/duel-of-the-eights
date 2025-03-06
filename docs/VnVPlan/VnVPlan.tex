@@ -323,12 +323,12 @@ Testing here covers the core game mechanics, such as player vs player mode, scor
 \paragraph{Test: PvP Support}
 \begin{itemize}
     \item \textbf{Test ID:} Test-1
-    \item \textbf{Control:} Automated
+    \item \textbf{Control:} Manual
     \item \textbf{Initial State:} Game loaded to main menu.
     \item \textbf{Input:} Two players connect to a match.
     \item \textbf{Output:} Game begins with both players connected, and each takes turns as expected.
     \item \textbf{Test Case Derivation:} Confirms successful setup and turn-taking in online mode, satisfying R1.
-    \item \textbf{How test will be performed:} Automated script connects two players in PvP mode and checks player statuses.
+    \item \textbf{How test will be performed:} Two players join a match in PvP mode and verify that the game can be initiated and turns can be taken as expected.
 \end{itemize}
 
 \paragraph{Test: Score Calculation}
@@ -336,10 +336,10 @@ Testing here covers the core game mechanics, such as player vs player mode, scor
     \item \textbf{Test ID:} Test-2
     \item \textbf{Control:} Automated
     \item \textbf{Initial State:} Active game session with dice rolled.
-    \item \textbf{Input:} Player achieves a Yahtzee (five of a kind).
-    \item \textbf{Output:} Correct score added to the Yahtzee section.
+    \item \textbf{Input:} Player achieves four of a kind and selects the four of a kind option.
+    \item \textbf{Output:} Correct score added from the four of a kind option.
     \item \textbf{Test Case Derivation:} Ensures that score calculations adhere to specified Yahtzee-like rules, satisfying R2.
-    \item \textbf{How test will be performed:} Tester evaluates various combinations to ensure scoring accuracy.
+    \item \textbf{How test will be performed:} Test case evaluates various combinations to ensure scoring accuracy.
 \end{itemize}
 
 \paragraph{Test: Dice Roll Physics}
@@ -371,24 +371,24 @@ This section validates the interface, display, and customization options to ensu
 \paragraph{Test: User interface initiation}
 \begin{itemize}
     \item \textbf{Test ID:} Test-5
-    \item \textbf{Control:} Automatic
+    \item \textbf{Control:} Manual
     \item \textbf{Initial State:} Game loaded to main menu
     \item \textbf{Input:} Player connects to a match
     \item \textbf{Output:} Game begins and a UI displaying important information, such as Player names, scores, number of rolls and time limits, is displayed.
     \item \textbf{Test Case Derivation:} confirms the Display of UI elements conveying important information to the User, thus satisfying requirement R8
-    \item \textbf{How test will be performed:} Upon the beginning of a match, an automated script will Create a UI that displays important information to the user, and updates as the match goes on.
+    \item \textbf{How test will be performed:} Upon the beginning of a match, testers will verify that expected UI is visible for display, and updates as the game goes on.
 \end{itemize}
 
 
 \paragraph{Test: Dice Selection}
 \begin{itemize}
     \item \textbf{Test ID:} Test-6
-    \item \textbf{Control:} Manual
+    \item \textbf{Control:} Automated
     \item \textbf{Initial State:} Mid-game, with player allowed to roll again.
-    \item \textbf{Input:} Player selects specific dice to keep and re-rolls the remaining.
-    \item \textbf{Output:} Only unselected dice are re-rolled, while selected dice remain.
+    \item \textbf{Input:} Player selects specific dice to roll and keeps those remaining.
+    \item \textbf{Output:} Only selected dice are re-rolled, while unselected dice remain.
     \item \textbf{Test Case Derivation:} Validates dice selection mechanics as per game rules, satisfying R7.
-    \item \textbf{How test will be performed:} Tester selects different dice combinations to confirm correct behavior.
+    \item \textbf{How test will be performed:} Automated test case selects some dice and performs a roll. The test then checks that the dice that were selected are rolling, and the dice that were not selected are not rolling.
 \end{itemize}
 
 \paragraph{Test: Game Presets}
@@ -422,21 +422,21 @@ Nonfunctional tests focus on measuring performance, responsiveness, reliability,
 \paragraph{Test: Frame Rate Consistency}
 \begin{itemize}
     \item \textbf{Test ID:} Test-9
-    \item \textbf{Type:} Dynamic, Automated
+    \item \textbf{Type:} Dynamic, Manual (from usability testing)
     \item \textbf{Initial State:} Game in progress.
     \item \textbf{Input/Condition:} Standard gameplay, including dice rolls, UI interactions, and animations.
     \item \textbf{Output/Result:} Game maintains a frame rate of at least 30 FPS.
-    \item \textbf{How test will be performed:} Frame rate monitored during gameplay on low and high-end systems to ensure stability.
+    \item \textbf{How test will be performed:} Frame rate monitored by testers during gameplay on low and high-end systems to ensure stability.
 \end{itemize}
 
 \paragraph{Test: Input Responsiveness}
 \begin{itemize}
     \item \textbf{Test ID:} Test-10
-    \item \textbf{Type:} Dynamic, Automated
+    \item \textbf{Type:} Dynamic, Manual (from usability testing)
     \item \textbf{Initial State:} Game loaded.
     \item \textbf{Input:} Player performs multiple actions (e.g., roll dice, end turn).
     \item \textbf{Output:} System responds within 500 ms of input.
-    \item \textbf{How test will be performed:} Response times recorded using automated tools, with any delays highlighted.
+    \item \textbf{How test will be performed:} Poor response times will be noted by users during usability testing.
 \end{itemize}
 
 \subsubsection{System Compatibility and Reliability}
@@ -483,13 +483,13 @@ The following table provides traceability between the test cases and the require
         Test-8 & R9: Game settings modification \\
         Test-9 & NFR1: Frame rate consistency \\
         Test-10 & NFR5: Input responsiveness \\
-        Test-11 & NFR3: Windows 10 compatibility, NFR10: MacOS support \\
+        Test-11 & NFR3: Windows 10 compatibility, \textit{*NFR10: MacOS support} \\
         Test-12 & NFR4: Multiplayer stability \\
         \hline
     \end{tabular}
     \label{tab:traceability}
 \end{table}
-
+\textit{* indicates stretch goal - out of scope}
 
 \newpage
 \section{Unit Test Description}
