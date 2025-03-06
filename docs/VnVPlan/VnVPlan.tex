@@ -291,10 +291,8 @@ The following documents are crucial for the Verification and Validation process,
 \noindent To maintain code quality and reliability, teh team will implement a variety of automated testing tools. Any mentioned tools are not finalized and may be substituted based on team preferences and needs:
 
   \begin{itemize}
-    \item \textbf{Unit Testing Framework}: The team will employ a unit testing framework, such as NUnit or xUnit, recommended by Microsoft, to automate our test cases. This will help ensure that each game feature functions consistently and accurately.
-    \item \textbf{Test Coverage Tools}: The team will utilize Coverlet which provides a cross-platform code coverage framework for C\#. As part of the .NET Foundation, Coverlet is recommended by Microsoft and will help us track coverage metrics to ensure our tests sufficiently cover the core components of the system.
-    \item \textbf{Linters}: The team will integrate language-specific linters, like Roslyn analyzers recommended by Microsoft, to ensure our code adheres to best practices and established coding standards.
-    \item \textbf{Continuous Integration (CI)}: The team will try to use a continuous integration platform, such GitHub Actions. However, the unique demands of game development could make it difficult to achieve seamless integration. Due to problems including lengthy build times, complex asset management, and dependence on graphical resources. Notwithstanding these possible obstacles, our goal is to set up a continuous integration pipeline that provides reliable feedback on code quality by automatically running tests whenever work is posted to the repository. It is important to note that this may not be entirely feasible.
+    \item \textbf{Unit Testing Framework}: The team will employ Godot's 'GUT Test' unit testing framework, to test all in-game functionality that can be reasonably tested via unit tests. This will help ensure that each game feature functions consistently and accurately.
+    \item \textbf{Continuous Integration (CI)}: The team will implement continuous integration through GitHub Actions to automate pdf generation when latex files are committed, and also to run unit tests on pull requests whenever code changes are made. Unit tests will be written within the GUT(Godot Unit Testing) testing framework and we will create a github action to automatically download Godot and GUT, to run the full test suite and block code merges when test cases fail.
   \end{itemize}
 
 \subsection{Software Validation Plan}
