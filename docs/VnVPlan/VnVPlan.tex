@@ -493,130 +493,151 @@ The following table provides traceability between the test cases and the require
 
 \newpage
 \section{Unit Test Description}
-
-\wss{This section should not be filled in until after the MIS (detailed design
-  document) has been completed.}
-
-\wss{Reference your MIS (detailed design document) and explain your overall
-philosophy for test case selection.}  
-
-\wss{To save space and time, it may be an option to provide less detail in this section.  
-For the unit tests you can potentially layout your testing strategy here.  That is, you 
-can explain how tests will be selected for each module.  For instance, your test building 
-approach could be test cases for each access program, including one test for normal behaviour 
-and as many tests as needed for edge cases.  Rather than create the details of the input 
-and output here, you could point to the unit testing code.  For this to work, you code 
-needs to be well-documented, with meaningful names for all of the tests.}
+% Reference MIS and explain philosophy for test case selection.
 
 \subsection{Unit Testing Scope}
+% Specify modules that are out of scope and rationale for prioritization.
 
-\wss{What modules are outside of the scope.  If there are modules that are
-  developed by someone else, then you would say here if you aren't planning on
-  verifying them.  There may also be modules that are part of your software, but
-  have a lower priority for verification than others.  If this is the case,
-  explain your rationale for the ranking of module importance.}
+The unit testing scope includes the Dice Container Module and the Scoring Module. Other modules related to UI and networking are not the focus of unit testing at this stage. The testing priority is given to modules that directly impact gameplay mechanics and fairness.
 
 \subsection{Tests for Functional Requirements}
 
-\wss{Most of the verification will be through automated unit testing.  If
-  appropriate specific modules can be verified by a non-testing based
-  technique.  That can also be documented in this section.}
-
-\subsubsection{Module 1}
-
-\wss{Include a blurb here to explain why the subsections below cover the module.
-  References to the MIS would be good.  You will want tests from a black box
-  perspective and from a white box perspective.  Explain to the reader how the
-  tests were selected.}
+\subsubsection{Dice Container Module}
+% Justification for coverage of the module and test selection approach.
 
 \begin{enumerate}
-
-\item{test-id1\\}
-
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
-
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
-
-How test will be performed: 
-					
-\item{test-id2\\}
-
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
-
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
-
-How test will be performed: 
-
-\item{...\\}
+    \item Test: Roll dice functionality
+    \begin{itemize}
+        \item Type: Functional, Automatic
+        \item Initial State: New dice container instance with new dice added
+        \item Input: Call the roll dice functionality
+        \item Output: All dice get rolled
+        \item Test Case Derivation: Ensures that dice always get rolled when requested
+        \item How test will be performed: Instantiate new dice container with newly instantiated dice nodes and then verify that all dice are in a rolling state after calling the roll function
+    \end{itemize}
     
+    \item Test: Rolling selected dice
+    \begin{itemize}
+        \item Type: Functional, Automatic
+        \item Initial State: New dice container with new dice added, some selected and some not
+        \item Input: Call the roll selected dice functionality
+        \item Output: Selected dice get rolled and unselected dice do not get rolled
+        \item Test Case Derivation: Ensures that only selected dice get rolled
+        \item How test will be performed: Instantiate new dice container with newly instantiated dice nodes and then verify that selected dice are in a rolling state after calling the roll function and unselected dice are not in a rolling state
+    \end{itemize}
+
+    \item Test: Dice selection can be inverted
+    \begin{itemize}
+        \item Type: Functional, Automatic
+        \item Initial State: New dice container with new dice added, some selected and some not
+        \item Input: Call invert selection functionality on dice
+        \item Output: Selected dice become unselected and unselected dice become selected
+        \item Test Case Derivation: Ensures that users can choose to roll selected or keep selected dice
+        \item How test will be performed: Instantiate new dice container with newly instantiated dice nodes where some are selected and some are not, then call the invert selection function and verify that the selected dice are now unselected and vice versa
+    \end{itemize}
+
+    \item Test: Dice values can be read
+    \begin{itemize}
+        \item Type: Functional, Automatic
+        \item Initial State: New dice container with new dice added, and roll all dice
+        \item Input: Call the get dice values functionality
+        \item Output: All dice values get returned
+        \item Test Case Derivation: Ensures that values can be read after dice get rolled
+        \item How test will be performed: Instantiate new dice container with newly instantiated dice nodes and roll all dice, then call the get dice values function and verify that all dice return values
+    \end{itemize}
+
+    \item Test: Dice collisions can be toggled
+    \begin{itemize}
+        \item Type: Functional, Automatic
+        \item Initial State: New dice container with new dice added
+        \item Input: Call functionality to toggle collisions off, and then back on
+        \item Output: All dice lose collidable property, then regain it
+        \item Test Case Derivation: Ensures that dice collisions can be toggled as needed for dice animations
+        \item How test will be performed: Instantiate new dice container with newly instantiated dice nodes, then call the toggle collisions function and verify that each die has collisions disabled, then call the function again and verify that each die has collisions enabled again
+    \end{itemize}
+
 \end{enumerate}
 
-\subsubsection{Module 2}
+\subsubsection{Scoring Module}
 
-...
-
-\subsection{Tests for Nonfunctional Requirements}
-
-\wss{If there is a module that needs to be independently assessed for
-  performance, those test cases can go here.  In some projects, planning for
-  nonfunctional tests of units will not be that relevant.}
-
-\wss{These tests may involve collecting performance data from previously
-  mentioned functional tests.}
-
-\subsubsection{Module ?}
-		
 \begin{enumerate}
+    \item Test: Calculate score for a full house
+    \begin{itemize}
+        \item Type: Functional, Automatic
+        \item Initial State: Set of dice showing full house
+        \item Input: Dice values
+        \item Output: Expected full house score
+        \item Test Case Derivation: Ensures correct score computation
+        \item How test will be performed: Pass dice values and check score
+    \end{itemize}
 
-\item{test-id1\\}
+    \item Test: Calculate score for a kind
+    \begin{itemize}
+        \item Type: Functional, Automatic
+        \item Initial State: Set of dice showing a kind
+        \item Input: Dice values and the quantity for the kind
+        \item Output: Expected kind score
+        \item Test Case Derivation: Ensures scoring logic applies correctly
+        \item How test will be performed: Pass kind roll and verify score
+    \end{itemize}
 
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
-					
-Initial State: 
-					
-Input/Condition: 
-					
-Output/Result: 
-					
-How test will be performed: 
-					
-\item{test-id2\\}
+    \item Test: Score calculation for a straight
+    \begin{itemize}
+        \item Type: Functional, Automatic
+        \item Initial State: Set of dice showing sequence
+        \item Input: Dice values and some expected sequence quantity
+        \item Output: Expected straight score
+        \item Test Case Derivation: Ensures proper scoring for straights
+        \item How test will be performed: Provide sequence values and check score
+    \end{itemize}
 
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
+    \item Test: Score calculation for singles
+    \begin{itemize}
+        \item Type: Functional, Automatic
+        \item Initial State: Set of dice showing singles
+        \item Input: Dice values and the single to score on
+        \item Output: Expected singles score
+        \item Test Case Derivation: Ensures proper scoring for singles
+        \item How test will be performed: Provide singles values and check score
+    \end{itemize}
+
+    \item Test: Score calculation for chance
+    \begin{itemize}
+        \item Type: Functional, Automatic
+        \item Initial State: Random set of dice
+        \item Input: Dice values
+        \item Output: Expected chance score
+        \item Test Case Derivation: Ensures proper scoring for chance
+        \item How test will be performed: Provide dice values and check score
+    \end{itemize}
 
 \end{enumerate}
-
-\subsubsection{Module ?}
-
-...
 
 \subsection{Traceability Between Test Cases and Modules}
 
-\wss{Provide evidence that all of the modules have been considered.}
-				
+\begin{table}[H]
+  \centering
+  \begin{tabular}{p{0.4\textwidth} p{0.4\textwidth}}
+    \toprule
+    \textbf{Test Case} & \textbf{Modules} \\
+    \midrule
+    test\_roll\_dice & Dice Container \\
+    test\_roll\_selected\_dice & Dice Container \\
+    test\_invert\_dice\_selection & Dice Container \\
+    test\_read\_dice\_values & Dice Container \\
+    test\_toggle\_dice\_collisions & Dice Container \\
+    test\_full\_house\_scoring & Scoring Module \\
+    test\_kind\_scoring & Scoring Module \\
+    test\_straight\_scoring & Scoring Module \\
+    test\_singles\_scoring & Scoring Module \\
+    test\_chance\_scoring & Scoring Module \\
+    \bottomrule
+  \end{tabular}
+  \caption{Traceability Between Test Cases and Modules}
+  \label{TblTraceability}
+\end{table}
+
+\newpage
 \bibliographystyle{plainnat}
 
 \bibliography{../../refs/References}
