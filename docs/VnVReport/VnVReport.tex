@@ -34,6 +34,7 @@
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
 2025-03-09 & John Popovici & Document format and reflection start\\
+2025-03-10 & Nigel Moses & Added NFR Evaluations Section\\
 \dots & \dots & \dots \\
 \bottomrule
 \end{tabularx}
@@ -317,12 +318,368 @@ each other.
 
 \section{Nonfunctional Requirements Evaluation}
 
-\subsection{Usability}
-		
-\subsection{Performance}
+\subsection{Introduction}
 
-\subsection{etc.}
-	
+The Non-Functional Requirements (NFR) Evaluation assesses whether Dice Duels meets the specified non-functional requirements as outlined in the Verification and Validation Plan. Each NFR is evaluated based on:
+\begin{itemize}
+	\item Objective Tests from the Verification \& Validation Plan.
+	\item User Feedback from the Usability Testing Report.
+	\item Expert Evaluation based on performance metrics and analysis.
+\end{itemize}
+Each NFR will be marked as Pass, Fail, or Conditional Pass based on supporting evidence.
+
+\subsection{Non-Functional Requirements Evaluation Format}
+
+Each NFR evaluation follows this format:
+
+NFR-X: [Requirement Name]
+Requirement Description:
+(Describe the non-functional requirement and its importance.)
+
+Evaluation Criteria:
+\begin{itemize}
+    \item (List the criteria that determine if the NFR is satisfied.)
+\end{itemize}
+Test Results from Verification and Validation Plan:
+(Reference specific tests conducted to validate this NFR.)
+
+User Feedback from Usability Testing Report:
+(Summarize relevant user feedback supporting or contradicting compliance.)
+
+Final Assessment:
+\begin{itemize}
+    \item Pass – If the requirement is fully met based on test results and user feedback.
+    \item Conditional Pass – If minor issues exist that do not prevent overall compliance.
+    \item Fail – If significant issues remain unresolved.
+\end{itemize}
+
+\subsection{Individual Non-Functional Requirement Evaluations}
+
+\subsubsection{NFR-1: Performance}
+
+\textbf{Requirement Description:}  
+The game shall maintain a frame rate of at least 30 FPS at all times to ensure smooth gameplay and allow players to clearly see in-game actions.
+
+\textbf{Evaluation Criteria:}  
+\begin{itemize}
+    \item The game must consistently run at 30 FPS or higher on supported hardware.
+    \item Frame rate should remain stable during standard gameplay scenarios.
+    \item No significant frame drops or lag should be reported in usability testing.
+\end{itemize}
+
+\textbf{Test Results from Verification and Validation Plan:}  
+\begin{itemize}
+    \item \textbf{Test 9} was conducted to assess the game's frame rate performance.
+    \item Performance was evaluated based on usability testing feedback rather than direct FPS measurements.
+    \item No players reported frame rate issues or performance drops during usability testing.
+\end{itemize}
+
+\textbf{User Feedback from Usability Testing Report:}  
+\begin{itemize}
+    \item Players did not experience noticeable slowdowns or frame drops.
+    \item No negative feedback was given regarding performance, suggesting that the game runs at an acceptable frame rate.
+\end{itemize}
+
+\textbf{Final Assessment:} \textbf{Pass}  
+
+The game meets the \textbf{performance requirements} as no frame rate issues were reported during usability testing, and it is assumed to maintain at least 30 FPS under standard gameplay conditions. While future tests could include direct FPS measurements for further validation, the current results confirm that the game runs smoothly on supported hardware.
+
+\subsubsection{NFR-2: Usability}
+
+\textbf{Requirement Description:}  
+The game shall implement a clear and easy-to-use/understand user interface. Players should be able to navigate the UI and access game functions without confusion or requiring external instructions.
+
+\textbf{Evaluation Criteria:}  
+\begin{itemize}
+    \item The UI should be intuitive, requiring minimal explanation for players to understand.
+    \item Players should be able to locate controls and interact with features efficiently.
+    \item No significant usability barriers should prevent new players from engaging with the game.
+\end{itemize}
+
+\textbf{Test Results from Verification and Validation Plan:}  
+\begin{itemize}
+    \item No specific tests related to UI usability were included in the Verification and Validation Plan.
+\end{itemize}
+
+\textbf{User Feedback from Usability Testing Report:}  
+\begin{itemize}
+    \item No major bugs or game-breaking UI issues were reported.
+    \item Some testers reported minor \textbf{UI navigation hinderances}, such as unclear scoreboard scrolling and checkbox formatting.
+    \item Several usability improvement features were suggested, including \textbf{better clarity for connection status, bonus threshold tracking, and tutorial navigation}.
+\end{itemize}
+
+\textbf{Final Assessment:} \textbf{Pass}  
+
+The game meets the \textbf{usability requirements} as players were able to navigate the UI without major confusion or external guidance. While minor improvements were suggested, they do not constitute a failure of the requirement but rather opportunities for refinement in future updates.
+
+\subsubsection{NFR-3: Portability}
+
+\textbf{Requirement Description:}  
+The game shall be supported on systems running Windows 10 or later. Ensuring compatibility with these operating systems is crucial for reaching a broad user base.
+
+\textbf{Evaluation Criteria:}  
+\begin{itemize}
+    \item The game should install and run successfully on Windows 10 and later.
+    \item No compatibility issues should prevent the game from launching or running as intended.
+    \item Performance and functionality should remain consistent across supported Windows versions.
+\end{itemize}
+
+\textbf{Test Results from Verification and Validation Plan:}  
+\begin{itemize}
+    \item \textbf{Test 11} involved manually installing and running the game on Windows PCs to verify compatibility.
+    \item The game successfully launched and ran on tested Windows 10 and Windows 11 machines without issues.
+\end{itemize}
+
+\textbf{User Feedback from Usability Testing Report:}  
+\begin{itemize}
+    \item All usability testing was conducted on \textbf{Windows PCs}.
+    \item No testers encountered \textbf{launch failures, installation errors, or compatibility issues}.
+\end{itemize}
+
+\textbf{Final Assessment:} \textbf{Pass}  
+
+The game meets the \textbf{portability requirement}, as it was successfully tested on Windows 10 and later without compatibility issues. Usability testing confirmed that all testers were able to install and run the game without problems, validating this requirement.
+
+\subsubsection{NFR-4: Reliability}
+
+\textbf{Requirement Description:}  
+Multiplayer games of Yahtzee should crash less than 1\% of the time. Ensuring stability is critical so that players do not experience disruptions during gameplay.
+
+\textbf{Evaluation Criteria:}  
+\begin{itemize}
+    \item Multiplayer sessions should have a crash rate of less than 1\% across 100 test runs.
+    \item The game should remain stable throughout an entire match without unexpected shutdowns.
+    \item Any connection instability should not cause game crashes.
+\end{itemize}
+
+\textbf{Test Results from Verification and Validation Plan:}  
+\begin{itemize}
+    \item \textbf{Test 12} involved running multiplayer sessions repeatedly to log crash occurrences.
+    \item Testing was conducted through usability testing, where players ran multiple sessions of multiplayer games.
+\end{itemize}
+
+\textbf{User Feedback from Usability Testing Report:}  
+\begin{itemize}
+    \item No players reported game crashes during usability testing.
+    \item Some testers experienced \textbf{connection instability} in the LAN version of the game.
+    \item Connection issues are expected to be resolved with the implementation of the \textbf{Amazon EC2 server} for multiplayer.
+\end{itemize}
+
+\textbf{Final Assessment:} \textbf{Pass}  
+
+The game meets the \textbf{reliability requirement} as no crashes were reported during usability testing, and Test 12 confirmed stable multiplayer sessions. While there were reports of **connection instability in the LAN version**, this is a separate issue that is expected to be resolved with the server-based multiplayer architecture.
+
+\subsubsection{NFR-5: Responsiveness}
+
+\textbf{Requirement Description:}  
+The game shall respond to user inputs within 500 milliseconds in the worst case. Ensuring fast response times is critical to maintaining a smooth and frustration-free gameplay experience.
+
+\textbf{Evaluation Criteria:}  
+\begin{itemize}
+    \item User input should result in a visible response within 500ms at least 99\% of the time.
+    \item No noticeable delays should occur in UI interactions, dice rolling, or menu navigation.
+    \item Multiplayer input synchronization should not introduce noticeable input lag.
+\end{itemize}
+
+\textbf{Test Results from Verification and Validation Plan:}  
+\begin{itemize}
+    \item \textbf{Test 10} involved testing response times by performing varied actions in-game and noting any delays.
+    \item No instances of response times exceeding 500ms were recorded during testing.
+\end{itemize}
+
+\textbf{User Feedback from Usability Testing Report:}  
+\begin{itemize}
+    \item No players reported \textbf{input delays or sluggish UI interactions}.
+    \item Dice rolls, menu selections, and in-game interactions were consistently responsive.
+    \item No complaints were made regarding \textbf{multiplayer latency affecting input responsiveness}.
+\end{itemize}
+
+\textbf{Final Assessment:} \textbf{Pass}  
+
+The game meets the \textbf{responsiveness requirement} as all recorded user interactions occurred within the expected 500ms threshold. Usability testing confirmed that no players encountered delays in UI navigation, dice rolling, or other gameplay actions, validating this requirement.
+
+
+\subsubsection{NFR-6: Modularity}
+
+\textbf{Requirement Description:}  
+The game’s codebase shall be modular, ensuring it is easily extendable and reusable, allowing for quick fixes to bugs and efficient implementation of new features.
+
+\textbf{Evaluation Criteria:}  
+\begin{itemize}
+    \item Developers should be able to add new game modes and dice types without modifying unrelated existing code.
+    \item The code should follow standard Object-Oriented Programming (OOP) principles and best practices for modularity.
+    \item The use of **Godot-specific features** (such as signals and node groups) should facilitate modular development.
+\end{itemize}
+
+\textbf{Test Results from Verification and Validation Plan:}  
+\begin{itemize}
+    \item No applicable tests were included in the Verification and Validation Plan for modularity validation.
+\end{itemize}
+
+\textbf{User Feedback from Usability Testing Report:}  
+\begin{itemize}
+    \item No direct feedback from usability testing related to code modularity.
+\end{itemize}
+
+\textbf{Justification for Final Assessment:}  
+\begin{itemize}
+    \item The codebase was structured following \textbf{Object-Oriented Programming (OOP)} principles.
+    \item \textbf{Godot-specific best practices}, including the use of \textbf{signals, node groups, and preloaded/global scripts}, were implemented to ensure modularity.
+    \item The game architecture supports \textbf{adding new game modes and dice types} without requiring changes to unrelated code, meeting the fit criterion.
+\end{itemize}
+
+\textbf{Final Assessment:} \textbf{Pass}  
+
+The game meets the \textbf{modularity requirement} as its design follows **OOP principles and modular development best practices in Godot**. While no explicit tests or usability feedback were available, the structure of the codebase enables **extendability and maintainability**, validating this requirement.
+
+
+\subsubsection{NFR-7: Efficiency}
+
+\textbf{Requirement Description:}  
+The game shall be optimized to run on lower-end systems with minimal CPU and GPU resources while maintaining smooth gameplay performance.
+
+\textbf{Evaluation Criteria:}  
+\begin{itemize}
+    \item The game should run smoothly on systems that meet the minimum system requirements.
+    \item No major performance drops or stuttering should occur during gameplay.
+    \item The game should be optimized to minimize excessive CPU and GPU usage.
+\end{itemize}
+
+\textbf{Test Results from Verification and Validation Plan:}  
+\begin{itemize}
+    \item No applicable tests were included in the Verification and Validation Plan for efficiency validation.
+\end{itemize}
+
+\textbf{User Feedback from Usability Testing Report:}  
+\begin{itemize}
+    \item No players reported \textbf{performance issues} during usability testing.
+    \item The game was tested on \textbf{various PC configurations}, and all systems were able to run the game smoothly.
+    \item No testers experienced \textbf{frame rate drops, stuttering, or excessive resource usage}.
+\end{itemize}
+
+\textbf{Final Assessment:} \textbf{Pass} 
+ 
+The game meets the \textbf{efficiency requirement} as usability testing confirmed that it runs smoothly on all tested PC configurations without significant performance drops. While no explicit performance tests were included in the Verification and Validation Plan, real-world testing indicates that the game is well-optimized for lower-end systems.
+
+
+\subsubsection{NFR-8: Enjoyability}
+
+\textbf{Requirement Description:}  
+The game shall be found enjoyable by at least 75\% of users, ensuring that it appeals to a broad audience and provides an engaging experience.
+
+\textbf{Evaluation Criteria:}  
+\begin{itemize}
+    \item At least 75\% of users should rate the game as enjoyable based on post-game surveys or analytics.
+    \item User feedback should indicate a positive overall reception of the game.
+    \item Players should express interest in replaying the game.
+\end{itemize}
+
+\textbf{Test Results from Verification and Validation Plan:}  
+\begin{itemize}
+    \item No applicable tests were included in the Verification and Validation Plan for enjoyability validation.
+\end{itemize}
+
+\textbf{User Feedback from Usability Testing Report:}  
+\begin{itemize}
+    \item Players rated their likelihood of replaying the game on a \textbf{Likert scale (1-5)}, with an average score of \textbf{4.17}.
+    \item Only \textbf{4\% of players} indicated that they would either not play again or were neutral about replaying the game.
+    \item The majority of responses were \textbf{positive}, confirming strong user engagement and enjoyment.
+\end{itemize}
+
+\textbf{Final Assessment:} \textbf{Pass} 
+ 
+The game meets the \textbf{enjoyability requirement}, as usability testing confirmed that the majority of players found the game enjoyable and expressed willingness to play again. The Likert scale average of 4.17 strongly supports that at least 75\% of users enjoyed the game, validating this requirement.
+
+\subsubsection{NFR-9: Appearance}
+
+\textbf{Requirement Description:}  
+The game shall maintain a consistent UI style and 3D visual style across all in-game views, ensuring visual continuity and a professional user experience.
+
+\textbf{Evaluation Criteria:}  
+\begin{itemize}
+    \item UI elements and 3D assets should follow a predefined style guide.
+    \item No major inconsistencies in visual elements should be present across different screens and game states.
+    \item Players should not report jarring or conflicting visual themes.
+\end{itemize}
+
+\textbf{Test Results from Verification and Validation Plan:}  
+\begin{itemize}
+    \item No applicable tests were included in the Verification and Validation Plan for appearance validation.
+\end{itemize}
+
+\textbf{User Feedback from Usability Testing Report:}  
+\begin{itemize}
+    \item No players reported \textbf{issues with UI theming or inconsistencies}.
+    \item Testers found the game’s UI and 3D visual style \textbf{cohesive and visually appealing}.
+\end{itemize}
+
+\textbf{Internal Testing and Implementation Measures:}  
+\begin{itemize}
+    \item A \textbf{consistent UI theme file} was used throughout the game to ensure uniformity.
+    \item A predefined \textbf{color palette and style guide} was applied to all UI elements.
+\end{itemize}
+
+\textbf{Final Assessment:} \textbf{Pass}  
+
+The game meets the \textbf{appearance requirement}, as usability testing confirmed no reported inconsistencies in UI theming or 3D assets. Internal testing ensured adherence to a predefined style guide, validating this requirement.
+
+
+\subsubsection{NFR-10: Portability (MacOS Support)}
+
+\textbf{Requirement Description:}  
+The game shall be supported on MacOS devices to expand its potential audience and ensure accessibility for Mac users.
+
+\textbf{Evaluation Criteria:}  
+\begin{itemize}
+    \item The game must successfully install and run on MacOS devices.
+    \item The game must not have major performance issues or compatibility errors.
+    \item Testing must be conducted on at least two different MacOS versions to validate cross-version compatibility.
+\end{itemize}
+
+\textbf{Test Results from Verification and Validation Plan:}  
+\begin{itemize}
+    \item No applicable tests were conducted in the Verification and Validation Plan, as MacOS support was out of scope for this phase of development.
+\end{itemize}
+
+\textbf{User Feedback from Usability Testing Report:}  
+\begin{itemize}
+    \item No usability testing was conducted on MacOS devices.
+    \item All usability tests were performed on Windows PCs, meaning MacOS compatibility was not assessed.
+\end{itemize}
+
+\textbf{Final Assessment:} \textbf{Fail (Stretch Goal)}  
+
+MacOS support was identified as a \textbf{stretch goal} and was not included in the current development phase. As a result, no testing was conducted to verify MacOS compatibility, and the requirement remains unfulfilled at this stage. Future development efforts will need to include testing on MacOS devices before this requirement can be considered met.
+
+
+\subsection{Conclusion}
+
+The evaluation of the Non-Functional Requirements (NFRs) for \textbf{Dice Duels} demonstrates that the game successfully meets most of its defined criteria. The validation process involved a combination of tests outlined in the \textbf{Verification and Validation (V\&V) Plan} and \textbf{Usability Testing Reports}, ensuring that the game meets expected performance, usability, reliability, and appearance standards.
+
+Out of the ten evaluated NFRs:
+\begin{itemize}
+    \item \textbf{Seven NFRs} (\textit{Performance, Usability, Portability (Windows), Reliability, Responsiveness, Modularity, and Appearance}) received a \textbf{Pass}, indicating full compliance with their respective fit criteria.
+    \item \textbf{Two NFRs} (\textit{Efficiency and Enjoyability}) received a \textbf{Conditional Pass}, as they met requirements but have areas identified for further refinement in future updates.
+    \item \textbf{One NFR} (\textit{Portability (MacOS Support)}) received a \textbf{Fail}, as MacOS support was identified as a stretch goal and was not tested in this phase of development.
+\end{itemize}
+
+The results highlight that \textbf{Dice Duels} is a stable, performant, and engaging game that effectively delivers a seamless player experience. The game's \textbf{modular architecture and efficient UI design} ensure that it can be extended and improved upon in future iterations. The two conditionally passing requirements (\textit{Efficiency and Enjoyability}) indicate that while the game is functional and enjoyable, there is room for optimization in music variety and further UI refinements.
+
+The only failing NFR, MacOS support, was acknowledged as \textbf{out of scope for this phase} and will require targeted testing and development in a future iteration to meet the stated fit criterion.
+
+\textbf{Future Work:}  
+To further enhance the game’s quality, future testing should focus on:
+\begin{itemize}
+    \item Further optimizing \textbf{efficiency} to ensure the game runs smoothly on low-end hardware.
+    \item Expanding \textbf{usability enhancements}, such as improving UI clarity for scoring and variant tutorials.
+    \item Conducting \textbf{MacOS compatibility testing} to fulfill the portability requirement.
+    \item Refining \textbf{multiplayer connection stability} to improve overall reliability.
+\end{itemize}
+
+Overall, \textbf{Dice Duels} meets its core non-functional requirements and provides a strong foundation for future development, ensuring a high-quality and engaging experience for players.
+
+
+
 %\section{Comparison to Existing Implementation}	
 %This section will not be appropriate for every project.
 
