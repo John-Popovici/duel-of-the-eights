@@ -77,13 +77,13 @@
  \subsubsection*{Description:}  The game shall support an online player vs player mode, where 2 players can play against
 each other.
 
- \*subsubsection{fit Criterion:}  2 players can connect to each other over an internet connection.
+ \subsubsection*{Fit Criterion:}  2 players can connect to each other over an internet connection.
  
- \subsubsection*{Pass or fail?}
+ \subsubsection*{Pass or fail? :}
  
  \noindent \textbf{PASS}\\
  
- \noindent  We have tested multiple versions of our game, and in each of those versions, we have verified though testing that two players on separate Windows devices connected to the same Wi-Fi network can successfully establish a connection to each other, verify their connectivity, and take turns without issues. Based on these successful tests, we confirm that this requirement has been met.
+ We have tested multiple versions of our game, and in each of those versions, we have verified though testing that two players on separate Windows devices connected to the same Wi-Fi network can successfully establish a connection to each other, verify their connectivity, and take turns without issues. Based on these successful tests, we confirm that this requirement has been met.
  
  \subsubsection*{Relevant VnV Plan test: }  
  
@@ -94,13 +94,13 @@ each other.
   
    \subsubsection*{Description:}  The game shall handle score calculations using similar rules to standard Yahtzee under default game settings.
 
- \subsubsection*{fit Criterion:}  Scores in default Yahtzee must match those obtained from an official Yahtzee score calculator (depending on house rules).
+ \subsubsection*{Fit Criterion:}  Scores in default Yahtzee must match those obtained from an official Yahtzee score calculator (depending on house rules).
  
- \subsubsection*{Pass or fail?}
+ \subsubsection*{Pass or fail? :}
  
  \noindent \textbf{PASS}\\
  
- \noindent  Through the comparisons between our hand calculated yahtzee  expected score and the games calculated score for each type of rolled hand, we have confirmed that the game can calculated the correct score for each type of hand based on yahtzee rules, and then display these calculations on the scoreboard. In addition, these calculations can adapt to the custom settings made by the players. As the game's calculated scores matches our expected scores, we can safely say that this requirement has been met. 
+ Through the comparisons between our hand calculated yahtzee  expected score and the games calculated score for each type of rolled hand, we have confirmed that the game can calculated the correct score for each type of hand based on yahtzee rules, and then display these calculations on the scoreboard. In addition, these calculations can adapt to the custom settings made by the players. As the game's calculated scores matches our expected scores, we can safely say that this requirement has been met. 
  
  \subsubsection*{Relevant VnV Plan test: }  \textbf{ Test-2}. The automated test, Test-2 from the VnV Plan, is relevant to this requirement and when we used these tests, they were all passed, confirming that the requirement had been met.
 
@@ -110,11 +110,11 @@ each other.
 
 \subsubsection*{Fit Criterion:} The result of a roll must be pseudo-random, adhere to physics-based simulation, and be accurately displayed to all players.
 
-\subsubsection*{Pass or Fail?} 
+\subsubsection*{Pass or Fail? :} 
 
  \noindent \textbf{PASS}\\
  
- \noindent In our current version, we have working 3D dice models that are physically rolled in front of the player, with methods to address and resolve any invalid rolls or collisions issues related to the rolling of the physical dice.  This requirement has been met by out project.
+ In our current version, we have working 3D dice models that are physically rolled in front of the player, with methods to address and resolve any invalid rolls or collisions issues related to the rolling of the physical dice.  This requirement has been met by out project.
 
  \subsubsection*{Relevant VnV Plan test: }  \textbf{ Test-3}. The manual test, Test-3 from the VnV Plan, is relevant to this requirement and when we executed the test, the system passed the test, confirming that the requirement had been met.
  
@@ -124,13 +124,13 @@ each other.
   
 \subsubsection*{Fit Criterion:} Dice values displayed on the UI must match the final resting state of the 3D dice model after rolling.
 
-\subsubsection*{Pass or Fail?} 
+\subsubsection*{Pass or Fail? :} 
  
   \noindent \textbf{PASS}\\
  
- \noindent In our current version, We can visually confirm that the results for each dice roll in the UI match the results of the physically rolled 3D dice models after they have finished rolling. This requirement has been met.
+ In our current version, We can visually confirm that the results for each dice roll in the UI match the results of the physically rolled 3D dice models after they have finished rolling. This requirement has been met.
  
-  \subsubsection*{Relevant VnV Plan test: } \textbf{ Test-3}. Though designed for Requirement 3, this test can confirm that requirement 4 has been met as well, as by physically rolling the dice, you can visually see if your rolled results match the results displayed in your UI or not.
+  \subsubsection*{Relevant VnV Plan test: } \textbf{ Test-3}. Though designed for Requirement 3 specifically, we have confirmed that requirement 4 has been met as well while implementing Test-3, as by physically rolling the dice, we were able to visually see that our rolled results match the results displayed in our UI.
   
 \subsection{R5: Multi Dice support} 
 
@@ -138,11 +138,11 @@ each other.
 
 \subsubsection*{Fit Criterion:} Players can select dice with different numbers of sides, and the game correctly processes rolls for all supported dice types.
 
-\subsubsection*{Pass or Fail?} 
+\subsubsection*{Pass or Fail? :} 
 
  \noindent \textbf{PASS}\\
  
- \noindent In our current version of our game, players can select from 4, 6, 8, and 10 sided dice. We have dice models for all four options, and they can all be rolled in game without issue. In addition, score calculators can adapt to the player's selected dice model. This requirement has been met.
+In our current version of our game, players can select from 4, 6, 8, and 10 sided dice. We have dice models for all four options, and they can all be rolled in game without issue. In addition, score calculators can adapt to the player's selected dice model. This requirement has been met.
 
 \subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. Though there is no test from the VnV plan dedicated to this Requirement, we have tested this requirement manually by loading the game, selecting our desired dice type, and then starting the game to see if the game can run using our selected dice option without issue. Since our current version can run any of the selected dice types without issue, the above test passes, confirming that the above requirement has been met.
 
@@ -152,11 +152,11 @@ each other.
 
 \subsubsection*{Fit Criterion:} Each player takes actions simultaneously, and results are revealed to both players once each has selected an action.
 
-\subsubsection*{Pass or Fail?} 
+\subsubsection*{Pass or Fail? :} 
 
  \noindent \textbf{PASS}\\
  
- \noindent In our current version, players automatically take their turns at the same time. The game is set so that both players automatically roll dice, select dice, and select their score for that round at the same time. This requirement has therefore been met.
+  In our current version, players automatically take their turns at the same time. The game is set so that both players automatically roll dice, select dice, and select their score for that round at the same time. This requirement has therefore been met.
 
 \subsubsection*{Relevant VnV Plan test: } \textbf{test-4}.  The manual test, Test-4 from the VnV Plan, is relevant to this requirement and when we executed the test, the system passed the test, confirming that the requirement had been met.
 
@@ -167,11 +167,11 @@ each other.
 \subsubsection*{Fit Criterion:} Players can select a subset of their dice before rolling, and the game correctly rolls only the selected dice.
 
 
-\subsubsection*{Pass or Fail?} 
+\subsubsection*{Pass or Fail? :} 
 
  \noindent \textbf{PASS}\\
  
- \noindent In our current version, Players can choose which dice they want to re-roll, which will highlight when selected. When the dice are rolled again, only selected dice will be rerolled. In addition, we have a special toggle option that allows for the inverse, which when activated causes \underline{unselected} dice to be rerolled instead of the selected ones. This requirement has been met.
+ In our current version, Players can choose which dice they want to re-roll, which will highlight when selected. When the dice are rolled again, only selected dice will be rerolled. In addition, we have a special toggle option that allows for the inverse, which when activated causes \underline{unselected} dice to be rerolled instead of the selected ones. This requirement has been met.
 
 \subsubsection*{Relevant VnV Plan test: } \textbf{test-6}.  The automated test, Test-6 from the VnV Plan, is relevant to this requirement and when we ran those tests, the tests all passed, confirming that the requirement has been met.
 
@@ -181,11 +181,11 @@ each other.
 
 \subsubsection*{Fit Criterion:} The UI must display the score, roll count, time limits, dice states, and player names without omissions or inconsistencies.
 
-\subsubsection*{Pass or Fail?} 
+\subsubsection*{Pass or Fail? :} 
 
  \noindent \textbf{PASS}\\
  
- \noindent Our current version has a UI display that provides the player will all relevant information, including score, roll count, time limits, and the names and dice states of both the player and his or her opponent. This requirement has been met.
+ Our current version has a UI display that provides the player will all relevant information, including score, roll count, time limits, and the names and dice states of both the player and his or her opponent. This requirement has been met.
 
 \subsubsection*{Relevant VnV Plan test: } \textbf{test-5}.  The Manual test, Test-5 from the VnV Plan, is relevant to this requirement and when we executed the test, the system passed the test, confirming that the requirement had been met.
 
@@ -195,11 +195,11 @@ each other.
 
 \subsubsection*{Fit Criterion:}Players must be able to access and modify at least 3 game settings before a game is started.
 
-\subsubsection*{Pass or Fail?} 
+\subsubsection*{Pass or Fail? :} 
 
  \noindent \textbf{PASS}\\
  
- \noindent Our current version Provides players with a wide variaty of options to modify. Depending on the players selected game mode, players can alter the number of rounds, the type of dice, the allowed hands for the game, rolls per round, the number of dice that can be rolled, and even the game's win condition. This requirement has been well met.
+  Our current version Provides players with a wide variaty of options to modify. Depending on the players selected game mode, players can alter the number of rounds, the type of dice, the allowed hands for the game, rolls per round, the number of dice that can be rolled, and even the game's win condition. This requirement has been well met.
 
 \subsubsection*{Relevant VnV Plan test: } \textbf{test-8}.  The Manual test, Test-8 from the VnV Plan, is relevant to this requirement and when we executed the test, the system passed the test, confirming that the requirement had been met.
 
@@ -209,11 +209,11 @@ each other.
 
 \subsubsection*{Fit Criterion:}Players must be able to select from at least one preset game mode in the settings menu.
 
-\subsubsection*{Pass or Fail?} 
+\subsubsection*{Pass or Fail? :} 
 
  \noindent \textbf{PASS}\\
  
- \noindent Our current version offers players three pre-set game modes: Standard, which closely follows traditional Yahtzee rules; Bluff, which incorporates health points and a bluffing system; and Blitz, which features a shorter timer to encourage faster rounds. Each mode applies unique parameters and settings tailored to its gameplay style, and when the game modes are selected, the unique parameters are present in the game. This requirement has therefore been met.
+  Our current version offers players three pre-set game modes: Standard, which closely follows traditional Yahtzee rules; Bluff, which incorporates health points and a bluffing system; and Blitz, which features a shorter timer to encourage faster rounds. Each mode applies unique parameters and settings tailored to its gameplay style, and when the game modes are selected, the unique parameters are present in the game. This requirement has therefore been met.
 
 \subsubsection*{Relevant VnV Plan test: } \textbf{test-7}.  The Manual test, Test-7 from the VnV Plan, is relevant to this requirement and when we executed the test, the system passed the test, confirming that the requirement had been met.
 
@@ -223,13 +223,13 @@ each other.
 
 \subsubsection*{Fit Criterion:}Two players can take turns using the same computer without errors or UI conflicts.
 
-\subsubsection*{Pass or Fail?} 
+\subsubsection*{Pass or Fail? :} 
 
  \noindent \textbf{Fail}\\
  
- \noindent  This Requirement is outside of our scope at the current stage of our project, as it is a stretch requirement, and as such hasn't been met yet.
+  This Requirement is outside of our scope at the current stage of our project, as it is a stretch requirement, and as such hasn't been met yet.
 
-\subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. 
+\subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. This requirement was out of scope for this project, and as such no test for requirement R11 was created in the VnV plan.
 
 \subsection{R12: Singleplayer} 
 
@@ -237,13 +237,13 @@ each other.
 
 \subsubsection*{Fit Criterion:} A player can start a game against a computer opponent without needing a human opponent.
 
-\subsubsection*{Pass or Fail?} 
+\subsubsection*{Pass or Fail? :} 
 
  \noindent \textbf{Fail}\\
  
- \noindent This requirement has not been met, because no single player algorithm exists yet. In addition, this Requirement is also outside of our scope at the current stage of our project, as it is a stretch requirement, and as such hasn't been met yet.
+ This requirement has not been met, because no single player algorithm exists yet. In addition, this Requirement is also outside of our scope at the current stage of our project, as it is a stretch requirement, and as such hasn't been met yet.
 
-\subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. 
+\subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. This requirement was out of scope for this project, and because of that no test for requirement R12 was created in the VnV plan.
 
 \subsection{R13: Singleplayer Algorithm} 
 
@@ -251,13 +251,13 @@ each other.
 
 \subsubsection*{Fit Criterion:} The computer opponent makes legal and strategic moves, ensuring a playable experience.
 
-\subsubsection*{Pass or Fail?} 
+\subsubsection*{Pass or Fail? :} 
 
  \noindent \textbf{Fail}\\
  
- \noindent No AI algorithm has been implemented yet, and as such this Requirement hasn't been met yet. This Requirement is also outside of our scope at the current stage of our project, as it is a stretch requirement, and as such it hasn't been met yet.
+  No AI algorithm has been implemented yet, and as such this Requirement hasn't been met yet. This Requirement is also outside of our scope at the current stage of our project, as it is a stretch requirement, and as such it hasn't been met yet.
 
-\subsubsection*{Relevant VnV Plan test: } \textbf{N/A}.
+\subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. This requirement was out of scope for this project, and because of that no test for requirement R13 was created in the VnV Plan.
 
 \subsection{R14: Online Matchmaking} 
 
@@ -265,13 +265,13 @@ each other.
 
 \subsubsection*{Fit Criterion:}Players can search for and be matched with online opponents.
 
-\subsubsection*{Pass or Fail?} 
+\subsubsection*{Pass or Fail? :} 
 
  \noindent \textbf{Fail}\\
  
  \noindent As of the current state of the project, this requirement remains outside the scope of the project since it's a stretch goal, and as such hasn't been implemented yet. 
 
-\subsubsection*{Relevant VnV Plan test: } \textbf{N/A}.
+\subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. This requirement was out of scope for this project, and because of that no test for requirement R13 was created in the VnV Plan.
 
 \subsection{R15: Saving game settings} 
 
@@ -280,13 +280,13 @@ each other.
 \subsubsection*{Fit Criterion:}Players can save and load custom game settings across different play sessions.
 
 
-\subsubsection*{Pass or Fail?} 
+\subsubsection*{Pass or Fail? :} 
 
  \noindent \textbf{Pass}\\
  
  \noindent As of this current version, users can now save their custom game settings and then load those same game settings even after they closed their old game session and started a new one. This requirement has been met.
 
-\subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. However, we have tested this requirement by setting up a game, saving our game settings, and then confirming that our custom game setting was still saved after ending my current session and beginning another. As our game settings remain saved and implementable even after new game sessions are begun, we can safely say that the game passes the test, and by extension, meets the requirement.
+\subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. No test from the VnV plan was dedicated to this Requirement. However, we have tested this requirement manually by setting up a game, saving our game settings, and then confirming that our custom game setting was still saved after ending my current session and beginning another. As our game settings remain saved and implementable even after new game sessions are begun, we can safely say that the game passes the test, and by extension, meets the requirement.
 
 \subsection{R16: end of game statistics} 
 
@@ -294,13 +294,13 @@ each other.
 
 \subsubsection*{Fit Criterion:}At the end of a game, the game displays statistics such as total score, average roll, and average score per round.
 
-\subsubsection*{Pass or Fail?} 
+\subsubsection*{Pass or Fail? :} 
 
  \noindent \textbf{Pass}\\
  
  \noindent As of this current version of the game, A game display showing the total score and remaining health for both players is shown at the end of every game. As such, while we consider this requirement to have been met, we are also planning on adding more statistics such as average roll, and average score per round later on in the project.
  
- \subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. No relevant test, however, we have tested this feature by playing the game to the end and seeing if the end of game results show up. As the end of game statistics show up after the end of every game we've played, we can safely say that the game passes our above test, and by extension that this requirement has been met as well.
+ \subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. No relevant test from the VnV Plan was created for this Requirement, however, we have tested this requirement manually by playing the game to the end and seeing if the end of game results show up. As the end of game statistics show up after the end of every game we've played, we can safely say that the game passes our above test, and by extension that this requirement has been met as well.
 
 \subsection{R17: Consistent and Correct game state} 
 
@@ -308,13 +308,13 @@ each other.
 
 \subsubsection*{Fit Criterion:}The game state (e.g., current scores, dice states, turn order) is always correctly updated and visible to the player.
 
-\subsubsection*{Pass or Fail?} 
+\subsubsection*{Pass or Fail? :} 
 
  \noindent \textbf{Pass}\\
  
  \noindent In our current iteration of the project, so far, we have been able to get our game stable enough to the point that we can consistently play though various rounds without issues, and the current state of the game is always correct and viable to the player throughout the entire match. This requirement has been met.
  
- \subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. No relevant test specific to this requirement. However, we have tested this requirement by  playing though a game and checking the UI to see if the correct game state is displayed throughout the whole game. As we had found no issues when conducting this test multiple times, we can safely say that the game has passed this test, and by extension, that this requirement has been met.
+ \subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. No relevant test specific to this requirement was created in the VnV Plan. However, we have tested this requirement manually by  playing though a game and checking the UI to see if the correct game state is displayed throughout the whole game. As we had found no issues when conducting this test multiple times, we can safely say that the game has passed this test, and by extension, that this requirement has been met.
 
 
 \newpage
