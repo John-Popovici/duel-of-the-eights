@@ -322,7 +322,7 @@ Functional tests are organized into different areas based on gameplay features, 
 
 Testing here covers the core game mechanics, such as player vs player mode, score calculations, and dice roll simulation.
 
-\paragraph{Test: PvP Support}
+\paragraph{\label{test-1}Test: PvP Support}
 \begin{itemize}
     \item \textbf{Test ID:} Test-1
     \item \textbf{Control:} Manual
@@ -333,7 +333,7 @@ Testing here covers the core game mechanics, such as player vs player mode, scor
     \item \textbf{How test will be performed:} Two players join a match in PvP mode and verify that the game can be initiated and turns can be taken as expected.
 \end{itemize}
 
-\paragraph{Test: Score Calculation}
+\paragraph{\label{test-2}Test: Score Calculation}
 \begin{itemize}
     \item \textbf{Test ID:} Test-2
     \item \textbf{Control:} Automated
@@ -344,7 +344,7 @@ Testing here covers the core game mechanics, such as player vs player mode, scor
     \item \textbf{How test will be performed:} Test case evaluates various combinations to ensure scoring accuracy.
 \end{itemize}
 
-\paragraph{Test: Dice Roll Physics}
+\paragraph{\label{test-3}Test: Dice Roll Physics}
 \begin{itemize}
     \item \textbf{Test ID:} Test-3
     \item \textbf{Control:} Manual
@@ -355,7 +355,7 @@ Testing here covers the core game mechanics, such as player vs player mode, scor
     \item \textbf{How test will be performed:} Tester initiates rolls and observes animation and outcomes.
 \end{itemize}
 
-\paragraph{Test: Simultaneous turn implementation}
+\paragraph{\label{test-4}Test: Simultaneous turn implementation}
 \begin{itemize}
     \item \textbf{Test ID:} Test-4
     \item \textbf{Control:} Manual
@@ -370,7 +370,7 @@ Testing here covers the core game mechanics, such as player vs player mode, scor
 
 This section validates the interface, display, and customization options to ensure they meet user needs and game standards.
 
-\paragraph{Test: User interface initiation}
+\paragraph{\label{test-5}Test: User interface initiation}
 \begin{itemize}
     \item \textbf{Test ID:} Test-5
     \item \textbf{Control:} Manual
@@ -382,7 +382,7 @@ This section validates the interface, display, and customization options to ensu
 \end{itemize}
 
 
-\paragraph{Test: Dice Selection}
+\paragraph{\label{test-6}Test: Dice Selection}
 \begin{itemize}
     \item \textbf{Test ID:} Test-6
     \item \textbf{Control:} Automated
@@ -393,7 +393,7 @@ This section validates the interface, display, and customization options to ensu
     \item \textbf{How test will be performed:} Automated test case selects some dice and performs a roll. The test then checks that the dice that were selected are rolling, and the dice that were not selected are not rolling.
 \end{itemize}
 
-\paragraph{Test: Game Presets}
+\paragraph{\label{test-7}Test: Game Presets}
 \begin{itemize}
     \item \textbf{Test ID:} Test-7
     \item \textbf{Control:} Manual
@@ -404,7 +404,7 @@ This section validates the interface, display, and customization options to ensu
     \item \textbf{How test will be performed:} Tester selects the pre-made options and runs the games to confirm functionality.
 \end{itemize}
 
-\paragraph{Test: Custom Game Settings Modification}
+\paragraph{\label{test-8}Test: Custom Game Settings Modification}
 \begin{itemize}
     \item \textbf{Test ID:} Test-8
     \item \textbf{Control:} Manual
@@ -421,7 +421,7 @@ Nonfunctional tests focus on measuring performance, responsiveness, reliability,
 
 \subsubsection{Performance and Usability}
 
-\paragraph{Test: Frame Rate Consistency}
+\paragraph{\label{test-9}Test: Frame Rate Consistency}
 \begin{itemize}
     \item \textbf{Test ID:} Test-9
     \item \textbf{Type:} Dynamic, Manual (from usability testing)
@@ -431,7 +431,7 @@ Nonfunctional tests focus on measuring performance, responsiveness, reliability,
     \item \textbf{How test will be performed:} Frame rate monitored by testers during gameplay on low and high-end systems to ensure stability.
 \end{itemize}
 
-\paragraph{Test: Input Responsiveness}
+\paragraph{\label{test-10}Test: Input Responsiveness}
 \begin{itemize}
     \item \textbf{Test ID:} Test-10
     \item \textbf{Type:} Dynamic, Manual (from usability testing)
@@ -443,7 +443,7 @@ Nonfunctional tests focus on measuring performance, responsiveness, reliability,
 
 \subsubsection{System Compatibility and Reliability}
 
-\paragraph{Test: System Compatibility}
+\paragraph{\label{test-11}Test: System Compatibility}
 \begin{itemize}
     \item \textbf{Test ID:} Test-11
     \item \textbf{Type:} Manual
@@ -453,7 +453,7 @@ Nonfunctional tests focus on measuring performance, responsiveness, reliability,
     \item \textbf{How test will be performed:} Run game on Windows 10 (and MacOS - stretch goal) to confirm compatibility, satisfying NFR3 (and NFR10).
 \end{itemize}
 
-\paragraph{Test: Crash Resilience in Multiplayer}
+\paragraph{\label{test-12}Test: Crash Resilience in Multiplayer}
 \begin{itemize}
     \item \textbf{Test ID:} Test-12
     \item \textbf{Type:} Dynamic, Manual
@@ -475,18 +475,18 @@ The following tables provides traceability between the test cases and the requir
         \hline
         \textbf{Test Case ID} & \textbf{Test Case Name} \\
         \hline
-        Test-1 & PvP Support \\
-        Test-2 & Score Calculation \\
-        Test-3 & Dice Roll Physics \\
-        Test-4 & Simultaneous turn implementation \\
-        Test-5 & User interface initiation \\
-        Test-6 & Dice Selection \\
-        Test-7 & Game Presets \\
-        Test-8 & Custom Game Settings Modification \\
-        Test-9 & Frame Rate Consistency \\
-        Test-10 & Input Responsiveness \\
-        Test-11 & System Compatibility \\
-        Test-12 & Crash Resilience in Multiplayer \\
+        \hyperref[test-1]{Test-1} & PvP Support \\
+        \hyperref[test-2]{Test-2} & Score Calculation \\
+        \hyperref[test-3]{Test-3} & Dice Roll Physics \\
+        \hyperref[test-4]{Test-4} & Simultaneous turn implementation \\
+        \hyperref[test-5]{Test-5} & User interface initiation \\
+        \hyperref[test-6]{Test-6} & Dice Selection \\
+        \hyperref[test-7]{Test-7} & Game Presets \\
+        \hyperref[test-8]{Test-8} & Custom Game Settings Modification \\
+        \hyperref[test-9]{Test-9} & Frame Rate Consistency \\
+        \hyperref[test-10]{Test-10} & Input Responsiveness \\
+        \hyperref[test-11]{Test-11} & System Compatibility \\
+        \hyperref[test-12]{Test-12} & Crash Resilience in Multiplayer \\
         \hline
     \end{tabular}
     \label{tab:traceability_key1}
@@ -541,10 +541,10 @@ NFR10* & MacOS support \\
 \hline
  & \multicolumn{12}{c|}{\textbf{Tests}} \\
 \hline
-\textbf{Req.} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{2} & \multicolumn{1}{c|}{3}
-& \multicolumn{1}{c|}{4} & \multicolumn{1}{c|}{5} & \multicolumn{1}{c|}{6}
-& \multicolumn{1}{c|}{7} & \multicolumn{1}{c|}{8} & \multicolumn{1}{c|}{9}
-& \multicolumn{1}{c|}{10} & \multicolumn{1}{c|}{11} & 12 \\ \hline
+\textbf{Req.} & \multicolumn{1}{c|}{\hyperref[test-1]{1}} & \multicolumn{1}{c|}{\hyperref[test-2]{2}} & \multicolumn{1}{c|}{\hyperref[test-3]{3}}
+& \multicolumn{1}{c|}{\hyperref[test-4]{4}} & \multicolumn{1}{c|}{\hyperref[test-5]{5}} & \multicolumn{1}{c|}{\hyperref[test-6]{6}}
+& \multicolumn{1}{c|}{\hyperref[test-7]{7}} & \multicolumn{1}{c|}{\hyperref[test-8]{8}} & \multicolumn{1}{c|}{\hyperref[test-9]{9}}
+& \multicolumn{1}{c|}{\hyperref[test-10]{10}} & \multicolumn{1}{c|}{\hyperref[test-11]{11}} & \hyperref[test-12]{12} \\ \hline
 
 R1 & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
