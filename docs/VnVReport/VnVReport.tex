@@ -979,6 +979,14 @@ The requirements discussed in sections 2 and 3 are related and tested through mu
 \newpage
 \section{Code Coverage Metrics}
 
+The team used multiple code coverage techniques to ensure the code was thoroughly tested. This section describes the techniques used, such as function coverage and branch coverage, but does not include specific metrics like the percentage of code covered due to limitations of the development environment. The Godot engine does not have a feature to track code coverage of tests.
+
+Function coverage was employed to verify and validate that each function in the codebase was executed at least once and performed as expected. Through this method, the team was able to test all the parts of code responsible for processing game data such as any function relating to scoring and user settings. The technique helped identify any potential problems with any of the functions that aided in-game states being altered or sent from one player to another. Through these tests, the team was able to validate the correctness of the system in regard to any internal calculations that had to be conducted by the system.  
+
+Branch coverage was also employed which went even deeper by testing all possible paths within any decision-making functions. This method aided in verifying and validating the game's decision-making processes. Through this method, the team was able to understand any flaws associated with the game's handling of user decisions such as choosing to roll or not roll dice as each option led to a different outcome.  Thus by covering almost every possible deviation, the team minimized any logical errors that could occur during gameplay due to user actions.
+
+Overall, while specific coverage metrics were unavailable to aid the team in understanding how much of the code was being tested, the team created comprehensive test cases covering all major functions, decision points, and smaller utility functions. This approach helped the team ensure that the majority of the code base was tested and performed as expected.
+
 \bibliographystyle{plainnat}
 \bibliography{../../refs/References}
 
