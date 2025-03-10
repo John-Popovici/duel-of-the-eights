@@ -11,6 +11,7 @@
     urlcolor=blue
 }
 \usepackage[round]{natbib}
+\usepackage{float}
 
 \input{../Comments}
 \input{../Common}
@@ -36,6 +37,7 @@
 2025-03-09 & John Popovici & Document format and reflection start\\
 2025-03-10 & Nigel Moses & Added NFR Evaluations Section\\
 2025-03-10 & Naishan Guo & Added Functional Requirements Evaluations Section\\
+2025-03-10 & John Popovici & Added traceability matrices\\
 \dots & \dots & \dots \\
 \bottomrule
 \end{tabularx}
@@ -72,7 +74,9 @@
 
 \section{Functional Requirements Evaluation}
 
-\subsection{ R1: PVP support}
+
+\subsection{R1: PVP support}
+\label{R1}
 
  \subsubsection*{Description:}  The game shall support an online player vs player mode, where 2 players can play against
 each other.
@@ -89,8 +93,9 @@ each other.
  
   \noindent \textbf{ Test-1}. The manual test, Test-1 from the VnV Plan, is relevant to this requirement and when we executed the test, the system passed the test, confirming that the requirement had been met.
 
-  
-  \subsection{ R2: Yatzee score calculations} 
+
+\subsection{R2: Yatzee score calculations}
+\label{R2} 
   
    \subsubsection*{Description:}  The game shall handle score calculations using similar rules to standard Yahtzee under default game settings.
 
@@ -104,7 +109,9 @@ each other.
  
  \subsubsection*{Relevant VnV Plan test: }  \textbf{ Test-2}. The automated test, Test-2 from the VnV Plan, is relevant to this requirement and when we used these tests, they were all passed, confirming that the requirement had been met.
 
-\subsection{ R3:Dice Roll Physics} 
+
+\subsection{R3: Dice Roll Physics} 
+\label{R3}  
   
 \subsubsection*{Description:}The game shall simulate realistic physics for 3D dice rolls with pseudo-randomness on every roll that replicates accurately to all users. If rolling $AdX$ dice, $A$ numbers will have to be determined from the range $1 \geq A_{i} \geq X$.
 
@@ -117,8 +124,10 @@ each other.
  \noindent In our current version, we have working 3D dice models that are physically rolled in front of the player, with methods to address and resolve any invalid rolls or collisions issues related to the rolling of the physical dice.  This requirement has been met by out project.
 
  \subsubsection*{Relevant VnV Plan test: }  \textbf{ Test-3}. The manual test, Test-3 from the VnV Plan, is relevant to this requirement and when we executed the test, the system passed the test, confirming that the requirement had been met.
- 
+
+
 \subsection{R4: Dice roll results} 
+\label{R4} 
 
 \subsubsection*{Description:}The game shall use the real outcome of a roll to get the values from the dice.
   
@@ -132,7 +141,9 @@ each other.
  
   \subsubsection*{Relevant VnV Plan test: } \textbf{ Test-3}. Though designed for Requirement 3, this test can confirm that requirement 4 has been met as well, as by physically rolling the dice, you can visually see if your rolled results match the results displayed in your UI or not.
   
+  
 \subsection{R5: Multi Dice support} 
+\label{R5} 
 
 \subsubsection*{Description:}The game shall support both regular six-sided dice and a set of dice with different number of sides, such as octahedral dice.
 
@@ -144,9 +155,11 @@ each other.
  
  \noindent In our current version of our game, players can select from 4, 6, 8, and 10 sided dice. We have dice models for all four options, and they can all be rolled in game without issue. In addition, score calculators can adapt to the player's selected dice model. This requirement has been met.
 
-\subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. Though there is no test from the VnV plan dedicated to this Requirement, we have tested this requirement manually by loading the game, selecting our desired dice type, and then starting the game to see if the game can run using our selected dice option without issue. Since our current version can run any of the selected dice types without issue, the above test passes, confirming that the above requirement has been met.
+\subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. Though there is no explict test from the VnV plan dedicated to this Requirement, we have tested this requirement manually through \textbf{Test-3} by loading the game, selecting our desired dice type, and then starting the game to see if the game can run using our selected dice option without issue. Since our current version can run any of the selected dice types without issue, the above test passes, confirming that the above requirement has been met.
+
 
 \subsection{R6: Simultaneous turn mechanism} 
+\label{R6} 
 
 \subsubsection*{Description:}The game shall implement a simultaneous turn based mechanism such that each player (or computer) takes a turn at the same time and then results are revealed simultaneously to each other at each dice roll.
 
@@ -160,7 +173,9 @@ each other.
 
 \subsubsection*{Relevant VnV Plan test: } \textbf{test-4}.  The manual test, Test-4 from the VnV Plan, is relevant to this requirement and when we executed the test, the system passed the test, confirming that the requirement had been met.
 
+
 \subsection{R7: Dice Selection} 
+\label{R7} 
 
 \subsubsection*{Description:} The game shall allow players to pick which dice they would like to use for each roll, and which dice they would like to omit. Selected dice will be a subset of the current dice in play belonging to that player $D' \subseteq D$.
 
@@ -173,9 +188,12 @@ each other.
  
  \noindent In our current version, Players can choose which dice they want to re-roll, which will highlight when selected. When the dice are rolled again, only selected dice will be rerolled. In addition, we have a special toggle option that allows for the inverse, which when activated causes \underline{unselected} dice to be rerolled instead of the selected ones. This requirement has been met.
 
-\subsubsection*{Relevant VnV Plan test: } \textbf{test-6}.  The automated test, Test-6 from the VnV Plan, is relevant to this requirement and when we ran those tests, the tests all passed, confirming that the requirement has been met.
+\subsubsection*{Relevant VnV Plan test: } \textbf{Test-6}.  The automated test, Test-6 from the VnV Plan, is relevant to this requirement and when we ran those tests, the tests all passed, confirming that the requirement has been met.\\
+\textbf{Test-3}. The manual test of dice rolling also works towards confirming this requirement.
+
 
 \subsection{R8: User Interface} 
+\label{R8} 
 
 \subsubsection*{Description:}  The game shall display some sort of user interface to display scores, number of rolls, time limits, state of dice, and player names.
 
@@ -189,7 +207,9 @@ each other.
 
 \subsubsection*{Relevant VnV Plan test: } \textbf{test-5}.  The Manual test, Test-5 from the VnV Plan, is relevant to this requirement and when we executed the test, the system passed the test, confirming that the requirement had been met.
 
+ 
 \subsection{R9: Custom games} 
+\label{R9}
 
 \subsubsection*{Description:}The game shall provide controls for the player to modify the game settings to access unique variants of the game.
 
@@ -203,7 +223,9 @@ each other.
 
 \subsubsection*{Relevant VnV Plan test: } \textbf{test-8}.  The Manual test, Test-8 from the VnV Plan, is relevant to this requirement and when we executed the test, the system passed the test, confirming that the requirement had been met.
 
+
 \subsection{R10: Preset Selection} 
+\label{R10} 
 
 \subsubsection*{Description:}The game shall provide presets for different game modes.
 
@@ -217,7 +239,9 @@ each other.
 
 \subsubsection*{Relevant VnV Plan test: } \textbf{test-7}.  The Manual test, Test-7 from the VnV Plan, is relevant to this requirement and when we executed the test, the system passed the test, confirming that the requirement had been met.
 
+
 \subsection{R11: Local multiplayer} 
+\label{R11} 
 
 \subsubsection*{Description:}The game shall support a local player vs player mode, where 2 players can play against each other on the same computer.
 
@@ -231,7 +255,9 @@ each other.
 
 \subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. 
 
+
 \subsection{R12: Singleplayer} 
+\label{R12} 
 
 \subsubsection*{Description:}The game shall support a player vs computer mode, where 1 player can play against another entity without needing to find a human match.
 
@@ -245,7 +271,9 @@ each other.
 
 \subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. 
 
+
 \subsection{R13: Singleplayer Algorithm} 
+\label{R13} 
 
 \subsubsection*{Description:} The game shall implement some sort of algorithmic computer opponent for  player vs computer gameplay option.
 
@@ -259,7 +287,9 @@ each other.
 
 \subsubsection*{Relevant VnV Plan test: } \textbf{N/A}.
 
+
 \subsection{R14: Online Matchmaking} 
+\label{R14} 
 
 \subsubsection*{Description:}The game shall implement online matchmaking.
 
@@ -271,9 +301,11 @@ each other.
  
  \noindent As of the current state of the project, this requirement remains outside the scope of the project since it's a stretch goal, and as such hasn't been implemented yet. 
 
-\subsubsection*{Relevant VnV Plan test: } \textbf{N/A}.
+\subsubsection*{Relevant VnV Plan test: } \textbf{Test-1}. Testing the PvP functionally is done through both LAN network testing and online server connections.
+
 
 \subsection{R15: Saving game settings} 
+\label{R15} 
 
 \subsubsection*{Description:}The game shall provide the option to save specific game settings to be reused in future sessions.
 
@@ -286,9 +318,11 @@ each other.
  
  \noindent As of this current version, users can now save their custom game settings and then load those same game settings even after they closed their old game session and started a new one. This requirement has been met.
 
-\subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. However, we have tested this requirement by setting up a game, saving our game settings, and then confirming that our custom game setting was still saved after ending my current session and beginning another. As our game settings remain saved and implementable even after new game sessions are begun, we can safely say that the game passes the test, and by extension, meets the requirement.
+\subsubsection*{Relevant VnV Plan test: } \textbf{Test-8}. We have tested this requirement by setting up a game, saving our game settings, and then confirming that our custom game setting was still saved after ending my current session and beginning another. As our game settings remain saved and implementable even after new game sessions are begun, we can safely say that the game passes the test, and by extension, meets the requirement.
+
 
 \subsection{R16: end of game statistics} 
+\label{R16} 
 
 \subsubsection*{Description:}The game shall display game statistics to each player at the end of every round.
 
@@ -302,7 +336,9 @@ each other.
  
  \subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. No relevant test, however, we have tested this feature by playing the game to the end and seeing if the end of game results show up. As the end of game statistics show up after the end of every game we've played, we can safely say that the game passes our above test, and by extension that this requirement has been met as well.
 
+
 \subsection{R17: Consistent and Correct game state} 
+\label{R17} 
 
 \subsubsection*{Description:} The game shall always show the correct current state accurately.
 
@@ -357,7 +393,9 @@ Final Assessment:
 
 \subsection{Individual Non-Functional Requirement Evaluations}
 
+
 \subsubsection{NFR-1: Performance}
+\label{NFR1} 
 
 \textbf{Requirement Description:}  
 The game shall maintain a frame rate of at least 30 FPS at all times to ensure smooth gameplay and allow players to clearly see in-game actions.
@@ -386,7 +424,9 @@ The game shall maintain a frame rate of at least 30 FPS at all times to ensure s
 
 The game meets the \textbf{performance requirements} as no frame rate issues were reported during usability testing, and it is assumed to maintain at least 30 FPS under standard gameplay conditions. While future tests could include direct FPS measurements for further validation, the current results confirm that the game runs smoothly on supported hardware.
 
+
 \subsubsection{NFR-2: Usability}
+\label{NFR2}
 
 \textbf{Requirement Description:}  
 The game shall implement a clear and easy-to-use/understand user interface. Players should be able to navigate the UI and access game functions without confusion or requiring external instructions.
@@ -400,7 +440,7 @@ The game shall implement a clear and easy-to-use/understand user interface. Play
 
 \textbf{Test Results from Verification and Validation Plan:}  
 \begin{itemize}
-    \item No specific tests related to UI usability were included in the Verification and Validation Plan.
+    \item No specific tests related to UI usability were included in the Verification and Validation Plan, but \textbf{Test-1} which includes playing PvP gameplay would require interacting with the UI.
 \end{itemize}
 
 \textbf{User Feedback from Usability Testing Report:}  
@@ -414,7 +454,9 @@ The game shall implement a clear and easy-to-use/understand user interface. Play
 
 The game meets the \textbf{usability requirements} as players were able to navigate the UI without major confusion or external guidance. While minor improvements were suggested, they do not constitute a failure of the requirement but rather opportunities for refinement in future updates.
 
+
 \subsubsection{NFR-3: Portability}
+\label{NFR3}
 
 \textbf{Requirement Description:}  
 The game shall be supported on systems running Windows 10 or later. Ensuring compatibility with these operating systems is crucial for reaching a broad user base.
@@ -442,7 +484,9 @@ The game shall be supported on systems running Windows 10 or later. Ensuring com
 
 The game meets the \textbf{portability requirement}, as it was successfully tested on Windows 10 and later without compatibility issues. Usability testing confirmed that all testers were able to install and run the game without problems, validating this requirement.
 
+
 \subsubsection{NFR-4: Reliability}
+\label{NFR4}
 
 \textbf{Requirement Description:}  
 Multiplayer games of Yahtzee should crash less than 1\% of the time. Ensuring stability is critical so that players do not experience disruptions during gameplay.
@@ -471,7 +515,9 @@ Multiplayer games of Yahtzee should crash less than 1\% of the time. Ensuring st
 
 The game meets the \textbf{reliability requirement} as no crashes were reported during usability testing, and Test 12 confirmed stable multiplayer sessions. While there were reports of **connection instability in the LAN version**, this is a separate issue that is expected to be resolved with the server-based multiplayer architecture.
 
+
 \subsubsection{NFR-5: Responsiveness}
+\label{NFR5}
 
 \textbf{Requirement Description:}  
 The game shall respond to user inputs within 500 milliseconds in the worst case. Ensuring fast response times is critical to maintaining a smooth and frustration-free gameplay experience.
@@ -502,6 +548,7 @@ The game meets the \textbf{responsiveness requirement} as all recorded user inte
 
 
 \subsubsection{NFR-6: Modularity}
+\label{NFR6}
 
 \textbf{Requirement Description:}  
 The game’s codebase shall be modular, ensuring it is easily extendable and reusable, allowing for quick fixes to bugs and efficient implementation of new features.
@@ -536,6 +583,7 @@ The game meets the \textbf{modularity requirement} as its design follows **OOP p
 
 
 \subsubsection{NFR-7: Efficiency}
+\label{NFR7}
 
 \textbf{Requirement Description:}  
 The game shall be optimized to run on lower-end systems with minimal CPU and GPU resources while maintaining smooth gameplay performance.
@@ -565,6 +613,7 @@ The game meets the \textbf{efficiency requirement} as usability testing confirme
 
 
 \subsubsection{NFR-8: Enjoyability}
+\label{NFR8}
 
 \textbf{Requirement Description:}  
 The game shall be found enjoyable by at least 75\% of users, ensuring that it appeals to a broad audience and provides an engaging experience.
@@ -592,7 +641,9 @@ The game shall be found enjoyable by at least 75\% of users, ensuring that it ap
  
 The game meets the \textbf{enjoyability requirement}, as usability testing confirmed that the majority of players found the game enjoyable and expressed willingness to play again. The Likert scale average of 4.17 strongly supports that at least 75\% of users enjoyed the game, validating this requirement.
 
+
 \subsubsection{NFR-9: Appearance}
+\label{NFR9}
 
 \textbf{Requirement Description:}  
 The game shall maintain a consistent UI style and 3D visual style across all in-game views, ensuring visual continuity and a professional user experience.
@@ -627,6 +678,7 @@ The game meets the \textbf{appearance requirement}, as usability testing confirm
 
 
 \subsubsection{NFR-10: Portability (MacOS Support)}
+\label{NFR10}
 
 \textbf{Requirement Description:}  
 The game shall be supported on MacOS devices to expand its potential audience and ensure accessibility for Mac users.
@@ -640,7 +692,7 @@ The game shall be supported on MacOS devices to expand its potential audience an
 
 \textbf{Test Results from Verification and Validation Plan:}  
 \begin{itemize}
-    \item No applicable tests were conducted in the Verification and Validation Plan, as MacOS support was out of scope for this phase of development.
+    \item No applicable tests were conducted in the Verification and Validation Plan, as MacOS support was out of scope for this phase of development, but when included \textbf{Test-11} would be used for confirmation.
 \end{itemize}
 
 \textbf{User Feedback from Usability Testing Report:}  
@@ -703,8 +755,226 @@ should be highlighted.}
 \newpage
 \section{Trace to Requirements}
 
+The requirements discussed in sections 2 and 3 are related and tested through multiple means. This section highlights their respective relations to test cases, as defined in the VnVPlan report.
+
+\begin{table}[H]
+    \centering
+    \caption{Key for Test Cases}
+    \begin{tabular}{|c|l|}
+        \hline
+        \textbf{Test Case ID} & \textbf{Test Case Name} \\
+        \hline
+        \hyperref[test-1]{Test-1} & PvP Support \\
+        \hyperref[test-2]{Test-2} & Score Calculation \\
+        \hyperref[test-3]{Test-3} & Dice Roll Physics \\
+        \hyperref[test-4]{Test-4} & Simultaneous turn implementation \\
+        \hyperref[test-5]{Test-5} & User interface initiation \\
+        \hyperref[test-6]{Test-6} & Dice Selection \\
+        \hyperref[test-7]{Test-7} & Game Presets \\
+        \hyperref[test-8]{Test-8} & Custom Game Settings Modification \\
+        \hyperref[test-9]{Test-9} & Frame Rate Consistency \\
+        \hyperref[test-10]{Test-10} & Input Responsiveness \\
+        \hyperref[test-11]{Test-11} & System Compatibility \\
+        \hyperref[test-12]{Test-12} & Crash Resilience in Multiplayer \\
+        \hline
+    \end{tabular}
+    \label{tab:traceability_key1}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Traceability Matrix for Test Cases and Requirements}
+    \begin{tabular}{|c|cccccccccccc|}
+\hline
+ & \multicolumn{12}{c|}{\textbf{Tests}} \\
+\hline
+\textbf{Req.} & \multicolumn{1}{c|}{\hyperref[test-1]{1}} & \multicolumn{1}{c|}{\hyperref[test-2]{2}} & \multicolumn{1}{c|}{\hyperref[test-3]{3}}
+& \multicolumn{1}{c|}{\hyperref[test-4]{4}} & \multicolumn{1}{c|}{\hyperref[test-5]{5}} & \multicolumn{1}{c|}{\hyperref[test-6]{6}}
+& \multicolumn{1}{c|}{\hyperref[test-7]{7}} & \multicolumn{1}{c|}{\hyperref[test-8]{8}} & \multicolumn{1}{c|}{\hyperref[test-9]{9}}
+& \multicolumn{1}{c|}{\hyperref[test-10]{10}} & \multicolumn{1}{c|}{\hyperref[test-11]{11}} & \hyperref[test-12]{12} \\ \hline
+
+\hyperref[R1]{R1} & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R2]{R2} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R3]{R3} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R4]{R4} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R5]{R5} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R6]{R6} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R7]{R7} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R8]{R8} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R9]{R9} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R10]{R10} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R11]{R11} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R12]{R12} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R13]{R13} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R14]{R14} & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R15]{R15} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R16]{R16} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R17]{R17} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[NFR1]{NFR1} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[NFR2]{NFR2} & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[NFR3]{NFR3} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{X}   &    \\ \hline
+
+\hyperref[NFR4]{NFR4} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &  X  \\ \hline
+
+\hyperref[NFR5]{NFR5} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{X}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[NFR6]{NFR6} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[NFR7]{NFR7} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[NFR8]{NFR8} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[NFR9]{NFR9} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[NFR10]{NFR10} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{X}   &    \\ \hline
+    \end{tabular}
+    \label{tab:traceability}
+\end{table}
+
 \newpage
 \section{Trace to Modules}		
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{p{0.4\textwidth} p{0.5\textwidth}}
+    \toprule
+    \textbf{Test Case} & \textbf{Modules} \\
+    \midrule
+    test\_roll\_dice & DynamicDiceContainer Module \\
+    test\_roll\_selected\_dice & DynamicDiceContainer Module \\
+    test\_invert\_dice\_selection & DynamicDiceContainer Module \\
+    test\_read\_dice\_values & DynamicDiceContainer Module \\
+    test\_toggle\_dice\_collisions & DynamicDiceContainer Module \\
+    test\_full\_house\_scoring & ScoreCalculator Module \\
+    test\_kind\_scoring & ScoreCalculator Module \\
+    test\_straight\_scoring & ScoreCalculator Module \\
+    test\_singles\_scoring & ScoreCalculator Module \\
+    test\_chance\_scoring & ScoreCalculator Module \\
+    \bottomrule
+  \end{tabular}
+  \caption{Table of Traceability Between Test Cases and Modules}
+  \label{TblTraceability}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|c|c|}
+  \hline
+    \textbf{Test Case} & \textbf{DynamicDiceContainer} & \textbf{ScoreCalculator} \\ \hline
+    test\_roll\_dice & X & \\ \hline
+    test\_roll\_selected\_dice & X & \\ \hline
+    test\_invert\_dice\_selection & X & \\ \hline
+    test\_read\_dice\_values & X & \\ \hline
+    test\_toggle\_dice\_collisions & X & \\ \hline
+    test\_full\_house\_scoring & & X \\ \hline
+    test\_kind\_scoring & & X \\ \hline
+    test\_straight\_scoring & & X \\ \hline
+    test\_singles\_scoring & & X \\ \hline
+    test\_chance\_scoring & & X \\ \hline
+  \end{tabular}
+  \caption{Matrix of Traceability Between Test Cases and Modules}
+  \label{TblTraceability2}
+\end{table}
 
 \newpage
 \section{Code Coverage Metrics}
