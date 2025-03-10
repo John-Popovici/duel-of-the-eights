@@ -47,6 +47,8 @@
 2024-11-04 & John Popovici & Added reflections \\
 2024-11-04 & John Popovici & Added symbols table new section 1 \\
 2025-03-07 & John Popovici & Updated extras and added usability testing questions \\
+2025-03-08 & Isaac Giles & Added section 5 unit test section \\
+2025-03-10 & John Popovici & Updated and converted tables to matrices \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -461,10 +463,74 @@ Nonfunctional tests focus on measuring performance, responsiveness, reliability,
     \item \textbf{How test will be performed:} Simulated load testing over numerous sessions, logging any crashes to validate NFR4.
 \end{itemize}
 
-
+\newpage
 \subsection{Traceability Between Test Cases and Requirements}
 
-The following table provides traceability between the test cases and the requirements. Each test case is mapped to one or more requirements that it validates, ensuring coverage of our functional and non-functional requirements.
+The following tables provides traceability between the test cases and the requirements. Each test case is mapped to one or more requirements that it validates, ensuring coverage of our functional and non-functional requirements. Tables for keys are provided to help clarify test and requirements.
+
+\begin{table}[H]
+    \centering
+    \caption{Key for Test Cases}
+    \begin{tabular}{|c|l|}
+        \hline
+        \textbf{Test Case ID} & \textbf{Test Case Name} \\
+        \hline
+        Test-1 & PvP Support \\
+        Test-2 & Score Calculation \\
+        Test-3 & Dice Roll Physics \\
+        Test-4 & Simultaneous turn implementation \\
+        Test-5 & User interface initiation \\
+        Test-6 & Dice Selection \\
+        Test-7 & Game Presets \\
+        Test-8 & Custom Game Settings Modification \\
+        Test-9 & Frame Rate Consistency \\
+        Test-10 & Input Responsiveness \\
+        Test-11 & System Compatibility \\
+        Test-12 & Crash Resilience in Multiplayer \\
+        \hline
+    \end{tabular}
+    \label{tab:traceability_key1}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Key for Requirements}
+    \begin{tabular}{|c|l|}
+        \hline
+        \textbf{Requirement ID} & \textbf{Requirement Name} \\
+        \hline
+R1 & Online player vs player mode \\  
+R2 & Score calculation using Yahtzee rules \\  
+R3 & Realistic physics for 3D dice rolls \\  
+R4 & Dice values determined by actual roll outcome \\  
+R5 & Support for different-sided dice \\  
+R6 & Simultaneous turn-based mechanism \\  
+R7 & Player selection of dice to roll \\  
+R8 & User interface displaying game information \\  
+R9 & Customizable game settings \\  
+R10 & Preset game modes \\  
+R11* & Local player vs player mode \\  
+R12* & Player vs computer mode \\  
+R13* & Algorithmic computer opponent \\  
+R14* & Online matchmaking \\  
+R15* & Saving custom game settings \\  
+R16* & Round statistics display \\  
+R17 & Accurate display of current game state \\  
+NFR1 & Minimum 30 FPS performance \\  
+NFR2 & Clear and easy-to-use user interface \\  
+NFR3 & Support for Windows 10 and later \\  
+NFR4 & Multiplayer crash rate below 1\% \\  
+NFR5 & Maximum input response time of 500ms \\  
+NFR6 & Modular and maintainable codebase \\  
+NFR7 & Optimization for low-end systems \\  
+NFR8 & Enjoyability rating of at least 75\% \\  
+NFR9 & Consistent UI and 3D visual style \\  
+NFR10* & MacOS support \\ 
+        \hline
+    \end{tabular}
+    \label{tab:traceability_key2}
+\end{table}
+\textit{* indicates stretch goal - out of scope}
 
 \begin{table}[H]
     \centering
@@ -490,6 +556,8 @@ The following table provides traceability between the test cases and the require
     \label{tab:traceability}
 \end{table}
 \textit{* indicates stretch goal - out of scope}
+
+
 
 \newpage
 \section{Unit Test Description}
