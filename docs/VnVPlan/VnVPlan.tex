@@ -291,10 +291,8 @@ The following documents are crucial for the Verification and Validation process,
 \noindent To maintain code quality and reliability, teh team will implement a variety of automated testing tools. Any mentioned tools are not finalized and may be substituted based on team preferences and needs:
 
   \begin{itemize}
-    \item \textbf{Unit Testing Framework}: The team will employ a unit testing framework, such as NUnit or xUnit, recommended by Microsoft, to automate our test cases. This will help ensure that each game feature functions consistently and accurately.
-    \item \textbf{Test Coverage Tools}: The team will utilize Coverlet which provides a cross-platform code coverage framework for C\#. As part of the .NET Foundation, Coverlet is recommended by Microsoft and will help us track coverage metrics to ensure our tests sufficiently cover the core components of the system.
-    \item \textbf{Linters}: The team will integrate language-specific linters, like Roslyn analyzers recommended by Microsoft, to ensure our code adheres to best practices and established coding standards.
-    \item \textbf{Continuous Integration (CI)}: The team will try to use a continuous integration platform, such GitHub Actions. However, the unique demands of game development could make it difficult to achieve seamless integration. Due to problems including lengthy build times, complex asset management, and dependence on graphical resources. Notwithstanding these possible obstacles, our goal is to set up a continuous integration pipeline that provides reliable feedback on code quality by automatically running tests whenever work is posted to the repository. It is important to note that this may not be entirely feasible.
+    \item \textbf{Unit Testing Framework}: The team will employ Godot's 'GUT Test' unit testing framework, to test all in-game functionality that can be reasonably tested via unit tests. This will help ensure that each game feature functions consistently and accurately.
+    \item \textbf{Continuous Integration (CI)}: The team will implement continuous integration through GitHub Actions to automate pdf generation when latex files are committed, and also to run unit tests on pull requests whenever code changes are made. Unit tests will be written within the GUT(Godot Unit Testing) testing framework and we will create a github action to automatically download Godot and GUT, to run the full test suite and block code merges when test cases fail.
   \end{itemize}
 
 \subsection{Software Validation Plan}
@@ -325,12 +323,12 @@ Testing here covers the core game mechanics, such as player vs player mode, scor
 \paragraph{Test: PvP Support}
 \begin{itemize}
     \item \textbf{Test ID:} Test-1
-    \item \textbf{Control:} Automated
+    \item \textbf{Control:} Manual
     \item \textbf{Initial State:} Game loaded to main menu.
     \item \textbf{Input:} Two players connect to a match.
     \item \textbf{Output:} Game begins with both players connected, and each takes turns as expected.
     \item \textbf{Test Case Derivation:} Confirms successful setup and turn-taking in online mode, satisfying R1.
-    \item \textbf{How test will be performed:} Automated script connects two players in PvP mode and checks player statuses.
+    \item \textbf{How test will be performed:} Two players join a match in PvP mode and verify that the game can be initiated and turns can be taken as expected.
 \end{itemize}
 
 \paragraph{Test: Score Calculation}
@@ -338,10 +336,10 @@ Testing here covers the core game mechanics, such as player vs player mode, scor
     \item \textbf{Test ID:} Test-2
     \item \textbf{Control:} Automated
     \item \textbf{Initial State:} Active game session with dice rolled.
-    \item \textbf{Input:} Player achieves a Yahtzee (five of a kind).
-    \item \textbf{Output:} Correct score added to the Yahtzee section.
+    \item \textbf{Input:} Player achieves four of a kind and selects the four of a kind option.
+    \item \textbf{Output:} Correct score added from the four of a kind option.
     \item \textbf{Test Case Derivation:} Ensures that score calculations adhere to specified Yahtzee-like rules, satisfying R2.
-    \item \textbf{How test will be performed:} Tester evaluates various combinations to ensure scoring accuracy.
+    \item \textbf{How test will be performed:} Test case evaluates various combinations to ensure scoring accuracy.
 \end{itemize}
 
 \paragraph{Test: Dice Roll Physics}
@@ -373,24 +371,24 @@ This section validates the interface, display, and customization options to ensu
 \paragraph{Test: User interface initiation}
 \begin{itemize}
     \item \textbf{Test ID:} Test-5
-    \item \textbf{Control:} Automatic
+    \item \textbf{Control:} Manual
     \item \textbf{Initial State:} Game loaded to main menu
     \item \textbf{Input:} Player connects to a match
     \item \textbf{Output:} Game begins and a UI displaying important information, such as Player names, scores, number of rolls and time limits, is displayed.
     \item \textbf{Test Case Derivation:} confirms the Display of UI elements conveying important information to the User, thus satisfying requirement R8
-    \item \textbf{How test will be performed:} Upon the beginning of a match, an automated script will Create a UI that displays important information to the user, and updates as the match goes on.
+    \item \textbf{How test will be performed:} Upon the beginning of a match, testers will verify that expected UI is visible for display, and updates as the game goes on.
 \end{itemize}
 
 
 \paragraph{Test: Dice Selection}
 \begin{itemize}
     \item \textbf{Test ID:} Test-6
-    \item \textbf{Control:} Manual
+    \item \textbf{Control:} Automated
     \item \textbf{Initial State:} Mid-game, with player allowed to roll again.
-    \item \textbf{Input:} Player selects specific dice to keep and re-rolls the remaining.
-    \item \textbf{Output:} Only unselected dice are re-rolled, while selected dice remain.
+    \item \textbf{Input:} Player selects specific dice to roll and keeps those remaining.
+    \item \textbf{Output:} Only selected dice are re-rolled, while unselected dice remain.
     \item \textbf{Test Case Derivation:} Validates dice selection mechanics as per game rules, satisfying R7.
-    \item \textbf{How test will be performed:} Tester selects different dice combinations to confirm correct behavior.
+    \item \textbf{How test will be performed:} Automated test case selects some dice and performs a roll. The test then checks that the dice that were selected are rolling, and the dice that were not selected are not rolling.
 \end{itemize}
 
 \paragraph{Test: Game Presets}
@@ -424,21 +422,21 @@ Nonfunctional tests focus on measuring performance, responsiveness, reliability,
 \paragraph{Test: Frame Rate Consistency}
 \begin{itemize}
     \item \textbf{Test ID:} Test-9
-    \item \textbf{Type:} Dynamic, Automated
+    \item \textbf{Type:} Dynamic, Manual (from usability testing)
     \item \textbf{Initial State:} Game in progress.
     \item \textbf{Input/Condition:} Standard gameplay, including dice rolls, UI interactions, and animations.
     \item \textbf{Output/Result:} Game maintains a frame rate of at least 30 FPS.
-    \item \textbf{How test will be performed:} Frame rate monitored during gameplay on low and high-end systems to ensure stability.
+    \item \textbf{How test will be performed:} Frame rate monitored by testers during gameplay on low and high-end systems to ensure stability.
 \end{itemize}
 
 \paragraph{Test: Input Responsiveness}
 \begin{itemize}
     \item \textbf{Test ID:} Test-10
-    \item \textbf{Type:} Dynamic, Automated
+    \item \textbf{Type:} Dynamic, Manual (from usability testing)
     \item \textbf{Initial State:} Game loaded.
     \item \textbf{Input:} Player performs multiple actions (e.g., roll dice, end turn).
     \item \textbf{Output:} System responds within 500 ms of input.
-    \item \textbf{How test will be performed:} Response times recorded using automated tools, with any delays highlighted.
+    \item \textbf{How test will be performed:} Poor response times will be noted by users during usability testing.
 \end{itemize}
 
 \subsubsection{System Compatibility and Reliability}
@@ -485,140 +483,161 @@ The following table provides traceability between the test cases and the require
         Test-8 & R9: Game settings modification \\
         Test-9 & NFR1: Frame rate consistency \\
         Test-10 & NFR5: Input responsiveness \\
-        Test-11 & NFR3: Windows 10 compatibility, NFR10: MacOS support \\
+        Test-11 & NFR3: Windows 10 compatibility, \textit{*NFR10: MacOS support} \\
         Test-12 & NFR4: Multiplayer stability \\
         \hline
     \end{tabular}
     \label{tab:traceability}
 \end{table}
-
+\textit{* indicates stretch goal - out of scope}
 
 \newpage
 \section{Unit Test Description}
-
-\wss{This section should not be filled in until after the MIS (detailed design
-  document) has been completed.}
-
-\wss{Reference your MIS (detailed design document) and explain your overall
-philosophy for test case selection.}  
-
-\wss{To save space and time, it may be an option to provide less detail in this section.  
-For the unit tests you can potentially layout your testing strategy here.  That is, you 
-can explain how tests will be selected for each module.  For instance, your test building 
-approach could be test cases for each access program, including one test for normal behaviour 
-and as many tests as needed for edge cases.  Rather than create the details of the input 
-and output here, you could point to the unit testing code.  For this to work, you code 
-needs to be well-documented, with meaningful names for all of the tests.}
+% Reference MIS and explain philosophy for test case selection.
 
 \subsection{Unit Testing Scope}
+% Specify modules that are out of scope and rationale for prioritization.
 
-\wss{What modules are outside of the scope.  If there are modules that are
-  developed by someone else, then you would say here if you aren't planning on
-  verifying them.  There may also be modules that are part of your software, but
-  have a lower priority for verification than others.  If this is the case,
-  explain your rationale for the ranking of module importance.}
+The unit testing scope includes the Dice Container Module and the Scoring Module. Other modules related to UI and networking are not the focus of unit testing at this stage. The testing priority is given to modules that directly impact gameplay mechanics and fairness.
 
 \subsection{Tests for Functional Requirements}
 
-\wss{Most of the verification will be through automated unit testing.  If
-  appropriate specific modules can be verified by a non-testing based
-  technique.  That can also be documented in this section.}
-
-\subsubsection{Module 1}
-
-\wss{Include a blurb here to explain why the subsections below cover the module.
-  References to the MIS would be good.  You will want tests from a black box
-  perspective and from a white box perspective.  Explain to the reader how the
-  tests were selected.}
+\subsubsection{Dice Container Module}
+% Justification for coverage of the module and test selection approach.
 
 \begin{enumerate}
-
-\item{test-id1\\}
-
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
-
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
-
-How test will be performed: 
-					
-\item{test-id2\\}
-
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
-
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
-
-How test will be performed: 
-
-\item{...\\}
+    \item Test: Roll dice functionality
+    \begin{itemize}
+        \item Type: Functional, Automatic
+        \item Initial State: New dice container instance with new dice added
+        \item Input: Call the roll dice functionality
+        \item Output: All dice get rolled
+        \item Test Case Derivation: Ensures that dice always get rolled when requested
+        \item How test will be performed: Instantiate new dice container with newly instantiated dice nodes and then verify that all dice are in a rolling state after calling the roll function
+    \end{itemize}
     
+    \item Test: Rolling selected dice
+    \begin{itemize}
+        \item Type: Functional, Automatic
+        \item Initial State: New dice container with new dice added, some selected and some not
+        \item Input: Call the roll selected dice functionality
+        \item Output: Selected dice get rolled and unselected dice do not get rolled
+        \item Test Case Derivation: Ensures that only selected dice get rolled
+        \item How test will be performed: Instantiate new dice container with newly instantiated dice nodes and then verify that selected dice are in a rolling state after calling the roll function and unselected dice are not in a rolling state
+    \end{itemize}
+
+    \item Test: Dice selection can be inverted
+    \begin{itemize}
+        \item Type: Functional, Automatic
+        \item Initial State: New dice container with new dice added, some selected and some not
+        \item Input: Call invert selection functionality on dice
+        \item Output: Selected dice become unselected and unselected dice become selected
+        \item Test Case Derivation: Ensures that users can choose to roll selected or keep selected dice
+        \item How test will be performed: Instantiate new dice container with newly instantiated dice nodes where some are selected and some are not, then call the invert selection function and verify that the selected dice are now unselected and vice versa
+    \end{itemize}
+
+    \item Test: Dice values can be read
+    \begin{itemize}
+        \item Type: Functional, Automatic
+        \item Initial State: New dice container with new dice added, and roll all dice
+        \item Input: Call the get dice values functionality
+        \item Output: All dice values get returned
+        \item Test Case Derivation: Ensures that values can be read after dice get rolled
+        \item How test will be performed: Instantiate new dice container with newly instantiated dice nodes and roll all dice, then call the get dice values function and verify that all dice return values
+    \end{itemize}
+
+    \item Test: Dice collisions can be toggled
+    \begin{itemize}
+        \item Type: Functional, Automatic
+        \item Initial State: New dice container with new dice added
+        \item Input: Call functionality to toggle collisions off, and then back on
+        \item Output: All dice lose collidable property, then regain it
+        \item Test Case Derivation: Ensures that dice collisions can be toggled as needed for dice animations
+        \item How test will be performed: Instantiate new dice container with newly instantiated dice nodes, then call the toggle collisions function and verify that each die has collisions disabled, then call the function again and verify that each die has collisions enabled again
+    \end{itemize}
+
 \end{enumerate}
 
-\subsubsection{Module 2}
+\subsubsection{Scoring Module}
 
-...
-
-\subsection{Tests for Nonfunctional Requirements}
-
-\wss{If there is a module that needs to be independently assessed for
-  performance, those test cases can go here.  In some projects, planning for
-  nonfunctional tests of units will not be that relevant.}
-
-\wss{These tests may involve collecting performance data from previously
-  mentioned functional tests.}
-
-\subsubsection{Module ?}
-		
 \begin{enumerate}
+    \item Test: Calculate score for a full house
+    \begin{itemize}
+        \item Type: Functional, Automatic
+        \item Initial State: Set of dice showing full house
+        \item Input: Dice values
+        \item Output: Expected full house score
+        \item Test Case Derivation: Ensures correct score computation
+        \item How test will be performed: Pass dice values and check score
+    \end{itemize}
 
-\item{test-id1\\}
+    \item Test: Calculate score for a kind
+    \begin{itemize}
+        \item Type: Functional, Automatic
+        \item Initial State: Set of dice showing a kind
+        \item Input: Dice values and the quantity for the kind
+        \item Output: Expected kind score
+        \item Test Case Derivation: Ensures scoring logic applies correctly
+        \item How test will be performed: Pass kind roll and verify score
+    \end{itemize}
 
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
-					
-Initial State: 
-					
-Input/Condition: 
-					
-Output/Result: 
-					
-How test will be performed: 
-					
-\item{test-id2\\}
+    \item Test: Score calculation for a straight
+    \begin{itemize}
+        \item Type: Functional, Automatic
+        \item Initial State: Set of dice showing sequence
+        \item Input: Dice values and some expected sequence quantity
+        \item Output: Expected straight score
+        \item Test Case Derivation: Ensures proper scoring for straights
+        \item How test will be performed: Provide sequence values and check score
+    \end{itemize}
 
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
+    \item Test: Score calculation for singles
+    \begin{itemize}
+        \item Type: Functional, Automatic
+        \item Initial State: Set of dice showing singles
+        \item Input: Dice values and the single to score on
+        \item Output: Expected singles score
+        \item Test Case Derivation: Ensures proper scoring for singles
+        \item How test will be performed: Provide singles values and check score
+    \end{itemize}
+
+    \item Test: Score calculation for chance
+    \begin{itemize}
+        \item Type: Functional, Automatic
+        \item Initial State: Random set of dice
+        \item Input: Dice values
+        \item Output: Expected chance score
+        \item Test Case Derivation: Ensures proper scoring for chance
+        \item How test will be performed: Provide dice values and check score
+    \end{itemize}
 
 \end{enumerate}
-
-\subsubsection{Module ?}
-
-...
 
 \subsection{Traceability Between Test Cases and Modules}
 
-\wss{Provide evidence that all of the modules have been considered.}
-				
+\begin{table}[H]
+  \centering
+  \begin{tabular}{p{0.4\textwidth} p{0.4\textwidth}}
+    \toprule
+    \textbf{Test Case} & \textbf{Modules} \\
+    \midrule
+    test\_roll\_dice & Dice Container \\
+    test\_roll\_selected\_dice & Dice Container \\
+    test\_invert\_dice\_selection & Dice Container \\
+    test\_read\_dice\_values & Dice Container \\
+    test\_toggle\_dice\_collisions & Dice Container \\
+    test\_full\_house\_scoring & Scoring Module \\
+    test\_kind\_scoring & Scoring Module \\
+    test\_straight\_scoring & Scoring Module \\
+    test\_singles\_scoring & Scoring Module \\
+    test\_chance\_scoring & Scoring Module \\
+    \bottomrule
+  \end{tabular}
+  \caption{Traceability Between Test Cases and Modules}
+  \label{TblTraceability}
+\end{table}
+
+\newpage
 \bibliographystyle{plainnat}
 
 \bibliography{../../refs/References}
