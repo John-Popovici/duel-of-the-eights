@@ -811,24 +811,44 @@ The unit testing scope includes the Dice Container Module and the Scoring Module
 
 \begin{table}[H]
   \centering
-  \begin{tabular}{p{0.4\textwidth} p{0.4\textwidth}}
+  \begin{tabular}{p{0.4\textwidth} p{0.5\textwidth}}
     \toprule
     \textbf{Test Case} & \textbf{Modules} \\
     \midrule
-    test\_roll\_dice & Dice Container \\
-    test\_roll\_selected\_dice & Dice Container \\
-    test\_invert\_dice\_selection & Dice Container \\
-    test\_read\_dice\_values & Dice Container \\
-    test\_toggle\_dice\_collisions & Dice Container \\
-    test\_full\_house\_scoring & Scoring Module \\
-    test\_kind\_scoring & Scoring Module \\
-    test\_straight\_scoring & Scoring Module \\
-    test\_singles\_scoring & Scoring Module \\
-    test\_chance\_scoring & Scoring Module \\
+    test\_roll\_dice & DynamicDiceContainer Module \\
+    test\_roll\_selected\_dice & DynamicDiceContainer Module \\
+    test\_invert\_dice\_selection & DynamicDiceContainer Module \\
+    test\_read\_dice\_values & DynamicDiceContainer Module \\
+    test\_toggle\_dice\_collisions & DynamicDiceContainer Module \\
+    test\_full\_house\_scoring & ScoreCalculator Module \\
+    test\_kind\_scoring & ScoreCalculator Module \\
+    test\_straight\_scoring & ScoreCalculator Module \\
+    test\_singles\_scoring & ScoreCalculator Module \\
+    test\_chance\_scoring & ScoreCalculator Module \\
     \bottomrule
   \end{tabular}
-  \caption{Traceability Between Test Cases and Modules}
+  \caption{Table of Traceability Between Test Cases and Modules}
   \label{TblTraceability}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|c|c|}
+  \hline
+    \textbf{Test Case} & \textbf{DynamicDiceContainer} & \textbf{ScoreCalculator} \\ \hline
+    test\_roll\_dice & X & \\ \hline
+    test\_roll\_selected\_dice & X & \\ \hline
+    test\_invert\_dice\_selection & X & \\ \hline
+    test\_read\_dice\_values & X & \\ \hline
+    test\_toggle\_dice\_collisions & X & \\ \hline
+    test\_full\_house\_scoring & & X \\ \hline
+    test\_kind\_scoring & & X \\ \hline
+    test\_straight\_scoring & & X \\ \hline
+    test\_singles\_scoring & & X \\ \hline
+    test\_chance\_scoring & & X \\ \hline
+  \end{tabular}
+  \caption{Matrix of Traceability Between Test Cases and Modules}
+  \label{TblTraceability2}
 \end{table}
 
 \newpage
