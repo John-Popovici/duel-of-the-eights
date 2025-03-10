@@ -317,6 +317,7 @@ each other.
  \*subsubsection{Relevant VnV Plan test: } \textbf{N/A}. No relevant test specific to this requirement. However, we have tested this requirement by  playing though a game and checking the UI to see if the correct game state is displayed throughout the whole game. As we had found no issues when conducting this test multiple times, we can safely say that the game has passed this test, and by extension, that this requirement has been met.
 
 
+\newpage
 \section{Nonfunctional Requirements Evaluation}
 
 \subsection{Introduction}
@@ -356,7 +357,7 @@ Final Assessment:
 
 \subsection{Individual Non-Functional Requirement Evaluations}
 
-\*subsubsection{NFR-1: Performance}
+\subsubsection{NFR-1: Performance}
 
 \textbf{Requirement Description:}  
 The game shall maintain a frame rate of at least 30 FPS at all times to ensure smooth gameplay and allow players to clearly see in-game actions.
@@ -385,7 +386,7 @@ The game shall maintain a frame rate of at least 30 FPS at all times to ensure s
 
 The game meets the \textbf{performance requirements} as no frame rate issues were reported during usability testing, and it is assumed to maintain at least 30 FPS under standard gameplay conditions. While future tests could include direct FPS measurements for further validation, the current results confirm that the game runs smoothly on supported hardware.
 
-\*subsubsection{NFR-2: Usability}
+\subsubsection{NFR-2: Usability}
 
 \textbf{Requirement Description:}  
 The game shall implement a clear and easy-to-use/understand user interface. Players should be able to navigate the UI and access game functions without confusion or requiring external instructions.
@@ -413,7 +414,7 @@ The game shall implement a clear and easy-to-use/understand user interface. Play
 
 The game meets the \textbf{usability requirements} as players were able to navigate the UI without major confusion or external guidance. While minor improvements were suggested, they do not constitute a failure of the requirement but rather opportunities for refinement in future updates.
 
-\*subsubsection{NFR-3: Portability}
+\subsubsection{NFR-3: Portability}
 
 \textbf{Requirement Description:}  
 The game shall be supported on systems running Windows 10 or later. Ensuring compatibility with these operating systems is crucial for reaching a broad user base.
@@ -441,7 +442,7 @@ The game shall be supported on systems running Windows 10 or later. Ensuring com
 
 The game meets the \textbf{portability requirement}, as it was successfully tested on Windows 10 and later without compatibility issues. Usability testing confirmed that all testers were able to install and run the game without problems, validating this requirement.
 
-\*subsubsection{NFR-4: Reliability}
+\subsubsection{NFR-4: Reliability}
 
 \textbf{Requirement Description:}  
 Multiplayer games of Yahtzee should crash less than 1\% of the time. Ensuring stability is critical so that players do not experience disruptions during gameplay.
@@ -470,7 +471,7 @@ Multiplayer games of Yahtzee should crash less than 1\% of the time. Ensuring st
 
 The game meets the \textbf{reliability requirement} as no crashes were reported during usability testing, and Test 12 confirmed stable multiplayer sessions. While there were reports of **connection instability in the LAN version**, this is a separate issue that is expected to be resolved with the server-based multiplayer architecture.
 
-\*subsubsection{NFR-5: Responsiveness}
+\subsubsection{NFR-5: Responsiveness}
 
 \textbf{Requirement Description:}  
 The game shall respond to user inputs within 500 milliseconds in the worst case. Ensuring fast response times is critical to maintaining a smooth and frustration-free gameplay experience.
@@ -500,7 +501,7 @@ The game shall respond to user inputs within 500 milliseconds in the worst case.
 The game meets the \textbf{responsiveness requirement} as all recorded user interactions occurred within the expected 500ms threshold. Usability testing confirmed that no players encountered delays in UI navigation, dice rolling, or other gameplay actions, validating this requirement.
 
 
-\*subsubsection{NFR-6: Modularity}
+\subsubsection{NFR-6: Modularity}
 
 \textbf{Requirement Description:}  
 The game’s codebase shall be modular, ensuring it is easily extendable and reusable, allowing for quick fixes to bugs and efficient implementation of new features.
@@ -534,7 +535,7 @@ The game’s codebase shall be modular, ensuring it is easily extendable and reu
 The game meets the \textbf{modularity requirement} as its design follows **OOP principles and modular development best practices in Godot**. While no explicit tests or usability feedback were available, the structure of the codebase enables **extendability and maintainability**, validating this requirement.
 
 
-\*subsubsection{NFR-7: Efficiency}
+\subsubsection{NFR-7: Efficiency}
 
 \textbf{Requirement Description:}  
 The game shall be optimized to run on lower-end systems with minimal CPU and GPU resources while maintaining smooth gameplay performance.
@@ -563,7 +564,7 @@ The game shall be optimized to run on lower-end systems with minimal CPU and GPU
 The game meets the \textbf{efficiency requirement} as usability testing confirmed that it runs smoothly on all tested PC configurations without significant performance drops. While no explicit performance tests were included in the Verification and Validation Plan, real-world testing indicates that the game is well-optimized for lower-end systems.
 
 
-\*subsubsection{NFR-8: Enjoyability}
+\subsubsection{NFR-8: Enjoyability}
 
 \textbf{Requirement Description:}  
 The game shall be found enjoyable by at least 75\% of users, ensuring that it appeals to a broad audience and provides an engaging experience.
@@ -591,7 +592,7 @@ The game shall be found enjoyable by at least 75\% of users, ensuring that it ap
  
 The game meets the \textbf{enjoyability requirement}, as usability testing confirmed that the majority of players found the game enjoyable and expressed willingness to play again. The Likert scale average of 4.17 strongly supports that at least 75\% of users enjoyed the game, validating this requirement.
 
-\*subsubsection{NFR-9: Appearance}
+\subsubsection{NFR-9: Appearance}
 
 \textbf{Requirement Description:}  
 The game shall maintain a consistent UI style and 3D visual style across all in-game views, ensuring visual continuity and a professional user experience.
@@ -625,7 +626,7 @@ The game shall maintain a consistent UI style and 3D visual style across all in-
 The game meets the \textbf{appearance requirement}, as usability testing confirmed no reported inconsistencies in UI theming or 3D assets. Internal testing ensured adherence to a predefined style guide, validating this requirement.
 
 
-\*subsubsection{NFR-10: Portability (MacOS Support)}
+\subsubsection{NFR-10: Portability (MacOS Support)}
 
 \textbf{Requirement Description:}  
 The game shall be supported on MacOS devices to expand its potential audience and ensure accessibility for Mac users.
@@ -684,8 +685,10 @@ Overall, \textbf{Dice Duels} meets its core non-functional requirements and prov
 %\section{Comparison to Existing Implementation}	
 %This section will not be appropriate for every project.
 
+\newpage
 \section{Unit Testing}
 
+\newpage
 \section{Changes Due to Testing}
 
 \wss{This section should highlight how feedback from the users and from 
@@ -693,12 +696,17 @@ the supervisor (when one exists) shaped the final product.  In particular
 the feedback from the Rev 0 demo to the supervisor (or to potential users) 
 should be highlighted.}
 
+\newpage
 \section{Automated Testing}
-		
+
+
+\newpage
 \section{Trace to Requirements}
-		
+	
+\newpage
 \section{Trace to Modules}		
 
+\newpage
 \section{Code Coverage Metrics}
 
 \bibliographystyle{plainnat}
