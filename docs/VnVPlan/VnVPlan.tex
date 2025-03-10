@@ -411,8 +411,8 @@ This section validates the interface, display, and customization options to ensu
     \item \textbf{Initial State:} Custom Game settings menu open.
     \item \textbf{Input:} Player modifies settings (e.g., changes dice sides, scoring rules).
     \item \textbf{Output:} Changes are successfully applied to new game sessions.
-    \item \textbf{Test Case Derivation:} Verifies that customizable game settings reflect unique variants, satisfying R9.
-    \item \textbf{How test will be performed:} Tester modifies various settings and initiates games to confirm functionality.
+    \item \textbf{Test Case Derivation:} Verifies that customizable game settings reflect unique variants, satisfying R9 and R15.
+    \item \textbf{How test will be performed:} Tester modifies various settings, saving them, and initiates games to confirm functionality.
 \end{itemize}
 
 \subsection{Tests for Nonfunctional Requirements}
@@ -532,31 +532,157 @@ NFR10* & MacOS support \\
 \end{table}
 \textit{* indicates stretch goal - out of scope}
 
+
+
 \begin{table}[H]
     \centering
     \caption{Traceability Matrix for Test Cases and Requirements}
-    \begin{tabular}{|c|c|}
-        \hline
-        \textbf{Test Case ID} & \textbf{Requirement(s) Verified} \\
-        \hline
-        Test-1 & R1: Online player vs player mode \\
-        Test-2 & R2: Score calculation using Yahtzee rules \\
-        Test-3 & R3: Realistic 3D dice roll physics \\
-        Test-4 & R6: Simultaneous turn implementation \\
-        Test-5 & R8: User interface display \\
-        Test-6 & R7: Dice selection functionality \\
-        Test-7 & R10: Game Presets \\
-        Test-8 & R9: Game settings modification \\
-        Test-9 & NFR1: Frame rate consistency \\
-        Test-10 & NFR5: Input responsiveness \\
-        Test-11 & NFR3: Windows 10 compatibility, \textit{*NFR10: MacOS support} \\
-        Test-12 & NFR4: Multiplayer stability \\
-        \hline
+    \begin{tabular}{|c|cccccccccccc|}
+\hline
+ & \multicolumn{12}{c|}{\textbf{Tests}} \\
+\hline
+\textbf{Req.} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{2} & \multicolumn{1}{c|}{3}
+& \multicolumn{1}{c|}{4} & \multicolumn{1}{c|}{5} & \multicolumn{1}{c|}{6}
+& \multicolumn{1}{c|}{7} & \multicolumn{1}{c|}{8} & \multicolumn{1}{c|}{9}
+& \multicolumn{1}{c|}{10} & \multicolumn{1}{c|}{11} & 12 \\ \hline
+
+R1 & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+R2 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+R3 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+R4 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+R5 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+R6 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+R7 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+R8 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+R9 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+R10 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+R11 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+R12 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+R13 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+R14 & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+R15 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+R16 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+R17 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+NFR1 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+NFR2 & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+NFR3 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{X}   &    \\ \hline
+
+NFR4 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &  X  \\ \hline
+
+NFR5 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{X}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+NFR6 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+NFR7 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+NFR8 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+NFR9 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+NFR10 & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{X}   &    \\ \hline
     \end{tabular}
     \label{tab:traceability}
 \end{table}
-\textit{* indicates stretch goal - out of scope}
-
 
 
 \newpage
