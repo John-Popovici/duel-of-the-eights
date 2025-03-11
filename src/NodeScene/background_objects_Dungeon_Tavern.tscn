@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://bg5xnvw62vip6"]
+[gd_scene load_steps=102 format=3 uid="uid://bg5xnvw62vip6"]
 
 [ext_resource type="Script" path="res://Scripts/UniversalScripts/BackgroundOjects.gd" id="1_jjdv2"]
 [ext_resource type="PackedScene" uid="uid://cayt468qqmnac" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_small_decorated_A.gltf" id="3_8t0tc"]
@@ -27,7 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://b4h53lv4vrd4d" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Assets/gltf/staff.gltf" id="16_ubrq1"]
 [ext_resource type="PackedScene" uid="uid://cesdhsch2oi5m" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_archedwindow_open.gltf" id="17_kjc5o"]
 [ext_resource type="PackedScene" uid="uid://bq4cbrba8odvg" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Assets/gltf/mug_empty.gltf" id="17_ttxxe"]
-[ext_resource type="PackedScene" uid="uid://b2vybu872oxk1" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/fbx(unity)/wall_corner_scaffold.fbx" id="18_xfhhp"]
+[ext_resource type="PackedScene" uid="uid://dgh1uvypuanmw" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_corner_scaffold.gltf" id="18_xfhhp"]
 [ext_resource type="PackedScene" uid="uid://55melk6otw81" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/banner_shield_green.gltf" id="19_6r1cu"]
 [ext_resource type="PackedScene" uid="uid://b5gs64n4itaaw" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/bottle_A_labeled_brown.gltf" id="20_4fk18"]
 [ext_resource type="PackedScene" uid="uid://djsh6mlx4uxmm" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_archedwindow_gated_scaffold.gltf" id="20_v6rpf"]
@@ -130,6 +130,99 @@ _data = {
 height = 2.05582
 radius = 0.110577
 
+[sub_resource type="Animation" id="Animation_qt1cn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:position:z")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:rotation:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:rotation:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:rotation:z")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
 [sub_resource type="Animation" id="Animation_ihi8b"]
 resource_name = "Dice_Bump"
 length = 1.0667
@@ -159,36 +252,59 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0.815522, 2.41028e-08, -0.842942), Vector3(-0.308284, -0.597549, -2.48111), Vector3(-0.223263, -0.479073, -2.81891), Vector3(-0.308284, -0.597549, -2.48111), Vector3(-0.0834962, -2.65076, -2.25894), Vector3(0, 0, 0), Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_qt1cn"]
-length = 0.001
-tracks/0/type = "value"
+[sub_resource type="Animation" id="Animation_42t4v"]
+resource_name = "Dice_Bump"
+length = 1.0667
+loop_mode = 1
+tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath(".:position:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(33.2855, -0.25, 0, 0.233333, 0.714546, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 37, -0.2, -1, 0.2, 1),
+"times": PackedFloat32Array(0, 0.4, 0.7, 1.06667)
 }
-tracks/1/type = "value"
+tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
+tracks/1/path = NodePath(".:rotation:x")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(52, -0.25, 0, 0.166667, -28, 0, -0.233333, 10, 0.25, 0, 2, -0.25, 0, 0.25, 0, 32, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.0333333, 0.4, 0.733333, 1.06667)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(-0.988659, -0.25, 0, 0.166667, 28.9887, 1, -0.133333, -44, 0.25, 0, 1, -0.25, 0, 0.25, 0, 39, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 0.666667, 1.06667)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:rotation:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(-1.99447, -0.25, 0, 0.1, 14.9945, 27, -0.25, 0, 0.25, 0, -2, -0.233333, 1, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 0.466667, 0.8)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xngax"]
 _data = {
-"Dice_Bump": SubResource("Animation_ihi8b"),
+"Dice_Bump": SubResource("Animation_42t4v"),
+"Dice_Toss": SubResource("Animation_ihi8b"),
 "RESET": SubResource("Animation_qt1cn")
 }
 
@@ -1116,7 +1232,7 @@ transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 libraries = {
 "": SubResource("AnimationLibrary_xngax")
 }
-autoplay = "Dice_Bump"
+autoplay = "Dice_Toss"
 
 [node name="DiceAnimation2" type="Node3D" parent="Restaurant/Characters"]
 transform = Transform3D(0.863114, 0, 0.50501, 0, 1, 0, -0.50501, 0, 0.863114, -206.295, 10, -129.806)
@@ -1128,7 +1244,7 @@ transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 libraries = {
 "": SubResource("AnimationLibrary_xngax")
 }
-autoplay = "Dice_Bump"
+autoplay = "Dice_Toss"
 
 [node name="DiceAnimation3" type="Node3D" parent="Restaurant/Characters"]
 transform = Transform3D(0.876399, 0, -0.481585, 0, 1, 0, 0.481585, 0, 0.876399, -201.882, 10, -136.921)
@@ -1140,7 +1256,7 @@ transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 libraries = {
 "": SubResource("AnimationLibrary_xngax")
 }
-autoplay = "Dice_Bump"
+autoplay = "Dice_Toss"
 
 [node name="DiceAnimation4" type="Node3D" parent="Restaurant/Characters"]
 transform = Transform3D(0.92442, 0, 0.381377, 0, 1, 0, -0.381377, 0, 0.92442, -209.494, 10, -128.323)
@@ -1152,7 +1268,7 @@ transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 libraries = {
 "": SubResource("AnimationLibrary_xngax")
 }
-autoplay = "Dice_Bump"
+autoplay = "Dice_Toss"
 
 [node name="DiceAnimation5" type="Node3D" parent="Restaurant/Characters"]
 transform = Transform3D(0.958775, 0, 0.284166, 0, 1, 0, -0.284166, 0, 0.958775, -212.221, 10, -131.649)
@@ -1164,4 +1280,4 @@ transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 libraries = {
 "": SubResource("AnimationLibrary_xngax")
 }
-autoplay = "Dice_Bump"
+autoplay = "Dice_Toss"
