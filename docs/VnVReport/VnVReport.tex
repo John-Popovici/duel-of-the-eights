@@ -3,6 +3,7 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{array}
 \hypersetup{
     colorlinks,
     citecolor=black,
@@ -39,6 +40,7 @@
 2025-03-10 & Naishan Guo & Added Functional Requirements Evaluations Section\\
 2025-03-10 & John Popovici & Added traceability matrices\\
 2025-03-10 & Hemraj Bhatt & Added content to section 10 and reflection\\
+2025-03-10 & Isaac Giles & Added content to section 6, 8, and reflection\\
 \dots & \dots & \dots \\
 \bottomrule
 \end{tabularx}
@@ -741,6 +743,132 @@ Overall, \textbf{Dice Duels} meets its core non-functional requirements and prov
 \newpage
 \section{Unit Testing}
 
+\subsection{Dice Container Tests}
+
+\textbf{Starting Conditions:} All test are initiated with 8 mock dice (2 four sided dice, 2 six sided dice, 2 eight sided dice, and 2 twelve sided dice).
+
+\subsubsection{Test: void roll\_dice()}
+\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
+    \cline{1-5}
+    \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
+    \cline{1-5}
+    DC-1 & n/a & die.isRolling = True for all dice & die.isRolling = True for all dice & Pass \\
+    \cline{1-5}
+\end{tabularx}
+
+\subsubsection{Test: void roll\_selected\_dice()}
+\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
+    \cline{1-5}
+    \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
+    \cline{1-5}
+    DC-2 & Select dice[0] & dice[0].getIsRolling() = True, dice[1:n].getIsRolling() = False & dice[0].getIsRolling() = True, dice[1:n].getIsRolling() = False & Pass \\
+    \cline{1-5}
+\end{tabularx}
+
+\subsubsection{Test: void invert\_Selection()}
+\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
+    \cline{1-5}
+    \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
+    \cline{1-5}
+    DC-3 & Select dice[0] & dice[0] .get\_selected\_status() = False, dice[1:n] .get\_selected\_status() = True & dice[0] .get\_selected\_status() = False, dice[1:n] .get\_selected\_status() = True & Pass \\
+    \cline{1-5}
+\end{tabularx}
+
+\subsubsection{Test: Array[int] get\_dice\_values()}
+\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
+    \cline{1-5}
+    \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
+    \cline{1-5}
+    DC-4 & dice\_container .roll\_dice() & get\_dice\_values() returns 8 values, each die value in range 1 to 12 & get\_dice\_values() returns 8 values, each die value in range 1 to 12 & Pass \\
+    \cline{1-5}
+\end{tabularx}
+
+\subsubsection{Test: void toggleDiceCollisions(toggle: bool)}
+\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
+    \cline{1-5}
+    \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
+    \cline{1-5}
+    DC-5 & True & disableCollisions(True) has been called on all dice & disableCollisions(True) has been called on all dice & Pass \\
+    \cline{1-5}
+    DC-6 & False & disableCollisions(False) has been called on all dice & disableCollisions(False) has been called on all dice & Pass \\
+    \cline{1-5}
+\end{tabularx}
+
+\section{Scoring Tests}
+
+\subsubsection{Test: Array[int] \_calculate\_singles\_score(target\_value: int, dice\_rolls: Array, \_scoring\_rule: String)}
+\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
+    \cline{1-5}
+    \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
+    \cline{1-5}
+    SC-1 & 5, [1,5,5,5,5,5], "2" & [50, 0] & [50, 0] & Pass \\
+    \cline{1-5}
+    SC-2 & 1, [1,5,5,5,5,5], "2" & [2, 0] & [2, 0] & Pass \\
+    \cline{1-5}
+    SC-3 & 5, [1,2,3], "2" & [0, 0] & [0, 0] & Pass \\
+    \cline{1-5}
+    SC-4 & 5, [1,1,5,1,5,1], "1" & [10, 0] & [10, 0] & Pass \\
+    \cline{1-5}
+\end{tabularx}
+
+\subsubsection{Test: int \_calculate\_kind\_score(target\_count: int, dice\_rolls: Array, \_scoring\_rule: String)}
+\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
+    \cline{1-5}
+    \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
+    \cline{1-5}
+    SC-5 & 3, [1,5,5,5], "2" & 32 & 32 & Pass \\
+    \cline{1-5}
+    SC-6 & 4, [1,5,5,5,5], "3" & 63 & 63 & Pass \\
+    \cline{1-5}
+    SC-7 & 3, [1,2,3], "2" & 0 & 0 & Pass \\
+    \cline{1-5}
+    SC-8 & 4, [1,1,5,1,5,1], "" & 14 & 14 & Pass \\
+    \cline{1-5}
+\end{tabularx}
+
+\subsubsection{Test: int \_calculate\_straight\_score(target\_length: int, dice\_rolls: Array, \_scoring\_rule: String)}
+\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
+    \cline{1-5}
+    \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
+    \cline{1-5}
+    SC-9 & 4, [1,5,2,4,3,1], "10" & 40 & 40 & Pass \\
+    \cline{1-5}
+    SC-10 & 4, [1,5,4,2,1], "3" & 0 & 0 & Pass \\
+    \cline{1-5}
+    SC-11 & 3, [1,2,2,1,3,5], "2" & 6 & 6 & Pass \\
+    \cline{1-5}
+    SC-12 & 3, [1,5,3,7,2,6], "10" & 30 & 30 & Pass \\
+    \cline{1-5}
+\end{tabularx}
+
+\subsubsection{Test: int \_calculate\_full\_house\_score(setSize1: int, setSize2: int, dice\_rolls: Array, \_scoring\_rule: String)}
+\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
+    \cline{1-5}
+    \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
+    \cline{1-5}
+    SC-13 & 2,3, [1,3,3,1,3], "2" & 10 & 10 & Pass \\
+    \cline{1-5}
+    SC-14 & 3,3, [2,2,4,4,2,4], "3" & 18 & 18 & Pass \\
+    \cline{1-5}
+    SC-15 & 3,4, [1,2,2,1,1,2,2], "2" & 14 & 14 & Pass \\
+    \cline{1-5}
+    SC-16 & 2,3, [1,5,1,4,4,4], "10" & 50 & 50 & Pass \\
+    \cline{1-5}
+\end{tabularx}
+
+\subsubsection{Test: int \_calculate\_chance\_score(dice\_rolls: Array, \_scoring\_rule: String)}
+\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
+    \cline{1-5}
+    \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
+    \cline{1-5}
+    SC-17 & [1,1,1,1,1,1], "10" & 60 & 60 & Pass \\
+    \cline{1-5}
+    SC-18 & [1,2,4,3], "3" & 30 & 30 & Pass \\
+    \cline{1-5}
+    SC-19 & [1,2,1,3], "" & 7 & 7 & Pass \\
+    \cline{1-5}
+\end{tabularx}
+
 \newpage
 \section{Changes Due to Testing}
 
@@ -752,6 +880,7 @@ should be highlighted.}
 \newpage
 \section{Automated Testing}
 
+Automated testing has been implemented through the use of the GUT testing framework in conjunction with GitHub Actions. Our team has created a GitHub Action that runs on all pull requests that contain code changes, such that the entire test suite for the project gets executed and blocks the merging of pull requests when test cases fail. This GitHub action intalls Godot as well as the GUT testing extension that we use for our test suite, and all PR's that modify code trigger this action to run.
 
 \newpage
 \section{Trace to Requirements}
@@ -1031,7 +1160,7 @@ graduate attribute of Reflection.
   teams will have had to deviate from their original VnV Plan.)
   
 \begin{itemize}
-  \item ...
+  \item In the VnV plan we hoped to be able to automate more of our tests and also create more unit tests to obtain better coverage of all of our modules but we realized that unit testing a game is very difficult so we found ourselves somewhat limited with what we could feasibly unit test. 
 \end{itemize}
   
 \end{enumerate}
