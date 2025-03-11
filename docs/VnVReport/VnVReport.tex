@@ -40,6 +40,7 @@
 2025-03-10 & Naishan Guo & Added Functional Requirements Evaluations Section\\
 2025-03-10 & John Popovici & Added traceability matrices\\
 2025-03-10 & Hemraj Bhatt & Added content to section 10 and reflection\\
+2025-03-10 & Isaac Giles & Added content to section 6 and 8\\
 \dots & \dots & \dots \\
 \bottomrule
 \end{tabularx}
@@ -879,6 +880,7 @@ should be highlighted.}
 \newpage
 \section{Automated Testing}
 
+Automated testing has been implemented through the use of the GUT testing framework in conjunction with GitHub Actions. Our team has created a GitHub Action that runs on all pull requests that contain code changes, such that the entire test suite for the project gets executed and blocks the merging of pull requests when test cases fail. This GitHub action intalls Godot as well as the GUT testing extension that we use for our test suite, and all PR's that modify code trigger this action to run.
 
 \newpage
 \section{Trace to Requirements}
