@@ -872,10 +872,43 @@ Overall, \textbf{Dice Duels} meets its core non-functional requirements and prov
 \newpage
 \section{Changes Due to Testing}
 
-\wss{This section should highlight how feedback from the users and from 
-the supervisor (when one exists) shaped the final product.  In particular 
-the feedback from the Rev 0 demo to the supervisor (or to potential users) 
-should be highlighted.}
+The changes made to the game as a result of testing have been primarily based on the findings from the most recent phase of usability testing. Since the Alpha Testing phase represents the latest completed stage of testing, the changes implemented due to testing are largely a replication of the "Changes Implemented Due to Alpha Testing" section from the Usability Testing Report. These changes include immediate fixes, mid-term adjustments, and long-term refinements, as outlined below.
+
+\subsection{Issues created due to Feedback and completion}
+
+\subsubsection{Critical Issues (P0)}
+\begin{itemize}
+    \item \textbf{Chat Button Visible in End Screen \#256} – \textbf{(Completed)} - Hide chat in the end game \& enable it in `setup\_game()`.
+    \item \textbf{d4 Standard Game Has Too Many Rounds \#229} – \textbf{(In Progress)} - Prevent rounds from exceeding the number of hands.
+    \item \textbf{Prevent Rounds Exceeding Number of Hands \#252} – \textbf{(In Progress)} - Adjust preset files \& enforce round limits.
+\end{itemize}
+
+\subsubsection{Moderate Issues (P1)}
+\begin{itemize}
+    \item \textbf{Differentiate Opponent Dice from Player \#249} – \textbf{(Completed)} - Add grey overlay \& different UI colors.
+    \item \textbf{Create a Debug Module \#231} – \textbf{(Completed)} - Implement an autoload Debug Module.
+    \item \textbf{Add Hands \& Scoring Tutorial Page \#230} – \textbf{(In Progress)} - Create a separate tutorial page.
+    \item \textbf{Show Player Connection Status More Clearly \#233} – \textbf{(In Progress)} - Add an indicator for opponent connection.
+    \item \textbf{Pass Button Passes All Rolls in Round \#236} – \textbf{(In Progress)} - Implement pass functionality for all rolls.
+    \item \textbf{d6 Dice UI Lacks Contrast \#255} – \textbf{(In Progress)} - Change UI theme or dice sprites.
+    \item \textbf{Bonus Threshold Clarity \#250} – \textbf{(In Progress)} - Add tooltips \& live tracking.
+\end{itemize}
+
+\subsubsection{Minor Suggestions (P2)}
+\begin{itemize}
+    \item \textbf{Change d4 Dice Variant Model \#228} – \textbf{(Out of Scope)} - Provide alternative d4 models.
+    \item \textbf{Format Checkboxes Better \#232} – \textbf{(Out of Scope)} - Improve checkbox UI formatting.
+    \item \textbf{Waiting Room for Client Player \#234} – \textbf{(Out of Scope)} - Add player details \& possible minigame.
+    \item \textbf{In-Game Tab Screen for Scoreboards \#237} – \textbf{(Out of Scope)} - Add a TAB key overlay.
+    \item \textbf{Scoreboard Scroll \& Length Clarity \#251} – \textbf{(Completed)} - Make scrollbars more prominent.
+    \item \textbf{Non-Repetitive Music \#253} – \textbf{(Completed)} - Add multiple tracks or allow user selection.
+    \item \textbf{Variant-Specific Tutorial Tabs \#254} – \textbf{(In Progress)} - Implement tutorial tabs for different variants.
+    \item \textbf{Cosmetic Achievements \& Progression \#257} – \textbf{(Out of Scope)} - Implement non-pay-to-win cosmetic rewards.
+    \item \textbf{Free Camera Movement in Non-Gameplay Scenes \#258} – \textbf{(Out of Scope)} - Enable camera movement \& tavern exploration.
+    \item \textbf{Multiplayer Interactive Lobby \#259} – \textbf{(Out of Scope)} - Consider a future multiplayer hub system.
+\end{itemize}
+
+
 
 \newpage
 \section{Automated Testing}
