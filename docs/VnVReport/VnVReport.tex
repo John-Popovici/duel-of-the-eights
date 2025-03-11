@@ -41,6 +41,7 @@
 2025-03-10 & John Popovici & Added traceability matrices\\
 2025-03-10 & Hemraj Bhatt & Added content to section 10 and reflection\\
 2025-03-10 & Isaac Giles & Added content to section 6, 8, and reflection\\
+2025-03-10 & Isaac Giles & Revised formatting issues\\
 \dots & \dots & \dots \\
 \bottomrule
 \end{tabularx}
@@ -747,7 +748,8 @@ Overall, \textbf{Dice Duels} meets its core non-functional requirements and prov
 
 \textbf{Starting Conditions:} All test are initiated with 8 mock dice (2 four sided dice, 2 six sided dice, 2 eight sided dice, and 2 twelve sided dice).
 
-\subsubsection{Test: void roll\_dice()}
+\subsubsection{Test: Roll Dice}
+void roll\_dice():\\
 \begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
     \cline{1-5}
     \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
@@ -756,7 +758,8 @@ Overall, \textbf{Dice Duels} meets its core non-functional requirements and prov
     \cline{1-5}
 \end{tabularx}
 
-\subsubsection{Test: void roll\_selected\_dice()}
+\subsubsection{Test: Roll Selected Dice}
+void roll\_selected\_dice():\\
 \begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
     \cline{1-5}
     \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
@@ -765,7 +768,8 @@ Overall, \textbf{Dice Duels} meets its core non-functional requirements and prov
     \cline{1-5}
 \end{tabularx}
 
-\subsubsection{Test: void invert\_Selection()}
+\subsubsection{Test: Invert Selection}
+void invert\_Selection():\\
 \begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
     \cline{1-5}
     \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
@@ -774,7 +778,8 @@ Overall, \textbf{Dice Duels} meets its core non-functional requirements and prov
     \cline{1-5}
 \end{tabularx}
 
-\subsubsection{Test: Array[int] get\_dice\_values()}
+\subsubsection{Test: Get Dice Values}
+Array[int] get\_dice\_values():\\
 \begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
     \cline{1-5}
     \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
@@ -783,7 +788,8 @@ Overall, \textbf{Dice Duels} meets its core non-functional requirements and prov
     \cline{1-5}
 \end{tabularx}
 
-\subsubsection{Test: void toggleDiceCollisions(toggle: bool)}
+\subsubsection{Test: Toggle Dice Collisions}
+void toggleDiceCollisions(toggle: bool):\\
 \begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
     \cline{1-5}
     \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
@@ -796,7 +802,8 @@ Overall, \textbf{Dice Duels} meets its core non-functional requirements and prov
 
 \section{Scoring Tests}
 
-\subsubsection{Test: Array[int] \_calculate\_singles\_score(target\_value: int, dice\_rolls: Array, \_scoring\_rule: String)}
+\subsubsection{Test: Calculate Singles Scoring}
+Array[int] \_calculate\_singles\_score(target\_value: int, dice\_rolls: Array, \_scoring\_rule: String):\\
 \begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
     \cline{1-5}
     \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
@@ -811,7 +818,8 @@ Overall, \textbf{Dice Duels} meets its core non-functional requirements and prov
     \cline{1-5}
 \end{tabularx}
 
-\subsubsection{Test: int \_calculate\_kind\_score(target\_count: int, dice\_rolls: Array, \_scoring\_rule: String)}
+\subsubsection{Test: Calculate Kind Scoring}
+int \_calculate\_kind\_score(target\_count: int, dice\_rolls: Array, \_scoring\_rule: String):\\
 \begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
     \cline{1-5}
     \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
@@ -826,7 +834,8 @@ Overall, \textbf{Dice Duels} meets its core non-functional requirements and prov
     \cline{1-5}
 \end{tabularx}
 
-\subsubsection{Test: int \_calculate\_straight\_score(target\_length: int, dice\_rolls: Array, \_scoring\_rule: String)}
+\subsubsection{Test: Calculate Straight Scoring}
+int \_calculate\_straight\_score(target\_length: int, dice\_rolls: Array, \_scoring\_rule: String):\\
 \begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
     \cline{1-5}
     \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
@@ -841,7 +850,8 @@ Overall, \textbf{Dice Duels} meets its core non-functional requirements and prov
     \cline{1-5}
 \end{tabularx}
 
-\subsubsection{Test: int \_calculate\_full\_house\_score(setSize1: int, setSize2: int, dice\_rolls: Array, \_scoring\_rule: String)}
+\subsubsection{Test: Calculate Full House Scoring}
+int \_calculate\_full\_house\_score(setSize1: int, setSize2: int, dice\_rolls: Array, \_scoring\_rule: String):\\
 \begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
     \cline{1-5}
     \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
@@ -856,7 +866,8 @@ Overall, \textbf{Dice Duels} meets its core non-functional requirements and prov
     \cline{1-5}
 \end{tabularx}
 
-\subsubsection{Test: int \_calculate\_chance\_score(dice\_rolls: Array, \_scoring\_rule: String)}
+\subsubsection{Test: Calculate Chance Scoring}
+int \_calculate\_chance\_score(dice\_rolls: Array, \_scoring\_rule: String):\\
 \begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
     \cline{1-5}
     \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
