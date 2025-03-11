@@ -42,6 +42,7 @@
 2025-03-10 & Hemraj Bhatt & Added content to section 10 and reflection\\
 2025-03-10 & Isaac Giles & Added content to section 6, 8, and reflection\\
 2025-03-10 & Isaac Giles & Revised formatting issues\\
+2025-03-10 & John Popovici & Cleaned final references\\
 \dots & \dots & \dots \\
 \bottomrule
 \end{tabularx}
@@ -55,20 +56,31 @@
 \begin{tabular}{l l} 
   \toprule		
   \textbf{symbol} & \textbf{description}\\
-  \midrule 
-  T & Test\\
+  \midrule
+  VnV & Verification and Validation\\
+  RX & Functional requirement number X\\
+  NFRX & Nonfunctional requirement number X\\
+  Test-X & Test number X\\
+  DC-X & Dice container unit test X\\
+  SC-X & Score calculator container unit test X\\
+  UI & User interface\\
+  PvP & Player versus player\\
+  LAN & Local area network\\
+  FPS & Frames per second\\
+  OOP & Object-oriented programming\\
   \bottomrule
 \end{tabular}\\
 
-\wss{symbols, abbreviations or acronyms -- you can reference the SRS tables if needed}
+%\wss{symbols, abbreviations or acronyms -- you can reference the SRS tables if needed}
 
 \newpage
 
 \tableofcontents
 
+\newpage
 \listoftables %if appropriate
 
-\listoffigures %if appropriate
+%\listoffigures %if appropriate
 
 \newpage
 
@@ -750,7 +762,7 @@ Overall, \textbf{Dice Duels} meets its core non-functional requirements and prov
 
 \subsubsection{Test: Roll Dice}
 void roll\_dice():\\
-\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
+\begin{tabularx}{\textwidth}{|p{2cm}|p{2.5cm}|p{3.75cm}|p{3.75cm}|p{1.5cm}|}
     \cline{1-5}
     \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
     \cline{1-5}
@@ -760,7 +772,7 @@ void roll\_dice():\\
 
 \subsubsection{Test: Roll Selected Dice}
 void roll\_selected\_dice():\\
-\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
+\begin{tabularx}{\textwidth}{|p{2cm}|p{2.5cm}|p{3.75cm}|p{3.75cm}|p{1.5cm}|}
     \cline{1-5}
     \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
     \cline{1-5}
@@ -770,7 +782,7 @@ void roll\_selected\_dice():\\
 
 \subsubsection{Test: Invert Selection}
 void invert\_Selection():\\
-\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
+\begin{tabularx}{\textwidth}{|p{2cm}|p{2.5cm}|p{3.75cm}|p{3.75cm}|p{1.5cm}|}
     \cline{1-5}
     \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
     \cline{1-5}
@@ -780,7 +792,7 @@ void invert\_Selection():\\
 
 \subsubsection{Test: Get Dice Values}
 Array[int] get\_dice\_values():\\
-\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
+\begin{tabularx}{\textwidth}{|p{2cm}|p{2.5cm}|p{3.75cm}|p{3.75cm}|p{1.5cm}|}
     \cline{1-5}
     \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
     \cline{1-5}
@@ -790,7 +802,7 @@ Array[int] get\_dice\_values():\\
 
 \subsubsection{Test: Toggle Dice Collisions}
 void toggleDiceCollisions(toggle: bool):\\
-\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
+\begin{tabularx}{\textwidth}{|p{2cm}|p{2.0cm}|p{4cm}|p{4cm}|p{1.5cm}|}
     \cline{1-5}
     \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
     \cline{1-5}
@@ -804,7 +816,7 @@ void toggleDiceCollisions(toggle: bool):\\
 
 \subsubsection{Test: Calculate Singles Scoring}
 Array[int] \_calculate\_singles\_score(target\_value: int, dice\_rolls: Array, \_scoring\_rule: String):\\
-\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
+\begin{tabularx}{\textwidth}{|p{2cm}|p{3.0cm}|p{4cm}|p{3.0cm}|p{1.5cm}|}
     \cline{1-5}
     \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
     \cline{1-5}
@@ -820,7 +832,7 @@ Array[int] \_calculate\_singles\_score(target\_value: int, dice\_rolls: Array, \
 
 \subsubsection{Test: Calculate Kind Scoring}
 int \_calculate\_kind\_score(target\_count: int, dice\_rolls: Array, \_scoring\_rule: String):\\
-\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
+\begin{tabularx}{\textwidth}{|p{2cm}|p{3.0cm}|p{4cm}|p{3.0cm}|p{1.5cm}|}
     \cline{1-5}
     \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
     \cline{1-5}
@@ -836,7 +848,7 @@ int \_calculate\_kind\_score(target\_count: int, dice\_rolls: Array, \_scoring\_
 
 \subsubsection{Test: Calculate Straight Scoring}
 int \_calculate\_straight\_score(target\_length: int, dice\_rolls: Array, \_scoring\_rule: String):\\
-\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
+\begin{tabularx}{\textwidth}{|p{2cm}|p{3.0cm}|p{4cm}|p{3.0cm}|p{1.5cm}|}
     \cline{1-5}
     \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
     \cline{1-5}
@@ -852,7 +864,7 @@ int \_calculate\_straight\_score(target\_length: int, dice\_rolls: Array, \_scor
 
 \subsubsection{Test: Calculate Full House Scoring}
 int \_calculate\_full\_house\_score(setSize1: int, setSize2: int, dice\_rolls: Array, \_scoring\_rule: String):\\
-\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
+\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{3.5cm}|p{3.0cm}|p{1.5cm}|}
     \cline{1-5}
     \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
     \cline{1-5}
@@ -868,7 +880,7 @@ int \_calculate\_full\_house\_score(setSize1: int, setSize2: int, dice\_rolls: A
 
 \subsubsection{Test: Calculate Chance Scoring}
 int \_calculate\_chance\_score(dice\_rolls: Array, \_scoring\_rule: String):\\
-\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{4cm}|p{4cm}|p{1.5cm}|}
+\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{3.5cm}|p{3.0cm}|p{1.5cm}|}
     \cline{1-5}
     \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
     \cline{1-5}
@@ -1161,8 +1173,8 @@ Branch coverage was also employed which went even deeper by testing all possible
 
 Overall, while specific coverage metrics were unavailable to aid the team in understanding how much of the code was being tested, the team created comprehensive test cases covering all major functions, decision points, and smaller utility functions. This approach helped the team ensure that the majority of the code base was tested and performed as expected.
 
-\bibliographystyle{plainnat}
-\bibliography{../../refs/References}
+%\bibliographystyle{plainnat}
+%\bibliography{../../refs/References}
 
 \newpage{}
 \section*{Appendix --- Reflection}
