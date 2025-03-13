@@ -54,10 +54,7 @@ func _print_lobby_status():
 		print("🛖 Lobby:", lobby_id, " | Players:", lobbies[lobby_id])
 	print("")
 
-@rpc("any_peer")
-func broadcast_game_state(state: String, data: Dictionary):
-	for peer_id in multiplayer.get_peers():
-		rpc_id(peer_id, "broadcast_game_state", state, data)
+
 
 
 
@@ -68,6 +65,13 @@ func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionar
 	# Broadcast to all clients
 	for peer_id in multiplayer.get_peers():
 		rpc_id(peer_id, "receive_game_settings", game_settings, hand_settings)
+
+@rpc("any_peer")
+func receive_game_state(state: String, data: Dictionary):
+	var game_state = state
+	var data_state = data
+	for peer_id in multiplayer.get_peers():
+		rpc_id(peer_id, "receive_game_state", game_state, data_state)
 
 @rpc("any_peer", "call_local")
 func ping():
