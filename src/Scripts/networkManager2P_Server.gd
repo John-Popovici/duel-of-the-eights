@@ -199,6 +199,7 @@ func receive_disconnect():
 	Debugger.log("Recieved Disconnect")
 	emit_signal("disconnected")
 	SceneSwitcher.returnToIntro()
+	# keep commented
 	#remove_from_group("NetworkHandlingNodes")
 
 
@@ -209,7 +210,18 @@ func receive_disconnect():
 func ping() -> void:
 	time_since_last_ping = 0.0
 
+signal game_state_received(state: String, data: Dictionary)
 
+# Broadcasts the game state to keep both players in sync
+func broadcast_game_state(state: String, data: Dictionary) -> void:
+	Debugger.log(str("Broadcasting state: ", state, "with data: ", data, "from host: ", getIsHost()))
+	rpc("receive_game_state", state, data)
+
+# Remote function to handle incoming game state updates
+@rpc("any_peer")
+func receive_game_state(state: String, data: Dictionary):
+	Debugger.log(str("Received state: ", state, " with data: ", data, " on host: ", getIsHost()))
+	emit_signal("game_state_received", state, data)
 
 
 signal received_game_settings(_game_settings: Dictionary, _hand_settings: Dictionary)
@@ -218,10 +230,10 @@ func send_game_settings(_game_settings: Dictionary,_hand_settings: Dictionary) -
 	var game_settings = _game_settings
 	var hand_settings = _hand_settings
 	Debugger.log("Network Manager sent settings")
-	rpc_id(1,"receive_game_settings",_game_settings, _hand_settings)
+	rpc("receive_game_settings",_game_settings, _hand_settings)
 
 # 🟢 Receive messages
-@rpc("any_peer", "call_local")
+@rpc("any_peer")
 func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionary):
 	var game_settings = _game_settings
 	var hand_settings = _hand_settings
@@ -229,26 +241,6 @@ func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionar
 	emit_signal("received_game_settings",game_settings,hand_settings)
 
 
-
-signal game_state_received(state: String, data: Dictionary)
-
-# Broadcasts the game state to keep both players in sync
-
-
-func broadcast_game_state(state: String, data: Dictionary):
-	var game_state = state
-	var data_state = data
-
-	Debugger.log(str("Broadcasting state: ", game_state, " with data: ", data_state, " from host: ", getIsHost()))
-	rpc_id(1, "receive_game_state", game_state, data_state)
-
-# Remote function to handle incoming game state updates
-@rpc("any_peer", "call_local")
-func receive_game_state(state: String, data: Dictionary):
-	var game_state = state
-	var data_state = data
-	Debugger.log(str("Received state: ", state, " with data: ", data, " on host: ", getIsHost()))
-	emit_signal("game_state_received", game_state, data_state)
 
 
 func _process(delta: float) -> void:

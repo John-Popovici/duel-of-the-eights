@@ -47,6 +47,20 @@ func _on_peer_disconnected(peer_id):
 	# 🔹 Print updated lobby status
 	_print_lobby_status()
 
+#@rpc("any_peer")
+#func receive_disconnect():
+	#var peer_id = multiplayer.get_remote_sender_id()  # Get the ID of the disconnecting client
+	#print("❌ Client", peer_id, "disconnected via RPC.")
+	
+	# Remove the player from lobbies
+	#for lobby_id in lobbies.keys():
+		#if peer_id in lobbies[lobby_id]:
+			#lobbies[lobby_id].erase(peer_id)
+			#break  # Stop searching once found
+	
+	# Print updated lobby status
+	#_print_lobby_status()
+
 # 🟢 Print lobby details
 func _print_lobby_status():
 	print("\n📜 Current Lobbies:")
@@ -54,7 +68,10 @@ func _print_lobby_status():
 		print("🛖 Lobby:", lobby_id, " | Players:", lobbies[lobby_id])
 	print("")
 
-
+@rpc("any_peer")
+func receive_game_state(state: String, data: Dictionary):
+	for peer_id in multiplayer.get_peers():
+		rpc_id(peer_id, "receive_game_state", state, data)
 
 
 
@@ -66,12 +83,7 @@ func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionar
 	for peer_id in multiplayer.get_peers():
 		rpc_id(peer_id, "receive_game_settings", game_settings, hand_settings)
 
-@rpc("any_peer")
-func receive_game_state(state: String, data: Dictionary):
-	var game_state = state
-	var data_state = data
-	for peer_id in multiplayer.get_peers():
-		rpc_id(peer_id, "receive_game_state", game_state, data_state)
+
 
 @rpc("any_peer", "call_local")
 func ping():
