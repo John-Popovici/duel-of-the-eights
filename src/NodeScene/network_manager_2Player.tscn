@@ -32,32 +32,37 @@ theme = ExtResource("3_cqgb1")
 text = "Select Multiplayer Options:"
 horizontal_alignment = 1
 
-[node name="HostCheckButton" type="CheckButton" parent="ConnectionUI/UIBox/Connection_Setup" groups=["SwitchButtons"]]
-texture_filter = 3
+[node name="ConnectionHSplit" type="HSplitContainer" parent="ConnectionUI/UIBox/Connection_Setup"]
 layout_mode = 2
-theme = ExtResource("3_cqgb1")
-text = "Host?"
-alignment = 1
+size_flags_vertical = 3
 
-[node name="IP_Input" type="LineEdit" parent="ConnectionUI/UIBox/Connection_Setup"]
-texture_filter = 3
+[node name="CreateVSplitContainer" type="VSplitContainer" parent="ConnectionUI/UIBox/Connection_Setup/ConnectionHSplit"]
 layout_mode = 2
-theme = ExtResource("3_cqgb1")
-placeholder_text = "Connect Code"
-alignment = 1
+size_flags_horizontal = 3
 
-[node name="Port_Input" type="LineEdit" parent="ConnectionUI/UIBox/Connection_Setup"]
+[node name="HostButton" type="Button" parent="ConnectionUI/UIBox/Connection_Setup/ConnectionHSplit/CreateVSplitContainer" groups=["ConfirmButtons"]]
 texture_filter = 3
 layout_mode = 2
 theme = ExtResource("3_cqgb1")
-placeholder_text = "Port - 5 digits"
-alignment = 1
+text = "Create a New Room"
 
-[node name="ConnectButton" type="Button" parent="ConnectionUI/UIBox/Connection_Setup" groups=["ConfirmButtons"]]
+[node name="JoinVSplitContainer" type="VSplitContainer" parent="ConnectionUI/UIBox/Connection_Setup/ConnectionHSplit"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="JoinButton" type="Button" parent="ConnectionUI/UIBox/Connection_Setup/ConnectionHSplit/JoinVSplitContainer" groups=["ConfirmButtons"]]
+texture_filter = 3
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_cqgb1")
+text = "Join an Existing Room"
+
+[node name="RoomCodeInput" type="LineEdit" parent="ConnectionUI/UIBox/Connection_Setup/ConnectionHSplit/JoinVSplitContainer"]
 texture_filter = 3
 layout_mode = 2
 theme = ExtResource("3_cqgb1")
-text = "Connect"
+placeholder_text = "Existing Room Code"
+alignment = 1
 
 [node name="BackToHomeButton" type="Button" parent="ConnectionUI/UIBox/Connection_Setup" groups=["BackButtons"]]
 texture_filter = 3

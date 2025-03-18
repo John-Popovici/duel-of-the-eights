@@ -1,13 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwmr2wxia4yx"]
+[gd_scene load_steps=2 format=3 uid="uid://cwmr2wxia4yx"]
 
 [ext_resource type="Script" path="res://Scripts/Server.gd" id="1_tv25k"]
-[ext_resource type="PackedScene" uid="uid://cwd4d0mdtbfk6" path="res://Scenes/room.tscn" id="2_s4g00"]
 
 [node name="OnlineGameScene" type="Node3D"]
 
 [node name="NetworkManager" type="Node" parent="."]
 script = ExtResource("1_tv25k")
-
-[node name="Lobby" type="Node" parent="NetworkManager"]
-
-[node name="Room" parent="NetworkManager/Lobby" instance=ExtResource("2_s4g00")]

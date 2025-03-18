@@ -10,8 +10,8 @@ var player2_name: String
 
 
 func load_game_settings() -> void:
+	network_manager.disconnect("startGame", self.load_game_settings)
 	Debugger.log("Start Game")
-	#GameManager.loadGameSetup()
 	GameSettings.collectInfo()
 	
 

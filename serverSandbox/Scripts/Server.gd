@@ -5,16 +5,13 @@ var port
 var is_host: bool = false
 var ConnectionUI: CanvasLayer
 
-signal connection_successful
-signal disconnected
-signal connection_failed
-
-var ping_timeout: float = 10.0
 var time_since_last_ping: float = 0.0
-var check_ping: bool = false
 
-@onready var lobby = get_node("Lobby")
-@onready var room = get_node("Lobby/Room")
+var rooms = {} # Dictionary to store active rooms { "room_code": Room }
+var max_rooms = 3  # Maximum number of concurrent rooms
+var room_code_length = 4  # Length of generated room codes
+
+@onready var waitingPeers = [] # Peers not in  rooms { "id": TimeJoined }
 
 func start_server(_port: int = default_port):
 	var peer = ENetMultiplayerPeer.new()
@@ -27,30 +24,92 @@ func start_server(_port: int = default_port):
 	multiplayer.set_multiplayer_peer(peer)
 	is_host = true
 	print(str("Started as server on port: ", port))
-	print(str("IP: ", IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1)))
 	multiplayer.multiplayer_peer.connect("peer_connected", self._on_peer_connected)
-	#setup tracking for peer disconnect
 	multiplayer.multiplayer_peer.connect("peer_disconnected", self._on_peer_disconnected)
+
+# Generate a unique room code
+func generate_room_code() -> String:
+	var code = ""
+	var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+	for i in range(room_code_length):
+		code += characters[randi() % characters.length()]
+	if rooms.has(code):
+		return generate_room_code()
+	return code
 
 func _on_peer_connected(id: int):
 	print(str("Connected to peer with ID: ", id))
-	print(str("Connected peers: ", multiplayer.has_multiplayer_peer()))
-	#check_ping = true
-	room.add_peer(id)
-	#emit_signal("connection_successful")
+	waitingPeers.append(id)
 
 func _on_peer_disconnected(id: int):
 	print(str("Disconnected from peer with ID: ", id))
-	room.remove_peer(id)
+	waitingPeers.erase(id)
+	removeIdFromRoom(id)
+	
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	room.initialize_room(1,"Custom")
 	start_server()
 	pass # Replace with function body.
 
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if waitingPeers.is_empty():
+		return
+	if Time.get_ticks_msec() % 1000 < delta * 1000:
+		for id in waitingPeers:
+			rpc_id(id,"ping")
+
+func removeIdFromRoom(id):
+	#To be completed
+	pass
 
 ####################  RPCs ###########################
+# Host creates a room
+@rpc("any_peer", "reliable")
+func create_room():
+	if rooms.size() >= max_rooms:
+		print("Server room limit reached.")
+		return  # Reject new rooms if at max capacity
+	
+	var host_id = multiplayer.get_remote_sender_id()
+	var room_code = generate_room_code()
+	
+	waitingPeers.erase(host_id)
+	var new_room = preload("res://Scenes/room.tscn").instantiate()
+	add_child(new_room)
+	
+	new_room.initialize_room(host_id, room_code)
+	rooms[room_code] = new_room
+	
+	print("Room created:", room_code, "by Host:", host_id)
+	rpc_id(host_id, "room_created", room_code)
+
+@rpc("any_peer", "reliable")
+func join_room(room_code):
+	var client_id = multiplayer.get_remote_sender_id()
+
+	if room_code in rooms and not rooms[room_code].is_full():
+		rooms[room_code].add_client(client_id)
+		#rpc_id(client_id, "room_joined", room_code) Already called by room
+		print("Client ", client_id, " joined room: ", room_code)
+	else:
+		rpc_id(client_id, "room_join_failed")
+		print("Client", client_id, "failed to join room:", room_code)
+
+@rpc("reliable")
+func room_created(code):
+	pass
+
+@rpc("reliable")
+func room_joined(code, hostid):
+	pass
+
+@rpc("reliable")
+func room_join_failed():
+	pass
+
+###############
 
 # Reset the timer on each ping received
 @rpc("any_peer")
@@ -63,7 +122,6 @@ func broadcast_disconnect(state: String = "", data: Dictionary = {}):
 	rpc("receive_disconnect")
 	remove_from_group("NetworkHandlingNodes")
 
-# Remote function to handle incoming game state updates
 @rpc("any_peer")
 func receive_disconnect():
 	print("Recieved Disconnect")
@@ -71,6 +129,11 @@ func receive_disconnect():
 	#_try_reconnect()
 	#SceneSwitcher.returnToIntro()
 	#remove_from_group("NetworkHandlingNodes")
+
+
+
+
+######################## Game specific transmissions ##########################
 
 # Broadcasts the game state to keep both players in sync
 func broadcast_game_state(state: String, data: Dictionary):

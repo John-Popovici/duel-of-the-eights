@@ -69,3 +69,4 @@ Additional Information:
 https://www.youtube.com/watch?v=jgJuX04cq7k&ab_channel=BatteryAcidDev
 https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connect-linux-inst-ssh.html
 https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/linux-file-transfer-scp.html
+https://www.youtube.com/watch?v=P1erVo5X3Bs&ab_channel=choobtorials
