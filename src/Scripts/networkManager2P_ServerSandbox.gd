@@ -1,6 +1,7 @@
 extends Node
 
 @export var default_port: int = 12345
+@export var default_server_ip: String = "192.168.0.106"
 var port
 var is_host: bool = false
 var ConnectionUI: CanvasLayer
@@ -9,43 +10,43 @@ signal connection_successful
 signal disconnected
 signal connection_failed
 
-var ping_timeout: float = 10.0
+var ping_timeout: float = 5.0 #change back to 10.0
 var time_since_last_ping: float = 0.0
 var check_ping: bool = false
 
 # Start as a server
 func start_server(_port: int = default_port):
 	var peer = ENetMultiplayerPeer.new()
-	port = _port
-	var error = peer.create_server(port, 2)  # Set maximum peers to 2 (host + 1 client)
+	var ip = default_server_ip
+
+	port = default_port
+	var error = peer.create_client(ip, port)
 	if error != OK:
-		Debugger.log_error(str("Cannot Host: ", error))
+		Debugger.log_error(str("Cannot Join as Client: ", error))
+		Debugger.log_error(str("Cannot Join as Client to: ", default_server_ip, " on port ", port))
 		return
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
 	is_host = true
-	Debugger.log(str("Started as server on port: ", port))
-	Debugger.log(str("IP: ", IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1)))
+	Debugger.log(str("Attempting to connect to server at ", ip, " on port ", port))
+	
 	multiplayer.multiplayer_peer.connect("peer_connected", self._on_peer_connected)
 	#setup tracking for peer disconnect
 	multiplayer.multiplayer_peer.connect("peer_disconnected", self._on_peer_disconnected)
 
 # Connect as a client
-func connect_to_server(_hash: String):
+func connect_to_server(_hash: String = "nullEmpty"):
 	var peer = ENetMultiplayerPeer.new()
-	var ip = hash_to_ip(_hash.substr(0,8))
-	Debugger.log(str("IP code is ", _hash.substr(0,8)))
-	port = lettersToNumber(_hash.substr(8,-1))
+	var ip = default_server_ip
+	port = default_port
 	var error = peer.create_client(ip, port)
 	if error != OK:
 		Debugger.log_error(str("Cannot Join as Client: ", error))
-		Debugger.log_error(str("Cannot Join as Client to: ", hash_to_ip(_hash), " on port ", port))
+		Debugger.log_error(str("Cannot Join as Client to: ", default_server_ip, " on port ", port))
 		return
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
 	is_host = false
-	Debugger.log(str("Hash code recieved: ", _hash))
-	Debugger.log(str("Hash to IP: ",ip))
 	Debugger.log(str("Attempting to connect to server at ", ip, " on port ", port))
 	
 	# Check if connection is successful
@@ -79,6 +80,7 @@ func _on_connection_failed():
 
 func _try_reconnect():
 	emit_signal("disconnected")
+	broadcast_disconnect()
 	multiplayer.multiplayer_peer = null
 	remove_from_group("NetworkHandlingNodes")
 
@@ -157,6 +159,7 @@ func getHashPort() -> String:
 
 func disconnect_from_server() -> void:
 	emit_signal("disconnected")
+	_try_reconnect()
 	multiplayer.multiplayer_peer = null
 	remove_from_group("NetworkHandlingNodes")
 
@@ -181,6 +184,7 @@ func broadcast_disconnect(state: String = "", data: Dictionary = {}):
 func receive_disconnect():
 	Debugger.log("Recieved Disconnect")
 	emit_signal("disconnected")
+	_try_reconnect()
 	SceneSwitcher.returnToIntro()
 	#remove_from_group("NetworkHandlingNodes")
 
@@ -198,13 +202,13 @@ func receive_game_state(state: String, data: Dictionary):
 	emit_signal("game_state_received", state, data)
 
 # Reset the timer on each ping received
-@rpc
+@rpc("any_peer")
 func ping() -> void:
 	time_since_last_ping = 0.0
 
 signal received_game_settings(_game_settings: Dictionary, _hand_settings: Dictionary)
 
-@rpc
+@rpc("any_peer","call_remote")
 func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionary) -> void:
 	var game_settings = _game_settings
 	var hand_settings = _hand_settings
@@ -217,30 +221,19 @@ func send_game_settings(_game_settings: Dictionary,_hand_settings: Dictionary) -
 	Debugger.log("Network Manager sent settings")
 	rpc("receive_game_settings",_game_settings, _hand_settings)
 
-#@rpc("any_peer","reliable")
+
 func send_chat_rpc(message: String):
-	if multiplayer.is_server():
-		rpc("receive_chat_rpc", message)  # Broadcast to all clients
-	else:
-		rpc_id(1, "receive_chat_rpc", message)  # Send to server
+	rpc("receive_chat_rpc", message)  # Broadcast to all clients
+
 
 signal chat_received(message: String)
 
-@rpc("any_peer","reliable")
+@rpc("any_peer","reliable","call_remote")
 func receive_chat_rpc(message: String):
 	chat_received.emit(message)
 
 func _process(delta: float) -> void:
-	if is_host:
-		# Broadcast a ping every second (adjust interval as necessary)
-		if Time.get_ticks_msec() % 1000 < delta * 1000:
-			rpc("ping")
-			if !multiplayer.has_multiplayer_peer():
-				emit_signal("disconnected")
-				multiplayer.multiplayer_peer = null
-				Debugger.log("Client Disconnected")
-				remove_from_group("NetworkHandlingNodes")
-	elif !is_host and check_ping:
+	if check_ping:
 		# Update the timer
 		time_since_last_ping += delta
 		
