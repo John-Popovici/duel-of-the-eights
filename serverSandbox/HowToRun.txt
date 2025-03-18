@@ -1,9 +1,9 @@
 How to Start Instance
 1) Start Amazon EC2 Instance (which is preloaded with the server implementation)
 2) In terminal, ssh into the amazon linux server using the following command
-ssh -i "path to .pem file" ec2-user@"insert public DNS from instance details"
+ssh -i "path to .pem file" ec2-user@"insert public DNS/Elastic IP from instance details"
 example:
-ssh -i C:\Users\nigel\OneDrive\Desktop\Nigel\GameDev\AWS\duel-of-the-eights-server-key-pair.pem ec2-user@"insert public DNS from instance details"
+ssh -i C:\Users\nigel\OneDrive\Desktop\Nigel\GameDev\AWS\duel-of-the-eights-server-key-pair.pem ec2-user@3.147.230.87
 3) Execute server file using the following command
 ./"path to .sh server executable"
 example:
@@ -16,17 +16,21 @@ chmod +x LinuxServer/*
 4) Update the default ip with the public DNS from the EC2 Server in the client game
 
 How to stop instance
-1) If ssh'd into linux server and you have the server running directly from the terminal, use CTRL+C to stop the server implementation from running
-2) Use the exit Command to leave the ssh remote terminal
-3) Stop the instance on Amazon EC2 portal
+1) In terminal, ssh into the amazon linux server using the following command (Skip if already ssh'd)
+ssh -i "path to .pem file" ec2-user@"insert public DNS/Elastic IP from instance details"
+example:
+ssh -i C:\Users\nigel\OneDrive\Desktop\Nigel\GameDev\AWS\duel-of-the-eights-server-key-pair.pem ec2-user@3.147.230.87
+2) If ssh'd into linux server and you have the server running directly from the terminal, use CTRL+C to stop the server implementation from running
+3) Use the exit Command to leave the ssh remote terminal
+4) Stop the instance on Amazon EC2 portal
 
 
 Optional (To run server in backend, without having the terminal window open):
 1) Start Amazon EC2 Instance (which is preloaded with the server implementation)
 2) In terminal, ssh into the amazon linux server using the following command
-ssh -i "path to .pem file" ec2-user@"insert public DNS from instance details"
+ssh -i "path to .pem file" ec2-user@"insert public DNS/Elastic IP from instance details"
 example:
-ssh -i C:\Users\nigel\OneDrive\Desktop\Nigel\GameDev\AWS\duel-of-the-eights-server-key-pair.pem ec2-user@"insert public DNS from instance details"
+ssh -i C:\Users\nigel\OneDrive\Desktop\Nigel\GameDev\AWS\duel-of-the-eights-server-key-pair.pem ec2-user@3.147.230.87
 3) To check running processes use the following command (there should be none)
 ps -A | grep "Server Build Name"
 example:
@@ -39,9 +43,9 @@ example:
 
 How to stop instance (When Server is running in the background)
 1) In terminal, ssh into the amazon linux server using the following command
-ssh -i "path to .pem file" ec2-user@"insert public DNS from instance details"
+ssh -i "path to .pem file" ec2-user@"insert public DNS/Elastic IP from instance details"
 example:
-ssh -i C:\Users\nigel\OneDrive\Desktop\Nigel\GameDev\AWS\duel-of-the-eights-server-key-pair.pem ec2-user@"insert public DNS from instance details"
+ssh -i C:\Users\nigel\OneDrive\Desktop\Nigel\GameDev\AWS\duel-of-the-eights-server-key-pair.pem ec2-user@3.147.230.87
 2) To check running processes use the following command (there should be two)
 ps -A | grep "Server Build Name"
 example:
@@ -58,3 +62,10 @@ kill 3046
 How to upload Linux Server files
 1) In terminal, scp the files to the server using the following command
 scp -i "path to .pem file" -r "path to LinuxServer folder on local machine" ec2-user@"insert public DNS from instance details":~/.
+
+
+
+Additional Information:
+https://www.youtube.com/watch?v=jgJuX04cq7k&ab_channel=BatteryAcidDev
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connect-linux-inst-ssh.html
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/linux-file-transfer-scp.html

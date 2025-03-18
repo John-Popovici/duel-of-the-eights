@@ -1,7 +1,7 @@
 extends Node
 
 @export var default_port: int = 12345
-@export var default_server_ip: String = "ec2-3-14-128-220.us-east-2.compute.amazonaws.com"#"ec2-18-119-130-156.us-east-2.compute.amazonaws.com"#"192.168.0.106"
+@export var default_server_ip: String = "3.147.230.87" #elastic IP address
 var port
 var is_host: bool = false
 var ConnectionUI: CanvasLayer
