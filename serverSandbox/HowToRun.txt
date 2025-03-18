@@ -1,0 +1,60 @@
+How to Start Instance
+1) Start Amazon EC2 Instance (which is preloaded with the server implementation)
+2) In terminal, ssh into the amazon linux server using the following command
+ssh -i "path to .pem file" ec2-user@"insert public DNS from instance details"
+example:
+ssh -i C:\Users\nigel\OneDrive\Desktop\Nigel\GameDev\AWS\duel-of-the-eights-server-key-pair.pem ec2-user@"insert public DNS from instance details"
+3) Execute server file using the following command
+./"path to .sh server executable"
+example:
+./LinuxServer/ServerSandbox.sh
+3.5) If at this point you run into a permissions denied error, use the following command, then try step 3 again
+chmod +x "Folder path"/*
+example:
+chmod +x LinuxServer/*
+**ls -latr to check
+4) Update the default ip with the public DNS from the EC2 Server in the client game
+
+How to stop instance
+1) If ssh'd into linux server and you have the server running directly from the terminal, use CTRL+C to stop the server implementation from running
+2) Use the exit Command to leave the ssh remote terminal
+3) Stop the instance on Amazon EC2 portal
+
+
+Optional (To run server in backend, without having the terminal window open):
+1) Start Amazon EC2 Instance (which is preloaded with the server implementation)
+2) In terminal, ssh into the amazon linux server using the following command
+ssh -i "path to .pem file" ec2-user@"insert public DNS from instance details"
+example:
+ssh -i C:\Users\nigel\OneDrive\Desktop\Nigel\GameDev\AWS\duel-of-the-eights-server-key-pair.pem ec2-user@"insert public DNS from instance details"
+3) To check running processes use the following command (there should be none)
+ps -A | grep "Server Build Name"
+example:
+ps -A | grep ServerSandbox
+4) Execute server file using the following modified command
+./"path to .sh server executable" &
+example:
+./LinuxServer/ServerSandbox.sh &
+5) Use the exit command to leave the linux terminal (The game server should still be running in the background)
+
+How to stop instance (When Server is running in the background)
+1) In terminal, ssh into the amazon linux server using the following command
+ssh -i "path to .pem file" ec2-user@"insert public DNS from instance details"
+example:
+ssh -i C:\Users\nigel\OneDrive\Desktop\Nigel\GameDev\AWS\duel-of-the-eights-server-key-pair.pem ec2-user@"insert public DNS from instance details"
+2) To check running processes use the following command (there should be two)
+ps -A | grep "Server Build Name"
+example:
+ps -A | grep ServerSandbox
+3) Use the following command
+kill "PID"
+example:
+kill 3046
+4) repeat setps 3 and 4 until all processes are gone
+5) Use the exit command to lve the linux terminal
+6) Stop the instance on Amazon EC2 portal
+
+
+How to upload Linux Server files
+1) In terminal, scp the files to the server using the following command
+scp -i "path to .pem file" -r "path to LinuxServer folder on local machine" ec2-user@"insert public DNS from instance details":~/.
