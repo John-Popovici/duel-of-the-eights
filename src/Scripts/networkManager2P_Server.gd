@@ -245,9 +245,9 @@ func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionar
 
 func _process(delta: float) -> void:
 	if is_host:
-		# Broadcast a ping every second (adjust interval as necessary)
+		# Broadcast a ping every second
 		if Time.get_ticks_msec() % 1000 < delta * 1000:
-			rpc_id(1,"ping")
+			rpc("ping")  # Broadcast ping to all clients
 			if !multiplayer.has_multiplayer_peer():
 				emit_signal("disconnected")
 				multiplayer.multiplayer_peer = null
@@ -262,4 +262,3 @@ func _process(delta: float) -> void:
 			Debugger.log("Host Ping Timedout")
 			_on_server_disconnected()
 			check_ping = false
-	pass

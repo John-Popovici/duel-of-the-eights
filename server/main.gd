@@ -87,4 +87,9 @@ func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionar
 
 @rpc("any_peer", "call_local")
 func ping():
-	print("Received ping from peer:", multiplayer.get_remote_sender_id())
+	var sender_id = multiplayer.get_remote_sender_id()
+	print("Received ping from peer:", sender_id)
+
+	# Send a ping response back to all connected peers
+	for peer_id in multiplayer.get_peers():
+		rpc_id(peer_id, "ping")
