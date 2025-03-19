@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c1ucubpi2ajty"]
+[gd_scene load_steps=7 format=3 uid="uid://bgoijvcn6t8nx"]
 
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_online_game_scene.gd" id="1_2onyq"]
 [ext_resource type="PackedScene" uid="uid://bb1hsjv35krnk" path="res://NodeScene/network_manager_2Player.tscn" id="2_xf15u"]

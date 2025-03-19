@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://c1ucubpi2ajty"]
+
+[ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_online_game_scene.gd" id="1_2dx22"]
+[ext_resource type="PackedScene" uid="uid://bb1hsjv35krnk" path="res://NodeScene/network_manager_2Player.tscn" id="2_limji"]
+[ext_resource type="PackedScene" uid="uid://c5010erpn74kt" path="res://NodeScene/standard_game_settings.tscn" id="4_wlydx"]
+[ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_PlayerManager.gd" id="5_aikji"]
+[ext_resource type="PackedScene" uid="uid://d0icyj31p2tgw" path="res://NodeScene/game_manager.tscn" id="6_53k3y"]
+
+[node name="OnlineGameScene" type="Node3D"]
+script = ExtResource("1_2dx22")
+
+[node name="NetworkManager" parent="." instance=ExtResource("2_limji")]
+
+[node name="GameSettings" parent="." instance=ExtResource("4_wlydx")]
+visible = false
+
+[node name="myPlayer" type="Node" parent="."]
+script = ExtResource("5_aikji")
+
+[node name="enemyPlayer" type="Node" parent="."]
+script = ExtResource("5_aikji")
+
+[node name="GameManager" parent="." instance=ExtResource("6_53k3y")]

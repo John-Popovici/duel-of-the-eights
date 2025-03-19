@@ -6,6 +6,7 @@ extends Node3D
 @onready var player2_name_input = $VBoxContainer/Player2Entry  # Reference to Player 2's LineEdit
 @onready var start_local_button = $VBoxContainer/StartLocalGame # Reference to the Start Button
 @onready var start_standard_button = $VBoxContainer/StartStandardGame # Reference to the Start Button
+@onready var start_online_standard_button = $VBoxContainer/StartOnlineStandardGame
 @onready var start_bluff_button = $VBoxContainer/StartBluffGame # Reference to the Start Button
 @onready var start_blitz_button = $VBoxContainer/StartBlitzGame # Reference to the Start Button
 @onready var start_online_button = $VBoxContainer/StartOnlineGame # Reference to the Start Button
@@ -20,6 +21,7 @@ func _ready() -> void:
 	start_local_button.pressed.connect(_on_start_local_game_pressed)
 	start_online_button.pressed.connect(_on_start_online_game_pressed)
 	start_standard_button.pressed.connect(_on_start_standard_game_pressed)
+	start_online_standard_button.pressed.connect(_on_start_online_standard_game_pressed)
 	start_bluff_button.pressed.connect(_on_start_bluff_game_pressed)
 	start_blitz_button.pressed.connect(_on_start_blitz_game_pressed)
 	start_online_long_form_button.pressed.connect(_on_start_online_long_form_game_pressed)
@@ -49,6 +51,10 @@ func _on_start_online_game_pressed() -> void:
 	SceneSwitcher.changeScene("res://Scenes/online_game_scene.tscn")
 
 func _on_start_standard_game_pressed() -> void:
+	# Load GameScene
+	SceneSwitcher.changeScene("res://Scenes/local_standard_game_scene.tscn")
+	
+func _on_start_online_standard_game_pressed() -> void:
 	# Load GameScene
 	SceneSwitcher.changeScene("res://Scenes/online_standard_game_scene.tscn")
 

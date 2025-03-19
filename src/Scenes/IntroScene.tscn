@@ -136,7 +136,13 @@ text = "Start Local Game!"
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("5_bq53n")
-text = "Play Standard Game"
+text = "Play Local Standard Game"
+
+[node name="StartOnlineStandardGame" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("5_bq53n")
+text = "Play Online Standard Game"
 
 [node name="StartBluffGame" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
 layout_mode = 2
