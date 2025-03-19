@@ -60,8 +60,10 @@ kill 3046
 
 
 How to upload Linux Server files
-1) In terminal, scp the files to the server using the following command
+1) In terminal, scp the files to the server using the following command (do not be ssh'd into linux server)
 scp -i "path to .pem file" -r "path to LinuxServer folder on local machine" ec2-user@"insert public DNS from instance details":~/.
+example:
+scp -i C:\Users\nigel\OneDrive\Desktop\Nigel\GameDev\AWS\duel-of-the-eights-server-key-pair.pem -r C:\Users\nigel\OneDrive\Documents\GitHub\duel-of-the-eights\serverSandbox\Builds\LinuxServer ec2-user@3.147.230.87:~/.
 
 
 

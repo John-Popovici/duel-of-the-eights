@@ -9,7 +9,6 @@ var peer_info = {}
 var is_host: bool = false
 var ConnectionUI: CanvasLayer
 
-signal disconnected
 signal connection_failed
 signal connection_successful
 signal second_player_connected
@@ -21,7 +20,7 @@ var check_ping: bool = false
 func connect_to_server():
 	var peer = ENetMultiplayerPeer.new()
 	var ip = default_server_ip
-	ip = "192.168.0.102" #For local Windows Testing
+	#ip = "192.168.0.107" #For local Windows Testing (replace with own ip)
 	
 	port = default_port
 	var error = peer.create_client(ip, port)
@@ -57,20 +56,14 @@ func _on_peer_connected(id: int):
 
 func _on_peer_disconnected(id: int):
 	Debugger.log(str("Disconnected from peer with ID: ", id))
-	_try_reconnect()
+	broadcast_disconnect()
 
 func _on_server_disconnected():
 	Debugger.log(str("Disconnected from server"))
-	_try_reconnect()
+	broadcast_disconnect()
 
 func _on_connection_failed():
 	Debugger.log(str("Connection Failed"))
-	multiplayer.multiplayer_peer = null
-	remove_from_group("NetworkHandlingNodes")
-	SceneSwitcher.returnToIntro()
-
-func _try_reconnect():
-	emit_signal("disconnected")
 	broadcast_disconnect()
 	multiplayer.multiplayer_peer = null
 	remove_from_group("NetworkHandlingNodes")
@@ -86,18 +79,14 @@ func getHashPort() -> String:
 	return ""
 
 func disconnect_from_server() -> void:
-	emit_signal("disconnected")
-	_try_reconnect()
-	multiplayer.multiplayer_peer = null
-	remove_from_group("NetworkHandlingNodes")
+	broadcast_disconnect()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	ConnectionUI = get_node("ConnectionUI")
-	ConnectionUI.setupNetworkManagerRef()
-	connect("disconnected", self.broadcast_disconnect)
 	add_to_group("NetworkHandlingNodes")
-	
+	ConnectionUI.setupNetworkManagerRef()
+
 
 signal startGame
 
@@ -105,16 +94,16 @@ signal startGame
 func broadcast_disconnect(state: String = "", data: Dictionary = {}):
 	Debugger.log("Broadcasting Disconnect")
 	rpc("receive_disconnect")
+	multiplayer.multiplayer_peer = null
 	remove_from_group("NetworkHandlingNodes")
+	SceneSwitcher.returnToIntro()
+	
 
 # Remote function to handle incoming game state updates
 @rpc("any_peer")
 func receive_disconnect():
 	Debugger.log("Recieved Disconnect")
-	emit_signal("disconnected")
-	_try_reconnect()
-	SceneSwitcher.returnToIntro()
-	#remove_from_group("NetworkHandlingNodes")
+	broadcast_disconnect()
 
 @rpc("reliable")
 func room_created(code):
@@ -159,7 +148,7 @@ signal game_state_received(state: String, data: Dictionary)
 # Broadcasts the game state to keep both players in sync
 func broadcast_game_state(state: String, data: Dictionary):
 	Debugger.log(str("Broadcasting state: ", state, "with data: ", data, "from host: ", getIsHost()))
-	rpc("receive_game_state", state, data)
+	rpc_id(1,"receive_game_state", state, data)
 
 # Remote function to handle incoming game state updates
 @rpc("any_peer")
@@ -185,11 +174,11 @@ func send_game_settings(_game_settings: Dictionary,_hand_settings: Dictionary) -
 	var game_settings = _game_settings
 	var hand_settings = _hand_settings
 	Debugger.log("Network Manager sent settings")
-	rpc("receive_game_settings",_game_settings, _hand_settings)
+	rpc_id(1,"receive_game_settings",_game_settings, _hand_settings)
 
 
 func send_chat_rpc(message: String):
-	rpc("receive_chat_rpc", message)  # Broadcast to all clients
+	rpc_id(1,"receive_chat_rpc", message)  # Broadcast to all clients
 
 
 signal chat_received(message: String)

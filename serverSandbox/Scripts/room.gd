@@ -3,7 +3,7 @@ extends Node
 var host_id: int
 var client_id: int
 var room_code: String
-var players = []  # List of players in the room
+var players: Array  # List of players in the room
 @onready var playerInfo = {} # {id: "Name"}
 @onready var check_ping = false
 
@@ -39,6 +39,31 @@ func is_full() -> bool:
 
 func is_empty() -> bool:
 	return players.size() == 0
+
+func returnids():
+	if is_empty():
+		return []
+	else:
+		return players
+
+func clear():
+	for id in players:
+		get_parent().rpc_id(id,"receive_disconnect")
+	print("Room: ", room_code, " Cleared")
+	queue_free()
+
+func otherPlayerid(id: int):
+	print("Players in room: ",room_code," are ",players)
+	if players.size() <2:
+		return
+	elif players.has(id):
+		if players[0] == id:
+			return players[1]
+		else:
+			return players[0]
+	else:
+		print("ID Missing")
+		return
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

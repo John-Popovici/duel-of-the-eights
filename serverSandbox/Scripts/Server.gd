@@ -16,7 +16,7 @@ var room_code_length = 4  # Length of generated room codes
 func start_server(_port: int = default_port):
 	var peer = ENetMultiplayerPeer.new()
 	port = _port
-	var error = peer.create_server(port, 3)  # Set maximum peers to 2 (host + 1 client)
+	var error = peer.create_server(port, max_rooms*2)  # Set maximum peers to 2 (host + 1 client)
 	if error != OK:
 		print(str("Cannot Host: ", error))
 		return
@@ -62,7 +62,18 @@ func _process(delta: float) -> void:
 
 func removeIdFromRoom(id):
 	#To be completed
-	pass
+	for room in rooms.keys():
+		if rooms[room].returnids().has(id):
+			print("Found id: ", id, " in room: ", room)
+			rooms[room].clear()
+			rooms.erase(room)
+
+
+func findReciever(id: int):
+	for room in rooms.keys():
+		if rooms[room].returnids().has(id):
+			print("Found id: ", id, " in room: ", room)
+			return rooms[room].otherPlayerid(id)
 
 ####################  RPCs ###########################
 # Host creates a room
@@ -77,6 +88,7 @@ func create_room():
 	
 	waitingPeers.erase(host_id)
 	var new_room = preload("res://Scenes/room.tscn").instantiate()
+	new_room.name = room_code
 	add_child(new_room)
 	
 	new_room.initialize_room(host_id, room_code)
@@ -124,11 +136,10 @@ func broadcast_disconnect(state: String = "", data: Dictionary = {}):
 
 @rpc("any_peer")
 func receive_disconnect():
-	print("Recieved Disconnect")
-	#emit_signal("disconnected")
-	#_try_reconnect()
-	#SceneSwitcher.returnToIntro()
-	#remove_from_group("NetworkHandlingNodes")
+	var disconnectedId = multiplayer.get_remote_sender_id()
+	print("Recieved Disconnect on server")
+	removeIdFromRoom(disconnectedId)
+	#Find id in rooms and clear and empty room
 
 
 
@@ -136,31 +147,40 @@ func receive_disconnect():
 ######################## Game specific transmissions ##########################
 
 # Broadcasts the game state to keep both players in sync
-func broadcast_game_state(state: String, data: Dictionary):
+func broadcast_game_state(senderid, state: String, data: Dictionary):
 	print(str("Broadcasting state: ", state, "with data: ", data, "from Server"))
-	rpc("receive_game_state", state, data)
+	var recieverid = findReciever(senderid)
+	rpc_id(recieverid,"receive_game_state", state, data)
 
 # Remote function to handle incoming game state updates
 @rpc("any_peer")
 func receive_game_state(state: String, data: Dictionary):
 	print(str("Received state: ", state, " with data: ", data, " on Server"))
+	var senderid = multiplayer.get_remote_sender_id()
+	broadcast_game_state(senderid,state,data)
 
 @rpc("any_peer","call_remote")
 func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionary) -> void:
 	var game_settings = _game_settings
 	var hand_settings = _hand_settings
 	print("Server recieved settings")
+	var senderid = multiplayer.get_remote_sender_id()
+	send_game_settings(senderid, _game_settings, _hand_settings)
 
-func send_game_settings(_game_settings: Dictionary,_hand_settings: Dictionary) -> void:
+func send_game_settings(senderid, _game_settings: Dictionary,_hand_settings: Dictionary) -> void:
 	var game_settings = _game_settings
 	var hand_settings = _hand_settings
 	print("Server sent settings")
-	rpc("receive_game_settings",_game_settings, _hand_settings)
+	var recieverid = findReciever(senderid)
+	rpc_id(recieverid,"receive_game_settings",_game_settings, _hand_settings)
 
-func send_chat_rpc(message: String):
-	rpc("receive_chat_rpc", message)  # Broadcast to all clients
+func send_chat_rpc(senderid, message: String):
+	var recieverid = findReciever(senderid)
+	rpc_id(recieverid,"receive_chat_rpc", message)  # Broadcast to all clients
 
 
 @rpc("any_peer","reliable","call_remote")
 func receive_chat_rpc(message: String):
 	print(message)
+	var senderid = multiplayer.get_remote_sender_id()
+	send_chat_rpc(senderid,message)
