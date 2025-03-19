@@ -84,6 +84,8 @@ func _on_start_game_pressed():
 		await get_tree().create_timer(1.0).timeout
 		save_advanced_settings()
 	await get_tree().create_timer(1.0).timeout
+	if calculateMaxHands() < game_settings["rounds"]:
+		game_settings["rounds"] = calculateMaxHands()
 	emit_signal("game_settings_ready", game_settings, hand_settings_vals)
 	self.visible = false
 
@@ -139,6 +141,18 @@ func _populate_advanced_settings():
 	_generate_chance()
 	
 	hand_settings_loaded = true
+
+func calculateMaxHands() -> int:
+	var maxHands = 0
+	for hand_name in hand_settings_vals.keys():
+		var settings = hand_settings_vals[hand_name]
+		if hand_name != "Bonus" and settings["allowed"]:
+			if settings["repeatable"]:
+				maxHands += settings["max_plays"]
+			else:
+				maxHands += 1
+	Debugger.log(str("Max Hands on Calculation: ", maxHands))
+	return maxHands
 
 # Save a new preset with game and hand settings
 func save_preset():
@@ -346,6 +360,7 @@ func save_advanced_settings():
 			"max_plays": int(settings["max_plays"].value),
 			"scoring_rule": settings["scoring_rule"].text
 		}
+	calculateMaxHands()
 	hand_settings_saved = true
 	_hand_settings_vals_changed()
 	_on_return_to_settings_pressed()
