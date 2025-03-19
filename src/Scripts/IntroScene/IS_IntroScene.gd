@@ -8,7 +8,9 @@ extends Node3D
 @onready var start_standard_button = $VBoxContainer/StartStandardGame # Reference to the Start Button
 @onready var start_online_standard_button = $VBoxContainer/StartOnlineStandardGame
 @onready var start_bluff_button = $VBoxContainer/StartBluffGame # Reference to the Start Button
+@onready var start_online_bluff_button = $VBoxContainer/StartOnlineBluffGame
 @onready var start_blitz_button = $VBoxContainer/StartBlitzGame # Reference to the Start Button
+@onready var start_online_blitz_button = $VBoxContainer/StartOnlineBlitzGame
 @onready var start_online_button = $VBoxContainer/StartOnlineGame # Reference to the Start Button
 @onready var start_online_long_form_button = $VBoxContainer/StartOnlineLongFormGame # Reference to the Start Button
 @onready var start_online_server_button = $VBoxContainer/StartServer
@@ -23,7 +25,9 @@ func _ready() -> void:
 	start_standard_button.pressed.connect(_on_start_standard_game_pressed)
 	start_online_standard_button.pressed.connect(_on_start_online_standard_game_pressed)
 	start_bluff_button.pressed.connect(_on_start_bluff_game_pressed)
+	start_online_bluff_button.pressed.connect(_on_start_online_bluff_game_pressed)
 	start_blitz_button.pressed.connect(_on_start_blitz_game_pressed)
+	start_online_blitz_button.pressed.connect(_on_start_online_blitz_game_pressed)
 	start_online_long_form_button.pressed.connect(_on_start_online_long_form_game_pressed)
 	start_online_server_button.pressed.connect(_on_start_online_server_pressed);
 	customization_button.pressed.connect(_on_customization_pressed)
@@ -60,9 +64,17 @@ func _on_start_online_standard_game_pressed() -> void:
 
 func _on_start_bluff_game_pressed() -> void:
 	# Load GameScene
+	SceneSwitcher.changeScene("res://Scenes/local_bluff_game_scene.tscn")
+	
+func _on_start_online_bluff_game_pressed() -> void:
+	# Load GameScene
 	SceneSwitcher.changeScene("res://Scenes/online_bluff_game_scene.tscn")
 
 func _on_start_blitz_game_pressed() -> void:
+	# Load GameScene
+	SceneSwitcher.changeScene("res://Scenes/local_blitz_game_scene.tscn")
+
+func _on_start_online_blitz_game_pressed() -> void:
 	# Load GameScene
 	SceneSwitcher.changeScene("res://Scenes/online_blitz_game_scene.tscn")
 

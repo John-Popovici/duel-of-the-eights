@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://de5kt8vf7m7pi"]
+[gd_scene load_steps=7 format=3 uid="uid://usk8660iqflf"]
 
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_online_game_scene.gd" id="1_822on"]
 [ext_resource type="PackedScene" uid="uid://bb1hsjv35krnk" path="res://NodeScene/network_manager_2Player.tscn" id="2_adt0s"]
+[ext_resource type="Script" path="res://Scripts/networkManager2P_Server.gd" id="3_dpjmp"]
 [ext_resource type="PackedScene" uid="uid://bhtxb2i1jaebl" path="res://NodeScene/blitz_game_settings.tscn" id="3_ws7lw"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_PlayerManager.gd" id="4_srbgy"]
 [ext_resource type="PackedScene" uid="uid://d0icyj31p2tgw" path="res://NodeScene/game_manager.tscn" id="5_85jmf"]
@@ -10,6 +11,8 @@
 script = ExtResource("1_822on")
 
 [node name="NetworkManager" parent="." instance=ExtResource("2_adt0s")]
+script = ExtResource("3_dpjmp")
+default_port = 9999
 
 [node name="GameSettings" parent="." instance=ExtResource("3_ws7lw")]
 visible = false

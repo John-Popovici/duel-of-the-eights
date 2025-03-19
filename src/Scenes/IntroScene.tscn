@@ -148,13 +148,25 @@ text = "Play Online Standard Game"
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("5_bq53n")
-text = "Play Bluff Game"
+text = "Play Local Bluff Game"
+
+[node name="StartOnlineBluffGame" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("5_bq53n")
+text = "Play Online Bluff Game"
 
 [node name="StartBlitzGame" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("5_bq53n")
-text = "Play Blitz Game"
+text = "Play Local Blitz Game"
+
+[node name="StartOnlineBlitzGame" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("5_bq53n")
+text = "Play Online Blitz Game"
 
 [node name="StartOnlineGame" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
 layout_mode = 2
@@ -174,6 +186,7 @@ theme_override_styles/normal = ExtResource("10_3uy0t")
 text = "Start Online Long Form Game"
 
 [node name="StartServer" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("5_bq53n")
