@@ -20,7 +20,7 @@ var check_ping: bool = false
 func connect_to_server():
 	var peer = ENetMultiplayerPeer.new()
 	var ip = default_server_ip
-	#ip = "192.168.0.107" #For local Windows Testing (replace with own ip)
+	#ip = "192.168.0.106"#"192.168.0.107" #For local Windows Testing (replace with own ip)
 	
 	port = default_port
 	var error = peer.create_client(ip, port)
