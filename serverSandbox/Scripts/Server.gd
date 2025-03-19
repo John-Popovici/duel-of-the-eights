@@ -16,7 +16,7 @@ var room_code_length = 4  # Length of generated room codes
 func start_server(_port: int = default_port):
 	var peer = ENetMultiplayerPeer.new()
 	port = _port
-	var error = peer.create_server(port, max_rooms*2)  # Set maximum peers to 2 (host + 1 client)
+	var error = peer.create_server(port, max_rooms*3)  # Set maximum peers to 2 (host + 1 client)
 	if error != OK:
 		print(str("Cannot Host: ", error))
 		return
