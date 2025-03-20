@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://d0icyj31p2tgw"]
+[gd_scene load_steps=24 format=3 uid="uid://d0icyj31p2tgw"]
 
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_manager.gd" id="1_q3ti8"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_dynamic_dice_container.gd" id="2_n4duv"]
@@ -10,7 +10,9 @@
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_Dynamic_Scoreboard.gd" id="7_0kcih"]
 [ext_resource type="PackedScene" uid="uid://bg5xnvw62vip6" path="res://NodeScene/background_objects_Dungeon_Tavern.tscn" id="7_scqsd"]
 [ext_resource type="StyleBox" uid="uid://bdd2m4n2as1ot" path="res://Themes/Default_Pixel_Wood/WoodBoxBackgroundStyle.tres" id="8_n6aig"]
+[ext_resource type="PackedScene" uid="uid://dnjtv5p8lpclx" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Rouge_Drinker.tscn" id="8_wv4bt"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_score_calculator.gd" id="9_b1f1p"]
+[ext_resource type="PackedScene" uid="uid://cp2ap6ewj5puv" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Knight_Player.tscn" id="9_vr5pn"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_ui.gd" id="11_0d724"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_chat_ui.gd" id="14_rpv4e"]
 [ext_resource type="Texture2D" uid="uid://cbbiofkoc88y1" path="res://Assets/2D Assets/OtherImages/message_read.svg" id="15_3hw5t"]
@@ -432,6 +434,26 @@ transform = Transform3D(1, 0, 0, 0, 100, 0, 0, 0, 0.05, 0, 50, -0.475)
 shape = SubResource("BoxShape3D_3tu6u")
 
 [node name="BackgroundObjects" parent="Environment" instance=ExtResource("7_scqsd")]
+
+[node name="EnemyCharacterModel" parent="Environment" instance=ExtResource("8_wv4bt")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, -16.3099, -38.2609)
+
+[node name="MyCharacterModel" parent="Environment" instance=ExtResource("9_vr5pn")]
+transform = Transform3D(-25, 0, -2.18557e-06, 0, 25, 0, 2.18557e-06, 0, -25, 0, -16.573, 39.9394)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Environment/MyCharacterModel"]
+transform = Transform3D(0.0363834, 4.99856e-11, 0.0166208, -0.00281443, 0.0394224, 0.00616088, -0.0163807, -0.00677329, 0.035858, 0.75315, 1.75936, 2.49812)
+light_color = Color(0.788235, 0.670588, 0.592157, 1)
+light_energy = 16.0
+spot_range = 90.7883
+spot_angle = 29.9219
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Environment/MyCharacterModel"]
+transform = Transform3D(0.0393465, 0.00445425, -0.00565784, -0.00337247, 0.0391679, 0.00738244, 0.00636222, -0.00678481, 0.0389036, -0.682145, 1.96736, 2.49812)
+light_color = Color(0.788235, 0.670588, 0.592157, 1)
+light_energy = 16.0
+spot_range = 90.7883
+spot_angle = 29.9219
 
 [node name="Scoreboard" type="CanvasLayer" parent="."]
 visible = false

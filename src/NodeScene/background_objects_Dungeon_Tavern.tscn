@@ -130,6 +130,84 @@ _data = {
 height = 2.05582
 radius = 0.110577
 
+[sub_resource type="Animation" id="Animation_42t4v"]
+resource_name = "Dice_Bump"
+length = 1.0667
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(33.2855, -0.25, 0, 0.233333, 0.714546, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 37, -0.2, -1, 0.2, 1),
+"times": PackedFloat32Array(0, 0.4, 0.7, 1.06667)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(52, -0.25, 0, 0.166667, -28, 0, -0.233333, 10, 0.25, 0, 2, -0.25, 0, 0.25, 0, 32, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.0333333, 0.4, 0.733333, 1.06667)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(-0.988659, -0.25, 0, 0.166667, 28.9887, 1, -0.133333, -44, 0.25, 0, 1, -0.25, 0, 0.25, 0, 39, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 0.666667, 1.06667)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:rotation:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(-1.99447, -0.25, 0, 0.1, 14.9945, 27, -0.25, 0, 0.25, 0, -2, -0.233333, 1, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 0.466667, 0.8)
+}
+
+[sub_resource type="Animation" id="Animation_ihi8b"]
+resource_name = "Dice_Bump"
+length = 1.0667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.366667, 0.433333, 0.7, 0.766667, 1.06667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 13.6877, 0), Vector3(0, 53.3171, 0), Vector3(0, 56.9761, 0), Vector3(0, 53.3171, 0), Vector3(0, 7.82156, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.366667, 0.433333, 0.7, 0.766667, 1.06667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.815522, 2.41028e-08, -0.842942), Vector3(-0.308284, -0.597549, -2.48111), Vector3(-0.223263, -0.479073, -2.81891), Vector3(-0.308284, -0.597549, -2.48111), Vector3(-0.0834962, -2.65076, -2.25894), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_qt1cn"]
 length = 0.001
 tracks/0/type = "value"
@@ -223,84 +301,6 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0)
 }
 
-[sub_resource type="Animation" id="Animation_ihi8b"]
-resource_name = "Dice_Bump"
-length = 1.0667
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3, 0.366667, 0.433333, 0.7, 0.766667, 1.06667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 13.6877, 0), Vector3(0, 53.3171, 0), Vector3(0, 56.9761, 0), Vector3(0, 53.3171, 0), Vector3(0, 7.82156, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3, 0.366667, 0.433333, 0.7, 0.766667, 1.06667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.815522, 2.41028e-08, -0.842942), Vector3(-0.308284, -0.597549, -2.48111), Vector3(-0.223263, -0.479073, -2.81891), Vector3(-0.308284, -0.597549, -2.48111), Vector3(-0.0834962, -2.65076, -2.25894), Vector3(0, 0, 0), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_42t4v"]
-resource_name = "Dice_Bump"
-length = 1.0667
-loop_mode = 1
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(33.2855, -0.25, 0, 0.233333, 0.714546, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 37, -0.2, -1, 0.2, 1),
-"times": PackedFloat32Array(0, 0.4, 0.7, 1.06667)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(52, -0.25, 0, 0.166667, -28, 0, -0.233333, 10, 0.25, 0, 2, -0.25, 0, 0.25, 0, 32, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0.0333333, 0.4, 0.733333, 1.06667)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:rotation:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(-0.988659, -0.25, 0, 0.166667, 28.9887, 1, -0.133333, -44, 0.25, 0, 1, -0.25, 0, 0.25, 0, 39, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.4, 0.666667, 1.06667)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:rotation:z")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(-1.99447, -0.25, 0, 0.1, 14.9945, 27, -0.25, 0, 0.25, 0, -2, -0.233333, 1, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.2, 0.466667, 0.8)
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xngax"]
 _data = {
 "Dice_Bump": SubResource("Animation_42t4v"),
@@ -330,9 +330,19 @@ script = ExtResource("1_jjdv2")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.931342, -0.271377, 0.24281, -1.42248e-08, 0.666793, 0.745243, -0.364145, -0.694077, 0.621012, 0, 35, 0)
 light_color = Color(0.844075, 0.615547, 0.564852, 1)
-light_energy = 0.75
+light_energy = 0.5
 light_indirect_energy = 1.5
 shadow_enabled = true
+shadow_opacity = 0.75
+shadow_blur = 10.0
+directional_shadow_fade_start = 0.0
+directional_shadow_max_distance = 8192.0
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.91466, -0.250336, -0.317379, 0.130585, -0.560065, 0.818092, -0.382551, -0.789721, -0.479579, 0, 35, 0)
+light_color = Color(0.844075, 0.615547, 0.564852, 1)
+light_energy = 0.25
+light_indirect_energy = 1.5
 directional_shadow_fade_start = 0.0
 directional_shadow_max_distance = 8192.0
 
@@ -342,10 +352,10 @@ directional_shadow_max_distance = 8192.0
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, -24.5, 0)
 
 [node name="stool2" parent="TavernDungeon/GameTable" instance=ExtResource("7_7ekul")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.176, -1.49982)
 
 [node name="stool3" parent="TavernDungeon/GameTable" instance=ExtResource("7_7ekul")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.176, 1.5)
 
 [node name="candle_thin_lit2" parent="TavernDungeon/GameTable" instance=ExtResource("8_aoelk")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.75, 1, -0.5)

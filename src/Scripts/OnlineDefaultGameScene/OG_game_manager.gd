@@ -21,6 +21,8 @@ var hand_settings
 @onready var BluffButtons = get_node("BluffContainer")
 @onready var raiseTheStakesButton: Button = get_node("BluffContainer/RaiseTheStakesButton")
 @onready var foldButton: Button = get_node("BluffContainer/FoldButton")
+@onready var enemyModel = get_node("Environment/EnemyCharacterModel")
+@onready var MyModel = get_node("Environment/MyCharacterModel")
 var isHost: bool
 var baseTimer: int
 var timedRounds: bool
@@ -90,6 +92,8 @@ func setup_game() -> void:
 	current_round = 0
 	max_rolls_per_round = game_settings["round_rolls"]
 	max_rounds = game_settings["rounds"]
+	MyModel.get_node("AnimationPlayer").play("Idle")
+	enemyModel.get_node("AnimationPlayer").play("Idle")
 	Debugger.log("bluffMechanicActive: " + str(bluffMechanicActive))
 	if bluffMechanicActive:
 		BluffButtons.visible = true
@@ -110,6 +114,8 @@ var round_start_done: bool = false
 
 func start_round() ->void:
 	waiting_on_other_player(false)
+	MyModel.get_node("AnimationPlayer").queue("Idle")
+	enemyModel.get_node("AnimationPlayer").queue("Idle")
 	round_start_done = false
 	roll_count = 0
 	current_round += 1
@@ -269,10 +275,13 @@ func endOfRoundEffects() -> void:
 			var scoreDiff = myPlayer.getLastScore() - enemyPlayer.getLastScore()
 			if scoreDiff < 0:
 				Debugger.log(str("Player Host: ", isHost, " scored less"))
+				enemyModel.get_node("AnimationPlayer").play("Spellcast_Raise")
 			elif scoreDiff > 0:
 				Debugger.log(str("Player Host: ", isHost, " scored more"))
+				enemyModel.get_node("AnimationPlayer").play("Throw")
 			else:
 				Debugger.log("Players scored the same")
+				enemyModel.get_node("AnimationPlayer").play("Throw")
 			#check engGame Criteria
 			if current_round >= max_rounds:
 				end_condition_reached = true
@@ -284,13 +293,16 @@ func endOfRoundEffects() -> void:
 					myPlayer.adjust_health(-1) # make this dyanmic
 				myPlayer.adjust_health(-1) # make this dyanmic
 				Debugger.log(str("Player Host: ", isHost, "scored less, took damage"))
+				enemyModel.get_node("AnimationPlayer").play("Spellcast_Raise")
 			elif scoreDiff > 0:
 				if raiseInEffect:
 					enemyPlayer.adjust_health(-1) # make this dyanmic
 				enemyPlayer.adjust_health(-1) # make this dyanmic
 				Debugger.log(str("Player Host: ", isHost, " scored more"))
+				enemyModel.get_node("AnimationPlayer").play("Throw")
 			else:
 				Debugger.log("Players scored the same")
+				enemyModel.get_node("AnimationPlayer").play("Throw")
 			if current_round >= max_rounds or myPlayer.getHealth() <= 0 or enemyPlayer.getHealth() <= 0:
 				end_condition_reached = true
 	
@@ -328,8 +340,10 @@ func foldEndOfRoundEffects() -> void:
 		1: #Health Points
 			if IFolded:
 				myPlayer.adjust_health(-1) # make this dyanmic
+				enemyModel.get_node("AnimationPlayer").play("Spellcast_Raise")
 			else:
 				enemyPlayer.adjust_health(-1) # make this dyanmic
+				enemyModel.get_node("AnimationPlayer").play("Throw")
 			Debugger.log(str("MyPlayer Host: ", isHost, " scored: ", myPlayer.getLastScore(), " and EnemyPlayer Host: ", !isHost, " scored: ", enemyPlayer.getLastScore(), ", I Folded: ", IFolded))
 			if current_round >= max_rounds or myPlayer.getHealth() <= 0 or enemyPlayer.getHealth() <= 0:
 				end_condition_reached = true
@@ -408,8 +422,10 @@ func endGame() -> void:
 	rollButtons.visible = false
 	if winner == "none" or winner =="self":
 		AudioManager.play_sfx("win_sound")
+		MyModel.get_node("AnimationPlayer").play("Cheer")
 	else:
 		AudioManager.play_sfx("lose_sound")
+		enemyModel.get_node("AnimationPlayer").play("Cheer")
 	GameUI.show_end_of_game_screen(resultText, myPlayerFinalStats, OpponentFinalStats)
 
 var rematch = false
