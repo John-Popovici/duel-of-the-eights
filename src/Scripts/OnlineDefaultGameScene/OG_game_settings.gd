@@ -18,6 +18,7 @@ signal game_settings_ready(game_settings,hand_settings)
 @onready var HealthPoints = settingsSetup.get_node("OptionsVBox/HealthPoints/HealthPoints").get_line_edit()
 @onready var HealthPointsBox = settingsSetup.get_node("OptionsVBox/HealthPoints")
 @onready var BluffButton = settingsSetup.get_node("OptionsVBox/HealthPoints/BluffButton")
+@onready var RoundsSpinBox = settingsSetup.get_node("OptionsVBox/Rounds/Rounds")
 @onready var Rounds = settingsSetup.get_node("OptionsVBox/Rounds/Rounds").get_line_edit()
 @onready var RoundRolls = settingsSetup.get_node("OptionsVBox/Rounds/RoundRolls").get_line_edit()
 @onready var DiceCountRef = settingsSetup.get_node("OptionsVBox/Dice/DiceCount").get_line_edit()
@@ -41,8 +42,13 @@ signal game_settings_ready(game_settings,hand_settings)
 var hand_settings_saved = false
 var hand_settings_loaded = false
 @export var hand_settings_refs: Dictionary = {}
-@export var hand_settings_vals: Dictionary = {}
+@export var hand_settings_vals: Dictionary = {}:
+	set(value):
+		hand_settings_vals = value
+		_hand_settings_vals_changed()
 @export var game_settings: Dictionary = {}
+
+var total_playable_hands: int
 # Capture the dice type and count
 var dice_count: int
 var dice_type: int
@@ -78,6 +84,8 @@ func _on_start_game_pressed():
 		await get_tree().create_timer(1.0).timeout
 		save_advanced_settings()
 	await get_tree().create_timer(1.0).timeout
+	if calculateMaxHands() < game_settings["rounds"]:
+		game_settings["rounds"] = calculateMaxHands()
 	emit_signal("game_settings_ready", game_settings, hand_settings_vals)
 	self.visible = false
 
@@ -133,6 +141,18 @@ func _populate_advanced_settings():
 	_generate_chance()
 	
 	hand_settings_loaded = true
+
+func calculateMaxHands() -> int:
+	var maxHands = 0
+	for hand_name in hand_settings_vals.keys():
+		var settings = hand_settings_vals[hand_name]
+		if hand_name != "Bonus" and settings["allowed"]:
+			if settings["repeatable"]:
+				maxHands += settings["max_plays"]
+			else:
+				maxHands += 1
+	Debugger.log(str("Max Hands on Calculation: ", maxHands))
+	return maxHands
 
 # Save a new preset with game and hand settings
 func save_preset():
@@ -340,7 +360,9 @@ func save_advanced_settings():
 			"max_plays": int(settings["max_plays"].value),
 			"scoring_rule": settings["scoring_rule"].text
 		}
+	calculateMaxHands()
 	hand_settings_saved = true
+	_hand_settings_vals_changed()
 	_on_return_to_settings_pressed()
 
 func _on_return_to_settings_pressed() -> void:
@@ -388,7 +410,17 @@ func _ready() -> void:
 
 func _on_player_name_modified(new_name) -> void:
 	GlobalSettings.profile_settings["player_name"] = new_name
-	
+
+func _hand_settings_vals_changed() -> void:
+	var total_playable_hands_counter = 0
+	for hsetting in hand_settings_vals:
+		if hand_settings_vals[hsetting]["allowed"]:
+			if hand_settings_vals[hsetting]["repeatable"]:
+				total_playable_hands_counter += hand_settings_vals[hsetting]["max_plays"]
+			else:
+				total_playable_hands_counter += 1
+	self.total_playable_hands = total_playable_hands_counter
+	RoundsSpinBox.max_value = total_playable_hands_counter
 
 func _on_roll_visible_toggled(_state) -> void:
 	if show_opponent_rolls:

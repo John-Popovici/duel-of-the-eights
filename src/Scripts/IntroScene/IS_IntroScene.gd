@@ -34,6 +34,7 @@ func _ready() -> void:
 	customization_button.pressed.connect(_on_customization_pressed)
 	tutorial_button.pressed.connect(_on_tutorial_button)
 	profile_button.pressed.connect(_on_profile_pressed)
+	AudioManager.play_music("main_menu")
 	AudioManager.connect_buttons()
 
 # Transition to GameScene with player names

@@ -4,17 +4,22 @@
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_ScoreboardButton.gd" id="1_2rqcn"]
 
 [node name="HBoxContainer" type="HBoxContainer"]
+texture_filter = 3
 offset_right = 40.0
 offset_bottom = 40.0
 theme = ExtResource("1_0v2ve")
 
 [node name="HandName" type="Label" parent="."]
+texture_filter = 3
 layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("1_0v2ve")
 text = "Hand Name:"
 
 [node name="Select" type="Button" parent="." groups=["ConfirmButtons"]]
+texture_filter = 3
 layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("1_0v2ve")
 text = "Select"
 script = ExtResource("1_2rqcn")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://d0icyj31p2tgw"]
+[gd_scene load_steps=24 format=3 uid="uid://d0icyj31p2tgw"]
 
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_manager.gd" id="1_q3ti8"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_dynamic_dice_container.gd" id="2_n4duv"]
@@ -10,7 +10,9 @@
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_Dynamic_Scoreboard.gd" id="7_0kcih"]
 [ext_resource type="PackedScene" uid="uid://bg5xnvw62vip6" path="res://NodeScene/background_objects_Dungeon_Tavern.tscn" id="7_scqsd"]
 [ext_resource type="StyleBox" uid="uid://bdd2m4n2as1ot" path="res://Themes/Default_Pixel_Wood/WoodBoxBackgroundStyle.tres" id="8_n6aig"]
+[ext_resource type="PackedScene" uid="uid://dnjtv5p8lpclx" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Rouge_Drinker.tscn" id="8_wv4bt"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_score_calculator.gd" id="9_b1f1p"]
+[ext_resource type="PackedScene" uid="uid://cp2ap6ewj5puv" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Knight_Player.tscn" id="9_vr5pn"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_ui.gd" id="11_0d724"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_chat_ui.gd" id="14_rpv4e"]
 [ext_resource type="Texture2D" uid="uid://cbbiofkoc88y1" path="res://Assets/2D Assets/OtherImages/message_read.svg" id="15_3hw5t"]
@@ -433,6 +435,26 @@ shape = SubResource("BoxShape3D_3tu6u")
 
 [node name="BackgroundObjects" parent="Environment" instance=ExtResource("7_scqsd")]
 
+[node name="EnemyCharacterModel" parent="Environment" instance=ExtResource("8_wv4bt")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, -16.3099, -38.2609)
+
+[node name="MyCharacterModel" parent="Environment" instance=ExtResource("9_vr5pn")]
+transform = Transform3D(-25, 0, -2.18557e-06, 0, 25, 0, 2.18557e-06, 0, -25, 0, -16.573, 39.9394)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Environment/MyCharacterModel"]
+transform = Transform3D(0.0363834, 4.99856e-11, 0.0166208, -0.00281443, 0.0394224, 0.00616088, -0.0163807, -0.00677329, 0.035858, 0.75315, 1.75936, 2.49812)
+light_color = Color(0.788235, 0.670588, 0.592157, 1)
+light_energy = 16.0
+spot_range = 90.7883
+spot_angle = 29.9219
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Environment/MyCharacterModel"]
+transform = Transform3D(0.0393465, 0.00445425, -0.00565784, -0.00337247, 0.0391679, 0.00738244, 0.00636222, -0.00678481, 0.0389036, -0.682145, 1.96736, 2.49812)
+light_color = Color(0.788235, 0.670588, 0.592157, 1)
+light_energy = 16.0
+spot_range = 90.7883
+spot_angle = 29.9219
+
 [node name="Scoreboard" type="CanvasLayer" parent="."]
 visible = false
 script = ExtResource("7_0kcih")
@@ -532,6 +554,7 @@ libraries = {
 script = ExtResource("11_0d724")
 
 [node name="OpponentDiceBase" type="Control" parent="GameUI"]
+texture_filter = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -539,6 +562,7 @@ offset_bottom = 40.0
 theme = ExtResource("4_h4ers")
 
 [node name="OpponentDiceLabel" type="Label" parent="GameUI/OpponentDiceBase"]
+texture_filter = 3
 layout_mode = 0
 offset_left = 3.0
 offset_top = 544.0
@@ -547,18 +571,35 @@ offset_bottom = 568.0
 theme = ExtResource("4_h4ers")
 text = "Opponent Dice Rolls:"
 
-[node name="OpponentDicePanel" type="PanelContainer" parent="GameUI/OpponentDiceBase"]
+[node name="GreyOutOverlay" type="ColorRect" parent="GameUI/OpponentDiceBase"]
+z_index = 1
+texture_filter = 3
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = 532.0
-offset_right = 568.0
+offset_top = 538.0
+offset_right = 500.0
+offset_bottom = 608.0
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 0, 0, 0.266667)
+
+[node name="OpponentDicePanel" type="PanelContainer" parent="GameUI/OpponentDiceBase"]
+texture_filter = 3
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 538.0
+offset_right = 500.0
 offset_bottom = 608.0
 grow_vertical = 0
 theme = ExtResource("4_h4ers")
 
 [node name="OpponentDiceDisplay" type="HBoxContainer" parent="GameUI/OpponentDiceBase/OpponentDicePanel"]
+texture_filter = 3
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
@@ -566,6 +607,7 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="MyPlayerDiceBase" type="Control" parent="GameUI"]
+texture_filter = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -573,6 +615,7 @@ offset_bottom = 40.0
 theme = ExtResource("4_h4ers")
 
 [node name="MyPlayerDiceLabel" type="Label" parent="GameUI/MyPlayerDiceBase"]
+texture_filter = 3
 layout_mode = 0
 offset_left = 1034.0
 offset_top = 543.0
@@ -583,6 +626,7 @@ text = "My Dice Rolls:"
 horizontal_alignment = 2
 
 [node name="MyPlayerDicePanel" type="PanelContainer" parent="GameUI/MyPlayerDiceBase"]
+texture_filter = 3
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -598,6 +642,7 @@ grow_vertical = 0
 theme = ExtResource("4_h4ers")
 
 [node name="MyPlayerDiceDisplay" type="HBoxContainer" parent="GameUI/MyPlayerDiceBase/MyPlayerDicePanel"]
+texture_filter = 3
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
@@ -605,6 +650,7 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="RollSorter" type="PanelContainer" parent="GameUI/MyPlayerDiceBase"]
+texture_filter = 3
 layout_mode = 0
 offset_left = 584.0
 offset_top = 533.0
@@ -612,57 +658,69 @@ offset_right = 889.0
 offset_bottom = 568.0
 
 [node name="ButtonHolder" type="HBoxContainer" parent="GameUI/MyPlayerDiceBase/RollSorter"]
+texture_filter = 3
 layout_mode = 2
 
 [node name="Asc" type="Button" parent="GameUI/MyPlayerDiceBase/RollSorter/ButtonHolder"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_eudyq")
 text = "Asc"
 
 [node name="Desc" type="Button" parent="GameUI/MyPlayerDiceBase/RollSorter/ButtonHolder"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_eudyq")
 text = "Desc"
 
 [node name="Freq" type="Button" parent="GameUI/MyPlayerDiceBase/RollSorter/ButtonHolder"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_eudyq")
 text = "Freq"
 
 [node name="GameStatePanel" type="PanelContainer" parent="GameUI"]
+texture_filter = 3
 offset_top = 390.0
 offset_right = 199.0
 offset_bottom = 430.0
 theme = ExtResource("4_h4ers")
 
 [node name="GameStateInfo" type="HBoxContainer" parent="GameUI/GameStatePanel"]
+texture_filter = 3
 layout_mode = 2
 alignment = 1
 
 [node name="PlayerStatsPanel" type="VBoxContainer" parent="GameUI"]
+texture_filter = 3
 offset_right = 199.0
 offset_bottom = 385.0
 
 [node name="MyPlayerPanel" type="PanelContainer" parent="GameUI/PlayerStatsPanel"]
+texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("4_h4ers")
 
 [node name="MyPlayerStatBox" type="VBoxContainer" parent="GameUI/PlayerStatsPanel/MyPlayerPanel"]
+texture_filter = 3
 layout_mode = 2
 
 [node name="EnemyPlayerPanel" type="PanelContainer" parent="GameUI/PlayerStatsPanel"]
+texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("4_h4ers")
 
 [node name="EnemyPlayerStatBox" type="VBoxContainer" parent="GameUI/PlayerStatsPanel/EnemyPlayerPanel"]
+texture_filter = 3
 layout_mode = 2
 
 [node name="CountdownPanel" type="PanelContainer" parent="GameUI"]
+texture_filter = 3
 offset_left = 954.0
 offset_top = 439.0
 offset_right = 1152.0
@@ -670,6 +728,7 @@ offset_bottom = 479.0
 theme = ExtResource("4_h4ers")
 
 [node name="ProgressBar" type="ProgressBar" parent="GameUI/CountdownPanel"]
+texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 1
 step = 1.0
@@ -680,6 +739,7 @@ fill_mode = 1
 wait_time = 20.0
 
 [node name="ChatUI" type="Control" parent="GameUI"]
+texture_filter = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -688,6 +748,7 @@ theme = ExtResource("4_eudyq")
 script = ExtResource("14_rpv4e")
 
 [node name="ChatButton" type="TextureButton" parent="GameUI/ChatUI"]
+texture_filter = 3
 layout_mode = 0
 offset_left = 522.0
 offset_top = 533.0

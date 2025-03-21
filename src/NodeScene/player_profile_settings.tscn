@@ -11,6 +11,7 @@
 script = ExtResource("1_lt7c1")
 
 [node name="MainBackground" type="PanelContainer" parent="."]
+texture_filter = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -28,28 +29,34 @@ size_flags_vertical = 4
 theme = ExtResource("2_pql38")
 
 [node name="MainContainer" type="VBoxContainer" parent="MainBackground"]
+texture_filter = 3
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MainBackground/MainContainer"]
+texture_filter = 3
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 
 [node name="HListingsContainer" type="VBoxContainer" parent="MainBackground/MainContainer/MarginContainer"]
+texture_filter = 3
 layout_mode = 2
 
 [node name="UserDetailsContainer" type="HBoxContainer" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
+texture_filter = 3
 custom_minimum_size = Vector2(50, 45)
 layout_mode = 2
 size_flags_vertical = 0
 
 [node name="ProfileBackground" type="Panel" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/UserDetailsContainer"]
+texture_filter = 3
 custom_minimum_size = Vector2(65, 45)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
 
 [node name="ProfilePicButton" type="TextureButton" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/UserDetailsContainer/ProfileBackground" groups=["ConfirmButtons"]]
+texture_filter = 3
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -69,12 +76,14 @@ texture_hover = ExtResource("5_xe1gp")
 stretch_mode = 5
 
 [node name="UsernameFrame" type="Panel" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/UserDetailsContainer"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 7.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_iwiv5")
 
 [node name="UsernameBox" type="LineEdit" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/UserDetailsContainer/UsernameFrame"]
+texture_filter = 3
 custom_minimum_size = Vector2(200, 25)
 layout_mode = 1
 anchors_preset = 2
@@ -89,51 +98,76 @@ max_length = 50
 expand_to_text_length = true
 
 [node name="HorizontalLine" type="ColorRect" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
+texture_filter = 3
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 color = Color(0, 0, 0, 0.321569)
 
 [node name="InvertSelectMethodContainer" type="HBoxContainer" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
+texture_filter = 3
 layout_mode = 2
 
 [node name="InvertSelectMethodLabel" type="Label" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/InvertSelectMethodContainer"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 1
 text = " Invert Selection Method : "
 
 [node name="CheckButton" type="CheckButton" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/InvertSelectMethodContainer" groups=["SwitchButtons"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 2
 
 [node name="AlignDiceContainer" type="HBoxContainer" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
+texture_filter = 3
 layout_mode = 2
 
 [node name="AlignDiceLabel" type="Label" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/AlignDiceContainer"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 1
 text = "Auto Align Rolled Dice : "
 
 [node name="CheckButton" type="CheckButton" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/AlignDiceContainer" groups=["SwitchButtons"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 2
 
+[node name="ChatEnabledContainer" type="HBoxContainer" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
+layout_mode = 2
+
+[node name="ChatEnabledLabel" type="Label" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/ChatEnabledContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 1
+text = "Chat Enabled : "
+
+[node name="CheckButton" type="CheckButton" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/ChatEnabledContainer" groups=["SwitchButtons"]]
+layout_mode = 2
+size_flags_horizontal = 2
+button_pressed = true
+
 [node name="SFXVolumeContainer" type="HBoxContainer" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
+texture_filter = 3
 layout_mode = 2
 
 [node name="SFXVolumeLabel" type="Label" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/SFXVolumeContainer"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 1
 text = " SFX Volume : "
 
 [node name="SliderContainer" type="HBoxContainer" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/SFXVolumeContainer"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Slider" type="HSlider" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/SFXVolumeContainer/SliderContainer" groups=["Sliders"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -141,6 +175,7 @@ size_flags_stretch_ratio = 4.8
 value = 100.0
 
 [node name="Value" type="Label" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/SFXVolumeContainer/SliderContainer"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -148,19 +183,23 @@ text = "100%"
 horizontal_alignment = 1
 
 [node name="MusicVolumeContainer" type="HBoxContainer" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
+texture_filter = 3
 layout_mode = 2
 
 [node name="MusicVolumeLabel" type="Label" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/MusicVolumeContainer"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 1
 text = " Music Volume : "
 
 [node name="SliderContainer" type="HBoxContainer" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/MusicVolumeContainer"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Slider" type="HSlider" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/MusicVolumeContainer/SliderContainer" groups=["Sliders"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -168,6 +207,7 @@ size_flags_stretch_ratio = 4.8
 value = 100.0
 
 [node name="Value" type="Label" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/MusicVolumeContainer/SliderContainer"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -175,19 +215,23 @@ text = "100%"
 horizontal_alignment = 1
 
 [node name="AmbientVolumeContainer" type="HBoxContainer" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
+texture_filter = 3
 layout_mode = 2
 
 [node name="AmbientVolumeLabel" type="Label" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/AmbientVolumeContainer"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 1
 text = " Ambience Volume : "
 
 [node name="SliderContainer" type="HBoxContainer" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/AmbientVolumeContainer"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Slider" type="HSlider" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/AmbientVolumeContainer/SliderContainer" groups=["Sliders"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -195,18 +239,15 @@ size_flags_stretch_ratio = 4.8
 value = 100.0
 
 [node name="Value" type="Label" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer/AmbientVolumeContainer/SliderContainer"]
+texture_filter = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "100%"
 horizontal_alignment = 1
 
-[node name="Spacing" type="Control" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-size_flags_vertical = 3
-
 [node name="BackToHomeButton" type="Button" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer" groups=["BackButtons"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 10
 text = "Back To Home"

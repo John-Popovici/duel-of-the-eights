@@ -1,22 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://c82amylpr3h42"]
+[gd_scene load_steps=7 format=3 uid="uid://c82amylpr3h42"]
 
 [ext_resource type="Script" path="res://Scripts/CustomDiceScripts/CustomBaseDie.gd" id="1_bbuhp"]
 [ext_resource type="ArrayMesh" uid="uid://ba2f8u3v23wm7" path="res://Assets/dice/d6/DiceMakerD6_d6_3d_numbered_stl.res" id="2_vfnn4"]
 [ext_resource type="Material" uid="uid://du2ej862se3yl" path="res://Materials/Faces.tres" id="3_ua6px"]
 [ext_resource type="ArrayMesh" uid="uid://cuau61gveesdi" path="res://Assets/dice/d6/DiceMakerD6_d6_3d_blank_stl.res" id="4_wpy65"]
 [ext_resource type="Material" uid="uid://d3pmd3027bxsl" path="res://Materials/Dice_Base.tres" id="5_5fkom"]
-[ext_resource type="ArrayMesh" uid="uid://dq46p5g0ryu5b" path="res://Assets/dice/customizableDice/d6/DiceMakerD6Custom_Cube_005.res" id="6_7yt6p"]
-[ext_resource type="ArrayMesh" uid="uid://bgjvv6kognbst" path="res://Assets/dice/customizableDice/d6/DiceMakerD6Custom_Cube_006.res" id="7_p1lg0"]
-[ext_resource type="Material" uid="uid://crbtj7v7au8r6" path="res://Materials/CustomDiceTextures/Purple/d6-1.tres" id="7_uwsve"]
-[ext_resource type="ArrayMesh" uid="uid://dlma323yhkumd" path="res://Assets/dice/customizableDice/d6/DiceMakerD6Custom_Cube_007.res" id="8_llikw"]
-[ext_resource type="ArrayMesh" uid="uid://d36npslr35t00" path="res://Assets/dice/customizableDice/d6/DiceMakerD6Custom_Cube_008.res" id="9_7b2ck"]
-[ext_resource type="Material" uid="uid://dxhogqtbgxqjg" path="res://Materials/CustomDiceTextures/Purple/d6-2.tres" id="9_qpbaw"]
-[ext_resource type="ArrayMesh" uid="uid://cr3hhwbhnab5l" path="res://Assets/dice/customizableDice/d6/DiceMakerD6Custom_Cube_009.res" id="10_11qg2"]
-[ext_resource type="ArrayMesh" uid="uid://dl07xbstatxoy" path="res://Assets/dice/customizableDice/d6/DiceMakerD6Custom_Cube_010.res" id="11_ccgaf"]
-[ext_resource type="Material" uid="uid://djyij58opey5s" path="res://Materials/CustomDiceTextures/Purple/d6-3.tres" id="11_cjy8v"]
-[ext_resource type="Material" uid="uid://bio478e0if8ea" path="res://Materials/CustomDiceTextures/Purple/d6-4.tres" id="13_hjm46"]
-[ext_resource type="Material" uid="uid://rdywhxwr6ddh" path="res://Materials/CustomDiceTextures/Purple/d6-5.tres" id="15_g7wqu"]
-[ext_resource type="Material" uid="uid://c768wwm8irl7w" path="res://Materials/CustomDiceTextures/Purple/d6-6.tres" id="17_043dr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yb52v"]
 
@@ -74,30 +62,18 @@ target_position = Vector3(0, 0, 1)
 
 [node name="MeshInstance3D1" type="MeshInstance3D" parent="DiceFaceHolder"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
-mesh = ExtResource("6_7yt6p")
-surface_material_override/0 = ExtResource("7_uwsve")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="DiceFaceHolder"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
-mesh = ExtResource("7_p1lg0")
-surface_material_override/0 = ExtResource("9_qpbaw")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="DiceFaceHolder"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
-mesh = ExtResource("10_11qg2")
-surface_material_override/0 = ExtResource("11_cjy8v")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="DiceFaceHolder"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
-mesh = ExtResource("8_llikw")
-surface_material_override/0 = ExtResource("13_hjm46")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="DiceFaceHolder"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
-mesh = ExtResource("9_7b2ck")
-surface_material_override/0 = ExtResource("15_g7wqu")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="DiceFaceHolder"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
-mesh = ExtResource("11_ccgaf")
-surface_material_override/0 = ExtResource("17_043dr")

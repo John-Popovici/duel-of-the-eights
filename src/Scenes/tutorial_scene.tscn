@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/camera_toggle_controller.gd" id="5_y4rc3"]
 
 [node name="TutorialScene" type="Control"]
+texture_filter = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,6 +20,7 @@ theme = ExtResource("1_nttex")
 script = ExtResource("2_2fbom")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+texture_filter = 3
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,6 +30,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.588235)
 
 [node name="Panel" type="PanelContainer" parent="."]
+texture_filter = 3
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -42,32 +45,40 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Container" type="VBoxContainer" parent="Panel"]
+texture_filter = 3
 layout_mode = 2
 
 [node name="ImageDisplay" type="TextureRect" parent="Panel/Container"]
+texture_filter = 3
 layout_mode = 2
 texture = ExtResource("3_lcype")
 expand_mode = 5
 
 [node name="CaptionBox" type="VBoxContainer" parent="Panel/Container"]
+texture_filter = 3
 layout_mode = 2
 
 [node name="CaptionLabel" type="Label" parent="Panel/Container/CaptionBox"]
+texture_filter = 3
 layout_mode = 2
 autowrap_mode = 2
 
 [node name="NavigationButtons" type="HBoxContainer" parent="Panel/Container"]
+texture_filter = 3
 layout_mode = 2
 
 [node name="PreviousButton" parent="Panel/Container/NavigationButtons" instance=ExtResource("3_5g33q")]
+texture_filter = 3
 layout_mode = 2
 text = "Previous"
 
 [node name="NextButton" parent="Panel/Container/NavigationButtons" instance=ExtResource("3_5g33q")]
+texture_filter = 3
 layout_mode = 2
 text = "Next"
 
 [node name="SkipButton" parent="Panel/Container/NavigationButtons" instance=ExtResource("3_5g33q")]
+texture_filter = 3
 layout_mode = 2
 text = "Exit Tutorial"
 

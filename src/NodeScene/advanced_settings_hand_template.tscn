@@ -3,26 +3,31 @@
 [ext_resource type="Theme" uid="uid://w0bhlln4xhbw" path="res://Themes/Custom_Default/Custom_Default_Wood.tres" id="1_kseyc"]
 
 [node name="AdvancedSettingsHandTemplate" type="HBoxContainer"]
+texture_filter = 3
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
 theme = ExtResource("1_kseyc")
 
 [node name="HandName" type="Label" parent="."]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("1_kseyc")
 
 [node name="Allowed" type="CheckBox" parent="."]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("1_kseyc")
 text = "Allowed"
 
 [node name="Repeatable" type="CheckBox" parent="."]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("1_kseyc")
 text = "Repeatable"
 
 [node name="MaxPlays" type="SpinBox" parent="."]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("1_kseyc")
 max_value = 99.0
@@ -30,6 +35,7 @@ value = 1.0
 suffix = "Play"
 
 [node name="ScoringRule" type="LineEdit" parent="."]
+texture_filter = 3
 layout_mode = 2
 theme = ExtResource("1_kseyc")
 placeholder_text = "Scoring Rule"

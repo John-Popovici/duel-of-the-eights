@@ -3,6 +3,8 @@
 \usepackage{float}
 \usepackage{hyperref}  % Required for clickable links
 \usepackage{tcolorbox} % Required for info boxes
+\usepackage{graphicx}
+\usepackage{longtable}
 \restylefloat{table}
 
 \usepackage{booktabs}
@@ -265,10 +267,190 @@ Any feedback is valuable, whether it's about \textbf{UI, game mechanics, bugs, o
 \subsection{Need Help?}
 If you run into issues or have any questions, feel free to reply to this message.
 
+\newpage
+
+\section{Alpha Usability Testing Report}
+
+\subsection{Introduction}
+\subsubsection{Purpose of the Test}
+This Alpha testing phase aimed to evaluate \textbf{gameplay clarity, UI usability, multiplayer interactions, and overall player experience}. The primary focus was identifying \textbf{critical bugs, major usability concerns, and quality-of-life improvements} based on \textbf{player feedback through observations, surveys, and interviews}.
+
+\subsubsection{Scope of Testing}
+\begin{itemize}
+    \item \textbf{Multiplayer stability \& clarity} (Connection status, waiting room, chat visibility).
+    \item \textbf{UI improvements} (Checkbox formatting, scoreboard readability, contrast issues).
+    \item \textbf{Game balance \& settings validation} (Round limits for different dice presets).
+    \item \textbf{Game tutorial \& scoring explanations} (Hands/scoring tutorial, variant tutorial tabs).
+    \item \textbf{Audio improvements} (Music variety).
+\end{itemize}
+
+\subsubsection{Test Environment}
+\begin{itemize}
+    \item \textbf{Platforms:} PC (Windows, MacOS, Linux).
+    \item \textbf{Network Conditions:} Local and online multiplayer sessions.
+\end{itemize}
+
+\subsection{Key Findings}
+\subsubsection{Observations}
+\begin{itemize}
+    \item Players found it \textbf{unclear whether the opponent was connected}.
+    \item The \textbf{chat button remains visible in the end-game screen}, causing UI clutter.
+    \item Some players had difficulty distinguishing \textbf{their dice from the opponent's dice}.
+    \item The \textbf{scoreboard scroll function} was \textbf{not obvious}, leading to missed scoring options.
+    \item \textbf{d4 and d8 presets} had \textbf{incorrect round limits}, causing the game to become stuck.
+\end{itemize}
+
+\subsubsection{Survey Results}
+\begin{longtable}{|p{7cm}|c|}
+\hline
+\textbf{Category} & \textbf{Average Score (1-5)} \\
+\hline
+Game UI Clarity & 3.8 \\
+\hline
+Multiplayer Connection Feedback & 3.2 \\
+\hline
+Music Variety & 2.5 \\
+\hline
+Dice and Scoreboard Readability & 3.6 \\
+\hline
+\end{longtable}
+
+\begin{itemize}
+    \item \textbf{82\%} of testers said they would play the game again.
+    \item \textbf{46\%} found it hard to distinguish \textbf{their dice from the opponent’s dice}.
+    \item \textbf{31\%} suggested adding \textbf{variant-specific tutorials} rather than one long tutorial.
+\end{itemize}
+
+\subsubsection{Interview Feedback}
+\textbf{Positive Feedback:}
+\begin{itemize}
+    \item "The game flow is easy to understand once you get used to it."
+    \item "The bluffing mechanic adds a fun layer of strategy!"
+    \item "Customization options are great – looking forward to unlocking more!"
+\end{itemize}
+
+\textbf{Areas for Improvement:}
+\begin{itemize}
+    \item "The UI is a little cluttered in places, especially the chat button appearing after the game ends."
+    \item "Some players had no idea that the opponent was connected because there was no clear status message."
+    \item "I didn’t realize I could scroll down the scoreboard—it should be more obvious."
+    \item "The d4 preset has too many rounds—it breaks the game!"
+\end{itemize}
+
+\subsection{Categorization of Feedback}
+
+\subsubsection{Critical Issues (P0)}
+\begin{itemize}
+    \item \textbf{Chat Button Visible in End Screen \#256} – Hide chat in the end game \& enable it in `setup\_game()`.
+    \item \textbf{d4 Standard Game Has Too Many Rounds \#229} – Prevent rounds from exceeding the number of hands.
+    \item \textbf{Prevent Rounds Exceeding Number of Hands \#252} – Adjust preset files \& enforce round limits.
+\end{itemize}
+
+\subsubsection{Moderate Issues (P1)}
+\begin{itemize}
+    \item \textbf{Differentiate Opponent Dice from Player \#249} – Add grey overlay \& different UI colors.
+    \item \textbf{Create a Debug Module \#231} – Implement an autoload Debug Module.
+    \item \textbf{Add Hands \& Scoring Tutorial Page \#230} – Create a separate tutorial page.
+    \item \textbf{Show Player Connection Status More Clearly \#233} – Add an indicator for opponent connection.
+    \item \textbf{Pass Button Passes All Rolls in Round \#236} – Implement pass functionality for all rolls.
+    \item \textbf{d6 Dice UI Lacks Contrast \#255} – Change UI theme or dice sprites.
+    \item \textbf{Bonus Threshold Clarity \#250} – Add tooltips \& live tracking.
+\end{itemize}
+
+\subsubsection{Minor Suggestions (P2)}
+\begin{itemize}
+    \item \textbf{Change d4 Dice Variant Model \#228} – Provide alternative d4 models.
+    \item \textbf{Format Checkboxes Better \#232} – Improve checkbox UI formatting.
+    \item \textbf{Waiting Room for Client Player \#234} – Add player details \& possible minigame.
+    \item \textbf{In-Game Tab Screen for Scoreboards \#237} – Add a TAB key overlay.
+    \item \textbf{Scoreboard Scroll \& Length Clarity \#251} – Make scrollbars more prominent.
+    \item \textbf{Non-Repetitive Music \#253} – Add multiple tracks or allow user selection.
+    \item \textbf{Variant-Specific Tutorial Tabs \#254} – Implement tutorial tabs for different variants.
+    \item \textbf{Cosmetic Achievements \& Progression \#257} – Implement non-pay-to-win cosmetic rewards.
+    \item \textbf{Free Camera Movement in Non-Gameplay Scenes \#258} – Enable camera movement \& tavern exploration.
+    \item \textbf{Multiplayer Interactive Lobby \#259} – Consider a future multiplayer hub system.
+\end{itemize}
+
+\subsection{Changes Implemented}
+
+\subsubsection{Immediate Fixes (Next Development Cycle)}
+\begin{itemize}
+    \item Fixed the round limit for d4 and d8 presets (\#229, \#252).
+    \item Removed chat button from the end game screen (\#256).
+    \item Added a clear player connection status UI (\#233).
+\end{itemize}
+
+\subsubsection{Mid-Term Adjustments (Next Playtesting Phase)}
+\begin{itemize}
+    \item Improve dice visibility with overlays \& UI colors (\#249).
+    \item Implement a Debug Module for logging errors (\#231).
+    \item Improve bonus threshold clarity with tracking \& tooltips (\#250).
+    \item Improve waiting room UX \& potential minigame (\#234).
+\end{itemize}
+
+\subsubsection{Long-Term Refinements (Final Release)}
+\begin{itemize}
+    \item Introduce cosmetic achievements \& progression system (\#257).
+    \item Consider implementing a multiplayer interactive lobby (\#259).
+\end{itemize}
+
+\subsection{Recommendations for Next Testing Phase}
+\begin{itemize}
+    \item Focus on UI improvements (Scoreboard clarity, checkbox formatting).
+    \item Evaluate tutorial changes (Hands \& scoring explanation, variant-specific tutorial tabs).
+    \item Test new visual effects for dice differentiation.
+    \item Assess music variety and potential custom soundtracks.
+\end{itemize}
+
+\subsection{Conclusion}
+The Alpha Playtest provided critical insights into game-breaking bugs, UI clarity, and feature requests. Immediate fixes have been applied, and upcoming development cycles will improve usability and game flow based on player feedback. The next testing phase will focus on polishing UI, enhancing tutorials, and refining the multiplayer experience.
+
+
+
+\newpage
+
+\section{Dice Duels - Beta Playtest Invitation}
+
+Hello, and thank you for helping us test \textbf{Dice Duels}!
+
+This is a Beta build, and we appreciate any feedback you can provide. Please follow the steps below to play and complete the survey.
+
+\subsection{Download \& Setup Instructions}
+\begin{enumerate}
+    \item Download the game here: \href{https://drive.google.com/file/d/1MLTZWqBBJjXCT3Q7cvJJVNfackxiZBBO/view?usp=sharing}{\textbf{Download Link}}.
+    \item Unzip the file to a folder on your computer.
+    \item Open the extracted folder and run \texttt{duel-of-the-eights.exe} to start the game.
+\end{enumerate}
+
+\subsection{How to Play (2-Player Online Game)}
+\begin{enumerate}
+    \item One player must \textbf{Host} the game, while the second player \textbf{Joins} using a \textbf{Connect Code}.
+    \item The host should \textbf{copy the code and share it} with the second player.
+    \item Once both players are connected, the host can \textbf{start the game}.
+\end{enumerate}
+
+\textbf{Note:} The Beta Build can only be played if both players are on the same WiFi/Network.
+
+\begin{tcolorbox}[colback=gray!10, colframe=black, title=Tip]
+You can use \textbf{Discord, WhatsApp, or any messaging app} to quickly share the Connect Code with your opponent.
+The host can click on the code button to automatically copy, to make copy/pasting easier
+\end{tcolorbox}
+
+\subsection{Provide Feedback (Survey Link)}
+
+Once you’ve played a full game (or multiple rounds), please take \textbf{5 minutes} to fill out our feedback survey:
+
+\href{https://forms.office.com/r/nYjE7qfsYG}{\textbf{Microsoft Forms Link}}
+
+Any feedback is valuable, whether it's about \textbf{UI, game mechanics, bugs, or suggestions}!
+
+\subsection{Need Help?}
+If you run into issues or have any questions, feel free to reply to this message.
+
 \bigskip
 
-\centering
+\begin{center}
 \textbf{Thank you for your time and support!}
-
+\end{center}
 
 \end{document}

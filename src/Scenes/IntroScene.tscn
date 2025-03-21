@@ -71,6 +71,7 @@ text = "Cinematic"
 [node name="BackgroundObjects" parent="." instance=ExtResource("12_1wfsc")]
 
 [node name="Title" type="VBoxContainer" parent="."]
+texture_filter = 3
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -133,6 +134,7 @@ disabled = true
 text = "Start Local Game!"
 
 [node name="StartStandardGame" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("5_bq53n")
@@ -145,6 +147,7 @@ theme = ExtResource("5_bq53n")
 text = "Play Online Standard Game"
 
 [node name="StartBluffGame" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("5_bq53n")
@@ -157,6 +160,7 @@ theme = ExtResource("5_bq53n")
 text = "Play Online Bluff Game"
 
 [node name="StartBlitzGame" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("5_bq53n")
@@ -209,19 +213,23 @@ grow_horizontal = 0
 theme = ExtResource("5_bq53n")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OptionsPanel"]
+texture_filter = 3
 layout_mode = 2
 
 [node name="Customization" type="Button" parent="OptionsPanel/VBoxContainer" groups=["ConfirmButtons"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 3
 text = "Cosmetic Customization"
 
 [node name="Profile" type="Button" parent="OptionsPanel/VBoxContainer" groups=["ConfirmButtons"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 3
 text = "Profile"
 
 [node name="Tutorial" type="Button" parent="OptionsPanel/VBoxContainer" groups=["ConfirmButtons"]]
+texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 3
 text = "Tutorial"

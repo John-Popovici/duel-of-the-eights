@@ -16,6 +16,14 @@ func clearDie () -> void:
 		die._clear_dice_ui()
 	die = null
 
+func _on_hover() -> void:
+	if die != null and not die.get_selected_status():
+		self.set_texture(selected_tex)
+	
+func _on_unhover() -> void:
+	if die != null and not die.get_selected_status():
+		self.set_texture(normal_tex)
+
 # Function that handles the click event on the TextureRect
 func _on_texture_rect_input_event(event) -> void:
 	if event is InputEventMouseButton:

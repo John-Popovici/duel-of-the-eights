@@ -3,6 +3,7 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{array}
 \hypersetup{
     colorlinks,
     citecolor=black,
@@ -11,6 +12,7 @@
     urlcolor=blue
 }
 \usepackage[round]{natbib}
+\usepackage{float}
 
 \input{../Comments}
 \input{../Common}
@@ -27,13 +29,24 @@
 
 \section{Revision History}
 
-\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
-\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\begin{table}[hp]
+\caption{Revision History} \label{TblRevisionHistory}
+\begin{tabularx}{\textwidth}{llX}
+\toprule
+\textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+2025-03-09 & John Popovici & Document format and reflection start\\
+2025-03-10 & Nigel Moses & Added NFR Evaluations Section\\
+2025-03-10 & Naishan Guo & Added Functional Requirements Evaluations Section\\
+2025-03-10 & John Popovici & Added traceability matrices\\
+2025-03-10 & Hemraj Bhatt & Added content to section 10 and reflection\\
+2025-03-10 & Isaac Giles & Added content to section 6, 8, and reflection\\
+2025-03-10 & Isaac Giles & Revised formatting issues\\
+2025-03-10 & John Popovici & Cleaned final references\\
+\dots & \dots & \dots \\
 \bottomrule
 \end{tabularx}
+\end{table}
 
 ~\newpage
 
@@ -43,60 +56,1125 @@ Date 2 & 1.1 & Notes\\
 \begin{tabular}{l l} 
   \toprule		
   \textbf{symbol} & \textbf{description}\\
-  \midrule 
-  T & Test\\
+  \midrule
+  VnV & Verification and Validation\\
+  RX & Functional requirement number X\\
+  NFRX & Nonfunctional requirement number X\\
+  Test-X & Test number X\\
+  DC-X & Dice container unit test X\\
+  SC-X & Score calculator container unit test X\\
+  UI & User interface\\
+  PvP & Player versus player\\
+  LAN & Local area network\\
+  FPS & Frames per second\\
+  OOP & Object-oriented programming\\
   \bottomrule
 \end{tabular}\\
 
-\wss{symbols, abbreviations or acronyms -- you can reference the SRS tables if needed}
+%\wss{symbols, abbreviations or acronyms -- you can reference the SRS tables if needed}
 
 \newpage
 
 \tableofcontents
 
+\newpage
 \listoftables %if appropriate
 
-\listoffigures %if appropriate
+%\listoffigures %if appropriate
 
 \newpage
 
 \pagenumbering{arabic}
 
-This document ...
+%This document ...
 
 \section{Functional Requirements Evaluation}
 
+
+\subsection{R1: PVP support}
+\label{R1}
+
+ \subsubsection*{Description:}  The game shall support an online player vs player mode, where 2 players can play against
+each other.
+
+ \subsubsection*{Fit Criterion:}  2 players can connect to each other over an internet connection.
+ 
+ \subsubsection*{Pass or fail? :}
+ 
+ \noindent \textbf{PASS}\\
+ 
+ We have tested multiple versions of our game, and in each of those versions, we have verified though testing that two players on separate Windows devices connected to the same Wi-Fi network can successfully establish a connection to each other, verify their connectivity, and take turns without issues. Based on these successful tests, we confirm that this requirement has been met.
+ 
+ \subsubsection*{Relevant VnV Plan test: }  
+ 
+  \noindent \textbf{ Test-1}. The manual test, Test-1 from the VnV Plan, is relevant to this requirement and when we executed the test, the system passed the test, confirming that the requirement had been met.
+
+
+\subsection{R2: Yatzee score calculations}
+\label{R2} 
+  
+   \subsubsection*{Description:}  The game shall handle score calculations using similar rules to standard Yahtzee under default game settings.
+
+ \subsubsection*{Fit Criterion:}  Scores in default Yahtzee must match those obtained from an official Yahtzee score calculator (depending on house rules).
+ 
+ \subsubsection*{Pass or fail? :}
+ 
+ \noindent \textbf{PASS}\\
+ 
+ Through the comparisons between our hand calculated yahtzee  expected score and the games calculated score for each type of rolled hand, we have confirmed that the game can calculated the correct score for each type of hand based on yahtzee rules, and then display these calculations on the scoreboard. In addition, these calculations can adapt to the custom settings made by the players. As the game's calculated scores matches our expected scores, we can safely say that this requirement has been met. 
+ 
+ \subsubsection*{Relevant VnV Plan test: }  \textbf{ Test-2}. The automated test, Test-2 from the VnV Plan, is relevant to this requirement and when we used these tests, they were all passed, confirming that the requirement had been met.
+
+
+\subsection{R3: Dice Roll Physics} 
+\label{R3}  
+  
+\subsubsection*{Description:}The game shall simulate realistic physics for 3D dice rolls with pseudo-randomness on every roll that replicates accurately to all users. If rolling $AdX$ dice, $A$ numbers will have to be determined from the range $1 \geq A_{i} \geq X$.
+
+\subsubsection*{Fit Criterion:} The result of a roll must be pseudo-random, adhere to physics-based simulation, and be accurately displayed to all players.
+
+\subsubsection*{Pass or Fail? :} 
+
+ \noindent \textbf{PASS}\\
+ 
+ In our current version, we have working 3D dice models that are physically rolled in front of the player, with methods to address and resolve any invalid rolls or collisions issues related to the rolling of the physical dice.  This requirement has been met by out project.
+
+ \subsubsection*{Relevant VnV Plan test: }  \textbf{ Test-3}. The manual test, Test-3 from the VnV Plan, is relevant to this requirement and when we executed the test, the system passed the test, confirming that the requirement had been met.
+
+
+\subsection{R4: Dice roll results} 
+\label{R4} 
+
+\subsubsection*{Description:}The game shall use the real outcome of a roll to get the values from the dice.
+  
+\subsubsection*{Fit Criterion:} Dice values displayed on the UI must match the final resting state of the 3D dice model after rolling.
+
+\subsubsection*{Pass or Fail? :} 
+ 
+  \noindent \textbf{PASS}\\
+ 
+ In our current version, We can visually confirm that the results for each dice roll in the UI match the results of the physically rolled 3D dice models after they have finished rolling. This requirement has been met.
+ 
+  \subsubsection*{Relevant VnV Plan test: } \textbf{ Test-3}. Though designed for Requirement 3 specifically, we have confirmed that requirement 4 has been met as well while implementing Test-3, as by physically rolling the dice, we were able to visually see that our rolled results match the results displayed in our UI.
+  
+  
+\subsection{R5: Multi Dice support} 
+\label{R5} 
+
+\subsubsection*{Description:}The game shall support both regular six-sided dice and a set of dice with different number of sides, such as octahedral dice.
+
+\subsubsection*{Fit Criterion:} Players can select dice with different numbers of sides, and the game correctly processes rolls for all supported dice types.
+
+\subsubsection*{Pass or Fail? :} 
+
+ \noindent \textbf{PASS}\\
+ 
+In our current version of our game, players can select from 4, 6, 8, and 10 sided dice. We have dice models for all four options, and they can all be rolled in game without issue. In addition, score calculators can adapt to the player's selected dice model. This requirement has been met.
+
+\subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. Though there is no explict test from the VnV plan dedicated to this Requirement, we have tested this requirement manually through \textbf{Test-3} by loading the game, selecting our desired dice type, and then starting the game to see if the game can run using our selected dice option without issue. Since our current version can run any of the selected dice types without issue, the above test passes, confirming that the above requirement has been met.
+
+
+\subsection{R6: Simultaneous turn mechanism} 
+\label{R6} 
+
+\subsubsection*{Description:}The game shall implement a simultaneous turn based mechanism such that each player (or computer) takes a turn at the same time and then results are revealed simultaneously to each other at each dice roll.
+
+\subsubsection*{Fit Criterion:} Each player takes actions simultaneously, and results are revealed to both players once each has selected an action.
+
+\subsubsection*{Pass or Fail? :} 
+
+ \noindent \textbf{PASS}\\
+ 
+  In our current version, players automatically take their turns at the same time. The game is set so that both players automatically roll dice, select dice, and select their score for that round at the same time. This requirement has therefore been met.
+
+\subsubsection*{Relevant VnV Plan test: } \textbf{test-4}.  The manual test, Test-4 from the VnV Plan, is relevant to this requirement and when we executed the test, the system passed the test, confirming that the requirement had been met.
+
+
+\subsection{R7: Dice Selection} 
+\label{R7} 
+
+\subsubsection*{Description:} The game shall allow players to pick which dice they would like to use for each roll, and which dice they would like to omit. Selected dice will be a subset of the current dice in play belonging to that player $D' \subseteq D$.
+
+\subsubsection*{Fit Criterion:} Players can select a subset of their dice before rolling, and the game correctly rolls only the selected dice.
+
+
+\subsubsection*{Pass or Fail? :} 
+
+ \noindent \textbf{PASS}\\
+ 
+ In our current version, Players can choose which dice they want to re-roll, which will highlight when selected. When the dice are rolled again, only selected dice will be rerolled. In addition, we have a special toggle option that allows for the inverse, which when activated causes \underline{unselected} dice to be rerolled instead of the selected ones. This requirement has been met.
+
+\subsubsection*{Relevant VnV Plan test: } \textbf{Test-6}.  The automated test, Test-6 from the VnV Plan, is relevant to this requirement and when we ran those tests, the tests all passed, confirming that the requirement has been met.\\
+\textbf{Test-3}. The manual test of dice rolling also works towards confirming this requirement.
+
+
+\subsection{R8: User Interface} 
+\label{R8} 
+
+\subsubsection*{Description:}  The game shall display some sort of user interface to display scores, number of rolls, time limits, state of dice, and player names.
+
+\subsubsection*{Fit Criterion:} The UI must display the score, roll count, time limits, dice states, and player names without omissions or inconsistencies.
+
+\subsubsection*{Pass or Fail? :} 
+
+ \noindent \textbf{PASS}\\
+ 
+ Our current version has a UI display that provides the player will all relevant information, including score, roll count, time limits, and the names and dice states of both the player and his or her opponent. This requirement has been met.
+
+\subsubsection*{Relevant VnV Plan test: } \textbf{test-5}.  The Manual test, Test-5 from the VnV Plan, is relevant to this requirement and when we executed the test, the system passed the test, confirming that the requirement had been met.
+
+ 
+\subsection{R9: Custom games} 
+\label{R9}
+
+\subsubsection*{Description:}The game shall provide controls for the player to modify the game settings to access unique variants of the game.
+
+\subsubsection*{Fit Criterion:}Players must be able to access and modify at least 3 game settings before a game is started.
+
+\subsubsection*{Pass or Fail? :} 
+
+ \noindent \textbf{PASS}\\
+ 
+  Our current version Provides players with a wide variaty of options to modify. Depending on the players selected game mode, players can alter the number of rounds, the type of dice, the allowed hands for the game, rolls per round, the number of dice that can be rolled, and even the game's win condition. This requirement has been well met.
+
+\subsubsection*{Relevant VnV Plan test: } \textbf{test-8}.  The Manual test, Test-8 from the VnV Plan, is relevant to this requirement and when we executed the test, the system passed the test, confirming that the requirement had been met.
+
+
+\subsection{R10: Preset Selection} 
+\label{R10} 
+
+\subsubsection*{Description:}The game shall provide presets for different game modes.
+
+\subsubsection*{Fit Criterion:}Players must be able to select from at least one preset game mode in the settings menu.
+
+\subsubsection*{Pass or Fail? :} 
+
+ \noindent \textbf{PASS}\\
+ 
+  Our current version offers players three pre-set game modes: Standard, which closely follows traditional Yahtzee rules; Bluff, which incorporates health points and a bluffing system; and Blitz, which features a shorter timer to encourage faster rounds. Each mode applies unique parameters and settings tailored to its gameplay style, and when the game modes are selected, the unique parameters are present in the game. This requirement has therefore been met.
+
+\subsubsection*{Relevant VnV Plan test: } \textbf{test-7}.  The Manual test, Test-7 from the VnV Plan, is relevant to this requirement and when we executed the test, the system passed the test, confirming that the requirement had been met.
+
+
+\subsection{R11: Local multiplayer} 
+\label{R11} 
+
+\subsubsection*{Description:}The game shall support a local player vs player mode, where 2 players can play against each other on the same computer.
+
+\subsubsection*{Fit Criterion:}Two players can take turns using the same computer without errors or UI conflicts.
+
+\subsubsection*{Pass or Fail? :} 
+
+ \noindent \textbf{Fail}\\
+ 
+  This Requirement is outside of our scope at the current stage of our project, as it is a stretch requirement, and as such hasn't been met yet.
+
+\subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. This requirement was out of scope for this project, and as such no test for requirement R11 was created in the VnV plan.
+
+
+\subsection{R12: Singleplayer} 
+\label{R12} 
+
+\subsubsection*{Description:}The game shall support a player vs computer mode, where 1 player can play against another entity without needing to find a human match.
+
+\subsubsection*{Fit Criterion:} A player can start a game against a computer opponent without needing a human opponent.
+
+\subsubsection*{Pass or Fail? :} 
+
+ \noindent \textbf{Fail}\\
+ 
+ This requirement has not been met, because no single player algorithm exists yet. In addition, this Requirement is also outside of our scope at the current stage of our project, as it is a stretch requirement, and as such hasn't been met yet.
+
+\subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. This requirement was out of scope for this project, and because of that no test for requirement R12 was created in the VnV plan.
+
+
+\subsection{R13: Singleplayer Algorithm} 
+\label{R13} 
+
+\subsubsection*{Description:} The game shall implement some sort of algorithmic computer opponent for  player vs computer gameplay option.
+
+\subsubsection*{Fit Criterion:} The computer opponent makes legal and strategic moves, ensuring a playable experience.
+
+\subsubsection*{Pass or Fail? :} 
+
+ \noindent \textbf{Fail}\\
+ 
+  No AI algorithm has been implemented yet, and as such this Requirement hasn't been met yet. This Requirement is also outside of our scope at the current stage of our project, as it is a stretch requirement, and as such it hasn't been met yet.
+
+\subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. This requirement was out of scope for this project, and because of that no test for requirement R13 was created in the VnV Plan.
+
+
+\subsection{R14: Online Matchmaking} 
+\label{R14} 
+
+\subsubsection*{Description:}The game shall implement online matchmaking.
+
+\subsubsection*{Fit Criterion:}Players can search for and be matched with online opponents.
+
+\subsubsection*{Pass or Fail? :} 
+
+ \noindent \textbf{Fail}\\
+ 
+ \noindent As of the current state of the project, this requirement remains outside the scope of the project since it's a stretch goal, and as such hasn't been implemented yet. 
+
+\subsubsection*{Relevant VnV Plan test: } \textbf{Test-1}. Testing the PvP functionally is done through both LAN network testing and online server connections.
+
+
+\subsection{R15: Saving game settings} 
+\label{R15} 
+
+\subsubsection*{Description:}The game shall provide the option to save specific game settings to be reused in future sessions.
+
+\subsubsection*{Fit Criterion:}Players can save and load custom game settings across different play sessions.
+
+
+\subsubsection*{Pass or Fail? :} 
+
+ \noindent \textbf{Pass}\\
+ 
+ \noindent As of this current version, users can now save their custom game settings and then load those same game settings even after they closed their old game session and started a new one. This requirement has been met.
+
+\subsubsection*{Relevant VnV Plan test: } \textbf{Test-8}. We have tested this requirement by setting up a game, saving our game settings, and then confirming that our custom game setting was still saved after ending my current session and beginning another. As our game settings remain saved and implementable even after new game sessions are begun, we can safely say that the game passes the test, and by extension, meets the requirement.
+
+
+\subsection{R16: end of game statistics} 
+\label{R16} 
+
+\subsubsection*{Description:}The game shall display game statistics to each player at the end of every round.
+
+\subsubsection*{Fit Criterion:}At the end of a game, the game displays statistics such as total score, average roll, and average score per round.
+
+\subsubsection*{Pass or Fail? :} 
+
+ \noindent \textbf{Pass}\\
+ 
+ \noindent As of this current version of the game, A game display showing the total score and remaining health for both players is shown at the end of every game. As such, while we consider this requirement to have been met, we are also planning on adding more statistics such as average roll, and average score per round later on in the project.
+ 
+ \subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. No relevant test from the VnV Plan was created for this Requirement, however, we have tested this requirement manually by playing the game to the end and seeing if the end of game results show up. As the end of game statistics show up after the end of every game we've played, we can safely say that the game passes our above test, and by extension that this requirement has been met as well.
+
+
+\subsection{R17: Consistent and Correct game state} 
+\label{R17} 
+
+\subsubsection*{Description:} The game shall always show the correct current state accurately.
+
+\subsubsection*{Fit Criterion:}The game state (e.g., current scores, dice states, turn order) is always correctly updated and visible to the player.
+
+\subsubsection*{Pass or Fail? :} 
+
+ \noindent \textbf{Pass}\\
+ 
+ \noindent In our current iteration of the project, so far, we have been able to get our game stable enough to the point that we can consistently play though various rounds without issues, and the current state of the game is always correct and viable to the player throughout the entire match. This requirement has been met.
+ 
+ \subsubsection*{Relevant VnV Plan test: } \textbf{N/A}. No relevant test specific to this requirement was created in the VnV Plan. However, we have tested this requirement manually by  playing though a game and checking the UI to see if the correct game state is displayed throughout the whole game. As we had found no issues when conducting this test multiple times, we can safely say that the game has passed this test, and by extension, that this requirement has been met.
+
+
+\newpage
 \section{Nonfunctional Requirements Evaluation}
 
-\subsection{Usability}
-		
-\subsection{Performance}
+\subsection{Introduction}
 
-\subsection{etc.}
-	
-\section{Comparison to Existing Implementation}	
+The Non-Functional Requirements (NFR) Evaluation assesses whether Dice Duels meets the specified non-functional requirements as outlined in the Verification and Validation Plan. Each NFR is evaluated based on:
+\begin{itemize}
+	\item Objective Tests from the Verification \& Validation Plan.
+	\item User Feedback from the Usability Testing Report.
+	\item Expert Evaluation based on performance metrics and analysis.
+\end{itemize}
+Each NFR will be marked as Pass, Fail, or Conditional Pass based on supporting evidence.
 
-This section will not be appropriate for every project.
+\subsection{Non-Functional Requirements Evaluation Format}
 
+Each NFR evaluation follows this format:
+
+NFR-X: [Requirement Name]
+Requirement Description:
+(Describe the non-functional requirement and its importance.)
+
+Evaluation Criteria:
+\begin{itemize}
+    \item (List the criteria that determine if the NFR is satisfied.)
+\end{itemize}
+Test Results from Verification and Validation Plan:
+(Reference specific tests conducted to validate this NFR.)
+
+User Feedback from Usability Testing Report:
+(Summarize relevant user feedback supporting or contradicting compliance.)
+
+Final Assessment:
+\begin{itemize}
+    \item Pass – If the requirement is fully met based on test results and user feedback.
+    \item Conditional Pass – If minor issues exist that do not prevent overall compliance.
+    \item Fail – If significant issues remain unresolved.
+\end{itemize}
+
+\subsection{Individual Non-Functional Requirement Evaluations}
+
+
+\subsubsection{NFR-1: Performance}
+\label{NFR1} 
+
+\textbf{Requirement Description:}  
+The game shall maintain a frame rate of at least 30 FPS at all times to ensure smooth gameplay and allow players to clearly see in-game actions.
+
+\textbf{Evaluation Criteria:}  
+\begin{itemize}
+    \item The game must consistently run at 30 FPS or higher on supported hardware.
+    \item Frame rate should remain stable during standard gameplay scenarios.
+    \item No significant frame drops or lag should be reported in usability testing.
+\end{itemize}
+
+\textbf{Test Results from Verification and Validation Plan:}  
+\begin{itemize}
+    \item \textbf{Test 9} was conducted to assess the game's frame rate performance.
+    \item Performance was evaluated based on usability testing feedback rather than direct FPS measurements.
+    \item No players reported frame rate issues or performance drops during usability testing.
+\end{itemize}
+
+\textbf{User Feedback from Usability Testing Report:}  
+\begin{itemize}
+    \item Players did not experience noticeable slowdowns or frame drops.
+    \item No negative feedback was given regarding performance, suggesting that the game runs at an acceptable frame rate.
+\end{itemize}
+
+\textbf{Final Assessment:} \textbf{Pass}  
+
+The game meets the \textbf{performance requirements} as no frame rate issues were reported during usability testing, and it is assumed to maintain at least 30 FPS under standard gameplay conditions. While future tests could include direct FPS measurements for further validation, the current results confirm that the game runs smoothly on supported hardware.
+
+
+\subsubsection{NFR-2: Usability}
+\label{NFR2}
+
+\textbf{Requirement Description:}  
+The game shall implement a clear and easy-to-use/understand user interface. Players should be able to navigate the UI and access game functions without confusion or requiring external instructions.
+
+\textbf{Evaluation Criteria:}  
+\begin{itemize}
+    \item The UI should be intuitive, requiring minimal explanation for players to understand.
+    \item Players should be able to locate controls and interact with features efficiently.
+    \item No significant usability barriers should prevent new players from engaging with the game.
+\end{itemize}
+
+\textbf{Test Results from Verification and Validation Plan:}  
+\begin{itemize}
+    \item No specific tests related to UI usability were included in the Verification and Validation Plan, but \textbf{Test-1} which includes playing PvP gameplay would require interacting with the UI.
+\end{itemize}
+
+\textbf{User Feedback from Usability Testing Report:}  
+\begin{itemize}
+    \item No major bugs or game-breaking UI issues were reported.
+    \item Some testers reported minor \textbf{UI navigation hinderances}, such as unclear scoreboard scrolling and checkbox formatting.
+    \item Several usability improvement features were suggested, including \textbf{better clarity for connection status, bonus threshold tracking, and tutorial navigation}.
+\end{itemize}
+
+\textbf{Final Assessment:} \textbf{Pass}  
+
+The game meets the \textbf{usability requirements} as players were able to navigate the UI without major confusion or external guidance. While minor improvements were suggested, they do not constitute a failure of the requirement but rather opportunities for refinement in future updates.
+
+
+\subsubsection{NFR-3: Portability}
+\label{NFR3}
+
+\textbf{Requirement Description:}  
+The game shall be supported on systems running Windows 10 or later. Ensuring compatibility with these operating systems is crucial for reaching a broad user base.
+
+\textbf{Evaluation Criteria:}  
+\begin{itemize}
+    \item The game should install and run successfully on Windows 10 and later.
+    \item No compatibility issues should prevent the game from launching or running as intended.
+    \item Performance and functionality should remain consistent across supported Windows versions.
+\end{itemize}
+
+\textbf{Test Results from Verification and Validation Plan:}  
+\begin{itemize}
+    \item \textbf{Test 11} involved manually installing and running the game on Windows PCs to verify compatibility.
+    \item The game successfully launched and ran on tested Windows 10 and Windows 11 machines without issues.
+\end{itemize}
+
+\textbf{User Feedback from Usability Testing Report:}  
+\begin{itemize}
+    \item All usability testing was conducted on \textbf{Windows PCs}.
+    \item No testers encountered \textbf{launch failures, installation errors, or compatibility issues}.
+\end{itemize}
+
+\textbf{Final Assessment:} \textbf{Pass}  
+
+The game meets the \textbf{portability requirement}, as it was successfully tested on Windows 10 and later without compatibility issues. Usability testing confirmed that all testers were able to install and run the game without problems, validating this requirement.
+
+
+\subsubsection{NFR-4: Reliability}
+\label{NFR4}
+
+\textbf{Requirement Description:}  
+Multiplayer games of Yahtzee should crash less than 1\% of the time. Ensuring stability is critical so that players do not experience disruptions during gameplay.
+
+\textbf{Evaluation Criteria:}  
+\begin{itemize}
+    \item Multiplayer sessions should have a crash rate of less than 1\% across 100 test runs.
+    \item The game should remain stable throughout an entire match without unexpected shutdowns.
+    \item Any connection instability should not cause game crashes.
+\end{itemize}
+
+\textbf{Test Results from Verification and Validation Plan:}  
+\begin{itemize}
+    \item \textbf{Test 12} involved running multiplayer sessions repeatedly to log crash occurrences.
+    \item Testing was conducted through usability testing, where players ran multiple sessions of multiplayer games.
+\end{itemize}
+
+\textbf{User Feedback from Usability Testing Report:}  
+\begin{itemize}
+    \item No players reported game crashes during usability testing.
+    \item Some testers experienced \textbf{connection instability} in the LAN version of the game.
+    \item Connection issues are expected to be resolved with the implementation of the \textbf{Amazon EC2 server} for multiplayer.
+\end{itemize}
+
+\textbf{Final Assessment:} \textbf{Pass}  
+
+The game meets the \textbf{reliability requirement} as no crashes were reported during usability testing, and Test 12 confirmed stable multiplayer sessions. While there were reports of **connection instability in the LAN version**, this is a separate issue that is expected to be resolved with the server-based multiplayer architecture.
+
+
+\subsubsection{NFR-5: Responsiveness}
+\label{NFR5}
+
+\textbf{Requirement Description:}  
+The game shall respond to user inputs within 500 milliseconds in the worst case. Ensuring fast response times is critical to maintaining a smooth and frustration-free gameplay experience.
+
+\textbf{Evaluation Criteria:}  
+\begin{itemize}
+    \item User input should result in a visible response within 500ms at least 99\% of the time.
+    \item No noticeable delays should occur in UI interactions, dice rolling, or menu navigation.
+    \item Multiplayer input synchronization should not introduce noticeable input lag.
+\end{itemize}
+
+\textbf{Test Results from Verification and Validation Plan:}  
+\begin{itemize}
+    \item \textbf{Test 10} involved testing response times by performing varied actions in-game and noting any delays.
+    \item No instances of response times exceeding 500ms were recorded during testing.
+\end{itemize}
+
+\textbf{User Feedback from Usability Testing Report:}  
+\begin{itemize}
+    \item No players reported \textbf{input delays or sluggish UI interactions}.
+    \item Dice rolls, menu selections, and in-game interactions were consistently responsive.
+    \item No complaints were made regarding \textbf{multiplayer latency affecting input responsiveness}.
+\end{itemize}
+
+\textbf{Final Assessment:} \textbf{Pass}  
+
+The game meets the \textbf{responsiveness requirement} as all recorded user interactions occurred within the expected 500ms threshold. Usability testing confirmed that no players encountered delays in UI navigation, dice rolling, or other gameplay actions, validating this requirement.
+
+
+\subsubsection{NFR-6: Modularity}
+\label{NFR6}
+
+\textbf{Requirement Description:}  
+The game’s codebase shall be modular, ensuring it is easily extendable and reusable, allowing for quick fixes to bugs and efficient implementation of new features.
+
+\textbf{Evaluation Criteria:}  
+\begin{itemize}
+    \item Developers should be able to add new game modes and dice types without modifying unrelated existing code.
+    \item The code should follow standard Object-Oriented Programming (OOP) principles and best practices for modularity.
+    \item The use of **Godot-specific features** (such as signals and node groups) should facilitate modular development.
+\end{itemize}
+
+\textbf{Test Results from Verification and Validation Plan:}  
+\begin{itemize}
+    \item No applicable tests were included in the Verification and Validation Plan for modularity validation.
+\end{itemize}
+
+\textbf{User Feedback from Usability Testing Report:}  
+\begin{itemize}
+    \item No direct feedback from usability testing related to code modularity.
+\end{itemize}
+
+\textbf{Justification for Final Assessment:}  
+\begin{itemize}
+    \item The codebase was structured following \textbf{Object-Oriented Programming (OOP)} principles.
+    \item \textbf{Godot-specific best practices}, including the use of \textbf{signals, node groups, and preloaded/global scripts}, were implemented to ensure modularity.
+    \item The game architecture supports \textbf{adding new game modes and dice types} without requiring changes to unrelated code, meeting the fit criterion.
+\end{itemize}
+
+\textbf{Final Assessment:} \textbf{Pass}  
+
+The game meets the \textbf{modularity requirement} as its design follows **OOP principles and modular development best practices in Godot**. While no explicit tests or usability feedback were available, the structure of the codebase enables **extendability and maintainability**, validating this requirement.
+
+
+\subsubsection{NFR-7: Efficiency}
+\label{NFR7}
+
+\textbf{Requirement Description:}  
+The game shall be optimized to run on lower-end systems with minimal CPU and GPU resources while maintaining smooth gameplay performance.
+
+\textbf{Evaluation Criteria:}  
+\begin{itemize}
+    \item The game should run smoothly on systems that meet the minimum system requirements.
+    \item No major performance drops or stuttering should occur during gameplay.
+    \item The game should be optimized to minimize excessive CPU and GPU usage.
+\end{itemize}
+
+\textbf{Test Results from Verification and Validation Plan:}  
+\begin{itemize}
+    \item No applicable tests were included in the Verification and Validation Plan for efficiency validation.
+\end{itemize}
+
+\textbf{User Feedback from Usability Testing Report:}  
+\begin{itemize}
+    \item No players reported \textbf{performance issues} during usability testing.
+    \item The game was tested on \textbf{various PC configurations}, and all systems were able to run the game smoothly.
+    \item No testers experienced \textbf{frame rate drops, stuttering, or excessive resource usage}.
+\end{itemize}
+
+\textbf{Final Assessment:} \textbf{Pass} 
+ 
+The game meets the \textbf{efficiency requirement} as usability testing confirmed that it runs smoothly on all tested PC configurations without significant performance drops. While no explicit performance tests were included in the Verification and Validation Plan, real-world testing indicates that the game is well-optimized for lower-end systems.
+
+
+\subsubsection{NFR-8: Enjoyability}
+\label{NFR8}
+
+\textbf{Requirement Description:}  
+The game shall be found enjoyable by at least 75\% of users, ensuring that it appeals to a broad audience and provides an engaging experience.
+
+\textbf{Evaluation Criteria:}  
+\begin{itemize}
+    \item At least 75\% of users should rate the game as enjoyable based on post-game surveys or analytics.
+    \item User feedback should indicate a positive overall reception of the game.
+    \item Players should express interest in replaying the game.
+\end{itemize}
+
+\textbf{Test Results from Verification and Validation Plan:}  
+\begin{itemize}
+    \item No applicable tests were included in the Verification and Validation Plan for enjoyability validation.
+\end{itemize}
+
+\textbf{User Feedback from Usability Testing Report:}  
+\begin{itemize}
+    \item Players rated their likelihood of replaying the game on a \textbf{Likert scale (1-5)}, with an average score of \textbf{4.17}.
+    \item Only \textbf{4\% of players} indicated that they would either not play again or were neutral about replaying the game.
+    \item The majority of responses were \textbf{positive}, confirming strong user engagement and enjoyment.
+\end{itemize}
+
+\textbf{Final Assessment:} \textbf{Pass} 
+ 
+The game meets the \textbf{enjoyability requirement}, as usability testing confirmed that the majority of players found the game enjoyable and expressed willingness to play again. The Likert scale average of 4.17 strongly supports that at least 75\% of users enjoyed the game, validating this requirement.
+
+
+\subsubsection{NFR-9: Appearance}
+\label{NFR9}
+
+\textbf{Requirement Description:}  
+The game shall maintain a consistent UI style and 3D visual style across all in-game views, ensuring visual continuity and a professional user experience.
+
+\textbf{Evaluation Criteria:}  
+\begin{itemize}
+    \item UI elements and 3D assets should follow a predefined style guide.
+    \item No major inconsistencies in visual elements should be present across different screens and game states.
+    \item Players should not report jarring or conflicting visual themes.
+\end{itemize}
+
+\textbf{Test Results from Verification and Validation Plan:}  
+\begin{itemize}
+    \item No applicable tests were included in the Verification and Validation Plan for appearance validation.
+\end{itemize}
+
+\textbf{User Feedback from Usability Testing Report:}  
+\begin{itemize}
+    \item No players reported \textbf{issues with UI theming or inconsistencies}.
+    \item Testers found the game’s UI and 3D visual style \textbf{cohesive and visually appealing}.
+\end{itemize}
+
+\textbf{Internal Testing and Implementation Measures:}  
+\begin{itemize}
+    \item A \textbf{consistent UI theme file} was used throughout the game to ensure uniformity.
+    \item A predefined \textbf{color palette and style guide} was applied to all UI elements.
+\end{itemize}
+
+\textbf{Final Assessment:} \textbf{Pass}  
+
+The game meets the \textbf{appearance requirement}, as usability testing confirmed no reported inconsistencies in UI theming or 3D assets. Internal testing ensured adherence to a predefined style guide, validating this requirement.
+
+
+\subsubsection{NFR-10: Portability (MacOS Support)}
+\label{NFR10}
+
+\textbf{Requirement Description:}  
+The game shall be supported on MacOS devices to expand its potential audience and ensure accessibility for Mac users.
+
+\textbf{Evaluation Criteria:}  
+\begin{itemize}
+    \item The game must successfully install and run on MacOS devices.
+    \item The game must not have major performance issues or compatibility errors.
+    \item Testing must be conducted on at least two different MacOS versions to validate cross-version compatibility.
+\end{itemize}
+
+\textbf{Test Results from Verification and Validation Plan:}  
+\begin{itemize}
+    \item No applicable tests were conducted in the Verification and Validation Plan, as MacOS support was out of scope for this phase of development, but when included \textbf{Test-11} would be used for confirmation.
+\end{itemize}
+
+\textbf{User Feedback from Usability Testing Report:}  
+\begin{itemize}
+    \item No usability testing was conducted on MacOS devices.
+    \item All usability tests were performed on Windows PCs, meaning MacOS compatibility was not assessed.
+\end{itemize}
+
+\textbf{Final Assessment:} \textbf{Fail (Stretch Goal)}  
+
+MacOS support was identified as a \textbf{stretch goal} and was not included in the current development phase. As a result, no testing was conducted to verify MacOS compatibility, and the requirement remains unfulfilled at this stage. Future development efforts will need to include testing on MacOS devices before this requirement can be considered met.
+
+
+\subsection{Conclusion}
+
+The evaluation of the Non-Functional Requirements (NFRs) for \textbf{Dice Duels} demonstrates that the game successfully meets most of its defined criteria. The validation process involved a combination of tests outlined in the \textbf{Verification and Validation (V\&V) Plan} and \textbf{Usability Testing Reports}, ensuring that the game meets expected performance, usability, reliability, and appearance standards.
+
+Out of the ten evaluated NFRs:
+\begin{itemize}
+    \item \textbf{Seven NFRs} (\textit{Performance, Usability, Portability (Windows), Reliability, Responsiveness, Modularity, and Appearance}) received a \textbf{Pass}, indicating full compliance with their respective fit criteria.
+    \item \textbf{Two NFRs} (\textit{Efficiency and Enjoyability}) received a \textbf{Conditional Pass}, as they met requirements but have areas identified for further refinement in future updates.
+    \item \textbf{One NFR} (\textit{Portability (MacOS Support)}) received a \textbf{Fail}, as MacOS support was identified as a stretch goal and was not tested in this phase of development.
+\end{itemize}
+
+The results highlight that \textbf{Dice Duels} is a stable, performant, and engaging game that effectively delivers a seamless player experience. The game's \textbf{modular architecture and efficient UI design} ensure that it can be extended and improved upon in future iterations. The two conditionally passing requirements (\textit{Efficiency and Enjoyability}) indicate that while the game is functional and enjoyable, there is room for optimization in music variety and further UI refinements.
+
+The only failing NFR, MacOS support, was acknowledged as \textbf{out of scope for this phase} and will require targeted testing and development in a future iteration to meet the stated fit criterion.
+
+\textbf{Future Work:}  
+To further enhance the game’s quality, future testing should focus on:
+\begin{itemize}
+    \item Further optimizing \textbf{efficiency} to ensure the game runs smoothly on low-end hardware.
+    \item Expanding \textbf{usability enhancements}, such as improving UI clarity for scoring and variant tutorials.
+    \item Conducting \textbf{MacOS compatibility testing} to fulfill the portability requirement.
+    \item Refining \textbf{multiplayer connection stability} to improve overall reliability.
+\end{itemize}
+
+Overall, \textbf{Dice Duels} meets its core non-functional requirements and provides a strong foundation for future development, ensuring a high-quality and engaging experience for players.
+
+
+
+%\section{Comparison to Existing Implementation}	
+%This section will not be appropriate for every project.
+
+\newpage
 \section{Unit Testing}
 
+\subsection{Dice Container Tests}
+
+\textbf{Starting Conditions:} All test are initiated with 8 mock dice (2 four sided dice, 2 six sided dice, 2 eight sided dice, and 2 twelve sided dice).
+
+\subsubsection{Test: Roll Dice}
+void roll\_dice():\\
+\begin{tabularx}{\textwidth}{|p{2cm}|p{2.5cm}|p{3.75cm}|p{3.75cm}|p{1.5cm}|}
+    \cline{1-5}
+    \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
+    \cline{1-5}
+    DC-1 & n/a & die.isRolling = True for all dice & die.isRolling = True for all dice & Pass \\
+    \cline{1-5}
+\end{tabularx}
+
+\subsubsection{Test: Roll Selected Dice}
+void roll\_selected\_dice():\\
+\begin{tabularx}{\textwidth}{|p{2cm}|p{2.5cm}|p{3.75cm}|p{3.75cm}|p{1.5cm}|}
+    \cline{1-5}
+    \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
+    \cline{1-5}
+    DC-2 & Select dice[0] & dice[0].getIsRolling() = True, dice[1:n].getIsRolling() = False & dice[0].getIsRolling() = True, dice[1:n].getIsRolling() = False & Pass \\
+    \cline{1-5}
+\end{tabularx}
+
+\subsubsection{Test: Invert Selection}
+void invert\_Selection():\\
+\begin{tabularx}{\textwidth}{|p{2cm}|p{2.5cm}|p{3.75cm}|p{3.75cm}|p{1.5cm}|}
+    \cline{1-5}
+    \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
+    \cline{1-5}
+    DC-3 & Select dice[0] & dice[0] .get\_selected\_status() = False, dice[1:n] .get\_selected\_status() = True & dice[0] .get\_selected\_status() = False, dice[1:n] .get\_selected\_status() = True & Pass \\
+    \cline{1-5}
+\end{tabularx}
+
+\subsubsection{Test: Get Dice Values}
+Array[int] get\_dice\_values():\\
+\begin{tabularx}{\textwidth}{|p{2cm}|p{2.5cm}|p{3.75cm}|p{3.75cm}|p{1.5cm}|}
+    \cline{1-5}
+    \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
+    \cline{1-5}
+    DC-4 & dice\_container .roll\_dice() & get\_dice\_values() returns 8 values, each die value in range 1 to 12 & get\_dice\_values() returns 8 values, each die value in range 1 to 12 & Pass \\
+    \cline{1-5}
+\end{tabularx}
+
+\subsubsection{Test: Toggle Dice Collisions}
+void toggleDiceCollisions(toggle: bool):\\
+\begin{tabularx}{\textwidth}{|p{2cm}|p{2.0cm}|p{4cm}|p{4cm}|p{1.5cm}|}
+    \cline{1-5}
+    \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
+    \cline{1-5}
+    DC-5 & True & disableCollisions(True) has been called on all dice & disableCollisions(True) has been called on all dice & Pass \\
+    \cline{1-5}
+    DC-6 & False & disableCollisions(False) has been called on all dice & disableCollisions(False) has been called on all dice & Pass \\
+    \cline{1-5}
+\end{tabularx}
+
+\section{Scoring Tests}
+
+\subsubsection{Test: Calculate Singles Scoring}
+Array[int] \_calculate\_singles\_score(target\_value: int, dice\_rolls: Array, \_scoring\_rule: String):\\
+\begin{tabularx}{\textwidth}{|p{2cm}|p{3.0cm}|p{4cm}|p{3.0cm}|p{1.5cm}|}
+    \cline{1-5}
+    \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
+    \cline{1-5}
+    SC-1 & 5, [1,5,5,5,5,5], "2" & [50, 0] & [50, 0] & Pass \\
+    \cline{1-5}
+    SC-2 & 1, [1,5,5,5,5,5], "2" & [2, 0] & [2, 0] & Pass \\
+    \cline{1-5}
+    SC-3 & 5, [1,2,3], "2" & [0, 0] & [0, 0] & Pass \\
+    \cline{1-5}
+    SC-4 & 5, [1,1,5,1,5,1], "1" & [10, 0] & [10, 0] & Pass \\
+    \cline{1-5}
+\end{tabularx}
+
+\subsubsection{Test: Calculate Kind Scoring}
+int \_calculate\_kind\_score(target\_count: int, dice\_rolls: Array, \_scoring\_rule: String):\\
+\begin{tabularx}{\textwidth}{|p{2cm}|p{3.0cm}|p{4cm}|p{3.0cm}|p{1.5cm}|}
+    \cline{1-5}
+    \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
+    \cline{1-5}
+    SC-5 & 3, [1,5,5,5], "2" & 32 & 32 & Pass \\
+    \cline{1-5}
+    SC-6 & 4, [1,5,5,5,5], "3" & 63 & 63 & Pass \\
+    \cline{1-5}
+    SC-7 & 3, [1,2,3], "2" & 0 & 0 & Pass \\
+    \cline{1-5}
+    SC-8 & 4, [1,1,5,1,5,1], "" & 14 & 14 & Pass \\
+    \cline{1-5}
+\end{tabularx}
+
+\subsubsection{Test: Calculate Straight Scoring}
+int \_calculate\_straight\_score(target\_length: int, dice\_rolls: Array, \_scoring\_rule: String):\\
+\begin{tabularx}{\textwidth}{|p{2cm}|p{3.0cm}|p{4cm}|p{3.0cm}|p{1.5cm}|}
+    \cline{1-5}
+    \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
+    \cline{1-5}
+    SC-9 & 4, [1,5,2,4,3,1], "10" & 40 & 40 & Pass \\
+    \cline{1-5}
+    SC-10 & 4, [1,5,4,2,1], "3" & 0 & 0 & Pass \\
+    \cline{1-5}
+    SC-11 & 3, [1,2,2,1,3,5], "2" & 6 & 6 & Pass \\
+    \cline{1-5}
+    SC-12 & 3, [1,5,3,7,2,6], "10" & 30 & 30 & Pass \\
+    \cline{1-5}
+\end{tabularx}
+
+\subsubsection{Test: Calculate Full House Scoring}
+int \_calculate\_full\_house\_score(setSize1: int, setSize2: int, dice\_rolls: Array, \_scoring\_rule: String):\\
+\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{3.5cm}|p{3.0cm}|p{1.5cm}|}
+    \cline{1-5}
+    \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
+    \cline{1-5}
+    SC-13 & 2,3, [1,3,3,1,3], "2" & 10 & 10 & Pass \\
+    \cline{1-5}
+    SC-14 & 3,3, [2,2,4,4,2,4], "3" & 18 & 18 & Pass \\
+    \cline{1-5}
+    SC-15 & 3,4, [1,2,2,1,1,2,2], "2" & 14 & 14 & Pass \\
+    \cline{1-5}
+    SC-16 & 2,3, [1,5,1,4,4,4], "10" & 50 & 50 & Pass \\
+    \cline{1-5}
+\end{tabularx}
+
+\subsubsection{Test: Calculate Chance Scoring}
+int \_calculate\_chance\_score(dice\_rolls: Array, \_scoring\_rule: String):\\
+\begin{tabularx}{\textwidth}{|p{2cm}|p{3.5cm}|p{3.5cm}|p{3.0cm}|p{1.5cm}|}
+    \cline{1-5}
+    \textbf{Test ID} & \textbf{Inputs} & \textbf{Expected Values} & \textbf{Actual Values} & \textbf{Result} \\
+    \cline{1-5}
+    SC-17 & [1,1,1,1,1,1], "10" & 60 & 60 & Pass \\
+    \cline{1-5}
+    SC-18 & [1,2,4,3], "3" & 30 & 30 & Pass \\
+    \cline{1-5}
+    SC-19 & [1,2,1,3], "" & 7 & 7 & Pass \\
+    \cline{1-5}
+\end{tabularx}
+
+\newpage
 \section{Changes Due to Testing}
 
-\wss{This section should highlight how feedback from the users and from 
-the supervisor (when one exists) shaped the final product.  In particular 
-the feedback from the Rev 0 demo to the supervisor (or to potential users) 
-should be highlighted.}
+The changes made to the game as a result of testing have been primarily based on the findings from the most recent phase of usability testing. Since the Alpha Testing phase represents the latest completed stage of testing, the changes implemented due to testing are largely a replication of the "Changes Implemented Due to Alpha Testing" section from the Usability Testing Report. These changes include immediate fixes, mid-term adjustments, and long-term refinements, as outlined below.
 
+\subsection{Issues created due to Feedback and completion}
+
+\subsubsection{Critical Issues (P0)}
+\begin{itemize}
+    \item \textbf{Chat Button Visible in End Screen \#256} – \textbf{(Completed)} - Hide chat in the end game \& enable it in `setup\_game()`.
+    \item \textbf{d4 Standard Game Has Too Many Rounds \#229} – \textbf{(In Progress)} - Prevent rounds from exceeding the number of hands.
+    \item \textbf{Prevent Rounds Exceeding Number of Hands \#252} – \textbf{(In Progress)} - Adjust preset files \& enforce round limits.
+\end{itemize}
+
+\subsubsection{Moderate Issues (P1)}
+\begin{itemize}
+    \item \textbf{Differentiate Opponent Dice from Player \#249} – \textbf{(Completed)} - Add grey overlay \& different UI colors.
+    \item \textbf{Create a Debug Module \#231} – \textbf{(Completed)} - Implement an autoload Debug Module.
+    \item \textbf{Add Hands \& Scoring Tutorial Page \#230} – \textbf{(In Progress)} - Create a separate tutorial page.
+    \item \textbf{Show Player Connection Status More Clearly \#233} – \textbf{(In Progress)} - Add an indicator for opponent connection.
+    \item \textbf{Pass Button Passes All Rolls in Round \#236} – \textbf{(In Progress)} - Implement pass functionality for all rolls.
+    \item \textbf{d6 Dice UI Lacks Contrast \#255} – \textbf{(In Progress)} - Change UI theme or dice sprites.
+    \item \textbf{Bonus Threshold Clarity \#250} – \textbf{(In Progress)} - Add tooltips \& live tracking.
+\end{itemize}
+
+\subsubsection{Minor Suggestions (P2)}
+\begin{itemize}
+    \item \textbf{Change d4 Dice Variant Model \#228} – \textbf{(Out of Scope)} - Provide alternative d4 models.
+    \item \textbf{Format Checkboxes Better \#232} – \textbf{(Out of Scope)} - Improve checkbox UI formatting.
+    \item \textbf{Waiting Room for Client Player \#234} – \textbf{(Out of Scope)} - Add player details \& possible minigame.
+    \item \textbf{In-Game Tab Screen for Scoreboards \#237} – \textbf{(Out of Scope)} - Add a TAB key overlay.
+    \item \textbf{Scoreboard Scroll \& Length Clarity \#251} – \textbf{(Completed)} - Make scrollbars more prominent.
+    \item \textbf{Non-Repetitive Music \#253} – \textbf{(Completed)} - Add multiple tracks or allow user selection.
+    \item \textbf{Variant-Specific Tutorial Tabs \#254} – \textbf{(In Progress)} - Implement tutorial tabs for different variants.
+    \item \textbf{Cosmetic Achievements \& Progression \#257} – \textbf{(Out of Scope)} - Implement non-pay-to-win cosmetic rewards.
+    \item \textbf{Free Camera Movement in Non-Gameplay Scenes \#258} – \textbf{(Out of Scope)} - Enable camera movement \& tavern exploration.
+    \item \textbf{Multiplayer Interactive Lobby \#259} – \textbf{(Out of Scope)} - Consider a future multiplayer hub system.
+\end{itemize}
+
+
+
+\newpage
 \section{Automated Testing}
-		
+
+Automated testing has been implemented through the use of the GUT testing framework in conjunction with GitHub Actions. Our team has created a GitHub Action that runs on all pull requests that contain code changes, such that the entire test suite for the project gets executed and blocks the merging of pull requests when test cases fail. This GitHub action intalls Godot as well as the GUT testing extension that we use for our test suite, and all PR's that modify code trigger this action to run.
+
+\newpage
 \section{Trace to Requirements}
-		
+
+The requirements discussed in sections 2 and 3 are related and tested through multiple means. This section highlights their respective relations to test cases, as defined in the VnVPlan report.
+
+\begin{table}[H]
+    \centering
+    \caption{Key for Test Cases}
+    \begin{tabular}{|c|l|}
+        \hline
+        \textbf{Test Case ID} & \textbf{Test Case Name} \\
+        \hline
+        \hyperref[test-1]{Test-1} & PvP Support \\
+        \hyperref[test-2]{Test-2} & Score Calculation \\
+        \hyperref[test-3]{Test-3} & Dice Roll Physics \\
+        \hyperref[test-4]{Test-4} & Simultaneous turn implementation \\
+        \hyperref[test-5]{Test-5} & User interface initiation \\
+        \hyperref[test-6]{Test-6} & Dice Selection \\
+        \hyperref[test-7]{Test-7} & Game Presets \\
+        \hyperref[test-8]{Test-8} & Custom Game Settings Modification \\
+        \hyperref[test-9]{Test-9} & Frame Rate Consistency \\
+        \hyperref[test-10]{Test-10} & Input Responsiveness \\
+        \hyperref[test-11]{Test-11} & System Compatibility \\
+        \hyperref[test-12]{Test-12} & Crash Resilience in Multiplayer \\
+        \hline
+    \end{tabular}
+    \label{tab:traceability_key1}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Traceability Matrix for Test Cases and Requirements}
+    \begin{tabular}{|c|cccccccccccc|}
+\hline
+ & \multicolumn{12}{c|}{\textbf{Tests}} \\
+\hline
+\textbf{Req.} & \multicolumn{1}{c|}{\hyperref[test-1]{1}} & \multicolumn{1}{c|}{\hyperref[test-2]{2}} & \multicolumn{1}{c|}{\hyperref[test-3]{3}}
+& \multicolumn{1}{c|}{\hyperref[test-4]{4}} & \multicolumn{1}{c|}{\hyperref[test-5]{5}} & \multicolumn{1}{c|}{\hyperref[test-6]{6}}
+& \multicolumn{1}{c|}{\hyperref[test-7]{7}} & \multicolumn{1}{c|}{\hyperref[test-8]{8}} & \multicolumn{1}{c|}{\hyperref[test-9]{9}}
+& \multicolumn{1}{c|}{\hyperref[test-10]{10}} & \multicolumn{1}{c|}{\hyperref[test-11]{11}} & \hyperref[test-12]{12} \\ \hline
+
+\hyperref[R1]{R1} & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R2]{R2} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R3]{R3} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R4]{R4} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R5]{R5} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R6]{R6} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R7]{R7} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R8]{R8} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R9]{R9} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R10]{R10} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R11]{R11} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R12]{R12} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R13]{R13} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R14]{R14} & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R15]{R15} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R16]{R16} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[R17]{R17} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[NFR1]{NFR1} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{X}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[NFR2]{NFR2} & \multicolumn{1}{c|}{X}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[NFR3]{NFR3} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{X}   &    \\ \hline
+
+\hyperref[NFR4]{NFR4} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &  X  \\ \hline
+
+\hyperref[NFR5]{NFR5} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{X}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[NFR6]{NFR6} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[NFR7]{NFR7} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[NFR8]{NFR8} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[NFR9]{NFR9} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{}   &    \\ \hline
+
+\hyperref[NFR10]{NFR10} & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}  & \multicolumn{1}{c|}{}
+& \multicolumn{1}{c|}{}   & \multicolumn{1}{c|}{X}   &    \\ \hline
+    \end{tabular}
+    \label{tab:traceability}
+\end{table}
+
+\newpage
 \section{Trace to Modules}		
 
+\begin{table}[H]
+  \centering
+  \begin{tabular}{p{0.4\textwidth} p{0.5\textwidth}}
+    \toprule
+    \textbf{Test Case} & \textbf{Modules} \\
+    \midrule
+    test\_roll\_dice & DynamicDiceContainer Module \\
+    test\_roll\_selected\_dice & DynamicDiceContainer Module \\
+    test\_invert\_dice\_selection & DynamicDiceContainer Module \\
+    test\_read\_dice\_values & DynamicDiceContainer Module \\
+    test\_toggle\_dice\_collisions & DynamicDiceContainer Module \\
+    test\_full\_house\_scoring & ScoreCalculator Module \\
+    test\_kind\_scoring & ScoreCalculator Module \\
+    test\_straight\_scoring & ScoreCalculator Module \\
+    test\_singles\_scoring & ScoreCalculator Module \\
+    test\_chance\_scoring & ScoreCalculator Module \\
+    \bottomrule
+  \end{tabular}
+  \caption{Table of Traceability Between Test Cases and Modules}
+  \label{TblTraceability}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|c|c|}
+  \hline
+    \textbf{Test Case} & \textbf{DynamicDiceContainer} & \textbf{ScoreCalculator} \\ \hline
+    test\_roll\_dice & X & \\ \hline
+    test\_roll\_selected\_dice & X & \\ \hline
+    test\_invert\_dice\_selection & X & \\ \hline
+    test\_read\_dice\_values & X & \\ \hline
+    test\_toggle\_dice\_collisions & X & \\ \hline
+    test\_full\_house\_scoring & & X \\ \hline
+    test\_kind\_scoring & & X \\ \hline
+    test\_straight\_scoring & & X \\ \hline
+    test\_singles\_scoring & & X \\ \hline
+    test\_chance\_scoring & & X \\ \hline
+  \end{tabular}
+  \caption{Matrix of Traceability Between Test Cases and Modules}
+  \label{TblTraceability2}
+\end{table}
+
+\newpage
 \section{Code Coverage Metrics}
 
-\bibliographystyle{plainnat}
-\bibliography{../../refs/References}
+The team used multiple code coverage techniques to ensure the code was thoroughly tested. This section describes the techniques used, such as function coverage and branch coverage, but does not include specific metrics like the percentage of code covered due to limitations of the development environment. The Godot engine does not have a feature to track code coverage of tests.
+
+Function coverage was employed to verify and validate that each function in the codebase was executed at least once and performed as expected. Through this method, the team was able to test all the parts of code responsible for processing game data such as any function relating to scoring and user settings. The technique helped identify any potential problems with any of the functions that aided in-game states being altered or sent from one player to another. Through these tests, the team was able to validate the correctness of the system in regard to any internal calculations that had to be conducted by the system.  
+
+Branch coverage was also employed which went even deeper by testing all possible paths within any decision-making functions. This method aided in verifying and validating the game's decision-making processes. Through this method, the team was able to understand any flaws associated with the game's handling of user decisions such as choosing to roll or not roll dice as each option led to a different outcome.  Thus by covering almost every possible deviation, the team minimized any logical errors that could occur during gameplay due to user actions.
+
+Overall, while specific coverage metrics were unavailable to aid the team in understanding how much of the code was being tested, the team created comprehensive test cases covering all major functions, decision points, and smaller utility functions. This approach helped the team ensure that the majority of the code base was tested and performed as expected.
+
+%\bibliographystyle{plainnat}
+%\bibliography{../../refs/References}
 
 \newpage{}
 \section*{Appendix --- Reflection}
@@ -107,11 +1185,27 @@ graduate attribute of Reflection.
 \input{../Reflection.tex}
 
 \begin{enumerate}
-  \item What went well while writing this deliverable? 
+  \item What went well while writing this deliverable?
+  
+\begin{itemize}
+  \item Since we already had the VnV Plan in a completed state, we were familiar with both the product and the VnV process we were looking to undertake. (John P.)
+  \item  Since the team had specified roles in the project, the team was able to divide the sections of the deliverable easily, with members focused on testing taking the lead. (Hemraj B.)
+\end{itemize}  
+  
   \item What pain points did you experience during this deliverable, and how
     did you resolve them?
+    
+\begin{itemize}
+  \item This deliverable came near the end of the development process, when the game was mostly completed save some final features and bugs, meaning there was some lack in motivation due to the work being more maintenance based. There was additionally exams and other events during this time. To help resolve this, the extension to the due date was of help and meetings where we discussed the final steps and end goals were had to help us hunker down and get the work over with. (John P.)
+\end{itemize}    
+    
   \item Which parts of this document stemmed from speaking to your client(s) or
   a proxy (e.g. your peers)? Which ones were not, and why?
+
+\begin{itemize}
+  \item The most significant element of this document that stemmed from speaking to the stakeholders of the project came through usability testing and playtesting feedback. As of 2025-03-09, 27 of 137 feature and bug issues on github stem from playtesting feedback. This feedback comes from external testing as we had internal testing and playtesting as well which generated issues. These issues addressed different elements of functional and nonfuctional requirements but especially led to the use of the section addressing changes due to testing. (John P.)
+\end{itemize}
+  
   \item In what ways was the Verification and Validation (VnV) Plan different
   from the activities that were actually conducted for VnV?  If there were
   differences, what changes required the modification in the plan?  Why did
@@ -120,6 +1214,12 @@ graduate attribute of Reflection.
   predict a feasible amount of effort and the right tasks needed to build the
   evidence that demonstrates the required quality?  (It is expected that most
   teams will have had to deviate from their original VnV Plan.)
+  
+\begin{itemize}
+  \item In the VnV plan we hoped to be able to automate more of our tests and also create more unit tests to obtain better coverage of all of our modules but we realized that unit testing a game is very difficult so we found ourselves somewhat limited with what we could feasibly unit test. 
+  \item The VnV plan accounted well for what could be verified and validated using usability testing and so intentionally leant on that rather than trying to do redundant work and as such did not have to change much.
+\end{itemize}
+  
 \end{enumerate}
 
 \end{document}
