@@ -5,10 +5,11 @@ var host_option: bool = false
 
 # Cached references
 var network_manager: Node
-@onready var ip_field = $UIBox/Connection_Setup/IP_Input
+@onready var code_field = $UIBox/Connection_Setup/RoomCodeInput
 @onready var port_field = $UIBox/Connection_Setup/Port_Input
 @onready var host_checkbutton = $UIBox/Connection_Setup/HostCheckButton
-@onready var connect_button = $UIBox/Connection_Setup/ConnectButton
+@onready var connect_button = $UIBox/Connection_Setup/HostButton
+@onready var join_button = $UIBox/Connection_Setup/JoinButton
 @onready var back_to_home_button = $UIBox/Connection_Setup/BackToHomeButton
 @onready var SetupUI = $UIBox/Connection_Setup
 @onready var ErrorUI = $UIBox/Connection_Error
@@ -22,17 +23,18 @@ func _ready():
 	ErrorUI.visible = false
 	ErrorBack.visible = false
 	port_field.visible = false
+	
 
 func _on_hostcheck_toggled(state):
 	Debugger.log(str("Host/Client Toggled: ",state))
 	host_option = state
 	if host_option:
-		ip_field.visible = false
+		code_field.visible = false
 		connect_button.text = "Start Hosting"
 		port_field.visible = true
 		port_field.placeholder_text = "Port (Optional - 5 digits to 65535)"
 	else:
-		ip_field.visible = true
+		code_field.visible = true
 		connect_button.text = "Connect"
 		port_field.visible = false
 		port_field.placeholder_text = "Port - 5 digits"
@@ -66,7 +68,7 @@ func _on_connect_pressed():
 		Debugger.log(network_manager.getHashPort())
 		_on_connection_successful()
 	else:
-		var _hash = ip_field.text
+		var _hash = code_field.text
 		network_manager.connect_to_server(_hash)
 
 
