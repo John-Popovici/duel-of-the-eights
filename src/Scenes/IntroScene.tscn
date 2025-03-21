@@ -178,7 +178,7 @@ text = "Play Local Custom Game"
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("5_bq53n")
-text = "Play Custom Game"
+text = "Play Online Custom Game"
 
 [node name="StartOnlineLongFormGame" type="Button" parent="VBoxContainer"]
 visible = false
