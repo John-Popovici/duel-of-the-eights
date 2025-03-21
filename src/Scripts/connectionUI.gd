@@ -23,8 +23,8 @@ func _ready():
 	ErrorUI.visible = false
 	ErrorBack.visible = false
 	port_field.visible = false
-	join_button.visible = true
-	connect_button.visible=false
+	
+	connect_button.visible=true
 	
 
 func _on_hostcheck_toggled(state):
@@ -32,7 +32,8 @@ func _on_hostcheck_toggled(state):
 	host_option = state
 	if host_option:
 		code_field.visible = false
-		connect_button.visible=true
+		connect_button.visible = true
+		join_button.visible = false
 		connect_button.text = "Start Hosting"
 		port_field.visible = true
 		port_field.placeholder_text = "Port (Optional - 5 digits to 65535)"
@@ -61,6 +62,20 @@ func _cancel_hosting() -> void:
 	await get_tree().create_timer(2.0).timeout
 
 func _on_connect_pressed():
+	var port = port_field.text.to_int() if port_field.text else default_port
+	# with server hosting, most likely, the port will be chosen internally and dynamically
+	
+	if host_option:
+		network_manager.start_server(port)
+		SetupUI.visible = false
+		Debugger.log(network_manager.getHashIP())
+		Debugger.log(network_manager.getHashPort())
+		_on_connection_successful()
+	else:
+		var _hash = code_field.text
+		network_manager.connect_to_server(_hash)
+
+func _on_join_pressed():
 	var port = port_field.text.to_int() if port_field.text else default_port
 	# with server hosting, most likely, the port will be chosen internally and dynamically
 	
