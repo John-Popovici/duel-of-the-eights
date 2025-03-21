@@ -1,16 +1,21 @@
-1. Transport server.x86_64 file to a godot folder is ec2
-2. Execute chmod +x server.x86_64 to make file runnable
-3. run either  ./server.x86_64 --headless OR nohup ./server.x86_64 --headless > server.log 2>&1 &
+Connect to the EC2 Instance
+Use SSH to connect to your EC2 instance:
+ssh -i "your-pem-key.pem" ec2-user@your-ec2-instance.compute-1.amazonaws.com
 
-ssh -i "pem key" ec2-user@ec2-54-174-171-0.compute-1.amazonaws.com
+Transfer the Server File
+Copy the server.x86_64 file to the desired folder on your EC2 instance (replace /path/to/godot-folder/ with the actual destination):
+scp -i "your-pem-key.pem" server.x86_64 ec2-user@your-ec2-instance.compute-1.amazonaws.com:/path/to/godot-folder/
 
-Transport server.x86_64 file to a godot folder is ec2
+Set Execute Permissions
+Navigate to the folder containing server.x86_64 and make it executable:
+chmod +x server.x86_64
 
-Run server, will close when cmd prompt is terminated 
+Start the Server
+
+Run in the foreground (stops when the terminal closes):
 ./server.x86_64 --headless
-
-Run server, will not close when cmd prompt is terminated
+Run in the background (continues running after terminal closes):
 nohup ./server.x86_64 --headless > server.log 2>&1 &
-
-End server
+Stop the Server
+To terminate the running server process:
 pkill -f server.x86_64
