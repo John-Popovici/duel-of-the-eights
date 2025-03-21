@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://cubdj2ob0wpmt"]
 
-[ext_resource type="Script" path="res://Scripts/networkManager2P.gd" id="1_0baar"]
+[ext_resource type="Script" path="res://Scripts/networkManager2P_Server.gd" id="1_icsj4"]
 [ext_resource type="Script" path="res://Scripts/connectionUI_v2.gd" id="2_18mre"]
 [ext_resource type="Theme" uid="uid://w0bhlln4xhbw" path="res://Themes/Custom_Default/Custom_Default_Wood.tres" id="3_47sx3"]
 
 [node name="NetworkManager" type="Node" groups=["NetworkHandlingNodes"]]
-script = ExtResource("1_0baar")
+script = ExtResource("1_icsj4")
 
 [node name="ConnectionUI" type="CanvasLayer" parent="."]
 layer = 3
