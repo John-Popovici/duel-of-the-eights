@@ -14,8 +14,12 @@ Start the Server
 
 Run in the foreground (stops when the terminal closes):
 ./server.x86_64 --headless
+
 Run in the background (continues running after terminal closes):
 nohup ./server.x86_64 --headless > server.log 2>&1 &
+
 Stop the Server
 To terminate the running server process:
 pkill -f server.x86_64
+
+Notes: contact bhatth14@mcmaster.ca for any questions
