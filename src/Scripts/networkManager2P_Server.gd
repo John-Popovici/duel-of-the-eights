@@ -44,7 +44,29 @@ func start_server(_port: int = default_port):
 # Connect as a client
 func connect_to_server(_hash: String):
 	is_host = false
-	_connect_as_client("Guest_" + str(randi() % 1000))
+	peer = ENetMultiplayerPeer.new()
+	var multiplayer_api = SceneMultiplayer.new()
+
+	if peer.create_client(SERVER_IP, PORT) != OK:
+		print("❌ Failed to connect to server")
+		return
+
+	multiplayer_api.multiplayer_peer = peer
+	get_tree().set_multiplayer(multiplayer_api)
+	
+
+	print("✅ Connected to server!")
+	multiplayer.multiplayer_peer.connect("peer_connected", self._on_peer_connected)
+	#Connection Failed case
+	multiplayer.multiplayer_peer.connect("connection_failed", self._on_connection_failed)
+	
+	rpc("receive_code", _hash)
+
+# Remote function to handle incoming game state updates
+@rpc("any_peer")
+func receive_code(code: String):
+	emit_signal("game_code_recived", code)
+	
 
 
 
@@ -72,6 +94,7 @@ func _connect_as_client(default_name: String) -> void:
 	multiplayer.multiplayer_peer.connect("peer_connected", self._on_peer_connected)
 	#Connection Failed case
 	multiplayer.multiplayer_peer.connect("connection_failed", self._on_connection_failed)
+	
 
 
 
@@ -205,15 +228,10 @@ func receive_disconnect():
 
 
 
-# Reset the timer on each ping received
-@rpc
-func ping() -> void:
-	time_since_last_ping = 0.0
-
 signal game_state_received(state: String, data: Dictionary)
 
 # Broadcasts the game state to keep both players in sync
-func broadcast_game_state(state: String, data: Dictionary) -> void:
+func broadcast_game_state(state: String, data: Dictionary):
 	Debugger.log(str("Broadcasting state: ", state, "with data: ", data, "from host: ", getIsHost()))
 	rpc("receive_game_state", state, data)
 
@@ -223,24 +241,26 @@ func receive_game_state(state: String, data: Dictionary):
 	Debugger.log(str("Received state: ", state, " with data: ", data, " on host: ", getIsHost()))
 	emit_signal("game_state_received", state, data)
 
+# Reset the timer on each ping received
+@rpc("any_peer")
+func ping() -> void:
+	time_since_last_ping = 0.0
 
 signal received_game_settings(_game_settings: Dictionary, _hand_settings: Dictionary)
-# 🟢 Send messages
+
+@rpc("any_peer","call_remote")
+func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionary) -> void:
+	var game_settings = _game_settings
+	var hand_settings = _hand_settings
+	Debugger.log("Network Manager recieved settings")
+	emit_signal("received_game_settings",game_settings,hand_settings)
+
 func send_game_settings(_game_settings: Dictionary,_hand_settings: Dictionary) -> void:
 	var game_settings = _game_settings
 	var hand_settings = _hand_settings
 	Debugger.log("Network Manager sent settings")
 	rpc("receive_game_settings",_game_settings, _hand_settings)
 
-# 🟢 Receive messages
-@rpc("any_peer")
-func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionary):
-	var game_settings = _game_settings
-	var hand_settings = _hand_settings
-	Debugger.log("Network Manager recieved settings")
-	emit_signal("received_game_settings",game_settings,hand_settings)
-
-#### NEW
 
 func send_chat_rpc(message: String):
 	rpc_id(1,"receive_chat_rpc", message)  # Broadcast to all clients
@@ -251,6 +271,7 @@ signal chat_received(message: String)
 @rpc("any_peer","reliable","call_remote")
 func receive_chat_rpc(message: String):
 	chat_received.emit(message)
+
 
 
 func _process(delta: float) -> void:
