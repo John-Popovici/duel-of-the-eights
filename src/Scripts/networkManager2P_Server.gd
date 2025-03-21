@@ -240,7 +240,17 @@ func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionar
 	Debugger.log("Network Manager recieved settings")
 	emit_signal("received_game_settings",game_settings,hand_settings)
 
+#### NEW
 
+func send_chat_rpc(message: String):
+	rpc_id(1,"receive_chat_rpc", message)  # Broadcast to all clients
+
+
+signal chat_received(message: String)
+
+@rpc("any_peer","reliable","call_remote")
+func receive_chat_rpc(message: String):
+	chat_received.emit(message)
 
 
 func _process(delta: float) -> void:
