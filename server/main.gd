@@ -85,6 +85,23 @@ func receive_game_settings(_game_settings: Dictionary, _hand_settings: Dictionar
 
 
 
+#### NEW CODE
+
+
+
+
+
+@rpc("any_peer","reliable","call_remote")
+func receive_chat_rpc(message: String):
+	print(message)
+	var senderid = multiplayer.get_remote_sender_id()
+	print(senderid)
+	for peer_id in multiplayer.get_peers():
+		if (peer_id != senderid):
+			rpc_id(peer_id, "receive_chat_rpc", message)
+
+
+
 @rpc("any_peer", "call_local")
 func ping():
 	var sender_id = multiplayer.get_remote_sender_id()
