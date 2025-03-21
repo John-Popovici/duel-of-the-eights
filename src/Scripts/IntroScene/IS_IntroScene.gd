@@ -11,7 +11,8 @@ extends Node3D
 @onready var start_online_bluff_button = $VBoxContainer/StartOnlineBluffGame
 @onready var start_blitz_button = $VBoxContainer/StartBlitzGame # Reference to the Start Button
 @onready var start_online_blitz_button = $VBoxContainer/StartOnlineBlitzGame
-@onready var start_online_button = $VBoxContainer/StartOnlineGame # Reference to the Start Button
+@onready var start_online_custom_button = $VBoxContainer/StartOnlineCustomGame # Reference to the Start local custom Button
+@onready var start_local_custom_button = $VBoxContainer/StartLocalCustomGame
 @onready var start_online_long_form_button = $VBoxContainer/StartOnlineLongFormGame # Reference to the Start Button
 @onready var start_online_server_button = $VBoxContainer/StartServer
 @onready var customization_button = $OptionsPanel/VBoxContainer/Customization
@@ -21,7 +22,7 @@ extends Node3D
 # Called when the node enters the scene tree
 func _ready() -> void:
 	start_local_button.pressed.connect(_on_start_local_game_pressed)
-	start_online_button.pressed.connect(_on_start_online_game_pressed)
+	start_online_custom_button.pressed.connect(_on_start_online_custom_game_pressed)
 	start_standard_button.pressed.connect(_on_start_standard_game_pressed)
 	start_online_standard_button.pressed.connect(_on_start_online_standard_game_pressed)
 	start_bluff_button.pressed.connect(_on_start_bluff_game_pressed)
@@ -29,7 +30,7 @@ func _ready() -> void:
 	start_blitz_button.pressed.connect(_on_start_blitz_game_pressed)
 	start_online_blitz_button.pressed.connect(_on_start_online_blitz_game_pressed)
 	start_online_long_form_button.pressed.connect(_on_start_online_long_form_game_pressed)
-	start_online_server_button.pressed.connect(_on_start_online_server_pressed);
+	start_local_custom_button.pressed.connect(_on_start_local_custom_game_pressed)
 	customization_button.pressed.connect(_on_customization_pressed)
 	tutorial_button.pressed.connect(_on_tutorial_button)
 	profile_button.pressed.connect(_on_profile_pressed)
@@ -50,9 +51,9 @@ func _on_start_local_game_pressed() -> void:
 	get_tree().root.add_child(local_game_scene)
 	queue_free()  # Free IntroScene
 
-func _on_start_online_game_pressed() -> void:
+func _on_start_online_custom_game_pressed() -> void:
 	# Load GameScene
-	SceneSwitcher.changeScene("res://Scenes/online_game_scene.tscn")
+	SceneSwitcher.changeScene("res://Scenes/online_custom_game_scene.tscn")
 
 func _on_start_standard_game_pressed() -> void:
 	# Load GameScene
@@ -82,9 +83,11 @@ func _on_start_online_long_form_game_pressed() -> void:
 	# Load GameScene
 	SceneSwitcher.changeScene("res://Scenes/online_long_form_pvp_scene.tscn")
 
-func _on_start_online_server_pressed() -> void:
+
+
+func _on_start_local_custom_game_pressed() -> void:
 	# Load GameScene
-	SceneSwitcher.changeScene("res://Scenes/online_server_game_scene.tscn")
+	SceneSwitcher.changeScene("res://Scenes/local_custom_game_scene.tscn")
 
 # Transition to GameScene with player names
 func _on_customization_pressed() -> void:
