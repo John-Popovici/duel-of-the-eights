@@ -1,0 +1,934 @@
+[gd_scene load_steps=72 format=3 uid="uid://begoykuqh8n4w"]
+
+[ext_resource type="PackedScene" uid="uid://mshgfe1w4iig" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_medium_tablecloth.gltf" id="2_5vq1x"]
+[ext_resource type="PackedScene" uid="uid://bcwefsnet07bs" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/stool.gltf" id="3_6fxia"]
+[ext_resource type="PackedScene" uid="uid://ccb64kqd880ai" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/candle_thin_lit.gltf" id="4_ujh1p"]
+[ext_resource type="PackedScene" uid="uid://dy7rhpdn1egnl" path="res://Assets/dice/d12/DiceMakerD12.glb" id="5_8rui6"]
+[ext_resource type="PackedScene" uid="uid://duisil3b3vik0" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/floor_wood_large.gltf" id="5_ld4uj"]
+[ext_resource type="PackedScene" uid="uid://cbda6yacn2ltw" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/keg.gltf" id="6_c3sek"]
+[ext_resource type="PackedScene" uid="uid://dmwa06sudq61a" path="res://Assets/dice/d4/DiceMakerD4.glb" id="6_u8jgf"]
+[ext_resource type="PackedScene" uid="uid://crbajjdrgkb6q" path="res://Assets/dice/d8/DiceMakerD8_numbered.glb" id="7_coxo0"]
+[ext_resource type="PackedScene" uid="uid://by43armwfycg6" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Assets/gltf/mug_full.gltf" id="7_nmilf"]
+[ext_resource type="PackedScene" uid="uid://cqspp2ayck0f1" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/box_stacked.gltf" id="8_kdua2"]
+[ext_resource type="PackedScene" uid="uid://btgyqyofee8xp" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/coin_stack_small.gltf" id="9_b7w4u"]
+[ext_resource type="PackedScene" uid="uid://i5gxpntt221i" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/keg_decorated.gltf" id="10_u55ig"]
+[ext_resource type="PackedScene" uid="uid://j4fcwa70xgs2" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall.gltf" id="11_s0nb7"]
+[ext_resource type="PackedScene" uid="uid://boqceysypysfo" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/pillar_decorated.gltf" id="12_cwslk"]
+[ext_resource type="PackedScene" uid="uid://dt6wo47jko2hd" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_doorway_scaffold.gltf" id="13_na2cc"]
+[ext_resource type="PackedScene" uid="uid://c3x5dn7c8x052" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/torch_mounted.gltf" id="14_ux200"]
+[ext_resource type="PackedScene" uid="uid://d1rs2f4lpf44t" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/keyring_hanging.gltf" id="15_geiel"]
+[ext_resource type="PackedScene" uid="uid://cp6rfxo3woegb" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_cracked.gltf" id="16_c6ft5"]
+[ext_resource type="PackedScene" uid="uid://b4h53lv4vrd4d" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Assets/gltf/staff.gltf" id="17_rcwo2"]
+[ext_resource type="PackedScene" uid="uid://pitt32nqy55h" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/shelf_small.gltf" id="18_ttfma"]
+[ext_resource type="PackedScene" uid="uid://bq4cbrba8odvg" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Assets/gltf/mug_empty.gltf" id="19_t6v57"]
+[ext_resource type="PackedScene" uid="uid://dcw5inl4flxp" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_half.gltf" id="20_srtdp"]
+[ext_resource type="PackedScene" uid="uid://ddyfba2ygvyif" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_window_closed_scaffold.gltf" id="21_qfbld"]
+[ext_resource type="PackedScene" uid="uid://bqcb384rabej7" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_shelves.gltf" id="22_cfc72"]
+[ext_resource type="PackedScene" uid="uid://cesdhsch2oi5m" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_archedwindow_open.gltf" id="23_ixad7"]
+[ext_resource type="PackedScene" uid="uid://b5gs64n4itaaw" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/bottle_A_labeled_brown.gltf" id="24_xfom2"]
+[ext_resource type="PackedScene" uid="uid://cfgbrkjm8frqw" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/bottle_A_labeled_green.gltf" id="25_kfvhm"]
+[ext_resource type="PackedScene" uid="uid://cl2njqojys6dg" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/bottle_C_brown.gltf" id="26_170dl"]
+[ext_resource type="PackedScene" uid="uid://dpspjbhkjaxpf" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/shelf_large.gltf" id="27_qllgk"]
+[ext_resource type="PackedScene" uid="uid://dgh1uvypuanmw" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_corner_scaffold.gltf" id="28_fca3x"]
+[ext_resource type="PackedScene" uid="uid://b23qkyb1ysv7p" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/sword_shield_gold.gltf" id="29_6y6um"]
+[ext_resource type="PackedScene" uid="uid://dqcxgbpu7epul" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/barrier.gltf" id="30_dbi18"]
+[ext_resource type="PackedScene" uid="uid://bfvvj44ulabb" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/barrier_half.gltf" id="31_kba8k"]
+[ext_resource type="PackedScene" uid="uid://dsw31tt3igfhl" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/barrier_colum_half.gltf" id="32_b6ucb"]
+[ext_resource type="PackedScene" uid="uid://55melk6otw81" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/banner_shield_green.gltf" id="33_y6x0o"]
+[ext_resource type="PackedScene" uid="uid://i1tj46sw05g2" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/pillar.gltf" id="34_vtk8s"]
+[ext_resource type="PackedScene" uid="uid://djsh6mlx4uxmm" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_archedwindow_gated_scaffold.gltf" id="35_7eo37"]
+[ext_resource type="PackedScene" uid="uid://cy6drhghdmgv" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/shelf_small_candles.gltf" id="36_qyful"]
+[ext_resource type="PackedScene" uid="uid://jw75ou1pnybp" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_arched.gltf" id="37_j51p3"]
+[ext_resource type="PackedScene" uid="uid://bogakujbmoqmh" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/stairs_wall_left.gltf" id="38_kpsux"]
+[ext_resource type="PackedScene" uid="uid://kn7dqa407k1a" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_long_decorated_C.gltf" id="39_mu70y"]
+[ext_resource type="PackedScene" uid="uid://br3qslty71dm4" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/candle_lit.gltf" id="40_a0ujp"]
+[ext_resource type="PackedScene" uid="uid://i16jdnu81odc" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_long_tablecloth.gltf" id="41_vseos"]
+[ext_resource type="PackedScene" uid="uid://u0h5rdbp7ljm" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Assets/gltf/spellbook_open.gltf" id="42_fbne2"]
+[ext_resource type="PackedScene" uid="uid://ddr5yrfwkqqjt" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Assets/gltf/spellbook_closed.gltf" id="43_pxe61"]
+[ext_resource type="PackedScene" uid="uid://enpa3rua2n8p" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Assets/gltf/dagger.gltf" id="44_1tjgw"]
+[ext_resource type="PackedScene" uid="uid://cayt468qqmnac" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_small_decorated_A.gltf" id="45_ra23h"]
+[ext_resource type="PackedScene" uid="uid://7trg6g3hfabd" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Assets/gltf/quiver.gltf" id="46_46vr6"]
+[ext_resource type="PackedScene" uid="uid://q0rsd7fpxbad" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_small_decorated_B.gltf" id="47_owocw"]
+[ext_resource type="PackedScene" uid="uid://c5bsn28ccej60" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/crates_stacked.gltf" id="48_i1i10"]
+[ext_resource type="PackedScene" uid="uid://dhwl8ifomds73" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/chair.gltf" id="49_w08h0"]
+[ext_resource type="PackedScene" uid="uid://cqh8v4hjtwigf" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_medium_broken.gltf" id="50_vmuye"]
+[ext_resource type="PackedScene" uid="uid://bbwsjnrbve4tf" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Assets/gltf/axe_2handed.gltf" id="51_4m1es"]
+[ext_resource type="PackedScene" uid="uid://b0fsjo012idhw" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Bartender_mod.tscn" id="52_ab835"]
+[ext_resource type="Script" path="res://Scripts/NPCAnimations/bartender.gd" id="53_8tsux"]
+[ext_resource type="PackedScene" uid="uid://chexd6ln6vo33" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Mage_Drinker.tscn" id="54_t1qkd"]
+[ext_resource type="Script" path="res://Scripts/NPCAnimations/Drinker.gd" id="55_5lboy"]
+[ext_resource type="PackedScene" uid="uid://dnjtv5p8lpclx" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Rouge_Drinker.tscn" id="56_1wty7"]
+[ext_resource type="PackedScene" uid="uid://b2spaaxl76xrh" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Barbarian_Gambler.tscn" id="57_q3ccg"]
+[ext_resource type="PackedScene" uid="uid://b5lkom3a2vrnc" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Knight_Gambler.tscn" id="58_4twqx"]
+[ext_resource type="PackedScene" uid="uid://dtohuamct7vwq" path="res://Assets/dice/d6/DiceMakerD6.glb" id="59_4xtxd"]
+[ext_resource type="PackedScene" uid="uid://6ytc3b7g5uql" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Knight_Player_Cinematic.tscn" id="59_rorx4"]
+[ext_resource type="PackedScene" uid="uid://70sdouynqgv2" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Rouge_Drinker_Cinematic.tscn" id="60_wrsmg"]
+
+[sub_resource type="Animation" id="Animation_gpu3b"]
+resource_name = "GlowingLoop"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(16, -0.25, 0, 0.25, 0, 2.973, -0.25, 0, 0.25, 0, 16, -0.233333, -14, 0.25, 0),
+"times": PackedFloat32Array(0, 2.5, 5)
+}
+
+[sub_resource type="Animation" id="Animation_4ymsg"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(16, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nhexg"]
+_data = {
+"GlowingLoop": SubResource("Animation_gpu3b"),
+"RESET": SubResource("Animation_4ymsg")
+}
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_j1tbi"]
+height = 2.05582
+radius = 0.110577
+
+[sub_resource type="Animation" id="Animation_42t4v"]
+resource_name = "Dice_Bump"
+length = 1.0667
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(33.2855, -0.25, 0, 0.233333, 0.714546, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 37, -0.2, -1, 0.2, 1),
+"times": PackedFloat32Array(0, 0.4, 0.7, 1.06667)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(52, -0.25, 0, 0.166667, -28, 0, -0.233333, 10, 0.25, 0, 2, -0.25, 0, 0.25, 0, 32, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.0333333, 0.4, 0.733333, 1.06667)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(-0.988659, -0.25, 0, 0.166667, 28.9887, 1, -0.133333, -44, 0.25, 0, 1, -0.25, 0, 0.25, 0, 39, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 0.666667, 1.06667)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:rotation:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(-1.99447, -0.25, 0, 0.1, 14.9945, 27, -0.25, 0, 0.25, 0, -2, -0.233333, 1, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 0.466667, 0.8)
+}
+
+[sub_resource type="Animation" id="Animation_ihi8b"]
+resource_name = "Dice_Bump"
+length = 1.0667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.366667, 0.433333, 0.7, 0.766667, 1.06667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 13.6877, 0), Vector3(0, 53.3171, 0), Vector3(0, 56.9761, 0), Vector3(0, 53.3171, 0), Vector3(0, 7.82156, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.366667, 0.433333, 0.7, 0.766667, 1.06667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.815522, 2.41028e-08, -0.842942), Vector3(-0.308284, -0.597549, -2.48111), Vector3(-0.223263, -0.479073, -2.81891), Vector3(-0.308284, -0.597549, -2.48111), Vector3(-0.0834962, -2.65076, -2.25894), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qt1cn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:position:z")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:rotation:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:rotation:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:rotation:z")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xngax"]
+_data = {
+"Dice_Bump": SubResource("Animation_42t4v"),
+"Dice_Toss": SubResource("Animation_ihi8b"),
+"RESET": SubResource("Animation_qt1cn")
+}
+
+[node name="BackgroundObjects" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.931342, -0.271377, 0.24281, -1.42248e-08, 0.666793, 0.745243, -0.364145, -0.694077, 0.621012, 0, 35, 0)
+light_color = Color(0.844075, 0.615547, 0.564852, 1)
+light_energy = 0.5
+light_indirect_energy = 1.5
+shadow_enabled = true
+shadow_opacity = 0.75
+shadow_blur = 10.0
+directional_shadow_fade_start = 0.0
+directional_shadow_max_distance = 8192.0
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.91466, -0.250336, -0.317379, 0.130585, -0.560065, 0.818092, -0.382551, -0.789721, -0.479579, 0, 35, 0)
+light_color = Color(0.844075, 0.615547, 0.564852, 1)
+light_energy = 0.25
+light_indirect_energy = 1.5
+directional_shadow_fade_start = 0.0
+directional_shadow_max_distance = 8192.0
+
+[node name="TavernDungeon" type="Node3D" parent="."]
+
+[node name="GameTable" parent="TavernDungeon" instance=ExtResource("2_5vq1x")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, -24.5, 0)
+
+[node name="stool2" parent="TavernDungeon/GameTable" instance=ExtResource("3_6fxia")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.176, -1.49982)
+
+[node name="stool3" parent="TavernDungeon/GameTable" instance=ExtResource("3_6fxia")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.176, 1.5)
+
+[node name="candle_thin_lit2" parent="TavernDungeon/GameTable" instance=ExtResource("4_ujh1p")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.75, 1, -0.5)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="TavernDungeon/GameTable/candle_thin_lit2"]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0, 0.885345, 0)
+light_color = Color(0.787116, 0.669645, 0.591936, 1)
+light_energy = 16.0
+light_indirect_energy = 9.566
+shadow_enabled = true
+shadow_opacity = 0.7
+distance_fade_begin = 75.0
+distance_fade_length = 100.0
+omni_range = 50.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TavernDungeon/GameTable/candle_thin_lit2/OmniLight3D"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
+[node name="RigidBody3D" type="RigidBody3D" parent="TavernDungeon/GameTable/candle_thin_lit2"]
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TavernDungeon/GameTable/candle_thin_lit2/RigidBody3D"]
+shape = SubResource("CylinderShape3D_j1tbi")
+
+[node name="DiceMakerD6" parent="TavernDungeon/GameTable" instance=ExtResource("59_4xtxd")]
+transform = Transform3D(0.00239861, 0.00621172, 0.0044341, -0.00102029, 0.0048672, -0.00626653, -0.00756344, 0.00131336, 0.00225153, 0, 1.60577, -0.104358)
+
+[node name="DiceMakerD13" parent="TavernDungeon/GameTable" instance=ExtResource("5_8rui6")]
+transform = Transform3D(0.00914013, 0.00342553, -0.00217341, -0.00405684, 0.00771778, -0.00489672, 1.49012e-10, 0.00535738, 0.00844384, 0.276577, 1.25134, 0.345748)
+
+[node name="DiceMakerD8" parent="TavernDungeon/GameTable" instance=ExtResource("59_4xtxd")]
+transform = Transform3D(-0.00252615, -0.00880287, -0.00401597, 0.00468707, -0.00474442, 0.0074513, -0.00846463, 2.98023e-10, 0.00532448, 0.283322, 1.2415, -0.30356)
+
+[node name="DiceMakerD4" parent="TavernDungeon/GameTable" instance=ExtResource("6_u8jgf")]
+transform = Transform3D(0.00857016, 0.00181223, 0.00482372, -0.00157926, 0.00983442, -0.000888886, -0.00490493, 2.98023e-10, 0.00871445, -0.134916, 1.45021, -0.419988)
+
+[node name="DiceMakerD8_numbered" parent="TavernDungeon/GameTable" instance=ExtResource("7_coxo0")]
+transform = Transform3D(-0.00906495, -0.00979642, -0.0268674, 0.0278528, -0.00941517, -0.00596445, -0.00648436, -0.0267467, 0.0119402, -0.188882, 1.4384, 0.177396)
+
+[node name="DiceMakerD12" parent="TavernDungeon/GameTable" instance=ExtResource("5_8rui6")]
+transform = Transform3D(0.00421622, 0.00906772, -2.36171e-10, -0.00832175, 0.00386936, 0.00397196, 0.00360166, -0.00167466, 0.00917734, 0.458713, 1.26906, 0.0157522)
+
+[node name="Floor" type="Node3D" parent="TavernDungeon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25.8, 0)
+
+[node name="floor_wood_large2" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, 0)
+
+[node name="floor_wood_large3" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 100, 0, 0)
+
+[node name="floor_wood_large4" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 200, 0, 0)
+
+[node name="floor_wood_large5" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -100, 0, 0)
+
+[node name="floor_wood_large6" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -200, 0, 0)
+
+[node name="floor_wood_large7" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, 100)
+
+[node name="floor_wood_large8" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 100, 0, 100)
+
+[node name="floor_wood_large9" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 200, 0, 100)
+
+[node name="floor_wood_large10" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -100, 0, 100)
+
+[node name="floor_wood_large11" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -200, 0, 100)
+
+[node name="floor_wood_large12" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, -100)
+
+[node name="floor_wood_large13" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 100, 0, -100)
+
+[node name="floor_wood_large14" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 200, 0, -100)
+
+[node name="floor_wood_large15" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -100, 0, -100)
+
+[node name="floor_wood_large16" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -200, 0, -100)
+
+[node name="floor_wood_large17" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, -200)
+
+[node name="floor_wood_large18" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 100, 0, -200)
+
+[node name="floor_wood_large19" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 200, 0, -200)
+
+[node name="floor_wood_large20" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -100, 0, -200)
+
+[node name="floor_wood_large21" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -200, 0, -200)
+
+[node name="floor_wood_large22" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -300, 0, 0)
+
+[node name="floor_wood_large23" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -300, 0, 100)
+
+[node name="floor_wood_large24" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -300, 0, -100)
+
+[node name="keg2" parent="TavernDungeon/Floor/floor_wood_large24" instance=ExtResource("6_c3sek")]
+transform = Transform3D(0.383538, 0, 0.923525, 0, 1, 0, -0.923525, 0, 0.383538, 0.418566, 0, -0.58057)
+
+[node name="mug_full2" parent="TavernDungeon/Floor/floor_wood_large24/keg2" instance=ExtResource("7_nmilf")]
+transform = Transform3D(0.975527, 0, -0.21988, 0, 1, 0, 0.21988, 0, 0.975527, -0.0928919, 2.22561, 3.72529e-09)
+
+[node name="floor_wood_large25" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -300, 0, -200)
+
+[node name="floor_wood_large26" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -400, 0, 0)
+
+[node name="floor_wood_large27" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -400, 0, 100)
+
+[node name="floor_wood_large28" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -400, 0, -100)
+
+[node name="floor_wood_large29" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -400, 0, -200)
+
+[node name="floor_wood_large30" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -400, 100, -200)
+
+[node name="box_stacked2" parent="TavernDungeon/Floor/floor_wood_large30" instance=ExtResource("8_kdua2")]
+
+[node name="coin_stack_small2" parent="TavernDungeon/Floor/floor_wood_large30/box_stacked2" instance=ExtResource("9_b7w4u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.793701, 1.88912, 0.182761)
+
+[node name="floor_wood_large31" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -400, 100, -100)
+
+[node name="floor_wood_large32" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -400, 100, 0)
+
+[node name="keg_decorated2" parent="TavernDungeon/Floor/floor_wood_large32" instance=ExtResource("10_u55ig")]
+transform = Transform3D(-0.256897, 0, 0.966439, 0, 1, 0, -0.966439, 0, -0.256897, 0, 0, 0)
+
+[node name="floor_wood_large33" parent="TavernDungeon/Floor" instance=ExtResource("5_ld4uj")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -400, 100, 100)
+
+[node name="Walls" type="Node3D" parent="TavernDungeon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25.8, 0)
+
+[node name="BackWall" type="Node3D" parent="TavernDungeon/Walls"]
+
+[node name="wall2" parent="TavernDungeon/Walls/BackWall" instance=ExtResource("11_s0nb7")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, -250)
+
+[node name="pillar_decorated2" parent="TavernDungeon/Walls/BackWall/wall2" instance=ExtResource("12_cwslk")]
+
+[node name="wall_doorway_scaffold2" parent="TavernDungeon/Walls/BackWall" instance=ExtResource("13_na2cc")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -100, 0, -250)
+
+[node name="torch_mounted2" parent="TavernDungeon/Walls/BackWall/wall_doorway_scaffold2" instance=ExtResource("14_ux200")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9, 2.3, 0.35)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="TavernDungeon/Walls/BackWall/wall_doorway_scaffold2/torch_mounted2"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0, 0.45, 0.3)
+light_color = Color(0.931627, 0.741943, 0.578706, 1)
+light_energy = 16.0
+light_indirect_energy = 10.0
+omni_range = 85.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TavernDungeon/Walls/BackWall/wall_doorway_scaffold2/torch_mounted2/OmniLight3D"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
+[node name="torch_mounted3" parent="TavernDungeon/Walls/BackWall/wall_doorway_scaffold2" instance=ExtResource("14_ux200")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.83238, 2.3, 0.35)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="TavernDungeon/Walls/BackWall/wall_doorway_scaffold2/torch_mounted3"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0, 0.45, 0.3)
+light_color = Color(0.931627, 0.741943, 0.578706, 1)
+light_energy = 16.0
+light_indirect_energy = 10.0
+omni_range = 85.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="TavernDungeon/Walls/BackWall/wall_doorway_scaffold2/torch_mounted3/OmniLight3D2"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
+[node name="keyring_hanging2" parent="TavernDungeon/Walls/BackWall/wall_doorway_scaffold2/torch_mounted3" instance=ExtResource("15_geiel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.138699, 0.103336)
+
+[node name="wall_cracked2" parent="TavernDungeon/Walls/BackWall" instance=ExtResource("16_c6ft5")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -200, 0, -250)
+
+[node name="pillar_decorated2" parent="TavernDungeon/Walls/BackWall/wall_cracked2" instance=ExtResource("12_cwslk")]
+
+[node name="staff2" parent="TavernDungeon/Walls/BackWall/wall_cracked2" instance=ExtResource("17_rcwo2")]
+transform = Transform3D(0.916433, 0.0927702, -0.389288, -1.6542e-08, 0.97276, 0.231816, 0.400189, -0.212444, 0.891469, 1.65074, 0.895753, 0.786927)
+
+[node name="wall5" parent="TavernDungeon/Walls/BackWall" instance=ExtResource("11_s0nb7")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -300, 0, -250)
+
+[node name="shelf_small2" parent="TavernDungeon/Walls/BackWall/wall5" instance=ExtResource("18_ttfma")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.88044, 2.74271, 0.291386)
+
+[node name="mug_empty2" parent="TavernDungeon/Walls/BackWall/wall5/shelf_small2" instance=ExtResource("19_t6v57")]
+transform = Transform3D(-0.645831, 8.74228e-08, 0.76348, -5.64603e-08, -1, 6.67456e-08, 0.76348, 0, 0.645831, 0.278902, 0.344449, 0.287545)
+
+[node name="mug_empty3" parent="TavernDungeon/Walls/BackWall/wall5/shelf_small2" instance=ExtResource("19_t6v57")]
+transform = Transform3D(-0.873475, 8.74228e-08, 0.486869, -7.63616e-08, -1, 4.25634e-08, 0.486869, 0, 0.873475, -0.224739, 0.344449, 0.344774)
+
+[node name="wall_half" parent="TavernDungeon/Walls/BackWall" instance=ExtResource("20_srtdp")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -400, 0, -250)
+
+[node name="wall_window_closed_scaffold2" parent="TavernDungeon/Walls/BackWall" instance=ExtResource("21_qfbld")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 100, 0, -250)
+
+[node name="wall_shelves2" parent="TavernDungeon/Walls/BackWall" instance=ExtResource("22_cfc72")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 200, 0, -250)
+
+[node name="LeftWall" type="Node3D" parent="TavernDungeon/Walls"]
+
+[node name="wall_half" parent="TavernDungeon/Walls/LeftWall" instance=ExtResource("20_srtdp")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -450, 0, -150)
+
+[node name="wall_shelves2" parent="TavernDungeon/Walls/LeftWall" instance=ExtResource("22_cfc72")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -350, 0, -100)
+
+[node name="wall_archedwindow_open2" parent="TavernDungeon/Walls/LeftWall" instance=ExtResource("23_ixad7")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -350, 0, 0)
+
+[node name="bottle_A_labeled_brown2" parent="TavernDungeon/Walls/LeftWall/wall_archedwindow_open2" instance=ExtResource("24_xfom2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.628861, 1.0351, -1.77636e-15)
+
+[node name="bottle_A_labeled_green2" parent="TavernDungeon/Walls/LeftWall/wall_archedwindow_open2" instance=ExtResource("25_kfvhm")]
+transform = Transform3D(0.46749, 0, 0.17735, 0, 0.5, 0, -0.17735, 0, 0.46749, -0.828673, 1.05613, 0.271975)
+
+[node name="bottle_C_brown2" parent="TavernDungeon/Walls/LeftWall/wall_archedwindow_open2" instance=ExtResource("26_170dl")]
+transform = Transform3D(0.478501, 0, 0.145042, 0, 0.5, 0, -0.145042, 0, 0.478501, 0.7207, 1.05819, 0.0646069)
+
+[node name="wall12" parent="TavernDungeon/Walls/LeftWall" instance=ExtResource("11_s0nb7")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -350, 0, 100)
+
+[node name="wall13" parent="TavernDungeon/Walls/LeftWall" instance=ExtResource("11_s0nb7")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -450, 0, -100)
+
+[node name="shelf_large2" parent="TavernDungeon/Walls/LeftWall/wall13" instance=ExtResource("27_qllgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.60555, 0.711287, 0.387695)
+
+[node name="wall_shelves3" parent="TavernDungeon/Walls/LeftWall" instance=ExtResource("22_cfc72")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -450, 0, 0)
+
+[node name="wall15" parent="TavernDungeon/Walls/LeftWall" instance=ExtResource("11_s0nb7")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -450, 0, 100)
+
+[node name="wall_corner_scaffold" parent="TavernDungeon/Walls" instance=ExtResource("28_fca3x")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -450, 0, -250)
+
+[node name="UpperLeftWall" type="Node3D" parent="TavernDungeon/Walls"]
+
+[node name="wall_half2" parent="TavernDungeon/Walls/UpperLeftWall" instance=ExtResource("20_srtdp")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -450, 100, -150)
+
+[node name="wall_corner_scaffold2" parent="TavernDungeon/Walls/UpperLeftWall" instance=ExtResource("28_fca3x")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -450, 100, -250)
+
+[node name="wall16" parent="TavernDungeon/Walls/UpperLeftWall" instance=ExtResource("11_s0nb7")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -450, 100, -100)
+
+[node name="sword_shield_gold2" parent="TavernDungeon/Walls/UpperLeftWall/wall16" instance=ExtResource("29_6y6um")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.77636e-15, 1.9294, 0.482594)
+
+[node name="wall17" parent="TavernDungeon/Walls/UpperLeftWall" instance=ExtResource("11_s0nb7")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -450, 100, 0)
+
+[node name="wall18" parent="TavernDungeon/Walls/UpperLeftWall" instance=ExtResource("11_s0nb7")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -450, 100, 100)
+
+[node name="barrier2" parent="TavernDungeon/Walls/UpperLeftWall" instance=ExtResource("30_dbi18")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -350, 100, 100)
+
+[node name="barrier3" parent="TavernDungeon/Walls/UpperLeftWall" instance=ExtResource("30_dbi18")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -350, 100, 0)
+
+[node name="barrier_half2" parent="TavernDungeon/Walls/UpperLeftWall" instance=ExtResource("31_kba8k")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -350, 100, -50)
+
+[node name="barrier_colum_half2" parent="TavernDungeon/Walls/UpperLeftWall" instance=ExtResource("32_b6ucb")]
+transform = Transform3D(-1.09278e-06, 0, -25, 0, 25, 0, 25, 0, -1.09278e-06, -350, 100, -150)
+
+[node name="UpperBackWall" type="Node3D" parent="TavernDungeon/Walls"]
+
+[node name="wall_half3" parent="TavernDungeon/Walls/UpperBackWall" instance=ExtResource("20_srtdp")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -400, 100, -250)
+
+[node name="wall3" parent="TavernDungeon/Walls/UpperBackWall" instance=ExtResource("11_s0nb7")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 100, -250)
+
+[node name="banner_shield_green2" parent="TavernDungeon/Walls/UpperBackWall/wall3" instance=ExtResource("33_y6x0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.282642)
+
+[node name="pillar2" parent="TavernDungeon/Walls/UpperBackWall/wall3" instance=ExtResource("34_vtk8s")]
+
+[node name="wall_archedwindow_gated_scaffold2" parent="TavernDungeon/Walls/UpperBackWall" instance=ExtResource("35_7eo37")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -100, 100, -250)
+
+[node name="wall2" parent="TavernDungeon/Walls/UpperBackWall" instance=ExtResource("11_s0nb7")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -200, 100, -250)
+
+[node name="banner_shield_green2" parent="TavernDungeon/Walls/UpperBackWall/wall2" instance=ExtResource("33_y6x0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.292186)
+
+[node name="pillar2" parent="TavernDungeon/Walls/UpperBackWall/wall2" instance=ExtResource("34_vtk8s")]
+
+[node name="wall6" parent="TavernDungeon/Walls/UpperBackWall" instance=ExtResource("11_s0nb7")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -300, 100, -250)
+
+[node name="shelf_small_candles2" parent="TavernDungeon/Walls/UpperBackWall/wall6" instance=ExtResource("36_qyful")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17455, 0.23999)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="TavernDungeon/Walls/UpperBackWall/wall6/shelf_small_candles2"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0.0762317, 0.58499, 0.185193)
+light_color = Color(0.931627, 0.741943, 0.578706, 1)
+light_energy = 16.0
+light_indirect_energy = 10.0
+omni_range = 85.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="TavernDungeon/Walls/UpperBackWall/wall6/shelf_small_candles2/OmniLight3D2"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
+[node name="wall_arched2" parent="TavernDungeon/Walls/UpperBackWall" instance=ExtResource("37_j51p3")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 100, 100, -250)
+
+[node name="wall9" parent="TavernDungeon/Walls/UpperBackWall" instance=ExtResource("11_s0nb7")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 200, 100, -250)
+
+[node name="stairs_wall_left2" parent="TavernDungeon/Walls" instance=ExtResource("38_kpsux")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, -300, 0, -250)
+
+[node name="FloatingObjects" type="Node3D" parent="TavernDungeon"]
+
+[node name="table_long_decorated_C2" parent="TavernDungeon/FloatingObjects" instance=ExtResource("39_mu70y")]
+transform = Transform3D(-1.09278e-06, 0, -25, 0, 25, 0, 25, 0, -1.09278e-06, 128.252, -24.5, -123.958)
+
+[node name="candle_lit2" parent="TavernDungeon/FloatingObjects/table_long_decorated_C2" instance=ExtResource("40_a0ujp")]
+transform = Transform3D(1, 0, 3.55271e-15, 0, 1, 0, -3.55271e-15, 0, 1, 0.849693, 0.997142, 0.0258476)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="TavernDungeon/FloatingObjects/table_long_decorated_C2/candle_lit2"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0.00298723, 0.885702, -0.00864941)
+light_color = Color(0.931627, 0.741943, 0.578706, 1)
+light_energy = 16.0
+light_indirect_energy = 10.0
+omni_range = 85.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="TavernDungeon/FloatingObjects/table_long_decorated_C2/candle_lit2/OmniLight3D2"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
+[node name="candle_lit3" parent="TavernDungeon/FloatingObjects/table_long_decorated_C2" instance=ExtResource("40_a0ujp")]
+transform = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, -0.625144, 0.997142, 1.42569)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="TavernDungeon/FloatingObjects/table_long_decorated_C2/candle_lit3"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0.00298723, 0.885702, -0.00864941)
+light_color = Color(0.931627, 0.741943, 0.578706, 1)
+light_energy = 16.0
+light_indirect_energy = 10.0
+omni_range = 85.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="TavernDungeon/FloatingObjects/table_long_decorated_C2/candle_lit3/OmniLight3D2"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
+[node name="table_long_tablecloth2" parent="TavernDungeon/FloatingObjects" instance=ExtResource("41_vseos")]
+transform = Transform3D(21.5655, 0, -12.6463, 0, 25, 0, 12.6463, 0, 21.5655, -169.277, -24.5, -63.9354)
+
+[node name="candle_lit2" parent="TavernDungeon/FloatingObjects/table_long_tablecloth2" instance=ExtResource("40_a0ujp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.799781, 0.997142, -0.107065)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="TavernDungeon/FloatingObjects/table_long_tablecloth2/candle_lit2"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0.00298723, 0.885702, -0.00864941)
+light_color = Color(0.931627, 0.741943, 0.578706, 1)
+light_energy = 16.0
+light_indirect_energy = 10.0
+omni_range = 85.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="TavernDungeon/FloatingObjects/table_long_tablecloth2/candle_lit2/OmniLight3D2"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
+[node name="spellbook_open2" parent="TavernDungeon/FloatingObjects/table_long_tablecloth2" instance=ExtResource("42_fbne2")]
+transform = Transform3D(0.637628, -0.686367, -0.349758, 0.0501519, 0.490051, -0.87025, 0.76871, 0.537355, 0.346893, 0.557999, 1.2396, 1.224)
+
+[node name="spellbook_closed2" parent="TavernDungeon/FloatingObjects/table_long_tablecloth2" instance=ExtResource("43_pxe61")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.315869, 1.11567, 1.60143)
+
+[node name="mug_full2" parent="TavernDungeon/FloatingObjects/table_long_tablecloth2" instance=ExtResource("7_nmilf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.130052, 1.29446, 1.25061)
+
+[node name="dagger2" parent="TavernDungeon/FloatingObjects/table_long_tablecloth2" instance=ExtResource("44_1tjgw")]
+transform = Transform3D(0.45161, 0.891792, -0.0274768, -0.0418948, 0.0519579, 0.99777, 0.891232, -0.449451, 0.0608261, -0.0520705, 1.05252, 0.776685)
+
+[node name="table_small_decorated_A2" parent="TavernDungeon/FloatingObjects" instance=ExtResource("45_ra23h")]
+transform = Transform3D(24.499, 0, -4.97992, 0, 25, 0, 4.97992, 0, 24.499, 0, -24.5, -210.342)
+
+[node name="quiver2" parent="TavernDungeon/FloatingObjects/table_small_decorated_A2" instance=ExtResource("46_46vr6")]
+transform = Transform3D(0.362022, -0.286139, 0.887167, 0.0187239, 0.953762, 0.299978, -0.931982, -0.0919872, 0.35064, 0.670647, 0.432572, 0.00391415)
+
+[node name="table_small_decorated_B2" parent="TavernDungeon/FloatingObjects" instance=ExtResource("47_owocw")]
+transform = Transform3D(22.3788, 0, 11.144, 0, 25, 0, -11.144, 0, 22.3788, -318.853, -24.5, -49.8812)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="TavernDungeon/FloatingObjects/table_small_decorated_B2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 2, 0.3)
+light_energy = 5.27811
+omni_range = 20.2985
+
+[node name="crates_stacked2" parent="TavernDungeon/FloatingObjects" instance=ExtResource("48_i1i10")]
+transform = Transform3D(22.5716, 0, -10.7482, 0, 25, 0, 10.7482, 0, 22.5716, -315.395, -24.5, 65.495)
+
+[node name="chair2" parent="TavernDungeon/FloatingObjects" instance=ExtResource("49_w08h0")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, 113.633, -25.8, -173.348)
+
+[node name="chair3" parent="TavernDungeon/FloatingObjects" instance=ExtResource("49_w08h0")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, 163.603, -25.8, -165.917)
+
+[node name="stool4" parent="TavernDungeon/FloatingObjects" instance=ExtResource("3_6fxia")]
+transform = Transform3D(23.8234, 0, -7.57921, 0, 25, 0, 7.57921, 0, 23.8234, -152.82, -28.8967, -126.183)
+
+[node name="stool7" parent="TavernDungeon/FloatingObjects" instance=ExtResource("3_6fxia")]
+transform = Transform3D(23.8234, 0, -7.57921, 0, 25, 0, 7.57921, 0, 23.8234, -197.204, -28.8967, -94.0929)
+
+[node name="stool5" parent="TavernDungeon/FloatingObjects" instance=ExtResource("3_6fxia")]
+transform = Transform3D(24.989, 0, 0.738632, 0, 25, 0, -0.738632, 0, 24.989, -224.82, -24.5, -59.2292)
+
+[node name="stool6" parent="TavernDungeon/FloatingObjects" instance=ExtResource("3_6fxia")]
+transform = Transform3D(20.7947, 0, -13.8773, 0, 25, 0, 13.8773, 0, 20.7947, -144.033, -24.5, -25.8628)
+
+[node name="table_medium_broken2" parent="TavernDungeon/FloatingObjects" instance=ExtResource("50_vmuye")]
+transform = Transform3D(20.8044, 0, 13.8628, 0, 25, 0, -13.8628, 0, 20.8044, -164.666, -25, 82.072)
+
+[node name="mug_empty2" parent="TavernDungeon/FloatingObjects/table_medium_broken2" instance=ExtResource("19_t6v57")]
+transform = Transform3D(0.884548, 0.466448, 1.77636e-15, 2.03891e-08, -3.86648e-08, -1, -0.466448, 0.884548, -4.37114e-08, 0.309446, 0.214764, -1.59778)
+
+[node name="mug_empty3" parent="TavernDungeon/FloatingObjects/table_medium_broken2" instance=ExtResource("19_t6v57")]
+transform = Transform3D(0.884548, -0.146515, 0.44284, 0, 0.949387, 0.314108, -0.466448, -0.277844, 0.839779, 0.610965, 0.195073, 1.20272)
+
+[node name="axe_2handed2" parent="TavernDungeon/FloatingObjects/table_medium_broken2" instance=ExtResource("51_4m1es")]
+transform = Transform3D(-0.053017, -0.285776, -0.956829, -0.983223, 0.182407, 2.98023e-08, 0.174532, 0.940776, -0.290652, 0.643937, 1.07215, -1.41388)
+
+[node name="InsideRoom" type="Node3D" parent="TavernDungeon"]
+
+[node name="shelf_small_candles2" parent="TavernDungeon/InsideRoom" instance=ExtResource("36_qyful")]
+transform = Transform3D(-1.09278e-06, 0, -25, 0, 25, 0, 25, 0, -1.09278e-06, -355.948, 25.395, 58.2759)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="TavernDungeon/InsideRoom/shelf_small_candles2"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, -0.164498, 0.699067, 0.196813)
+light_color = Color(0.931627, 0.741943, 0.578706, 1)
+light_energy = 16.0
+light_indirect_energy = 10.0
+omni_range = 85.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="TavernDungeon/InsideRoom/shelf_small_candles2/OmniLight3D2"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
+[node name="shelf_small_candles3" parent="TavernDungeon/InsideRoom" instance=ExtResource("36_qyful")]
+transform = Transform3D(-1.09278e-06, 0, -25, 0, 25, 0, 25, 0, -1.09278e-06, -355.948, 25.395, -58.0121)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="TavernDungeon/InsideRoom/shelf_small_candles3"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, -0.164498, 0.699067, 0.196813)
+light_color = Color(0.931627, 0.741943, 0.578706, 1)
+light_energy = 16.0
+light_indirect_energy = 10.0
+omni_range = 85.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="TavernDungeon/InsideRoom/shelf_small_candles3/OmniLight3D2"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
+[node name="shelf_small_candles4" parent="TavernDungeon/InsideRoom" instance=ExtResource("36_qyful")]
+transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -444.051, 25.395, -58.0121)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="TavernDungeon/InsideRoom/shelf_small_candles4"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, -0.164498, 0.699067, 0.196813)
+light_color = Color(0.931627, 0.741943, 0.578706, 1)
+light_energy = 16.0
+light_indirect_energy = 10.0
+omni_range = 85.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="TavernDungeon/InsideRoom/shelf_small_candles4/OmniLight3D2"]
+libraries = {
+"": SubResource("AnimationLibrary_nhexg")
+}
+autoplay = "GlowingLoop"
+
+[node name="SpotLight3D" type="SpotLight3D" parent="TavernDungeon/InsideRoom"]
+transform = Transform3D(0.819982, -0.165544, 0.547927, -1.49012e-08, 0.957264, 0.289216, -0.572389, -0.237152, 0.784939, -360.433, 47.9298, 37.1253)
+light_color = Color(0.933333, 0.741176, 0.580392, 1)
+light_energy = 16.0
+light_indirect_energy = 4.177
+spot_range = 365.953
+spot_angle = 89.99
+
+[node name="Characters" type="Node3D" parent="TavernDungeon"]
+
+[node name="Bartender" parent="TavernDungeon/Characters" instance=ExtResource("52_ab835")]
+transform = Transform3D(-3.67581, 0, 24.7283, 0, 25, 0, -24.7283, 0, -3.67581, -378.25, -16.4222, -1.27919)
+script = ExtResource("53_8tsux")
+
+[node name="Mage" parent="TavernDungeon/Characters" instance=ExtResource("54_t1qkd")]
+transform = Transform3D(21.9487, 0, -11.9688, 0, 25, 0, 11.9688, 0, 21.9487, 82.157, -24.7759, -189.899)
+script = ExtResource("55_5lboy")
+
+[node name="Rogue_Hooded" parent="TavernDungeon/Characters" instance=ExtResource("56_1wty7")]
+transform = Transform3D(-16.6363, 0, 18.661, 0, 25, 0, -18.661, 0, -16.6363, 57.3961, -24.7759, -150.991)
+script = ExtResource("55_5lboy")
+
+[node name="Barbarian" parent="TavernDungeon/Characters" instance=ExtResource("57_q3ccg")]
+transform = Transform3D(2.96486, 0, 24.8236, 0, 25, 0, -24.8236, 0, 2.96486, -199.662, -16.371, -98.129)
+
+[node name="Knight" parent="TavernDungeon/Characters" instance=ExtResource("58_4twqx")]
+transform = Transform3D(24.9084, 0, 2.1376, 0, 25, 0, -2.1376, 0, 24.9084, -154.494, -16.3712, -126.821)
+
+[node name="DiceAnimation" type="Node3D" parent="TavernDungeon/Characters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -158.583, 1.65668, -86.535)
+
+[node name="DiceMakerD6_1" parent="TavernDungeon/Characters/DiceAnimation" instance=ExtResource("59_4xtxd")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TavernDungeon/Characters/DiceAnimation/DiceMakerD6_1"]
+libraries = {
+"": SubResource("AnimationLibrary_xngax")
+}
+autoplay = "Dice_Bump"
+
+[node name="DiceAnimation2" type="Node3D" parent="TavernDungeon/Characters"]
+transform = Transform3D(0.863114, 0, 0.50501, 0, 1, 0, -0.50501, 0, 0.863114, -158.621, 1.65668, -97.4426)
+
+[node name="DiceMakerD6_1" parent="TavernDungeon/Characters/DiceAnimation2" instance=ExtResource("59_4xtxd")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TavernDungeon/Characters/DiceAnimation2/DiceMakerD6_1"]
+libraries = {
+"": SubResource("AnimationLibrary_xngax")
+}
+autoplay = "Dice_Bump"
+
+[node name="DiceAnimation3" type="Node3D" parent="TavernDungeon/Characters"]
+transform = Transform3D(0.876399, 0, -0.481585, 0, 1, 0, 0.481585, 0, 0.876399, -163.951, 1.65668, -84.375)
+
+[node name="DiceMakerD6_1" parent="TavernDungeon/Characters/DiceAnimation3" instance=ExtResource("59_4xtxd")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TavernDungeon/Characters/DiceAnimation3/DiceMakerD6_1"]
+libraries = {
+"": SubResource("AnimationLibrary_xngax")
+}
+autoplay = "Dice_Bump"
+
+[node name="DiceAnimation4" type="Node3D" parent="TavernDungeon/Characters"]
+transform = Transform3D(0.92442, 0, 0.381377, 0, 1, 0, -0.381377, 0, 0.92442, -151.032, 1.65668, -76.9948)
+
+[node name="DiceMakerD6_1" parent="TavernDungeon/Characters/DiceAnimation4" instance=ExtResource("59_4xtxd")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TavernDungeon/Characters/DiceAnimation4/DiceMakerD6_1"]
+libraries = {
+"": SubResource("AnimationLibrary_xngax")
+}
+autoplay = "Dice_Bump"
+
+[node name="DiceAnimation5" type="Node3D" parent="TavernDungeon/Characters"]
+transform = Transform3D(0.958775, 0, 0.284166, 0, 1, 0, -0.284166, 0, 0.958775, -151.149, 1.65668, -89.3688)
+
+[node name="DiceMakerD6_1" parent="TavernDungeon/Characters/DiceAnimation5" instance=ExtResource("59_4xtxd")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TavernDungeon/Characters/DiceAnimation5/DiceMakerD6_1"]
+libraries = {
+"": SubResource("AnimationLibrary_xngax")
+}
+autoplay = "Dice_Bump"
+
+[node name="Knight2" parent="TavernDungeon/Characters" instance=ExtResource("59_rorx4")]
+transform = Transform3D(-25, 0, -3.7749e-06, 0, 25, 0, 3.7749e-06, 0, -25, 0, -16.6783, 40.3856)
+
+[node name="Rogue_Hooded3" parent="TavernDungeon/Characters" instance=ExtResource("60_wrsmg")]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, -16.5797, -38.8605)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.77384, -0.258629, 0.578172, 0, 0.912834, 0.408331, -0.633381, -0.315983, 0.706388, 75.964, 75, 73.923)
+fov = 67.9
