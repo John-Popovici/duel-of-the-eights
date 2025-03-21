@@ -23,6 +23,8 @@ func _ready():
 	ErrorUI.visible = false
 	ErrorBack.visible = false
 	port_field.visible = false
+	join_button.visible = true
+	connect_button.visible=false
 	
 
 func _on_hostcheck_toggled(state):
@@ -30,6 +32,7 @@ func _on_hostcheck_toggled(state):
 	host_option = state
 	if host_option:
 		code_field.visible = false
+		connect_button.visible=true
 		connect_button.text = "Start Hosting"
 		port_field.visible = true
 		port_field.placeholder_text = "Port (Optional - 5 digits to 65535)"
