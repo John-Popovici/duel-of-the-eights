@@ -13,6 +13,7 @@ script = ExtResource("1_822on")
 [node name="NetworkManager" parent="." instance=ExtResource("2_adt0s")]
 script = ExtResource("3_dpjmp")
 default_port = 9999
+default_server_ip = "54.174.171.0"
 
 [node name="GameSettings" parent="." instance=ExtResource("3_ws7lw")]
 visible = false
