@@ -168,7 +168,13 @@ size_flags_vertical = 3
 theme = ExtResource("5_bq53n")
 text = "Play Online Blitz Game"
 
-[node name="StartOnlineGame" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
+[node name="StartLocalCustomGame" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("5_bq53n")
+text = "Play Local Custom Game"
+
+[node name="StartOnlineCustomGame" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("5_bq53n")
