@@ -306,7 +306,7 @@ directional_shadow_max_distance = 8192.0
 [node name="TavernDungeon" type="Node3D" parent="."]
 
 [node name="GameTable" parent="TavernDungeon" instance=ExtResource("2_5vq1x")]
-transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, -24.5, 0)
+transform = Transform3D(16.5082, 0, -18.7744, 0, 25, 0, 18.7744, 0, 16.5082, 0.381771, -24.5, 0.172677)
 
 [node name="stool2" parent="TavernDungeon/GameTable" instance=ExtResource("3_6fxia")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.176, -1.49982)
@@ -924,11 +924,15 @@ libraries = {
 autoplay = "Dice_Bump"
 
 [node name="Knight2" parent="TavernDungeon/Characters" instance=ExtResource("59_rorx4")]
-transform = Transform3D(-25, 0, -3.7749e-06, 0, 25, 0, 3.7749e-06, 0, -25, 0, -16.6783, 40.3856)
+transform = Transform3D(-16.5082, 0, 18.7744, 0, 25, 0, -18.7744, 0, -16.5082, -29.9469, -16.6783, 26.8405)
 
 [node name="Rogue_Hooded3" parent="TavernDungeon/Characters" instance=ExtResource("60_wrsmg")]
-transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, -16.5797, -38.8605)
+transform = Transform3D(16.5082, 0, -18.7744, 0, 25, 0, 18.7744, 0, 16.5082, 29.5651, -16.5797, -25.4881)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.77384, -0.258629, 0.578172, 0, 0.912834, 0.408331, -0.633381, -0.315983, 0.706388, 75.964, 75, 73.923)
-fov = 67.9
+transform = Transform3D(0.77384, -0.216629, 0.595183, 0, 0.939693, 0.34202, -0.633381, -0.264669, 0.727172, 60.913, 65, 80.332)
+fov = 65.5
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
+light_energy = 6.186
+spot_range = 288.486

@@ -88,22 +88,18 @@ expand_mode = 5
 stretch_mode = 5
 
 [node name="d4" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer" instance=ExtResource("4_ikotc")]
-texture_filter = 3
 layout_mode = 2
 text = "4-Sided"
 
 [node name="d6" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer" instance=ExtResource("4_ikotc")]
-texture_filter = 3
 layout_mode = 2
 text = "6-Sided"
 
 [node name="d8" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer" instance=ExtResource("4_ikotc")]
-texture_filter = 3
 layout_mode = 2
 text = "8-Sided"
 
 [node name="d12" parent="UIBox/SimplePresetsBox/PresetsBox/PresetsButtonsContainer" instance=ExtResource("4_ikotc")]
-texture_filter = 3
 layout_mode = 2
 text = "12-Sided"
 
