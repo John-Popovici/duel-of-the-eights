@@ -147,6 +147,7 @@ theme = ExtResource("5_bq53n")
 text = "Play Online Standard Game"
 
 [node name="StartBluffGame" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
+visible = false
 texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 3
@@ -160,6 +161,7 @@ theme = ExtResource("5_bq53n")
 text = "Play Online Bluff Game"
 
 [node name="StartBlitzGame" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
+visible = false
 texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 3
@@ -201,6 +203,12 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("5_bq53n")
 text = "Connect to Server"
+
+[node name="ExitGame" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("5_bq53n")
+text = "Exit Game"
 
 [node name="OptionsPanel" type="PanelContainer" parent="."]
 texture_filter = 3
