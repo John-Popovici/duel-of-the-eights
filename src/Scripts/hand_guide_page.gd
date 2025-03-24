@@ -2,6 +2,8 @@ extends CanvasLayer
 
 @onready var vbox_container = $PanelContainer/HandGuideInfoBox/ScrollContainer/HandDetailsInfo
 
+func openGuide() -> void:
+	self.visible
 
 
 
