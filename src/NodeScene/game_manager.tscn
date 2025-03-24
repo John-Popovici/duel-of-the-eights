@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d0icyj31p2tgw"]
+[gd_scene load_steps=25 format=3 uid="uid://d0icyj31p2tgw"]
 
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_manager.gd" id="1_q3ti8"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_dynamic_dice_container.gd" id="2_n4duv"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cp2ap6ewj5puv" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Knight_Player.tscn" id="9_vr5pn"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_ui.gd" id="11_0d724"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_chat_ui.gd" id="14_rpv4e"]
+[ext_resource type="Script" path="res://NodeScene/hand_guide_page.gd" id="14_s1fpd"]
 [ext_resource type="Texture2D" uid="uid://cbbiofkoc88y1" path="res://Assets/2D Assets/OtherImages/message_read.svg" id="15_3hw5t"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_watpb"]
@@ -555,6 +556,8 @@ libraries = {
 }
 
 [node name="HandGuidePage" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("14_s1fpd")
 
 [node name="PanelContainer" type="PanelContainer" parent="HandGuidePage"]
 anchors_preset = -1
@@ -568,20 +571,24 @@ offset_right = 334.048
 offset_bottom = 229.632
 theme = ExtResource("4_eudyq")
 
-[node name="HandGuideInfo" type="VBoxContainer" parent="HandGuidePage/PanelContainer"]
+[node name="HandGuideInfoBox" type="VBoxContainer" parent="HandGuidePage/PanelContainer"]
 layout_mode = 2
 theme = ExtResource("4_eudyq")
 
-[node name="HandGuideTitle" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfo"]
+[node name="HandGuideTitle" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox"]
 layout_mode = 2
 text = "Hand Guide For Player"
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HandGuidePage/PanelContainer/HandGuideInfo"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HandGuidePage/PanelContainer/HandGuideInfoBox"]
 layout_mode = 2
 
-[node name="HandDetails" type="VBoxContainer" parent="HandGuidePage/PanelContainer/HandGuideInfo/ScrollContainer"]
+[node name="HandDetailsInfo" type="VBoxContainer" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer"]
 layout_mode = 2
+
+[node name="Close button" type="Button" parent="HandGuidePage/PanelContainer/HandGuideInfoBox"]
+layout_mode = 2
+text = "Close Guide"
 
 [node name="GameUI" type="CanvasLayer" parent="."]
 script = ExtResource("11_0d724")
