@@ -456,7 +456,6 @@ spot_range = 90.7883
 spot_angle = 29.9219
 
 [node name="Scoreboard" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("7_0kcih")
 
 [node name="UIBox" type="PanelContainer" parent="Scoreboard"]
@@ -500,10 +499,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 400.0
-offset_top = -279.0
-offset_right = 548.0
-offset_bottom = -213.0
+offset_left = 398.0
+offset_top = -275.0
+offset_right = 550.0
+offset_bottom = -174.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("4_eudyq")
@@ -519,6 +518,11 @@ layout_mode = 2
 theme = ExtResource("4_eudyq")
 theme_override_font_sizes/font_size = 22
 text = "Pass"
+
+[node name="HandGuide" type="Button" parent="RollButtons" groups=["ConfirmButtons"]]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Hand Guide"
 
 [node name="BluffContainer" type="VBoxContainer" parent="."]
 visible = false
@@ -549,6 +553,35 @@ text = "Fold"
 libraries = {
 "": SubResource("AnimationLibrary_fxp87")
 }
+
+[node name="HandGuidePage" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="HandGuidePage"]
+anchors_preset = -1
+anchor_left = 0.526
+anchor_top = 0.391
+anchor_right = 0.526
+anchor_bottom = 0.391
+offset_left = -333.952
+offset_top = -229.368
+offset_right = 334.048
+offset_bottom = 229.632
+theme = ExtResource("4_eudyq")
+
+[node name="HandGuideInfo" type="VBoxContainer" parent="HandGuidePage/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("4_eudyq")
+
+[node name="HandGuideTitle" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfo"]
+layout_mode = 2
+text = "Hand Guide For Player"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HandGuidePage/PanelContainer/HandGuideInfo"]
+layout_mode = 2
+
+[node name="HandDetails" type="VBoxContainer" parent="HandGuidePage/PanelContainer/HandGuideInfo/ScrollContainer"]
+layout_mode = 2
 
 [node name="GameUI" type="CanvasLayer" parent="."]
 script = ExtResource("11_0d724")
@@ -721,10 +754,10 @@ layout_mode = 2
 
 [node name="CountdownPanel" type="PanelContainer" parent="GameUI"]
 texture_filter = 3
-offset_left = 954.0
-offset_top = 439.0
-offset_right = 1152.0
-offset_bottom = 479.0
+offset_left = 953.0
+offset_top = 481.0
+offset_right = 1151.0
+offset_bottom = 521.0
 theme = ExtResource("4_h4ers")
 
 [node name="ProgressBar" type="ProgressBar" parent="GameUI/CountdownPanel"]
