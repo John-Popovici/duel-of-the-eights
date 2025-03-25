@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://d0icyj31p2tgw"]
+[gd_scene load_steps=39 format=3 uid="uid://d0icyj31p2tgw"]
 
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_manager.gd" id="1_q3ti8"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_dynamic_dice_container.gd" id="2_n4duv"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://Scripts/hand_guide_page.gd" id="14_s1fpd"]
 [ext_resource type="Texture2D" uid="uid://cbbiofkoc88y1" path="res://Assets/2D Assets/OtherImages/message_read.svg" id="15_3hw5t"]
 [ext_resource type="Texture2D" uid="uid://ckrhen3gd2fhn" path="res://Assets/2D Assets/RollExamples/hand_3_example.png" id="15_h46vp"]
+[ext_resource type="Texture2D" uid="uid://b5ctf6j8pkibf" path="res://Assets/2D Assets/RollExamples/hover.png" id="15_wasxe"]
 [ext_resource type="Texture2D" uid="uid://46gtnfykaa3k" path="res://Assets/2D Assets/RollExamples/hand_3_example_score.png" id="16_0b61b"]
 [ext_resource type="Texture2D" uid="uid://b1tbooa4q63h1" path="res://Assets/2D Assets/RollExamples/4_of_a_kind_example.png" id="17_bjung"]
 [ext_resource type="Texture2D" uid="uid://ssyy8wgfhbeu" path="res://Assets/2D Assets/RollExamples/4_of_a_kind_example_score.png" id="18_ktcim"]
@@ -604,7 +605,19 @@ size_flags_vertical = 3
 
 [node name="Note" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-text = "Note: You can hover over the hand score to find out how many points you can score in that category. With that in mind, here’s how to score certain hands on the scoreboard:  "
+text = "Note: When scoring, you can hover your mouse over the select button of each hand catagory in the scoreboard to find out how many points you can score in that category, just like in the example below:"
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="TextureRect12" type="TextureRect" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 20.0
+texture = ExtResource("15_wasxe")
+
+[node name="Note2" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "With that in mind, here is a guide on how to get each type of scoreable hand on the scoreboard:"
 vertical_alignment = 3
 autowrap_mode = 3
 
