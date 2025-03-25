@@ -537,7 +537,7 @@ text = "Pass"
 [node name="HandGuide" type="Button" parent="RollButtons" groups=["ConfirmButtons"]]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
-text = "Hand Guide"
+text = "Scoring Guide"
 
 [node name="BluffContainer" type="VBoxContainer" parent="."]
 visible = false
@@ -591,7 +591,7 @@ theme = ExtResource("4_eudyq")
 
 [node name="HandGuideTitle" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox"]
 layout_mode = 2
-text = "Hand Guide For Player"
+text = "Scoring Guide For Player"
 horizontal_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HandGuidePage/PanelContainer/HandGuideInfoBox"]
