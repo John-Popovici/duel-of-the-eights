@@ -44,6 +44,7 @@ layout_mode = 2
 theme = ExtResource("3_cqgb1")
 placeholder_text = "Connect Code"
 alignment = 1
+max_length = 25
 
 [node name="Port_Input" type="LineEdit" parent="ConnectionUI/UIBox/Connection_Setup"]
 texture_filter = 3
@@ -51,6 +52,7 @@ layout_mode = 2
 theme = ExtResource("3_cqgb1")
 placeholder_text = "Port - 5 digits"
 alignment = 1
+max_length = 5
 
 [node name="HostButton" type="Button" parent="ConnectionUI/UIBox/Connection_Setup" groups=["ConfirmButtons"]]
 layout_mode = 2

@@ -787,6 +787,7 @@ layout_mode = 2
 [node name="ChatInput" type="LineEdit" parent="GameUI/ChatUI/ChatPopup/VSplitContainer/InputUI"]
 layout_mode = 2
 placeholder_text = "Input Message"
+max_length = 160
 
 [node name="SendButton" type="Button" parent="GameUI/ChatUI/ChatPopup/VSplitContainer/InputUI"]
 layout_mode = 2

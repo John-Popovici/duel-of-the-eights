@@ -109,6 +109,7 @@ theme_override_styles/read_only = ExtResource("5_dpqr0")
 theme_override_styles/normal = ExtResource("6_f7cih")
 placeholder_text = "Enter Name 1"
 alignment = 1
+max_length = 20
 
 [node name="Player2Entry" type="LineEdit" parent="VBoxContainer"]
 visible = false
@@ -120,6 +121,7 @@ theme_override_styles/read_only = ExtResource("5_dpqr0")
 theme_override_styles/normal = ExtResource("6_f7cih")
 placeholder_text = "Enter Name 2"
 alignment = 1
+max_length = 20
 
 [node name="StartLocalGame" type="Button" parent="VBoxContainer"]
 visible = false

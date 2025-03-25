@@ -40,6 +40,7 @@ layout_mode = 2
 theme = ExtResource("3_47sx3")
 placeholder_text = "Connect Code"
 alignment = 1
+max_length = 4
 
 [node name="Port_Input" type="LineEdit" parent="ConnectionUI/UIBox/Connection_Setup"]
 visible = false
