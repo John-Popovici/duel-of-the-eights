@@ -94,7 +94,7 @@ offset_right = 200.0
 grow_vertical = 0
 size_flags_vertical = 8
 placeholder_text = "User Name"
-max_length = 50
+max_length = 25
 expand_to_text_length = true
 
 [node name="HorizontalLine" type="ColorRect" parent="MainBackground/MainContainer/MarginContainer/HListingsContainer"]
