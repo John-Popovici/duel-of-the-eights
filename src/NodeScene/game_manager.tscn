@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d0icyj31p2tgw"]
+[gd_scene load_steps=39 format=3 uid="uid://d0icyj31p2tgw"]
 
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_manager.gd" id="1_q3ti8"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_dynamic_dice_container.gd" id="2_n4duv"]
@@ -15,7 +15,22 @@
 [ext_resource type="PackedScene" uid="uid://cp2ap6ewj5puv" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Knight_Player.tscn" id="9_vr5pn"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_ui.gd" id="11_0d724"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_chat_ui.gd" id="14_rpv4e"]
+[ext_resource type="Script" path="res://Scripts/hand_guide_page.gd" id="14_s1fpd"]
 [ext_resource type="Texture2D" uid="uid://cbbiofkoc88y1" path="res://Assets/2D Assets/OtherImages/message_read.svg" id="15_3hw5t"]
+[ext_resource type="Texture2D" uid="uid://ckrhen3gd2fhn" path="res://Assets/2D Assets/RollExamples/hand_3_example.png" id="15_h46vp"]
+[ext_resource type="Texture2D" uid="uid://b5ctf6j8pkibf" path="res://Assets/2D Assets/RollExamples/hover.png" id="15_wasxe"]
+[ext_resource type="Texture2D" uid="uid://46gtnfykaa3k" path="res://Assets/2D Assets/RollExamples/hand_3_example_score.png" id="16_0b61b"]
+[ext_resource type="Texture2D" uid="uid://b1tbooa4q63h1" path="res://Assets/2D Assets/RollExamples/4_of_a_kind_example.png" id="17_bjung"]
+[ext_resource type="Texture2D" uid="uid://ssyy8wgfhbeu" path="res://Assets/2D Assets/RollExamples/4_of_a_kind_example_score.png" id="18_ktcim"]
+[ext_resource type="Texture2D" uid="uid://c8fplkmovbtyu" path="res://Assets/2D Assets/RollExamples/2_3_full_house_example.png" id="19_fy5hm"]
+[ext_resource type="Texture2D" uid="uid://b6acqkajmw545" path="res://Assets/2D Assets/RollExamples/2_3_full_house_example_score.png" id="20_mr2u7"]
+[ext_resource type="Texture2D" uid="uid://bj32g6uq1ppf2" path="res://Assets/2D Assets/RollExamples/Straight_of_5_example.png" id="21_swopi"]
+[ext_resource type="Texture2D" uid="uid://bwn2i2vg7kphw" path="res://Assets/2D Assets/RollExamples/Straight_of_5_example_score.png" id="22_5bfp5"]
+[ext_resource type="Texture2D" uid="uid://bibarfypvsnoj" path="res://Assets/2D Assets/RollExamples/chance_example.png" id="23_qithm"]
+[ext_resource type="Texture2D" uid="uid://djoahb5opw0c4" path="res://Assets/2D Assets/RollExamples/chance_example_score.png" id="24_84ba5"]
+[ext_resource type="Texture2D" uid="uid://b6pralm22kdoh" path="res://Assets/2D Assets/RollExamples/bonus_setting.png" id="25_dstdp"]
+[ext_resource type="Texture2D" uid="uid://dlln7g5t6y1ch" path="res://Assets/2D Assets/RollExamples/pre-bonus.png" id="26_c3hy3"]
+[ext_resource type="Texture2D" uid="uid://cug3ufjbagsum" path="res://Assets/2D Assets/RollExamples/post-bonus.png" id="27_ayo50"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_watpb"]
 
@@ -456,7 +471,6 @@ spot_range = 90.7883
 spot_angle = 29.9219
 
 [node name="Scoreboard" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("7_0kcih")
 
 [node name="UIBox" type="PanelContainer" parent="Scoreboard"]
@@ -500,10 +514,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 400.0
-offset_top = -279.0
-offset_right = 548.0
-offset_bottom = -213.0
+offset_left = 398.0
+offset_top = -275.0
+offset_right = 550.0
+offset_bottom = -174.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("4_eudyq")
@@ -519,6 +533,11 @@ layout_mode = 2
 theme = ExtResource("4_eudyq")
 theme_override_font_sizes/font_size = 22
 text = "Pass"
+
+[node name="HandGuide" type="Button" parent="RollButtons" groups=["ConfirmButtons"]]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Hand Guide"
 
 [node name="BluffContainer" type="VBoxContainer" parent="."]
 visible = false
@@ -549,6 +568,229 @@ text = "Fold"
 libraries = {
 "": SubResource("AnimationLibrary_fxp87")
 }
+
+[node name="HandGuidePage" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("14_s1fpd")
+
+[node name="PanelContainer" type="PanelContainer" parent="HandGuidePage"]
+anchors_preset = -1
+anchor_left = 0.526
+anchor_top = 0.391
+anchor_right = 0.526
+anchor_bottom = 0.391
+offset_left = -355.952
+offset_top = -203.368
+offset_right = 312.048
+offset_bottom = 149.632
+theme = ExtResource("4_eudyq")
+
+[node name="HandGuideInfoBox" type="VBoxContainer" parent="HandGuidePage/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("4_eudyq")
+
+[node name="HandGuideTitle" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox"]
+layout_mode = 2
+text = "Hand Guide For Player"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HandGuidePage/PanelContainer/HandGuideInfoBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Note" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Note: When scoring, you can hover your mouse over the select button of each hand catagory in the scoreboard to find out how many points you can score in that category, just like in the example below:"
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="TextureRect12" type="TextureRect" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 20.0
+texture = ExtResource("15_wasxe")
+
+[node name="Note2" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "With that in mind, here is a guide on how to get each type of scoreable hand on the scoreboard:"
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="BasicHands" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Basic Hands (Hand: 1’s, Hand: 2’s, etc) "
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="BasicHanddetails" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Score when you have any number of dice of the same value as that hand (so to score in Hand: 3’s for example, have any die with a three value). When scored, ONLY the total of each die with the same value specified in the hand is added to that score.  
+
+In this example below, the user has three dice each containing the value “3”. As a result, when the user scores in this category, the total value of the “3” dice are added together, and the non-3 dice are ignored, creating the final score of “9” shown in the image below the hand.
+"
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("15_h46vp")
+
+[node name="TextureRect2" type="TextureRect" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 20.0
+texture = ExtResource("16_0b61b")
+
+[node name="ofAKind" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "_ of a kind "
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="ofAKindDetails" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Score this hand by rolling __ dice of the same value (e.g., three for a “3 of a kind”). When scored, add the total of all rolled dice — even non-matching ones — to your final score.
+
+In this example below, The user has four dice containing the same value of “4”. This gives her a “4 of a kind” hand that when scored, gives her the total score of all the dice in her hand (in this case, 17 points)
+"
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="TextureRect3" type="TextureRect" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("17_bjung")
+
+[node name="TextureRect4" type="TextureRect" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 20.0
+texture = ExtResource("18_ktcim")
+
+[node name="fullHouse" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Full house(a,b)"
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="fullHouseDetails" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Score by rolling a dice of one value and b of another (e.g., (2,3) = two of one number + three of another). When scored, The score equals the value of length “a” + “b”, multiplied by a multiplier  (e.g., (a+b) × modifier).
+
+In this example below, the user has two “1’s” and three “2’s”, fulfilling the requirements of the hand “Full house (2,3)”. Thus when this hand is scored, a special score is calculated for that hand.
+"
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="TextureRect5" type="TextureRect" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("19_fy5hm")
+
+[node name="TextureRect6" type="TextureRect" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 20.0
+texture = ExtResource("20_mr2u7")
+
+[node name="Straight" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Straight of _"
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="StraightDetails" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "This type of hand is scored when dice have a sequence of _ numbers in order(so for example, in order to score in a “straight of 4” hand, the player must have four dice with values in ascending order, like 1,2,3,4 ). When this hand type is scored, the length of the hand is multiplied with a special modifier in order to provide the final score for that hand (so for a “straight of 4” hand, the length of that hand would be 4). 
+
+In this example, a person rolled a hand where five of his dice produces a sequence of values in ascending order together, creating a “straight of 5” hand. Thus, when the user scored for this type of hand, a special score was calculated.
+"
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="TextureRect7" type="TextureRect" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("21_swopi")
+
+[node name="TextureRect8" type="TextureRect" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 20.0
+texture = ExtResource("22_5bfp5")
+
+[node name="Chance" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Chance"
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="ChanceDetails" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "This hand is basically a wild card hand that, when scored, simply adds the total of every dice in the hand, regardless of the values of each die. This is useful when you can’t or don’t wish to score in another category. 
+
+In this example, This person chose to use his below hand to score a “Chance” hand, which added up every value in his hand for a total value of 14 (1+2+3+3+5=14)
+"
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="TextureRect9" type="TextureRect" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("23_qithm")
+
+[node name="TextureRect10" type="TextureRect" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 20.0
+texture = ExtResource("24_84ba5")
+
+[node name="Bonus" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Bonus"
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="Bonusdetails" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "If the player reaches a certain amount of points with the sum of all the basic hands (“Hand: 1’s, Hand 2’s, etc), A bonus score will be applied to the player's final score. Note that many preset game modes won’t have this Bonus score active, so the bonus score feature may need to be added manually in the pre-game settings. 
+
+In this example,the user has enabled the bonus score option, with an in game score of “10”. "
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="TextureRect11" type="TextureRect" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 20.0
+texture = ExtResource("25_dstdp")
+
+[node name="Bonusdetails2" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Thus, When the user achieved a high enough score on his basic hands (“Hand: 1’s, Hand 2’s, etc), a bonus score of “10” was added to his final score (The images below show the before and after the bonus was applied."
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect13" type="TextureRect" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("27_ayo50")
+
+[node name="TextureRect12" type="TextureRect" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("26_c3hy3")
+
+[node name="Close button" type="Button" parent="HandGuidePage/PanelContainer/HandGuideInfoBox"]
+layout_mode = 2
+text = "Close Guide"
+icon_alignment = 1
+vertical_icon_alignment = 2
 
 [node name="GameUI" type="CanvasLayer" parent="."]
 script = ExtResource("11_0d724")
@@ -721,10 +963,10 @@ layout_mode = 2
 
 [node name="CountdownPanel" type="PanelContainer" parent="GameUI"]
 texture_filter = 3
-offset_left = 954.0
-offset_top = 439.0
-offset_right = 1152.0
-offset_bottom = 479.0
+offset_left = 953.0
+offset_top = 481.0
+offset_right = 1151.0
+offset_bottom = 521.0
 theme = ExtResource("4_h4ers")
 
 [node name="ProgressBar" type="ProgressBar" parent="GameUI/CountdownPanel"]

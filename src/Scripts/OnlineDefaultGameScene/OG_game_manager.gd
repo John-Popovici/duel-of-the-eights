@@ -18,6 +18,9 @@ var hand_settings
 @onready var rollButtons = get_node("RollButtons")
 @onready var rollSelected: Button = get_node("RollButtons/RollSelected")
 @onready var passRoll: Button = get_node("RollButtons/PassRoll")
+@onready var handGuide: Button = get_node("RollButtons/HandGuide")
+@onready var closeGuide: Button = get_node("HandGuidePage/PanelContainer/HandGuideInfoBox/Close button")
+@onready var handGuideCanvas = get_node("HandGuidePage")
 @onready var BluffButtons = get_node("BluffContainer")
 @onready var raiseTheStakesButton: Button = get_node("BluffContainer/RaiseTheStakesButton")
 @onready var foldButton: Button = get_node("BluffContainer/FoldButton")
@@ -86,6 +89,9 @@ func setup_game() -> void:
 	passRoll.connect("pressed", self._on_pass_roll)
 	raiseTheStakesButton.connect("pressed", self._on_raise)
 	foldButton.connect("pressed", self._on_fold)
+	handGuide.connect("pressed", self._on_guide)
+	closeGuide.connect("pressed", self._on_guide)
+	handGuideCanvas.visible = false
 	setDisableAllButtons(true)
 	GameUI.visible = true
 	GameUI.hide_waiting_screen()
@@ -562,6 +568,15 @@ func _on_pass_roll() -> void:
 		other_player_roll_selection = false
 		waiting_on_other_player(false)
 		rollPhase(roll_selection)
+		
+func _on_guide() -> void:
+	if handGuideCanvas.visible:
+		handGuideCanvas.visible = false
+	else:
+		handGuideCanvas.visible = true
+	
+	
+	
 
 func _on_raise() -> void:
 	setDisableRaiseButtons(true)
@@ -636,6 +651,8 @@ func _on_hand_selected(hand: Dictionary):
 		other_player_hand_selection_done = false
 		endOfRoundEffects()
 		waiting_on_other_player(false)
+		
+		
 
 func _on_bonus_exist(_hand: Dictionary) -> void:
 	scoreCalc.setupBonus(_hand)
