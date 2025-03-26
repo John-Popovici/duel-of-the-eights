@@ -1,0 +1,184 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtaxv1htjd126"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerProfile/player_profile_ui.gd" id="1_gh403"]
+
+[node name="CreditRollUI" type="CanvasLayer"]
+script = ExtResource("1_gh403")
+
+[node name="MainBackground" type="PanelContainer" parent="."]
+visible = false
+texture_filter = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BackgroundBlurred" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0.376471)
+
+[node name="CreditScroll" type="ScrollContainer" parent="BackgroundBlurred"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Categories" type="VBoxContainer" parent="BackgroundBlurred/CreditScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 23
+
+[node name="header_spacing" type="ColorRect" parent="BackgroundBlurred/CreditScroll/Categories"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+color = Color(1, 1, 1, 0)
+
+[node name="DevelopersLabel" type="Label" parent="BackgroundBlurred/CreditScroll/Categories"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0594551, 0.262175, 0.485844, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 26
+text = "Duel of the Eights Developers"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Hemraj" type="Label" parent="BackgroundBlurred/CreditScroll/Categories"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.129412, 0.415686, 0.737255, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 23
+text = "Hemraj Bhatt - Slayer of Servers"
+horizontal_alignment = 1
+
+[node name="Isaac" type="Label" parent="BackgroundBlurred/CreditScroll/Categories"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.129412, 0.415686, 0.737255, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 23
+text = "Isaac Giles - Aligner of Dice"
+horizontal_alignment = 1
+
+[node name="John" type="Label" parent="BackgroundBlurred/CreditScroll/Categories"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.129412, 0.415686, 0.737255, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 23
+text = "John Popovici - Master of Docs"
+horizontal_alignment = 1
+
+[node name="Naishan" type="Label" parent="BackgroundBlurred/CreditScroll/Categories"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.129412, 0.415686, 0.737255, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 23
+text = "Naishan Guo - Jack of All Trades"
+horizontal_alignment = 1
+
+[node name="Nigel" type="Label" parent="BackgroundBlurred/CreditScroll/Categories"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.129412, 0.415686, 0.737255, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 23
+text = "Nigel Moses - Hero of Ages"
+horizontal_alignment = 1
+
+[node name="section_spacing1" type="ColorRect" parent="BackgroundBlurred/CreditScroll/Categories"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+color = Color(1, 1, 1, 0)
+
+[node name="SpecialThanksLabel" type="Label" parent="BackgroundBlurred/CreditScroll/Categories"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.558838, 0.104416, 0.153228, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 26
+text = "Special Thanks"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Rapoport" type="Label" parent="BackgroundBlurred/CreditScroll/Categories"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.741176, 0.160784, 0.219608, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 23
+text = "Prof. Rapoport - A Man of Probability"
+horizontal_alignment = 1
+
+[node name="TA" type="Label" parent="BackgroundBlurred/CreditScroll/Categories"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.741176, 0.160784, 0.219608, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 23
+text = "Lucas Dutton - TA of Great Standing"
+horizontal_alignment = 1
+
+[node name="Smith" type="Label" parent="BackgroundBlurred/CreditScroll/Categories"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.741176, 0.160784, 0.219608, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 23
+text = "Prof. Smith - The Man Himself"
+horizontal_alignment = 1
+
+[node name="section_spacing2" type="ColorRect" parent="BackgroundBlurred/CreditScroll/Categories"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+color = Color(1, 1, 1, 0)
+
+[node name="OtherAssetsLabel" type="Label" parent="BackgroundBlurred/CreditScroll/Categories"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0969127, 0.354366, 0.309614, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 26
+text = "Other Assets"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="KayKits" type="Label" parent="BackgroundBlurred/CreditScroll/Categories"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.159887, 0.516463, 0.456074, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 23
+text = "Kay Kits Assets"
+horizontal_alignment = 1
+
+[node name="ChatGPT" type="Label" parent="BackgroundBlurred/CreditScroll/Categories"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.159887, 0.516463, 0.456074, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 23
+text = "ChatGPT - Valued Team Member"
+horizontal_alignment = 1
+
+[node name="Jack" type="Label" parent="BackgroundBlurred/CreditScroll/Categories"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.159887, 0.516463, 0.456074, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 23
+text = "Jack - Slapper Audio"
+horizontal_alignment = 1
+
+[node name="Ben" type="Label" parent="BackgroundBlurred/CreditScroll/Categories"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.159887, 0.516463, 0.456074, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 23
+text = "Ben - Slappee Audio"
+horizontal_alignment = 1
+
+[node name="footer_spacing" type="ColorRect" parent="BackgroundBlurred/CreditScroll/Categories"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+color = Color(1, 1, 1, 0)
