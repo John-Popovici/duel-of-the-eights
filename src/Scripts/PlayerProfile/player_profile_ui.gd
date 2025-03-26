@@ -20,7 +20,7 @@ signal profile_settings_ready(profile_settings)
 @onready var ambience_slider_value = ambienceContainer.get_node("Value")
 @onready var back_to_home_button = listingsContainer.get_node("BackToHomeButton")
 
-@export var presets_folder = "res://Presets"
+@export var presets_folder = "user://Presets"
 @export var player_settings_path = (presets_folder + "/profile_settings.json")
 
 @export var profile_settings: Dictionary = {}
