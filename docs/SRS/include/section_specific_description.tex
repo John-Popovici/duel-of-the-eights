@@ -235,7 +235,20 @@ The stretch goals are:
 
 \subsection{Solution Characteristics Specification}
 
-This section, along with Physical System Description are not included within our document and have been removed from the template. The purpose of this section is to reduce the problem into one expressed in mathematical terms. Mathematical expertise is used to extract the essentials from the underlying physical description of the problem, and to collect and substantiate all physical data pertinent to the problem. Important elements that might otherwise have been in this section can be found in other sections where they may be more pertinent. Given the focus of this section on the physical description, and the fact there is no physical description as we have a software based project that is mostly hardware agnostic where the operating system would be more pertinent to the execution of the program. 
+This section, along with Physical System Description are not included within our document and have been removed from the template. The purpose of this section is to reduce the problem into one expressed in mathematical terms. Mathematical expertise is used to extract the essentials from the underlying physical description of the problem, and to collect and substantiate all physical data pertinent to the problem. Important elements that might otherwise have been in this section can be found in other sections where they may be more pertinent. Given the focus of this section on the physical description, and the fact there is no physical description as we have a software based project that is mostly hardware agnostic where the operating system would be more pertinent to the execution of the program. //
+
+To build an understanding of state space for the solution space, the following is a list of scenes the user would interact with.
+\begin{itemize}
+  \item \textbf{Main Menu:} The starting screen where the player can navigate to different sections of the game. Options include starting a new game, joining an online game, accessing settings, or exiting.
+  \item \textbf{Client Settings Page:} A pre-game configuration screen where players define game-specific parameters.
+  \item \textbf{Game Setup Page:} A configuration page where users can adjust settings such as dice graphics, sounds, name, and game UI.
+  \item \textbf{Game:} The main interactive state of the game where gameplay takes place. This scene consists of the core mechanics, including dice movement, player interactions, and real-time processing.
+  \item \textbf{Game Decisions Panel:} A UI component that appears during gameplay, allowing players to make decisions. This may involve selecting which dice to re-roll and selecting what scoring option to use.
+  \item \textbf{Game Score Page:} The post-game results screen where players can see their scores and other performance metrics. It may also include options to restart or return to the main menu.
+\end{itemize}
+
+
+
 
 \iffalse
 \plt{This section specifies the information in the solution domain of the system
