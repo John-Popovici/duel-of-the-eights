@@ -48,6 +48,16 @@ grow_vertical = 2
 texture_filter = 3
 layout_mode = 2
 
+[node name="TutTitle" type="VBoxContainer" parent="Panel/Container"]
+texture_filter = 3
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Panel/Container/TutTitle"]
+texture_filter = 3
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="ImageDisplay" type="TextureRect" parent="Panel/Container"]
 texture_filter = 3
 layout_mode = 2
@@ -68,17 +78,14 @@ texture_filter = 3
 layout_mode = 2
 
 [node name="PreviousButton" parent="Panel/Container/NavigationButtons" instance=ExtResource("3_5g33q")]
-texture_filter = 3
 layout_mode = 2
 text = "Previous"
 
 [node name="NextButton" parent="Panel/Container/NavigationButtons" instance=ExtResource("3_5g33q")]
-texture_filter = 3
 layout_mode = 2
 text = "Next"
 
 [node name="SkipButton" parent="Panel/Container/NavigationButtons" instance=ExtResource("3_5g33q")]
-texture_filter = 3
 layout_mode = 2
 text = "Exit Tutorial"
 
