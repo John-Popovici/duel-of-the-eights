@@ -26,7 +26,7 @@ extends Node
 	"Black": preload("res://Materials/DiceTextures/Black.tres"),
 }
 
-@onready var presets_folder = "res://Presets"
+@onready var presets_folder = "user://Presets"
 @onready var player_settings_path = (presets_folder + "/profile_settings.json")
 @onready var global_theme_settings_path = (presets_folder + "/global_theme_settings.json")
 @onready var dice_settings_path = (presets_folder + "/dice_settings.json")
@@ -201,6 +201,15 @@ func save_global_themes():
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	# Create folders that may be missing
+	var usersFolder = DirAccess.open("user://")
+	if not usersFolder.dir_exists("user://Presets"):
+		usersFolder.make_dir("user://Presets")
+	var temp_presets_folder = DirAccess.open(presets_folder)
+	if not temp_presets_folder.dir_exists("user://Presets/Images"):
+		temp_presets_folder.make_dir("user://Presets/Images")
+		
 	var dir = DirAccess.open(dice_tex_folder)
 	if dir:
 		dir.list_dir_begin()
