@@ -19,6 +19,7 @@ extends Node3D
 @onready var customization_button = $OptionsPanel/VBoxContainer/Customization
 @onready var tutorial_button = $OptionsPanel/VBoxContainer/Tutorial
 @onready var profile_button = $OptionsPanel/VBoxContainer/Profile
+@onready var credits_button = $OptionsPanel/VBoxContainer/Credits
 
 # Called when the node enters the scene tree
 func _ready() -> void:
@@ -36,6 +37,7 @@ func _ready() -> void:
 	customization_button.pressed.connect(_on_customization_pressed)
 	tutorial_button.pressed.connect(_on_tutorial_button)
 	profile_button.pressed.connect(_on_profile_pressed)
+	credits_button.pressed.connect(_on_credits_pressed)
 	AudioManager.play_music("main_menu")
 	AudioManager.connect_buttons()
 
@@ -106,6 +108,10 @@ func _on_tutorial_button() -> void:
 func _on_profile_pressed() -> void:
 	# Load profile overlay
 	SceneSwitcher.changeScene("res://Scenes/player_profile_scene.tscn")
+	
+func _on_credits_pressed() -> void:
+	# Load credits overlay
+	SceneSwitcher.changeScene("res://Scenes/credit_roll_scene.tscn")
 
 func _input(event):
 	if event is InputEventKey:

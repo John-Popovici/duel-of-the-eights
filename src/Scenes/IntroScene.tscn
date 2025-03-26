@@ -220,7 +220,7 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -218.0
-offset_bottom = 152.0
+offset_bottom = 160.0
 grow_horizontal = 0
 theme = ExtResource("5_bq53n")
 
@@ -245,3 +245,9 @@ texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 3
 text = "Tutorial"
+
+[node name="Credits" type="Button" parent="OptionsPanel/VBoxContainer" groups=["ConfirmButtons"]]
+texture_filter = 3
+layout_mode = 2
+size_flags_vertical = 3
+text = "Credits"
