@@ -37,6 +37,11 @@ func _ready() -> void:
 	# Initialize tween
 	_start_auto_scroll()
 
+func _input(event):
+	if event is InputEventKey:
+		if event.is_pressed() and event.keycode == KEY_ESCAPE :
+			SceneSwitcher.returnToIntro()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

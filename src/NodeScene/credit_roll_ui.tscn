@@ -12,7 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-color = Color(1, 1, 1, 0.47451)
+color = Color(1, 1, 1, 0.517647)
 
 [node name="CreditScroll" type="ScrollContainer" parent="BackgroundBlurred"]
 layout_mode = 1
@@ -169,6 +169,19 @@ text = "Ben - Slappee Audio"
 horizontal_alignment = 1
 
 [node name="footer_spacing" type="ColorRect" parent="BackgroundBlurred/CreditScroll/Categories"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+color = Color(1, 1, 1, 0)
+
+[node name="EscapeToQuit" type="Label" parent="BackgroundBlurred/CreditScroll/Categories"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 23
+text = "--     Press Esc to Quit     --"
+horizontal_alignment = 1
+
+[node name="bottom_padding" type="ColorRect" parent="BackgroundBlurred/CreditScroll/Categories"]
+custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
 color = Color(1, 1, 1, 0)
