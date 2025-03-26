@@ -136,6 +136,7 @@ disabled = true
 text = "Start Local Game!"
 
 [node name="StartStandardGame" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
+visible = false
 texture_filter = 3
 layout_mode = 2
 size_flags_vertical = 3
@@ -177,6 +178,7 @@ theme = ExtResource("5_bq53n")
 text = "Play Online Blitz Game"
 
 [node name="StartLocalCustomGame" type="Button" parent="VBoxContainer" groups=["ConfirmButtons"]]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("5_bq53n")
