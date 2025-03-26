@@ -1,20 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://dtaxv1htjd126"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerProfile/player_profile_ui.gd" id="1_gh403"]
+[ext_resource type="Script" path="res://NodeScene/credit_roll_ui.gd" id="1_5y601"]
 
 [node name="CreditRollUI" type="CanvasLayer"]
-script = ExtResource("1_gh403")
-
-[node name="MainBackground" type="PanelContainer" parent="."]
-visible = false
-texture_filter = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="BackgroundBlurred" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -24,7 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-color = Color(1, 1, 1, 0.376471)
+color = Color(1, 1, 1, 0.47451)
 
 [node name="CreditScroll" type="ScrollContainer" parent="BackgroundBlurred"]
 layout_mode = 1
@@ -33,6 +21,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+vertical_scroll_mode = 2
+script = ExtResource("1_5y601")
 
 [node name="Categories" type="VBoxContainer" parent="BackgroundBlurred/CreditScroll"]
 layout_mode = 2
