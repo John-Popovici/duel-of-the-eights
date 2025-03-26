@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://begoykuqh8n4w"]
+[gd_scene load_steps=74 format=3 uid="uid://begoykuqh8n4w"]
 
 [ext_resource type="PackedScene" uid="uid://mshgfe1w4iig" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/table_medium_tablecloth.gltf" id="2_5vq1x"]
 [ext_resource type="PackedScene" uid="uid://bcwefsnet07bs" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/stool.gltf" id="3_6fxia"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://dqcxgbpu7epul" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/barrier.gltf" id="30_dbi18"]
 [ext_resource type="PackedScene" uid="uid://bfvvj44ulabb" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/barrier_half.gltf" id="31_kba8k"]
 [ext_resource type="PackedScene" uid="uid://dsw31tt3igfhl" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/barrier_colum_half.gltf" id="32_b6ucb"]
+[ext_resource type="PackedScene" uid="uid://cwlc2vnlyuvs4" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/floor_wood_large_dark.gltf" id="32_fswu5"]
 [ext_resource type="PackedScene" uid="uid://55melk6otw81" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/banner_shield_green.gltf" id="33_y6x0o"]
 [ext_resource type="PackedScene" uid="uid://i1tj46sw05g2" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/pillar.gltf" id="34_vtk8s"]
 [ext_resource type="PackedScene" uid="uid://djsh6mlx4uxmm" path="res://Assets/3D Assets/KayKit_DungeonRemastered_1.1_Free/Assets/gltf/wall_archedwindow_gated_scaffold.gltf" id="35_7eo37"]
@@ -63,6 +64,7 @@
 [ext_resource type="PackedScene" uid="uid://dtohuamct7vwq" path="res://Assets/dice/d6/DiceMakerD6.glb" id="59_4xtxd"]
 [ext_resource type="PackedScene" uid="uid://6ytc3b7g5uql" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Knight_Player_Cinematic.tscn" id="59_rorx4"]
 [ext_resource type="PackedScene" uid="uid://70sdouynqgv2" path="res://Assets/3D Assets/KayKit_Adventurers_1.0_FREE/Characters/gltf/Rouge_Drinker_Cinematic.tscn" id="60_wrsmg"]
+[ext_resource type="Script" path="res://Scripts/moving_camera_controller.gd" id="65_68chc"]
 
 [sub_resource type="Animation" id="Animation_gpu3b"]
 resource_name = "GlowingLoop"
@@ -594,6 +596,18 @@ transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -45
 [node name="wall_corner_scaffold2" parent="TavernDungeon/Walls/UpperLeftWall" instance=ExtResource("28_fca3x")]
 transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -450, 100, -250)
 
+[node name="floor_wood_large_dark2" parent="TavernDungeon/Walls/UpperLeftWall/wall_corner_scaffold2" instance=ExtResource("32_fswu5")]
+transform = Transform3D(-1, 0, 7.10543e-15, 0, -1, 0, -7.10543e-15, 0, -1, -2.5, 4, 2.5)
+
+[node name="floor_wood_large_dark3" parent="TavernDungeon/Walls/UpperLeftWall/wall_corner_scaffold2" instance=ExtResource("32_fswu5")]
+transform = Transform3D(-1, 0, 1.06581e-14, 0, -1, 0, -1.06581e-14, 0, -1, -2.5, 4, 6.5)
+
+[node name="floor_wood_large_dark4" parent="TavernDungeon/Walls/UpperLeftWall/wall_corner_scaffold2" instance=ExtResource("32_fswu5")]
+transform = Transform3D(-1, 0, 1.06581e-14, 0, -1, 0, -1.06581e-14, 0, -1, -6, 4, 2.5)
+
+[node name="floor_wood_large_dark5" parent="TavernDungeon/Walls/UpperLeftWall/wall_corner_scaffold2" instance=ExtResource("32_fswu5")]
+transform = Transform3D(-1, 0, 1.06581e-14, 0, -1, 0, -1.06581e-14, 0, -1, -6, 4, 6.5)
+
 [node name="wall16" parent="TavernDungeon/Walls/UpperLeftWall" instance=ExtResource("11_s0nb7")]
 transform = Transform3D(-1.09278e-06, 0, 25, 0, 25, 0, -25, 0, -1.09278e-06, -450, 100, -100)
 
@@ -925,13 +939,31 @@ autoplay = "Dice_Bump"
 
 [node name="Knight2" parent="TavernDungeon/Characters" instance=ExtResource("59_rorx4")]
 transform = Transform3D(-16.5082, 0, 18.7744, 0, 25, 0, -18.7744, 0, -16.5082, -29.9469, -16.6783, 26.8405)
+script = ExtResource("53_8tsux")
 
 [node name="Rogue_Hooded3" parent="TavernDungeon/Characters" instance=ExtResource("60_wrsmg")]
 transform = Transform3D(16.5082, 0, -18.7744, 0, 25, 0, 18.7744, 0, 16.5082, 29.5651, -16.5797, -25.4881)
+script = ExtResource("53_8tsux")
+
+[node name="Positions" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Pos1" type="Node3D" parent="Positions"]
+transform = Transform3D(0.77384, -0.216629, 0.595184, 0, 0.939693, 0.34202, -0.633381, -0.264669, 0.727172, 60.913, 65, 80.332)
+
+[node name="Pos2" type="Node3D" parent="Positions"]
+transform = Transform3D(0.77384, -0.216629, 0.595183, 0, 0.939693, 0.34202, -0.633381, -0.264669, 0.727172, -252.329, 65, 35.917)
+
+[node name="Pos3" type="Node3D" parent="Positions"]
+transform = Transform3D(0.77384, -0.216629, 0.595183, 0, 0.939693, 0.34202, -0.633381, -0.264669, 0.727172, -89.4746, 65, -27.9782)
+
+[node name="Pos4" type="Node3D" parent="Positions"]
+transform = Transform3D(0.77384, -0.216629, 0.595183, 0, 0.939693, 0.34202, -0.633381, -0.264669, 0.727172, 177.794, 65, 18.7744)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.77384, -0.216629, 0.595183, 0, 0.939693, 0.34202, -0.633381, -0.264669, 0.727172, 60.913, 65, 80.332)
+transform = Transform3D(0.77384, -0.216629, 0.595184, 0, 0.939693, 0.34202, -0.633381, -0.264669, 0.727172, 50.7832, 65, 62.4102)
 fov = 65.5
+script = ExtResource("65_68chc")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
 light_energy = 6.186
