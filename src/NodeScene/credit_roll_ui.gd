@@ -5,7 +5,7 @@ extends ScrollContainer
 @export var pause_between_cycles: float = 0.5  # seconds between directions
 
 var tween: Tween
-
+var lastScroll: float
 
 func _start_auto_scroll():
 	if tween:
@@ -21,9 +21,11 @@ func _start_auto_scroll():
 	tween.tween_property(self, "scroll_vertical", 0.0, duration).set_delay(pause_between_cycles)
 
 func _on_scrolling():
+	lastScroll = Time.get_unix_time_from_system()
 	if tween.is_running():
 		tween.pause()
-		await get_tree().create_timer(idle_resume_delay).timeout
+		while (Time.get_unix_time_from_system() - lastScroll) < idle_resume_delay:
+			await get_tree().create_timer(idle_resume_delay - (Time.get_unix_time_from_system() - lastScroll)).timeout
 		tween.play()
 
 func _ready() -> void:
@@ -40,6 +42,7 @@ func _ready() -> void:
 func _input(event):
 	if event is InputEventKey:
 		if event.is_pressed() and event.keycode == KEY_ESCAPE :
+			AudioManager.play_sfx("back_button_click")
 			SceneSwitcher.returnToIntro()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
