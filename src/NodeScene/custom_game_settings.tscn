@@ -322,6 +322,7 @@ size_flags_vertical = 3
 theme = ExtResource("2_i6rsi")
 
 [node name="SamplePreset" parent="UIBox/SettingsSplitBox/PresetsPanelBox/PresetsScrollBar/PresetsButtons" instance=ExtResource("4_o2ime")]
+texture_filter = 3
 layout_mode = 2
 
 [node name="NewPresetName" type="LineEdit" parent="UIBox/SettingsSplitBox/PresetsPanelBox"]
