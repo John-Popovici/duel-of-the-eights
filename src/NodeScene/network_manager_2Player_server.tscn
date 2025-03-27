@@ -12,6 +12,7 @@ layer = 3
 script = ExtResource("2_18mre")
 
 [node name="UIBox" type="PanelContainer" parent="ConnectionUI"]
+texture_filter = 3
 offset_left = 176.0
 offset_top = 118.0
 offset_right = 728.0
