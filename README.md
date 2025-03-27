@@ -4,6 +4,8 @@
 
 - **Date of project start**: 2024-09-05
 
+- **Date of project exposition**: 2025-04-08
+
 - **Description**:
 
 Design and play your own version of modernized Yahtzee
