@@ -206,6 +206,7 @@ layout_mode = 2
 text = "Dice Customization"
 
 [node name="Music" type="Button" parent="CustomizationUI/BackPanel/Sections/TabsContainer" groups=["ConfirmButtons"]]
+visible = false
 texture_filter = 3
 layout_mode = 2
 text = "Music Customization"
@@ -303,12 +304,10 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Tavern" parent="CustomizationUI/BackPanel/Sections/ThemeCustomization/Themes" instance=ExtResource("4_aknih")]
-texture_filter = 3
 layout_mode = 2
 text = "Tavern"
 
 [node name="Restaurant" parent="CustomizationUI/BackPanel/Sections/ThemeCustomization/Themes" instance=ExtResource("4_aknih")]
-texture_filter = 3
 layout_mode = 2
 text = "Restaurant"
 
