@@ -23,8 +23,9 @@
 
 This document summarizes the contributions of each team member for the final
 demonstration and documentation.  The time period of interest is the time
-between Rev 0 and the Final documentation.
+between Rev 0 and the Final documentation. Data is from Rev0 or from 2025-02-02 inclusive (depending on what is being tracked), to 2025-03-26.
 
+\newpage
 \section{Team Meeting Attendance}
 
 % \wss{For each team member how many team meetings have they attended over the time period of interest.  This number should be determined from the meeting issues in the team's repo.  The first entry in the table should be the total number of team meetings held by the team.}
@@ -35,18 +36,21 @@ between Rev 0 and the Final documentation.
 \toprule
 \textbf{Student} & \textbf{Meetings}\\
 \midrule
-Total & X\\
-John P. & X\\
-Nigel M. & X\\
-Naishan G. & X\\
-Isaac G. & X\\
-Hemraj B. & X\\
+Total & 5\\
+John P. & 5\\
+Nigel M. & 5\\
+Naishan G. & 5\\
+Isaac G. & 3\\
+Hemraj B. & 2\\
 \bottomrule
 \end{tabular}
 \end{table}
 
+Meetings were documented and persons missing were notified through text channels. Work was distributed fairly keeping in account elements of focus and those who could help helped those who needed it.
+
 % \wss{If needed, an explanation for the counts can be provided here.}
 
+\newpage
 \section{Supervisor/Stakeholder Meeting Attendance}
 
 % \wss{For each team member how many supervisor/stakeholder team meetings have they attended over the time period of interest.  This number should be determined from the supervisor meeting issues in the team's repo.  The first entry in the table should be the total number of supervisor and team meetings held by the team.  If there is no supervisor, there will usually be meetings with stakeholders (potential users) that can serve a similar purpose.}
@@ -57,18 +61,21 @@ Hemraj B. & X\\
 \toprule
 \textbf{Student} & \textbf{Meetings}\\
 \midrule
-Total & X\\
-John P. & X\\
-Nigel M. & X\\
-Naishan G. & X\\
-Isaac G. & X\\
-Hemraj B. & X\\
+Total & 2\\
+John P. & 1\\
+Nigel M. & 2\\
+Naishan G. & 2\\
+Isaac G. & 2\\
+Hemraj B. & 0\\
 \bottomrule
 \end{tabular}
 \end{table}
 
+Not everyone needed to be present at the supervisor meetings as it was documented and was primarily to show off the product to the supervisor and receive feedback.
+
 % \wss{If needed, an explanation for the counts can be provided here.}
 
+\newpage
 \section{Lecture Attendance}
 
 % \wss{For each team member how many lectures have they attended over the time period of interest.  This number should be determined from the lecture issues in the team's repo.  The first entry in the table should be the total number of lectures since the beginning of the term.}
@@ -79,18 +86,21 @@ Hemraj B. & X\\
 \toprule
 \textbf{Student} & \textbf{Lectures}\\
 \midrule
-Total & X\\
-John P. & X\\
-Nigel M. & X\\
-Naishan G. & X\\
-Isaac G. & X\\
-Hemraj B. & X\\
+Total & 1\\
+John P. & 0\\
+Nigel M. & 1\\
+Naishan G. & 1\\
+Isaac G. & 0\\
+Hemraj B. & 0\\
 \bottomrule
 \end{tabular}
 \end{table}
 
+We made sure to always have at least one team member present at all lectures taking detailed notes which we went over in the following team meeting.
+
 % \wss{If needed, an explanation for the lecture attendance can be provided here.}
 
+\newpage
 \section{TA Document Discussion Attendance}
 
 % \wss{For each team member how many of the informal document discussion meetings with the TA were attended over the time period of interest.}
@@ -101,29 +111,31 @@ Hemraj B. & X\\
 \toprule
 \textbf{Student} & \textbf{Lectures}\\
 \midrule
-Total & X\\
-John P. & X\\
-Nigel M. & X\\
-Naishan G. & X\\
-Isaac G. & X\\
-Hemraj B. & X\\
+Total & 1\\
+John P. & 1\\
+Nigel M. & 1\\
+Naishan G. & 1\\
+Isaac G. & 1\\
+Hemraj B. & 1\\
 \bottomrule
 \end{tabular}
 \end{table}
 
+We made sure to all be available and present for the only TA discussion.
+
 % \wss{If needed, an explanation for the attendance can be provided here.}
 
+\newpage
 \section{Commits}
 
 % \wss{For each team member how many commits to the main branch have been made over the time period of interest.  The total is the total number of commits for the entire team since the beginning of the term.  The percentage is the percentage of the total commits made by each team member.}
 
-%TODO
 % The number of commits
-\pgfmathsetmacro{\CJ}{1}
-\pgfmathsetmacro{\CN}{1}
-\pgfmathsetmacro{\CNS}{1}
-\pgfmathsetmacro{\CI}{1}
-\pgfmathsetmacro{\CH}{1}
+\pgfmathsetmacro{\CJ}{38}
+\pgfmathsetmacro{\CN}{83}
+\pgfmathsetmacro{\CNS}{20}
+\pgfmathsetmacro{\CI}{70}
+\pgfmathsetmacro{\CH}{42}
 
 % Calculate the total
 \pgfmathsetmacro{\CT}{\CJ + \CN + \CNS + \CH + \CI}
@@ -152,9 +164,16 @@ Hemraj B. & \CH & \pgfmathprintnumber[fixed,precision=2]\PH\% \\
 \end{tabular}
 \end{table}
 
-%TODO
+Nigel took primary lead in developing the structure of the game and in bug fixes.\\
+Isaac 's focus was on the test suite and CI/CD which required uploading and re-uploading when failing, leading to a large single-week commit amount.\\
+Hemraj's focus was on server setup which similarly led to a large single-week commit amount.\\
+John focused on organization and preparation for the expo, leading to a lower commit amount, but with a sizable amount across the semester.\\
+Naishan's focus was on creating the user manual video as it is an extra, but leads to fewer commits. Likewise, he took a lead in usability testing outreach which led to more testing feedback but did not include commits.
+
+
 % \wss{If needed, an explanation for the counts can be provided here.  For instance, if a team member has more commits to unmerged branches, these numbers can be provided here.  If multiple people contribute to a commit, git allows for multi-author commits.}
 
+\newpage
 \section{Issue Tracker}
 
 % \wss{For each team member how many issues have they authored (including open and closed issues (O+C)) and how many have they been assigned (only counting closed issues (C only)) over the time period of interest.}
@@ -165,14 +184,16 @@ Hemraj B. & \CH & \pgfmathprintnumber[fixed,precision=2]\PH\% \\
 \toprule
 \textbf{Student} & \textbf{Authored (O+C)} & \textbf{Assigned (C only)}\\
 \midrule
-John P. & X & X \\
-Nigel M. & X & X \\
-Naishan G. & X & X \\
-Isaac G. & X & X \\
-Hemraj B. & X & X \\
+John P. & 23 & 24 \\
+Nigel M. & 74 & 31 \\
+Naishan G. & 3 & 9 \\
+Isaac G. & 2 & 22 \\
+Hemraj B. & 0 & 6 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+Nigel took a lead in making issues based on usability testing feedback, leading to a large amount of authored issues that are mostly all attributed to him regardless of feedback source, and John was the primary note-keeper during meetings, which were tracked as issues. Hemraj focused on solving server issues.
 
 % \wss{If needed, an explanation for the counts can be provided here.}
 
