@@ -103,7 +103,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.741176, 0.160784, 0.219608, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 23
-text = "Prof. Rapoport - A Man of Probability"
+text = "Prof. Paul Rapoport - A Man of Probability"
 horizontal_alignment = 1
 
 [node name="TA" type="Label" parent="BackgroundBlurred/CreditScroll/Categories"]
@@ -119,7 +119,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.741176, 0.160784, 0.219608, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 23
-text = "Prof. Smith - The Man Himself"
+text = "Dr. Spencer Smith - The Man Himself"
 horizontal_alignment = 1
 
 [node name="section_spacing2" type="ColorRect" parent="BackgroundBlurred/CreditScroll/Categories"]
@@ -153,6 +153,7 @@ text = "ChatGPT - Valued Team Member"
 horizontal_alignment = 1
 
 [node name="Jack" type="Label" parent="BackgroundBlurred/CreditScroll/Categories"]
+visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.159887, 0.516463, 0.456074, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
@@ -161,6 +162,7 @@ text = "Jack - Slapper Audio"
 horizontal_alignment = 1
 
 [node name="Ben" type="Label" parent="BackgroundBlurred/CreditScroll/Categories"]
+visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.159887, 0.516463, 0.456074, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
