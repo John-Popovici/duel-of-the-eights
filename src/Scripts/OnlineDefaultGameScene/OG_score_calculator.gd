@@ -56,6 +56,11 @@ func initializeValues(_game_settings: Dictionary) -> void:
 	full_house_modifier = roundi(0.0114*pow(DiceType,2) + 0.5864*DiceType + 1.3636)
 	BonusScore = roundi(-0.1563*pow(DiceType,3) + 3.4375*pow(DiceType,2) - 15*DiceType + 35)
 	BonusThreshold = roundi(0.125*pow(DiceType,3) - 3.625*pow(DiceType,2) + 38.25*DiceType - 63)
+	BonusThreshold = ((DiceType*(DiceType+1))/2) * DiceCount * 0.5625
+	if DiceType == 8 and DiceCount == 8:
+		BonusThreshold = 162
+	if DiceType == 6 and DiceCount == 5:
+		BonusThreshold = 63
 
 # Calculates score for Singles (like Ones, Twos, etc.)
 func _calculate_singles_score(target_value: int, dice_rolls: Array, _scoring_rule: String) -> Array[int]:
@@ -94,6 +99,8 @@ func _calculate_kind_score(target_count: int, dice_rolls: Array, _scoring_rule: 
 		roll_counts[roll] = roll_counts.get(roll, 0) + 1
 	# Check if any roll appears target_count times
 	for number in roll_counts.keys():
+		if (roll_counts[number] >= target_count) and !(_scoring_rule.is_empty()):
+			return int(target_count * float(_scoring_rule)) #Use scroing rule to multiply
 		if roll_counts[number] >= target_count:
 			return _calculate_chance_score(dice_rolls,_scoring_rule) # Sum all dice for scoring
 	
