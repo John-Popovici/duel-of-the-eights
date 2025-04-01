@@ -632,35 +632,34 @@ If you run into issues or have any questions, feel free to reply to this message
 \end{center}
 
 
-\section{Usability Testing Report – Final Testing (Template)}
+\section{Usability Testing Report – Final Testing}
 
 \subsection{Introduction}
 
 \subsubsection{Purpose of the Test}
-This test aimed to evaluate the stability of the networked multiplayer system, assess the clarity and helpfulness of the in-game tutorial, and gather feedback on the improved features implemented since Alpha testing.
+This test aimed to evaluate the usability of the online multiplayer system, review the final tutorial effectiveness, and validate changes made from previous testing phases.
 
 \subsubsection{Scope of Testing}
 \begin{itemize}
     \item \textbf{Multiplayer connection setup} (Connection status, waiting room).
-    \item \textbf{Gameplay clarity} (Game State clarity, and audio and visual feedback evaluation).
-    \item \textbf{UI usability across resolutions} (Testing the limits of stretching UI and blurriness).
+    \item \textbf{Game onboarding} (Game State clarity, and audio and visual feedback evaluation).
+    \item \textbf{Online connection reliability} (Testing the online EC2 Server implementation).
     \item \textbf{Game tutorial updates \& scoring explanations} (Hands/scoring Guide evaluation).
-    \item \textbf{New features} (Chat, profile customization, and hand-scoring feedback).
 \end{itemize}
 
 \subsubsection{Test Environment}
 \begin{itemize}
     \item \textbf{Platforms:} PC (Windows).
-    \item \textbf{Network Conditions:} Local multiplayer sessions.
+    \item \textbf{Network Conditions:} Online Multiplayer Sessions.
 \end{itemize}
 
 \subsection{Key Findings}
 
 \subsubsection{Observations}
 \begin{itemize}
-    \item Several players encountered difficulty connecting using LAN (later replaced with cloud server).
-    \item The tutorial was praised for structure but needed updated visuals and interaction.
-    \item UI scaling issues appeared on high-DPI displays, causing blurriness and overlap.
+    \item Some users remained confused about when a round ended due to limited feedback.
+    \item Many testers attempted to click scoring buttons early to “preview” the score without realizing it was disabled.
+    \item Players frequently failed to notice the chat feature or misinterpreted the timer percentage bar.
 \end{itemize}
 
 
@@ -671,15 +670,15 @@ This test aimed to evaluate the stability of the networked multiplayer system, a
 \hline
 Intuitive Controls & 3.7 \\
 \hline
-Engagement & 4 \\
+Engagement & 4.7 \\
 \hline
-Play Again? & 4.3 \\
+Play Again? & 4 \\
 \hline
 Multiplayer Engagement & 3.7 \\
 \hline
-Game Balance & 3.7 \\
+Game Balance & 4.3 \\
 \hline
-Player Impact & 3.7 \\
+Player Impact & 4 \\
 \hline
 \end{longtable}
 
@@ -687,78 +686,101 @@ Player Impact & 3.7 \\
 
 \textbf{Positive Feedback:}
 \begin{itemize}
-    \item Theme feature were well received.
+    \item The bluff mechanic was frequently cited as “fun” and “strategic.”
+    \item Players enjoyed the visual style and appreciated the improved tutorial over previous versions.
 \end{itemize}
 
 \textbf{Areas for Improvement:}
 \begin{itemize}
-    \item Some confusion remained about when a round ended or what the result was.
+    \item Lack of folding feedback caused confusion in bluff rounds.
+    \item Some UI elements (like chat and game state) were not immediately intuitive.
+    \item Scoreboard should show potential scores before players finish their rolls.
+    \item Dice could be selected before opponent finished rolling, leading to desync issues.
 \end{itemize}
 
 
 \subsection{Categorization of Feedback}
 
 \subsubsection{Critical Issues (Immediate Fixes)}
-\begin{itemize}
-    \item \textbf{Tutorial outdated} – Updated all visuals, added interactivity (\#272)
-    \item \textbf{Connection failure via LAN} – Replaced with server-based room system (\#280, \#297)
-    \item \textbf{Broken preset button for d6 game} – Fixed click behavior (\#293)
-\end{itemize}
+None
 
 \subsubsection{Moderate Issues (Mid-Term Adjustments)}
 \begin{itemize}
-    \item \textbf{UI scaling blur} – Bitmap scaling issue identified (\#265)
-    \item \textbf{Scoreboard resizing on hover} – UI size lock needed (\#284)
-    \item \textbf{Name syncing bug (Client name not passed)} – Fixed in connection flow (\#294)
-    \item \textbf{Round transition feedback weak} – Added round-end summary screen (\#300)
-    \item \textbf{Crash logs inaccessible} – Future update will add downloadable logs (\#296)
-    \item \textbf{Text field input validation} – Added length limits and character checks (\#304)
+    \item \textbf{\#327} – Add clear feedback when a player folds.
+    \item \textbf{\#331} – Improve UI clarity (chat, game state, timer label).
+    \item \textbf{\#332} – Preview scores on scoreboard buttons (hover only, unclickable).
+    \item \textbf{\#333} – Reorganize Tutorial.
+    \item \textbf{\#330} – Clear selected dice at the beginning of each rolling phase.
+    \item \textbf{\#329} – Disable dice selection while waiting for the other player to finish rolling.
 \end{itemize}
 
 \subsubsection{Minor Suggestions (Long-Term Refinements)}
 \begin{itemize}
-    \item \textbf{Profile picture file window resizability} – Better handle/UI resizing (\#299, \#292)
-    \item \textbf{Use player name in chat} – Switch from “Opponent” to actual names (\#302)
-    \item \textbf{Add file type validation for profile image} – Prevent non-image selection (\#303)
-    \item \textbf{Game lobby feature request} – Considered for future expansion (\#278)
-    \item \textbf{Tavern animation out of sync} – Fixed animation grouping (\#295)
+    \item \textbf{\#328} – Speed up dice rolls (e.g., increase gravity or rolling impulse).
 \end{itemize}
 
 \subsection{Change Implementation pathway}
 
 \subsubsection{Immediate Fixes(Next Development Cycle)}
 \begin{itemize}
-    \item \textbf{Tutorial Updated:} Visuals refreshed, tutorial now interactive (\#272)
-    \item \textbf{LAN Removed:} Game now runs through AWS-hosted server, stabilizing connectivity (\#280, \#297)
-    \item \textbf{Preset Fixes:} d6 button restored to functionality (\#293)
+    \item \textbf{\#327} – Add clear feedback when a player folds.
+    \item \textbf{\#331} – Improve UI clarity (chat, game state, timer label).
+    \item \textbf{\#332} – Preview scores on scoreboard buttons (hover only, unclickable).
 \end{itemize}
 
 \subsubsection{Mid-Term Adjustments (Next Playtesting Phase)}
 \begin{itemize}
-    \item \textbf{UI Scaling Blur:} Fixed, needs validation (\#265)
-    \item \textbf{Improved Text Input Validation:} Length restrictions applied across inputs (\#304)
-    \item \textbf{Round-End Feedback:} SFX added to clarify transitions (\#300)
+    \item \textbf{\#333} – Reorganize Tutorial.
+    \item \textbf{\#330} – Clear selected dice at the beginning of each rolling phase.
+    \item \textbf{\#329} – Disable dice selection while waiting for the other player to finish rolling.
 \end{itemize}
 
 \subsubsection{Long-Term Refinements (Final Release)}
 \begin{itemize}
-    \item \textbf{Log System Expansion:} Future implementation for log access via UI (\#296)
-    \item \textbf{Chat \& Profile Refinement:} Improved name labels and error handling (\#302, \#303)
+    \item \textbf{\#328} – Speed up dice rolls (e.g., increase gravity or rolling impulse).
 \end{itemize}
 
 \subsection{Recommendations for the Next Testing Phase}
 \begin{itemize}
-    \item Further stress testing on connection stability and player state sync.
-    \item Conduct multi-device testing across screen resolutions for scaling fixes.
-    \item Collect feedback on new visual/audio round transition effects.
-    \item Evaluate player understanding of new in-game scoring guide.
-    \item Continue UI polishing (scoreboard hover size, clearer interaction cues).
+    \item Continue stress testing online multiplayer under high-latency conditions.
+    \item Collect new tutorial feedback after redesign with chapters is implemented.
+    \item Evaluate visual feedback clarity in scoring transitions and end-of-round events.
+    \item Consider automated testing for edge cases in timing, folding, and scoring.
 \end{itemize}
 
 \subsection{Conclusion}
-Beta testing of Dice Duels provided important insights on connection reliability, user interface clarity, and tutorial effectiveness. Most major bugs have been resolved, and several player-requested features are underway or implemented. The game is approaching final polish, with strong improvements over Alpha based on real user feedback.
+The final round of playtesting confirmed that major functionality is stable and well-received. Visual and tutorial improvements from prior phases were positively noted. Some refinements in UI clarity and game feedback are still underway but are not blockers. The game is ready for final polish and release with confidence that it provides a strong multiplayer experience with bluffing and strategic gameplay.
 
+\newpage
 
+\section{Conclusion}
+
+Over the course of three structured usability testing phases—Alpha, Beta, and Final—we have gained valuable insights into how players interact with our game \textit{Dice Duels}, and how to iteratively improve it based on real user feedback.
+
+The usability testing process has highlighted not only the areas of our game that resonated with players, such as the bluffing mechanics and multiplayer interaction, but also those that required refinement—such as end-of-round clarity, UI intuitiveness, and the responsiveness of game elements. Through continuous observation, surveys, and interviews, we were able to implement critical bug fixes, address moderate usability concerns, and plan for long-term polish features that elevate the overall player experience.
+
+Across the testing phases, we saw a steady and measurable improvement in nearly every user-reported metric:
+
+\begin{table}[H]
+\centering
+\caption{Usability Metrics Improvement Across Testing Phases}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Category} & \textbf{Alpha Avg.} & \textbf{Beta Avg.} & \textbf{Final Avg.} \\
+\hline
+Intuitive Controls & 3.7 & 3.7 & 3.7 \\
+Engagement & 3.3 & 4.0 & 4.7 \\
+Play Again? & 4.0 & 4.3 & 4.0 \\
+Multiplayer Engagement & 3.7 & 3.7 & 3.7 \\
+Game Balance & 4.0 & 3.7 & 4.3 \\
+Player Impact & 3.3 & 3.7 & 4.0 \\
+\hline
+\end{tabular}
+\end{table}
+
+Notably, engagement and player agency (impact) both improved substantially by the final testing phase. These gains can be attributed to clearer visual and audio feedback, a better-scoped tutorial system, and more intuitive UI elements. Although intuitive controls remained constant, player understanding and strategic depth improved, suggesting that the interface is no longer a barrier to learning and playing effectively.
+
+In summary, the usability testing process has been instrumental in shaping the final product. It allowed us to prioritize development efforts, validate key features, and refine the gameplay experience based on real player input. As a result, \textit{Dice Duels} has matured into a polished and engaging bluff-based multiplayer dice game that is well-received and ready for final release.
 
 
 
