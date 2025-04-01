@@ -474,11 +474,12 @@ spot_angle = 29.9219
 script = ExtResource("7_0kcih")
 
 [node name="UIBox" type="PanelContainer" parent="Scoreboard"]
+custom_minimum_size = Vector2(248, 362)
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -198.0
-offset_bottom = 332.0
+offset_left = -248.0
+offset_bottom = 362.0
 grow_horizontal = 0
 theme_override_styles/panel = ExtResource("8_n6aig")
 
@@ -514,10 +515,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 398.0
-offset_top = -275.0
-offset_right = 550.0
-offset_bottom = -174.0
+offset_left = 409.0
+offset_top = -233.0
+offset_right = 572.0
+offset_bottom = -132.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("4_eudyq")
@@ -963,10 +964,11 @@ layout_mode = 2
 
 [node name="CountdownPanel" type="PanelContainer" parent="GameUI"]
 texture_filter = 3
-offset_left = 953.0
-offset_top = 481.0
+custom_minimum_size = Vector2(248, 0)
+offset_left = 903.0
+offset_top = 370.0
 offset_right = 1151.0
-offset_bottom = 521.0
+offset_bottom = 410.0
 theme = ExtResource("4_h4ers")
 
 [node name="ProgressBar" type="ProgressBar" parent="GameUI/CountdownPanel"]

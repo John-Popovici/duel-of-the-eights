@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dtaxv1htjd126"]
 
-[ext_resource type="Script" path="res://NodeScene/credit_roll_ui.gd" id="1_5y601"]
+[ext_resource type="Script" path="res://Scripts/credit_roll_ui.gd" id="1_5y601"]
 
 [node name="CreditRollUI" type="CanvasLayer"]
 
