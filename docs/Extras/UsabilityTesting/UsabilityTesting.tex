@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[12pt, titlepage]{article}
 
 \usepackage{float}
 \usepackage{hyperref}  % Required for clickable links
@@ -14,10 +14,56 @@
 
 \date{}
 
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=red,
+    urlcolor=blue
+}
+\usepackage[round]{natbib}
+
+\title{Usability Testing Documentation: SFWRENG 4G06} 
+\author{Team 9, dice devs\\
+John Popovici\\
+Nigel Moses\\
+Naishan Guo\\
+Hemraj Bhatt\\
+Isaac Giles}
+\date{\today}
 
 \begin{document}
+	
+\maketitle
+
+\pagenumbering{roman}
+
+\section{Revision History}
+
+\begin{table}[hp]
+\caption{Revision History} \label{TblRevisionHistory}
+\begin{tabularx}{\textwidth}{llX}
+\toprule
+\textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
+\midrule
+2025-01-29 & Nigel Moses & Usability Testing Plan Initial Commit\\
+2025-02-04 & Nigel Moses & Added Alpha Testing invitation format\\
+2025-02-27 & Nigel Moses & Alpha Testing Usability Report\\
+2025-03-25 & Nigel Moses & Beta and Final Testing invitation format\\
+2025-03-31 & Nigel Moses & Beta Testing Usability Report\\
+2025-03-31 & Nigel Moses & Final Testing Usability Report and Conclusion\\
+\dots & \dots & \dots \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+~\newpage
 
 \newpage
+
 \section{Introduction}
 
 \subsection{Purpose of the Usability Testing Plan}
