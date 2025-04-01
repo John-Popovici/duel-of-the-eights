@@ -343,6 +343,7 @@ theme = ExtResource("2_ssdl2")
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_ssdl2")
+disabled = true
 button_pressed = true
 text = "Timed Rounds:"
 
