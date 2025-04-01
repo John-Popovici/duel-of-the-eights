@@ -221,6 +221,7 @@ func set_rolls_read(state: bool) ->void:
 var selectionmode = "none"
 
 func setup_selection() -> void:
+	Engine.time_scale = 1
 	if GlobalSettings.profile_settings["align_rolled_dice"]:
 			myPlayer.move_dice_inline()
 	myPlayer.toggle_dice_collisions(false)

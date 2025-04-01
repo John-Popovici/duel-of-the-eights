@@ -260,8 +260,11 @@ func _process(_delta: float) -> void:
 			roll_start_time = Time.get_ticks_msec() / 1000.0
 		else:
 			var current_time = Time.get_ticks_msec() / 1000.0
+			if current_time - roll_start_time > roll_time_limit*0.8:
+				Engine.time_scale = 2
 			if current_time - roll_start_time > roll_time_limit:
 				Debugger.log(str("The die has been rolling for more than, ", roll_time_limit, " seconds."))
 				roll_start_time = current_time  # Reset timer to prevent repeated calls
+				Engine.time_scale = 2
 	else:
 		is_rolling = false
