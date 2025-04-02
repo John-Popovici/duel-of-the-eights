@@ -307,7 +307,7 @@ can include usability testing, code walkthroughs, user documentation, formal
 proof, GenderMag personas, Design Thinking, etc.  Extras should have already
 been approved by the course instructor as included in your problem statement.}
 
-Our team worked on a 'Usability Testing' extra which consisted of a usability testing plan and an associated report. We also worked on a 'User Manual' as one of our extras which we completed in the form of a video, to help users better understand how to play and navigate our game.
+Our team worked on a 'Usability Testing' extra which consisted of a usability testing plan and an associated report. We also worked on a 'User Instructional Video' as one of our extras which we completed to help users better understand how to play and navigate our game.
 
 \section{Design Iteration (LO11 (PrototypeIterate))}
 
@@ -333,6 +333,19 @@ As the project took roots and began to materialize itself as a tangible game, fe
  assumptions, and constraints influence your decisions?  Discuss each of these
  separately.}
 
+\subsection{Effects of Limitations on Design Decisions}
+
+Some of the limitations in working on this project included time, technical abilities of the team, and limitations of the engine that we chose to work with. Beginning with time as a limitation, we were cognizant of the fact that game development is something that is never truly finished. We knew that there would always be more features that we could add, or ways to improve existing functionalities. This is why we were very clear on what specific goals would be central to developing this project, and we then set forth to achieve those goals before anything else. This means that we started with dice mechanics, so that dice could be rolled and read. Then we implemented player connections so that games could be initiated, and this led straight into scoring mechanics. We focused on creating all the most central components of the game so that we could best use our limited time to create a game that would meet the goals we set before us. From there we could add polish with whatever time remained. Next we were limited by technical abilities; for example nobody had the level of skill needed to quickly build and animate professional looking 3D models in the time that was given to us for this project. In response to this we made the decision that we would use open source assets so that we could better focus our time on game functionality, and we made similar decisions on the front of music. Lastly engine limitations also played a roll. Engines can be glitchy sometimes, so we always developed the game with this in mind, and we relied on user testing feedback to catch engine bugs that may have been missed in initial development. For example, dice physics could be glitchy at times, but with our understanding of engine limitations, we were able to account for these issues by re-rolling dice that refused to settle properly.
+
+\subsection{Effects of Assumptions on Design Decisions}
+
+The two critical assumptions that were made at the beginning of this project were that the Godot game engine would be stable and function correctly, and that all external libraries would function correctly since they had already been tested in mass. Now as previously mentioned, we knew that our game engine would have some limitations such as minor physics glitches, but we made the assumption that the engine would be quite stable overall. The game would operate overwhelmingly similar between each play of the game, and crashes would be rare. We structured our design decisions around this assumption; that we would not at any point have to fight with our game engine, and we could develop our game only needing to focus on the functionalities we were implementing, and not on how any specific additions might cause issues in our engine. Fortunately this assumption panned out for our team and we were able to place all of our focus on developing features for our game, without needing worry about whether or not our engine of choice could handle each successive feature. Our next assumption about the correctness of external libraries also held up. We centered some of our design decisions around external libraries enabling things like testing, and player to player connections. These were key parts of this project and we designed around these libraries as if they were trustworthy black boxes. This removed a level of complexity from our lives and turned out to be a positive design decision.
+
+\subsection{Effects of Constraints on Design Decisions}
+
+Constraints played a pretty simple roll in our design decisions. We set up some system constraints such that the game would have development occurring only within the Godot game engine, the code base must be written using GDScript, and the system needed to support peer-to-peer and multiplayer capabilities. This meant that all design considerations took Godot as our engine into account, and we ensured that all features and code structuring could be implemented with GDScript. Furthermore we knew that Godot has built in functionality to help support peer-to-peer and multiplayer so this constraint required little thought.
+ 
+
 \section{Economic Considerations (LO23)}
 
 \plt{Is there a market for your product? What would be involved in marketing your 
@@ -341,6 +354,17 @@ sell?  What would you charge for your product?  How many units would you have to
 sell to make money? If your product isn't something that would be sold, like an 
 open source project, how would you go about attracting users?  How many potential 
 users currently exist?}
+
+Duel of the Eights is a game that features two primary user groups. The first is the same user group that plays traditional Yahtzee, and the second is composed of mostly young people, who already like playing video games and may be interested more specifically in dice and/or gambling games. Since there are no games quite like our own when looking for 3D yahtzee adjacent games online or on game hosting platforms, there is definitely market space available. And with the two afore mentioned user groups, our team could have a real chance of capitalizing on this market space.
+\\
+\\
+To actually market this product we can first begin with a qr code at the capstone expo for interested onlookers to sign up for a mailing list to be notified when the game is released to the market. Furthermore, the game could use some self marketing techniques, in which our team could create social media accounts including a YouTube channel so that a following is more likely to develop among users that may be interested in watching gameplay with commentary.
+\\
+\\
+To produce a sellable version of the game we would need to pay the initial fee of \$100 to get the game listed on steam, and then subsequent payments of roughly \$15 a month for running servers with an initial user base, but this number would be expected to grow as user counts increase. We likely would not charge anything for access to the game itself, but we would like to add more cosmetic customization to the game which could be monetized quite easily. This may include loot crates with unique dice skins of different rarities where indivdual loot crates could be purchased for anywhere between \$1-\$50 depending on the drop rates associated with the crate. To make money we would have to sell pretty much any non-zero quantity of in game assets since our production costs are remarkably low.
+\\
+\\
+For this game we estimate that the user base could be very large. By looking at other popular games on steam that are centered around dice or cards, we can see that these games get anywhere from 50k monthly active users on the lower end, to as many as 800k monthly active users on the higher end. We would hope to capitalize on this demographic of users, and then hopefully some of these users would reach out to older family members and friends who already enjoy Yahtzee but don't play a lot of video games, and recommend this online variation of the classic game.
 
 \section{Reflection on Project Management (LO24)}
 
