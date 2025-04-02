@@ -61,6 +61,201 @@ be able to grade your response to feedback.  In that case your grade on this
 document, and likely the Revision 1 versions of the other documents will be
 low.} 
 
+\subsection{Usability Testing Feedback}
+
+\subsubsection{UI/UX Improvements}
+\begin{itemize}
+    \item \textbf{Issue:} LineEdit Text Validation
+    \begin{itemize}
+        \item \textbf{Feedback:} No input length restrictions
+        \item \textbf{Response:} Implemented SMS-length chat (160 chars) and connection code limits
+    \end{itemize}
+    
+    \item \textbf{Issue:} LineEdit Text Overlap
+    \begin{itemize}
+        \item \textbf{Feedback:} Text overflowed UI borders
+        \item \textbf{Response:} Adjusted margins and text wrapping
+    \end{itemize}
+    
+    \item \textbf{Issue:} Scoreboard Size Changes
+    \begin{itemize}
+        \item \textbf{Feedback:} Scoreboard changes size when hovering to view points
+        \item \textbf{Response:} Fixed layout constraints to avoid sizing issues
+    \end{itemize}
+    
+    \item \textbf{Issue:} Blurry UI Scaling
+    \begin{itemize}
+        \item \textbf{Feedback:} Pixelation was noticed with window scaling
+        \item \textbf{Response:} Implemented nearest-neighbor scaling for bitmap elements
+    \end{itemize}
+    
+    \item \textbf{Issue:} Checkbox Formatting
+    \begin{itemize}
+        \item \textbf{Feedback:} Unclear state indicators (check boxes) used throughout game
+        \item \textbf{Response:} Redesign with better labeling (\textbf{planned})
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Gameplay Enhancements}
+\begin{itemize}
+    \item \textbf{Issue:} Round Transition Feedback
+    \begin{itemize}
+        \item \textbf{Feedback:} Unclear progression from last roll of hand to next round
+        \item \textbf{Response:} Add visual/audio cues and round summaries (\textbf{planned})
+    \end{itemize}
+    
+    \item \textbf{Issue:} Scoring Explanations
+    \begin{itemize}
+        \item \textbf{Feedback:} Needed in-game hand guides to explain scoring
+        \item \textbf{Response:} Created interactive tutorial with dice examples
+    \end{itemize}
+    
+    \item \textbf{Issue:} Bonus Threshold Clarity
+    \begin{itemize}
+        \item \textbf{Feedback:} Unclear requirements for attaining the bonus
+        \item \textbf{Response:} Add live tracking and tooltips (\textbf{planned})
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Multiplayer Features}
+\begin{itemize}
+    \item \textbf{Issue:} Opponent Name Integration
+    \begin{itemize}
+        \item \textbf{Feedback:} Generic "Opponent" labels get used in chat
+        \item \textbf{Response:} Implement actual profile name usage in chat (\textbf{planned})
+    \end{itemize}
+    
+    \item \textbf{Issue:} Chat During Waiting Screen
+    \begin{itemize}
+        \item \textbf{Feedback:} Inaccessible chat during time when waiting for other user to roll
+        \item \textbf{Response:} Layer reordering for UI access to chat feature throughout round (\textbf{planned})
+    \end{itemize}
+    
+    \item \textbf{Issue:} Interactive Lobby
+    \begin{itemize}
+        \item \textbf{Feedback:} Request for social hub to facilitate matchmaking
+        \item \textbf{Response:} Added to post-MVP road-map
+    \end{itemize}
+    
+    \item \textbf{Issue:} Connection Status Clarity
+    \begin{itemize}
+        \item \textbf{Feedback:} Not sufficiently clear when client player connects to the host lobby
+        \item \textbf{Response:} Add SFX and status indicators to show connection (\textbf{planned})
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Technical Improvements}
+\begin{itemize}
+    \item \textbf{Issue:} Profile Persistence
+    \begin{itemize}
+        \item \textbf{Feedback:} Profile data is not persisting across multiple openings of the game
+        \item \textbf{Response:} Implemented new file storage location that allows for data persistence when the game gets packed into an executable
+    \end{itemize}
+    
+    \item \textbf{Issue:} Round Count Mismatch
+    \begin{itemize}
+        \item \textbf{Feedback:} D4 preset has 1 too many rounds and gets stuck on last round with no playable hands left to select
+        \item \textbf{Response:} Reduced number of rounds associated with preset
+    \end{itemize}
+    
+    \item \textbf{Issue:} Debug Module
+    \begin{itemize}
+        \item \textbf{Feedback:} Needed logging system to better explain issues appearing during usability testing
+        \item \textbf{Response:} Created auto-loaded debug manager
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Art/Animation}
+\begin{itemize}
+    \item \textbf{Issue:} Tavern Animation Sync
+    \begin{itemize}
+        \item \textbf{Feedback:} Tavern theme animations are out of sync
+        \item \textbf{Response:} Re-sync tavern animation for dice bouncing
+    \end{itemize}
+    
+    \item \textbf{Issue:} Dice Contrast
+    \begin{itemize}
+        \item \textbf{Feedback:} D6 dice UI not contrasted enough, creating poor visibility
+        \item \textbf{Response:} Updated color schemes to improve visibility
+    \end{itemize}
+    
+    \item \textbf{Issue:} D4 Model Replacement
+    \begin{itemize}
+        \item \textbf{Feedback:} Confusing layout of current D4 model
+        \item \textbf{Response:} Add alternate D4 model that is easier to interpret (\textbf{planned})
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Audio Improvements}
+\begin{itemize}
+    \item \textbf{Issue:} Music Variety
+    \begin{itemize}
+        \item \textbf{Feedback:} Music gets too repetitive
+        \item \textbf{Response:} Added more music variety to game to reduce the frequency at which users hear the same audio
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Tutorial System}
+\begin{itemize}
+    \item \textbf{Issue:} Tutorial Tabs
+    \begin{itemize}
+        \item \textbf{Feedback:} Tutorial section gets hard to navigate for different game variants
+        \item \textbf{Response:} Add tabs to tutorial section for each variant of the game (\textbf{planned})
+    \end{itemize}
+    
+    \item \textbf{Issue:} Update Tutorial Theming
+    \begin{itemize}
+        \item \textbf{Feedback:} Tutorial does not match current game theme
+        \item \textbf{Response:} Updated tutorial to match most recent theming of the game
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Network Features}
+\begin{itemize}
+    \item \textbf{Issue:} Client Name Transfer
+    \begin{itemize}
+        \item \textbf{Feedback:} Client name does not get passed to host when connecting
+        \item \textbf{Response:} Should be updated to use client's name that gets passed (\textbf{planned})
+    \end{itemize}
+    
+    \item \textbf{Issue:} End Game Chat Visibility
+    \begin{itemize}
+        \item \textbf{Feedback:} Chat should not remain visible on end screen
+        \item \textbf{Response:} New functionality added to hide chat when game ends
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Scoreboard System}
+\begin{itemize}
+    \item \textbf{Issue:} Scoreboard Scroll Clarity
+    \begin{itemize}
+        \item \textbf{Feedback:} Unclear that scoreboard can be scrolled, and how far the scrolling goes
+        \item \textbf{Response:} Enhanced scrollbar theming to make scrollbar and handle more prominent (\textbf{planned})
+    \end{itemize}
+    
+    \item \textbf{Issue:} Scoreboard Hover Explanations
+    \begin{itemize}
+        \item \textbf{Feedback:} Scoring explanation should be added for each scoring option when hovering
+        \item \textbf{Response:} Opted to create a scoring quick guide that explains each scoring option
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Player Differentiation}
+\begin{itemize}
+    \item \textbf{Issue:} Opponent Dice Visibility
+    \begin{itemize}
+        \item \textbf{Feedback:} Confusing which dice UI represents your own dice and which represents the opponents
+        \item \textbf{Response:} Added grey overlay over opponent dice UI and made UI box smaller to indicate it is not interactable
+    \end{itemize}
+    
+    \item \textbf{Issue:} Tab Screen Overlay
+    \begin{itemize}
+        \item \textbf{Feedback:} Pressing tab should show both player's scores as an overlay
+        \item \textbf{Response:} Pressing tab show's both player's scores as an overlay (\textbf{planned})
+    \end{itemize}
+\end{itemize}
+
+
 \subsection{SRS and Hazard Analysis}
 
 \subsection{Design and Design Documentation}
