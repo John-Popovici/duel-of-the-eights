@@ -444,12 +444,15 @@ Our project management did not stray too massively from our original development
 technology?}
 
 Naming PR's using unique emojis to express what type of change the PR represented, creating issues with clear labels, working in separate branches, and tracking development through GitHub projects all allowed this project to flow very smoothly. These were easily some of the best decisions we made to keep our project organized and on track. Furthermore, meeting every week helped keep the team in line, and ensured that everyone always knew what was being worked on, and what needed more attention.
+\\
+\\
+In terms of technology, the team employed continuous integration, which enabled any code being pushed to the repository to be built and run to check for any major issues. While our test suites were rather basic due to the nature of the project, it still helped catch any issues that were not caught when the code was tested locally and reduced issues for members using the main repository as their base codebase for development of new features, as code that would break the game would be rejected. Additionally, GitHub actions were used to enable the building of PDF documents when new or modified LaTeX files were pushed to the repository. This enabled the repository to always have the most current PDF for any document. The use of these technologies streamlined project management by automating tasks that would normally require one or two team members. This reduced the workload, allowing them to focus on other important tasks.
 
 \subsection{What Went Wrong?}
 
 \plt{What went wrong in terms of processes and technology?}
 
-Game development is not an easy thing to test, and setting up linter's or code coverage metrics turned out to be nearly impossible in Godot. We certainly struggled to setup a strong test suite, and automate this testing as part of our CI/CD infrastructure. We had initially planned to use linter's and code coverage/quality tools but this later proved to be something that simply was not worth the trouble. 
+Game development is not an easy thing to test, and setting up linter's or code coverage metrics turned out to be nearly impossible in Godot. We certainly struggled to setup a strong test suite, and automate this testing as part of our CI/CD infrastructure. Thus, we had to settle for a limited test suite for automation, as mentioned in section 6.2. We had initially planned to use linter's and code coverage/quality tools but this later proved to be something that simply was not worth the trouble. 
 
 \subsection{What Would you Do Differently Next Time?}
 
