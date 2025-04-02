@@ -777,15 +777,15 @@ autowrap_mode = 3
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect13" type="TextureRect" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-texture = ExtResource("27_ayo50")
-
 [node name="TextureRect12" type="TextureRect" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("26_c3hy3")
+
+[node name="TextureRect13" type="TextureRect" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("27_ayo50")
 
 [node name="Close button" type="Button" parent="HandGuidePage/PanelContainer/HandGuideInfoBox"]
 layout_mode = 2
