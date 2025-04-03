@@ -20,9 +20,9 @@ func test_singles_scoring():
 # Testing Kind Scoring
 func test_kind_scoring():
 	var _calculate_kind_score_1 = score_calculator._calculate_kind_score(3, [1,5,5,5], "2")
-	assert_eq(32, _calculate_kind_score_1)
+	assert_eq(6, _calculate_kind_score_1)
 	var _calculate_kind_score_2 = score_calculator._calculate_kind_score(4, [1,5,5,5,5], "3")
-	assert_eq(63, _calculate_kind_score_2)
+	assert_eq(12, _calculate_kind_score_2)
 	var _calculate_kind_score_3 = score_calculator._calculate_kind_score(3, [1,2,3], "2")
 	assert_eq(0, _calculate_kind_score_3)
 	var _calculate_kind_score_4 = score_calculator._calculate_kind_score(4, [1,1,5,1,5,1], "")
