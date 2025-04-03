@@ -10,6 +10,7 @@ var DiceType: int
 var DiceCount: int
 var straight_modifier: int
 var full_house_modifier: int
+var yahtzeeMultiplier: int = 1
 
 # Main scoring function
 func calculate_hand_score(hand_dict: Dictionary, dice_rolls: Array) -> Array[int]:
@@ -21,7 +22,7 @@ func calculate_hand_score(hand_dict: Dictionary, dice_rolls: Array) -> Array[int
 		"Singles":
 			return _calculate_singles_score(hand_value1, dice_rolls, scoring_rule)
 		"Kind":
-			return [_calculate_kind_score(hand_value1, dice_rolls, scoring_rule),0] #Modify to include Yahtzee repetition rules
+			return [_calculate_kind_score(hand_value1, dice_rolls, scoring_rule),0]
 		"Straight":
 			return [_calculate_straight_score(hand_value1, dice_rolls, scoring_rule),0]
 		"FullHouse":
@@ -29,9 +30,14 @@ func calculate_hand_score(hand_dict: Dictionary, dice_rolls: Array) -> Array[int
 			return [_calculate_full_house_score(hand_value1, hand_value2, dice_rolls, scoring_rule),0]
 		"Chance":
 			return [_calculate_chance_score(dice_rolls, scoring_rule),0]
+		"Yahtzee":
+			return [_calculate_yahtzee_score(hand_value1, dice_rolls, scoring_rule)*yahtzeeMultiplier,0]
 		_:
 			Debugger.log_error(str("Unknown hand type:", hand_type))
 			return [0,0]
+
+func setYahtzeeCount(multiplier: int) -> void:
+	self.yahtzeeMultiplier = multiplier
 
 func setupBonus(_bonusHand: Dictionary) -> void:
 	#Add logic to read host input
@@ -103,6 +109,21 @@ func _calculate_kind_score(target_count: int, dice_rolls: Array, _scoring_rule: 
 			return int(target_count * float(_scoring_rule)) #Use scroing rule to multiply
 		if roll_counts[number] >= target_count:
 			return _calculate_chance_score(dice_rolls,_scoring_rule) # Sum all dice for scoring
+	
+	return 0  # No qualifying Kind found
+	
+# Calculates score for Yahtzee hands (this is the maximum _ of a kind hand)
+func _calculate_yahtzee_score(target_count: int, dice_rolls: Array, _scoring_rule: String) -> int:
+	const yahtzee_scoring_mapper = {4:25, 6:50, 8:60, 12:90}
+	var roll_counts = {}
+	for roll in dice_rolls:
+		roll_counts[roll] = roll_counts.get(roll, 0) + 1
+	# Check if any roll appears target_count times
+	for number in roll_counts.keys():
+		if (roll_counts[number] >= target_count) and !(_scoring_rule.is_empty()):
+			return int(target_count * float(_scoring_rule)) #Use scroing rule to multiply
+		if roll_counts[number] >= target_count and self.DiceType:
+			return yahtzee_scoring_mapper.get(self.DiceType)
 	
 	return 0  # No qualifying Kind found
 

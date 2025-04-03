@@ -9,6 +9,8 @@ var game_manager
 var player
 var scoreCalc
 
+var baseName: String = ""
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.connect("pressed",self.playHand)
@@ -26,13 +28,20 @@ func playHand() -> void:
 	_reset()
 	textChangeable = false
 	prevState = ""
-	if plays >= maxPlays:
+	
+	var rolls = player.getRolls()
+	if (plays >= maxPlays or (self.settings.get("hand_type")[0] == "Yahtzee" and scoreCalc.calculate_hand_score(settings,rolls)[0] == 0)):
 		self.disabled = true
 		disable = true
+		
 	toCall.call(settings, self)
 	await get_tree().create_timer(1.0).timeout
 	prevState = self.text
 	textChangeable = true
+	
+	# handle yahtzee specific rules
+	if (not disable) and (self.settings.get("hand_type")[0] == "Yahtzee"):
+		scoreCalc.setYahtzeeCount(plays+1)
 	
 
 var textChangeable = true
@@ -40,6 +49,9 @@ var textChangeable = true
 func setText(_text: String):
 	if textChangeable:
 		self.text = _text
+
+func setBaseName(_text: String):
+	self.baseName = _text
 
 func getDisable() ->bool:
 	return disable
