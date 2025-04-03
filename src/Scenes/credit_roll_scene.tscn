@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dm3j3q78pd8uf"]
+[gd_scene load_steps=8 format=3 uid="uid://dm3j3q78pd8uf"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerProfile/player_profile_scene.gd" id="1_vf17f"]
 [ext_resource type="Script" path="res://Scripts/camera_toggle_controller.gd" id="2_5ihb0"]
+[ext_resource type="Script" path="res://Scripts/moving_camera_controller.gd" id="2_odw7k"]
 [ext_resource type="Theme" uid="uid://dokd457t4xs7n" path="res://Themes/Default_Pixel_Wood/Default_pixel_.Wood.tres" id="3_l8eaa"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_PlayerManager.gd" id="4_7i1aa"]
 [ext_resource type="PackedScene" uid="uid://bg5xnvw62vip6" path="res://NodeScene/background_objects_Dungeon_Tavern.tscn" id="6_836wm"]
@@ -9,6 +10,35 @@
 
 [node name="PlayerProfileScene" type="Node3D"]
 script = ExtResource("1_vf17f")
+
+[node name="Positions" type="Node3D" parent="."]
+
+[node name="Pos1" type="Node3D" parent="Positions"]
+transform = Transform3D(0.77384, -0.216629, 0.595184, 0, 0.939693, 0.34202, -0.633381, -0.264669, 0.727172, 172.66, 65, -102.065)
+
+[node name="Pos2" type="Node3D" parent="Positions"]
+transform = Transform3D(0.77384, -0.216629, 0.595183, 0, 0.939693, 0.34202, -0.633381, -0.264669, 0.727172, -138.54, 65, -173.061)
+
+[node name="Pos3" type="Node3D" parent="Positions"]
+transform = Transform3D(0.313992, -0.324723, 0.892168, 0, 0.939693, 0.34202, -0.949425, -0.107392, 0.295056, -319.581, 130, -120.997)
+
+[node name="Pos4" type="Node3D" parent="Positions"]
+transform = Transform3D(0.0366437, -0.341791, 0.939061, 0, 0.939693, 0.34202, -0.999328, -0.0125329, 0.0344338, -333.78, 130, -31.0682)
+
+[node name="Pos5" type="Node3D" parent="Positions"]
+transform = Transform3D(0.531399, -0.289733, 0.796034, 0, 0.939693, 0.34202, -0.847122, -0.181749, 0.499351, -269.883, 65, 24.5452)
+
+[node name="Pos6" type="Node3D" parent="Positions"]
+transform = Transform3D(0.531399, -0.500315, 0.683594, 0, 0.806961, 0.590606, -0.847122, -0.313847, 0.428818, -106.592, 65, -54.7341)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.531399, -0.500315, 0.683594, 0, 0.80696, 0.590606, -0.847122, -0.313847, 0.428818, 178.577, 65, -137.563)
+fov = 65.5
+script = ExtResource("2_odw7k")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
+light_energy = 6.186
+spot_range = 288.486
 
 [node name="CameraController" type="Node3D" parent="."]
 script = ExtResource("2_5ihb0")
