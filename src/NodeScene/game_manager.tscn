@@ -982,6 +982,28 @@ fill_mode = 1
 [node name="CountdownTimer" type="Timer" parent="GameUI"]
 wait_time = 20.0
 
+[node name="WaitingScreen" type="VBoxContainer" parent="GameUI"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_eudyq")
+alignment = 1
+
+[node name="WaitMessage" type="Label" parent="GameUI/WaitingScreen"]
+layout_mode = 2
+theme = ExtResource("4_eudyq")
+text = "Waiting for other player..."
+horizontal_alignment = 1
+
 [node name="ChatUI" type="Control" parent="GameUI"]
 texture_filter = 3
 layout_mode = 3
@@ -1036,28 +1058,6 @@ max_length = 160
 [node name="SendButton" type="Button" parent="GameUI/ChatUI/ChatPopup/VSplitContainer/InputUI"]
 layout_mode = 2
 text = "Send Message"
-
-[node name="WaitingScreen" type="VBoxContainer" parent="GameUI"]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -200.0
-offset_right = 200.0
-offset_bottom = 200.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("4_eudyq")
-alignment = 1
-
-[node name="WaitMessage" type="Label" parent="GameUI/WaitingScreen"]
-layout_mode = 2
-theme = ExtResource("4_eudyq")
-text = "Waiting for other player..."
-horizontal_alignment = 1
 
 [node name="EscBackOverlay" type="ColorRect" parent="GameUI"]
 visible = false
