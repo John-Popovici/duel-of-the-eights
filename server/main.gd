@@ -78,7 +78,7 @@ func findReciever(id: int):
 ####################  RPCs ###########################
 # Host creates a room
 @rpc("any_peer", "reliable")
-func create_room():
+func create_room(_name: String):
 	if rooms.size() >= max_rooms:
 		print("Server room limit reached.")
 		return  # Reject new rooms if at max capacity
@@ -91,18 +91,18 @@ func create_room():
 	new_room.name = room_code
 	add_child(new_room)
 	
-	new_room.initialize_room(host_id, room_code)
+	new_room.initialize_room(host_id, room_code, _name)
 	rooms[room_code] = new_room
 	
 	print("Room created:", room_code, "by Host:", host_id)
 	rpc_id(host_id, "room_created", room_code)
 
 @rpc("any_peer", "reliable")
-func join_room(room_code):
+func join_room(room_code, _name):
 	var client_id = multiplayer.get_remote_sender_id()
 
 	if room_code in rooms and not rooms[room_code].is_full():
-		rooms[room_code].add_client(client_id)
+		rooms[room_code].add_client(client_id, _name)
 		#rpc_id(client_id, "room_joined", room_code) Already called by room
 		print("Client ", client_id, " joined room: ", room_code)
 	else:

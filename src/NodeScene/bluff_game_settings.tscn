@@ -171,6 +171,7 @@ size_flags_horizontal = 3
 theme = ExtResource("2_j16bg")
 placeholder_text = "Host Player Name"
 alignment = 1
+editable = false
 
 [node name="Player2Name" type="LineEdit" parent="UIBox/SettingsSplitBox/Settings_Setup/OptionsVBox/PlayerNames"]
 layout_mode = 2
