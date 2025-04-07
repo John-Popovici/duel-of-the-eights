@@ -36,7 +36,7 @@ func snap_camera_to_position(target: Node3D) -> void:
 	camera.global_transform = target.global_transform
 
 # Lerps the camera to the specified position and rotation
-func lerp_camera_to_position(target: Node3D, lerp_speed: float = 0.01) -> void:
+func lerp_camera_to_position(target: Node3D, lerp_speed: float = 0.005) -> void:
 	var start_transform = camera.global_transform
 	var end_transform = target.global_transform
 	var t = 0.0
