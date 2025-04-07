@@ -4,27 +4,32 @@ var host_id: int
 var client_id: int
 var room_code: String
 var players: Array  # List of players in the room
-@onready var playerInfo = {} # {id: "Name"}
+@onready var playerInfo = {
+	"Host": "",
+	"Client": ""
+} # {id: "Name"}
 @onready var check_ping = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
-func initialize_room(host: int, code: String):
+func initialize_room(host: int, code: String, _name: String):
 	host_id = host
 	room_code = code
 	players.append(host)
+	playerInfo["Host"] = _name
 	check_ping = true
 	print("Room initialized with host:", host_id, ", Room Code:", room_code)
 
-func add_client(_client_id: int):
+func add_client(_client_id: int, _name: String):
 	if _client_id not in players and players.size() < 2:
 		client_id = _client_id
 		players.append(_client_id)
+		playerInfo["Client"] = _name
 		print("Client", _client_id, " added to room:", room_code)
-		get_parent().rpc_id(_client_id, "room_joined", room_code, host_id)
-		get_parent().rpc_id(host_id, "room_joined", room_code, _client_id)
+		get_parent().rpc_id(_client_id, "room_joined", room_code, host_id, playerInfo["Host"])
+		get_parent().rpc_id(host_id, "room_joined", room_code, _client_id, playerInfo["Client"])
 	else:
 		get_parent().rpc_id(_client_id, "room_join_failed")
 

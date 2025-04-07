@@ -39,12 +39,12 @@ func connect_to_server():
 
 # Start as a server
 func connect_as_host(_port: int = default_port):
-	create_room()
+	create_room(GlobalSettings.profile_settings["player_name"])
 	is_host = true
 
 # Connect as a client
 func connect_as_client(_code: String):
-	join_room(_code)
+	join_room(_code, GlobalSettings.profile_settings["player_name"])
 	is_host = false
 
 func _on_peer_connected(id: int):
@@ -114,13 +114,13 @@ func room_created(code):
 	ConnectionUI.visible = false
 
 @rpc("reliable")
-func room_joined(code, hostid):
+func room_joined(code, hostid, _name):
 	room_code = code
 	peer_id = hostid
 	print("Successfully joined room:", room_code, " with peer's ID: ", hostid)
 	#If hosting in game settings, allow start game
 	emit_signal("startGame")
-	emit_signal("second_player_connected","Client")
+	emit_signal("second_player_connected",_name)
 	ConnectionUI.visible = false
 
 @rpc("reliable")
@@ -128,18 +128,18 @@ func room_join_failed():
 	print("Failed to join room. Room does not exist or is full.")
 
 @rpc("any_peer", "reliable")
-func create_room():
+func create_room(_name: String):
 	if multiplayer.is_server():
 		print("Already acting as a server. Cannot create room.")
 		return
-	rpc_id(1, "create_room")  # Ask the server to create a room
+	rpc_id(1, "create_room", _name)  # Ask the server to create a room
 
 @rpc("any_peer", "reliable")
-func join_room(code: String):
+func join_room(code: String, _name: String):
 	if multiplayer.is_server():
 		print("Already acting as a server. Cannot join a room.")
 		return
-	rpc_id(1, "join_room", code)  # Ask the server to join a room
+	rpc_id(1, "join_room", code, _name)  # Ask the server to join a room
 
 ################# Game Data Transmission ###################
 
