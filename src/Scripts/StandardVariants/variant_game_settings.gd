@@ -477,6 +477,8 @@ func _dice_values_changed(_state) -> void:
 	#code to indicate
 
 func collectInfo() -> void:
+	if self.visible:
+		return
 	self.visible = true
 	if NetworkManager.getIsHost():
 		SettingsSplitBox.visible = false
