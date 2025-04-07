@@ -70,6 +70,9 @@ var show_opponent_rolls: bool = false
 var timed_rounds: bool = true
 var bluff_active: bool = false
 
+const YAHTZEE_MAX_PLAYS: int = 5
+
+
 func _on_start_game_pressed():
 	start_game_button.disabled = true
 	home_button.disabled = true
@@ -322,6 +325,13 @@ func _generate_straights():
 func _generate_kinds():
 	# Start with "Three of a Kind" and go up to the maximum count (dice_count)
 	for kind in range(3, dice_count + 1):
+		if kind == dice_count: # create yahtzee hand
+			var hand_name = "Dice Storm"
+			var hand_type = ["Yahtzee",kind]
+			var hand_option = _create_hand_option(hand_name, hand_type)
+			advanced_settings_vbox.add_child(hand_option)
+			break
+			
 		var hand_name = "%d of a Kind" % kind
 		var hand_type = ["Kind",kind]
 		var hand_option = _create_hand_option(hand_name, hand_type)
@@ -355,6 +365,8 @@ func _create_hand_option(hand_name: String, hand_type: Array) -> HBoxContainer:
 
 	# SpinBox for maximum plays allowed
 	var max_plays = hand_hbox.get_node("MaxPlays")
+	if hand_name == "Dice Storm":
+		max_plays.max_value = YAHTZEE_MAX_PLAYS
 
 	# TextField for custom scoring rule
 	var scoring_input = hand_hbox.get_node("ScoringRule")

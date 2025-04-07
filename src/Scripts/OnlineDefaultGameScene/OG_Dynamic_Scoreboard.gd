@@ -8,7 +8,15 @@ var lastButton: Button
 var BonusButton: Button
 signal bonusExists(hand: Dictionary)
 var AllButtons: Array[Button]
+var AllButtonLabels: Array[Label]
 @onready var TotalLabel = get_node("UIBox/SelfHandsSectionBox/Total")
+
+const plays_mapping = { # note that these mappings are intentionally 1 number off from the expected mapping
+	1 : "Double ",
+	2 : "Triple ",
+	3 : "Quadruple ",
+	4 : "Quintuple "
+}
 
 # Called to populate the scoreboard with hands from hand_settings
 func populate_scoreboard(hand_settings: Dictionary):
@@ -37,6 +45,8 @@ func populate_scoreboard(hand_settings: Dictionary):
 			bonusExists.emit(settings)
 		else:
 			AllButtons.append(select_button)
+			AllButtonLabels.append(hand_name_label)
+		select_button.setBaseName(hand_name)
 		select_button.setMaxPlays(settings["max_plays"])
 		select_button.setSettings(settings)
 		#add code to set max number of presses per button
@@ -52,6 +62,11 @@ func populate_scoreboard(hand_settings: Dictionary):
 # Callback for when a hand is selected
 func _on_hand_selected(hand: Dictionary, button: Button):
 	lastButton = button
+	if hand.get("hand_type")[0] == "Yahtzee" and not button.disabled:
+		var buttonIndex = AllButtons.find(button)
+		if buttonIndex >= 0: #make sure button index is found
+			# add the double or triple multiplier labels to hand name
+			AllButtonLabels[buttonIndex].text = plays_mapping[AllButtons[buttonIndex].plays] + AllButtons[buttonIndex].baseName
 	emit_signal("hand_selected", hand)
 
 func updateButtonScore(_score: int):
