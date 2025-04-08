@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://d0icyj31p2tgw"]
+[gd_scene load_steps=42 format=3 uid="uid://d0icyj31p2tgw"]
 
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_game_manager.gd" id="1_q3ti8"]
 [ext_resource type="Script" path="res://Scripts/OnlineDefaultGameScene/OG_dynamic_dice_container.gd" id="2_n4duv"]
@@ -23,8 +23,11 @@
 [ext_resource type="Texture2D" uid="uid://b1tbooa4q63h1" path="res://Assets/2D Assets/RollExamples/4_of_a_kind_example.png" id="17_bjung"]
 [ext_resource type="Texture2D" uid="uid://ssyy8wgfhbeu" path="res://Assets/2D Assets/RollExamples/4_of_a_kind_example_score.png" id="18_ktcim"]
 [ext_resource type="Texture2D" uid="uid://c8fplkmovbtyu" path="res://Assets/2D Assets/RollExamples/2_3_full_house_example.png" id="19_fy5hm"]
+[ext_resource type="Texture2D" uid="uid://u7hbspf842rx" path="res://Assets/2D Assets/RollExamples/Dice_Storm_example.png" id="20_fwh3d"]
 [ext_resource type="Texture2D" uid="uid://b6acqkajmw545" path="res://Assets/2D Assets/RollExamples/2_3_full_house_example_score.png" id="20_mr2u7"]
+[ext_resource type="Texture2D" uid="uid://36jtxphvkalp" path="res://Assets/2D Assets/RollExamples/Dice_Storm_Score1.png" id="21_ltymi"]
 [ext_resource type="Texture2D" uid="uid://bj32g6uq1ppf2" path="res://Assets/2D Assets/RollExamples/Straight_of_5_example.png" id="21_swopi"]
+[ext_resource type="Texture2D" uid="uid://donjblphj7v3c" path="res://Assets/2D Assets/RollExamples/Dice_Storm_Score2.png" id="22_4quji"]
 [ext_resource type="Texture2D" uid="uid://bwn2i2vg7kphw" path="res://Assets/2D Assets/RollExamples/Straight_of_5_example_score.png" id="22_5bfp5"]
 [ext_resource type="Texture2D" uid="uid://bibarfypvsnoj" path="res://Assets/2D Assets/RollExamples/chance_example.png" id="23_qithm"]
 [ext_resource type="Texture2D" uid="uid://djoahb5opw0c4" path="res://Assets/2D Assets/RollExamples/chance_example_score.png" id="24_84ba5"]
@@ -671,6 +674,38 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_stretch_ratio = 20.0
 texture = ExtResource("18_ktcim")
+
+[node name="DiceStorm" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "DiceStorm
+"
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="DiceStormDetails" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "When all the dice in the hand have the same value, then you get a special \"_ of a kind\" hand called the Dice Strom Hand (otherwise known as the yatzee)! When you score in this category, you get a special, very high score. If you score in this catagory multiple times, a multiplier is added each time: so the more you score in this category, the higher the points you earn each time. 
+
+(Also, note that for the current build, you will need to manually enable the ability to score multiple times in the same  \"Dice Storm\" catagory in order to be able to score in that catagory multiple times. You can set this up in the pre-game settings)
+
+In this example, we see a valid Dice Storm hand where all the dice show the same number, as well as the first and second time the player scored in the \"Dice Storm\" catagory. The first time Dice Storm was scored, it earned 50 points. The second time, a 2x multiplier was applied, adding 100 more points. So the total for Dice Storm is now 150 points (50 from the first, 100 from the second)."
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="TextureRect14" type="TextureRect" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("20_fwh3d")
+
+[node name="TextureRect15" type="TextureRect" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("21_ltymi")
+
+[node name="TextureRect16" type="TextureRect" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("22_4quji")
 
 [node name="fullHouse" type="Label" parent="HandGuidePage/PanelContainer/HandGuideInfoBox/ScrollContainer/VBoxContainer"]
 layout_mode = 2
