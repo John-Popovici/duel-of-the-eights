@@ -13,7 +13,7 @@ signal connection_failed
 signal connection_successful
 signal second_player_connected
 
-var ping_timeout: float = 5.0 #change back to 10.0
+var ping_timeout: float = 20.0 #change back to 10.0
 var time_since_last_ping: float = 0.0
 var check_ping: bool = false
 
