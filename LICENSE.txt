@@ -1,6 +1,3 @@
-The Godot Engine uses the MIT License
-https://github.com/godotengine/godot/blob/master/LICENSE.txt
-
 This program is distributed under the GNU General Public License
 Copyright (C) 2024  dice_devs (see AUTHORS.md).
 
