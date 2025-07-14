@@ -1,3 +1,5 @@
+This program uses the Godot Engine: https://godotengine.org/license/
+
 This program is distributed under the GNU General Public License
 Copyright (C) 2024  dice_devs (see AUTHORS.md).
 
